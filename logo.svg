@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 180">
+  <rect width="680" height="180" fill="none"/>
+  <g transform="translate(10 10)">
+    <circle cx="80" cy="80" r="64" fill="none" stroke="#dce5eb" stroke-width="3"/>
+    <circle cx="80" cy="80" r="48" fill="none" stroke="#6f8496" stroke-width="1.5" opacity=".75"/>
+    <path d="M48 113V47h11v29l38-29h16L76 79l39 34H98L68 88l-9 7v18H48Z" fill="#eef3f6"/>
+    <circle cx="126" cy="50" r="5" fill="#9db0bf"/>
+  </g>
+  <g transform="translate(174 52)">
+    <text x="0" y="32" font-family="Arial,Helvetica,sans-serif" font-size="31" font-weight="700" letter-spacing="4" fill="#eef3f6">KETOGENIC</text>
+    <text x="0" y="77" font-family="Arial,Helvetica,sans-serif" font-size="31" font-weight="500" letter-spacing="4" fill="#93a4b3">RESEARCH</text>
+    <text x="0" y="110" font-family="Arial,Helvetica,sans-serif" font-size="11" letter-spacing="3" fill="#66798a">CLINICAL &amp; TRANSLATIONAL METABOLIC SCIENCE</text>
+  </g>
+</svg>
