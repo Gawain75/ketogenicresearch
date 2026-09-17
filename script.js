@@ -164,6 +164,10 @@ function latestDateLabel(value, precision = '') {
 
   const locale = latestLang() === 'it' ? 'it-IT' : 'en-GB';
 
+  if (!precision && /^\d{4}-01-01$/.test(value)) {
+    return value.slice(0, 4);
+  }
+
   if (precision === 'year' || /^\d{4}$/.test(value)) {
     return value.slice(0, 4);
   }
