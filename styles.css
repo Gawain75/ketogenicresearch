@@ -551,3 +551,27 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,
     max-width:100%;
   }
 }
+
+
+/* V15 — publication-link cleanup */
+.link-policy-note{
+  max-width:1180px;
+  margin:0 auto 26px;
+  padding:12px 16px;
+  border:1px solid #d4e1eb;
+  border-left:3px solid var(--primary);
+  border-radius:8px;
+  background:#f7fbfe;
+  color:var(--text);
+  font-size:12px;
+  line-height:1.5;
+}
+.link-policy-note strong{
+  color:var(--primary);
+  margin-right:8px;
+}
+.paper-links .article-link{
+  background:#1f4e79;
+  color:#fff;
+  border-color:#1f4e79;
+}
