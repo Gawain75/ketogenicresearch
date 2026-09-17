@@ -40,3 +40,5 @@ OR "β-hydroxybutyrate"[Title/Abstract]
 OR "ketone bodies"[Title/Abstract]
 )
 """
+if __name__ == "__main__":
+    main()
