@@ -116,3 +116,31 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   applyLibraryFilters();
 });
+
+
+// V37 — centralized scientific-library counters
+const KR_LIBRARY_STATS = {
+  publications: 555,
+  clinicalAreas: 53
+};
+
+function updateLibraryCounters() {
+  let publications = KR_LIBRARY_STATS.publications;
+  let clinicalAreas = KR_LIBRARY_STATS.clinicalAreas;
+
+  const paperNodes = document.querySelectorAll('article.folder-paper');
+  const folderNodes = document.querySelectorAll('details.library-folder');
+
+  if (paperNodes.length) publications = paperNodes.length;
+  if (folderNodes.length) clinicalAreas = folderNodes.length;
+
+  document.querySelectorAll('[data-publication-count]').forEach(el => {
+    el.textContent = publications.toLocaleString(document.documentElement.lang === 'it' ? 'it-IT' : 'en-US');
+  });
+
+  document.querySelectorAll('[data-clinical-area-count]').forEach(el => {
+    el.textContent = clinicalAreas.toLocaleString(document.documentElement.lang === 'it' ? 'it-IT' : 'en-US');
+  });
+}
+
+document.addEventListener('DOMContentLoaded', updateLibraryCounters);
