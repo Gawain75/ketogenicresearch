@@ -112,3 +112,44 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,
   .footer{display:block}
   .footer span{display:block;margin:5px 0}
 }
+
+
+/* Scientific logo integration */
+.nav{
+  min-height:84px;
+  height:auto;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  text-decoration:none;
+  min-width:0;
+}
+.site-logo{
+  display:block;
+  height:58px;
+  width:auto;
+  max-width:360px;
+  object-fit:contain;
+  object-position:left center;
+}
+.brand-symbol{
+  display:none !important;
+}
+
+@media(max-width:850px){
+  .nav{
+    min-height:76px;
+  }
+  .site-logo{
+    height:42px;
+    max-width:245px;
+  }
+}
+
+@media(max-width:420px){
+  .site-logo{
+    height:38px;
+    max-width:220px;
+  }
+}
