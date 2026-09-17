@@ -615,3 +615,80 @@ article.folder-paper[hidden],details.library-folder[hidden]{display:none!importa
   .library-controls{top:58px}
   .library-filter-row{display:grid;grid-template-columns:1fr}
 }
+
+
+/* V40 — Latest Evidence */
+.latest-status-strip{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+  margin:0 0 20px;
+}
+.latest-status-strip>div{
+  border:1px solid var(--line,#d9e2ec);
+  border-radius:14px;
+  padding:16px;
+  background:var(--card,#fff);
+}
+.latest-status-strip strong{display:block;font-size:1.45rem;line-height:1.1;margin-bottom:6px}
+.latest-status-strip span{font-size:.9rem;opacity:.75}
+.latest-method-note{
+  border-left:4px solid var(--accent,#245f92);
+  padding:10px 14px;
+  margin:0 0 22px;
+  background:rgba(36,95,146,.06);
+}
+.latest-method-note p{margin:0}
+.latest-controls{
+  display:grid;
+  grid-template-columns:minmax(0,2fr) minmax(220px,1fr);
+  gap:14px;
+  margin:0 0 22px;
+}
+.latest-controls label{display:grid;gap:7px;font-weight:600}
+.latest-controls input,.latest-controls select{
+  width:100%;
+  min-height:44px;
+  border:1px solid var(--line,#cfd9e3);
+  border-radius:10px;
+  padding:9px 11px;
+  background:var(--card,#fff);
+  color:inherit;
+  font:inherit;
+}
+.latest-load-message,.latest-empty{padding:18px 0;opacity:.75}
+.latest-publications{display:grid;gap:14px}
+.latest-paper{
+  border:1px solid var(--line,#d9e2ec);
+  border-radius:14px;
+  padding:18px;
+  background:var(--card,#fff);
+}
+.latest-paper-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.latest-paper time{font-size:.88rem;opacity:.7}
+.latest-new-badge{
+  display:inline-flex;
+  align-items:center;
+  padding:3px 8px;
+  border-radius:999px;
+  font-size:.75rem;
+  font-weight:700;
+  background:rgba(36,95,146,.1);
+}
+.latest-paper h2{font-size:1.12rem;line-height:1.35;margin:0 0 8px}
+.latest-authors,.latest-journal{margin:5px 0;font-size:.92rem}
+.latest-authors{opacity:.88}
+.latest-journal{opacity:.72}
+.latest-area-list{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.latest-area-chip{
+  display:inline-flex;
+  padding:4px 8px;
+  border:1px solid var(--line,#d9e2ec);
+  border-radius:999px;
+  font-size:.76rem;
+  line-height:1.2;
+}
+@media (max-width:760px){
+  .latest-status-strip{grid-template-columns:1fr}
+  .latest-controls{grid-template-columns:1fr}
+}

@@ -144,3 +144,150 @@ function updateLibraryCounters() {
 }
 
 document.addEventListener('DOMContentLoaded', updateLibraryCounters);
+
+
+// V40 — automated Latest Evidence feed
+let KR_LATEST_DATA = null;
+
+function krEscapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, ch => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#039;'
+  })[ch]);
+}
+
+function latestLang() {
+  return document.documentElement.lang === 'it' ? 'it' : 'en';
+}
+
+function latestDateLabel(iso) {
+  if (!iso) return '—';
+  try {
+    const d = new Date(`${iso}T00:00:00Z`);
+    return new Intl.DateTimeFormat(latestLang() === 'it' ? 'it-IT' : 'en-GB', {
+      year:'numeric', month:'short', day:'2-digit', timeZone:'UTC'
+    }).format(d);
+  } catch (_) {
+    return iso;
+  }
+}
+
+function renderLatestEvidence() {
+  const host = document.getElementById('latestPublications');
+  if (!host || !KR_LATEST_DATA) return;
+
+  const q = (document.getElementById('latestSearch')?.value || '').trim().toLowerCase();
+  const area = document.getElementById('latestArea')?.value || 'all';
+  const lang = latestLang();
+
+  const rows = (KR_LATEST_DATA.publications || []).filter(p => {
+    const hay = [
+      p.title,
+      ...(p.authors || []),
+      p.journal,
+      ...(p.areas || []),
+      p.doi,
+      p.pmid
+    ].join(' ').toLowerCase();
+    const qOk = !q || hay.includes(q);
+    const areaOk = area === 'all' || (p.areas || []).includes(area);
+    return qOk && areaOk;
+  });
+
+  if (!rows.length) {
+    host.innerHTML = `<p class="latest-empty">${lang === 'it'
+      ? 'Nessuna pubblicazione corrisponde ai filtri selezionati.'
+      : 'No publications match the selected filters.'}</p>`;
+    return;
+  }
+
+  host.innerHTML = rows.map(p => {
+    const authors = (p.authors || []).slice(0, 6);
+    const authorText = authors.join(', ') + ((p.authors || []).length > 6 ? ' et al.' : '');
+    const areas = (p.areas || []).map(a => `<span class="latest-area-chip">${krEscapeHtml(a)}</span>`).join('');
+    const newBadge = p.status === 'new'
+      ? `<span class="latest-new-badge">${lang === 'it' ? 'Nuovo' : 'New'}</span>` : '';
+    const doi = p.doi_url
+      ? `<a href="${krEscapeHtml(p.doi_url)}" target="_blank" rel="noopener">DOI ↗</a>` : '';
+    const pmid = p.pubmed_url
+      ? `<a href="${krEscapeHtml(p.pubmed_url)}" target="_blank" rel="noopener">PubMed ↗</a>` : '';
+    return `
+      <article class="latest-paper">
+        <div class="latest-paper-top">
+          <time datetime="${krEscapeHtml(p.date || '')}">${krEscapeHtml(latestDateLabel(p.date))}</time>
+          ${newBadge}
+        </div>
+        <h2>${krEscapeHtml(p.title || '')}</h2>
+        <p class="latest-authors">${krEscapeHtml(authorText)}</p>
+        <p class="latest-journal">${krEscapeHtml(p.journal || '')}${p.year ? ` · ${krEscapeHtml(p.year)}` : ''}</p>
+        <div class="latest-area-list">${areas}</div>
+        <div class="paper-links">${pmid}${doi}</div>
+      </article>`;
+  }).join('');
+}
+
+async function loadLatestEvidence() {
+  const host = document.getElementById('latestPublications');
+  if (!host) return;
+
+  const message = document.getElementById('latestLoadMessage');
+  try {
+    const response = await fetch('latest-publications.json?v=40', {cache:'no-store'});
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    KR_LATEST_DATA = await response.json();
+
+    const count = document.getElementById('latestCount');
+    if (count) count.textContent = Number(KR_LATEST_DATA.count || 0).toLocaleString(
+      latestLang() === 'it' ? 'it-IT' : 'en-US'
+    );
+
+    const updated = document.getElementById('latestUpdated');
+    if (updated) {
+      const stamp = KR_LATEST_DATA.generated_at;
+      updated.textContent = stamp ? latestDateLabel(stamp.slice(0,10)) : '—';
+    }
+
+    const areaSelect = document.getElementById('latestArea');
+    if (areaSelect) {
+      const current = areaSelect.value;
+      const areas = [...new Set(
+        (KR_LATEST_DATA.publications || []).flatMap(p => p.areas || [])
+      )].sort((a,b) => a.localeCompare(b));
+      areaSelect.querySelectorAll('option:not([value="all"])').forEach(o => o.remove());
+      areas.forEach(area => {
+        const opt = document.createElement('option');
+        opt.value = area;
+        opt.textContent = area;
+        areaSelect.appendChild(opt);
+      });
+      if ([...areaSelect.options].some(o => o.value === current)) areaSelect.value = current;
+    }
+
+    if (message) {
+      message.textContent = (KR_LATEST_DATA.count || 0)
+        ? ''
+        : (latestLang() === 'it'
+            ? 'Il feed verrà popolato alla prima esecuzione automatica o manuale del workflow GitHub Actions.'
+            : 'The feed will be populated after the first automatic or manual GitHub Actions run.');
+      message.hidden = Boolean(KR_LATEST_DATA.count);
+    }
+
+    renderLatestEvidence();
+  } catch (err) {
+    if (message) {
+      message.hidden = false;
+      message.textContent = latestLang() === 'it'
+        ? 'Il feed automatico non è al momento disponibile.'
+        : 'The automated literature feed is currently unavailable.';
+    }
+    console.error('Latest Evidence load error:', err);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const search = document.getElementById('latestSearch');
+  const area = document.getElementById('latestArea');
+  if (search) search.addEventListener('input', renderLatestEvidence);
+  if (area) area.addEventListener('change', renderLatestEvidence);
+  loadLatestEvidence();
+});
+
