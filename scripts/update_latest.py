@@ -23,11 +23,20 @@ MAX_RECORDS = int(os.getenv("MAX_RECORDS", "100"))
 
 BASE = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 
-CORE = (
-    '("ketogenic diet"[Title/Abstract] OR "ketogenic diets"[Title/Abstract] '
-    'OR "ketogenic therapy"[Title/Abstract] OR "ketogenic metabolic therapy"[Title/Abstract] '
-    'OR "nutritional ketosis"[Title/Abstract] OR "very low calorie ketogenic diet"[Title/Abstract] '
-    'OR "very-low-calorie ketogenic diet"[Title/Abstract] OR VLCKD[Title/Abstract] '
-    'OR "very low energy ketogenic"[Title/Abstract] OR VLEKT[Title/Abstract] '
-    'OR "beta-hydroxybutyrate"[Title/Abstract] OR "β-hydroxybutyrate"[Title/Abstract] '
-    'OR "ketone bodies"[
+CORE = """
+(
+"ketogenic diet"[Title/Abstract]
+OR "ketogenic diets"[Title/Abstract]
+OR "ketogenic therapy"[Title/Abstract]
+OR "ketogenic metabolic therapy"[Title/Abstract]
+OR "nutritional ketosis"[Title/Abstract]
+OR "very low calorie ketogenic diet"[Title/Abstract]
+OR "very-low-calorie ketogenic diet"[Title/Abstract]
+OR VLCKD[Title/Abstract]
+OR "very low energy ketogenic"[Title/Abstract]
+OR VLEKT[Title/Abstract]
+OR "beta-hydroxybutyrate"[Title/Abstract]
+OR "β-hydroxybutyrate"[Title/Abstract]
+OR "ketone bodies"[Title/Abstract]
+)
+"""
