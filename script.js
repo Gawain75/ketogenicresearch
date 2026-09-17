@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // V37 — centralized scientific-library counters
 const KR_LIBRARY_STATS = {
-  publications: 570,
+  publications: 602,
   clinicalAreas: 53
 };
 
@@ -159,16 +159,38 @@ function latestLang() {
   return document.documentElement.lang === 'it' ? 'it' : 'en';
 }
 
-function latestDateLabel(iso) {
-  if (!iso) return '—';
-  try {
-    const d = new Date(`${iso}T00:00:00Z`);
-    return new Intl.DateTimeFormat(latestLang() === 'it' ? 'it-IT' : 'en-GB', {
-      year:'numeric', month:'short', day:'2-digit', timeZone:'UTC'
-    }).format(d);
-  } catch (_) {
-    return iso;
+function latestDateLabel(value, precision = '') {
+  if (!value) return '—';
+
+  const locale = latestLang() === 'it' ? 'it-IT' : 'en-GB';
+
+  if (precision === 'year' || /^\d{4}$/.test(value)) {
+    return value.slice(0, 4);
   }
+
+  if (precision === 'month' || /^\d{4}-\d{2}$/.test(value)) {
+    const [year, month] = value.split('-').map(Number);
+    if (!year || !month) return value;
+    const d = new Date(Date.UTC(year, month - 1, 1));
+    return new Intl.DateTimeFormat(locale, {
+      year: 'numeric',
+      month: 'short',
+      timeZone: 'UTC'
+    }).format(d);
+  }
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    const [year, month, day] = value.split('-').map(Number);
+    const d = new Date(Date.UTC(year, month - 1, day));
+    return new Intl.DateTimeFormat(locale, {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+      timeZone: 'UTC'
+    }).format(d);
+  }
+
+  return value;
 }
 
 function renderLatestEvidence() {
@@ -213,7 +235,7 @@ function renderLatestEvidence() {
     return `
       <article class="latest-paper">
         <div class="latest-paper-top">
-          <time datetime="${krEscapeHtml(p.date || '')}">${krEscapeHtml(latestDateLabel(p.date))}</time>
+          <time datetime="${krEscapeHtml(p.date || '')}">${krEscapeHtml(latestDateLabel(p.date, p.date_precision))}</time>
           ${newBadge}
         </div>
         <h2>${krEscapeHtml(p.title || '')}</h2>
