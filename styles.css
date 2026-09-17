@@ -259,3 +259,50 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,
   background:#f4f8fb;
   color:var(--primary);
 }
+
+
+/* V10 live bibliography */
+.live-publications{
+  margin-top:18px;
+  padding-top:16px;
+  border-top:1px solid var(--line);
+}
+.live-status{
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:12px;
+}
+.live-results{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+.live-paper{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:15px;
+  min-width:0;
+}
+.live-paper h4{
+  margin:6px 0 8px;
+  font-size:14px;
+  line-height:1.35;
+  color:var(--ink);
+}
+.live-paper p{
+  margin:0 0 12px;
+  font-size:11px;
+  line-height:1.45;
+  color:var(--muted);
+}
+.live-paper .paper-links{
+  gap:6px;
+}
+.live-paper .paper-links a{
+  font-size:10px;
+  padding:6px 8px;
+}
+@media(max-width:850px){
+  .live-results{grid-template-columns:1fr}
+}
