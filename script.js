@@ -1,8 +1,13 @@
 
 const setLang = (lang) => {
   document.documentElement.lang = lang;
-  document.querySelectorAll('[data-en]').forEach(el => el.innerHTML = el.dataset[lang]);
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const value = el.dataset[lang];
+    if (typeof value !== 'undefined') el.innerHTML = value;
+  });
   document.querySelectorAll('.lang button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  const pageTitle = document.querySelector('meta[name="kr-title-' + lang + '"]');
+  if (pageTitle) document.title = pageTitle.content;
   localStorage.setItem('kr-lang', lang);
 };
 document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));

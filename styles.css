@@ -582,3 +582,13 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,
 .folder-paper{background:#fbfdff;border:1px solid var(--line);border-radius:10px;padding:14px}
 .folder-paper h4{font-size:14px;line-height:1.35;margin:0 0 7px;color:var(--ink)}
 .folder-paper p{font-size:11px;line-height:1.45;margin:0 0 10px;color:var(--muted)}
+
+/* V20 Drive source-audit */
+.drive-method-note{margin:16px 0 24px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:#f8fbfd;font-size:13px;line-height:1.55}
+.drive-audit-badge{display:inline-flex;align-items:center;margin:8px 0 14px;padding:6px 10px;border-radius:999px;background:#eef5f8;border:1px solid var(--line);font-size:11px;font-weight:700;letter-spacing:.03em;color:var(--primary)}
+.drive-paper{position:relative}
+.drive-paper:before{content:"PDF source verified";display:inline-block;margin-bottom:7px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+/* V23 evidence-priority hierarchy */
+.evidence-priority-legend{margin:12px 0 22px;padding:12px 14px;border-left:3px solid var(--primary);background:#f8fbfd;font-size:12px;line-height:1.55;color:var(--muted)}
+.evidence-level{display:inline-block;margin:0 0 7px;padding:4px 8px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:10px;font-weight:700;letter-spacing:.03em;color:var(--primary)}
