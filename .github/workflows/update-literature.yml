@@ -1,0 +1,47 @@
+name: Update latest scientific literature
+
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-latest-literature
+  cancel-in-progress: false
+
+jobs:
+  update-literature:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Update PubMed literature feed
+        env:
+          NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
+          NCBI_EMAIL: info@ketogenicresearch.org
+          WINDOW_DAYS: "90"
+          MAX_RECORDS: "100"
+        run: python scripts/update_latest.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add latest-publications.json
+          if git diff --cached --quiet; then
+            echo "No literature changes."
+          else
+            git commit -m "Update latest scientific literature"
+            git push
+          fi
