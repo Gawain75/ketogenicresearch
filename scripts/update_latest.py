@@ -30,11 +30,29 @@ OR "ketogenic metabolic therapy"[Title/Abstract]
 OR "nutritional ketosis"[Title/Abstract]
 OR "very low calorie ketogenic diet"[Title/Abstract]
 OR "very-low-calorie ketogenic diet"[Title/Abstract]
+OR "very low energy ketogenic therapy"[Title/Abstract]
+OR "modified Atkins diet"[Title/Abstract]
 OR VLCKD[Title/Abstract]
 OR VLEKT[Title/Abstract]
-OR "beta-hydroxybutyrate"[Title/Abstract]
-OR "β-hydroxybutyrate"[Title/Abstract]
-OR "ketone bodies"[Title/Abstract]
+OR "exogenous ketone"[Title/Abstract]
+OR "exogenous ketones"[Title/Abstract]
+OR "ketone ester"[Title/Abstract]
+OR "ketone esters"[Title/Abstract]
+OR "ketone salt"[Title/Abstract]
+OR "ketone salts"[Title/Abstract]
+OR (
+    (
+        "beta-hydroxybutyrate"[Title/Abstract]
+        OR "β-hydroxybutyrate"[Title/Abstract]
+        OR "ketone bodies"[Title/Abstract]
+    )
+    AND
+    (
+        ketogenic[Title/Abstract]
+        OR "nutritional ketosis"[Title/Abstract]
+        OR "ketogenic therapy"[Title/Abstract]
+    )
+)
 )
 """
 
@@ -73,6 +91,55 @@ def clean_text(node) -> str:
     if node is None:
         return ""
     return "".join(node.itertext()).strip()
+
+
+CORE_RELEVANCE_TERMS = (
+    "ketogenic diet",
+    "ketogenic diets",
+    "ketogenic therapy",
+    "ketogenic metabolic therapy",
+    "nutritional ketosis",
+    "very low calorie ketogenic diet",
+    "very-low-calorie ketogenic diet",
+    "very low energy ketogenic therapy",
+    "modified atkins diet",
+    "vlckd",
+    "vlekt",
+    "exogenous ketone",
+    "exogenous ketones",
+    "ketone ester",
+    "ketone esters",
+    "ketone salt",
+    "ketone salts",
+)
+
+SECONDARY_KETONE_TERMS = (
+    "beta-hydroxybutyrate",
+    "β-hydroxybutyrate",
+    "ketone bodies",
+)
+
+SECONDARY_CONTEXT_TERMS = (
+    "ketogenic",
+    "nutritional ketosis",
+    "ketogenic therapy",
+)
+
+
+def is_relevant_record(article: ET.Element) -> bool:
+    title = clean_text(article.find("ArticleTitle"))
+    abstract = " ".join(
+        clean_text(node)
+        for node in article.findall("Abstract/AbstractText")
+    )
+    text = f"{title} {abstract}".lower()
+
+    if any(term in text for term in CORE_RELEVANCE_TERMS):
+        return True
+
+    has_secondary = any(term in text for term in SECONDARY_KETONE_TERMS)
+    has_context = any(term in text for term in SECONDARY_CONTEXT_TERMS)
+    return has_secondary and has_context
 
 
 def parse_month(value: str) -> int | None:
@@ -237,6 +304,9 @@ def main() -> None:
         citation = item.find("MedlineCitation")
         article = citation.find("Article") if citation is not None else None
         if citation is None or article is None:
+            continue
+
+        if not is_relevant_record(article):
             continue
 
         pmid = clean_text(citation.find("PMID"))
