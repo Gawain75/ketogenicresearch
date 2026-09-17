@@ -1,428 +1,10 @@
 {
-  "generated_at": "2026-09-17T21:46:02+00:00",
+  "generated_at": "2026-09-17T21:51:15+00:00",
   "window_days": 90,
   "max_records": 100,
   "source": "PubMed / NCBI E-utilities",
   "count": 99,
   "publications": [
-    {
-      "pmid": "42591798",
-      "title": "The ketogenic diet ameliorates behavioral abnormalities in a PTZ-induced zebrafish larvae model via modulating neurotransmitter balance.",
-      "authors": [
-        "Yang X",
-        "Lin J",
-        "Zhang Q",
-        "Xia Y",
-        "Zhou S",
-        "Wang Y",
-        "Li Q",
-        "Yu L"
-      ],
-      "journal": "IBRO neuroscience reports",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1016/j.ibneur.2026.08.001",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42591798/",
-      "doi_url": "https://doi.org/10.1016/j.ibneur.2026.08.001",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42392584",
-      "title": "SGLT2 inhibitors and chronic kidney disease: a narrative review of nephroprotective mechanisms from hemodynamics to metabolism.",
-      "authors": [
-        "Habas E",
-        "Rayani A",
-        "Habas A",
-        "Alarbi K",
-        "Habas A",
-        "Baghi M",
-        "Habas E",
-        "Errayes E",
-        "Hamad A",
-        "Elzouki A"
-      ],
-      "journal": "Renal failure",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1080/0886022X.2026.2688578",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42392584/",
-      "doi_url": "https://doi.org/10.1080/0886022X.2026.2688578",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42617931",
-      "title": "The impact of medium chain triglyceride ketogenic diet on liver mitochondria and cytochrome P450 2E1.",
-      "authors": [
-        "Ryan AS",
-        "Roberts RM",
-        "Stayer KM",
-        "Tomasevich AA",
-        "Misare KR",
-        "Hollis F",
-        "McQuail JA",
-        "Hartman JH"
-      ],
-      "journal": "Archives of biochemistry and biophysics",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1016/j.abb.2026.110978",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42617931/",
-      "doi_url": "https://doi.org/10.1016/j.abb.2026.110978",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42485940",
-      "title": "Epilepsy of infancy with migrating focal seizures: A scoping review of clinical features, diagnostic testing including genetics, long-term outcomes, mortality, and current and emerging therapeutic strategies.",
-      "authors": [
-        "Samanta D"
-      ],
-      "journal": "Epilepsy & behavior : E&B",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1016/j.yebeh.2026.111218",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42485940/",
-      "doi_url": "https://doi.org/10.1016/j.yebeh.2026.111218",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42462897",
-      "title": "β-Hydroxybutyrate induces histone H3 β-hydroxybutyrylation and attenuates diabetic brain microvascular endothelial hyperpermeability.",
-      "authors": [
-        "Liu L",
-        "Yi R",
-        "Wang Y",
-        "Cui Y",
-        "Cui Y",
-        "Liu X",
-        "Zheng H",
-        "Qi J",
-        "Li Y"
-      ],
-      "journal": "Experimental neurology",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1016/j.expneurol.2026.115905",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42462897/",
-      "doi_url": "https://doi.org/10.1016/j.expneurol.2026.115905",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42462387",
-      "title": "From synaptic dysfunction to targeted intervention: a comprehensive review of STXBP1 encephalopathy and precision therapeutic strategies.",
-      "authors": [
-        "Samanta D"
-      ],
-      "journal": "Epilepsy & behavior : E&B",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1016/j.yebeh.2026.111194",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42462387/",
-      "doi_url": "https://doi.org/10.1016/j.yebeh.2026.111194",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42617797",
-      "title": "Ketogenic diet attenuates seizures by promoting lipid droplet formation via peroxisome proliferator-activated receptor gamma signaling pathway.",
-      "authors": [
-        "Xi Z",
-        "Zhang W",
-        "Liu Q",
-        "Wang Q",
-        "Qi Y"
-      ],
-      "journal": "Life sciences",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1016/j.lfs.2026.124638",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42617797/",
-      "doi_url": "https://doi.org/10.1016/j.lfs.2026.124638",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42546517",
-      "title": "Metabolic ketosis attenuates NLRP3 inflammasome activation and is associated with improvements in hepatic steatosis and liver stiffness in MASLD: a pilot randomized controlled trial.",
-      "authors": [
-        "Ehtiati S",
-        "Hatami B",
-        "Khatami SH",
-        "Ahmadzade R",
-        "Zarei T",
-        "Sirati-Sabet M",
-        "Abdi S",
-        "Hajimohammadebrahim-Ketabforoush M",
-        "Namvarjah F",
-        "Boostanipour A",
-        "Karima S"
-      ],
-      "journal": "International immunopharmacology",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1016/j.intimp.2026.117214",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42546517/",
-      "doi_url": "https://doi.org/10.1016/j.intimp.2026.117214",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42729904",
-      "title": "Euglycemic ketoacidosis in a nondiabetic patient receiving dapagliflozin for heart failure.",
-      "authors": [
-        "Silveira G",
-        "Kvasha Y",
-        "Shah P",
-        "Shah H",
-        "Gogineni J"
-      ],
-      "journal": "JCEM case reports",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1210/jcemcr/luag275",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42729904/",
-      "doi_url": "https://doi.org/10.1210/jcemcr/luag275",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42647426",
-      "title": "NAD+ or β-hydroxybutyrate each protects against tachypacing-induced metabolic remodeling through regulation of mitophagy in HL-1 cardiomyocytes.",
-      "authors": [
-        "Qi X",
-        "Hu L",
-        "Rinsum AV",
-        "Koopman WJH",
-        "Keijer J",
-        "Zhang D"
-      ],
-      "journal": "American journal of physiology. Cell physiology",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1152/ajpcell.00253.2026",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42647426/",
-      "doi_url": "https://doi.org/10.1152/ajpcell.00253.2026",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42544887",
-      "title": "Acute Heat Exposure Upregulates Zebra Finch Physiology While Avoiding DNA Damage Across Both Sexes.",
-      "authors": [
-        "Haussmann BD",
-        "McGrath MR",
-        "Vo DH",
-        "Pham K",
-        "Gassman NR",
-        "Schwartz TS",
-        "Wada H"
-      ],
-      "journal": "Journal of experimental zoology. Part A, Ecological and integrative physiology",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1002/jez.70120",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42544887/",
-      "doi_url": "https://doi.org/10.1002/jez.70120",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42526162",
-      "title": "Neurodevelopmental Risk Factors and Comparative Efficacy of Ketogenic Diet in Children With Spike-Wave Activation in Sleep: A Cohort Study.",
-      "authors": [
-        "Ma J",
-        "Wang J",
-        "Song X",
-        "Xie L",
-        "Li X",
-        "Hu Y",
-        "Hong S",
-        "Jiang L",
-        "Li T"
-      ],
-      "journal": "Pediatric neurology",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1016/j.pediatrneurol.2026.07.010",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42526162/",
-      "doi_url": "https://doi.org/10.1016/j.pediatrneurol.2026.07.010",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42479345",
-      "title": "The emerging role of trace elements in epilepsy and metabolic disorders: a new frontier in neurotherapeutics.",
-      "authors": [
-        "El Foutat S",
-        "El Khiat A",
-        "Fdil N"
-      ],
-      "journal": "Biometals : an international journal on the role of metal ions in biology, biochemistry, and medicine",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1007/s10534-026-00852-4",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42479345/",
-      "doi_url": "https://doi.org/10.1007/s10534-026-00852-4",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42470908",
-      "title": "Inhibition in β-hydroxybutyrate synthesis by 6-PPD quinone at environmentally relevant concentrations is associated with immunosuppression induction in Caenorhabditis elegans.",
-      "authors": [
-        "Wang W",
-        "Wu Z",
-        "Li Y",
-        "Wang D"
-      ],
-      "journal": "Aquatic toxicology (Amsterdam, Netherlands)",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1016/j.aquatox.2026.107935",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42470908/",
-      "doi_url": "https://doi.org/10.1016/j.aquatox.2026.107935",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42456869",
-      "title": "Ketogenic diet in rheumatoid arthritis, psoriatic arthritis and psoriasis: A scoping review of clinical and mechanistic evidence.",
-      "authors": [
-        "Conforti A",
-        "Russo V",
-        "Lucchetti L",
-        "Fiorino E",
-        "Messina F",
-        "Francomano D",
-        "Merendino N",
-        "Marchetti M"
-      ],
-      "journal": "Autoimmunity reviews",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1016/j.autrev.2026.104137",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42456869/",
-      "doi_url": "https://doi.org/10.1016/j.autrev.2026.104137",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42407128",
-      "title": "Multi-omics and biochemical analyses provide new insights into the effects of poly-β-hydroxybutyrate on flesh quality in common carp (Cyprinus carpio).",
-      "authors": [
-        "Li L",
-        "Jiang Z",
-        "Wang S",
-        "Yu P",
-        "Dong J",
-        "Liu J",
-        "Xue Z",
-        "Wang Y",
-        "Yang Z",
-        "Yang Y"
-      ],
-      "journal": "Food chemistry",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1016/j.foodchem.2026.150305",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42407128/",
-      "doi_url": "https://doi.org/10.1016/j.foodchem.2026.150305",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42448648",
-      "title": "Dietary patterns, gut microbiota, and gastrointestinal disorders: mechanistic insights into irritable bowel syndrome and inflammatory bowel disease.",
-      "authors": [
-        "Khial Y",
-        "Lathief S",
-        "Aliwi L",
-        "Alqashouti S",
-        "Mohamedahmed H",
-        "Ali F",
-        "Tayyem R"
-      ],
-      "journal": "Reviews on environmental health",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1515/reveh-2026-0041",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42448648/",
-      "doi_url": "https://doi.org/10.1515/reveh-2026-0041",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
     {
       "pmid": "42746937",
       "title": "To eat, or not to eat… dietary patterns and the clinical recognition of insulinoma: a case report.",
@@ -443,7 +25,8 @@
         "Cittadini A"
       ],
       "journal": "Journal of basic and clinical physiology and pharmacology",
-      "date": "2026-01-01",
+      "date": "2026-09-17",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1515/jbcpp-2026-0193",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42746937/",
@@ -465,11 +48,41 @@
         "Meamar M"
       ],
       "journal": "Tropical animal health and production",
-      "date": "2026-01-01",
+      "date": "2026-09-16",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1007/s11250-026-05331-z",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42747625/",
       "doi_url": "https://doi.org/10.1007/s11250-026-05331-z",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42745506",
+      "title": "Diet, the Gut Microbiome, and Mental Health: Mechanistic Perspectives.",
+      "authors": [
+        "Hetta HF",
+        "Hassan RAA",
+        "Alanazi FE",
+        "Alqifari SF",
+        "Albalwi MA",
+        "Albalawi AA",
+        "Bukhari SQ",
+        "Alatawi Z",
+        "Ellah NHA",
+        "Ramadan YN"
+      ],
+      "journal": "Molecular nutrition & food research",
+      "date": "2026-09-16",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1002/mnfr.70592",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42745506/",
+      "doi_url": "https://doi.org/10.1002/mnfr.70592",
       "areas": [
         "Other / General"
       ],
@@ -495,11 +108,45 @@
         "Liu X"
       ],
       "journal": "Acta biochimica et biophysica Sinica",
-      "date": "2026-01-01",
+      "date": "2026-09-15",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.3724/abbs.2026117",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42743019/",
       "doi_url": "https://doi.org/10.3724/abbs.2026117",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42742320",
+      "title": "Pitfalls in 2HG Detection With TE-Optimized MRS at 3T.",
+      "authors": [
+        "Alcicek S",
+        "Simicic D",
+        "Blair L",
+        "Saint-Germain M",
+        "Zöllner HJ",
+        "Davies-Jenkins CW",
+        "Holdhoff M",
+        "Laterra J",
+        "Bettegowda C",
+        "Schreck KC",
+        "Lin DD",
+        "Barker PB",
+        "Kamson DO",
+        "Oeltzschner G"
+      ],
+      "journal": "Journal of neuroimaging : official journal of the American Society of Neuroimaging",
+      "date": "2026-09-15",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1111/jon.70146",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42742320/",
+      "doi_url": "https://doi.org/10.1111/jon.70146",
       "areas": [
         "Other / General"
       ],
@@ -526,95 +173,12 @@
         "Fang F"
       ],
       "journal": "Zhonghua er ke za zhi = Chinese journal of pediatrics",
-      "date": "2026-01-01",
+      "date": "2026-09-15",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.3760/cma.j.cn112140-20260601-00420",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42742013/",
       "doi_url": "https://doi.org/10.3760/cma.j.cn112140-20260601-00420",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42709008",
-      "title": "Fenofibrate Protects Against Antipsychotic-Induced Hyperglycemia Through Weight Loss and FGF21 Dependent Mechanisms.",
-      "authors": [
-        "Akcan M",
-        "Jeromson S",
-        "Baranowski BJ",
-        "Bellucci A",
-        "Trang S",
-        "Eisner K",
-        "Babicki-Moore A",
-        "Alfares H",
-        "Arbeau M",
-        "Medak K",
-        "Hahn M",
-        "Wright DC"
-      ],
-      "journal": "FASEB journal : official publication of the Federation of American Societies for Experimental Biology",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1096/fj.202602558R",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42709008/",
-      "doi_url": "https://doi.org/10.1096/fj.202602558R",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42670629",
-      "title": "Low Carbohydrate Availability in Energy Balance Alters Bone Turnover and Muscle Proteomic Response With Limited Endocrine Disruption.",
-      "authors": [
-        "Mosquera-Lopez E",
-        "Taylor HL",
-        "Nishimura Y",
-        "Langan-Evans C",
-        "Shepherd SO",
-        "Strauss JA",
-        "Morton JP",
-        "Burniston JG",
-        "Areta JL"
-      ],
-      "journal": "FASEB journal : official publication of the Federation of American Societies for Experimental Biology",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1096/fj.202602531R",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42670629/",
-      "doi_url": "https://doi.org/10.1096/fj.202602531R",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42288275",
-      "title": "Detection of NADH/NAD+ dysregulation in MELAS via diazo-carboxyl click derivatization mass spectrometry.",
-      "authors": [
-        "Hu J",
-        "Liufu T",
-        "Li C",
-        "Zhao Q",
-        "Yu M",
-        "Yuan Y",
-        "Quan L",
-        "Chen Z",
-        "Wang Z"
-      ],
-      "journal": "Clinica chimica acta; international journal of clinical chemistry",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1016/j.cca.2026.121172",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42288275/",
-      "doi_url": "https://doi.org/10.1016/j.cca.2026.121172",
       "areas": [
         "Other / General"
       ],
@@ -640,7 +204,8 @@
         "Maresh CM"
       ],
       "journal": "Journal of strength and conditioning research",
-      "date": "2026-01-01",
+      "date": "2026-09-14",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1519/JSC.0000000000005679",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42735299/",
@@ -660,7 +225,8 @@
         "Agus MS"
       ],
       "journal": "Hospital pediatrics",
-      "date": "2026-01-01",
+      "date": "2026-09-14",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1542/hpeds.2026-009505",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42732891/",
@@ -679,7 +245,8 @@
         "Ferrannini E"
       ],
       "journal": "Handbook of experimental pharmacology",
-      "date": "2026-01-01",
+      "date": "2026-09-13",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1007/164_2026_824",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42730799/",
@@ -705,11 +272,36 @@
         "Wang Q"
       ],
       "journal": "Immunobiology",
-      "date": "2026-01-01",
+      "date": "2026-09-11",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1016/j.imbio.2026.153243",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42732658/",
       "doi_url": "https://doi.org/10.1016/j.imbio.2026.153243",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42729904",
+      "title": "Euglycemic ketoacidosis in a nondiabetic patient receiving dapagliflozin for heart failure.",
+      "authors": [
+        "Silveira G",
+        "Kvasha Y",
+        "Shah P",
+        "Shah H",
+        "Gogineni J"
+      ],
+      "journal": "JCEM case reports",
+      "date": "2026-09-11",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1210/jcemcr/luag275",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42729904/",
+      "doi_url": "https://doi.org/10.1210/jcemcr/luag275",
       "areas": [
         "Other / General"
       ],
@@ -733,7 +325,8 @@
         "Li S"
       ],
       "journal": "Journal of animal science and biotechnology",
-      "date": "2026-01-01",
+      "date": "2026-09-11",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1186/s40104-026-01497-6",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42723101/",
@@ -753,7 +346,8 @@
         "Huang L"
       ],
       "journal": "Journal of renal nutrition : the official journal of the Council on Renal Nutrition of the National Kidney Foundation",
-      "date": "2026-01-01",
+      "date": "2026-09-10",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1053/j.jrn.2026.08.011",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42722219/",
@@ -788,43 +382,12 @@
         "Cha YM"
       ],
       "journal": "Circulation. Heart failure",
-      "date": "2026-01-01",
+      "date": "2026-09-10",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1161/CIRCHEARTFAILURE.125.014148",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42717876/",
       "doi_url": "https://doi.org/10.1161/CIRCHEARTFAILURE.125.014148",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42456350",
-      "title": "Knockout of acod1 promotes liver regeneration after hepatectomy by promoting fatty acid mobilization.",
-      "authors": [
-        "Zhang D",
-        "Kuai J",
-        "Jiang Y",
-        "Zhang S",
-        "Chen P",
-        "Wang H",
-        "Liu X",
-        "Guo X",
-        "Jiang Z",
-        "Wang P",
-        "Wang C",
-        "Zhao D",
-        "Que W",
-        "Zhong L"
-      ],
-      "journal": "Biochemical and biophysical research communications",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1016/j.bbrc.2026.154289",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42456350/",
-      "doi_url": "https://doi.org/10.1016/j.bbrc.2026.154289",
       "areas": [
         "Other / General"
       ],
@@ -840,7 +403,8 @@
         "Dimitriadis K"
       ],
       "journal": "Neurological research and practice",
-      "date": "2026-01-01",
+      "date": "2026-09-09",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1186/s42466-026-00533-0",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42717355/",
@@ -863,7 +427,8 @@
         "Neves RC"
       ],
       "journal": "Journal of dairy science",
-      "date": "2026-01-01",
+      "date": "2026-09-09",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.3168/jds.2026-29086",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42716296/",
@@ -887,7 +452,8 @@
         "Ma Y"
       ],
       "journal": "Journal of animal science and biotechnology",
-      "date": "2026-01-01",
+      "date": "2026-09-09",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1186/s40104-026-01490-z",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42711729/",
@@ -909,7 +475,8 @@
         "Lu L"
       ],
       "journal": "Dose-response : a publication of International Hormesis Society",
-      "date": "2026-01-01",
+      "date": "2026-09-08",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1177/15593258261487097",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42719481/",
@@ -940,7 +507,8 @@
         "Li CJ"
       ],
       "journal": "The Journal of biological chemistry",
-      "date": "2026-01-01",
+      "date": "2026-09-08",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1016/j.jbc.2026.113535",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42710673/",
@@ -967,7 +535,8 @@
         "Anzenbacherova E"
       ],
       "journal": "PloS one",
-      "date": "2026-01-01",
+      "date": "2026-09-08",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1371/journal.pone.0357797",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42709766/",
@@ -992,7 +561,8 @@
         "Debevec T"
       ],
       "journal": "European journal of applied physiology",
-      "date": "2026-01-01",
+      "date": "2026-09-08",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1007/s00421-026-06426-z",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42709151/",
@@ -1005,21 +575,29 @@
       "status": "new"
     },
     {
-      "pmid": "42685074",
-      "title": "Transforming neural activity to operate without glucose metabolism using brain-derived ketone bodies.",
+      "pmid": "42709008",
+      "title": "Fenofibrate Protects Against Antipsychotic-Induced Hyperglycemia Through Weight Loss and FGF21 Dependent Mechanisms.",
       "authors": [
-        "Yaseen H",
-        "Cisneros K",
-        "Wright R",
-        "Bueschke N",
-        "Santin JM"
+        "Akcan M",
+        "Jeromson S",
+        "Baranowski BJ",
+        "Bellucci A",
+        "Trang S",
+        "Eisner K",
+        "Babicki-Moore A",
+        "Alfares H",
+        "Arbeau M",
+        "Medak K",
+        "Hahn M",
+        "Wright DC"
       ],
-      "journal": "Proceedings of the National Academy of Sciences of the United States of America",
-      "date": "2026-01-01",
+      "journal": "FASEB journal : official publication of the Federation of American Societies for Experimental Biology",
+      "date": "2026-09-08",
+      "date_precision": "day",
       "year": 2026,
-      "doi": "10.1073/pnas.2613981123",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42685074/",
-      "doi_url": "https://doi.org/10.1073/pnas.2613981123",
+      "doi": "10.1096/fj.202602558R",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42709008/",
+      "doi_url": "https://doi.org/10.1096/fj.202602558R",
       "areas": [
         "Other / General"
       ],
@@ -1040,7 +618,8 @@
         "Conte C"
       ],
       "journal": "Nutrients",
-      "date": "2026-01-01",
+      "date": "2026-09-07",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.3390/nu18172933",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42739105/",
@@ -1072,11 +651,39 @@
         "Komar AA"
       ],
       "journal": "FASEB bioAdvances",
-      "date": "2026-01-01",
+      "date": "2026-09-07",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1096/fba.2026-00271",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42712787/",
       "doi_url": "https://doi.org/10.1096/fba.2026-00271",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42704874",
+      "title": "Discriminatory performance of total calcium for ionized hypocalcemia and factors affecting ionized calcium in Assaf ewes during the pre- and post-lambing periods.",
+      "authors": [
+        "Tümer KÇ",
+        "Buczinski S",
+        "Bozaci S",
+        "Deniz Ö",
+        "Şafak T",
+        "Deniz BI",
+        "Şimşek A",
+        "Wittek T"
+      ],
+      "journal": "Journal of veterinary internal medicine",
+      "date": "2026-09-07",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1093/jvimsj/aalag202",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42704874/",
+      "doi_url": "https://doi.org/10.1093/jvimsj/aalag202",
       "areas": [
         "Other / General"
       ],
@@ -1109,7 +716,8 @@
         "Kwan P"
       ],
       "journal": "Epilepsia open",
-      "date": "2026-01-01",
+      "date": "2026-09-07",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1002/epi4.70345",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42704249/",
@@ -1130,7 +738,8 @@
         "Piwowar A"
       ],
       "journal": "Nutrients",
-      "date": "2026-01-01",
+      "date": "2026-09-06",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.3390/nu18172917",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42739089/",
@@ -1153,7 +762,8 @@
         "Rodríguez-Arias M"
       ],
       "journal": "Behavioural brain research",
-      "date": "2026-01-01",
+      "date": "2026-09-05",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1016/j.bbr.2026.116465",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42700934/",
@@ -1177,7 +787,8 @@
         "Weir MR"
       ],
       "journal": "Kidney360",
-      "date": "2026-01-01",
+      "date": "2026-09-04",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.34067/KID.0000001379",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42696402/",
@@ -1209,7 +820,8 @@
         "Zhang Y"
       ],
       "journal": "Plant physiology and biochemistry : PPB",
-      "date": "2026-01-01",
+      "date": "2026-09-03",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1016/j.plaphy.2026.111712",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42700578/",
@@ -1236,7 +848,8 @@
         "Wang J"
       ],
       "journal": "Journal of dairy science",
-      "date": "2026-01-01",
+      "date": "2026-09-03",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.3168/jds.2026-28725",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42692332/",
@@ -1260,7 +873,8 @@
         "Du R"
       ],
       "journal": "European journal of pharmacology",
-      "date": "2026-01-01",
+      "date": "2026-09-03",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1016/j.ejphar.2026.179309",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42692280/",
@@ -1288,7 +902,8 @@
         "Cheng J"
       ],
       "journal": "Cell metabolism",
-      "date": "2026-01-01",
+      "date": "2026-09-03",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1016/j.cmet.2026.08.009",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42692017/",
@@ -1311,7 +926,8 @@
         "Chen Q"
       ],
       "journal": "Frontiers in nutrition",
-      "date": "2026-01-01",
+      "date": "2026-09-02",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.3389/fnut.2026.1945464",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42751354/",
@@ -1338,7 +954,8 @@
         "Wang Z"
       ],
       "journal": "Nutrients",
-      "date": "2026-01-01",
+      "date": "2026-09-02",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.3390/nu18172867",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42739040/",
@@ -1368,7 +985,8 @@
         "Rochfort SJ"
       ],
       "journal": "Foods (Basel, Switzerland)",
-      "date": "2026-01-01",
+      "date": "2026-09-02",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.3390/foods15173117",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42737360/",
@@ -1391,7 +1009,8 @@
         "Li D"
       ],
       "journal": "Biosensors & bioelectronics",
-      "date": "2026-01-01",
+      "date": "2026-09-02",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1016/j.bios.2026.119187",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42696819/",
@@ -1415,7 +1034,8 @@
         "Jackson MI"
       ],
       "journal": "Journal of animal science",
-      "date": "2026-01-01",
+      "date": "2026-09-02",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1093/jas/skag193",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42687438/",
@@ -1444,11 +1064,36 @@
         "Cao A"
       ],
       "journal": "BMC psychiatry",
-      "date": "2026-01-01",
+      "date": "2026-09-02",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1186/s12888-026-08547-3",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42687165/",
       "doi_url": "https://doi.org/10.1186/s12888-026-08547-3",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42685074",
+      "title": "Transforming neural activity to operate without glucose metabolism using brain-derived ketone bodies.",
+      "authors": [
+        "Yaseen H",
+        "Cisneros K",
+        "Wright R",
+        "Bueschke N",
+        "Santin JM"
+      ],
+      "journal": "Proceedings of the National Academy of Sciences of the United States of America",
+      "date": "2026-09-02",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1073/pnas.2613981123",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42685074/",
+      "doi_url": "https://doi.org/10.1073/pnas.2613981123",
       "areas": [
         "Other / General"
       ],
@@ -1476,7 +1121,8 @@
         "Su H"
       ],
       "journal": "Journal of animal science and biotechnology",
-      "date": "2026-01-01",
+      "date": "2026-09-02",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1186/s40104-026-01485-w",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42681694/",
@@ -1501,142 +1147,12 @@
         "Zhang W"
       ],
       "journal": "Frontiers in cardiovascular medicine",
-      "date": "2026-01-01",
+      "date": "2026-09-01",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.3389/fcvm.2026.1925684",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42746146/",
       "doi_url": "https://doi.org/10.3389/fcvm.2026.1925684",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42745506",
-      "title": "Diet, the Gut Microbiome, and Mental Health: Mechanistic Perspectives.",
-      "authors": [
-        "Hetta HF",
-        "Hassan RAA",
-        "Alanazi FE",
-        "Alqifari SF",
-        "Albalwi MA",
-        "Albalawi AA",
-        "Bukhari SQ",
-        "Alatawi Z",
-        "Ellah NHA",
-        "Ramadan YN"
-      ],
-      "journal": "Molecular nutrition & food research",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1002/mnfr.70592",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42745506/",
-      "doi_url": "https://doi.org/10.1002/mnfr.70592",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42742320",
-      "title": "Pitfalls in 2HG Detection With TE-Optimized MRS at 3T.",
-      "authors": [
-        "Alcicek S",
-        "Simicic D",
-        "Blair L",
-        "Saint-Germain M",
-        "Zöllner HJ",
-        "Davies-Jenkins CW",
-        "Holdhoff M",
-        "Laterra J",
-        "Bettegowda C",
-        "Schreck KC",
-        "Lin DD",
-        "Barker PB",
-        "Kamson DO",
-        "Oeltzschner G"
-      ],
-      "journal": "Journal of neuroimaging : official journal of the American Society of Neuroimaging",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1111/jon.70146",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42742320/",
-      "doi_url": "https://doi.org/10.1111/jon.70146",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42729715",
-      "title": "Artificial rearing with milk replacers of varying fat and total solids compared with natural suckling: Pre- and post-weaning performance of lambs.",
-      "authors": [
-        "Akbarizadeh A",
-        "Ghasemi E",
-        "Gholami M",
-        "Dolatkhah B"
-      ],
-      "journal": "Veterinary and animal science",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1016/j.vas.2026.100839",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42729715/",
-      "doi_url": "https://doi.org/10.1016/j.vas.2026.100839",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42724849",
-      "title": "Monocarboxylate transporter 1 deficiency: a rare case report and systematic review of genetically confirmed cases.",
-      "authors": [
-        "Khalifa YM",
-        "Assem MY",
-        "Ahmed ZF",
-        "Hasan LT",
-        "Qutob IA"
-      ],
-      "journal": "Annals of medicine and surgery (2012)",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1097/MS9.0000000000005477",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42724849/",
-      "doi_url": "https://doi.org/10.1097/MS9.0000000000005477",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42704874",
-      "title": "Discriminatory performance of total calcium for ionized hypocalcemia and factors affecting ionized calcium in Assaf ewes during the pre- and post-lambing periods.",
-      "authors": [
-        "Tümer KÇ",
-        "Buczinski S",
-        "Bozaci S",
-        "Deniz Ö",
-        "Şafak T",
-        "Deniz BI",
-        "Şimşek A",
-        "Wittek T"
-      ],
-      "journal": "Journal of veterinary internal medicine",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1093/jvimsj/aalag202",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42704874/",
-      "doi_url": "https://doi.org/10.1093/jvimsj/aalag202",
       "areas": [
         "Other / General"
       ],
@@ -1659,7 +1175,8 @@
         "Jiao J"
       ],
       "journal": "Global heart",
-      "date": "2026-01-01",
+      "date": "2026-09-01",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.5334/gh.1582",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42699646/",
@@ -1682,7 +1199,8 @@
         "Aoki C"
       ],
       "journal": "Neuroscience",
-      "date": "2026-01-01",
+      "date": "2026-09-01",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1016/j.neuroscience.2026.08.045",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42679921/",
@@ -1708,6 +1226,7 @@
         "Cho AN",
         "Imam FB",
         "Krish V",
+        "Global Neurodegeneration Proteomics Consortium (GNPC)",
         "Taylor MK",
         "Mahnken JD",
         "Sullivan DK",
@@ -1719,7 +1238,8 @@
         "Finney CA"
       ],
       "journal": "Alzheimer's & dementia : the journal of the Alzheimer's Association",
-      "date": "2026-01-01",
+      "date": "2026-08-31",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1002/alz.71714",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42671246/",
@@ -1732,21 +1252,74 @@
       "status": "new"
     },
     {
-      "pmid": "42658174",
-      "title": "Acute-onset autoimmune type 1 diabetes presenting with diabetic ketoacidosis in an obese adult.",
+      "pmid": "42670629",
+      "title": "Low Carbohydrate Availability in Energy Balance Alters Bone Turnover and Muscle Proteomic Response With Limited Endocrine Disruption.",
       "authors": [
-        "Donkor DKA",
-        "Chandanala VSD",
-        "Akinfisoye T",
-        "Adrejiya P",
-        "Gichamo A"
+        "Mosquera-Lopez E",
+        "Taylor HL",
+        "Nishimura Y",
+        "Langan-Evans C",
+        "Shepherd SO",
+        "Strauss JA",
+        "Morton JP",
+        "Burniston JG",
+        "Areta JL"
       ],
-      "journal": "Proceedings (Baylor University. Medical Center)",
-      "date": "2026-01-01",
+      "journal": "FASEB journal : official publication of the Federation of American Societies for Experimental Biology",
+      "date": "2026-08-31",
+      "date_precision": "day",
       "year": 2026,
-      "doi": "10.1080/08998280.2026.2657125",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42658174/",
-      "doi_url": "https://doi.org/10.1080/08998280.2026.2657125",
+      "doi": "10.1096/fj.202602531R",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42670629/",
+      "doi_url": "https://doi.org/10.1096/fj.202602531R",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42729715",
+      "title": "Artificial rearing with milk replacers of varying fat and total solids compared with natural suckling: Pre- and post-weaning performance of lambs.",
+      "authors": [
+        "Akbarizadeh A",
+        "Ghasemi E",
+        "Gholami M",
+        "Dolatkhah B"
+      ],
+      "journal": "Veterinary and animal science",
+      "date": "2026-08-27",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.vas.2026.100839",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42729715/",
+      "doi_url": "https://doi.org/10.1016/j.vas.2026.100839",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42647426",
+      "title": "NAD+ or β-hydroxybutyrate each protects against tachypacing-induced metabolic remodeling through regulation of mitophagy in HL-1 cardiomyocytes.",
+      "authors": [
+        "Qi X",
+        "Hu L",
+        "Rinsum AV",
+        "Koopman WJH",
+        "Keijer J",
+        "Zhang D"
+      ],
+      "journal": "American journal of physiology. Cell physiology",
+      "date": "2026-08-26",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1152/ajpcell.00253.2026",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42647426/",
+      "doi_url": "https://doi.org/10.1152/ajpcell.00253.2026",
       "areas": [
         "Other / General"
       ],
@@ -1759,7 +1332,8 @@
       "title": "Ketogenic Diet Promotes Intestinal Tumorigenesis Via Lipid Oxidation.",
       "authors": [],
       "journal": "Cancer discovery",
-      "date": "2026-01-01",
+      "date": "2026-08-25",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1158/2159-8290.CD-RW2026-076",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42642354/",
@@ -1789,7 +1363,8 @@
         "Sperb-Ludwig F"
       ],
       "journal": "JIMD reports",
-      "date": "2026-01-01",
+      "date": "2026-08-23",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1002/jmd2.70113",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42638834/",
@@ -1813,11 +1388,63 @@
         "Selmer KK"
       ],
       "journal": "EBioMedicine",
-      "date": "2026-01-01",
+      "date": "2026-08-22",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1016/j.ebiom.2026.106449",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42632233/",
       "doi_url": "https://doi.org/10.1016/j.ebiom.2026.106449",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42617931",
+      "title": "The impact of medium chain triglyceride ketogenic diet on liver mitochondria and cytochrome P450 2E1.",
+      "authors": [
+        "Ryan AS",
+        "Roberts RM",
+        "Stayer KM",
+        "Tomasevich AA",
+        "Misare KR",
+        "Hollis F",
+        "McQuail JA",
+        "Hartman JH"
+      ],
+      "journal": "Archives of biochemistry and biophysics",
+      "date": "2026-08-19",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.abb.2026.110978",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42617931/",
+      "doi_url": "https://doi.org/10.1016/j.abb.2026.110978",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42617797",
+      "title": "Ketogenic diet attenuates seizures by promoting lipid droplet formation via peroxisome proliferator-activated receptor gamma signaling pathway.",
+      "authors": [
+        "Xi Z",
+        "Zhang W",
+        "Liu Q",
+        "Wang Q",
+        "Qi Y"
+      ],
+      "journal": "Life sciences",
+      "date": "2026-08-19",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.lfs.2026.124638",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42617797/",
+      "doi_url": "https://doi.org/10.1016/j.lfs.2026.124638",
       "areas": [
         "Other / General"
       ],
@@ -1856,7 +1483,8 @@
         "Kautzky-Willer A"
       ],
       "journal": "Endocrinology, diabetes & metabolism",
-      "date": "2026-01-01",
+      "date": "2026-08-13",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1002/edm2.70258",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42594354/",
@@ -1869,27 +1497,49 @@
       "status": "new"
     },
     {
-      "pmid": "42568854",
-      "title": "Association between Circulating Ketone Bodies and Primary Open-Angle Glaucoma and Related Ocular Parameters.",
+      "pmid": "42724849",
+      "title": "Monocarboxylate transporter 1 deficiency: a rare case report and systematic review of genetically confirmed cases.",
       "authors": [
-        "Chen J",
-        "Wang Z",
-        "Deng S",
-        "Li Z",
-        "Chen X",
-        "Liang J",
-        "Li Y",
-        "Yu J",
-        "Lei L",
-        "Zhuo Y",
-        "Zhu Y"
+        "Khalifa YM",
+        "Assem MY",
+        "Ahmed ZF",
+        "Hasan LT",
+        "Qutob IA"
       ],
-      "journal": "Ophthalmology science",
-      "date": "2026-01-01",
+      "journal": "Annals of medicine and surgery (2012)",
+      "date": "2026-08-10",
+      "date_precision": "day",
       "year": 2026,
-      "doi": "10.1016/j.xops.2026.101313",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42568854/",
-      "doi_url": "https://doi.org/10.1016/j.xops.2026.101313",
+      "doi": "10.1097/MS9.0000000000005477",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42724849/",
+      "doi_url": "https://doi.org/10.1097/MS9.0000000000005477",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42591798",
+      "title": "The ketogenic diet ameliorates behavioral abnormalities in a PTZ-induced zebrafish larvae model via modulating neurotransmitter balance.",
+      "authors": [
+        "Yang X",
+        "Lin J",
+        "Zhang Q",
+        "Xia Y",
+        "Zhou S",
+        "Wang Y",
+        "Li Q",
+        "Yu L"
+      ],
+      "journal": "IBRO neuroscience reports",
+      "date": "2026-08-04",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.ibneur.2026.08.001",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42591798/",
+      "doi_url": "https://doi.org/10.1016/j.ibneur.2026.08.001",
       "areas": [
         "Other / General"
       ],
@@ -1908,11 +1558,68 @@
         "Farrar MA"
       ],
       "journal": "Seizure",
-      "date": "2026-01-01",
+      "date": "2026-08-03",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1016/j.seizure.2026.07.026",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42546573/",
       "doi_url": "https://doi.org/10.1016/j.seizure.2026.07.026",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42546517",
+      "title": "Metabolic ketosis attenuates NLRP3 inflammasome activation and is associated with improvements in hepatic steatosis and liver stiffness in MASLD: a pilot randomized controlled trial.",
+      "authors": [
+        "Ehtiati S",
+        "Hatami B",
+        "Khatami SH",
+        "Ahmadzade R",
+        "Zarei T",
+        "Sirati-Sabet M",
+        "Abdi S",
+        "Hajimohammadebrahim-Ketabforoush M",
+        "Namvarjah F",
+        "Boostanipour A",
+        "Karima S"
+      ],
+      "journal": "International immunopharmacology",
+      "date": "2026-08-03",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.intimp.2026.117214",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42546517/",
+      "doi_url": "https://doi.org/10.1016/j.intimp.2026.117214",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42544887",
+      "title": "Acute Heat Exposure Upregulates Zebra Finch Physiology While Avoiding DNA Damage Across Both Sexes.",
+      "authors": [
+        "Haussmann BD",
+        "McGrath MR",
+        "Vo DH",
+        "Pham K",
+        "Gassman NR",
+        "Schwartz TS",
+        "Wada H"
+      ],
+      "journal": "Journal of experimental zoology. Part A, Ecological and integrative physiology",
+      "date": "2026-08-03",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1002/jez.70120",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42544887/",
+      "doi_url": "https://doi.org/10.1002/jez.70120",
       "areas": [
         "Other / General"
       ],
@@ -1935,7 +1642,8 @@
         "Kim NH"
       ],
       "journal": "Diabetes research and clinical practice",
-      "date": "2026-01-01",
+      "date": "2026-07-31",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1016/j.diabres.2026.113476",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42537913/",
@@ -1952,32 +1660,12 @@
       "title": "Correction to \"Metabolism-Based Molecular Subtyping Endows Effective Ketogenic Therapy in p53-Mutant Colon Cancer\".",
       "authors": [],
       "journal": "Advanced science (Weinheim, Baden-Wurttemberg, Germany)",
-      "date": "2026-01-01",
+      "date": "2026-07-31",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1002/advs.76845",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42535782/",
       "doi_url": "https://doi.org/10.1002/advs.76845",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42531745",
-      "title": "Inconsistency Between the Definition of \"Real-World Exposure\" and the Predefined Inclusion Criteria in a Systematic Review on the Ketogenic Diet for Polycystic Ovary Syndrome.",
-      "authors": [
-        "Zhu H",
-        "Lu C",
-        "Shen L"
-      ],
-      "journal": "Clinical nutrition (Edinburgh, Scotland)",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1016/j.clnu.2026.106732",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42531745/",
-      "doi_url": "https://doi.org/10.1016/j.clnu.2026.106732",
       "areas": [
         "Other / General"
       ],
@@ -1994,30 +1682,12 @@
         "Weimbs T"
       ],
       "journal": "American journal of physiology. Endocrinology and metabolism",
-      "date": "2026-01-01",
+      "date": "2026-07-30",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1152/ajpendo.00067.2026",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42530143/",
       "doi_url": "https://doi.org/10.1152/ajpendo.00067.2026",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42527000",
-      "title": "Future of Continuous Ketone Monitoring and Its Utility for Safe Use of Sodium-glucose Cotransporter-2 Inhibitors in Type 1 Diabetes.",
-      "authors": [
-        "Akturk HK"
-      ],
-      "journal": "Endocrinology and metabolism clinics of North America",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1016/j.ecl.2026.04.005",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42527000/",
-      "doi_url": "https://doi.org/10.1016/j.ecl.2026.04.005",
       "areas": [
         "Other / General"
       ],
@@ -2036,7 +1706,8 @@
         "Hanoğlu L"
       ],
       "journal": "The journal of nutrition, health & aging",
-      "date": "2026-01-01",
+      "date": "2026-07-24",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1016/j.jnha.2026.100930",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42497811/",
@@ -2049,24 +1720,18 @@
       "status": "new"
     },
     {
-      "pmid": "42492456",
-      "title": "Predicting the efficacy of classic ketogenic diet therapy in children with refractory epilepsy using dynamic changes in the glucose-ketone index (GKI).",
+      "pmid": "42485940",
+      "title": "Epilepsy of infancy with migrating focal seizures: A scoping review of clinical features, diagnostic testing including genetics, long-term outcomes, mortality, and current and emerging therapeutic strategies.",
       "authors": [
-        "Li J",
-        "Wang T",
-        "Yu L",
-        "Ni Y",
-        "Li Y",
-        "Zhang Y",
-        "Zhou S",
-        "Wang Y"
+        "Samanta D"
       ],
-      "journal": "Seizure",
-      "date": "2026-01-01",
+      "journal": "Epilepsy & behavior : E&B",
+      "date": "2026-07-22",
+      "date_precision": "day",
       "year": 2026,
-      "doi": "10.1016/j.seizure.2026.07.011",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42492456/",
-      "doi_url": "https://doi.org/10.1016/j.seizure.2026.07.011",
+      "doi": "10.1016/j.yebeh.2026.111218",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42485940/",
+      "doi_url": "https://doi.org/10.1016/j.yebeh.2026.111218",
       "areas": [
         "Other / General"
       ],
@@ -2088,11 +1753,56 @@
         "Wang W"
       ],
       "journal": "EMBO molecular medicine",
-      "date": "2026-01-01",
+      "date": "2026-07-21",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1038/s44321-026-00491-9",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42481825/",
       "doi_url": "https://doi.org/10.1038/s44321-026-00491-9",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42479345",
+      "title": "The emerging role of trace elements in epilepsy and metabolic disorders: a new frontier in neurotherapeutics.",
+      "authors": [
+        "El Foutat S",
+        "El Khiat A",
+        "Fdil N"
+      ],
+      "journal": "Biometals : an international journal on the role of metal ions in biology, biochemistry, and medicine",
+      "date": "2026-07-21",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1007/s10534-026-00852-4",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42479345/",
+      "doi_url": "https://doi.org/10.1007/s10534-026-00852-4",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42531745",
+      "title": "Inconsistency Between the Definition of \"Real-World Exposure\" and the Predefined Inclusion Criteria in a Systematic Review on the Ketogenic Diet for Polycystic Ovary Syndrome.",
+      "authors": [
+        "Zhu H",
+        "Lu C",
+        "Shen L"
+      ],
+      "journal": "Clinical nutrition (Edinburgh, Scotland)",
+      "date": "2026-07-20",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.clnu.2026.106732",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42531745/",
+      "doi_url": "https://doi.org/10.1016/j.clnu.2026.106732",
       "areas": [
         "Other / General"
       ],
@@ -2118,11 +1828,109 @@
         "Thyfault JP"
       ],
       "journal": "Molecular metabolism",
-      "date": "2026-01-01",
+      "date": "2026-07-16",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1016/j.molmet.2026.102421",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42463009/",
       "doi_url": "https://doi.org/10.1016/j.molmet.2026.102421",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42462897",
+      "title": "β-Hydroxybutyrate induces histone H3 β-hydroxybutyrylation and attenuates diabetic brain microvascular endothelial hyperpermeability.",
+      "authors": [
+        "Liu L",
+        "Yi R",
+        "Wang Y",
+        "Cui Y",
+        "Cui Y",
+        "Liu X",
+        "Zheng H",
+        "Qi J",
+        "Li Y"
+      ],
+      "journal": "Experimental neurology",
+      "date": "2026-07-16",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.expneurol.2026.115905",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42462897/",
+      "doi_url": "https://doi.org/10.1016/j.expneurol.2026.115905",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42462387",
+      "title": "From synaptic dysfunction to targeted intervention: a comprehensive review of STXBP1 encephalopathy and precision therapeutic strategies.",
+      "authors": [
+        "Samanta D"
+      ],
+      "journal": "Epilepsy & behavior : E&B",
+      "date": "2026-07-16",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.yebeh.2026.111194",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42462387/",
+      "doi_url": "https://doi.org/10.1016/j.yebeh.2026.111194",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42448648",
+      "title": "Dietary patterns, gut microbiota, and gastrointestinal disorders: mechanistic insights into irritable bowel syndrome and inflammatory bowel disease.",
+      "authors": [
+        "Khial Y",
+        "Lathief S",
+        "Aliwi L",
+        "Alqashouti S",
+        "Mohamedahmed H",
+        "Ali F",
+        "Tayyem R"
+      ],
+      "journal": "Reviews on environmental health",
+      "date": "2026-07-16",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1515/reveh-2026-0041",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42448648/",
+      "doi_url": "https://doi.org/10.1515/reveh-2026-0041",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42470908",
+      "title": "Inhibition in β-hydroxybutyrate synthesis by 6-PPD quinone at environmentally relevant concentrations is associated with immunosuppression induction in Caenorhabditis elegans.",
+      "authors": [
+        "Wang W",
+        "Wu Z",
+        "Li Y",
+        "Wang D"
+      ],
+      "journal": "Aquatic toxicology (Amsterdam, Netherlands)",
+      "date": "2026-07-15",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.aquatox.2026.107935",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42470908/",
+      "doi_url": "https://doi.org/10.1016/j.aquatox.2026.107935",
       "areas": [
         "Other / General"
       ],
@@ -2142,7 +1950,8 @@
         "Martins RN"
       ],
       "journal": "The American journal of clinical nutrition",
-      "date": "2026-01-01",
+      "date": "2026-07-15",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1016/j.ajcnut.2026.101434",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42457037/",
@@ -2155,7 +1964,67 @@
       "status": "new"
     },
     {
-      "pmid": "42447709",
+      "pmid": "42456869",
+      "title": "Ketogenic diet in rheumatoid arthritis, psoriatic arthritis and psoriasis: A scoping review of clinical and mechanistic evidence.",
+      "authors": [
+        "Conforti A",
+        "Russo V",
+        "Lucchetti L",
+        "Fiorino E",
+        "Messina F",
+        "Francomano D",
+        "Merendino N",
+        "Marchetti M"
+      ],
+      "journal": "Autoimmunity reviews",
+      "date": "2026-07-15",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.autrev.2026.104137",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42456869/",
+      "doi_url": "https://doi.org/10.1016/j.autrev.2026.104137",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42456350",
+      "title": "Knockout of acod1 promotes liver regeneration after hepatectomy by promoting fatty acid mobilization.",
+      "authors": [
+        "Zhang D",
+        "Kuai J",
+        "Jiang Y",
+        "Zhang S",
+        "Chen P",
+        "Wang H",
+        "Liu X",
+        "Guo X",
+        "Jiang Z",
+        "Wang P",
+        "Wang C",
+        "Zhao D",
+        "Que W",
+        "Zhong L"
+      ],
+      "journal": "Biochemical and biophysical research communications",
+      "date": "2026-07-14",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.bbrc.2026.154289",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42456350/",
+      "doi_url": "https://doi.org/10.1016/j.bbrc.2026.154289",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42492456",
       "title": "Predicting the efficacy of classic ketogenic diet therapy in children with refractory epilepsy using dynamic changes in the glucose-ketone index (GKI).",
       "authors": [
         "Li J",
@@ -2168,11 +2037,12 @@
         "Wang Y"
       ],
       "journal": "Seizure",
-      "date": "2026-01-01",
+      "date": "2026-07-12",
+      "date_precision": "day",
       "year": 2026,
-      "doi": "10.1016/j.seizure.2026.06.017",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42447709/",
-      "doi_url": "https://doi.org/10.1016/j.seizure.2026.06.017",
+      "doi": "10.1016/j.seizure.2026.07.011",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42492456/",
+      "doi_url": "https://doi.org/10.1016/j.seizure.2026.07.011",
       "areas": [
         "Other / General"
       ],
@@ -2195,11 +2065,70 @@
         "Arhan E"
       ],
       "journal": "Epilepsy research",
-      "date": "2026-01-01",
+      "date": "2026-07-10",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1016/j.eplepsyres.2026.107872",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42431072/",
       "doi_url": "https://doi.org/10.1016/j.eplepsyres.2026.107872",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42526162",
+      "title": "Neurodevelopmental Risk Factors and Comparative Efficacy of Ketogenic Diet in Children With Spike-Wave Activation in Sleep: A Cohort Study.",
+      "authors": [
+        "Ma J",
+        "Wang J",
+        "Song X",
+        "Xie L",
+        "Li X",
+        "Hu Y",
+        "Hong S",
+        "Jiang L",
+        "Li T"
+      ],
+      "journal": "Pediatric neurology",
+      "date": "2026-07-08",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.pediatrneurol.2026.07.010",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42526162/",
+      "doi_url": "https://doi.org/10.1016/j.pediatrneurol.2026.07.010",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42568854",
+      "title": "Association between Circulating Ketone Bodies and Primary Open-Angle Glaucoma and Related Ocular Parameters.",
+      "authors": [
+        "Chen J",
+        "Wang Z",
+        "Deng S",
+        "Li Z",
+        "Chen X",
+        "Liang J",
+        "Li Y",
+        "Yu J",
+        "Lei L",
+        "Zhuo Y",
+        "Zhu Y"
+      ],
+      "journal": "Ophthalmology science",
+      "date": "2026-07-06",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.xops.2026.101313",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42568854/",
+      "doi_url": "https://doi.org/10.1016/j.xops.2026.101313",
       "areas": [
         "Other / General"
       ],
@@ -2232,11 +2161,70 @@
         "Al-Hasani H"
       ],
       "journal": "Diabetes, obesity & metabolism",
-      "date": "2026-01-01",
+      "date": "2026-07-06",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1111/dom.71068",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42410330/",
       "doi_url": "https://doi.org/10.1111/dom.71068",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42407128",
+      "title": "Multi-omics and biochemical analyses provide new insights into the effects of poly-β-hydroxybutyrate on flesh quality in common carp (Cyprinus carpio).",
+      "authors": [
+        "Li L",
+        "Jiang Z",
+        "Wang S",
+        "Yu P",
+        "Dong J",
+        "Liu J",
+        "Xue Z",
+        "Wang Y",
+        "Yang Z",
+        "Yang Y"
+      ],
+      "journal": "Food chemistry",
+      "date": "2026-07-03",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.foodchem.2026.150305",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42407128/",
+      "doi_url": "https://doi.org/10.1016/j.foodchem.2026.150305",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42392584",
+      "title": "SGLT2 inhibitors and chronic kidney disease: a narrative review of nephroprotective mechanisms from hemodynamics to metabolism.",
+      "authors": [
+        "Habas E",
+        "Rayani A",
+        "Habas A",
+        "Alarbi K",
+        "Habas A",
+        "Baghi M",
+        "Habas E",
+        "Errayes E",
+        "Hamad A",
+        "Elzouki A"
+      ],
+      "journal": "Renal failure",
+      "date": "2026-07-02",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1080/0886022X.2026.2688578",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42392584/",
+      "doi_url": "https://doi.org/10.1080/0886022X.2026.2688578",
       "areas": [
         "Other / General"
       ],
@@ -2263,11 +2251,39 @@
         "Herzog RI"
       ],
       "journal": "Diabetes",
-      "date": "2026-01-01",
+      "date": "2026-07-01",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.2337/db26-0293",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42384016/",
       "doi_url": "https://doi.org/10.2337/db26-0293",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42447709",
+      "title": "Predicting the efficacy of classic ketogenic diet therapy in children with refractory epilepsy using dynamic changes in the glucose-ketone index (GKI).",
+      "authors": [
+        "Li J",
+        "Wang T",
+        "Yu L",
+        "Ni Y",
+        "Li Y",
+        "Zhang Y",
+        "Zhou S",
+        "Wang Y"
+      ],
+      "journal": "Seizure",
+      "date": "2026-06-29",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.seizure.2026.06.017",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42447709/",
+      "doi_url": "https://doi.org/10.1016/j.seizure.2026.06.017",
       "areas": [
         "Other / General"
       ],
@@ -2286,82 +2302,12 @@
         "Huang C"
       ],
       "journal": "Redox biology",
-      "date": "2026-01-01",
+      "date": "2026-06-26",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1016/j.redox.2026.104279",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42365823/",
       "doi_url": "https://doi.org/10.1016/j.redox.2026.104279",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42341707",
-      "title": "Effect of the ketogenic diet on absence seizures in rats with genetic absence epilepsy.",
-      "authors": [
-        "Acikgoz NB",
-        "Toplu-Hocaoglu A",
-        "Yildirim BA",
-        "Yananli HR",
-        "Turkdogan D",
-        "Onat F"
-      ],
-      "journal": "Epilepsy research",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1016/j.eplepsyres.2026.107847",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42341707/",
-      "doi_url": "https://doi.org/10.1016/j.eplepsyres.2026.107847",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42339150",
-      "title": "Electroconvulsive Treatment for Depression Alters Mitochondrial Serum Metabolites.",
-      "authors": [
-        "Pålsson E",
-        "Sigström R",
-        "Salehi A",
-        "Hedenström M",
-        "Nordenskjöld A",
-        "Landén M"
-      ],
-      "journal": "Biological psychiatry global open science",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1016/j.bpsgos.2026.100754",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42339150/",
-      "doi_url": "https://doi.org/10.1016/j.bpsgos.2026.100754",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42322727",
-      "title": "Hormonal regulation of metabolic and reproductive homeostasis in transition dairy cows: Current insights and future perspectives.",
-      "authors": [
-        "Sarno RD",
-        "Abdoun KA",
-        "Al-Badwi MA",
-        "Samara EM",
-        "Al-Haidary AA"
-      ],
-      "journal": "Animal reproduction science",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1016/j.anireprosci.2026.108274",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42322727/",
-      "doi_url": "https://doi.org/10.1016/j.anireprosci.2026.108274",
       "areas": [
         "Other / General"
       ],
@@ -2389,11 +2335,89 @@
         "He S"
       ],
       "journal": "Cell proliferation",
-      "date": "2026-01-01",
+      "date": "2026-06-17",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1111/cpr.70247",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42311078/",
       "doi_url": "https://doi.org/10.1111/cpr.70247",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42341707",
+      "title": "Effect of the ketogenic diet on absence seizures in rats with genetic absence epilepsy.",
+      "authors": [
+        "Acikgoz NB",
+        "Toplu-Hocaoglu A",
+        "Yildirim BA",
+        "Yananli HR",
+        "Turkdogan D",
+        "Onat F"
+      ],
+      "journal": "Epilepsy research",
+      "date": "2026-06-16",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.eplepsyres.2026.107847",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42341707/",
+      "doi_url": "https://doi.org/10.1016/j.eplepsyres.2026.107847",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42322727",
+      "title": "Hormonal regulation of metabolic and reproductive homeostasis in transition dairy cows: Current insights and future perspectives.",
+      "authors": [
+        "Sarno RD",
+        "Abdoun KA",
+        "Al-Badwi MA",
+        "Samara EM",
+        "Al-Haidary AA"
+      ],
+      "journal": "Animal reproduction science",
+      "date": "2026-06-16",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.anireprosci.2026.108274",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42322727/",
+      "doi_url": "https://doi.org/10.1016/j.anireprosci.2026.108274",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42288275",
+      "title": "Detection of NADH/NAD+ dysregulation in MELAS via diazo-carboxyl click derivatization mass spectrometry.",
+      "authors": [
+        "Hu J",
+        "Liufu T",
+        "Li C",
+        "Zhao Q",
+        "Yu M",
+        "Yuan Y",
+        "Quan L",
+        "Chen Z",
+        "Wang Z"
+      ],
+      "journal": "Clinica chimica acta; international journal of clinical chemistry",
+      "date": "2026-06-13",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.cca.2026.121172",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42288275/",
+      "doi_url": "https://doi.org/10.1016/j.cca.2026.121172",
       "areas": [
         "Other / General"
       ],
@@ -2414,7 +2438,8 @@
         "Liu Z"
       ],
       "journal": "Cancer science",
-      "date": "2026-01-01",
+      "date": "2026-06-11",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1111/cas.70447",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42274090/",
@@ -2444,11 +2469,35 @@
         "Helman A"
       ],
       "journal": "Diabetologia",
-      "date": "2026-01-01",
+      "date": "2026-06-09",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1007/s00125-026-06771-w",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42265456/",
       "doi_url": "https://doi.org/10.1007/s00125-026-06771-w",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42263845",
+      "title": "The effects of acute ketone monoester supplementation on brain insulin responsiveness and cognitive performance: Results of a randomized, double-blind, placebo-controlled crossover trial in older men with overweight.",
+      "authors": [
+        "Nijssen KMR",
+        "Adam TC",
+        "Mensink RP",
+        "Joris PJ"
+      ],
+      "journal": "Metabolism: clinical and experimental",
+      "date": "2026-06-09",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.metabol.2026.156672",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42263845/",
+      "doi_url": "https://doi.org/10.1016/j.metabol.2026.156672",
       "areas": [
         "Other / General"
       ],
@@ -2469,33 +2518,12 @@
         "Hailemariam D"
       ],
       "journal": "Journal of dairy science",
-      "date": "2026-01-01",
+      "date": "2026-06-08",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.3168/jds.2026-28409",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42264364/",
       "doi_url": "https://doi.org/10.3168/jds.2026-28409",
-      "areas": [
-        "Other / General"
-      ],
-      "source": "PubMed",
-      "first_seen": "2026-09-17",
-      "status": "new"
-    },
-    {
-      "pmid": "42263845",
-      "title": "The effects of acute ketone monoester supplementation on brain insulin responsiveness and cognitive performance: Results of a randomized, double-blind, placebo-controlled crossover trial in older men with overweight.",
-      "authors": [
-        "Nijssen KMR",
-        "Adam TC",
-        "Mensink RP",
-        "Joris PJ"
-      ],
-      "journal": "Metabolism: clinical and experimental",
-      "date": "2026-01-01",
-      "year": 2026,
-      "doi": "10.1016/j.metabol.2026.156672",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42263845/",
-      "doi_url": "https://doi.org/10.1016/j.metabol.2026.156672",
       "areas": [
         "Other / General"
       ],
@@ -2515,7 +2543,8 @@
         "Xu X"
       ],
       "journal": "Epilepsy research",
-      "date": "2026-01-01",
+      "date": "2026-06-01",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1016/j.eplepsyres.2026.107841",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42263507/",
@@ -2542,7 +2571,8 @@
         "Gu FF"
       ],
       "journal": "Animal bioscience",
-      "date": "2026-01-01",
+      "date": "2026-06-01",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.5713/ab.250687",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42226425/",
@@ -2569,11 +2599,81 @@
         "Worden LT"
       ],
       "journal": "Epilepsy research",
-      "date": "2026-01-01",
+      "date": "2026-05-31",
+      "date_precision": "day",
       "year": 2026,
       "doi": "10.1016/j.eplepsyres.2026.107843",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42224811/",
       "doi_url": "https://doi.org/10.1016/j.eplepsyres.2026.107843",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42527000",
+      "title": "Future of Continuous Ketone Monitoring and Its Utility for Safe Use of Sodium-glucose Cotransporter-2 Inhibitors in Type 1 Diabetes.",
+      "authors": [
+        "Akturk HK"
+      ],
+      "journal": "Endocrinology and metabolism clinics of North America",
+      "date": "2026-05-18",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.ecl.2026.04.005",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42527000/",
+      "doi_url": "https://doi.org/10.1016/j.ecl.2026.04.005",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42339150",
+      "title": "Electroconvulsive Treatment for Depression Alters Mitochondrial Serum Metabolites.",
+      "authors": [
+        "Pålsson E",
+        "Sigström R",
+        "Salehi A",
+        "Hedenström M",
+        "Nordenskjöld A",
+        "Landén M"
+      ],
+      "journal": "Biological psychiatry global open science",
+      "date": "2026-05-12",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.bpsgos.2026.100754",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42339150/",
+      "doi_url": "https://doi.org/10.1016/j.bpsgos.2026.100754",
+      "areas": [
+        "Other / General"
+      ],
+      "source": "PubMed",
+      "first_seen": "2026-09-17",
+      "status": "new"
+    },
+    {
+      "pmid": "42658174",
+      "title": "Acute-onset autoimmune type 1 diabetes presenting with diabetic ketoacidosis in an obese adult.",
+      "authors": [
+        "Donkor DKA",
+        "Chandanala VSD",
+        "Akinfisoye T",
+        "Adrejiya P",
+        "Gichamo A"
+      ],
+      "journal": "Proceedings (Baylor University. Medical Center)",
+      "date": "2026-04-20",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1080/08998280.2026.2657125",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42658174/",
+      "doi_url": "https://doi.org/10.1080/08998280.2026.2657125",
       "areas": [
         "Other / General"
       ],
