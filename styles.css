@@ -512,3 +512,42 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,
     animation:none !important;
   }
 }
+
+
+/* V14 — animation placement fix */
+.hero-clean-grid > .science-visual{
+  align-self:center;
+  justify-self:end;
+  width:100%;
+  max-width:650px;
+  min-height:430px;
+  margin:0;
+  overflow:visible;
+}
+.hero-clean-grid > .science-visual .science-svg{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* Hide the legacy static hero panel if an old cached HTML version ever contains it. */
+.hero-clean-grid .hero-panel{
+  display:none;
+}
+
+@media(max-width:980px){
+  .hero-clean-grid > .science-visual{
+    grid-column:1 / -1;
+    justify-self:center;
+    max-width:680px;
+    min-height:380px;
+    margin-top:10px;
+  }
+}
+
+@media(max-width:640px){
+  .hero-clean-grid > .science-visual{
+    min-height:300px;
+    max-width:100%;
+  }
+}
