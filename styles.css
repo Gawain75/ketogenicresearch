@@ -575,3 +575,10 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,
   color:#fff;
   border-color:#1f4e79;
 }
+
+/* V18 strict curated folders */
+.folder-curated{display:grid;gap:10px;margin-top:14px}
+.folder-curated-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--primary);margin-bottom:2px}
+.folder-paper{background:#fbfdff;border:1px solid var(--line);border-radius:10px;padding:14px}
+.folder-paper h4{font-size:14px;line-height:1.35;margin:0 0 7px;color:var(--ink)}
+.folder-paper p{font-size:11px;line-height:1.45;margin:0 0 10px;color:var(--muted)}
