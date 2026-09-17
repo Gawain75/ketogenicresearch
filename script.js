@@ -291,3 +291,37 @@ document.addEventListener('DOMContentLoaded', () => {
   loadLatestEvidence();
 });
 
+
+
+// V43 — synchronize curated Library "Last literature update" with the latest PubMed feed timestamp
+async function syncLiteratureUpdateDate() {
+  const targets = document.querySelectorAll('[data-literature-update-date]');
+  if (!targets.length) return;
+
+  try {
+    const response = await fetch('latest-publications.json', { cache: 'no-store' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+    const data = await response.json();
+    const stamp = data.generated_at;
+    if (!stamp) return;
+
+    const date = new Date(stamp);
+    if (Number.isNaN(date.getTime())) return;
+
+    const lang = document.documentElement.lang === 'it' ? 'it-IT' : 'en-GB';
+    const label = new Intl.DateTimeFormat(lang, {
+      month: 'short',
+      year: 'numeric'
+    }).format(date);
+
+    targets.forEach(el => {
+      el.textContent = label;
+      el.setAttribute('datetime', stamp);
+    });
+  } catch (error) {
+    console.warn('Literature update date sync unavailable:', error);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', syncLiteratureUpdateDate);
