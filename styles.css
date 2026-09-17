@@ -265,3 +265,52 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,
 .library-folder .folder-body{background:#fbfdff}
 .library-folder .folder-links-primary .pdf-link{order:-2}
 .library-folder .folder-links-primary a[href*="crossref"]{order:-1}
+
+/* V12 — repaired lower library sections */
+.folder-curated{
+  display:grid;
+  gap:10px;
+  margin:0 0 18px;
+}
+.folder-curated-title{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--primary);
+  font-weight:700;
+  margin-bottom:2px;
+}
+.folder-paper{
+  border:1px solid var(--line);
+  border-radius:9px;
+  padding:13px;
+  background:#fbfdff;
+}
+.folder-paper h4{
+  margin:0 0 7px;
+  font-size:13px;
+  line-height:1.35;
+  color:var(--ink);
+}
+.folder-paper p{
+  margin:0 0 10px;
+  font-size:11px;
+  color:var(--muted);
+}
+.evidence-note{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  border-left:3px solid #94b7d2;
+  background:#f3f8fc;
+  padding:10px 12px;
+  margin:0 0 14px;
+  font-size:12px;
+  color:var(--text);
+}
+.evidence-note strong{
+  color:var(--primary);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+}
