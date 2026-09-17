@@ -231,7 +231,7 @@ async function loadLatestEvidence() {
 
   const message = document.getElementById('latestLoadMessage');
   try {
-    const response = await fetch('latest-publications.json?v=40', {cache:'no-store'});
+    const response = await fetch('latest-publications.json?v=41', {cache:'no-store'});
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     KR_LATEST_DATA = await response.json();
 
@@ -266,8 +266,8 @@ async function loadLatestEvidence() {
       message.textContent = (KR_LATEST_DATA.count || 0)
         ? ''
         : (latestLang() === 'it'
-            ? 'Il feed verrà popolato alla prima esecuzione automatica o manuale del workflow GitHub Actions.'
-            : 'The feed will be populated after the first automatic or manual GitHub Actions run.');
+            ? 'Nessuna pubblicazione recente disponibile al momento.'
+            : 'No recent publications are currently available.');
       message.hidden = Boolean(KR_LATEST_DATA.count);
     }
 
