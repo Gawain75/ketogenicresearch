@@ -25,54 +25,20 @@ CURATION_MAX_RECORDS = int(os.getenv("CURATION_MAX_RECORDS", "500"))
 
 BASE = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 
-QUERY = r'''(
-"ketogenic diet"[Title/Abstract]
-OR "ketogenic diets"[Title/Abstract]
-OR "ketogenic therapy"[Title/Abstract]
-OR "ketogenic metabolic therapy"[Title/Abstract]
-OR "nutritional ketosis"[Title/Abstract]
-OR "very low calorie ketogenic diet"[Title/Abstract]
-OR "very-low-calorie ketogenic diet"[Title/Abstract]
-OR "very low energy ketogenic therapy"[Title/Abstract]
-OR "modified Atkins diet"[Title/Abstract]
-OR VLCKD[Title/Abstract]
-OR VLEKT[Title/Abstract]
-OR "exogenous ketone"[Title/Abstract]
-OR "exogenous ketones"[Title/Abstract]
-OR "ketone ester"[Title/Abstract]
-OR "ketone esters"[Title/Abstract]
-OR "ketone salt"[Title/Abstract]
-OR "ketone salts"[Title/Abstract]
-OR (
-    (
-        "beta-hydroxybutyrate"[Title/Abstract]
-        OR "ketone bodies"[Title/Abstract]
-    )
-    AND
-    (
-        ketogenic[Title/Abstract]
-        OR "nutritional ketosis"[Title/Abstract]
-        OR "ketogenic therapy"[Title/Abstract]
-    )
-)
+QUERY = '''(
+"ketogenic diet"[Title/Abstract] OR "ketogenic diets"[Title/Abstract]
+OR "ketogenic therapy"[Title/Abstract] OR "ketogenic metabolic therapy"[Title/Abstract]
+OR "nutritional ketosis"[Title/Abstract] OR "very low calorie ketogenic diet"[Title/Abstract]
+OR "very-low-calorie ketogenic diet"[Title/Abstract] OR "very low energy ketogenic therapy"[Title/Abstract]
+OR "modified Atkins diet"[Title/Abstract] OR VLCKD[Title/Abstract] OR VLEKT[Title/Abstract]
+OR "exogenous ketone"[Title/Abstract] OR "exogenous ketones"[Title/Abstract]
+OR "ketone ester"[Title/Abstract] OR "ketone esters"[Title/Abstract]
+OR "ketone salt"[Title/Abstract] OR "ketone salts"[Title/Abstract]
+OR (("beta-hydroxybutyrate"[Title/Abstract] OR "ketone bodies"[Title/Abstract])
+AND (ketogenic[Title/Abstract] OR "nutritional ketosis"[Title/Abstract] OR "ketogenic therapy"[Title/Abstract]))
 )'''
 
-MONTHS = {
-    "jan": 1, "january": 1,
-    "feb": 2, "february": 2,
-    "mar": 3, "march": 3,
-    "apr": 4, "april": 4,
-    "may": 5,
-    "jun": 6, "june": 6,
-    "jul": 7, "july": 7,
-    "aug": 8, "august": 8,
-    "sep": 9, "sept": 9, "september": 9,
-    "oct": 10, "october": 10,
-    "nov": 11, "november": 11,
-    "dec": 12, "december": 12,
-}
-
-TITLE_CORE_TERMS = (
+CORE = (
     "ketogenic",
     "nutritional ketosis",
     "modified atkins",
@@ -80,17 +46,15 @@ TITLE_CORE_TERMS = (
     "vlekt",
     "exogenous ketone",
     "ketone ester",
-    "ketone esters",
     "ketone salt",
-    "ketone salts",
 )
 
-TITLE_SECONDARY_TERMS = (
+SECONDARY = (
     "beta-hydroxybutyrate",
     "ketone bodies",
 )
 
-CONTEXT_TERMS = (
+CONTEXT = (
     "ketogenic diet",
     "ketogenic diets",
     "ketogenic therapy",
@@ -99,309 +63,91 @@ CONTEXT_TERMS = (
 )
 
 AREA_RULES = {
-    "Obesity": [
-        "obesity", "obese", "weight loss",
-        "body weight", "bariatric"
-    ],
-    "Diabetes & Glucose Metabolism": [
-        "diabetes", "glycemic", "glycaemic",
-        "glucose", "insulin resistance",
-        "prediabetes", "hba1c"
-    ],
-    "MASLD / Metabolic Liver Disease": [
-        "masld", "nafld", "fatty liver",
-        "steatotic liver", "hepatic steatosis",
-        "liver disease"
-    ],
-    "Dyslipidemia & Lipid Metabolism": [
-        "ldl", "cholesterol", "lipid",
-        "lipoprotein", "triglyceride",
-        "hypercholesterolemia"
-    ],
-    "Lipid Energy Model / LMHR": [
-        "lean mass hyper-responder",
-        "lmhr",
-        "lipid energy model"
-    ],
-    "Thyroid Disorders": [
-        "thyroid", "tsh", "thyroxine",
-        "triiodothyronine"
-    ],
-    "Cushing Syndrome": [
-        "cushing", "hypercortisol", "cortisol"
-    ],
-    "Polyendocrine Metabolic Ovarian Syndrome (PMOS, formerly PCOS)": [
-        "pcos", "polycystic ovary",
-        "polycystic ovarian", "pcom",
-        "pomos", "pmos"
-    ],
-    "Epilepsy": [
-        "epilepsy", "epileptic", "seizure",
-        "drug-resistant epilepsy",
-        "refractory epilepsy"
-    ],
-    "Alzheimer's Disease": [
-        "alzheimer",
-        "mild cognitive impairment"
-    ],
-    "Parkinson's Disease": [
-        "parkinson"
-    ],
-    "Huntington's Disease": [
-        "huntington"
-    ],
-    "Neurodegenerative Disorders": [
-        "neurodegenerative",
-        "amyotrophic lateral sclerosis",
-        "als",
-        "motor neuron"
-    ],
-    "GLUT1 Deficiency Syndrome": [
-        "glut1",
-        "glucose transporter type 1"
-    ],
-    "Pyruvate Dehydrogenase Deficiency": [
-        "pyruvate dehydrogenase",
-        "pdh deficiency",
-        "pdhc"
-    ],
-    "Brain Injury & Neurotrauma": [
-        "traumatic brain injury",
-        "brain injury",
-        "neurotrauma",
-        "concussion"
-    ],
-    "Cognitive Function": [
-        "cognitive",
-        "memory",
-        "cognition"
-    ],
-    "Headache & Migraine": [
-        "migraine",
-        "headache",
-        "cluster headache"
-    ],
-    "Multiple Sclerosis": [
-        "multiple sclerosis"
-    ],
-    "Autism Spectrum Disorder": [
-        "autism",
-        "autistic"
-    ],
-    "Psychiatry & Mental Health": [
-        "bipolar",
-        "schizophrenia",
-        "depression",
-        "anxiety",
-        "psychiatric",
-        "mental health",
-        "psychosis",
-        "mood disorder"
-    ],
-    "Substance Use Disorders": [
-        "alcohol use",
-        "alcohol withdrawal",
-        "ethanol",
-        "substance use",
-        "addiction",
-        "opioid"
-    ],
-    "Eating Disorders": [
-        "binge eating",
-        "eating disorder",
-        "anorexia nervosa",
-        "bulimia"
-    ],
-    "Oncology & Cancer Metabolism": [
-        "cancer",
-        "tumor",
-        "tumour",
-        "glioblastoma",
-        "glioma",
-        "carcinoma",
-        "melanoma",
-        "oncology",
-        "neoplasm"
-    ],
-    "Cardiovascular Health": [
-        "cardiovascular",
-        "heart",
-        "cardiac",
-        "myocard",
-        "atherosclerosis",
-        "blood pressure",
-        "vascular"
-    ],
-    "ADPKD": [
-        "adpkd",
-        "polycystic kidney"
-    ],
-    "Chronic Kidney Disease": [
-        "chronic kidney",
-        "renal impairment",
-        "kidney disease",
-        "renal disease",
-        "egfr"
-    ],
-    "Urinary Incontinence": [
-        "urinary incontinence",
-        "lower urinary tract",
-        "bladder function"
-    ],
-    "Sarcopenia & Skeletal Muscle": [
-        "sarcopenia",
-        "skeletal muscle",
-        "muscle mass",
-        "muscle strength",
-        "handgrip",
-        "motor unit"
-    ],
-    "Osteoarthritis": [
-        "osteoarthritis"
-    ],
-    "Rheumatoid Arthritis": [
-        "rheumatoid",
-        "inflammatory arthritis"
-    ],
-    "Fibromyalgia": [
-        "fibromyalgia"
-    ],
-    "Acne": [
-        "acne",
-        "hidradenitis"
-    ],
-    "Psoriasis": [
-        "psoriasis",
-        "psoriatic"
-    ],
-    "Keto Rash / Prurigo Pigmentosa": [
-        "prurigo pigmentosa",
-        "keto rash"
-    ],
-    "Asthma": [
-        "asthma"
-    ],
-    "Inflammation & Immunometabolism": [
-        "inflammation",
-        "inflammatory",
-        "immune",
-        "immunometabolism",
-        "nlrp3",
-        "inflammasome"
-    ],
-    "Endometriosis": [
-        "endometriosis"
-    ],
-    "Reproduction & Fertility": [
-        "fertility",
-        "infertility",
-        "reproductive",
-        "ivf",
-        "testosterone",
-        "ovarian function"
-    ],
-    "Lipedema": [
-        "lipedema",
-        "lipoedema"
-    ],
-    "Longevity & Healthy Aging": [
-        "aging",
-        "ageing",
-        "longevity",
-        "lifespan",
-        "healthy aging"
-    ],
-    "Circadian Rhythms": [
-        "circadian",
-        "sleep",
-        "wakefulness"
-    ],
-    "Gut Microbiome": [
-        "microbiome",
-        "microbiota",
-        "gut bacteria",
-        "intestinal microbiota"
-    ],
-    "Candida & Mycobiome": [
-        "candida",
-        "mycobiome",
-        "fungal microbiome"
-    ],
-    "Exogenous Ketones": [
-        "exogenous ketone",
-        "ketone ester",
-        "ketone salt"
-    ],
-    "Medium-Chain Triglycerides (MCT)": [
-        "medium-chain triglyceride",
-        "medium chain triglyceride",
-        "mct",
-        "tricaprylin",
-        "coconut oil"
-    ],
-    "Supplementation & Nutraceuticals": [
-        "supplement",
-        "nutraceutical",
-        "exogenous ketone",
-        "ketone ester",
-        "ketone salt"
-    ],
-    "Exercise & Performance": [
-        "exercise",
-        "athlete",
-        "athletic",
-        "performance",
-        "endurance",
-        "training",
-        "vo2"
-    ],
-    "Glaucoma": [
-        "glaucoma"
-    ],
-    "Down Syndrome": [
-        "down syndrome",
-        "trisomy 21"
-    ],
-    "Gilbert Syndrome": [
-        "gilbert syndrome",
-        "bilirubin"
-    ],
-    "COVID-19 & Metabolism": [
-        "covid",
-        "sars-cov-2",
-        "long covid"
-    ],
-    "Aesthetic Medicine & Body Composition": [
-        "body composition",
-        "fat mass",
-        "lean mass",
-        "aesthetic medicine"
-    ],
+    "Obesity": ["obesity", "obese", "weight loss", "body weight", "bariatric"],
+    "Diabetes & Glucose Metabolism": ["diabetes", "glycemic", "glycaemic", "glucose", "insulin resistance", "prediabetes", "hba1c"],
+    "MASLD / Metabolic Liver Disease": ["masld", "nafld", "fatty liver", "steatotic liver", "hepatic steatosis", "liver disease"],
+    "Dyslipidemia & Lipid Metabolism": ["ldl", "cholesterol", "lipid", "lipoprotein", "triglyceride", "hypercholesterolemia"],
+    "Lipid Energy Model / LMHR": ["lean mass hyper-responder", "lmhr", "lipid energy model"],
+    "Thyroid Disorders": ["thyroid", "tsh", "thyroxine", "triiodothyronine"],
+    "Cushing Syndrome": ["cushing", "hypercortisol", "cortisol"],
+    "Polyendocrine Metabolic Ovarian Syndrome (PMOS, formerly PCOS)": ["pcos", "polycystic ovary", "polycystic ovarian", "pcom", "pmos"],
+    "Epilepsy": ["epilepsy", "epileptic", "seizure", "drug-resistant epilepsy", "refractory epilepsy"],
+    "Alzheimer’s Disease": ["alzheimer", "mild cognitive impairment"],
+    "Parkinson’s Disease": ["parkinson"],
+    "Huntington’s Disease": ["huntington"],
+    "Neurodegenerative Disorders": ["neurodegenerative", "amyotrophic lateral sclerosis", "motor neuron"],
+    "GLUT1 Deficiency Syndrome": ["glut1", "glucose transporter type 1"],
+    "Pyruvate Dehydrogenase Deficiency": ["pyruvate dehydrogenase", "pdh deficiency", "pdhc"],
+    "Brain Injury & Neurotrauma": ["traumatic brain injury", "brain injury", "neurotrauma", "concussion"],
+    "Cognitive Function": ["cognitive", "memory", "cognition"],
+    "Headache & Migraine": ["migraine", "headache", "cluster headache"],
+    "Multiple Sclerosis": ["multiple sclerosis"],
+    "Autism Spectrum Disorder": ["autism", "autistic"],
+    "Psychiatry & Mental Health": ["bipolar", "schizophrenia", "depression", "anxiety", "psychiatric", "mental health", "psychosis", "mood disorder"],
+    "Substance Use Disorders": ["alcohol use", "alcohol withdrawal", "ethanol", "substance use", "addiction", "opioid"],
+    "Eating Disorders": ["binge eating", "eating disorder", "anorexia nervosa", "bulimia"],
+    "Oncology & Cancer Metabolism": ["cancer", "tumor", "tumour", "glioblastoma", "glioma", "carcinoma", "melanoma", "oncology", "neoplasm"],
+    "Cardiovascular Health": ["cardiovascular", "heart", "cardiac", "myocard", "atherosclerosis", "blood pressure", "vascular"],
+    "ADPKD": ["adpkd", "polycystic kidney"],
+    "Chronic Kidney Disease": ["chronic kidney", "renal impairment", "kidney disease", "renal disease", "egfr"],
+    "Urinary Incontinence": ["urinary incontinence", "lower urinary tract", "bladder function"],
+    "Sarcopenia & Skeletal Muscle": ["sarcopenia", "skeletal muscle", "muscle mass", "muscle strength", "handgrip", "motor unit"],
+    "Osteoarthritis": ["osteoarthritis"],
+    "Rheumatoid Arthritis": ["rheumatoid", "inflammatory arthritis"],
+    "Fibromyalgia": ["fibromyalgia"],
+    "Acne": ["acne", "hidradenitis"],
+    "Psoriasis": ["psoriasis", "psoriatic"],
+    "Keto Rash / Prurigo Pigmentosa": ["prurigo pigmentosa", "keto rash"],
+    "Asthma": ["asthma"],
+    "Inflammation & Immunometabolism": ["inflammation", "inflammatory", "immune", "immunometabolism", "nlrp3", "inflammasome"],
+    "Endometriosis": ["endometriosis"],
+    "Reproduction & Fertility": ["fertility", "infertility", "reproductive", "ivf", "testosterone", "ovarian function"],
+    "Lipedema": ["lipedema", "lipoedema"],
+    "Longevity & Healthy Aging": ["aging", "ageing", "longevity", "lifespan", "healthy aging"],
+    "Circadian Rhythms": ["circadian", "sleep", "wakefulness"],
+    "Gut Microbiome": ["microbiome", "microbiota", "gut bacteria", "intestinal microbiota"],
+    "Candida & Mycobiome": ["candida", "mycobiome", "fungal microbiome"],
+    "Exogenous Ketones": ["exogenous ketone", "ketone ester", "ketone salt"],
+    "Medium-Chain Triglycerides (MCT)": ["medium-chain triglyceride", "medium chain triglyceride", "mct", "tricaprylin", "coconut oil"],
+    "Supplementation & Nutraceuticals": ["supplement", "nutraceutical", "exogenous ketone", "ketone ester", "ketone salt"],
+    "Exercise & Performance": ["exercise", "athlete", "athletic", "performance", "endurance", "training", "vo2"],
+    "Glaucoma": ["glaucoma"],
+    "Down Syndrome": ["down syndrome", "trisomy 21"],
+    "Gilbert Syndrome": ["gilbert syndrome", "bilirubin"],
+    "COVID-19 & Metabolism": ["covid", "sars-cov-2", "long covid"],
+    "Aesthetic Medicine & Body Composition": ["body composition", "fat mass", "lean mass", "aesthetic medicine"],
 }
 
-EVIDENCE_LABEL_IT = {
-    "Systematic review / meta-analysis":
-        "Revisione sistematica / meta-analisi",
-    "Guideline / consensus":
-        "Linea guida / consensus",
-    "Randomized clinical trial":
-        "Trial clinico randomizzato",
-    "Clinical trial / intervention":
-        "Trial clinico / intervento",
-    "Observational human study":
-        "Studio osservazionale umano",
-    "Case report / case series":
-        "Case report / case series",
-    "Review":
-        "Revisione",
-    "Preclinical / mechanistic":
-        "Preclinico / meccanicistico",
-    "Other":
-        "Altro",
+IT = {
+    "Systematic review / meta-analysis": "Revisione sistematica / meta-analisi",
+    "Guideline / consensus": "Linea guida / consensus",
+    "Randomized clinical trial": "Trial clinico randomizzato",
+    "Clinical trial / intervention": "Trial clinico / intervento",
+    "Observational human study": "Studio osservazionale umano",
+    "Case report / case series": "Case report / case series",
+    "Review": "Revisione",
+    "Preclinical / mechanistic": "Preclinico / meccanicistico",
+    "Other": "Altro",
+}
+
+MONTHS = {
+    "jan": 1,
+    "feb": 2,
+    "mar": 3,
+    "apr": 4,
+    "may": 5,
+    "jun": 6,
+    "jul": 7,
+    "aug": 8,
+    "sep": 9,
+    "sept": 9,
+    "oct": 10,
+    "nov": 11,
+    "dec": 12,
 }
 
 
-def api(name: str, params: dict[str, str]) -> bytes:
+def api(name, params):
     params = {
         **params,
         "tool": "ketogenicresearch-literature-monitor",
@@ -411,72 +157,59 @@ def api(name: str, params: dict[str, str]) -> bytes:
     if API_KEY:
         params["api_key"] = API_KEY
 
-    url = f"{BASE}/{name}?{urllib.parse.urlencode(params)}"
+    encoded = urllib.parse.urlencode(params).encode()
+    endpoint = f"{BASE}/{name}"
 
-    req = urllib.request.Request(
-        url,
-        headers={
-            "User-Agent":
-                f"ketogenicresearch-literature-monitor/2.0 ({EMAIL})"
-        },
-    )
+    if name == "efetch.fcgi" or len(encoded) > 1800:
+        req = urllib.request.Request(
+            endpoint,
+            data=encoded,
+            method="POST",
+            headers={
+                "User-Agent": f"ketogenicresearch/2.0 ({EMAIL})",
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+        )
+    else:
+        req = urllib.request.Request(
+            f"{endpoint}?{encoded.decode()}",
+            headers={
+                "User-Agent": f"ketogenicresearch/2.0 ({EMAIL})"
+            },
+        )
 
     with urllib.request.urlopen(req, timeout=60) as response:
         data = response.read()
 
     time.sleep(0.12 if API_KEY else 0.36)
-
     return data
 
 
-def clean_text(node) -> str:
-    if node is None:
-        return ""
-
-    return "".join(node.itertext()).strip()
+def text(node):
+    return "" if node is None else "".join(node.itertext()).strip()
 
 
-def normalize_title(value: str) -> str:
-    value = re.sub(
-        r"^\s*\d+\.\s*",
-        "",
-        value or "",
-    )
-
-    value = re.sub(
-        r"\s+",
-        " ",
-        value,
-    ).strip().lower()
-
-    return re.sub(
-        r"[^a-z0-9]+",
-        " ",
-        value,
-    )
+def norm(value):
+    value = re.sub(r"^\s*\d+\.\s*", "", value or "").lower()
+    return re.sub(r"[^a-z0-9]+", " ", value).strip()
 
 
-def load_curated_titles() -> set[str]:
+def curated_titles():
     if not LIBRARY_HTML.exists():
         return set()
 
-    html = LIBRARY_HTML.read_text(
-        encoding="utf-8"
-    )
-
-    titles = re.findall(
-        r'<h4[^>]*data-en="([^"]+)"',
-        html,
-    )
+    html = LIBRARY_HTML.read_text(encoding="utf-8")
 
     return {
-        normalize_title(t)
-        for t in titles
-        if t
+        norm(x)
+        for x in re.findall(
+            r'<h4[^>]*data-en="([^"]+)"',
+            html,
+        )
     }
 
 
-def load_previous_queue() -> dict[str, dict]:
+def previous_queue():
     if not QUEUE_OUT.exists():
         return {}
 
@@ -497,150 +230,112 @@ def load_previous_queue() -> dict[str, dict]:
         return {}
 
 
-def is_relevant_record(
-    article: ET.Element
-) -> bool:
-
-    title = clean_text(
+def relevant(article):
+    title = text(
         article.find("ArticleTitle")
     ).lower()
 
     abstract = " ".join(
-        clean_text(n)
+        text(n)
         for n in article.findall(
             "Abstract/AbstractText"
         )
     ).lower()
 
-    text = f"{title} {abstract}"
+    all_text = title + " " + abstract
 
-    if any(
-        term in title
-        for term in TITLE_CORE_TERMS
-    ):
-        return True
-
-    if any(
-        term in title
-        for term in TITLE_SECONDARY_TERMS
-    ):
-        return any(
-            term in text
-            for term in CONTEXT_TERMS
+    return (
+        any(x in title for x in CORE)
+        or (
+            any(x in title for x in SECONDARY)
+            and any(x in all_text for x in CONTEXT)
         )
+    )
 
-    return False
 
+def classify(title, abstract, mesh):
+    title_lower = title.lower()
 
-def classify_areas(
-    title: str,
-    abstract: str,
-    mesh_terms: list[str],
-) -> tuple[list[str], int]:
-
-    title_l = title.lower()
-
-    combined = " ".join(
-        [
-            title,
-            abstract,
-            *mesh_terms,
-        ]
+    all_text = " ".join(
+        [title, abstract, *mesh]
     ).lower()
 
-    scored = []
+    scores = []
 
     for area, keywords in AREA_RULES.items():
-        score = 0
-
-        for kw in keywords:
-            if kw in title_l:
-                score += 4
-
-            elif kw in combined:
-                score += 1
+        score = sum(
+            4 if keyword in title_lower
+            else 1 if keyword in all_text
+            else 0
+            for keyword in keywords
+        )
 
         if score:
-            scored.append(
+            scores.append(
                 (score, area)
             )
 
-    scored.sort(
+    scores.sort(
         key=lambda x: (
             -x[0],
             x[1],
         )
     )
 
-    strong = [
-        (score, area)
-        for score, area in scored
-        if score >= 1
-    ]
+    if not scores:
+        return ["Other / General"], 0
 
-    if not strong:
-        return [
-            "Other / General"
-        ], 0
-
-    areas = [
-        area
-        for score, area in strong[:3]
-    ]
-
-    confidence = strong[0][0]
-
-    return areas, confidence
+    return (
+        [area for _, area in scores[:3]],
+        scores[0][0],
+    )
 
 
-def classify_evidence(
-    item: ET.Element,
-    title: str,
-    abstract: str,
-) -> str:
-
-    types = [
-        clean_text(n).lower()
+def evidence(item, title, abstract):
+    publication_types = " ".join(
+        text(n).lower()
         for n in item.findall(
             ".//PublicationTypeList/PublicationType"
         )
-    ]
+    )
 
-    text = f"{title} {abstract}".lower()
-    joined = " ".join(types)
+    body = (
+        title + " " + abstract
+    ).lower()
 
     if (
-        "meta-analysis" in joined
-        or "meta-analysis" in text
-        or "systematic review" in joined
-        or "systematic review" in text
+        "meta-analysis" in publication_types
+        or "systematic review" in publication_types
+        or "meta-analysis" in body
+        or "systematic review" in body
     ):
         return "Systematic review / meta-analysis"
 
     if (
-        "guideline" in joined
-        or "consensus" in text
-        or "position statement" in text
+        "guideline" in publication_types
+        or "consensus" in body
+        or "position statement" in body
     ):
         return "Guideline / consensus"
 
     if (
-        "randomized controlled trial" in joined
-        or "randomized" in text
-        or "randomised" in text
+        "randomized controlled trial"
+        in publication_types
+        or "randomized" in body
+        or "randomised" in body
     ):
         return "Randomized clinical trial"
 
     if (
-        "clinical trial" in joined
-        or "clinical trial" in text
-        or "intervention" in text
+        "clinical trial" in publication_types
+        or "clinical trial" in body
+        or "intervention" in body
     ):
         return "Clinical trial / intervention"
 
     if (
         any(
-            x in joined
+            x in publication_types
             for x in [
                 "observational study",
                 "cohort",
@@ -648,7 +343,7 @@ def classify_evidence(
             ]
         )
         or any(
-            x in text
+            x in body
             for x in [
                 "prospective",
                 "retrospective",
@@ -660,29 +355,23 @@ def classify_evidence(
         return "Observational human study"
 
     if (
-        any(
-            x in joined
-            for x in [
-                "case reports",
-                "case report",
-            ]
-        )
-        or "case series" in text
+        "case report" in publication_types
+        or "case series" in body
     ):
         return "Case report / case series"
 
     if (
-        "review" in joined
-        or "review" in text
+        "review" in publication_types
+        or "review" in body
     ):
         return "Review"
 
     if any(
-        x in text
+        x in body
         for x in [
             "mouse",
             "mice",
-            "rat ",
+            " rat ",
             "rats",
             "cell line",
             "in vitro",
@@ -695,426 +384,89 @@ def classify_evidence(
     return "Other"
 
 
-def parse_month(
-    value: str
-) -> int | None:
-
-    value = (
-        value or ""
-    ).strip()
-
-    if not value:
-        return None
-
-    if value.isdigit():
-        month = int(value)
-
-        return (
-            month
-            if 1 <= month <= 12
-            else None
+def pubdate(item):
+    nodes = (
+        item.findall(
+            ".//Article/ArticleDate"
         )
-
-    return MONTHS.get(
-        value.lower()
-    )
-
-
-def make_date(
-    year: int,
-    month: int | None = None,
-    day: int | None = None,
-) -> dict:
-
-    if (
-        month is not None
-        and day is not None
-    ):
-
-        try:
-            full = dt.date(
-                year,
-                month,
-                day,
-            )
-
-            return {
-                "date":
-                    full.isoformat(),
-                "date_precision":
-                    "day",
-                "sort_key":
-                    (
-                        year,
-                        month,
-                        day,
-                    ),
-            }
-
-        except ValueError:
-            pass
-
-    if month is not None:
-
-        return {
-            "date":
-                f"{year:04d}-{month:02d}",
-            "date_precision":
-                "month",
-            "sort_key":
-                (
-                    year,
-                    month,
-                    0,
-                ),
-        }
-
-    return {
-        "date":
-            f"{year:04d}",
-        "date_precision":
-            "year",
-        "sort_key":
-            (
-                year,
-                0,
-                0,
-            ),
-    }
-
-
-def date_from_node(
-    node
-) -> dict | None:
-
-    if node is None:
-        return None
-
-    year_text = clean_text(
-        node.find("Year")
-    )
-
-    month_text = clean_text(
-        node.find("Month")
-    )
-
-    day_text = clean_text(
-        node.find("Day")
-    )
-
-    if year_text.isdigit():
-
-        year = int(
-            year_text
+        + item.findall(
+            ".//PubmedData/History/PubMedPubDate"
         )
-
-        month = parse_month(
-            month_text
-        )
-
-        day = (
-            int(day_text)
-            if day_text.isdigit()
-            else None
-        )
-
-        return make_date(
-            year,
-            month,
-            day,
-        )
-
-    medline = clean_text(
-        node.find("MedlineDate")
-    )
-
-    if medline:
-
-        match = re.search(
-            r"\b(?:19|20)\d{2}\b",
-            medline,
-        )
-
-        if match:
-
-            year = int(
-                match.group(0)
-            )
-
-            month = None
-
-            lower = medline.lower()
-
-            for name, number in MONTHS.items():
-
-                if re.search(
-                    rf"\b{re.escape(name)}\b",
-                    lower,
-                ):
-                    month = number
-                    break
-
-            return make_date(
-                year,
-                month,
-            )
-
-    return None
-
-
-def publication_date(
-    pubmed_article: ET.Element
-) -> dict:
-
-    candidates = []
-
-    for node in pubmed_article.findall(
-        ".//Article/ArticleDate"
-    ):
-
-        parsed = date_from_node(
-            node
-        )
-
-        if parsed:
-            candidates.append(
-                parsed
-            )
-
-    if candidates:
-
-        candidates.sort(
-            key=lambda x:
-                x["sort_key"],
-            reverse=True,
-        )
-
-        return candidates[0]
-
-    preferred_statuses = (
-        "epublish",
-        "ppublish",
-        "pubmed",
-    )
-
-    status_candidates = []
-
-    for node in pubmed_article.findall(
-        ".//PubmedData/History/PubMedPubDate"
-    ):
-
-        status = (
-            node.attrib.get(
-                "PubStatus"
-            )
-            or ""
-        ).lower()
-
-        parsed = date_from_node(
-            node
-        )
-
-        if parsed:
-
-            priority = (
-                preferred_statuses.index(
-                    status
-                )
-                if status
-                in preferred_statuses
-                else 99
-            )
-
-            status_candidates.append(
-                (
-                    priority,
-                    parsed,
-                )
-            )
-
-    preferred = [
-        x
-        for x in status_candidates
-        if x[0] < 99
-    ]
-
-    if preferred:
-
-        preferred.sort(
-            key=lambda x: (
-                x[0],
-                tuple(
-                    -v
-                    for v
-                    in x[1]["sort_key"]
-                ),
-            )
-        )
-
-        return preferred[0][1]
-
-    journal_date = date_from_node(
-        pubmed_article.find(
+        + item.findall(
             ".//Article/Journal/JournalIssue/PubDate"
         )
     )
 
-    if journal_date:
-        return journal_date
-
-    if status_candidates:
-
-        status_candidates.sort(
-            key=lambda x:
-                x[1]["sort_key"],
-            reverse=True,
+    for node in nodes:
+        year_text = text(
+            node.find("Year")
         )
 
-        return (
-            status_candidates[0][1]
+        month_text = text(
+            node.find("Month")
         )
 
-    return {
-        "date": "",
-        "date_precision":
-            "unknown",
-        "sort_key":
-            (
-                0,
-                0,
-                0,
-            ),
-    }
-
-
-def is_within_recent_window(
-    date_info: dict,
-    cutoff: dt.date,
-    today: dt.date,
-) -> bool:
-
-    precision = date_info.get(
-        "date_precision"
-    )
-
-    value = date_info.get(
-        "date",
-        "",
-    )
-
-    if (
-        precision == "day"
-        and re.fullmatch(
-            r"\d{4}-\d{2}-\d{2}",
-            value,
-        )
-    ):
-
-        try:
-
-            published = dt.date.fromisoformat(
-                value
-            )
-
-            return (
-                cutoff
-                <= published
-                <= today
-            )
-
-        except ValueError:
-            return False
-
-    if (
-        precision == "month"
-        and re.fullmatch(
-            r"\d{4}-\d{2}",
-            value,
-        )
-    ):
-
-        year, month = map(
-            int,
-            value.split("-"),
+        day_text = text(
+            node.find("Day")
         )
 
-        try:
+        if not year_text.isdigit():
+            continue
 
-            month_start = dt.date(
-                year,
-                month,
-                1,
-            )
+        year = int(year_text)
 
-            if month == 12:
-                next_month = dt.date(
-                    year + 1,
-                    1,
-                    1,
+        if month_text.isdigit():
+            month = int(month_text)
+        else:
+            month = (
+                MONTHS.get(
+                    month_text[:4].lower()
                 )
-            else:
-                next_month = dt.date(
+                or MONTHS.get(
+                    month_text[:3].lower()
+                )
+            )
+
+        if (
+            month
+            and day_text.isdigit()
+        ):
+            try:
+                return (
+                    dt.date(
+                        year,
+                        month,
+                        int(day_text),
+                    ),
+                    "day",
+                )
+            except ValueError:
+                pass
+
+        if month:
+            return (
+                dt.date(
                     year,
-                    month + 1,
+                    month,
                     1,
-                )
-
-            month_end = (
-                next_month
-                - dt.timedelta(
-                    days=1
-                )
+                ),
+                "month",
             )
 
-            return (
-                month_end >= cutoff
-                and month_start <= today
-            )
-
-        except ValueError:
-            return False
-
-    return False
+    return None, "unknown"
 
 
-def is_new_publication(
-    date_info: dict,
-    today: dt.date,
-) -> bool:
-
-    if (
-        date_info.get(
-            "date_precision"
-        )
-        != "day"
-    ):
-        return False
-
-    try:
-        published = dt.date.fromisoformat(
-            date_info.get(
-                "date",
-                "",
-            )
-        )
-
-    except ValueError:
-        return False
-
-    age = (
-        today - published
-    ).days
-
-    return (
-        0 <= age <= 14
+def within(date_value, cutoff, today):
+    return bool(
+        date_value
+        and cutoff <= date_value <= today
     )
 
 
-def main() -> None:
-
+def main():
     today = dt.date.today()
 
-    cutoff = (
+    latest_cutoff = (
         today
         - dt.timedelta(
             days=WINDOW_DAYS
@@ -1128,32 +480,21 @@ def main() -> None:
         )
     )
 
-    curated_titles = (
-        load_curated_titles()
-    )
-
-    previous_queue = (
-        load_previous_queue()
-    )
+    existing = curated_titles()
+    old_queue = previous_queue()
 
     search = json.loads(
         api(
             "esearch.fcgi",
             {
-                "db":
-                    "pubmed",
-                "term":
-                    QUERY,
-                "retmode":
-                    "json",
-                "retmax":
-                    str(
-                        CURATION_MAX_RECORDS
-                    ),
-                "sort":
-                    "pub date",
-                "datetype":
-                    "pdat",
+                "db": "pubmed",
+                "term": QUERY,
+                "retmode": "json",
+                "retmax": str(
+                    CURATION_MAX_RECORDS
+                ),
+                "sort": "pub date",
+                "datetype": "pdat",
                 "mindate":
                     curation_cutoff.strftime(
                         "%Y/%m/%d"
@@ -1163,9 +504,7 @@ def main() -> None:
                         "%Y/%m/%d"
                     ),
             },
-        ).decode(
-            "utf-8"
-        )
+        ).decode()
     )
 
     ids = (
@@ -1189,23 +528,19 @@ def main() -> None:
         api(
             "efetch.fcgi",
             {
-                "db":
-                    "pubmed",
-                "id":
-                    ",".join(ids),
-                "retmode":
-                    "xml",
+                "db": "pubmed",
+                "id": ",".join(ids),
+                "retmode": "xml",
             },
         )
     )
 
-    publications = []
+    latest = []
     queue = []
 
     for item in root.findall(
         ".//PubmedArticle"
     ):
-
         citation = item.find(
             "MedlineCitation"
         )
@@ -1219,174 +554,143 @@ def main() -> None:
         if (
             citation is None
             or article is None
-            or not is_relevant_record(
-                article
-            )
+            or not relevant(article)
         ):
             continue
 
-        pmid = clean_text(
-            citation.find(
-                "PMID"
-            )
+        pmid = text(
+            citation.find("PMID")
         )
 
-        title = clean_text(
+        title = text(
             article.find(
                 "ArticleTitle"
             )
         )
 
         abstract = " ".join(
-            clean_text(n)
+            text(n)
             for n in article.findall(
                 "Abstract/AbstractText"
             )
         )
 
-        journal = clean_text(
+        journal = text(
             article.find(
                 "Journal/Title"
             )
         )
+
+        date_value, precision = (
+            pubdate(item)
+        )
+
+        if not within(
+            date_value,
+            curation_cutoff,
+            today,
+        ):
+            continue
 
         authors = []
 
         for author in article.findall(
             "AuthorList/Author"
         ):
-
-            collective = clean_text(
-                author.find(
-                    "CollectiveName"
+            name = (
+                text(
+                    author.find(
+                        "CollectiveName"
+                    )
                 )
-            )
-
-            if collective:
-                authors.append(
-                    collective
+                or " ".join(
+                    x
+                    for x in [
+                        text(
+                            author.find(
+                                "LastName"
+                            )
+                        ),
+                        text(
+                            author.find(
+                                "Initials"
+                            )
+                        ),
+                    ]
+                    if x
                 )
-                continue
-
-            last = clean_text(
-                author.find(
-                    "LastName"
-                )
-            )
-
-            initials = clean_text(
-                author.find(
-                    "Initials"
-                )
-            )
-
-            name = " ".join(
-                x
-                for x in (
-                    last,
-                    initials,
-                )
-                if x
             )
 
             if name:
-                authors.append(
-                    name
-                )
+                authors.append(name)
 
         doi = ""
 
-        for aid in item.findall(
+        for article_id in item.findall(
             ".//ArticleId"
         ):
-
             if (
                 (
-                    aid.attrib.get(
+                    article_id.attrib.get(
                         "IdType"
                     )
                     or ""
                 ).lower()
                 == "doi"
             ):
-
-                doi = clean_text(
-                    aid
-                )
-
+                doi = text(article_id)
                 break
 
-        mesh_terms = [
-            clean_text(n)
+        mesh = [
+            text(n)
             for n in citation.findall(
                 ".//MeshHeading/DescriptorName"
             )
-            if clean_text(n)
+            if text(n)
         ]
 
-        date_info = publication_date(
-            item
-        )
-
-        if not is_within_recent_window(
-            date_info,
-            curation_cutoff,
-            today,
-        ):
-            continue
-
-        (
-            areas,
-            category_confidence,
-        ) = classify_areas(
+        areas, confidence = classify(
             title,
             abstract,
-            mesh_terms,
+            mesh,
         )
 
-        evidence_type = (
-            classify_evidence(
-                item,
-                title,
-                abstract,
+        evidence_type = evidence(
+            item,
+            title,
+            abstract,
+        )
+
+        if (
+            precision == "day"
+            and date_value
+        ):
+            date_string = (
+                date_value.isoformat()
             )
-        )
 
-        year = (
-            date_info[
-                "sort_key"
-            ][0]
-            or None
-        )
-
-        status = (
-            "new"
-            if is_new_publication(
-                date_info,
-                today,
+        elif date_value:
+            date_string = (
+                date_value.strftime(
+                    "%Y-%m"
+                )
             )
-            else "indexed"
-        )
+
+        else:
+            date_string = ""
 
         record = {
-            "pmid":
-                pmid,
-            "title":
-                title,
-            "authors":
-                authors,
-            "journal":
-                journal,
-            "date":
-                date_info["date"],
-            "date_precision":
-                date_info[
-                    "date_precision"
-                ],
+            "pmid": pmid,
+            "title": title,
+            "authors": authors,
+            "journal": journal,
+            "date": date_string,
+            "date_precision": precision,
             "year":
-                year,
-            "doi":
-                doi,
+                date_value.year
+                if date_value
+                else None,
+            "doi": doi,
             "pubmed_url":
                 (
                     f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/"
@@ -1399,22 +703,20 @@ def main() -> None:
                     if doi
                     else ""
                 ),
-            "areas":
-                areas,
+            "areas": areas,
             "category_confidence":
-                category_confidence,
+                confidence,
             "evidence_type":
                 evidence_type,
             "evidence_type_it":
-                EVIDENCE_LABEL_IT.get(
+                IT.get(
                     evidence_type,
                     evidence_type,
                 ),
-            "source":
-                "PubMed",
+            "source": "PubMed",
             "first_seen":
                 (
-                    previous_queue
+                    old_queue
                     .get(
                         pmid,
                         {},
@@ -1425,84 +727,45 @@ def main() -> None:
                     or today.isoformat()
                 ),
             "status":
-                status,
-            "_sort_key":
-                date_info[
-                    "sort_key"
-                ],
+                (
+                    "new"
+                    if (
+                        date_value
+                        and precision == "day"
+                        and 0
+                        <= (
+                            today
+                            - date_value
+                        ).days
+                        <= 14
+                    )
+                    else "indexed"
+                ),
         }
 
-        if is_within_recent_window(
-            date_info,
-            cutoff,
+        if within(
+            date_value,
+            latest_cutoff,
             today,
         ):
+            latest.append(record)
 
-            publications.append(
-                record
-            )
-
-        if (
-            normalize_title(
-                title
-            )
-            not in curated_titles
-        ):
-
-            valid_areas = [
-                a
-                for a in areas
-                if a
-                != "Other / General"
-            ]
-
+        if norm(title) not in existing:
             auto_eligible = bool(
-                valid_areas
-                and category_confidence
-                >= 1
+                [
+                    area
+                    for area in areas
+                    if area
+                    != "Other / General"
+                ]
+                and confidence >= 1
             )
 
             queue.append(
                 {
-                    "pmid":
-                        pmid,
-                    "title":
-                        title,
-                    "authors":
-                        authors,
-                    "journal":
-                        journal,
-                    "date":
-                        date_info[
-                            "date"
-                        ],
-                    "doi":
-                        doi,
-                    "pubmed_url":
-                        record[
-                            "pubmed_url"
-                        ],
-                    "doi_url":
-                        record[
-                            "doi_url"
-                        ],
-                    "areas":
-                        areas,
-                    "category_confidence":
-                        category_confidence,
+                    **record,
                     "auto_eligible":
                         auto_eligible,
-                    "evidence_type":
-                        evidence_type,
-                    "evidence_type_it":
-                        EVIDENCE_LABEL_IT.get(
-                            evidence_type,
-                            evidence_type,
-                        ),
-                    "first_seen":
-                        record[
-                            "first_seen"
-                        ],
                     "curation_status":
                         (
                             "auto-approved"
@@ -1513,41 +776,20 @@ def main() -> None:
                 }
             )
 
-    publications.sort(
-        key=lambda p: (
-            p[
-                "_sort_key"
-            ],
-            p.get(
-                "pmid"
-            )
-            or "",
+    latest = sorted(
+        latest,
+        key=lambda x: (
+            x.get("date") or "",
+            x.get("pmid") or "",
         ),
         reverse=True,
-    )
+    )[:MAX_RECORDS]
 
-    publications = (
-        publications[
-            :MAX_RECORDS
-        ]
-    )
-
-    for p in publications:
-        p.pop(
-            "_sort_key",
-            None,
-        )
-
-    queue.sort(
-        key=lambda p: (
-            p.get(
-                "date"
-            )
-            or "",
-            p.get(
-                "pmid"
-            )
-            or "",
+    queue = sorted(
+        queue,
+        key=lambda x: (
+            x.get("date") or "",
+            x.get("pmid") or "",
         ),
         reverse=True,
     )
@@ -1574,11 +816,9 @@ def main() -> None:
                 "source":
                     "PubMed / NCBI E-utilities",
                 "count":
-                    len(
-                        publications
-                    ),
+                    len(latest),
                 "publications":
-                    publications,
+                    latest,
             },
             ensure_ascii=False,
             indent=2,
@@ -1623,15 +863,13 @@ def main() -> None:
     )
 
     print(
-        f"Wrote {len(publications)} "
-        f"recent records to "
-        f"{LATEST_OUT.name}"
+        f"Wrote {len(latest)} recent records "
+        f"to {LATEST_OUT.name}"
     )
 
     print(
-        f"Wrote {len(queue)} "
-        f"non-curated candidates to "
-        f"{QUEUE_OUT.name}"
+        f"Wrote {len(queue)} non-curated candidates "
+        f"to {QUEUE_OUT.name}"
     )
 
 
