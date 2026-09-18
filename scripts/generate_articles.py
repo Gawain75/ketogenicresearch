@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Ketogenic Research — AI article pilot V3.1
+Ketogenic Research — AI article pilot V3.2
 
 V3 editorial-quality pilot:
 - processes ONE article per run
@@ -276,13 +276,15 @@ EDITORIAL RULES FOR V3
 - For randomized trials, do not turn one experiment into a general clinical claim.
 
 2. ABSTRACT-ONLY CAUTION
+- Never mention AI, automation, workflow, model, generation process, or any technical production method in the published article.
+- Describe only the source limitations, not how the article was produced.
 - If full text is unavailable, the article must be explicitly labelled:
   English: "{article_type_en}"
   Italian: "{article_type_it}"
 - The English text must include this exact disclosure:
-  "Interpretation is based on the PubMed abstract; the full text was not available to this automated workflow."
+  "Interpretation is based on the PubMed abstract; the full text was not available."
 - The Italian text must include this exact disclosure:
-  "L'interpretazione si basa sull'abstract di PubMed; il testo completo non era disponibile per questo flusso di lavoro automatizzato."
+  "L'interpretazione si basa sull'abstract di PubMed; il testo completo non era disponibile."
 - Do not speculate about methods, adverse events, conflicts of interest, secondary endpoints, or limitations that are not stated in the source.
 
 3. STRUCTURE
@@ -360,6 +362,7 @@ FACTUAL CHECKS
 - abstract-only status is clearly disclosed when applicable.
 
 EDITORIAL CHECKS
+- the article contains no mention of AI, automation, workflow, model, generation process, or technical production method;
 - titles are descriptive rather than overstated;
 - no section heading is duplicated;
 - English section headings are exactly:
