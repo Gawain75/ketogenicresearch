@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // V37 — centralized scientific-library counters
 const KR_LIBRARY_STATS = {
-  publications: 614,
+  publications: 1219,
   clinicalAreas: 53
 };
 
