@@ -262,7 +262,7 @@ async function loadLatestEvidence() {
 
   const message = document.getElementById('latestLoadMessage');
   try {
-    const response = await fetch('latest-publications.json?v=62', {cache:'no-store'});
+    const response = await fetch('latest-publications.json?v=63', {cache:'no-store'});
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     KR_LATEST_DATA = await response.json();
 
