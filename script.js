@@ -383,6 +383,159 @@ function openLibraryAreaFromHash() {
     const offset = (header ? header.getBoundingClientRect().height : 0) + 18;
     const top = target.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top, behavior: 'smooth' });
+    // LIBRARY CLINICAL AREA FILTER
+(function () {
+  function setupClinicalAreaFilter() {
+    const filterRow = document.querySelector('.library-filter-row');
+    const folders = Array.from(
+      document.querySelectorAll('details.library-folder')
+    );
+
+    if (!filterRow || !folders.length) return;
+
+    let areaFilter = document.getElementById('areaFilter');
+
+    if (!areaFilter) {
+      areaFilter = document.createElement('select');
+      areaFilter.id = 'areaFilter';
+      areaFilter.setAttribute(
+        'aria-label',
+        'Filter by clinical area'
+      );
+
+      const firstOption = document.createElement('option');
+      firstOption.value = 'all';
+      firstOption.textContent = 'All clinical areas';
+      firstOption.dataset.en = 'All clinical areas';
+      firstOption.dataset.it = 'Tutte le aree cliniche';
+      areaFilter.appendChild(firstOption);
+
+      folders.forEach(folder => {
+        const title = folder.querySelector('summary strong');
+        if (!title || !folder.id) return;
+
+        const option = document.createElement('option');
+        option.value = folder.id;
+        option.textContent =
+          title.dataset.en ||
+          title.textContent.trim();
+
+        option.dataset.en =
+          title.dataset.en ||
+          title.textContent.trim();
+
+        option.dataset.it =
+          title.dataset.it ||
+          title.textContent.trim();
+
+        areaFilter.appendChild(option);
+      });
+
+      filterRow.insertBefore(
+        areaFilter,
+        filterRow.firstChild
+      );
+    }
+
+    function applyClinicalAreaFilter() {
+      const selected = areaFilter.value;
+
+      folders.forEach(folder => {
+        const areaMatches =
+          selected === 'all' ||
+          folder.id === selected;
+
+        if (!areaMatches) {
+          folder.hidden = true;
+        } else if (selected !== 'all') {
+          folder.hidden = false;
+          folder.open = true;
+        }
+      });
+
+      document
+        .querySelectorAll('.library-group')
+        .forEach(group => {
+          const hasVisibleFolder = Array.from(
+            group.querySelectorAll(
+              'details.library-folder'
+            )
+          ).some(folder => !folder.hidden);
+
+          group.hidden = !hasVisibleFolder;
+        });
+    }
+
+    areaFilter.addEventListener(
+      'change',
+      function () {
+        if (
+          typeof window.applyLibraryFilters ===
+          'function'
+        ) {
+          window.applyLibraryFilters();
+        }
+
+        applyClinicalAreaFilter();
+      }
+    );
+
+    const controls = [
+      document.getElementById('librarySearch'),
+      document.getElementById('evidenceFilter'),
+      document.getElementById('yearFilter')
+    ].filter(Boolean);
+
+    controls.forEach(control => {
+      const eventName =
+        control.tagName === 'SELECT'
+          ? 'change'
+          : 'input';
+
+      control.addEventListener(
+        eventName,
+        function () {
+          setTimeout(
+            applyClinicalAreaFilter,
+            0
+          );
+        }
+      );
+    });
+
+    const clearButton =
+      document.getElementById(
+        'clearLibraryFilters'
+      );
+
+    if (clearButton) {
+      clearButton.addEventListener(
+        'click',
+        function () {
+          areaFilter.value = 'all';
+
+          setTimeout(
+            applyClinicalAreaFilter,
+            0
+          );
+        }
+      );
+    }
+
+    applyClinicalAreaFilter();
+  }
+
+  if (
+    document.readyState === 'loading'
+  ) {
+    document.addEventListener(
+      'DOMContentLoaded',
+      setupClinicalAreaFilter
+    );
+  } else {
+    setupClinicalAreaFilter();
+  }
+})();
   }, 80);
 
   window.setTimeout(() => {
