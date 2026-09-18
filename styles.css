@@ -912,3 +912,72 @@ details.library-folder.deep-link-target{
   font-size:.78rem;
   font-weight:700;
 }
+
+
+/* V70 RECOVERY — universal mobile header fallback */
+@media (max-width: 850px) {
+  .header .nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 76px;
+  }
+
+  .header .brand {
+    display: flex;
+    align-items: center;
+  }
+
+  .header .site-logo {
+    display: block;
+    height: 42px;
+    width: auto;
+    max-width: 245px;
+  }
+
+  .header .actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+  }
+
+  .header .menu {
+    display: block;
+    border: 0;
+    background: transparent;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .header nav {
+    display: none !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    flex-direction: column;
+    gap: 0;
+    padding: 12px 16px 16px;
+    background: #f7fbfe;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .header nav.open {
+    display: flex !important;
+  }
+
+  .header nav a {
+    display: block;
+    padding: 11px 4px;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .header .lang {
+    display: flex;
+  }
+}
