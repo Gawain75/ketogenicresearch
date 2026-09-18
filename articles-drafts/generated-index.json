@@ -1,0 +1,21 @@
+{
+  "generated_pmids": [],
+  "failures": [
+    {
+      "pmid": "42753265",
+      "at": "2026-09-18T22:40:19.151920+00:00",
+      "error": "Model did not return a JSON object."
+    },
+    {
+      "pmid": "42742013",
+      "at": "2026-09-18T22:40:40.641559+00:00",
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "pmid": "42753449",
+      "at": "2026-09-18T22:40:44.923564+00:00",
+      "error": "HTTP Error 429: Too Many Requests"
+    }
+  ],
+  "updated_at": "2026-09-18T22:40:48.923845+00:00"
+}
