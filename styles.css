@@ -981,3 +981,449 @@ details.library-folder.deep-link-target{
     display: flex;
   }
 }
+/* ==========================================================
+   V71 VISUAL POLISH — CSS ONLY
+   Safe visual refinement
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   GLOBAL RHYTHM
+   ---------------------------------------------------------- */
+
+body {
+  line-height: 1.55;
+}
+
+.section {
+  padding-top: 56px;
+  padding-bottom: 56px;
+}
+
+.page-hero {
+  padding-top: 72px;
+  padding-bottom: 58px;
+}
+
+.page-hero h1 {
+  letter-spacing: -0.02em;
+}
+
+.page-hero p {
+  max-width: 760px;
+}
+
+
+/* ----------------------------------------------------------
+   HEADER
+   ---------------------------------------------------------- */
+
+.header {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.header .nav {
+  min-height: 74px;
+}
+
+.header nav a {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.header nav a:hover {
+  opacity: 0.78;
+}
+
+.lang button {
+  min-width: 38px;
+  min-height: 34px;
+  border-radius: 10px;
+}
+
+.menu {
+  border-radius: 10px;
+}
+
+
+/* ----------------------------------------------------------
+   HOME / HERO
+   ---------------------------------------------------------- */
+
+.hero,
+.page-hero {
+  position: relative;
+}
+
+.hero::after,
+.page-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(20, 92, 98, 0.12),
+    transparent
+  );
+  pointer-events: none;
+}
+
+.hero .button-row,
+.page-hero .button-row {
+  gap: 10px;
+}
+
+
+/* ----------------------------------------------------------
+   METRICS
+   ---------------------------------------------------------- */
+
+.home-metrics,
+.metrics-grid {
+  gap: 14px;
+}
+
+.home-metric,
+.metric-card {
+  border-radius: 16px;
+  box-shadow:
+    0 8px 24px
+    rgba(19, 63, 69, 0.045);
+}
+
+.home-metric strong,
+.metric-card strong {
+  letter-spacing: -0.03em;
+}
+
+
+/* ----------------------------------------------------------
+   CARDS
+   ---------------------------------------------------------- */
+
+.research-card,
+.update-card,
+.info-card,
+.card {
+  border-radius: 16px;
+  box-shadow:
+    0 8px 24px
+    rgba(19, 63, 69, 0.045);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.research-card:hover,
+.update-card:hover,
+.info-card:hover,
+.card:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 12px 30px
+    rgba(19, 63, 69, 0.065);
+}
+
+
+/* ----------------------------------------------------------
+   LIBRARY TOOLING
+   ---------------------------------------------------------- */
+
+.library-filter-row,
+.library-controls,
+.library-toolbar {
+  gap: 10px;
+}
+
+.library-filter-row input,
+.library-filter-row select,
+.library-controls input,
+.library-controls select,
+.library-toolbar input,
+.library-toolbar select {
+  min-height: 44px;
+  border-radius: 12px;
+}
+
+#clearLibraryFilters {
+  min-height: 44px;
+  border-radius: 12px;
+}
+
+
+/* ----------------------------------------------------------
+   LIBRARY FOLDERS
+   ---------------------------------------------------------- */
+
+details.library-folder {
+  margin-bottom: 10px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow:
+    0 4px 18px
+    rgba(19, 63, 69, 0.03);
+}
+
+details.library-folder > summary {
+  padding: 15px 17px;
+  font-weight: 700;
+  transition:
+    background 0.18s ease;
+}
+
+details.library-folder > summary:hover {
+  background:
+    rgba(20, 92, 98, 0.025);
+}
+
+details.library-folder[open] > summary {
+  background:
+    rgba(20, 92, 98, 0.03);
+}
+
+
+/* ----------------------------------------------------------
+   PUBLICATION CARDS
+   ---------------------------------------------------------- */
+
+article.folder-paper {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+article.folder-paper h4 {
+  margin-top: 6px;
+  margin-bottom: 7px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+article.folder-paper p {
+  line-height: 1.45;
+}
+
+.evidence-level {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 4px 9px;
+  font-size: 0.73rem;
+  font-weight: 700;
+  background:
+    rgba(20, 92, 98, 0.08);
+}
+
+.paper-links {
+  gap: 7px;
+}
+
+.paper-links a {
+  border-radius: 9px;
+}
+
+
+/* ----------------------------------------------------------
+   LATEST EVIDENCE
+   ---------------------------------------------------------- */
+
+.latest-paper {
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow:
+    0 7px 22px
+    rgba(19, 63, 69, 0.04);
+}
+
+.latest-paper h2 {
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.latest-area-chip,
+.latest-evidence-chip,
+.latest-new-badge {
+  border-radius: 999px;
+}
+
+.latest-evidence-chip {
+  font-weight: 700;
+}
+
+
+/* ----------------------------------------------------------
+   SCIENTIFIC DIRECTION
+   ---------------------------------------------------------- */
+
+.director {
+  gap: 34px;
+}
+
+.portrait img {
+  border-radius: 18px;
+  box-shadow:
+    0 12px 32px
+    rgba(19, 63, 69, 0.08);
+}
+
+.director-data {
+  gap: 12px;
+}
+
+.director-data > div {
+  border-radius: 14px;
+}
+
+.institutional-block {
+  border-radius: 16px;
+}
+
+
+/* ----------------------------------------------------------
+   TYPOGRAPHY
+   ---------------------------------------------------------- */
+
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: -0.018em;
+}
+
+.section-heading p {
+  max-width: 760px;
+}
+
+.kicker,
+.eyebrow {
+  letter-spacing: 0.08em;
+}
+
+
+/* ----------------------------------------------------------
+   BUTTONS
+   ---------------------------------------------------------- */
+
+.button {
+  border-radius: 11px;
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.16s ease,
+    background 0.16s ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+
+/* ----------------------------------------------------------
+   FOOTER
+   ---------------------------------------------------------- */
+
+.footer {
+  padding-top: 26px;
+  padding-bottom: 26px;
+  font-size: 0.9rem;
+}
+
+
+/* ----------------------------------------------------------
+   MOBILE
+   ---------------------------------------------------------- */
+
+@media (max-width: 760px) {
+
+  .section {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .page-hero {
+    padding-top: 50px;
+    padding-bottom: 42px;
+  }
+
+  .page-hero h1 {
+    line-height: 1.05;
+  }
+
+  .header .nav {
+    min-height: 68px;
+  }
+
+  .site-logo {
+    max-height: 40px;
+  }
+
+  .home-metric,
+  .metric-card,
+  .research-card,
+  .update-card,
+  .latest-paper {
+    border-radius: 14px;
+  }
+
+  details.library-folder {
+    border-radius: 13px;
+    margin-bottom: 8px;
+  }
+
+  details.library-folder > summary {
+    padding: 13px 14px;
+  }
+
+  article.folder-paper {
+    padding: 13px 14px;
+  }
+
+  article.folder-paper h4 {
+    font-size: 0.95rem;
+    line-height: 1.38;
+  }
+
+  article.folder-paper p {
+    font-size: 0.84rem;
+  }
+
+  .paper-links a {
+    font-size: 0.76rem;
+    padding: 5px 9px;
+  }
+
+  .latest-paper {
+    padding: 15px;
+  }
+
+  .latest-paper h2 {
+    font-size: 1rem;
+  }
+
+  .director {
+    gap: 24px;
+  }
+
+  .footer {
+    padding-top: 22px;
+    padding-bottom: 22px;
+  }
+
+}
+
+
+/* ----------------------------------------------------------
+   REDUCED MOTION
+   ---------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
