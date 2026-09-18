@@ -726,3 +726,12 @@ article.folder-paper[hidden],details.library-folder[hidden]{display:none!importa
     height:18px;
   }
 }
+
+/* V52 — unique clinical-area icons */
+.library-folder .folder-icon{
+  flex:0 0 auto;
+  color:var(--primary);
+}
+.library-folder .folder-icon svg{
+  display:block;
+}
