@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Ketogenic Research — AI article pilot V2
+Ketogenic Research — AI article pilot V3.1
 
-Changes vs pilot V1:
+V3 editorial-quality pilot:
 - processes ONE article per run
 - requests structured JSON output
 - retries Groq HTTP 429 automatically with exponential backoff
@@ -251,7 +251,8 @@ PMC FULL-TEXT EXCERPT
 """.strip()
 
 def writer_prompt(packet: str, has_full_text: bool) -> str:
-    article_type = "Research Analysis" if has_full_text else "Research Note"
+    article_type_en = "Research Analysis" if has_full_text else "Research Note"
+    article_type_it = "Analisi di ricerca" if has_full_text else "Nota di ricerca"
 
     return f"""You are the scientific editorial writer for Ketogenic Research.
 
@@ -260,11 +261,67 @@ Follow this policy exactly:
 {POLICY_TEXT}
 --- END POLICY ---
 
-Write one bilingual {article_type} based ONLY on the SOURCE PACKET.
+Write one bilingual article based ONLY on the SOURCE PACKET.
 Do not add background facts that are not explicitly present in the source.
+
+EDITORIAL RULES FOR V3
+
+1. TITLE CAUTION
+- Do not use causal or definitive verbs such as "improves", "enhances", "prevents",
+  "reduces", "increases", "protects", "causes" in the title unless the supplied
+  source itself clearly supports a causal conclusion and the study design justifies it.
+- Prefer descriptive formulations such as:
+  "was associated with", "was linked to", "showed higher", "showed lower",
+  "findings from a randomized crossover trial", or equivalent neutral wording.
+- For randomized trials, do not turn one experiment into a general clinical claim.
+
+2. ABSTRACT-ONLY CAUTION
+- If full text is unavailable, the article must be explicitly labelled:
+  English: "{article_type_en}"
+  Italian: "{article_type_it}"
+- The English text must include this exact disclosure:
+  "Interpretation is based on the PubMed abstract; the full text was not available to this automated workflow."
+- The Italian text must include this exact disclosure:
+  "L'interpretazione si basa sull'abstract di PubMed; il testo completo non era disponibile per questo flusso di lavoro automatizzato."
+- Do not speculate about methods, adverse events, conflicts of interest, secondary endpoints, or limitations that are not stated in the source.
+
+3. STRUCTURE
+Use these English section headings exactly once and in this order:
+- Key finding
+- Study design
+- Main results
+- Cautious interpretation
+- Limitations of this note
+
+Use these Italian section headings exactly once and in this order:
+- Risultato chiave
+- Disegno dello studio
+- Risultati principali
+- Interpretazione cauta
+- Limiti della nota
+
+Do not duplicate headings.
+
+4. ITALIAN QUALITY
+- Use natural scientific Italian, not literal machine translation.
+- Preserve technical terms when a forced Italian translation would be misleading.
+- Do not translate "throughput" as "produttività" in performance-testing contexts.
+  Prefer "prestazione complessiva", "rendimento operativo", or retain "throughput"
+  with a short clarification when needed.
+- Use "studio crossover randomizzato" rather than awkward alternatives.
+- Keep numerical formatting appropriate for Italian prose, while preserving the exact values.
+
+5. CLAIM DISCIPLINE
+- Every quantitative claim must be present in the source packet.
+- Distinguish what the study observed from what the authors concluded.
+- Do not convert association into causation.
+- Do not make clinical recommendations.
+- Do not use promotional language.
+- If the supplied source does not support a statement, omit it.
 
 Return JSON with exactly these top-level keys:
 article_type
+article_type_it
 title_en
 title_it
 summary_en
@@ -278,24 +335,20 @@ sections_en and sections_it must be arrays of objects with:
 heading
 text
 
-For abstract-only records:
-- keep the article concise;
-- explicitly state that interpretation is based on the PubMed abstract;
-- do not imply that the full paper was reviewed.
-
-For full-text records:
-- use only information contained in the supplied PMC excerpt.
+Set:
+article_type = "{article_type_en}"
+article_type_it = "{article_type_it}"
 
 SOURCE PACKET:
 {packet}
 """
 
 def verifier_prompt(packet: str, draft: dict[str, Any]) -> str:
-    return f"""You are a strict scientific fact checker.
+    return f"""You are a strict scientific fact checker and editorial quality controller.
 
 Compare the DRAFT only against the SOURCE PACKET.
 
-Check:
+FACTUAL CHECKS
 - every number is supported;
 - study design is correct;
 - population is correct;
@@ -303,8 +356,30 @@ Check:
 - no unsupported clinical recommendation;
 - no invented limitation;
 - no external factual claims;
-- identifiers are correct;
+- PMID/DOI/source status are correct;
 - abstract-only status is clearly disclosed when applicable.
+
+EDITORIAL CHECKS
+- titles are descriptive rather than overstated;
+- no section heading is duplicated;
+- English section headings are exactly:
+  Key finding
+  Study design
+  Main results
+  Cautious interpretation
+  Limitations of this note
+- Italian section headings are exactly:
+  Risultato chiave
+  Disegno dello studio
+  Risultati principali
+  Interpretazione cauta
+  Limiti della nota
+- the Italian is natural scientific Italian, not a literal or awkward translation;
+- "throughput" is not translated as "produttività" in a performance-testing context;
+- wording distinguishes observed findings from authors' interpretation;
+- abstract-only notes do not imply review of the full paper.
+
+If any factual or editorial check fails, verdict must be FAIL.
 
 Return JSON with exactly:
 verdict
@@ -347,11 +422,20 @@ pmcid: {json.dumps(pmcid)}
 date: {json.dumps(rec.get("date",""))}
 journal: {json.dumps(rec.get("journal",""), ensure_ascii=False)}
 article_type: {json.dumps(draft.get("article_type",""))}
+article_type_it: {json.dumps(draft.get("article_type_it",""))}
+editorial_byline: "Ketogenic Research Editorial"
+scientific_oversight_en: "Marco Medeot, Scientific Director"
+scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
 verified_at: {json.dumps(verified_at)}
 ---
 
 # {draft.get("title_en","")}
+
+**{draft.get("article_type","Research Note")}**
+
+**Ketogenic Research Editorial**  
+Scientific oversight: **Marco Medeot, Scientific Director**
 
 {draft.get("summary_en","")}
 
@@ -368,6 +452,11 @@ PMCID: {pmcid or "Not available"}
 ---
 
 # {draft.get("title_it","")}
+
+**{draft.get("article_type_it","Nota di ricerca")}**
+
+**Ketogenic Research Editorial**  
+Supervisione scientifica: **Marco Medeot, Direttore Scientifico**
 
 {draft.get("summary_it","")}
 
