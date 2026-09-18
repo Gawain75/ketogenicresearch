@@ -93,53 +93,64 @@ def clean_text(node) -> str:
     return "".join(node.itertext()).strip()
 
 
-CORE_RELEVANCE_TERMS = (
-    "ketogenic diet",
-    "ketogenic diets",
-    "ketogenic therapy",
-    "ketogenic metabolic therapy",
+TITLE_CORE_TERMS = (
+    "ketogenic",
     "nutritional ketosis",
-    "very low calorie ketogenic diet",
-    "very-low-calorie ketogenic diet",
-    "very low energy ketogenic therapy",
-    "modified atkins diet",
+    "modified atkins",
     "vlckd",
     "vlekt",
     "exogenous ketone",
-    "exogenous ketones",
     "ketone ester",
     "ketone esters",
     "ketone salt",
     "ketone salts",
 )
 
-SECONDARY_KETONE_TERMS = (
+TITLE_SECONDARY_TERMS = (
     "beta-hydroxybutyrate",
     "β-hydroxybutyrate",
     "ketone bodies",
 )
 
-SECONDARY_CONTEXT_TERMS = (
-    "ketogenic",
-    "nutritional ketosis",
+CONTEXT_TERMS = (
+    "ketogenic diet",
+    "ketogenic diets",
     "ketogenic therapy",
+    "ketogenic metabolic therapy",
+    "nutritional ketosis",
 )
 
 
 def is_relevant_record(article: ET.Element) -> bool:
-    title = clean_text(article.find("ArticleTitle"))
+    """
+    High-precision public-feed filter.
+
+    A paper is accepted when:
+    1) its TITLE directly signals ketogenic / nutritional-ketosis / ketone-supplement
+       relevance; or
+    2) its TITLE is specifically about beta-hydroxybutyrate / ketone bodies AND the
+       title+abstract also contains explicit ketogenic-therapy context.
+
+    This intentionally favors precision over recall so the public Latest Evidence
+    page does not fill with incidental ketogenesis, ketoacidosis, SGLT2, animal
+    metabolism, imaging, or unrelated biochemical papers.
+    """
+    title = clean_text(article.find("ArticleTitle")).lower()
     abstract = " ".join(
         clean_text(node)
         for node in article.findall("Abstract/AbstractText")
-    )
-    text = f"{title} {abstract}".lower()
+    ).lower()
+    text = f"{title} {abstract}"
 
-    if any(term in text for term in CORE_RELEVANCE_TERMS):
+    # Strong title gate: direct ketogenic / nutritional-ketosis / exogenous-ketone topic.
+    if any(term in title for term in TITLE_CORE_TERMS):
         return True
 
-    has_secondary = any(term in text for term in SECONDARY_KETONE_TERMS)
-    has_context = any(term in text for term in SECONDARY_CONTEXT_TERMS)
-    return has_secondary and has_context
+    # Mechanistic ketone papers are only allowed with explicit ketogenic context.
+    if any(term in title for term in TITLE_SECONDARY_TERMS):
+        return any(term in text for term in CONTEXT_TERMS)
+
+    return False
 
 
 def parse_month(value: str) -> int | None:
@@ -392,4 +403,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()w
+    main()
