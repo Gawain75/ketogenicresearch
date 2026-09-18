@@ -832,3 +832,21 @@ article.folder-paper[hidden],details.library-folder[hidden]{display:none!importa
   .update-grid,.methodology-two-col,.method-steps{grid-template-columns:1fr;}
   .library-method-strip .wrap{align-items:flex-start;flex-direction:column;gap:8px;}
 }
+
+
+/* V54 — specific deep-link destination feedback */
+.program-link-note{
+  margin:0 0 18px;
+  color:var(--muted);
+  font-size:.95rem;
+}
+details.library-folder.deep-link-target{
+  outline:2px solid rgba(31,78,121,.22);
+  outline-offset:4px;
+  border-radius:14px;
+  transition:outline-color .25s ease;
+}
+.program-links a{
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+}

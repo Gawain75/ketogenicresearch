@@ -351,3 +351,39 @@ async function syncLiteratureUpdateDate() {
 }
 
 document.addEventListener('DOMContentLoaded', syncLiteratureUpdateDate);
+
+
+// V54 — robust deep links from Research Programs to specific Library areas
+function openLibraryAreaFromHash() {
+  if (!window.location.hash) return;
+
+  const id = decodeURIComponent(window.location.hash.slice(1));
+  if (!id) return;
+
+  const target = document.getElementById(id);
+  if (!target || !target.matches('details.library-folder')) return;
+
+  // Close other areas so the destination is visually unambiguous.
+  document.querySelectorAll('details.library-folder[open]').forEach((item) => {
+    if (item !== target) item.removeAttribute('open');
+  });
+
+  target.setAttribute('open', '');
+
+  // Brief visual emphasis after navigation.
+  target.classList.add('deep-link-target');
+
+  window.setTimeout(() => {
+    const header = document.querySelector('.header');
+    const offset = (header ? header.getBoundingClientRect().height : 0) + 18;
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }, 80);
+
+  window.setTimeout(() => {
+    target.classList.remove('deep-link-target');
+  }, 2200);
+}
+
+document.addEventListener('DOMContentLoaded', openLibraryAreaFromHash);
+window.addEventListener('hashchange', openLibraryAreaFromHash);
