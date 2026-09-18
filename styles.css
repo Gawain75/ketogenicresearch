@@ -889,3 +889,12 @@ details.library-folder.deep-link-target{
     height:20px;
   }
 }
+
+/* V59 — link reliability note */
+.link-reliability-note{
+  max-width:1180px;
+  margin:0 auto 18px;
+  padding:12px 18px;
+  color:var(--muted);
+  font-size:.93rem;
+}
