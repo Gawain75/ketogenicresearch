@@ -1737,3 +1737,200 @@ window.addEventListener('hashchange', openLibraryAreaFromHash);
 
         Array.from(
           container
+// ============================================================
+// GLOBAL HEADER FIX
+// Restores language switch and mobile menu site-wide
+// ============================================================
+
+(function () {
+
+  function initGlobalHeaderFix() {
+
+    // -------------------------
+    // LANGUAGE
+    // -------------------------
+
+    const langButtons =
+      document.querySelectorAll(
+        '.lang button[data-lang]'
+      );
+
+    function setLanguage(lang) {
+
+      document.documentElement.lang =
+        lang;
+
+      document
+        .querySelectorAll(
+          '[data-en][data-it]'
+        )
+        .forEach(function (element) {
+
+          const value =
+            element.getAttribute(
+              'data-' + lang
+            );
+
+          if (value !== null) {
+            element.textContent =
+              value;
+          }
+
+        });
+
+      langButtons.forEach(
+        function (button) {
+
+          button.classList.toggle(
+            'active',
+            button.getAttribute(
+              'data-lang'
+            ) === lang
+          );
+
+        }
+      );
+
+      try {
+        localStorage.setItem(
+          'kr-language',
+          lang
+        );
+      } catch (e) {}
+
+    }
+
+
+    langButtons.forEach(
+      function (button) {
+
+        button.onclick =
+          function () {
+
+            setLanguage(
+              button.getAttribute(
+                'data-lang'
+              )
+            );
+
+          };
+
+      }
+    );
+
+
+    let initialLanguage =
+      'en';
+
+    try {
+
+      const saved =
+        localStorage.getItem(
+          'kr-language'
+        );
+
+      if (
+        saved === 'en' ||
+        saved === 'it'
+      ) {
+        initialLanguage =
+          saved;
+      }
+
+    } catch (e) {}
+
+    setLanguage(
+      initialLanguage
+    );
+
+
+    // -------------------------
+    // MOBILE MENU
+    // -------------------------
+
+    const menuButton =
+      document.querySelector(
+        '.header .menu'
+      );
+
+    const navigation =
+      document.querySelector(
+        '.header nav'
+      );
+
+    if (
+      menuButton &&
+      navigation
+    ) {
+
+      menuButton.setAttribute(
+        'aria-expanded',
+        'false'
+      );
+
+      menuButton.onclick =
+        function (event) {
+
+          event.preventDefault();
+
+          const open =
+            navigation.classList.toggle(
+              'open'
+            );
+
+          menuButton.setAttribute(
+            'aria-expanded',
+            open
+              ? 'true'
+              : 'false'
+          );
+
+        };
+
+
+      navigation
+        .querySelectorAll('a')
+        .forEach(
+          function (link) {
+
+            link.addEventListener(
+              'click',
+              function () {
+
+                navigation.classList.remove(
+                  'open'
+                );
+
+                menuButton.setAttribute(
+                  'aria-expanded',
+                  'false'
+                );
+
+              }
+            );
+
+          }
+        );
+
+    }
+
+  }
+
+
+  if (
+    document.readyState ===
+    'loading'
+  ) {
+
+    document.addEventListener(
+      'DOMContentLoaded',
+      initGlobalHeaderFix
+    );
+
+  } else {
+
+    initGlobalHeaderFix();
+
+  }
+
+})();
