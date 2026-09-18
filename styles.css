@@ -735,3 +735,100 @@ article.folder-paper[hidden],details.library-folder[hidden]{display:none!importa
 .library-folder .folder-icon svg{
   display:block;
 }
+
+
+/* V53 — streamlined information architecture */
+.library-method-strip{
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  background:#f8fbfd;
+}
+.library-method-strip .wrap{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  justify-content:space-between;
+  padding-top:16px;
+  padding-bottom:16px;
+}
+.library-method-strip p{margin:0;color:var(--muted);}
+.library-method-strip a{font-weight:700;white-space:nowrap;}
+
+.whats-new .wrap>h2{margin-top:0;}
+.update-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+.update-card{
+  display:block;
+  padding:24px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:#fff;
+  text-decoration:none;
+  color:inherit;
+}
+.update-card strong{display:block;font-size:1.8rem;color:var(--primary);margin-bottom:6px;}
+.update-card span{display:block;font-weight:700;margin-bottom:8px;}
+.update-card p{margin:0;color:var(--muted);}
+
+.program-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 12px;
+  margin-top:12px;
+  font-size:.92rem;
+}
+.program-links span{color:var(--muted);}
+.program-links a{font-weight:650;}
+
+.methodology-two-col{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:20px;
+  margin-bottom:36px;
+}
+.method-card{
+  padding:26px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:#fff;
+}
+.method-card h2{margin-top:4px;}
+.method-card p:last-child{color:var(--muted);margin-bottom:0;}
+
+.method-flow{margin:40px 0;}
+.method-steps{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+}
+.method-steps div{
+  padding:20px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:#f8fbfd;
+}
+.method-steps strong{
+  display:block;
+  font-size:1.35rem;
+  color:var(--primary);
+  margin-bottom:6px;
+}
+.methodology-copy{
+  max-width:880px;
+}
+.methodology-copy h2{margin-top:34px;}
+.methodology-copy p{color:var(--muted);}
+.method-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:36px;
+}
+
+@media (max-width:760px){
+  .update-grid,.methodology-two-col,.method-steps{grid-template-columns:1fr;}
+  .library-method-strip .wrap{align-items:flex-start;flex-direction:column;gap:8px;}
+}
