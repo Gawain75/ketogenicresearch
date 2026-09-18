@@ -25,7 +25,7 @@ CURATION_MAX_RECORDS = int(os.getenv("CURATION_MAX_RECORDS", "500"))
 
 BASE = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 
-QUERY = '''(
+QUERY = r'''(
 "ketogenic diet"[Title/Abstract] OR "ketogenic diets"[Title/Abstract]
 OR "ketogenic therapy"[Title/Abstract] OR "ketogenic metabolic therapy"[Title/Abstract]
 OR "nutritional ketosis"[Title/Abstract] OR "very low calorie ketogenic diet"[Title/Abstract]
@@ -39,27 +39,13 @@ AND (ketogenic[Title/Abstract] OR "nutritional ketosis"[Title/Abstract] OR "keto
 )'''
 
 CORE = (
-    "ketogenic",
-    "nutritional ketosis",
-    "modified atkins",
-    "vlckd",
-    "vlekt",
-    "exogenous ketone",
-    "ketone ester",
-    "ketone salt",
+    "ketogenic", "nutritional ketosis", "modified atkins", "vlckd", "vlekt",
+    "exogenous ketone", "ketone ester", "ketone salt",
 )
-
-SECONDARY = (
-    "beta-hydroxybutyrate",
-    "ketone bodies",
-)
-
+SECONDARY = ("beta-hydroxybutyrate", "ketone bodies")
 CONTEXT = (
-    "ketogenic diet",
-    "ketogenic diets",
-    "ketogenic therapy",
-    "ketogenic metabolic therapy",
-    "nutritional ketosis",
+    "ketogenic diet", "ketogenic diets", "ketogenic therapy",
+    "ketogenic metabolic therapy", "nutritional ketosis",
 )
 
 AREA_RULES = {
@@ -118,6 +104,12 @@ AREA_RULES = {
     "Aesthetic Medicine & Body Composition": ["body composition", "fat mass", "lean mass", "aesthetic medicine"],
 }
 
+BROAD_AREAS = {
+    "Inflammation & Immunometabolism", "Cognitive Function", "Cardiovascular Health",
+    "Longevity & Healthy Aging", "Aesthetic Medicine & Body Composition",
+    "Supplementation & Nutraceuticals",
+}
+
 IT = {
     "Systematic review / meta-analysis": "Revisione sistematica / meta-analisi",
     "Guideline / consensus": "Linea guida / consensus",
@@ -131,33 +123,17 @@ IT = {
 }
 
 MONTHS = {
-    "jan": 1,
-    "feb": 2,
-    "mar": 3,
-    "apr": 4,
-    "may": 5,
-    "jun": 6,
-    "jul": 7,
-    "aug": 8,
-    "sep": 9,
-    "sept": 9,
-    "oct": 10,
-    "nov": 11,
-    "dec": 12,
+    "jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
+    "jul": 7, "aug": 8, "sep": 9, "sept": 9, "oct": 10, "nov": 11, "dec": 12,
 }
 
 
 def api(name, params):
-    params = {
-        **params,
-        "tool": "ketogenicresearch-literature-monitor",
-        "email": EMAIL,
-    }
-
+    params = {**params, "tool": "ketogenicresearch-literature-monitor", "email": EMAIL}
     if API_KEY:
         params["api_key"] = API_KEY
 
-    encoded = urllib.parse.urlencode(params).encode()
+    encoded = urllib.parse.urlencode(params).encode("utf-8")
     endpoint = f"{BASE}/{name}"
 
     if name == "efetch.fcgi" or len(encoded) > 1800:
@@ -166,16 +142,14 @@ def api(name, params):
             data=encoded,
             method="POST",
             headers={
-                "User-Agent": f"ketogenicresearch/2.0 ({EMAIL})",
+                "User-Agent": f"ketogenicresearch/2.1 ({EMAIL})",
                 "Content-Type": "application/x-www-form-urlencoded",
             },
         )
     else:
         req = urllib.request.Request(
-            f"{endpoint}?{encoded.decode()}",
-            headers={
-                "User-Agent": f"ketogenicresearch/2.0 ({EMAIL})"
-            },
+            f"{endpoint}?{encoded.decode('utf-8')}",
+            headers={"User-Agent": f"ketogenicresearch/2.1 ({EMAIL})"},
         )
 
     with urllib.request.urlopen(req, timeout=60) as response:
@@ -189,23 +163,52 @@ def text(node):
     return "" if node is None else "".join(node.itertext()).strip()
 
 
-def norm(value):
+def norm_title(value):
     value = re.sub(r"^\s*\d+\.\s*", "", value or "").lower()
+    value = value.replace("’", "'").replace("–", "-").replace("—", "-")
     return re.sub(r"[^a-z0-9]+", " ", value).strip()
 
 
-def curated_titles():
+def norm_doi(value):
+    value = (value or "").strip().lower()
+    value = re.sub(r"^https?://(?:dx\.)?doi\.org/", "", value)
+    return value.rstrip(" .")
+
+
+def existing_ids():
     if not LIBRARY_HTML.exists():
-        return set()
+        return {"titles": set(), "pmids": set(), "dois": set()}
 
     html = LIBRARY_HTML.read_text(encoding="utf-8")
 
-    return {
-        norm(x)
-        for x in re.findall(
-            r'<h4[^>]*data-en="([^"]+)"',
+    titles = {
+        norm_title(re.sub(r"<[^>]+>", "", x))
+        for x in re.findall(r"<h4[^>]*>(.*?)</h4>", html, re.S)
+        if x
+    }
+
+    pmids = set(
+        re.findall(
+            r"pubmed\.ncbi\.nlm\.nih\.gov/(\d+)/",
             html,
+            re.I,
         )
+    )
+
+    dois = {
+        norm_doi(x)
+        for x in re.findall(
+            r"https?://(?:dx\.)?doi\.org/([^\"'<>\s]+)",
+            html,
+            re.I,
+        )
+        if x
+    }
+
+    return {
+        "titles": titles,
+        "pmids": pmids,
+        "dois": dois,
     }
 
 
@@ -242,57 +245,86 @@ def relevant(article):
         )
     ).lower()
 
-    all_text = title + " " + abstract
+    body = title + " " + abstract
 
     return (
         any(x in title for x in CORE)
         or (
             any(x in title for x in SECONDARY)
-            and any(x in all_text for x in CONTEXT)
+            and any(x in body for x in CONTEXT)
         )
     )
 
 
 def classify(title, abstract, mesh):
-    title_lower = title.lower()
+    title_l = title.lower()
+    abstract_l = abstract.lower()
+    mesh_l = " ".join(mesh).lower()
 
-    all_text = " ".join(
-        [title, abstract, *mesh]
-    ).lower()
-
-    scores = []
+    scored = []
 
     for area, keywords in AREA_RULES.items():
-        score = sum(
-            4 if keyword in title_lower
-            else 1 if keyword in all_text
-            else 0
-            for keyword in keywords
+        score = 0
+        title_hit = False
+
+        for kw in keywords:
+            if kw in title_l:
+                score += 6
+                title_hit = True
+            elif kw in mesh_l:
+                score += 2
+            elif kw in abstract_l:
+                score += 1
+
+        if not score:
+            continue
+
+        if (
+            area in BROAD_AREAS
+            and not title_hit
+            and score < 3
+        ):
+            continue
+
+        scored.append(
+            (score, area)
         )
 
-        if score:
-            scores.append(
-                (score, area)
-            )
-
-    scores.sort(
+    scored.sort(
         key=lambda x: (
             -x[0],
             x[1],
         )
     )
 
-    if not scores:
-        return ["Other / General"], 0
+    if not scored:
+        return [
+            "Other / General"
+        ], 0
+
+    top = scored[0][0]
+
+    areas = [
+        area
+        for score, area in scored
+        if score >= max(
+            2,
+            top - 4,
+        )
+    ][:3]
 
     return (
-        [area for _, area in scores[:3]],
-        scores[0][0],
+        areas or ["Other / General"],
+        top,
     )
 
 
-def evidence(item, title, abstract):
-    publication_types = " ".join(
+def evidence(
+    item,
+    title,
+    abstract,
+):
+    types = " ".join(
         text(n).lower()
         for n in item.findall(
             ".//PublicationTypeList/PublicationType"
@@ -304,15 +336,15 @@ def evidence(item, title, abstract):
     ).lower()
 
     if (
-        "meta-analysis" in publication_types
-        or "systematic review" in publication_types
+        "meta-analysis" in types
         or "meta-analysis" in body
+        or "systematic review" in types
         or "systematic review" in body
     ):
         return "Systematic review / meta-analysis"
 
     if (
-        "guideline" in publication_types
+        "guideline" in types
         or "consensus" in body
         or "position statement" in body
     ):
@@ -320,14 +352,14 @@ def evidence(item, title, abstract):
 
     if (
         "randomized controlled trial"
-        in publication_types
+        in types
         or "randomized" in body
         or "randomised" in body
     ):
         return "Randomized clinical trial"
 
     if (
-        "clinical trial" in publication_types
+        "clinical trial" in types
         or "clinical trial" in body
         or "intervention" in body
     ):
@@ -335,7 +367,7 @@ def evidence(item, title, abstract):
 
     if (
         any(
-            x in publication_types
+            x in types
             for x in [
                 "observational study",
                 "cohort",
@@ -355,13 +387,13 @@ def evidence(item, title, abstract):
         return "Observational human study"
 
     if (
-        "case report" in publication_types
+        "case report" in types
         or "case series" in body
     ):
         return "Case report / case series"
 
     if (
-        "review" in publication_types
+        "review" in types
         or "review" in body
     ):
         return "Review"
@@ -398,45 +430,44 @@ def pubdate(item):
     )
 
     for node in nodes:
-        year_text = text(
+        y = text(
             node.find("Year")
         )
-
-        month_text = text(
+        m = text(
             node.find("Month")
         )
-
-        day_text = text(
+        d = text(
             node.find("Day")
         )
 
-        if not year_text.isdigit():
+        if not y.isdigit():
             continue
 
-        year = int(year_text)
+        year = int(y)
 
-        if month_text.isdigit():
-            month = int(month_text)
-        else:
-            month = (
+        month = (
+            int(m)
+            if m.isdigit()
+            else (
                 MONTHS.get(
-                    month_text[:4].lower()
+                    m[:4].lower()
                 )
                 or MONTHS.get(
-                    month_text[:3].lower()
+                    m[:3].lower()
                 )
             )
+        )
 
         if (
             month
-            and day_text.isdigit()
+            and d.isdigit()
         ):
             try:
                 return (
                     dt.date(
                         year,
                         month,
-                        int(day_text),
+                        int(d),
                     ),
                     "day",
                 )
@@ -453,13 +484,9 @@ def pubdate(item):
                 "month",
             )
 
-    return None, "unknown"
-
-
-def within(date_value, cutoff, today):
-    return bool(
-        date_value
-        and cutoff <= date_value <= today
+    return (
+        None,
+        "unknown",
     )
 
 
@@ -480,7 +507,7 @@ def main():
         )
     )
 
-    existing = curated_titles()
+    existing = existing_ids()
     old_queue = previous_queue()
 
     search = json.loads(
@@ -504,7 +531,9 @@ def main():
                         "%Y/%m/%d"
                     ),
             },
-        ).decode()
+        ).decode(
+            "utf-8"
+        )
     )
 
     ids = (
@@ -559,7 +588,9 @@ def main():
             continue
 
         pmid = text(
-            citation.find("PMID")
+            citation.find(
+                "PMID"
+            )
         )
 
         title = text(
@@ -585,10 +616,13 @@ def main():
             pubdate(item)
         )
 
-        if not within(
-            date_value,
-            curation_cutoff,
-            today,
+        if (
+            not date_value
+            or not (
+                curation_cutoff
+                <= date_value
+                <= today
+            )
         ):
             continue
 
@@ -597,49 +631,62 @@ def main():
         for author in article.findall(
             "AuthorList/Author"
         ):
-            name = (
-                text(
-                    author.find(
-                        "CollectiveName"
-                    )
-                )
-                or " ".join(
-                    x
-                    for x in [
-                        text(
-                            author.find(
-                                "LastName"
-                            )
-                        ),
-                        text(
-                            author.find(
-                                "Initials"
-                            )
-                        ),
-                    ]
-                    if x
+            collective = text(
+                author.find(
+                    "CollectiveName"
                 )
             )
 
+            if collective:
+                authors.append(
+                    collective
+                )
+                continue
+
+            name = " ".join(
+                x
+                for x in [
+                    text(
+                        author.find(
+                            "LastName"
+                        )
+                    ),
+                    text(
+                        author.find(
+                            "Initials"
+                        )
+                    ),
+                ]
+                if x
+            )
+
             if name:
-                authors.append(name)
+                authors.append(
+                    name
+                )
 
         doi = ""
+        pmc = ""
 
         for article_id in item.findall(
             ".//ArticleId"
         ):
-            if (
-                (
-                    article_id.attrib.get(
-                        "IdType"
-                    )
-                    or ""
-                ).lower()
-                == "doi"
-            ):
-                doi = text(article_id)
-                break
+            kind = (
+                article_id.attrib.get(
+                    "IdType"
+                )
+                or ""
+            ).lower()
+
+            if kind == "doi":
+                doi = text(
+                    article_id
+                )
+
+            elif kind == "pmc":
+                pmc = text(
+                    article_id
+                )
 
         mesh = [
             text(n)
@@ -661,36 +708,33 @@ def main():
             abstract,
         )
 
-        if (
-            precision == "day"
-            and date_value
-        ):
-            date_string = (
-                date_value.isoformat()
+        date_string = (
+            date_value.isoformat()
+            if precision == "day"
+            else date_value.strftime(
+                "%Y-%m"
             )
-
-        elif date_value:
-            date_string = (
-                date_value.strftime(
-                    "%Y-%m"
-                )
-            )
-
-        else:
-            date_string = ""
+        )
 
         record = {
-            "pmid": pmid,
-            "title": title,
-            "authors": authors,
-            "journal": journal,
-            "date": date_string,
-            "date_precision": precision,
+            "pmid":
+                pmid,
+            "title":
+                title,
+            "authors":
+                authors,
+            "journal":
+                journal,
+            "date":
+                date_string,
+            "date_precision":
+                precision,
             "year":
-                date_value.year
-                if date_value
-                else None,
-            "doi": doi,
+                date_value.year,
+            "doi":
+                doi,
+            "pmc":
+                pmc,
             "pubmed_url":
                 (
                     f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/"
@@ -703,7 +747,14 @@ def main():
                     if doi
                     else ""
                 ),
-            "areas": areas,
+            "pmc_url":
+                (
+                    f"https://pmc.ncbi.nlm.nih.gov/articles/{pmc}/"
+                    if pmc
+                    else ""
+                ),
+            "areas":
+                areas,
             "category_confidence":
                 confidence,
             "evidence_type":
@@ -713,7 +764,8 @@ def main():
                     evidence_type,
                     evidence_type,
                 ),
-            "source": "PubMed",
+            "source":
+                "PubMed",
             "first_seen":
                 (
                     old_queue
@@ -730,8 +782,7 @@ def main():
                 (
                     "new"
                     if (
-                        date_value
-                        and precision == "day"
+                        precision == "day"
                         and 0
                         <= (
                             today
@@ -743,22 +794,54 @@ def main():
                 ),
         }
 
-        if within(
-            date_value,
-            latest_cutoff,
-            today,
+        if (
+            latest_cutoff
+            <= date_value
+            <= today
         ):
-            latest.append(record)
+            latest.append(
+                record
+            )
 
-        if norm(title) not in existing:
-            auto_eligible = bool(
-                [
-                    area
-                    for area in areas
-                    if area
-                    != "Other / General"
+        duplicate = (
+            (
+                pmid
+                and pmid
+                in existing[
+                    "pmids"
                 ]
-                and confidence >= 1
+            )
+            or (
+                doi
+                and norm_doi(
+                    doi
+                )
+                in existing[
+                    "dois"
+                ]
+            )
+            or (
+                norm_title(
+                    title
+                )
+                in existing[
+                    "titles"
+                ]
+            )
+        )
+
+        if not duplicate:
+            valid_areas = [
+                a
+                for a in areas
+                if a
+                != "Other / General"
+            ]
+
+            auto_eligible = bool(
+                valid_areas
+                and confidence
+                >= 2
             )
 
             queue.append(
@@ -779,8 +862,14 @@ def main():
     latest = sorted(
         latest,
         key=lambda x: (
-            x.get("date") or "",
-            x.get("pmid") or "",
+            x.get(
+                "date"
+            )
+            or "",
+            x.get(
+                "pmid"
+            )
+            or "",
         ),
         reverse=True,
     )[:MAX_RECORDS]
@@ -788,8 +877,14 @@ def main():
     queue = sorted(
         queue,
         key=lambda x: (
-            x.get("date") or "",
-            x.get("pmid") or "",
+            x.get(
+                "date"
+            )
+            or "",
+            x.get(
+                "pmid"
+            )
+            or "",
         ),
         reverse=True,
     )
@@ -841,7 +936,8 @@ def main():
                                 "auto_eligible"
                             )
                         )
-                        for x in queue
+                        for x
+                        in queue
                     ),
                 "excluded_count":
                     sum(
@@ -850,7 +946,8 @@ def main():
                                 "auto_eligible"
                             )
                         )
-                        for x in queue
+                        for x
+                        in queue
                     ),
                 "records":
                     queue,
