@@ -1313,3 +1313,427 @@ window.addEventListener('hashchange', openLibraryAreaFromHash);
     initV66FilterFix();
   }
 })();
+// ============================================================
+// FINAL LIBRARY FILTER FIX
+// Clinical Area + Sort
+// ============================================================
+
+(function () {
+
+  function startLibraryEnhancement() {
+
+    // Find Library folders robustly
+    const folders = Array.from(
+      document.querySelectorAll(
+        'details.library-folder, details'
+      )
+    ).filter(folder =>
+      folder.querySelector('summary') &&
+      folder.querySelector('article.folder-paper')
+    );
+
+    if (!folders.length) {
+      return;
+    }
+
+    // Find existing controls by ID or visible content
+    const searchInput =
+      document.getElementById('librarySearch') ||
+      Array.from(
+        document.querySelectorAll(
+          'input[type="search"], input[type="text"]'
+        )
+      ).find(input =>
+        (
+          input.placeholder ||
+          ''
+        ).toLowerCase().includes(
+          'search by topic'
+        )
+      );
+
+    const evidenceFilter =
+      document.getElementById('evidenceFilter') ||
+      Array.from(
+        document.querySelectorAll('select')
+      ).find(select =>
+        select.textContent
+          .toLowerCase()
+          .includes(
+            'all evidence types'
+          )
+      );
+
+    const yearFilter =
+      document.getElementById('yearFilter') ||
+      Array.from(
+        document.querySelectorAll('select')
+      ).find(select =>
+        select.textContent
+          .toLowerCase()
+          .includes(
+            'all years'
+          )
+      );
+
+    const clearButton =
+      document.getElementById(
+        'clearLibraryFilters'
+      ) ||
+      Array.from(
+        document.querySelectorAll(
+          'button, input[type="button"]'
+        )
+      ).find(button =>
+        (
+          button.textContent ||
+          button.value ||
+          ''
+        )
+          .trim()
+          .toLowerCase()
+          .includes(
+            'clear filters'
+          )
+      );
+
+    if (
+      !searchInput &&
+      !evidenceFilter &&
+      !yearFilter &&
+      !clearButton
+    ) {
+      return;
+    }
+
+    // --------------------------------------------------------
+    // Give folders stable IDs when missing
+    // --------------------------------------------------------
+
+    folders.forEach(
+      (folder, index) => {
+
+        if (!folder.id) {
+          folder.id =
+            'clinical-area-' +
+            (index + 1);
+        }
+
+      }
+    );
+
+    // --------------------------------------------------------
+    // CREATE CLINICAL AREA FILTER
+    // --------------------------------------------------------
+
+    let areaFilter =
+      document.getElementById(
+        'krClinicalAreaFilter'
+      );
+
+    if (!areaFilter) {
+
+      areaFilter =
+        document.createElement(
+          'select'
+        );
+
+      areaFilter.id =
+        'krClinicalAreaFilter';
+
+      areaFilter.setAttribute(
+        'aria-label',
+        'Clinical area'
+      );
+
+      areaFilter.style.width =
+        '100%';
+
+      areaFilter.style.minHeight =
+        '70px';
+
+      areaFilter.style.padding =
+        '0 24px';
+
+      areaFilter.style.fontSize =
+        '18px';
+
+      areaFilter.style.borderRadius =
+        '16px';
+
+      areaFilter.style.border =
+        '1px solid #d3dde2';
+
+      areaFilter.style.background =
+        '#ffffff';
+
+      areaFilter.style.margin =
+        '10px 0';
+
+      const first =
+        document.createElement(
+          'option'
+        );
+
+      first.value = 'all';
+
+      first.textContent =
+        'All clinical areas';
+
+      first.dataset.en =
+        'All clinical areas';
+
+      first.dataset.it =
+        'Tutte le aree cliniche';
+
+      areaFilter.appendChild(
+        first
+      );
+
+      folders.forEach(folder => {
+
+        const heading =
+          folder.querySelector(
+            'summary strong'
+          ) ||
+          folder.querySelector(
+            'summary'
+          );
+
+        if (!heading) {
+          return;
+        }
+
+        const option =
+          document.createElement(
+            'option'
+          );
+
+        option.value =
+          folder.id;
+
+        const english =
+          heading.dataset.en ||
+          heading.textContent.trim();
+
+        const italian =
+          heading.dataset.it ||
+          english;
+
+        option.textContent =
+          english;
+
+        option.dataset.en =
+          english;
+
+        option.dataset.it =
+          italian;
+
+        areaFilter.appendChild(
+          option
+        );
+
+      });
+
+      // Place before Evidence filter whenever possible
+      if (evidenceFilter) {
+
+        evidenceFilter
+          .insertAdjacentElement(
+            'beforebegin',
+            areaFilter
+          );
+
+      } else if (yearFilter) {
+
+        yearFilter
+          .insertAdjacentElement(
+            'beforebegin',
+            areaFilter
+          );
+
+      } else if (clearButton) {
+
+        clearButton
+          .insertAdjacentElement(
+            'beforebegin',
+            areaFilter
+          );
+
+      }
+
+    }
+
+    // --------------------------------------------------------
+    // CREATE SORT FILTER
+    // --------------------------------------------------------
+
+    let sortFilter =
+      document.getElementById(
+        'krLibrarySort'
+      );
+
+    if (!sortFilter) {
+
+      sortFilter =
+        document.createElement(
+          'select'
+        );
+
+      sortFilter.id =
+        'krLibrarySort';
+
+      sortFilter.setAttribute(
+        'aria-label',
+        'Sort publications'
+      );
+
+      sortFilter.style.width =
+        '100%';
+
+      sortFilter.style.minHeight =
+        '70px';
+
+      sortFilter.style.padding =
+        '0 24px';
+
+      sortFilter.style.fontSize =
+        '18px';
+
+      sortFilter.style.borderRadius =
+        '16px';
+
+      sortFilter.style.border =
+        '1px solid #d3dde2';
+
+      sortFilter.style.background =
+        '#ffffff';
+
+      sortFilter.style.margin =
+        '10px 0';
+
+      const sortOptions = [
+        {
+          value: 'default',
+          en: 'Default order',
+          it: 'Ordine predefinito'
+        },
+        {
+          value: 'newest',
+          en: 'Newest first',
+          it: 'Più recenti'
+        },
+        {
+          value: 'oldest',
+          en: 'Oldest first',
+          it: 'Meno recenti'
+        },
+        {
+          value: 'evidence',
+          en: 'Evidence type',
+          it: 'Tipo di evidenza'
+        }
+      ];
+
+      sortOptions.forEach(
+        item => {
+
+          const option =
+            document.createElement(
+              'option'
+            );
+
+          option.value =
+            item.value;
+
+          option.textContent =
+            item.en;
+
+          option.dataset.en =
+            item.en;
+
+          option.dataset.it =
+            item.it;
+
+          sortFilter.appendChild(
+            option
+          );
+
+        }
+      );
+
+      if (clearButton) {
+
+        clearButton
+          .insertAdjacentElement(
+            'beforebegin',
+            sortFilter
+          );
+
+      } else if (yearFilter) {
+
+        yearFilter
+          .insertAdjacentElement(
+            'afterend',
+            sortFilter
+          );
+
+      }
+
+    }
+
+    // --------------------------------------------------------
+    // RESULT COUNTER
+    // --------------------------------------------------------
+
+    let counter =
+      document.getElementById(
+        'krLibraryVisibleCount'
+      );
+
+    if (!counter) {
+
+      counter =
+        document.createElement(
+          'div'
+        );
+
+      counter.id =
+        'krLibraryVisibleCount';
+
+      counter.style.margin =
+        '10px 2px 18px';
+
+      counter.style.fontSize =
+        '14px';
+
+      counter.style.color =
+        '#718087';
+
+      if (clearButton) {
+
+        const parent =
+          clearButton.parentElement;
+
+        if (parent) {
+          parent.appendChild(
+            counter
+          );
+        }
+
+      }
+
+    }
+
+    // --------------------------------------------------------
+    // SAVE ORIGINAL PAPER ORDER
+    // --------------------------------------------------------
+
+    document
+      .querySelectorAll(
+        '.folder-curated'
+      )
+      .forEach(container => {
+
+        Array.from(
+          container
