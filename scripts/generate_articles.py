@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
 """
-Pilot generator for Ketogenic Research AI-assisted research articles.
+Ketogenic Research — AI article pilot V2
 
-Reads latest-publications.json, fetches PubMed abstracts and optional PMC full text,
-generates bilingual Markdown drafts with Groq, then performs a second verification pass.
-
-PILOT SAFETY:
-- maximum PILOT_MAX_ARTICLES drafts per run (default 3)
-- drafts go to articles-drafts/ only
-- no public HTML page is modified
-- records are tracked in articles-drafts/generated-index.json
+Changes vs pilot V1:
+- processes ONE article per run
+- requests structured JSON output
+- retries Groq HTTP 429 automatically with exponential backoff
+- waits longer between generation and verification
+- keeps the pilot isolated in articles-drafts/
 """
 
 from __future__ import annotations
@@ -18,7 +16,7 @@ import json
 import os
 import re
 import time
-import html
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -33,19 +31,34 @@ INDEX = OUT / "generated-index.json"
 
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "").strip()
 GROQ_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-120b").strip()
-MAX_ARTICLES = max(1, min(int(os.environ.get("PILOT_MAX_ARTICLES", "3")), 5))
 NCBI_EMAIL = os.environ.get("NCBI_EMAIL", "info@ketogenicresearch.org").strip()
 NCBI_API_KEY = os.environ.get("NCBI_API_KEY", "").strip()
+
+# Pilot V2 deliberately handles only one new record per run.
+MAX_ARTICLES = 1
 
 EUTILS = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
 
-POLICY_TEXT = (ROOT / "ARTICLE_EDITORIAL_POLICY.md").read_text(encoding="utf-8")
+POLICY_FILE = ROOT / "ARTICLE_EDITORIAL_POLICY.md"
+POLICY_TEXT = POLICY_FILE.read_text(encoding="utf-8") if POLICY_FILE.exists() else """
+Use only the supplied source.
+Do not invent data.
+Use neutral scientific language.
+Distinguish findings from interpretation.
+Do not make unsupported clinical recommendations.
+For abstract-only records, explicitly disclose that the interpretation is based on the PubMed abstract.
+"""
 
-def request(url: str, data: bytes | None = None, headers: dict[str, str] | None = None, timeout: int = 45) -> bytes:
+def http_request(
+    url: str,
+    data: bytes | None = None,
+    headers: dict[str, str] | None = None,
+    timeout: int = 60
+) -> bytes:
     req = urllib.request.Request(url, data=data, headers=headers or {})
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return r.read()
+    with urllib.request.urlopen(req, timeout=timeout) as response:
+        return response.read()
 
 def pubmed_xml(pmid: str) -> ET.Element:
     params = {
@@ -57,8 +70,9 @@ def pubmed_xml(pmid: str) -> ET.Element:
     }
     if NCBI_API_KEY:
         params["api_key"] = NCBI_API_KEY
+
     url = f"{EUTILS}/efetch.fcgi?{urllib.parse.urlencode(params)}"
-    return ET.fromstring(request(url))
+    return ET.fromstring(http_request(url))
 
 def text_content(node: ET.Element | None) -> str:
     if node is None:
@@ -71,24 +85,24 @@ def extract_pubmed_source(root: ET.Element) -> dict[str, Any]:
         return {}
 
     abstract_parts = []
-    for a in article.findall(".//Abstract/AbstractText"):
-        label = a.attrib.get("Label", "").strip()
-        txt = text_content(a)
-        if txt:
-            abstract_parts.append(f"{label}: {txt}" if label else txt)
+    for node in article.findall(".//Abstract/AbstractText"):
+        label = node.attrib.get("Label", "").strip()
+        text = text_content(node)
+        if text:
+            abstract_parts.append(f"{label}: {text}" if label else text)
 
-    ids = {}
+    ids: dict[str, str] = {}
     for node in article.findall(".//ArticleIdList/ArticleId"):
         kind = node.attrib.get("IdType", "").lower()
-        val = text_content(node)
-        if kind and val:
-            ids[kind] = val
+        value = text_content(node)
+        if kind and value:
+            ids[kind] = value
 
     mesh = []
     for node in article.findall(".//MeshHeading/DescriptorName"):
-        val = text_content(node)
-        if val:
-            mesh.append(val)
+        value = text_content(node)
+        if value:
+            mesh.append(value)
 
     return {
         "abstract": "\n".join(abstract_parts).strip(),
@@ -100,6 +114,7 @@ def extract_pubmed_source(root: ET.Element) -> dict[str, Any]:
 def pmc_full_text(pmcid: str) -> str:
     if not pmcid:
         return ""
+
     params = {
         "db": "pmc",
         "id": pmcid,
@@ -109,57 +124,107 @@ def pmc_full_text(pmcid: str) -> str:
     }
     if NCBI_API_KEY:
         params["api_key"] = NCBI_API_KEY
+
     url = f"{EUTILS}/efetch.fcgi?{urllib.parse.urlencode(params)}"
+
     try:
-        root = ET.fromstring(request(url))
+        root = ET.fromstring(http_request(url))
     except Exception:
         return ""
 
     chunks: list[str] = []
     for tag in ("abstract", "sec"):
         for node in root.findall(f".//{tag}"):
-            txt = text_content(node)
-            if txt and len(txt) > 80:
-                chunks.append(txt)
+            value = text_content(node)
+            if value and len(value) > 80:
+                chunks.append(value)
 
-    cleaned = "\n\n".join(dict.fromkeys(chunks))
-    # Keep the free-tier request modest and deterministic.
-    return cleaned[:14000]
+    # Keep prompt size moderate for free-tier use.
+    return "\n\n".join(dict.fromkeys(chunks))[:10000]
 
-def groq(messages: list[dict[str, str]], max_tokens: int = 2500, temperature: float = 0.15) -> str:
+def groq_json(
+    messages: list[dict[str, str]],
+    max_tokens: int,
+    temperature: float,
+    attempts: int = 5
+) -> dict[str, Any]:
     if not GROQ_API_KEY:
         raise RuntimeError("GROQ_API_KEY is missing.")
 
-    payload = json.dumps({
+    payload = {
         "model": GROQ_MODEL,
         "messages": messages,
         "temperature": temperature,
         "max_tokens": max_tokens,
-    }).encode("utf-8")
+        "response_format": {"type": "json_object"},
+    }
 
-    raw = request(
-        GROQ_URL,
-        data=payload,
-        headers={
-            "Authorization": f"Bearer {GROQ_API_KEY}",
-            "Content-Type": "application/json",
-            "User-Agent": "KetogenicResearch/AI-Articles-Pilot",
-        },
-        timeout=90,
-    )
-    obj = json.loads(raw)
-    return obj["choices"][0]["message"]["content"].strip()
+    encoded = json.dumps(payload).encode("utf-8")
+
+    for attempt in range(1, attempts + 1):
+        try:
+            raw = http_request(
+                GROQ_URL,
+                data=encoded,
+                headers={
+                    "Authorization": f"Bearer {GROQ_API_KEY}",
+                    "Content-Type": "application/json",
+                    "User-Agent": "KetogenicResearch/AI-Articles-Pilot-V2",
+                },
+                timeout=120,
+            )
+
+            obj = json.loads(raw)
+            content = obj["choices"][0]["message"]["content"].strip()
+
+            # Normal case: valid JSON content.
+            try:
+                return json.loads(content)
+            except json.JSONDecodeError:
+                # Fallback extraction in case the model wraps JSON.
+                start = content.find("{")
+                end = content.rfind("}")
+                if start >= 0 and end > start:
+                    return json.loads(content[start:end + 1])
+                raise RuntimeError("Model response was not valid JSON.")
+
+        except urllib.error.HTTPError as exc:
+            if exc.code != 429 or attempt >= attempts:
+                body = ""
+                try:
+                    body = exc.read().decode("utf-8", errors="replace")
+                except Exception:
+                    pass
+                raise RuntimeError(
+                    f"Groq HTTP {exc.code}: {body[:500]}"
+                ) from exc
+
+            retry_after = exc.headers.get("Retry-After")
+            if retry_after and retry_after.isdigit():
+                wait_seconds = max(30, int(retry_after))
+            else:
+                wait_seconds = 45 * attempt
+
+            print(
+                f"Groq rate limit reached (429). "
+                f"Waiting {wait_seconds}s before retry {attempt + 1}/{attempts}..."
+            )
+            time.sleep(wait_seconds)
+
+    raise RuntimeError("Groq request failed after retries.")
 
 def slugify(value: str) -> str:
     value = value.lower()
     value = re.sub(r"[^a-z0-9]+", "-", value)
     return value.strip("-")[:80] or "research-note"
 
-def source_packet(rec: dict[str, Any], extra: dict[str, Any], full_text: str) -> str:
+def source_packet(
+    rec: dict[str, Any],
+    extra: dict[str, Any],
+    full_text: str
+) -> str:
     authors = ", ".join(rec.get("authors") or [])
     areas = ", ".join(rec.get("areas") or [])
-    abstract = extra.get("abstract", "")
-    pmcid = extra.get("pmcid", "")
     access = "PMC FULL TEXT AVAILABLE" if full_text else "ABSTRACT ONLY"
 
     return f"""SOURCE ACCESS: {access}
@@ -167,7 +232,7 @@ def source_packet(rec: dict[str, Any], extra: dict[str, Any], full_text: str) ->
 PUBMED METADATA
 PMID: {rec.get('pmid','')}
 DOI: {rec.get('doi') or extra.get('doi_from_pubmed','')}
-PMCID: {pmcid}
+PMCID: {extra.get('pmcid','')}
 Title: {rec.get('title','')}
 Authors: {authors}
 Journal: {rec.get('journal','')}
@@ -177,7 +242,7 @@ Clinical areas: {areas}
 MeSH: {", ".join(extra.get("mesh") or [])}
 
 PUBMED ABSTRACT
-{abstract or "[No abstract supplied by PubMed]"}
+{extra.get("abstract") or "[No abstract supplied by PubMed]"}
 
 PMC FULL-TEXT EXCERPT
 {full_text or "[Not available to this workflow]"}
@@ -185,71 +250,67 @@ PMC FULL-TEXT EXCERPT
 
 def writer_prompt(packet: str, has_full_text: bool) -> str:
     article_type = "Research Analysis" if has_full_text else "Research Note"
+
     return f"""You are the scientific editorial writer for Ketogenic Research.
 
-Follow this editorial policy exactly:
+Follow this policy exactly:
 --- POLICY ---
 {POLICY_TEXT}
 --- END POLICY ---
 
-Write one bilingual {article_type} based ONLY on SOURCE PACKET below.
-Do not use background knowledge that is not explicitly in the packet.
-If information is absent, say it is not reported in the supplied source.
+Write one bilingual {article_type} based ONLY on the SOURCE PACKET.
+Do not add background facts that are not explicitly present in the source.
 
-Return valid JSON only, with this exact schema:
-{{
-  "article_type": "{article_type}",
-  "title_en": "...",
-  "title_it": "...",
-  "summary_en": "...",
-  "summary_it": "...",
-  "sections_en": [
-    {{"heading":"Key finding","text":"..."}}
-  ],
-  "sections_it": [
-    {{"heading":"Risultato principale","text":"..."}}
-  ],
-  "source_note_en": "...",
-  "source_note_it": "..."
-}}
+Return JSON with exactly these top-level keys:
+article_type
+title_en
+title_it
+summary_en
+summary_it
+sections_en
+sections_it
+source_note_en
+source_note_it
 
-For abstract-only records, keep each language concise (roughly 450-700 words total)
-and explicitly state that the interpretation is based on the PubMed abstract.
-For PMC full-text records, roughly 800-1200 words per language is acceptable.
+sections_en and sections_it must be arrays of objects with:
+heading
+text
+
+For abstract-only records:
+- keep the article concise;
+- explicitly state that interpretation is based on the PubMed abstract;
+- do not imply that the full paper was reviewed.
+
+For full-text records:
+- use only information contained in the supplied PMC excerpt.
 
 SOURCE PACKET:
 {packet}
 """
 
-def parse_json_model_output(raw: str) -> dict[str, Any]:
-    raw = raw.strip()
-    raw = re.sub(r"^```(?:json)?\s*", "", raw, flags=re.I)
-    raw = re.sub(r"\s*```$", "", raw)
-    start = raw.find("{")
-    end = raw.rfind("}")
-    if start < 0 or end < start:
-        raise ValueError("Model did not return a JSON object.")
-    return json.loads(raw[start:end+1])
-
 def verifier_prompt(packet: str, draft: dict[str, Any]) -> str:
     return f"""You are a strict scientific fact checker.
 
-Compare the DRAFT only against the SOURCE PACKET. Apply these rules:
-- Every number and quantitative claim must be in the source.
-- Study design and population must match the source.
-- No unsupported causal statement.
-- No unsupported clinical recommendation.
-- No invented limitation.
-- No external facts or background knowledge.
-- PMID/DOI/source status must be correct.
-- If only an abstract is supplied, the draft must explicitly disclose that limitation.
+Compare the DRAFT only against the SOURCE PACKET.
 
-Return valid JSON only:
-{{
-  "verdict": "PASS" or "FAIL",
-  "issues": ["..."],
-  "unsupported_claims": ["..."]
-}}
+Check:
+- every number is supported;
+- study design is correct;
+- population is correct;
+- no unsupported causal claim;
+- no unsupported clinical recommendation;
+- no invented limitation;
+- no external factual claims;
+- identifiers are correct;
+- abstract-only status is clearly disclosed when applicable.
+
+Return JSON with exactly:
+verdict
+issues
+unsupported_claims
+
+verdict must be PASS or FAIL.
+issues and unsupported_claims must be arrays of strings.
 
 SOURCE PACKET:
 {packet}
@@ -258,12 +319,17 @@ DRAFT:
 {json.dumps(draft, ensure_ascii=False)}
 """
 
-def markdown(rec: dict[str, Any], extra: dict[str, Any], draft: dict[str, Any], verified_at: str) -> str:
-    def section_block(items: list[dict[str, str]]) -> str:
+def markdown(
+    rec: dict[str, Any],
+    extra: dict[str, Any],
+    draft: dict[str, Any],
+    verified_at: str
+) -> str:
+    def sections(items: list[dict[str, str]]) -> str:
         blocks = []
-        for s in items:
-            heading = str(s.get("heading", "")).strip()
-            text = str(s.get("text", "")).strip()
+        for item in items:
+            heading = str(item.get("heading", "")).strip()
+            text = str(item.get("text", "")).strip()
             if heading and text:
                 blocks.append(f"## {heading}\n\n{text}")
         return "\n\n".join(blocks)
@@ -271,28 +337,23 @@ def markdown(rec: dict[str, Any], extra: dict[str, Any], draft: dict[str, Any], 
     pmid = rec.get("pmid", "")
     doi = rec.get("doi") or extra.get("doi_from_pubmed", "")
     pmcid = extra.get("pmcid", "")
-    front = {
-        "pmid": pmid,
-        "doi": doi,
-        "pmcid": pmcid,
-        "date": rec.get("date", ""),
-        "journal": rec.get("journal", ""),
-        "article_type": draft.get("article_type", ""),
-        "verification": "PASS",
-        "verified_at": verified_at,
-    }
-
-    meta = "\n".join(f"{k}: {json.dumps(v, ensure_ascii=False)}" for k, v in front.items())
 
     return f"""---
-{meta}
+pmid: {json.dumps(pmid)}
+doi: {json.dumps(doi)}
+pmcid: {json.dumps(pmcid)}
+date: {json.dumps(rec.get("date",""))}
+journal: {json.dumps(rec.get("journal",""), ensure_ascii=False)}
+article_type: {json.dumps(draft.get("article_type",""))}
+verification: "PASS"
+verified_at: {json.dumps(verified_at)}
 ---
 
 # {draft.get("title_en","")}
 
 {draft.get("summary_en","")}
 
-{section_block(draft.get("sections_en") or [])}
+{sections(draft.get("sections_en") or [])}
 
 ### Source
 
@@ -308,7 +369,7 @@ PMCID: {pmcid or "Not available"}
 
 {draft.get("summary_it","")}
 
-{section_block(draft.get("sections_it") or [])}
+{sections(draft.get("sections_it") or [])}
 
 ### Fonte
 
@@ -334,6 +395,7 @@ def main() -> None:
         raise SystemExit("GROQ_API_KEY GitHub secret is required.")
 
     OUT.mkdir(exist_ok=True)
+
     latest = json.loads(LATEST.read_text(encoding="utf-8"))
     idx = load_index()
     done = set(str(x) for x in idx.get("generated_pmids", []))
@@ -346,74 +408,109 @@ def main() -> None:
     ][:MAX_ARTICLES]
 
     if not candidates:
-        print("No new eligible records for the pilot.")
+        print("No new eligible record for the pilot.")
         return
 
-    generated = 0
-    for rec in candidates:
-        pmid = str(rec["pmid"])
-        print(f"Processing PMID {pmid}: {rec.get('title','')[:90]}")
+    rec = candidates[0]
+    pmid = str(rec["pmid"])
 
-        try:
-            px = pubmed_xml(pmid)
-            extra = extract_pubmed_source(px)
-            if not extra.get("abstract"):
-                raise RuntimeError("PubMed abstract unavailable; pilot skips this record.")
+    print(f"Processing PMID {pmid}: {rec.get('title','')[:100]}")
 
-            full_text = pmc_full_text(extra.get("pmcid", ""))
-            packet = source_packet(rec, extra, full_text)
+    try:
+        pubmed = pubmed_xml(pmid)
+        extra = extract_pubmed_source(pubmed)
 
-            raw_draft = groq([
-                {"role": "system", "content": "Write only evidence-grounded scientific editorial content."},
-                {"role": "user", "content": writer_prompt(packet, bool(full_text))}
-            ], max_tokens=3200, temperature=0.12)
-            draft = parse_json_model_output(raw_draft)
-
-            # Space calls to make pilot friendlier to free-tier token/rate limits.
-            time.sleep(12)
-
-            raw_check = groq([
-                {"role": "system", "content": "Act as a conservative scientific fact checker. Return JSON only."},
-                {"role": "user", "content": verifier_prompt(packet, draft)}
-            ], max_tokens=900, temperature=0.0)
-            check = parse_json_model_output(raw_check)
-
-            if check.get("verdict") != "PASS":
-                idx.setdefault("failures", []).append({
-                    "pmid": pmid,
-                    "at": datetime.now(timezone.utc).isoformat(),
-                    "issues": check.get("issues", []),
-                    "unsupported_claims": check.get("unsupported_claims", []),
-                })
-                print(f"Verification FAILED for PMID {pmid}; not writing draft.")
-                continue
-
-            verified_at = datetime.now(timezone.utc).isoformat()
-            date_prefix = (rec.get("date") or verified_at[:10])[:7]
-            filename = f"{date_prefix}-{pmid}-{slugify(rec.get('title',''))}.md"
-            (OUT / filename).write_text(
-                markdown(rec, extra, draft, verified_at),
-                encoding="utf-8"
+        if not extra.get("abstract"):
+            raise RuntimeError(
+                "PubMed abstract unavailable; pilot skips this record."
             )
-            done.add(pmid)
-            generated += 1
-            print(f"Generated verified draft: {filename}")
 
-        except Exception as exc:
+        full_text = pmc_full_text(extra.get("pmcid", ""))
+        packet = source_packet(rec, extra, full_text)
+
+        print("Generating bilingual article...")
+        draft = groq_json(
+            [
+                {
+                    "role": "system",
+                    "content": (
+                        "Write only evidence-grounded scientific editorial content. "
+                        "Return JSON only."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": writer_prompt(packet, bool(full_text)),
+                },
+            ],
+            max_tokens=2600,
+            temperature=0.1,
+        )
+
+        # Give the free tier time before the verification request.
+        print("Waiting before verification...")
+        time.sleep(75)
+
+        print("Verifying draft against source...")
+        check = groq_json(
+            [
+                {
+                    "role": "system",
+                    "content": (
+                        "Act as a conservative scientific fact checker. "
+                        "Return JSON only."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": verifier_prompt(packet, draft),
+                },
+            ],
+            max_tokens=700,
+            temperature=0.0,
+        )
+
+        if str(check.get("verdict", "")).upper() != "PASS":
             idx.setdefault("failures", []).append({
                 "pmid": pmid,
                 "at": datetime.now(timezone.utc).isoformat(),
-                "error": str(exc),
+                "stage": "verification",
+                "issues": check.get("issues", []),
+                "unsupported_claims": check.get("unsupported_claims", []),
             })
-            print(f"Skipped PMID {pmid}: {exc}")
+            print("Verification FAILED; no article file created.")
+        else:
+            verified_at = datetime.now(timezone.utc).isoformat()
+            date_prefix = (rec.get("date") or verified_at[:10])[:7]
+            filename = (
+                f"{date_prefix}-{pmid}-"
+                f"{slugify(rec.get('title',''))}.md"
+            )
 
-        time.sleep(4)
+            (OUT / filename).write_text(
+                markdown(rec, extra, draft, verified_at),
+                encoding="utf-8",
+            )
+
+            done.add(pmid)
+            print(f"Verified article created: {filename}")
+
+    except Exception as exc:
+        idx.setdefault("failures", []).append({
+            "pmid": pmid,
+            "at": datetime.now(timezone.utc).isoformat(),
+            "stage": "generation",
+            "error": str(exc),
+        })
+        print(f"Pilot error for PMID {pmid}: {exc}")
 
     idx["generated_pmids"] = sorted(done)
     idx["updated_at"] = datetime.now(timezone.utc).isoformat()
-    INDEX.write_text(json.dumps(idx, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
-    print(f"Pilot complete. Verified drafts generated: {generated}")
+    INDEX.write_text(
+        json.dumps(idx, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
 
 if __name__ == "__main__":
     main()
