@@ -1427,3 +1427,68 @@ h4 {
     animation: none !important;
   }
 }
+/* ==========================================================
+   V72 MOBILE DENSITY + MICRO TYPOGRAPHY
+   CSS ONLY
+   ========================================================== */
+
+@media (max-width: 760px) {
+
+  /* HERO HOME — meno dominante */
+  .hero-copy h1 {
+    font-size: clamp(42px, 11.2vw, 58px);
+    line-height: 1.02;
+    margin-bottom: 18px;
+  }
+
+  .lead.clean-lead {
+    font-size: 17px;
+    line-height: 1.55;
+  }
+
+  .hero-clean {
+    padding-top: 58px;
+    padding-bottom: 58px;
+  }
+
+  .hero-actions {
+    margin-top: 22px;
+    gap: 10px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    min-height: 42px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 12px;
+  }
+
+
+  /* EYEBROW PIÙ ISTITUZIONALE E COMPATTO */
+  .kicker,
+  .eyebrow {
+    font-size: 9px;
+    letter-spacing: .16em;
+  }
+
+
+  /* CURRENT EVIDENCE COVERAGE */
+  .home-overview {
+    padding-top: 56px;
+    padding-bottom: 62px;
+  }
+
+  .home-overview h2 {
+    font-size: clamp(36px, 9.5vw, 48px);
+    line-height: 1.06;
+    margin-bottom: 22px;
+  }
+
+  .overview-grid {
+    gap: 30px;
+  }
+
+
+  /* METRIC / OVERVIEW CARDS PIÙ COMPATTE */
+  .
