@@ -986,3 +986,330 @@ window.addEventListener('hashchange', openLibraryAreaFromHash);
     initV66LibraryUX();
   }
 })();
+// ============================================================
+// V66 FILTER FIX
+// Adds Clinical Area + Sort without relying on .library-filter-row
+// ============================================================
+
+(function () {
+  function initV66FilterFix() {
+    const folders = Array.from(
+      document.querySelectorAll('details.library-folder')
+    );
+
+    if (!folders.length) return;
+
+    const clearButton =
+      document.getElementById('clearLibraryFilters');
+
+    const evidenceFilter =
+      document.getElementById('evidenceFilter');
+
+    const yearFilter =
+      document.getElementById('yearFilter');
+
+    const search =
+      document.getElementById('librarySearch') ||
+      document.querySelector(
+        'input[type="search"]'
+      );
+
+    if (!clearButton) return;
+
+    const container =
+      clearButton.parentElement;
+
+    if (!container) return;
+
+    // -------------------------
+    // Clinical area
+    // -------------------------
+
+    let areaFilter =
+      document.getElementById('areaFilter');
+
+    if (!areaFilter) {
+      areaFilter =
+        document.createElement('select');
+
+      areaFilter.id = 'areaFilter';
+
+      areaFilter.setAttribute(
+        'aria-label',
+        'Clinical area'
+      );
+
+      const all =
+        document.createElement('option');
+
+      all.value = 'all';
+      all.textContent =
+        'All clinical areas';
+
+      all.dataset.en =
+        'All clinical areas';
+
+      all.dataset.it =
+        'Tutte le aree cliniche';
+
+      areaFilter.appendChild(all);
+
+      folders.forEach(folder => {
+        const heading =
+          folder.querySelector(
+            'summary strong'
+          );
+
+        if (!heading) return;
+
+        const option =
+          document.createElement('option');
+
+        option.value =
+          folder.id || '';
+
+        option.dataset.en =
+          heading.dataset.en ||
+          heading.textContent.trim();
+
+        option.dataset.it =
+          heading.dataset.it ||
+          heading.textContent.trim();
+
+        option.textContent =
+          option.dataset.en;
+
+        areaFilter.appendChild(
+          option
+        );
+      });
+
+      if (evidenceFilter) {
+        container.insertBefore(
+          areaFilter,
+          evidenceFilter
+        );
+      } else if (yearFilter) {
+        container.insertBefore(
+          areaFilter,
+          yearFilter
+        );
+      } else {
+        container.insertBefore(
+          areaFilter,
+          clearButton
+        );
+      }
+    }
+
+    // -------------------------
+    // Sort
+    // -------------------------
+
+    let sortFilter =
+      document.getElementById(
+        'librarySort'
+      );
+
+    if (!sortFilter) {
+      sortFilter =
+        document.createElement(
+          'select'
+        );
+
+      sortFilter.id =
+        'librarySort';
+
+      sortFilter.innerHTML = `
+        <option value="default">
+          Default order
+        </option>
+        <option value="newest">
+          Newest first
+        </option>
+        <option value="oldest">
+          Oldest first
+        </option>
+        <option value="evidence">
+          Evidence type
+        </option>
+      `;
+
+      container.insertBefore(
+        sortFilter,
+        clearButton
+      );
+    }
+
+    // -------------------------
+    // Area filtering
+    // -------------------------
+
+    function applyArea() {
+      const selected =
+        areaFilter.value;
+
+      folders.forEach(folder => {
+        const visible =
+          selected === 'all' ||
+          folder.id === selected;
+
+        folder.hidden =
+          !visible;
+
+        if (
+          visible &&
+          selected !== 'all'
+        ) {
+          folder.open = true;
+        }
+      });
+
+      document
+        .querySelectorAll(
+          '.library-group'
+        )
+        .forEach(group => {
+          const visible =
+            Array.from(
+              group.querySelectorAll(
+                'details.library-folder'
+              )
+            ).some(
+              folder =>
+                !folder.hidden
+            );
+
+          group.hidden =
+            !visible;
+        });
+    }
+
+    // -------------------------
+    // Sorting
+    // -------------------------
+
+    function yearOf(paper) {
+      return (
+        parseInt(
+          paper.dataset.year ||
+          '0',
+          10
+        ) || 0
+      );
+    }
+
+    function evidenceRank(paper) {
+      const ranks = {
+        'systematic-review': 1,
+        'guideline': 2,
+        'clinical-trial': 3,
+        'human': 4,
+        'review': 5,
+        'mechanistic': 6,
+        'other': 7
+      };
+
+      return (
+        ranks[
+          paper.dataset.evidence
+        ] || 99
+      );
+    }
+
+    function applySort() {
+      const mode =
+        sortFilter.value;
+
+      document
+        .querySelectorAll(
+          '.folder-curated'
+        )
+        .forEach(section => {
+          const papers =
+            Array.from(
+              section.querySelectorAll(
+                'article.folder-paper'
+              )
+            );
+
+          if (
+            mode === 'newest'
+          ) {
+            papers.sort(
+              (a, b) =>
+                yearOf(b) -
+                yearOf(a)
+            );
+          }
+
+          if (
+            mode === 'oldest'
+          ) {
+            papers.sort(
+              (a, b) =>
+                yearOf(a) -
+                yearOf(b)
+            );
+          }
+
+          if (
+            mode === 'evidence'
+          ) {
+            papers.sort(
+              (a, b) =>
+                evidenceRank(a) -
+                evidenceRank(b)
+            );
+          }
+
+          papers.forEach(
+            paper =>
+              section.appendChild(
+                paper
+              )
+          );
+        });
+    }
+
+    areaFilter.addEventListener(
+      'change',
+      applyArea
+    );
+
+    sortFilter.addEventListener(
+      'change',
+      applySort
+    );
+
+    clearButton.addEventListener(
+      'click',
+      () => {
+        areaFilter.value =
+          'all';
+
+        sortFilter.value =
+          'default';
+
+        setTimeout(
+          applyArea,
+          0
+        );
+      }
+    );
+
+    applyArea();
+  }
+
+  if (
+    document.readyState ===
+    'loading'
+  ) {
+    document.addEventListener(
+      'DOMContentLoaded',
+      initV66FilterFix
+    );
+  } else {
+    initV66FilterFix();
+  }
+})();
