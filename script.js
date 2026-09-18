@@ -545,3 +545,444 @@ function openLibraryAreaFromHash() {
 
 document.addEventListener('DOMContentLoaded', openLibraryAreaFromHash);
 window.addEventListener('hashchange', openLibraryAreaFromHash);
+// ============================================================
+// V66 LIBRARY UX
+// ============================================================
+
+(function () {
+  function initV66LibraryUX() {
+    const filterRow = document.querySelector('.library-filter-row');
+    const folders = Array.from(
+      document.querySelectorAll('details.library-folder')
+    );
+
+    if (!filterRow || !folders.length) return;
+
+    filterRow.classList.add('kr-v66-toolbar');
+
+    // --------------------------------------------------------
+    // Clinical area filter
+    // --------------------------------------------------------
+
+    let areaFilter = document.getElementById('areaFilter');
+
+    if (!areaFilter) {
+      areaFilter = document.createElement('select');
+      areaFilter.id = 'areaFilter';
+      areaFilter.className = 'kr-v66-select';
+      areaFilter.setAttribute(
+        'aria-label',
+        'Filter by clinical area'
+      );
+
+      const allAreas = document.createElement('option');
+      allAreas.value = 'all';
+      allAreas.textContent = 'All clinical areas';
+      allAreas.dataset.en = 'All clinical areas';
+      allAreas.dataset.it = 'Tutte le aree cliniche';
+
+      areaFilter.appendChild(allAreas);
+
+      folders.forEach(folder => {
+        const heading = folder.querySelector('summary strong');
+
+        if (!heading || !folder.id) return;
+
+        const option = document.createElement('option');
+        option.value = folder.id;
+
+        option.dataset.en =
+          heading.dataset.en ||
+          heading.textContent.trim();
+
+        option.dataset.it =
+          heading.dataset.it ||
+          heading.textContent.trim();
+
+        option.textContent = option.dataset.en;
+
+        areaFilter.appendChild(option);
+      });
+
+      const search =
+        document.getElementById('librarySearch') ||
+        filterRow.querySelector(
+          'input[type="search"], input[type="text"]'
+        );
+
+      if (search && search.nextSibling) {
+        filterRow.insertBefore(
+          areaFilter,
+          search.nextSibling
+        );
+      } else {
+        filterRow.prepend(areaFilter);
+      }
+    }
+
+    // --------------------------------------------------------
+    // Sort filter
+    // --------------------------------------------------------
+
+    let sortFilter = document.getElementById('librarySort');
+
+    if (!sortFilter) {
+      sortFilter = document.createElement('select');
+      sortFilter.id = 'librarySort';
+      sortFilter.className = 'kr-v66-select';
+      sortFilter.setAttribute(
+        'aria-label',
+        'Sort publications'
+      );
+
+      const options = [
+        {
+          value: 'default',
+          en: 'Default order',
+          it: 'Ordine predefinito'
+        },
+        {
+          value: 'newest',
+          en: 'Newest first',
+          it: 'Più recenti'
+        },
+        {
+          value: 'oldest',
+          en: 'Oldest first',
+          it: 'Meno recenti'
+        },
+        {
+          value: 'evidence',
+          en: 'Evidence type',
+          it: 'Tipo di evidenza'
+        }
+      ];
+
+      options.forEach(item => {
+        const option = document.createElement('option');
+
+        option.value = item.value;
+        option.dataset.en = item.en;
+        option.dataset.it = item.it;
+        option.textContent = item.en;
+
+        sortFilter.appendChild(option);
+      });
+
+      const clearButton =
+        document.getElementById('clearLibraryFilters');
+
+      if (clearButton) {
+        filterRow.insertBefore(
+          sortFilter,
+          clearButton
+        );
+      } else {
+        filterRow.appendChild(sortFilter);
+      }
+    }
+
+    // --------------------------------------------------------
+    // Result counter
+    // --------------------------------------------------------
+
+    let resultCounter =
+      document.getElementById('libraryResultCount');
+
+    if (!resultCounter) {
+      resultCounter = document.createElement('div');
+
+      resultCounter.id = 'libraryResultCount';
+      resultCounter.className = 'kr-v66-result-count';
+      resultCounter.setAttribute(
+        'aria-live',
+        'polite'
+      );
+
+      filterRow.insertAdjacentElement(
+        'afterend',
+        resultCounter
+      );
+    }
+
+    // --------------------------------------------------------
+    // Filter selected clinical area
+    // --------------------------------------------------------
+
+    function applyAreaFilter() {
+      const selected = areaFilter.value;
+
+      folders.forEach(folder => {
+        const matches =
+          selected === 'all' ||
+          folder.id === selected;
+
+        if (!matches) {
+          folder.dataset.v66AreaHidden = 'true';
+          folder.hidden = true;
+        } else {
+          delete folder.dataset.v66AreaHidden;
+
+          folder.hidden = false;
+
+          if (selected !== 'all') {
+            folder.open = true;
+          }
+        }
+      });
+
+      document
+        .querySelectorAll('.library-group')
+        .forEach(group => {
+          const visibleFolder = Array.from(
+            group.querySelectorAll(
+              'details.library-folder'
+            )
+          ).some(folder => !folder.hidden);
+
+          group.hidden = !visibleFolder;
+        });
+    }
+
+    // --------------------------------------------------------
+    // Sorting
+    // --------------------------------------------------------
+
+    const originalOrder = new WeakMap();
+
+    document
+      .querySelectorAll('.folder-curated')
+      .forEach(container => {
+        Array.from(
+          container.querySelectorAll(
+            'article.folder-paper'
+          )
+        ).forEach((paper, index) => {
+          originalOrder.set(paper, index);
+        });
+      });
+
+    function paperYear(paper) {
+      const value =
+        paper.dataset.year ||
+        '';
+
+      const year = parseInt(value, 10);
+
+      return Number.isFinite(year)
+        ? year
+        : 0;
+    }
+
+    function evidenceRank(paper) {
+      const order = {
+        'systematic-review': 1,
+        'guideline': 2,
+        'clinical-trial': 3,
+        'human': 4,
+        'review': 5,
+        'mechanistic': 6,
+        'other': 7
+      };
+
+      return (
+        order[paper.dataset.evidence] ||
+        99
+      );
+    }
+
+    function sortPapers() {
+      const mode = sortFilter.value;
+
+      document
+        .querySelectorAll('.folder-curated')
+        .forEach(container => {
+          const papers = Array.from(
+            container.querySelectorAll(
+              'article.folder-paper'
+            )
+          );
+
+          papers.sort((a, b) => {
+            if (mode === 'newest') {
+              return paperYear(b) - paperYear(a);
+            }
+
+            if (mode === 'oldest') {
+              return paperYear(a) - paperYear(b);
+            }
+
+            if (mode === 'evidence') {
+              const diff =
+                evidenceRank(a) -
+                evidenceRank(b);
+
+              if (diff !== 0) return diff;
+
+              return paperYear(b) -
+                paperYear(a);
+            }
+
+            return (
+              (originalOrder.get(a) || 0) -
+              (originalOrder.get(b) || 0)
+            );
+          });
+
+          papers.forEach(paper => {
+            container.appendChild(paper);
+          });
+        });
+    }
+
+    // --------------------------------------------------------
+    // Result count
+    // --------------------------------------------------------
+
+    function updateResultCount() {
+      const papers = Array.from(
+        document.querySelectorAll(
+          'article.folder-paper'
+        )
+      );
+
+      const visible = papers.filter(paper => {
+        const folder =
+          paper.closest(
+            'details.library-folder'
+          );
+
+        if (!folder || folder.hidden) {
+          return false;
+        }
+
+        const style =
+          window.getComputedStyle(paper);
+
+        return (
+          !paper.hidden &&
+          style.display !== 'none'
+        );
+      });
+
+      const language =
+        document.documentElement.lang ||
+        'en';
+
+      if (
+        language.toLowerCase().startsWith('it')
+      ) {
+        resultCounter.textContent =
+          `${visible.length} pubblicazioni visualizzate`;
+      } else {
+        resultCounter.textContent =
+          `${visible.length} publications shown`;
+      }
+    }
+
+    // --------------------------------------------------------
+    // Refresh
+    // --------------------------------------------------------
+
+    function refreshV66() {
+      window.setTimeout(() => {
+        applyAreaFilter();
+        sortPapers();
+        updateResultCount();
+      }, 0);
+    }
+
+    areaFilter.addEventListener(
+      'change',
+      refreshV66
+    );
+
+    sortFilter.addEventListener(
+      'change',
+      refreshV66
+    );
+
+    const search =
+      document.getElementById('librarySearch') ||
+      filterRow.querySelector(
+        'input[type="search"], input[type="text"]'
+      );
+
+    if (search) {
+      search.addEventListener(
+        'input',
+        refreshV66
+      );
+    }
+
+    [
+      document.getElementById('evidenceFilter'),
+      document.getElementById('yearFilter')
+    ]
+      .filter(Boolean)
+      .forEach(control => {
+        control.addEventListener(
+          'change',
+          refreshV66
+        );
+      });
+
+    const clear =
+      document.getElementById(
+        'clearLibraryFilters'
+      );
+
+    if (clear) {
+      clear.addEventListener(
+        'click',
+        () => {
+          areaFilter.value = 'all';
+          sortFilter.value = 'default';
+
+          window.setTimeout(
+            refreshV66,
+            20
+          );
+        }
+      );
+    }
+
+    // Update count when existing filters modify the DOM.
+    const observer = new MutationObserver(() => {
+      window.clearTimeout(
+        window.krV66CounterTimer
+      );
+
+      window.krV66CounterTimer =
+        window.setTimeout(
+          updateResultCount,
+          40
+        );
+    });
+
+    folders.forEach(folder => {
+      observer.observe(folder, {
+        attributes: true,
+        subtree: true,
+        attributeFilter: [
+          'hidden',
+          'style',
+          'class'
+        ]
+      });
+    });
+
+    refreshV66();
+  }
+
+  if (
+    document.readyState === 'loading'
+  ) {
+    document.addEventListener(
+      'DOMContentLoaded',
+      initV66LibraryUX
+    );
+  } else {
+    initV66LibraryUX();
+  }
+})();
