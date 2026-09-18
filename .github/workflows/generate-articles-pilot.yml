@@ -13,7 +13,7 @@ concurrency:
 jobs:
   generate-pilot:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
 
     steps:
       - name: Check out repository
@@ -24,23 +24,22 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Generate and verify up to 3 article drafts
+      - name: Generate and verify one article draft
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GROQ_MODEL: openai/gpt-oss-120b
           NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
           NCBI_EMAIL: info@ketogenicresearch.org
-          PILOT_MAX_ARTICLES: "3"
         run: python scripts/generate_articles.py
 
-      - name: Commit verified drafts
+      - name: Commit verified draft
         run: |
           git config user.name "Ketogenic Research Bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add articles-drafts/
           if git diff --cached --quiet; then
-            echo "No verified article drafts generated."
+            echo "No verified article draft generated."
           else
-            git commit -m "Generate verified AI research article drafts"
+            git commit -m "Generate verified AI research article draft"
             git push
           fi
