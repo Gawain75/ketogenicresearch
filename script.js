@@ -230,6 +230,11 @@ function renderLatestEvidence() {
     const authors = (p.authors || []).slice(0, 6);
     const authorText = authors.join(', ') + ((p.authors || []).length > 6 ? ' et al.' : '');
     const areas = (p.areas || []).map(a => `<span class="latest-area-chip">${krEscapeHtml(a)}</span>`).join('');
+    const evidenceLabel = lang === 'it'
+      ? (p.evidence_type_it || p.evidence_type || '')
+      : (p.evidence_type || '');
+    const evidenceBadge = evidenceLabel
+      ? `<span class="latest-evidence-chip">${krEscapeHtml(evidenceLabel)}</span>` : '';
     const newBadge = p.status === 'new'
       ? `<span class="latest-new-badge">${lang === 'it' ? 'Nuovo' : 'New'}</span>` : '';
     const doi = p.doi_url
@@ -245,7 +250,7 @@ function renderLatestEvidence() {
         <h2>${krEscapeHtml(p.title || '')}</h2>
         <p class="latest-authors">${krEscapeHtml(authorText)}</p>
         <p class="latest-journal">${krEscapeHtml(p.journal || '')}${p.year ? ` · ${krEscapeHtml(p.year)}` : ''}</p>
-        <div class="latest-area-list">${areas}</div>
+        <div class="latest-area-list">${evidenceBadge}${areas}</div>
         <div class="paper-links">${pmid}${doi}</div>
       </article>`;
   }).join('');
@@ -257,7 +262,7 @@ async function loadLatestEvidence() {
 
   const message = document.getElementById('latestLoadMessage');
   try {
-    const response = await fetch('latest-publications.json?v=41', {cache:'no-store'});
+    const response = await fetch('latest-publications.json?v=61', {cache:'no-store'});
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     KR_LATEST_DATA = await response.json();
 

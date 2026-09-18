@@ -898,3 +898,17 @@ details.library-folder.deep-link-target{
   color:var(--muted);
   font-size:.93rem;
 }
+
+/* V61 — automatic evidence classification */
+.latest-evidence-chip{
+  display:inline-flex;
+  align-items:center;
+  padding:4px 8px;
+  margin:0 6px 6px 0;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:#f6f8fa;
+  color:var(--muted);
+  font-size:.78rem;
+  font-weight:700;
+}
