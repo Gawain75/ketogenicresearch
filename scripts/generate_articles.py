@@ -155,7 +155,9 @@ def groq_json(
         "model": GROQ_MODEL,
         "messages": messages,
         "temperature": temperature,
-        "max_tokens": max_tokens,
+        "max_completion_tokens": max_tokens,
+        "reasoning_effort": "low",
+        "reasoning_format": "hidden",
         "response_format": {"type": "json_object"},
     }
 
