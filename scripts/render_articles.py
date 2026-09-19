@@ -239,10 +239,24 @@ def main():
         en_title, en_html = markdown_to_html(en_md)
         it_title, it_html = markdown_to_html(it_md)
 
-        # The generated Markdown contains the article type immediately below the H1.
-        # It is already displayed as the page kicker, so remove that duplicate paragraph.
+        # Remove duplicated article type and duplicated editorial byline from the Markdown body.
         en_html = re.sub(r'<p><strong>Research Note</strong></p>', '', en_html, count=1)
         it_html = re.sub(r'<p><strong>Nota di ricerca</strong></p>', '', it_html, count=1)
+
+        en_html = re.sub(
+            r'<p><strong>Ketogenic Research Editorial</strong>\s*Scientific oversight:\s*<strong>Marco Medeot, Scientific Director</strong></p>',
+            '',
+            en_html,
+            count=1,
+            flags=re.I
+        )
+        it_html = re.sub(
+            r'<p><strong>Ketogenic Research Editorial</strong>\s*Supervisione scientifica:\s*<strong>Marco Medeot, Direttore Scientifico</strong></p>',
+            '',
+            it_html,
+            count=1,
+            flags=re.I
+        )
 
         if not en_title:
             continue
