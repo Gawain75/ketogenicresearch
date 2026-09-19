@@ -136,3 +136,12 @@
     font-size:14px;
   }
 }
+
+
+/* V3 final mobile article refinement */
+@media(max-width:640px){
+  .article-content h1{
+    font-size:clamp(30px,8.4vw,39px);
+    line-height:1.07;
+  }
+}
