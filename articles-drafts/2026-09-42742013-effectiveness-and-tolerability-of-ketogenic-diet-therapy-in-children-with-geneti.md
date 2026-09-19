@@ -31,11 +31,11 @@ The data suggest that KDT can be effective in a substantial proportion of young 
 
 ## Limitations of this note
 
-Interpretation is based on the PubMed abstract; the full text was not available. Details on KDT protocols, long‑term follow‑up, and potential confounders are not provided.
+This note is based on the PubMed abstract. Details on KDT protocols, long‑term follow‑up, and potential confounders are not provided.
 
 ### Source
 
-Interpretation is based on the PubMed abstract; the full text was not available. PMID: 42742013. DOI: 10.3760/cma.j.cn112140-20260601-00420.
+This note is based on the PubMed abstract. PMID: 42742013. DOI: 10.3760/cma.j.cn112140-20260601-00420.
 
 PMID: 42742013  
 DOI: 10.3760/cma.j.cn112140-20260601-00420  
