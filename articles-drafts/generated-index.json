@@ -25,7 +25,18 @@
       "at": "2026-09-18T22:49:08.691169+00:00",
       "stage": "generation",
       "error": "Groq HTTP 400: {\"error\":{\"message\":\"Failed to validate JSON. Please adjust your prompt. See 'failed_generation' for more details.\",\"type\":\"invalid_request_error\",\"code\":\"json_validate_failed\",\"failed_generation\":\"\"}}\n"
+    },
+    {
+      "pmid": "42732658",
+      "at": "2026-09-19T08:24:53.533900+00:00",
+      "stage": "verification",
+      "issues": [
+        "Abstract-only status is not explicitly disclosed in the draft; source_note does not state that only the abstract was accessed.",
+        "The draft includes a claim that KE \"reduced hepatic Bax/Bcl‑2 ratio\" which is supported by the abstract, but the abstract does not provide quantitative details; however this is acceptable as a supported claim.",
+        "No explicit statement that the source is abstract-only may mislead readers about completeness of evidence."
+      ],
+      "unsupported_claims": []
     }
   ],
-  "updated_at": "2026-09-18T23:18:43.061194+00:00"
+  "updated_at": "2026-09-19T08:24:53.533926+00:00"
 }
