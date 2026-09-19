@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import importlib.util
 import json
-import re
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -41,7 +40,6 @@ def parse_meta(text: str) -> dict:
     return meta
 
 def is_legacy(text: str) -> bool:
-    # Old Research Notes used the five-section structure.
     legacy_markers = [
         "## Key finding",
         "## Study design",
@@ -84,36 +82,36 @@ def main():
         print("No legacy articles require regeneration.")
         return
 
-    # One article per run to stay friendly to free-tier rate limits.
     path, pmid = legacy[0]
     rec = records.get(pmid)
-
     if not rec:
-        raise RuntimeError(
-            f"PMID {pmid} is not present in latest-publications.json. "
-            "Regeneration was not attempted."
-        )
+        raise RuntimeError(f"PMID {pmid} is not present in latest-publications.json.")
 
     print(f"Regenerating legacy article PMID {pmid}: {path.name}")
 
     pubmed = ga.pubmed_xml(pmid)
     extra = ga.extract_pubmed_source(pubmed)
-
     if not extra.get("abstract"):
         raise RuntimeError("PubMed abstract unavailable; article not regenerated.")
 
-    full_text = ga.pmc_full_text(extra.get("pmcid", ""))
-    packet = ga.source_packet(rec, extra, full_text)
+    full_text, full_text_source, full_text_url = ga.discover_full_text(rec, extra)
+    print(f"Source material selected: {full_text_source}")
+    if full_text_url:
+        print(f"Full-text source URL: {full_text_url}")
 
-    print("Generating V3.5 article...")
+    packet = ga.source_packet(
+        rec,
+        extra,
+        full_text,
+        full_text_source,
+        full_text_url,
+    )
+
     draft = ga.groq_json(
         [
             {
                 "role": "system",
-                "content": (
-                    "Write evidence-grounded scientific editorial content "
-                    "with natural expert prose. Return JSON only."
-                ),
+                "content": "Write evidence-grounded scientific editorial content with natural expert prose. Return JSON only.",
             },
             {
                 "role": "user",
@@ -127,15 +125,11 @@ def main():
     print("Waiting before verification...")
     time.sleep(75)
 
-    print("Verifying regenerated article...")
     check = ga.groq_json(
         [
             {
                 "role": "system",
-                "content": (
-                    "Act as a conservative scientific fact checker and "
-                    "editorial quality controller. Return JSON only."
-                ),
+                "content": "Act as a conservative scientific fact checker and editorial quality controller. Return JSON only.",
             },
             {
                 "role": "user",
@@ -152,10 +146,10 @@ def main():
         return
 
     verified_at = datetime.now(timezone.utc).isoformat()
-    new_text = ga.markdown(rec, extra, draft, verified_at)
-
-    # Overwrite only after PASS.
-    path.write_text(new_text, encoding="utf-8")
+    path.write_text(
+        ga.markdown(rec, extra, draft, verified_at),
+        encoding="utf-8",
+    )
     print(f"Regenerated and replaced: {path.name}")
     print("Run this workflow again to regenerate the next legacy article.")
 
