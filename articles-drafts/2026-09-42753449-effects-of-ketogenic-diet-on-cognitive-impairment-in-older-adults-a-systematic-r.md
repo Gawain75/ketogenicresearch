@@ -36,7 +36,7 @@ Domain‑specific analyses showed significant benefits for memory (SMD = 0.5
 
 ## Cautious interpretation
 
-Interpretation is based on the PubMed abstract; the full text was not available to this automated workflow. The observed cognitive benefits are modest and derived from pooled short‑term RCTs; causality cannot be established. The rise in total cholesterol and LDL‑C suggests a metabolic trade‑off that warrants further investigation.
+Interpretation is based on the PubMed abstract; the full text was not available. The observed cognitive benefits are modest and derived from pooled short‑term RCTs; causality cannot be established. The rise in total cholesterol and LDL‑C suggests a metabolic trade‑off that warrants further investigation.
 
 ## Limitations of this note
 
@@ -75,7 +75,7 @@ Le analisi per dominio hanno mostrato benefici significativi per la memoria (dif
 
 ## Interpretazione cauta
 
-L'interpretazione si basa sull'abstract di PubMed; il testo completo non era disponibile per questo flusso di lavoro automatizzato. I benefici cognitivi osservati sono modesti e derivano da RCT a breve termine; non è possibile affermare una causalità. L’aumento di colesterolo totale e LDL‑C indica un possibile compromesso metabolico che richiede ulteriori studi.
+L'interpretazione si basa sull'abstract di PubMed; il testo completo non era disponibile. I benefici cognitivi osservati sono modesti e derivano da RCT a breve termine; non è possibile affermare una causalità. L’aumento di colesterolo totale e LDL‑C indica un possibile compromesso metabolico che richiede ulteriori studi.
 
 ## Limiti della nota
 

@@ -27,7 +27,7 @@ Capillary ketones rose above 1.0 mM with BO‑BD, and deep‑sleep time increa
 
 ## Cautious Interpretation
 
-The authors conclude that transient nutritional ketosis can enhance shooting speed and efficiency without impairing marksmanship or decision‑making during short‑term sleep restriction. Interpretation is based on the PubMed abstract; the full text was not available to this automated workflow.
+The authors conclude that transient nutritional ketosis can enhance shooting speed and efficiency without impairing marksmanship or decision‑making during short‑term sleep restriction. Interpretation is based on the PubMed abstract; the full text was not available.
 
 ## Limitations of This Note
 
