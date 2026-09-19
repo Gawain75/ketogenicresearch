@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Ketogenic Research — AI article pilot V3.6
+Ketogenic Research — AI article pilot V3.7
 
 V3 editorial-quality pilot:
 - processes ONE article per run
@@ -20,6 +20,8 @@ import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
+from io import BytesIO
+from html.parser import HTMLParser
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -220,16 +222,169 @@ def slugify(value: str) -> str:
     value = re.sub(r"[^a-z0-9]+", "-", value)
     return value.strip("-")[:80] or "research-note"
 
+
+class _ReadableHTML(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.parts = []
+        self.skip = 0
+
+    def handle_starttag(self, tag, attrs):
+        if tag.lower() in {"script", "style", "nav", "header", "footer", "noscript", "svg"}:
+            self.skip += 1
+
+    def handle_endtag(self, tag):
+        if tag.lower() in {"script", "style", "nav", "header", "footer", "noscript", "svg"} and self.skip:
+            self.skip -= 1
+
+    def handle_data(self, data):
+        if not self.skip:
+            value = " ".join(data.split())
+            if value:
+                self.parts.append(value)
+
+    def text(self):
+        return "\n".join(self.parts)
+
+
+def unpaywall_locations(doi: str) -> list[dict[str, Any]]:
+    doi = (doi or "").strip()
+    if not doi:
+        return []
+
+    url = (
+        "https://api.unpaywall.org/v2/"
+        + urllib.parse.quote(doi, safe="")
+        + "?email="
+        + urllib.parse.quote(NCBI_EMAIL)
+    )
+
+    try:
+        raw = http_request(
+            url,
+            headers={"User-Agent": "KetogenicResearch/FullTextDiscovery"},
+            timeout=45,
+        )
+        data = json.loads(raw)
+    except Exception as exc:
+        print(f"Unpaywall lookup unavailable for DOI {doi}: {exc}")
+        return []
+
+    locations = []
+    best = data.get("best_oa_location")
+    if isinstance(best, dict):
+        locations.append(best)
+
+    for item in data.get("oa_locations") or []:
+        if isinstance(item, dict) and item not in locations:
+            locations.append(item)
+
+    return locations
+
+
+def extract_pdf_text(raw: bytes) -> str:
+    try:
+        from pypdf import PdfReader
+    except Exception:
+        return ""
+
+    try:
+        reader = PdfReader(BytesIO(raw))
+        chunks = []
+        for page in reader.pages[:80]:
+            value = page.extract_text() or ""
+            value = " ".join(value.split())
+            if value:
+                chunks.append(value)
+            if sum(len(x) for x in chunks) >= 18000:
+                break
+        return "\n\n".join(chunks)[:18000]
+    except Exception as exc:
+        print(f"PDF text extraction failed: {exc}")
+        return ""
+
+
+def fetch_oa_location_text(location: dict[str, Any]) -> tuple[str, str]:
+    pdf_url = (location.get("url_for_pdf") or "").strip()
+    landing_url = (location.get("url_for_landing_page") or location.get("url") or "").strip()
+
+    if pdf_url:
+        try:
+            raw = http_request(
+                pdf_url,
+                headers={
+                    "User-Agent": "Mozilla/5.0 KetogenicResearch/FullTextDiscovery",
+                    "Accept": "application/pdf,text/html;q=0.8,*/*;q=0.5",
+                },
+                timeout=75,
+            )
+            if raw[:4] == b"%PDF":
+                text = extract_pdf_text(raw)
+                if len(text) >= 3000:
+                    return text[:18000], pdf_url
+        except Exception as exc:
+            print(f"OA PDF retrieval failed: {exc}")
+
+    if landing_url:
+        try:
+            raw = http_request(
+                landing_url,
+                headers={
+                    "User-Agent": "Mozilla/5.0 KetogenicResearch/FullTextDiscovery",
+                    "Accept": "text/html,application/xhtml+xml,*/*;q=0.5",
+                },
+                timeout=75,
+            )
+            decoded = raw.decode("utf-8", errors="replace")
+            parser = _ReadableHTML()
+            parser.feed(decoded)
+            value = parser.text()
+            if len(value) >= 5000:
+                return value[:18000], landing_url
+        except Exception as exc:
+            print(f"OA HTML retrieval failed: {exc}")
+
+    return "", ""
+
+
+def discover_full_text(
+    rec: dict[str, Any],
+    extra: dict[str, Any],
+) -> tuple[str, str, str]:
+    # 1. Prefer structured PMC/Europe-PMC-compatible full text when a PMCID exists.
+    pmcid = (extra.get("pmcid") or "").strip()
+    if pmcid:
+        text = pmc_full_text(pmcid)
+        if len(text) >= 3000:
+            return text[:18000], "PMC full text", f"https://pmc.ncbi.nlm.nih.gov/articles/{pmcid}/"
+
+    # 2. Look for a legal OA copy registered by Unpaywall.
+    doi = (rec.get("doi") or extra.get("doi_from_pubmed") or "").strip()
+    for location in unpaywall_locations(doi):
+        text, source_url = fetch_oa_location_text(location)
+        if len(text) >= 3000:
+            version = location.get("version") or "open-access version"
+            host = location.get("host_type") or "open-access host"
+            return text[:18000], f"Unpaywall OA ({host}, {version})", source_url
+
+    # 3. No usable full text was retrieved. This says nothing about whether
+    #    a full text exists elsewhere; the note simply uses the PubMed abstract.
+    return "", "PubMed abstract", ""
+
+
 def source_packet(
     rec: dict[str, Any],
     extra: dict[str, Any],
-    full_text: str
+    full_text: str,
+    full_text_source: str = "",
+    full_text_url: str = "",
 ) -> str:
     authors = ", ".join(rec.get("authors") or [])
     areas = ", ".join(rec.get("areas") or [])
-    access = "PMC FULL TEXT USED" if full_text else "PUBMED ABSTRACT USED"
+    source_used = full_text_source or ("Full text" if full_text else "PubMed abstract")
 
-    return f"""SOURCE ACCESS: {access}
+    return f"""SOURCE MATERIAL USED: {source_used}
+SOURCE URL: {full_text_url or "[not applicable]"}
 
 PUBMED METADATA
 PMID: {rec.get('pmid','')}
@@ -246,8 +401,8 @@ MeSH: {", ".join(extra.get("mesh") or [])}
 PUBMED ABSTRACT
 {extra.get("abstract") or "[No abstract supplied by PubMed]"}
 
-PMC FULL-TEXT EXCERPT
-{full_text or "[Not available to this workflow]"}
+FULL-TEXT MATERIAL USED FOR THIS NOTE
+{full_text or "[No full-text material was supplied; use the PubMed abstract only.]"}
 """.strip()
 
 def writer_prompt(packet: str, has_full_text: bool) -> str:
@@ -278,9 +433,9 @@ EDITORIAL RULES FOR V3
 2. ABSTRACT-ONLY CAUTION
 - Never mention AI, automation, workflow, model, generation process, or any technical production method in the published article.
 - Describe only the source limitations, not how the article was produced.
-- If no PMC full text was supplied to the model, the English article MUST include this exact sentence verbatim:
+- If no full-text material was supplied to the model, the English article MUST include this exact sentence verbatim:
   "This note is based on the PubMed abstract."
-- If no PMC full text was supplied to the model, the Italian article MUST include this exact sentence verbatim:
+- If no full-text material was supplied to the model, the Italian article MUST include this exact sentence verbatim:
   "Questa nota si basa sull'abstract di PubMed."
 - These sentences describe the source material used for the note. Do not state that a full text does not exist or is unavailable elsewhere.
 
@@ -438,7 +593,7 @@ FACTUAL CHECKS
 - abstract-only status is clearly disclosed when applicable.
 
 EDITORIAL CHECKS
-- never state or imply that the full text is globally unavailable merely because no PMC full text was supplied;
+- never state or imply that the full text is globally unavailable merely because no full-text material was supplied;
 - when only the PubMed abstract was supplied, describe the note as abstract-based without making claims about publisher availability;
 - for abstract-only Research Notes, English headings are exactly: Study and findings; Clinical interpretation; Limitations and open questions;
 - for abstract-only Research Notes, Italian headings are exactly: Studio e risultati; Interpretazione clinica; Limiti e questioni aperte;
@@ -606,8 +761,17 @@ def main() -> None:
                 "PubMed abstract unavailable; pilot skips this record."
             )
 
-        full_text = pmc_full_text(extra.get("pmcid", ""))
-        packet = source_packet(rec, extra, full_text)
+        full_text, full_text_source, full_text_url = discover_full_text(rec, extra)
+        print(f"Source material selected: {full_text_source}")
+        if full_text_url:
+            print(f"Full-text source URL: {full_text_url}")
+        packet = source_packet(
+            rec,
+            extra,
+            full_text,
+            full_text_source,
+            full_text_url,
+        )
 
         print("Generating bilingual article...")
         draft = groq_json(
