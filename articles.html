@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Articles | Ketogenic Research</title>
+<link href="favicon.svg" rel="icon">
+<link href="styles.css?v=70" rel="stylesheet">
+<link href="articles.css?v=1" rel="stylesheet">
+</head>
+<body class="article-index-page">
+<header class="article-topbar">
+  <a href="index.html" class="article-brand">Ketogenic Research</a>
+  <div class="article-lang">
+    <button type="button" class="active" data-lang="en">EN</button>
+    <button type="button" data-lang="it">IT</button>
+  </div>
+</header>
+
+<main class="article-shell">
+  <div class="article-index-intro">
+    <p class="article-kicker" data-en="EDITORIAL" data-it="EDITORIALE">EDITORIAL</p>
+    <h1 data-en="Articles" data-it="Articoli">Articles</h1>
+    <p data-en="Research notes and scientific analyses based on recent peer-reviewed literature."
+       data-it="Note di ricerca e analisi scientifiche basate sulla letteratura peer-reviewed recente.">
+       Research notes and scientific analyses based on recent peer-reviewed literature.
+    </p>
+  </div>
+  <div class="article-list">
+<article class="article-card">
+  <a href="articles/2026-09-42753449-effects-of-ketogenic-diet-on-cognitive-impairment-in-older-adults-a-systematic-r.html">
+    <div class="article-card-language active" data-card-lang="en">
+      <span class="article-card-type">Research Note</span>
+      <h2>Ketogenic diet and cognitive function in older adults: findings from a systematic review and meta-analysis</h2>
+      <p>September 12, 2026 · Archives of gerontology and geriatrics</p>
+    </div>
+    <div class="article-card-language" data-card-lang="it">
+      <span class="article-card-type">Nota di ricerca</span>
+      <h2>Dieta chetogenica e funzione cognitiva negli adulti anziani: risultati di una revisione sistematica e meta‑analisi</h2>
+      <p>12 settembre 2026 · Archives of gerontology and geriatrics</p>
+    </div>
+  </a>
+</article>
+<article class="article-card">
+  <a href="articles/2026-09-42753265-supplementation-with-ketogenic-precursors-enhances-virtual-reality-shooting-perf.html">
+    <div class="article-card-language active" data-card-lang="en">
+      <span class="article-card-type">Research Note</span>
+      <h2>Ketogenic Precursor Supplementation Improves Virtual Reality Shooting Performance During Sleep Restriction: A Randomized Crossover Trial</h2>
+      <p>September 17, 2026 · Military medicine</p>
+    </div>
+    <div class="article-card-language" data-card-lang="it">
+      <span class="article-card-type">Nota di ricerca</span>
+      <h2>Integrazione di Precursori Chetonici Migliora le Prestazioni di Tiro in Realtà Virtuale Durante Restrizione del Sonno: Uno Studio Randomizzato Crossover</h2>
+      <p>17 settembre 2026 · Military medicine</p>
+    </div>
+  </a>
+</article>
+<article class="article-card">
+  <a href="articles/2026-09-42742013-effectiveness-and-tolerability-of-ketogenic-diet-therapy-in-children-with-geneti.html">
+    <div class="article-card-language active" data-card-lang="en">
+      <span class="article-card-type">Research Note</span>
+      <h2>Effectiveness and tolerability of ketogenic diet therapy in children with genetic developmental and epileptic encephalopathy onset before 2 years of age</h2>
+      <p>September 15, 2026 · Zhonghua er ke za zhi = Chinese journal of pediatrics</p>
+    </div>
+    <div class="article-card-language" data-card-lang="it">
+      <span class="article-card-type">Nota di ricerca</span>
+      <h2>Efficacia e tollerabilità della terapia dietetica chetogenica nei bambini con encefalopatia epilettica dello sviluppo di origine genetica con esordio prima dei 2 anni</h2>
+      <p>15 settembre 2026 · Zhonghua er ke za zhi = Chinese journal of pediatrics</p>
+    </div>
+  </a>
+</article>
+<article class="article-card">
+  <a href="articles/2026-09-42732658-ketone-ester-alleviates-sepsis-associated-liver-injury-through-hydroxybutyrylati.html">
+    <div class="article-card-language active" data-card-lang="en">
+      <span class="article-card-type">Research Note</span>
+      <h2>Ketone ester and STAT1 K679 β‑hydroxybutyrylation in a mouse model of sepsis‑associated liver injury</h2>
+      <p>September 11, 2026 · Immunobiology</p>
+    </div>
+    <div class="article-card-language" data-card-lang="it">
+      <span class="article-card-type">Nota di ricerca</span>
+      <h2>Esteri chetonici e β‑idrossibutirrulazione di STAT1 K679 in un modello murino di lesione epatica associata a sepsi</h2>
+      <p>11 settembre 2026 · Immunobiology</p>
+    </div>
+  </a>
+</article></div>
+</main>
+
+<script>
+(function(){
+  const buttons=[...document.querySelectorAll('[data-lang]')];
+  function setLang(lang){
+    document.documentElement.lang=lang;
+    buttons.forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+    document.querySelectorAll('[data-en]').forEach(el=>{
+      const v=lang==='it'?el.dataset.it:el.dataset.en;
+      if(v!==undefined) el.textContent=v;
+    });
+    document.querySelectorAll('[data-card-lang]').forEach(el=>{
+      el.classList.toggle('active',el.dataset.cardLang===lang);
+    });
+    try{localStorage.setItem('kr-lang',lang)}catch(e){}
+  }
+  buttons.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+  let initial='en';
+  try{if(localStorage.getItem('kr-lang')==='it') initial='it'}catch(e){}
+  setLang(initial);
+})();
+</script>
+</body>
+</html>
