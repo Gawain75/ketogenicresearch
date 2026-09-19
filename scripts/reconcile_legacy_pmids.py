@@ -20,7 +20,7 @@ REPORT = ROOT / "library-legacy-reconcile-report.json"
 
 NCBI_EMAIL = os.getenv("NCBI_EMAIL", "info@ketogenicresearch.org").strip()
 NCBI_API_KEY = os.getenv("NCBI_API_KEY", "").strip()
-MAX_CARDS = max(1, int(os.getenv("RECONCILE_MAX", "25")))
+MAX_CARDS = max(1, int(os.getenv("RECONCILE_MAX", "50")))
 REQUEST_DELAY = 0.18 if NCBI_API_KEY else 0.45
 _LAST_REQUEST = 0.0
 
@@ -137,16 +137,42 @@ def card_year(card) -> str:
     return ""
 
 
-def search_candidates(title: str, year: str) -> list[str]:
-    # First try an exact title-field query.
+
+def card_first_author(card) -> str:
+    p = card.find("p")
+    if not p:
+        return ""
+    raw = p.get_text(" ", strip=True)
+    # Metadata often begins with author list before journal/date.
+    first = re.split(r"\s*[·|]\s*", raw, maxsplit=1)[0].strip()
+    if not first:
+        return ""
+    # Keep first listed surname-like token.
+    first_author = re.split(r",|;|\band\b", first, maxsplit=1, flags=re.I)[0].strip()
+    return first_author
+
+
+def norm_author(value: str) -> str:
+    value = (value or "").lower()
+    value = re.sub(r"[^a-z]+", " ", value)
+    return re.sub(r"\s+", " ", value).strip()
+
+def search_candidates(title: str, year: str, author: str) -> list[str]:
     queries = [f'"{title}"[Title]']
-    # Fallback: significant title words, optionally constrained by publication year.
+
     words = [w for w in norm_title(title).split() if len(w) >= 4][:10]
     if words:
         q = " AND ".join(f"{w}[Title]" for w in words[:7])
         if year:
             q += f" AND {year}[pdat]"
+        if author:
+            q += f' AND "{author}"[Author]'
         queries.append(q)
+
+        q2 = " AND ".join(f"{w}[Title]" for w in words[:5])
+        if year:
+            q2 += f" AND {year}[pdat]"
+        queries.append(q2)
 
     for query in queries:
         data = json.loads(
@@ -156,7 +182,7 @@ def search_candidates(title: str, year: str) -> list[str]:
                     "db": "pubmed",
                     "term": query,
                     "retmode": "json",
-                    "retmax": "8",
+                    "retmax": "10",
                 },
             ).decode("utf-8")
         )
@@ -164,7 +190,6 @@ def search_candidates(title: str, year: str) -> list[str]:
         if ids:
             return ids
     return []
-
 
 def fetch_records(pmids: list[str]) -> list[dict]:
     if not pmids:
@@ -202,6 +227,15 @@ def fetch_records(pmids: list[str]) -> list[dict]:
             if m:
                 year = m.group(1)
 
+        first_author = ""
+        first_author_node = article.find("AuthorList/Author")
+        if first_author_node is not None:
+            collective = txt(first_author_node.find("CollectiveName"))
+            if collective:
+                first_author = collective
+            else:
+                first_author = txt(first_author_node.find("LastName"))
+
         doi = ""
         pmc = ""
         for aid in item.findall(".//PubmedData/ArticleIdList/ArticleId"):
@@ -216,6 +250,7 @@ def fetch_records(pmids: list[str]) -> list[dict]:
                 "pmid": pmid,
                 "title": title,
                 "year": year,
+                "first_author": first_author,
                 "doi": doi,
                 "pmc": pmc,
             }
@@ -223,44 +258,84 @@ def fetch_records(pmids: list[str]) -> list[dict]:
     return out
 
 
-def best_match(local_title: str, local_year: str, candidates: list[dict]):
+def best_match(
+    local_title: str,
+    local_year: str,
+    local_author: str,
+    candidates: list[dict],
+):
     target = norm_title(local_title)
+    local_author_n = norm_author(local_author)
+
     ranked = []
     for rec in candidates:
-        score = difflib.SequenceMatcher(
+        title_score = difflib.SequenceMatcher(
             None, target, norm_title(rec["title"])
         ).ratio()
+
         year_match = bool(local_year and rec["year"] == local_year)
-        ranked.append((score, year_match, rec))
-    ranked.sort(key=lambda x: (x[0], x[1]), reverse=True)
+
+        rec_author_n = norm_author(rec.get("first_author") or "")
+        author_match = False
+        if local_author_n and rec_author_n:
+            author_match = (
+                local_author_n in rec_author_n
+                or rec_author_n in local_author_n
+                or difflib.SequenceMatcher(
+                    None, local_author_n, rec_author_n
+                ).ratio() >= 0.82
+            )
+
+        composite = title_score
+        if year_match:
+            composite += 0.03
+        if author_match:
+            composite += 0.04
+
+        ranked.append(
+            (
+                composite,
+                title_score,
+                year_match,
+                author_match,
+                rec,
+            )
+        )
+
+    ranked.sort(key=lambda x: x[0], reverse=True)
     if not ranked:
         return None, "no-candidate"
 
-    score, year_match, rec = ranked[0]
+    composite, title_score, year_match, author_match, rec = ranked[0]
     second = ranked[1][0] if len(ranked) > 1 else 0.0
 
-    # Conservative acceptance:
-    # - near-exact title on its own, OR
-    # - very strong title match + matching year.
-    # Require separation from second candidate when several results exist.
+    # Conservative acceptance rules.
     accept = (
-        score >= 0.975
-        or (score >= 0.94 and year_match)
-    ) and (score - second >= 0.025 or len(ranked) == 1)
+        title_score >= 0.985
+        or (title_score >= 0.95 and year_match)
+        or (title_score >= 0.92 and year_match and author_match)
+        or (title_score >= 0.94 and author_match)
+    ) and (composite - second >= 0.02 or len(ranked) == 1)
 
     if not accept:
         return None, {
-            "best_score": round(score, 3),
-            "second_score": round(second, 3),
+            "best_composite": round(composite, 3),
+            "best_title_score": round(title_score, 3),
+            "second_composite": round(second, 3),
             "best_pubmed_title": rec["title"],
             "best_pmid": rec["pmid"],
             "year_match": year_match,
+            "author_match": author_match,
+            "library_author": local_author,
+            "pubmed_first_author": rec.get("first_author", ""),
         }
-    return rec, {
-        "score": round(score, 3),
-        "year_match": year_match,
-    }
 
+    return rec, {
+        "composite": round(composite, 3),
+        "title_score": round(title_score, 3),
+        "year_match": year_match,
+        "author_match": author_match,
+    }
 
 def set_links(soup, card, rec):
     links = card.select_one(".paper-links")
@@ -322,18 +397,18 @@ def main():
             continue
         title = card_title(card)
         if title:
-            candidates.append((card, title, card_year(card)))
+            candidates.append((card, title, card_year(card), card_first_author(card)))
 
     checked = 0
     matched = 0
     no_match = 0
     ambiguous = []
 
-    for card, title, year in candidates[:MAX_CARDS]:
+    for card, title, year, author in candidates[:MAX_CARDS]:
         checked += 1
-        ids = search_candidates(title, year)
+        ids = search_candidates(title, year, author)
         records = fetch_records(ids)
-        rec, detail = best_match(title, year, records)
+        rec, detail = best_match(title, year, author, records)
 
         if rec is None:
             no_match += 1
@@ -341,6 +416,7 @@ def main():
                 {
                     "library_title": title,
                     "library_year": year,
+                    "library_first_author": author,
                     "detail": detail,
                 }
             )
