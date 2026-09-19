@@ -1,163 +1,417 @@
 {
-  "cards_checked_this_run": 25,
-  "cards_matched_this_run": 1,
-  "cards_not_matched_this_run": 24,
-  "cards_without_pmid_remaining": 1211,
+  "cards_checked_this_run": 50,
+  "cards_matched_this_run": 5,
+  "cards_not_matched_this_run": 45,
+  "cards_without_pmid_remaining": 1206,
   "ambiguous_or_unmatched": [
-    {
-      "library_title": "The impact of the ketogenic diet on the health of patients with metabolic syndrome: a scoping review",
-      "library_year": "",
-      "detail": "no-candidate"
-    },
     {
       "library_title": "Leptin/Adiponectin Ratio as a new multidimensional biomarker in obese patients with liver steatosis undergoing VLEKT",
       "library_year": "",
+      "library_first_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
       "detail": {
-        "best_score": 0.896,
-        "second_score": 0.0,
+        "best_composite": 0.896,
+        "best_title_score": 0.896,
+        "second_composite": 0.0,
         "best_pubmed_title": "Leptin/Adiponectin Ratio as a new multidimensional biomarker in obese patients with liver steatosis undergoing VLEKT: results from a pilot study.",
         "best_pmid": "41939193",
-        "year_match": false
+        "year_match": false,
+        "author_match": false,
+        "library_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
+        "pubmed_first_author": "Balestra"
       }
     },
     {
       "library_title": "The effects of a very low-energy ketogenic therapy on body composition, gut microbiota and metabolites in overweight subjects",
       "library_year": "",
+      "library_first_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
       "detail": "no-candidate"
     },
     {
       "library_title": "The impact of very-low-calorie ketogenic diets on gut microbiota in individuals with obesity: a systematic review and meta-analysis",
       "library_year": "",
+      "library_first_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
       "detail": "no-candidate"
     },
     {
       "library_title": "Exploring the potential of the ketogenic diet in managing metabolic syndrome",
       "library_year": "",
+      "library_first_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
       "detail": {
-        "best_score": 0.741,
-        "second_score": 0.0,
+        "best_composite": 0.741,
+        "best_title_score": 0.741,
+        "second_composite": 0.0,
         "best_pubmed_title": "Exploring the potential of the ketogenic diet in managing metabolic syndrome: mechanisms, strategies, and future research directions.",
         "best_pmid": "40948876",
-        "year_match": false
+        "year_match": false,
+        "author_match": false,
+        "library_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
+        "pubmed_first_author": "Chen"
       }
     },
     {
       "library_title": "Effects of 1-Month Very-Low-Calorie Ketogenic Diet on 24-Hour Energy Metabolism and Body Composition",
       "library_year": "",
+      "library_first_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
       "detail": "no-candidate"
     },
     {
       "library_title": "Low-Carbohydrate (Ketogenic) Diet in Children with Obesity: Diet Impact on Anthropometric Indicators and Metabolic Syndrome and Insulin Resistance",
       "library_year": "",
+      "library_first_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
       "detail": "no-candidate"
     },
     {
       "library_title": "Effects of One-Month Very-Low-Calorie Ketogenic Diet on 24h Energy Metabolism",
       "library_year": "",
+      "library_first_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
       "detail": "no-candidate"
     },
     {
       "library_title": "Advancing Obesity Management: Very Low-Energy Ketogenic Therapy (VLEKT) as an Evolution of the Traditional Ketogenic Diet",
       "library_year": "",
+      "library_first_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
       "detail": "no-candidate"
     },
     {
       "library_title": "Epigenetic Aging Acceleration in Obesity Is Slowed Down by Nutritional Ketosis Following Very Low-Calorie Ketogenic Diet",
       "library_year": "",
+      "library_first_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
       "detail": {
-        "best_score": 0.828,
-        "second_score": 0.0,
+        "best_composite": 0.828,
+        "best_title_score": 0.828,
+        "second_composite": 0.0,
         "best_pubmed_title": "Epigenetic Aging Acceleration in Obesity Is Slowed Down by Nutritional Ketosis Following Very Low-Calorie Ketogenic Diet (VLCKD): A New Perspective to Reverse Biological Age.",
         "best_pmid": "40292468",
-        "year_match": false
+        "year_match": false,
+        "author_match": false,
+        "library_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
+        "pubmed_first_author": "Izquierdo"
       }
     },
     {
       "library_title": "The Impact of Ketogenic Nutrition on Obesity and Metabolic Health",
       "library_year": "",
+      "library_first_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
       "detail": {
-        "best_score": 0.778,
-        "second_score": 0.718,
+        "best_composite": 0.778,
+        "best_title_score": 0.778,
+        "second_composite": 0.718,
         "best_pubmed_title": "The Impact of Ketogenic Nutrition on Obesity and Metabolic Health: Mechanisms and Clinical Implications.",
         "best_pmid": "40036324",
-        "year_match": false
+        "year_match": false,
+        "author_match": false,
+        "library_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
+        "pubmed_first_author": "Biesiekierska"
       }
     },
     {
       "library_title": "Efficacy and Safety of Phase 1 of Very Low Energy Ketogenic Therapy (VLEKT) in Subjects with Obesity and Mild Renal Impairment",
       "library_year": "",
+      "library_first_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
       "detail": "no-candidate"
     },
     {
       "library_title": "The Impact of a Very-Low-Calorie Ketogenic Diet on Monocyte Subsets of Patients with Obesity: A Pilot Study",
       "library_year": "",
+      "library_first_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
       "detail": "no-candidate"
     },
     {
       "library_title": "An 8-Week Very Low-Calorie Ketogenic Diet (VLCKD) Alters the Landscape of Obese-Derived Small Extracellular Vesicles",
       "library_year": "",
+      "library_first_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
       "detail": "no-candidate"
     },
     {
       "library_title": "Nutritional Studies Evaluating Ketogenic Diets as a Treatment for Obesity and Obesity-Associated Morbidities",
       "library_year": "",
+      "library_first_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
       "detail": "no-candidate"
     },
     {
       "library_title": "The impact of a ketogenic diet on weight loss",
       "library_year": "",
+      "library_first_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
       "detail": {
-        "best_score": 0.652,
-        "second_score": 0.0,
+        "best_composite": 0.652,
+        "best_title_score": 0.652,
+        "second_composite": 0.0,
         "best_pubmed_title": "The impact of a ketogenic diet on weight loss, metabolism, body composition and quality of life.",
         "best_pmid": "39628567",
-        "year_match": false
+        "year_match": false,
+        "author_match": false,
+        "library_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
+        "pubmed_first_author": "Hirschberger"
       }
     },
     {
       "library_title": "European Society for the Study of Obesity (EASO) Position Statement on Very Low-Calorie Ketogenic Diets",
       "library_year": "",
-      "detail": "no-candidate"
+      "library_first_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
+      "detail": {
+        "best_composite": 0.021,
+        "best_title_score": 0.021,
+        "second_composite": 0.0,
+        "best_pubmed_title": "Championing the use of people-first language in childhood overweight and obesity to address weight bias and stigma: A joint statement from the European-Childhood-Obesity-Group (ECOG), the European-Coalition-for-People-Living-with-Obesity (ECPO), the International-Paediatric-Association (IPA), Obesity-Canada, the European-Association-for-the-Study-of-Obesity Childhood-Obesity-Task-Force (EASO-COTF), Obesity Action Coalition (OAC), The Obesity Society (TOS) and the World-Obesity-Federation (WOF).",
+        "best_pmid": "37002830",
+        "year_match": false,
+        "author_match": false,
+        "library_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
+        "pubmed_first_author": "Weghuber"
+      }
     },
     {
       "library_title": "Weight loss, changes in body composition and inflammatory status after a very low-energy ketogenic therapy (VLEKT)",
       "library_year": "",
+      "library_first_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
       "detail": {
-        "best_score": 0.921,
-        "second_score": 0.0,
+        "best_composite": 0.921,
+        "best_title_score": 0.921,
+        "second_composite": 0.461,
         "best_pubmed_title": "Weight loss, changes in body composition and inflammatory status after a very low-energy ketogenic therapy (VLEKT): does gender matter?",
         "best_pmid": "39427162",
-        "year_match": false
+        "year_match": false,
+        "author_match": false,
+        "library_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
+        "pubmed_first_author": "Muscogiuri"
       }
     },
     {
       "library_title": "Metabolic Effects of Ketogenic Diets and Their Utilization in Obesity",
       "library_year": "",
+      "library_first_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
       "detail": "no-candidate"
     },
     {
       "library_title": "Very Low-Calorie Ketogenic Diet (VLCKD) as Pre-Operative First-Line Dietary Therapy in Patients with Obesity Who Are Candidates for Bariatric Surgery",
       "library_year": "",
+      "library_first_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
       "detail": "no-candidate"
     },
     {
       "library_title": "VLCKD in Combination with Physical Exercise Preserves Skeletal Muscle in Obesity",
       "library_year": "",
+      "library_first_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
       "detail": "no-candidate"
     },
     {
       "library_title": "Very low-calorie ketogenic diet (VLCKD): an antihypertensive nutritional approach",
       "library_year": "",
+      "library_first_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
       "detail": "no-candidate"
     },
     {
       "library_title": "Supplementation with medium-chain fatty acids increases body weight loss during very low-calorie ketogenic diet",
       "library_year": "",
+      "library_first_author": "Bibliographic record reviewed for inclusion in the curated Scientific Library.",
       "detail": "no-candidate"
     },
     {
       "library_title": "Low-Carbohydrate Ketogenic Diet in Children with Obesity: Effects on Anthropometric Indicators, Metabolic Syndrome and Insulin Resistance",
       "library_year": "",
+      "library_first_author": "Original publication title: Low-Carbohydrate Ketogenic Diet in Children with Obesity: Effects on Anthropometric Indicators",
+      "detail": "no-candidate"
+    },
+    {
+      "library_title": "Effects of One-Month Very-Low-Calorie Ketogenic Diet on 24-h Energy Expenditure",
+      "library_year": "",
+      "library_first_author": "Original publication title: Effects of One-Month Very-Low-Calorie Ketogenic Diet on 24-h Energy Expenditure",
+      "detail": "no-candidate"
+    },
+    {
+      "library_title": "Advancing Obesity Management: Very Low-Energy Ketogenic Therapy as an Evolution of the Traditional Ketogenic Diet",
+      "library_year": "",
+      "library_first_author": "Original publication title: Advancing Obesity Management: Very Low-Energy Ketogenic Therapy as an Evolution of the Traditional Ketogenic Diet",
+      "detail": "no-candidate"
+    },
+    {
+      "library_title": "Epigenetic Aging Acceleration in Obesity Is Slowed Down by Nutritional Ketosis Following VLCKD",
+      "library_year": "",
+      "library_first_author": "Original publication title: Epigenetic Aging Acceleration in Obesity Is Slowed Down by Nutritional Ketosis Following VLCKD",
+      "detail": {
+        "best_composite": 0.712,
+        "best_title_score": 0.712,
+        "second_composite": 0.0,
+        "best_pubmed_title": "Epigenetic Aging Acceleration in Obesity Is Slowed Down by Nutritional Ketosis Following Very Low-Calorie Ketogenic Diet (VLCKD): A New Perspective to Reverse Biological Age.",
+        "best_pmid": "40292468",
+        "year_match": false,
+        "author_match": false,
+        "library_author": "Original publication title: Epigenetic Aging Acceleration in Obesity Is Slowed Down by Nutritional Ketosis Following VLCKD",
+        "pubmed_first_author": "Izquierdo"
+      }
+    },
+    {
+      "library_title": "Efficacy and Safety of Phase 1 Very Low-Energy Ketogenic Therapy in Subjects with Obesity and Mild Renal Impairment",
+      "library_year": "",
+      "library_first_author": "Original publication title: Efficacy",
+      "detail": "no-candidate"
+    },
+    {
+      "library_title": "An 8-Week Very Low-Calorie Ketogenic Diet Alters Obese-Derived Small Extracellular Vesicles and Hepatic Cell Phenotypes",
+      "library_year": "",
+      "library_first_author": "Original publication title: An 8-Week Very Low-Calorie Ketogenic Diet Alters Obese-Derived Small Extracellular Vesicles",
+      "detail": "no-candidate"
+    },
+    {
+      "library_title": "Effects of a 12-Week Ketogenic Diet Intervention on Women with Overweight or Obesity and Glucose and Lipid Metabolism Disturbance",
+      "library_year": "",
+      "library_first_author": "Original publication title: Effects of a 12-Week Ketogenic Diet Intervention on Women with Overweight or Obesity",
+      "detail": {
+        "best_composite": 0.878,
+        "best_title_score": 0.878,
+        "second_composite": 0.0,
+        "best_pubmed_title": "Effects of a 12 Week Ketogenic Diet Intervention on Obese and Overweight Females with Glucose and Lipid Metabolism Disturbance.",
+        "best_pmid": "39683611",
+        "year_match": false,
+        "author_match": false,
+        "library_author": "Original publication title: Effects of a 12-Week Ketogenic Diet Intervention on Women with Overweight or Obesity",
+        "pubmed_first_author": "Klonek"
+      }
+    },
+    {
+      "library_title": "Weight Loss, Changes in Body Composition and Inflammatory Status after a Very Low-Energy Ketogenic Therapy",
+      "library_year": "",
+      "library_first_author": "Original publication title: Weight Loss",
+      "detail": {
+        "best_composite": 0.894,
+        "best_title_score": 0.894,
+        "second_composite": 0.471,
+        "best_pubmed_title": "Weight loss, changes in body composition and inflammatory status after a very low-energy ketogenic therapy (VLEKT): does gender matter?",
+        "best_pmid": "39427162",
+        "year_match": false,
+        "author_match": false,
+        "library_author": "Original publication title: Weight Loss",
+        "pubmed_first_author": "Muscogiuri"
+      }
+    },
+    {
+      "library_title": "A Multi-Omics Approach to Metabolic Pathways Impacting Intestinal Permeability in Obese Patients Undergoing VLCKD",
+      "library_year": "",
+      "library_first_author": "Original publication title: A Multi-Omics Approach to Metabolic Pathways Impacting Intestinal Permeability in Obese Patients Undergoing VLCKD",
+      "detail": {
+        "best_composite": 0.866,
+        "best_title_score": 0.866,
+        "second_composite": 0.382,
+        "best_pubmed_title": "A Multi-Omics Approach to Disclose Metabolic Pathways Impacting Intestinal Permeability in Obese Patients Undergoing Very Low Calorie Ketogenic Diet.",
+        "best_pmid": "38999827",
+        "year_match": false,
+        "author_match": false,
+        "library_author": "Original publication title: A Multi-Omics Approach to Metabolic Pathways Impacting Intestinal Permeability in Obese Patients Undergoing VLCKD",
+        "pubmed_first_author": "Celano"
+      }
+    },
+    {
+      "library_title": "Very Low-Calorie Ketogenic Diet as Pre-Operative First-Line Dietary Therapy in Patients with Obesity Candidates for Bariatric Surgery",
+      "library_year": "",
+      "library_first_author": "Original publication title: Very Low-Calorie Ketogenic Diet as Pre-Operative First-Line Dietary Therapy in Patients with Obesity Candidates for Bariatric Surgery",
+      "detail": "no-candidate"
+    },
+    {
+      "library_title": "Very Low-Calorie Ketogenic Diet: An Antihypertensive Nutritional Approach",
+      "library_year": "",
+      "library_first_author": "Original publication title: Very Low-Calorie Ketogenic Diet: An Antihypertensive Nutritional Approach",
+      "detail": "no-candidate"
+    },
+    {
+      "library_title": "Supplementation with Medium-Chain Fatty Acids Increases Body Weight Loss During a Very Low-Calorie Ketogenic Diet",
+      "library_year": "",
+      "library_first_author": "Original publication title: Supplementation with Medium-Chain Fatty Acids Increases Body Weight Loss During a Very Low-Calorie Ketogenic Diet",
+      "detail": "no-candidate"
+    },
+    {
+      "library_title": "Ketogenic Diet Combined with Moderate Aerobic Exercise in Obesity",
+      "library_year": "",
+      "library_first_author": "Original publication title: Ketogenic Diet Combined with Moderate Aerobic Exercise in Obesity",
+      "detail": "no-candidate"
+    },
+    {
+      "library_title": "Comparison of a Pre-Bariatric Surgery VLCKD and Mediterranean Diet on Weight Loss, Metabolic Parameters, and Liver Size Reduction",
+      "library_year": "",
+      "library_first_author": "Original publication title: Comparison of a Pre-Bariatric Surgery VLCKD",
+      "detail": "no-candidate"
+    },
+    {
+      "library_title": "Impact of a VLCKD on Handgrip Strength in Women with Obesity",
+      "library_year": "",
+      "library_first_author": "Original publication title: Impact of a VLCKD on Handgrip Strength in Women with Obesity",
+      "detail": {
+        "best_composite": 0.736,
+        "best_title_score": 0.736,
+        "second_composite": 0.0,
+        "best_pubmed_title": "Impact of a Very Low-Calorie Ketogenic Diet (VLCKD) on Changes in Handgrip Strength in Women with Obesity.",
+        "best_pmid": "36235866",
+        "year_match": false,
+        "author_match": false,
+        "library_author": "Original publication title: Impact of a VLCKD on Handgrip Strength in Women with Obesity",
+        "pubmed_first_author": "Barrea"
+      }
+    },
+    {
+      "library_title": "Efficacy and Safety of Very Low-Calorie Ketogenic Diet in Patients with Overweight and Obesity",
+      "library_year": "",
+      "library_first_author": "Original publication title: Efficacy",
+      "detail": "no-candidate"
+    },
+    {
+      "library_title": "Reduction of Cardio-Metabolic Risk and Body Weight through Ketogenic Nutritional Intervention",
+      "library_year": "",
+      "library_first_author": "Original publication title: Reduction of Cardio-Metabolic Risk",
+      "detail": {
+        "best_composite": 0.593,
+        "best_title_score": 0.593,
+        "second_composite": 0.0,
+        "best_pubmed_title": "Reduction of Cardio-Metabolic Risk and Body Weight through a Multiphasic Very-Low Calorie Ketogenic Diet Program in Women with Overweight/Obesity: A Study in a Real-World Setting.",
+        "best_pmid": "34073344",
+        "year_match": false,
+        "author_match": false,
+        "library_author": "Original publication title: Reduction of Cardio-Metabolic Risk",
+        "pubmed_first_author": "Tragni"
+      }
+    },
+    {
+      "library_title": "Ketogenic Diet and Weight Loss: Is There an Effect on Energy Expenditure?",
+      "library_year": "",
+      "library_first_author": "Original publication title: Ketogenic Diet",
+      "detail": "no-candidate"
+    },
+    {
+      "library_title": "Comparison of Very Low-Calorie Ketogenic Diet with a Standard Low-Calorie Diet in Obesity",
+      "library_year": "",
+      "library_first_author": "Original publication title: Comparison of Very Low-Calorie Ketogenic Diet with a Standard Low-Calorie Diet in Obesity",
+      "detail": "no-candidate"
+    },
+    {
+      "library_title": "Adaptive Ketogenic–Mediterranean Protocol (AKMP) in Real Clinical Practice",
+      "library_year": "",
+      "library_first_author": "Original publication title: Adaptive Ketogenic–Mediterranean Protocol (AKMP) in Real Clinical Practice",
+      "detail": {
+        "best_composite": 0.696,
+        "best_title_score": 0.696,
+        "second_composite": 0.0,
+        "best_pubmed_title": "Adaptive Ketogenic-Mediterranean Protocol (AKMP) in Real Clinical Practice: 14-Week Pre-Post Cohort Study on Glucolipid Markers and Safety.",
+        "best_pmid": "41305609",
+        "year_match": false,
+        "author_match": false,
+        "library_author": "Original publication title: Adaptive Ketogenic–Mediterranean Protocol (AKMP) in Real Clinical Practice",
+        "pubmed_first_author": "García-Gorrita"
+      }
+    },
+    {
+      "library_title": "Sparing Muscle While Losing Fat: A Narrative Review of Ketogenic Diets and Lean Mass Preservation During Weight Loss.",
+      "library_year": "2026",
+      "library_first_author": "Caturano A",
+      "detail": "no-candidate"
+    },
+    {
+      "library_title": "Effects of switching from a high-fat diet to a ketogenic diet on oxidative stress, nitrosative damage, and protein glycation in rat skin.",
+      "library_year": "2026",
+      "library_first_author": "Chylińska N",
+      "detail": "no-candidate"
+    },
+    {
+      "library_title": "Real-world experience with GLP-1 receptor agonists in adults with epilepsy following a modified atkins diet.",
+      "library_year": "2026",
+      "library_first_author": "El Zibaoui R",
       "detail": "no-candidate"
     }
   ]
