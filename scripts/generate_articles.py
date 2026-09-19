@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Ketogenic Research — AI article pilot V3.7
+Ketogenic Research — AI article pilot V3.8
 
 V3 editorial-quality pilot:
 - processes ONE article per run
@@ -367,7 +367,53 @@ def discover_full_text(
             host = location.get("host_type") or "open-access host"
             return text[:18000], f"Unpaywall OA ({host}, {version})", source_url
 
-    # 3. No usable full text was retrieved. This says nothing about whether
+    # 3. Try the DOI landing page itself. This does not bypass paywalls:
+    #    it only uses content that the publisher returns without authentication.
+    doi = (rec.get("doi") or extra.get("doi_from_pubmed") or "").strip()
+    if doi:
+        doi_url = "https://doi.org/" + urllib.parse.quote(doi, safe="/().;:-_")
+        try:
+            raw = http_request(
+                doi_url,
+                headers={
+                    "User-Agent": "Mozilla/5.0 KetogenicResearch/FullTextDiscovery",
+                    "Accept": "text/html,application/xhtml+xml,application/pdf,*/*;q=0.5",
+                },
+                timeout=75,
+            )
+
+            if raw[:4] == b"%PDF":
+                value = extract_pdf_text(raw)
+                if len(value) >= 6000:
+                    return value[:18000], "Publisher full text via DOI", doi_url
+            else:
+                decoded = raw.decode("utf-8", errors="replace")
+                parser = _ReadableHTML()
+                parser.feed(decoded)
+                value = parser.text()
+
+                # Be conservative: require substantial article-like text and
+                # multiple scientific section signals before calling it full text.
+                lower = value.lower()
+                section_hits = sum(
+                    marker in lower
+                    for marker in (
+                        "introduction",
+                        "methods",
+                        "materials and methods",
+                        "results",
+                        "discussion",
+                        "conclusion",
+                        "references",
+                    )
+                )
+                if len(value) >= 9000 and section_hits >= 3:
+                    return value[:18000], "Publisher full text via DOI", doi_url
+
+        except Exception as exc:
+            print(f"Publisher DOI full-text retrieval failed: {exc}")
+
+    # 4. No usable full text was retrieved. This says nothing about whether
     #    a full text exists elsewhere; the note simply uses the PubMed abstract.
     return "", "PubMed abstract", ""
 
@@ -675,6 +721,7 @@ date: {json.dumps(rec.get("date",""))}
 journal: {json.dumps(rec.get("journal",""), ensure_ascii=False)}
 article_type: {json.dumps(draft.get("article_type",""))}
 article_type_it: {json.dumps(draft.get("article_type_it",""))}
+generator_version: "3.8"
 editorial_byline: "Ketogenic Research Editorial"
 scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
