@@ -13451,6 +13451,101 @@
         "year_match": true,
         "author_match": true
       }
+    },
+    {
+      "library_title": "The effects of ketogenic diet and calorie-restricted diet on metabolic dysfunction-associated steatotic liver disease: a retrospective study.",
+      "library_year": "2026",
+      "library_first_author": "Sun WJ",
+      "candidate": {
+        "pmid": "42163963",
+        "title": "The effects of ketogenic diet and calorie-restricted diet on metabolic dysfunction-associated steatotic liver disease: a retrospective study.",
+        "year": "2026",
+        "first_author": "Sun",
+        "doi": "10.3389/fnut.2026.1790674"
+      },
+      "match_detail": {
+        "title_score": 1.0,
+        "composite": 1.07,
+        "second_composite": 0.0,
+        "year_match": true,
+        "author_match": true
+      }
+    },
+    {
+      "library_title": "Leptin/Adiponectin Ratio as a new multidimensional biomarker in obese patients with liver steatosis undergoing VLEKT: results from a pilot study.",
+      "library_year": "2026",
+      "library_first_author": "Balestra F",
+      "candidate": {
+        "pmid": "41939193",
+        "title": "Leptin/Adiponectin Ratio as a new multidimensional biomarker in obese patients with liver steatosis undergoing VLEKT: results from a pilot study.",
+        "year": "2026",
+        "first_author": "Balestra",
+        "doi": "10.3389/fnut.2026.1754299"
+      },
+      "match_detail": {
+        "title_score": 1.0,
+        "composite": 1.07,
+        "second_composite": 0.0,
+        "year_match": true,
+        "author_match": true
+      }
+    },
+    {
+      "library_title": "Immune-modulating effects of energy-restricted ketogenic diet in women with overweight and obesity: KETO-MINOX study.",
+      "library_year": "2026",
+      "library_first_author": "Drabińska-Fois N",
+      "candidate": {
+        "pmid": "41793518",
+        "title": "Immune-modulating effects of energy-restricted ketogenic diet in women with overweight and obesity: KETO-MINOX study.",
+        "year": "2026",
+        "first_author": "Drabińska-Fois",
+        "doi": "10.1007/s00394-026-03935-7"
+      },
+      "match_detail": {
+        "title_score": 1.0,
+        "composite": 1.07,
+        "second_composite": 0.0,
+        "year_match": true,
+        "author_match": true
+      }
+    },
+    {
+      "library_title": "Effects of the ketogenic-caloric restricted diet on metabolic endotoxemia and metabolic health in adults with prediabetes: A randomized controlled trial.",
+      "library_year": "2026",
+      "library_first_author": "Jawamis A",
+      "candidate": {
+        "pmid": "41747400",
+        "title": "Effects of the ketogenic-caloric restricted diet on metabolic endotoxemia and metabolic health in adults with prediabetes: A randomized controlled trial.",
+        "year": "2026",
+        "first_author": "Jawamis",
+        "doi": "10.1016/j.nut.2026.113119"
+      },
+      "match_detail": {
+        "title_score": 1.0,
+        "composite": 1.07,
+        "second_composite": 0.0,
+        "year_match": true,
+        "author_match": true
+      }
+    },
+    {
+      "library_title": "Ketogenic diet attenuates high fat diet induced obesity in rats: insights into hepatic and intestinal tissues.",
+      "library_year": "2025",
+      "library_first_author": "Abo El-Magd NF",
+      "candidate": {
+        "pmid": "41397600",
+        "title": "Ketogenic diet attenuates high fat diet induced obesity in rats: insights into hepatic and intestinal tissues.",
+        "year": "2026",
+        "first_author": "Abo El-Magd",
+        "doi": "10.1016/j.jnutbio.2025.110237"
+      },
+      "match_detail": {
+        "title_score": 1.0,
+        "composite": 1.04,
+        "second_composite": 0.0,
+        "year_match": false,
+        "author_match": true
+      }
     }
   ],
   "possible": [
@@ -19611,15 +19706,22 @@
       "library_first_author": "Caturano A",
       "candidate": null,
       "match_detail": {}
+    },
+    {
+      "library_title": "Ketogenic Diet and Exercise Improve Peripheral Neuropathy in a Mouse Model of Metabolic Syndrome.",
+      "library_year": "2025",
+      "library_first_author": "Eid SA",
+      "candidate": null,
+      "match_detail": {}
     }
   ],
   "summary": {
     "cards_without_pmid_total": 1206,
-    "cards_audited": 1200,
-    "certain_matches": 708,
+    "cards_audited": 1206,
+    "certain_matches": 713,
     "possible_matches": 70,
-    "no_match": 422,
-    "cards_remaining": 6,
-    "completed": false
+    "no_match": 423,
+    "cards_remaining": 0,
+    "completed": true
   }
 }
