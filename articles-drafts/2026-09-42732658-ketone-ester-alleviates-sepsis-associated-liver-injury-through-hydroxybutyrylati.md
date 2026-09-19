@@ -6,62 +6,63 @@ date: "2026-09-11"
 journal: "Immunobiology"
 article_type: "Research Note"
 article_type_it: "Nota di ricerca"
+generator_version: "4.0"
 editorial_byline: "Ketogenic Research Editorial"
 scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
-verified_at: "2026-09-19T12:41:23.916891+00:00"
+verified_at: "2026-09-19T14:19:08.197613+00:00"
 ---
 
-# Ketone ester mitigates LPS‑induced liver injury in mice via STAT1 K679 β‑hydroxybutyrylation
+# Ketone ester associated with reduced LPS‑induced liver injury in mice via STAT1 K679 β‑hydroxybutyrylation
 
 **Research Note**
 
 **Ketogenic Research Editorial**  
 Scientific oversight: **Marco Medeot, Scientific Director**
 
-In a mouse model of sepsis‑associated liver injury, pretreatment with a ketone ester reduced histopathological damage, serum transaminases and pro‑apoptotic signaling. The protective effect depended on lysine β‑hydroxybutyrylation of STAT1 at residue K679, a modification absent in STAT1K679R knock‑in mice.
+In a mouse model of sepsis‑related liver injury, pretreatment with a ketone ester lowered serum transaminases, improved histology and modulated macrophage polarization. The protective pattern was attenuated in knock‑in mice bearing a STAT1 K679R mutation that prevents lysine β‑hydroxybutyrylation, indicating that STAT1 K679 β‑hydroxybutyrylation contributes to the observed effect.
 
 ## Study and findings
 
-The authors generated STAT1p.K679R knock‑in mice and induced liver injury by intraperitoneal lipopolysaccharide (LPS). In wild‑type mice, oral pretreatment with a ketone ester (KE) lowered serum alanine aminotransferase and aspartate aminotransferase, improved hepatic histology, and reduced the Bax/Bcl‑2 ratio, indicating less apoptosis. KE also increased hepatic STAT1 K679 β‑hydroxybutyrylation (Kbhb). In STAT1p.K679R mice, the KE‑induced rise in Kbhb was markedly blunted, and the improvements in transaminases, histopathology and Bax/Bcl‑2 were significantly attenuated. In RAW264.7 macrophages, the K679R mutation reduced β‑OHB‑stimulated STAT1 Kbhb, whereas AML12 hepatocytes showed no such effect. KE lowered hepatic M1 macrophage markers, IL‑6, IL‑12 and STAT1 Ser727 phosphorylation in LPS‑treated wild‑type mice; these molecular changes were also diminished in the K679R knock‑in strain.
+The authors generated STAT1p.K679R knock‑in mice, in which lysine 679 cannot undergo β‑hydroxybutyrylation (Kbhb). Wild‑type and knock‑in mice received a ketone ester (KE) pretreatment before intraperitoneal lipopolysaccharide (LPS) to induce sepsis‑associated liver injury. In wild‑type mice, KE reduced histopathological damage, lowered serum alanine aminotransferase (ALT) and aspartate aminotransferase (AST), and decreased the pro‑apoptotic Bax/Bcl‑2 ratio. KE also increased hepatic STAT1 Kbhb, suppressed M1 macrophage markers (IL‑6, IL‑12) and reduced STAT1 Ser727 phosphorylation. In STAT1p.K679R mice, these biochemical and molecular benefits were markedly blunted, and KE failed to raise STAT1 Kbhb. In vitro, RAW264.7 macrophages carrying the K679R mutation showed reduced β‑OHB‑induced STAT1 Kbhb, whereas AML12 hepatocytes were unaffected.
 
 ## Clinical interpretation
 
-The data suggest that exogenous ketone ester can modulate the inflammatory response in sepsis‑related liver injury by promoting a specific post‑translational modification of STAT1. The K679 β‑hydroxybutyrylation appears to suppress M1 macrophage polarization and downstream cytokine production, thereby limiting hepatocellular injury. While the study is preclinical, the mechanistic link between ketone‑derived β‑OHB, STAT1 Kbhb and reduced hepatic inflammation provides a rationale for exploring ketone supplementation as an adjunctive strategy in septic patients, pending safety and dosing data.
+The data suggest that exogenous ketone supplementation can modulate inflammatory signaling in sepsis‑related hepatic injury, and that the effect depends, at least in part, on site‑specific β‑hydroxybutyrylation of STAT1 at lysine 679. By limiting M1 macrophage polarization and downstream cytokine production, KE may attenuate the inflammatory cascade that drives hepatocellular damage. Although the study is pre‑clinical, the mechanistic link between a metabolic signal (β‑OHB) and a transcription factor modification provides a rationale for exploring ketone‑based interventions in inflammatory liver disorders.
 
 ## Limitations and open questions
 
-The investigation was limited to a single acute LPS model in male C57BL/6 mice, which may not capture the heterogeneity of human sepsis. The knock‑in approach isolates the K679 site but does not address potential contributions of other Kbhb sites or parallel pathways. Effects were observed with pretreatment; the therapeutic window after sepsis onset remains unknown. Translating β‑OHB concentrations achieved by KE to clinically feasible dosing, and confirming safety in critically ill patients, are essential next steps.
+The investigation was confined to a single mouse strain and an acute LPS model; extrapolation to human sepsis or chronic liver disease is uncertain. The knock‑in approach isolates one lysine residue, but other post‑translational modifications of STAT1 or parallel pathways may also contribute. Dose, timing and formulation of KE were not varied, limiting insight into therapeutic windows. Future studies should assess whether similar STAT1 Kbhb occurs in human patients, evaluate long‑term outcomes, and compare KE with other metabolic modulators in clinically relevant models.
 
 ### Source
 
-PMID: 42732658. DOI: 10.1016/j.imbio.2026.153243.
+PMID: 42732658; DOI: 10.1016/j.imbio.2026.153243.
 
 ---
 
-# L'ester chetone attenua il danno epatico indotto da LPS nei topi tramite β‑idrossibutirrizzazione del STAT1 K679
+# Esteri chetonici associati a una minore lesione epatica indotta da LPS nei topi tramite β‑idrossibutirrizzazione del STAT1 K679
 
 **Nota di ricerca**
 
 **Ketogenic Research Editorial**  
 Supervisione scientifica: **Marco Medeot, Direttore Scientifico**
 
-In un modello murino di danno epatico associato a sepsi, la pretreatment con un ester chetone ha ridotto il danno istologico, le transaminasi sieriche e la segnalazione pro‑apoptotica. L’effetto protettivo dipendeva dalla β‑idrossibutirrizzazione della lisina K679 del STAT1, modifica assente nei topi knock‑in STAT1K679R.
+In un modello murino di lesione epatica associata a sepsi, la pretreatment con un estere chetonico ha ridotto le transaminasi sieriche, migliorato l'istologia e modulato la polarizzazione dei macrofagi. Il pattern protettivo è stato attenuato nei topi knock‑in STAT1 K679R, che impediscono la β‑idrossibutirrizzazione della lisina, suggerendo che la β‑idrossibutirrizzazione del STAT1 K679 partecipa all’effetto osservato.
 
 ## Studio e risultati
 
-Gli autori hanno generato topi knock‑in STAT1p.K679R e hanno indotto danno epatico mediante iniezione intraperitoneale di lipopolisaccaride (LPS). Nei topi wild‑type, la pretreatment orale con un ester chetone (KE) ha ridotto le transaminasi sieriche (ALT e AST), migliorato l'istologia epatica e diminuito il rapporto Bax/Bcl‑2, indicante minore apoptosi. KE ha anche aumentato la β‑idrossibutirrizzazione (Kbhb) del STAT1 al residuo K679 nel fegato. Nei topi STAT1p.K679R, l'incremento di Kbhb indotto da KE è stato notevolmente attenuato e i benefici su transaminasi, istologia e Bax/Bcl‑2 sono risultati significativamente ridotti. In macrofagi RAW264.7, la mutazione K679R ha diminuito la Kbhb del STAT1 indotta da β‑OHB, mentre nelle cellule epatiche AML12 non è stato osservato alcun effetto. KE ha inoltre ridotto i marcatori di macrofagi M1, le citochine IL‑6 e IL‑12 e la fosforilazione di STAT1 Ser727 nei topi wild‑type trattati con LPS; questi cambiamenti molecolari sono stati anch'essi attenuati nei knock‑in K679R.
+Gli autori hanno creato topi knock‑in STAT1p.K679R, in cui la lisina 679 non può subire β‑idrossibutirrizzazione (Kbhb). Topi wild‑type e knock‑in hanno ricevuto una pretreatment con estere chetonico (KE) prima della somministrazione intraperitoneale di lipopolisaccaride (LPS) per indurre lesione epatica associata a sepsi. Nei topi wild‑type, il KE ha ridotto il danno istopatologico, diminuito le transaminasi sieriche (ALT e AST) e abbassato il rapporto pro‑apoptotico Bax/Bcl‑2. Il KE ha inoltre aumentato la Kbhb del STAT1 epatico, inibito i marcatori macrofagici M1 (IL‑6, IL‑12) e ridotto la fosforilazione di STAT1 su Ser727. Nei topi STAT1p.K679R, questi benefici biochimici e molecolari sono stati notevolmente attenuati e il KE non ha aumentato la Kbhb del STAT1. In vitro, i macrofagi RAW264.7 con mutazione K679R hanno mostrato una ridotta Kbhb indotta da β‑OHB, mentre le cellule epatiche AML12 non sono state influenzate.
 
 ## Interpretazione clinica
 
-I risultati suggeriscono che l'ester chetone esogeno possa modulare la risposta infiammatoria nel danno epatico associato a sepsi favorendo una modificazione post‑traduzionale specifica del STAT1. La β‑idrossibutirrizzazione di K679 sembra inibire la polarizzazione M1 dei macrofagi e la produzione di citochine, limitando così il danno epatocellulare. Sebbene lo studio sia preclinico, il legame meccanistico tra β‑OHB derivato da KE, Kbhb di STAT1 e ridotta infiammazione epatica fornisce una base per valutare la supplementazione di chetoni come possibile coadiuvante nei pazienti settici, previa verifica di sicurezza e dosaggio.
+I risultati indicano che la supplementazione con chetoni esogeni può modulare la segnalazione infiammatoria nella lesione epatica associata a sepsi, e che tale effetto dipende, almeno in parte, dalla β‑idrossibutirrizzazione specifica del STAT1 in corrispondenza della lisina 679. Limitando la polarizzazione M1 dei macrofagi e la produzione di citochine correlate, il KE potrebbe attenuare la cascata infiammatoria responsabile del danno epatocellulare. Sebbene lo studio sia preclinico, il legame meccanistico tra un segnale metabolico (β‑OHB) e una modificazione trascrizionale fornisce una base per indagare interventi basati su chetoni in patologie epatiche infiammatorie.
 
 ## Limiti e questioni aperte
 
-Lo studio è stato condotto in un unico modello acuto di LPS su topi maschi C57BL/6, il che potrebbe non riflettere la variabilità della sepsi umana. L'approccio knock‑in isola il sito K679 ma non esclude il possibile ruolo di altre site di Kbhb o di vie parallele. Gli effetti sono stati osservati con pretreatment; il potenziale beneficio quando il trattamento è iniziato dopo l'insorgenza della sepsi rimane incerto. È necessario tradurre le concentrazioni di β‑OHB raggiunte con KE in dosaggi clinicamente praticabili e confermare la sicurezza nei pazienti critici.
+La ricerca è stata condotta su un unico ceppo murino e su un modello acuto di LPS; la generalizzabilità a sepsi umana o a malattie epatiche croniche rimane incerta. L’approccio knock‑in isola una singola lisina, ma altre modificazioni post‑traslazionali del STAT1 o vie parallele potrebbero contribuire. Non sono stati esplorati diversi dosaggi, tempi o formulazioni del KE, limitando la comprensione della finestra terapeutica. Studi futuri dovrebbero verificare se la Kbhb del STAT1 si verifica in pazienti umani, valutare gli effetti a lungo termine e confrontare il KE con altri modulatori metabolici in modelli clinicamente rilevanti.
 
 ### Fonte
 
-PMID: 42732658. DOI: 10.1016/j.imbio.2026.153243.
+PMID: 42732658; DOI: 10.1016/j.imbio.2026.153243.
 
