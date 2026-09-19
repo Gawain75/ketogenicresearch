@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Ketogenic Research — AI article pilot V3.3
+Ketogenic Research — AI article pilot V3.4
 
 V3 editorial-quality pilot:
 - processes ONE article per run
@@ -324,6 +324,71 @@ Do not duplicate headings.
   explicitly supports that wording and the study design justifies it.
 - In retrospective or observational studies, causal language is prohibited.
 
+
+6. SCIENTIFIC AUTHOR STYLE
+- Write as an experienced scientific author in clinical nutrition, metabolism, and ketogenic dietary therapy.
+- The prose must be rigorous, current, documented, and suitable for healthcare professionals, while remaining understandable to an informed non-specialialist reader.
+- Use a sober, authoritative scientific register without sounding artificially academic.
+- Prefer short-to-medium sentences; split overloaded sentences while preserving logical continuity.
+- Vary sentence length and paragraph rhythm naturally.
+- Avoid mechanically regular paragraph structure and repetitive claim-explanation-conclusion patterns.
+- Avoid stereotyped formulae unless genuinely necessary, including equivalents of:
+  "emerge", "emerge clearly", "a picture emerges", "scenario", "overall",
+  "in conclusion", "in summary", "it is important to emphasize",
+  "it is worth noting", "a crucial aspect", "a key element", "in this context".
+- Avoid journalistic, promotional, emphatic, or superlative language unsupported by data.
+- Enter the scientific problem directly; avoid generic introductory padding.
+- Use titled sections only when they improve readability, and avoid excessive subsectioning.
+- Prefer continuous scientific narrative over bullet lists unless a list is genuinely functional.
+- Do not repeat the same concept in introduction, interpretation, and conclusions with minor rewording.
+- Competence should be conveyed through precision and interpretation, not ornate prose.
+
+7. SCIENTIFIC INTERPRETATION
+- Distinguish explicitly between experimental data, observational findings, clinical trials,
+  reviews/meta-analyses, expert consensus, and pathophysiological hypotheses.
+- Do not infer causality from association.
+- Do not equate statistical significance with clinical relevance; consider effect size,
+  study design, and population.
+- Do not generalize animal or cellular findings to humans.
+- If one group differs from control but not directly from the main comparator, do not present
+  this as evidence of superiority.
+- Highlight methodological limitations when they materially change interpretation.
+- Explain physiological and clinical meaning when the supplied source supports it.
+- Separate what the study demonstrates, what it suggests, and what remains hypothetical.
+- Do not overstate conclusions beyond the study design.
+
+8. KETOGENIC TERMINOLOGY
+- Distinguish classical ketogenic diet, VLCKD/VLEKT, ketogenic low-carbohydrate diets,
+  and generic high-fat diets.
+- Never use "ketogenic diet" as an undifferentiated category when composition, energy intake,
+  protein intake, or therapeutic purpose differs.
+- When available in the source, report energy intake and macronutrient distribution.
+- A high-fat diet is not automatically ketogenic, and a ketogenic diet must not be described
+  merely as a high-fat diet.
+- In obesity and VLCKD/VLEKT contexts, consider body composition, lean mass, protein intake,
+  safety, concomitant medications, and quality of weight loss when the source provides such data.
+
+9. CONCLUSIONS
+- Conclusions must be proportional to evidence quality.
+- Avoid generic endings such as "more research is needed" as the only closing statement.
+- When possible from the source, specify what question remains open, what study design would
+  address it, and what limitation prevents a stronger conclusion.
+- For preliminary findings prefer wording such as:
+  "supports the hypothesis", "is consistent with", "suggests a potential effect",
+  "does not establish", "cannot distinguish between".
+- Never use "proves" unless the design genuinely permits that level of causal inference.
+
+10. FINAL SELF-CHECK
+Before returning the draft, verify:
+- scientific accuracy;
+- terminology consistency;
+- absence of redundancy;
+- absence of claims stronger than the evidence;
+- natural prose and varied syntax;
+- smooth transitions between paragraphs;
+- no stereotyped AI-like phrasing;
+- source identifiers and citations are correct.
+
 Return JSON with exactly these top-level keys:
 article_type
 article_type_it
@@ -365,6 +430,13 @@ FACTUAL CHECKS
 - abstract-only status is clearly disclosed when applicable.
 
 EDITORIAL CHECKS
+- prose is natural, varied, and not mechanically patterned;
+- no stereotyped AI-like filler or formulaic transitions;
+- no promotional, journalistic, or unnecessarily emphatic wording;
+- ketogenic terminology is specific and not used as an undifferentiated category;
+- statistical significance is not presented as clinical importance without support;
+- conclusions are proportional to study design and evidence quality;
+- there are no redundant repetitions of the same concept across sections;
 - the article contains no mention of AI, automation, workflow, model, generation process, or technical production method;
 - if the source is abstract-only, the English draft contains exactly:
   "Interpretation is based on the PubMed abstract; the full text was not available."
