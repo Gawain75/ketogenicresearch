@@ -8,6 +8,7 @@ import re
 import time
 import urllib.parse
 import urllib.request
+import urllib.error
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -19,26 +20,82 @@ REPORT = ROOT / "library-legacy-reconcile-report.json"
 
 NCBI_EMAIL = os.getenv("NCBI_EMAIL", "info@ketogenicresearch.org").strip()
 NCBI_API_KEY = os.getenv("NCBI_API_KEY", "").strip()
-MAX_CARDS = max(1, int(os.getenv("RECONCILE_MAX", "100")))
+MAX_CARDS = max(1, int(os.getenv("RECONCILE_MAX", "25")))
+REQUEST_DELAY = 0.18 if NCBI_API_KEY else 0.45
+_LAST_REQUEST = 0.0
 
 
 def api(endpoint: str, params: dict[str, str]) -> bytes:
+    global _LAST_REQUEST
+
     params = dict(params)
     params["tool"] = "KetogenicResearchLegacyReconcile"
     params["email"] = NCBI_EMAIL
     if NCBI_API_KEY:
         params["api_key"] = NCBI_API_KEY
+
     url = (
         "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
         + endpoint + "?" + urllib.parse.urlencode(params)
     )
-    req = urllib.request.Request(
-        url,
-        headers={"User-Agent": f"KetogenicResearchLegacyReconcile/1.0 ({NCBI_EMAIL})"},
-    )
-    with urllib.request.urlopen(req, timeout=60) as response:
-        return response.read()
 
+    # Respect NCBI request-rate guidance conservatively.
+    elapsed = time.monotonic() - _LAST_REQUEST
+    if elapsed < REQUEST_DELAY:
+        time.sleep(REQUEST_DELAY - elapsed)
+
+    last_exc = None
+    for attempt in range(6):
+        req = urllib.request.Request(
+            url,
+            headers={
+                "User-Agent": f"KetogenicResearchLegacyReconcile/1.1 ({NCBI_EMAIL})"
+            },
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=60) as response:
+                data = response.read()
+                _LAST_REQUEST = time.monotonic()
+                return data
+        except urllib.error.HTTPError as exc:
+            last_exc = exc
+            _LAST_REQUEST = time.monotonic()
+
+            if exc.code == 429:
+                retry_after = exc.headers.get("Retry-After")
+                try:
+                    wait = float(retry_after)
+                except Exception:
+                    wait = min(60.0, 2.0 * (2 ** attempt))
+                wait = max(wait, 3.0)
+                print(
+                    f"NCBI rate limit (429). Waiting {wait:.0f}s "
+                    f"before retry {attempt + 1}/6."
+                )
+                time.sleep(wait)
+                continue
+
+            if 500 <= exc.code < 600:
+                wait = min(30.0, 2.0 * (2 ** attempt))
+                print(
+                    f"NCBI temporary HTTP {exc.code}. Waiting {wait:.0f}s "
+                    f"before retry {attempt + 1}/6."
+                )
+                time.sleep(wait)
+                continue
+
+            raise
+
+        except urllib.error.URLError as exc:
+            last_exc = exc
+            wait = min(30.0, 2.0 * (2 ** attempt))
+            print(
+                f"NCBI network error. Waiting {wait:.0f}s "
+                f"before retry {attempt + 1}/6: {exc}"
+            )
+            time.sleep(wait)
+
+    raise RuntimeError(f"NCBI request failed after retries: {last_exc}")
 
 def txt(node):
     return "".join(node.itertext()).strip() if node is not None else ""
@@ -300,7 +357,6 @@ def main():
         set_links(soup, card, rec)
         matched += 1
         print(f"Matched PMID {rec['pmid']}: {title}")
-        time.sleep(0.12)
 
     LIBRARY.write_text(str(soup), encoding="utf-8")
 
