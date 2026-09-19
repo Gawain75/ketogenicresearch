@@ -85,7 +85,19 @@
       "at": "2026-09-19T13:03:16.867156+00:00",
       "stage": "generation",
       "error": "PubMed abstract unavailable; pilot skips this record."
+    },
+    {
+      "pmid": "42760380",
+      "at": "2026-09-19T21:30:02.587791+00:00",
+      "stage": "verification",
+      "issues": [
+        "The source note cites the case report on concurrent non‑ketotic hyperglycinemia and biotinidase deficiency, which does not contain the data on six infants, plasma glycine reduction, or brain MRS findings presented in the draft. The appropriate source is the retrospective observational study of six NKH infants within the same PMC article.",
+        "The mechanistic explanation that the ketogenic diet reduces glycine \"likely through enhanced hepatic gluconeogenesis\" is not directly demonstrated in the source and constitutes an unsupported causal inference."
+      ],
+      "unsupported_claims": [
+        "The claim that the ketogenic diet reduces glycine \"likely through enhanced hepatic gluconeogenesis that consumes glycine-derived substrates\" is not supported by the source data."
+      ]
     }
   ],
-  "updated_at": "2026-09-19T13:03:16.867184+00:00"
+  "updated_at": "2026-09-19T21:30:02.587818+00:00"
 }
