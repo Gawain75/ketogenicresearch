@@ -1,0 +1,17 @@
+{
+  "cards_scanned": 2483,
+  "unique_pmids_checked": 1154,
+  "verified_ok": 1230,
+  "fixed_wrong_doi": 644,
+  "added_missing_doi": 1,
+  "removed_spurious_doi": 2,
+  "title_pmid_mismatches_not_modified": [
+    {
+      "pmid": "40036324",
+      "library_title": "The Impact of Ketogenic Nutrition on Obesity and Metabolic Health",
+      "pubmed_title": "The Impact of Ketogenic Nutrition on Obesity and Metabolic Health: Mechanisms and Clinical Implications.",
+      "similarity": 0.778
+    }
+  ],
+  "pmids_not_returned_by_pubmed": []
+}
