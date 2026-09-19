@@ -118021,8 +118021,227 @@
       "promotion_status": "promoted",
       "backfill_window": "1974-1976",
       "promotion_note": "Published by controlled V5.1 batch"
+    },
+    {
+      "pmid": "4747287",
+      "title": "Nutritional ketosis.",
+      "authors": [],
+      "journal": "Modern veterinary practice",
+      "date": "1973-10-01",
+      "date_precision": "day",
+      "year": 1973,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/4747287/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-19",
+      "status": "historical-index",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence",
+      "promotion_status": "not-eligible",
+      "backfill_window": "1971-1973"
+    },
+    {
+      "pmid": "4736310",
+      "title": "Ketotic hypoglycemia and the ketogenic diet.",
+      "authors": [
+        "DeVivo DC",
+        "Pagliara AS",
+        "Prensky AL"
+      ],
+      "journal": "Neurology",
+      "date": "1973-06-01",
+      "date_precision": "day",
+      "year": 1973,
+      "doi": "10.1212/wnl.23.6.640",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/4736310/",
+      "doi_url": "https://doi.org/10.1212/wnl.23.6.640",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism",
+        "Epilepsy"
+      ],
+      "category_confidence": 2,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-19",
+      "status": "historical-index",
+      "auto_eligible": true,
+      "curation_status": "auto-approved-historical",
+      "promotion_status": "promoted",
+      "backfill_window": "1971-1973",
+      "promotion_note": "Published by controlled V5.1 batch"
+    },
+    {
+      "pmid": "4687695",
+      "title": "Ketogenic diet containing medium-chain triglycerides.",
+      "authors": [
+        "Signore JM"
+      ],
+      "journal": "Journal of the American Dietetic Association",
+      "date": "1973-03-01",
+      "date_precision": "day",
+      "year": 1973,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/4687695/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Dyslipidemia & Lipid Metabolism",
+        "Medium-Chain Triglycerides (MCT)",
+        "Epilepsy"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-19",
+      "status": "historical-index",
+      "auto_eligible": true,
+      "curation_status": "auto-approved-historical",
+      "promotion_status": "promoted",
+      "backfill_window": "1971-1973",
+      "promotion_note": "Published by controlled V5.1 batch"
+    },
+    {
+      "pmid": "4687694",
+      "title": "An improved ketogenic diet for treatment of epilepsy.",
+      "authors": [
+        "Lasser JL",
+        "Brush MK"
+      ],
+      "journal": "Journal of the American Dietetic Association",
+      "date": "1973-03-01",
+      "date_precision": "day",
+      "year": 1973,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/4687694/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Epilepsy"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-19",
+      "status": "historical-index",
+      "auto_eligible": true,
+      "curation_status": "auto-approved-historical",
+      "promotion_status": "promoted",
+      "backfill_window": "1971-1973",
+      "promotion_note": "Published by controlled V5.1 batch"
+    },
+    {
+      "pmid": "4792164",
+      "title": "An experimental animal model for the effect of ketogenic diet on epilepsy.",
+      "authors": [
+        "Appleton DB",
+        "De Vivo DC"
+      ],
+      "journal": "Proceedings of the Australian Association of Neurologists",
+      "date": "1973-01-01",
+      "date_precision": "day",
+      "year": 1973,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/4792164/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Epilepsy"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-19",
+      "status": "historical-index",
+      "auto_eligible": true,
+      "curation_status": "auto-approved-historical",
+      "promotion_status": "promoted",
+      "backfill_window": "1971-1973",
+      "promotion_note": "Published by controlled V5.1 batch"
+    },
+    {
+      "pmid": "5010672",
+      "title": "Anticonvulsant properties of the ketogenic diet in mice.",
+      "authors": [
+        "Uhlemann ER",
+        "Neims AH"
+      ],
+      "journal": "The Journal of pharmacology and experimental therapeutics",
+      "date": "1972-02-01",
+      "date_precision": "day",
+      "year": 1972,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/5010672/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Epilepsy",
+        "Obesity"
+      ],
+      "category_confidence": 2,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-19",
+      "status": "historical-index",
+      "auto_eligible": true,
+      "curation_status": "auto-approved-historical",
+      "promotion_status": "promoted",
+      "backfill_window": "1971-1973",
+      "promotion_note": "Published by controlled V5.1 batch"
+    },
+    {
+      "pmid": "5101442",
+      "title": "Sporadic hypoglycemia: abnormal epinephrine response to the ketogenic diet or to insulin.",
+      "authors": [
+        "Koffler H",
+        "Schubert WK",
+        "Hug G"
+      ],
+      "journal": "The Journal of pediatrics",
+      "date": "1971-03-01",
+      "date_precision": "day",
+      "year": 1971,
+      "doi": "10.1016/s0022-3476(71)80225-1",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/5101442/",
+      "doi_url": "https://doi.org/10.1016/s0022-3476(71)80225-1",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism",
+        "Obesity"
+      ],
+      "category_confidence": 2,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-19",
+      "status": "historical-index",
+      "auto_eligible": true,
+      "curation_status": "auto-approved-historical",
+      "promotion_status": "promoted",
+      "backfill_window": "1971-1973",
+      "promotion_note": "Published by controlled V5.1 batch"
     }
   ],
-  "updated": "2026-09-19T20:57:27.560767+00:00",
+  "updated": "2026-09-19T20:59:02.842273+00:00",
   "source": "PubMed + Library V5"
 }
