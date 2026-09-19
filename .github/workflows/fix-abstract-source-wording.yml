@@ -1,0 +1,41 @@
+name: Fix abstract source wording
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix-source-wording:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Correct existing abstract-only wording
+        run: python scripts/fix_abstract_source_wording.py
+
+      - name: Re-render public article pages
+        run: python scripts/render_articles.py
+
+      - name: Commit corrected articles
+        run: |
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add             articles-drafts/             articles/             articles.html
+
+          if git diff --cached --quiet; then
+            echo "No outdated wording found."
+          else
+            git commit -m "Correct article source wording"
+            git push
+          fi
