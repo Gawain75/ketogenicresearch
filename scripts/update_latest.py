@@ -335,6 +335,31 @@ def evidence(
         title + " " + abstract
     ).lower()
 
+    # V5: detect clearly non-human/preclinical work BEFORE looking for
+    # words such as "randomized". Animal experiments can be randomized too.
+    preclinical_terms = [
+        "mouse", "mice", "murine",
+        " rat ", "rats", "rodent",
+        "animal model", "animal study",
+        "preclinical", "in vitro",
+        "cell line", "cell culture",
+        "zebrafish", "drosophila",
+        "porcine", "swine model",
+    ]
+
+    human_terms = [
+        "patient", "patients", "participant", "participants",
+        "human", "humans", "men", "women", "children",
+        "adolescent", "adolescents", "adult", "adults",
+        "clinical trial",
+    ]
+
+    explicit_preclinical = any(x in body for x in preclinical_terms)
+    explicit_human = any(x in body for x in human_terms)
+
+    if explicit_preclinical and not explicit_human:
+        return "Preclinical / mechanistic"
+
     if (
         "meta-analysis" in types
         or "meta-analysis" in body
@@ -351,17 +376,25 @@ def evidence(
         return "Guideline / consensus"
 
     if (
-        "randomized controlled trial"
-        in types
-        or "randomized" in body
-        or "randomised" in body
+        "randomized controlled trial" in types
+        or "controlled clinical trial" in types
+        or (
+            ("randomized" in body or "randomised" in body)
+            and explicit_human
+        )
     ):
         return "Randomized clinical trial"
 
     if (
         "clinical trial" in types
-        or "clinical trial" in body
-        or "intervention" in body
+        or (
+            "clinical trial" in body
+            and explicit_human
+        )
+        or (
+            "intervention" in body
+            and explicit_human
+        )
     ):
         return "Clinical trial / intervention"
 
@@ -383,13 +416,13 @@ def evidence(
                 "cross-sectional",
             ]
         )
-    ):
+    ) and not explicit_preclinical:
         return "Observational human study"
 
     if (
         "case report" in types
         or "case series" in body
-    ):
+    ) and not explicit_preclinical:
         return "Case report / case series"
 
     if (
@@ -398,23 +431,10 @@ def evidence(
     ):
         return "Review"
 
-    if any(
-        x in body
-        for x in [
-            "mouse",
-            "mice",
-            " rat ",
-            "rats",
-            "cell line",
-            "in vitro",
-            "animal model",
-            "preclinical",
-        ]
-    ):
+    if explicit_preclinical:
         return "Preclinical / mechanistic"
 
     return "Other"
-
 
 def pubdate(item):
     nodes = (
