@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Ketogenic Research — AI article pilot V3.4
+Ketogenic Research — AI article pilot V3.5
 
 V3 editorial-quality pilot:
 - processes ONE article per run
@@ -285,21 +285,24 @@ EDITORIAL RULES FOR V3
 - These two sentences are mandatory and must not be paraphrased.
 
 3. STRUCTURE
-Use these English section headings exactly once and in this order:
-- Key finding
-- Study design
-- Main results
-- Cautious interpretation
-- Limitations of this note
+For abstract-only Research Notes, use exactly three sections.
 
-Use these Italian section headings exactly once and in this order:
-- Risultato chiave
-- Disegno dello studio
-- Risultati principali
-- Interpretazione cauta
-- Limiti della nota
+English headings, once each and in this order:
+- Study and findings
+- Clinical interpretation
+- Limitations and open questions
 
-Do not duplicate headings.
+Italian headings, once each and in this order:
+- Studio e risultati
+- Interpretazione clinica
+- Limiti e questioni aperte
+
+Do not use a separate "Key finding" section in short Research Notes.
+Integrate the principal result naturally into the opening paragraph or the first section.
+Do not force every paragraph into the same length or rhetorical pattern.
+Avoid repeating the same quantitative result in the summary and again in multiple sections.
+
+For full-text Research Analyses, a more detailed structure is allowed when justified by the source.
 
 4. ITALIAN QUALITY
 - Use natural scientific Italian, not literal machine translation.
@@ -378,6 +381,11 @@ Do not duplicate headings.
   "does not establish", "cannot distinguish between".
 - Never use "proves" unless the design genuinely permits that level of causal inference.
 
+10. SOURCE PRESENTATION
+- Include only one concise source note in the article body.
+- Do not repeat PMID, DOI, or PMCID in multiple places.
+- Public page rendering will provide PubMed and DOI links separately.
+
 10. FINAL SELF-CHECK
 Before returning the draft, verify:
 - scientific accuracy;
@@ -430,6 +438,10 @@ FACTUAL CHECKS
 - abstract-only status is clearly disclosed when applicable.
 
 EDITORIAL CHECKS
+- for abstract-only Research Notes, English headings are exactly: Study and findings; Clinical interpretation; Limitations and open questions;
+- for abstract-only Research Notes, Italian headings are exactly: Studio e risultati; Interpretazione clinica; Limiti e questioni aperte;
+- no duplicate section headings;
+- source identifiers are not redundantly repeated in the article body;
 - prose is natural, varied, and not mechanically patterned;
 - no stereotyped AI-like filler or formulaic transitions;
 - no promotional, journalistic, or unnecessarily emphatic wording;
@@ -528,10 +540,6 @@ Scientific oversight: **Marco Medeot, Scientific Director**
 
 {draft.get("source_note_en","")}
 
-PMID: {pmid}  
-DOI: {doi or "Not available"}  
-PMCID: {pmcid or "Not available"}
-
 ---
 
 # {draft.get("title_it","")}
@@ -549,9 +557,6 @@ Supervisione scientifica: **Marco Medeot, Direttore Scientifico**
 
 {draft.get("source_note_it","")}
 
-PMID: {pmid}  
-DOI: {doi or "Non disponibile"}  
-PMCID: {pmcid or "Non disponibile"}
 """
 
 def load_index() -> dict[str, Any]:
