@@ -1,7 +1,7 @@
 // Ketogenic Research — V70 recovery script
 
 const KR_LIBRARY_STATS = {
-  publications: 1219,
+  publications: 2483,
   clinicalAreas: 53
 };
 
@@ -636,3 +636,100 @@ window.addEventListener(
   'hashchange',
   openLibraryAreaFromHash
 );
+
+// V65_AREA_FILTER
+(function () {
+  function applyAreaFilter() {
+    const area = document.getElementById('areaFilter');
+    if (!area) return;
+
+    const chosen = area.value;
+
+    document.querySelectorAll(
+      'details.library-folder'
+    ).forEach(folder => {
+      const areaMatch =
+        chosen === 'all' ||
+        folder.id === chosen;
+
+      if (!areaMatch) {
+        folder.hidden = true;
+      } else {
+        folder.hidden = false;
+
+        if (chosen !== 'all') {
+          folder.open = true;
+        }
+      }
+    });
+
+    document.querySelectorAll(
+      '.library-group'
+    ).forEach(group => {
+      const visible = [
+        ...group.querySelectorAll(
+          'details.library-folder'
+        )
+      ].some(
+        folder =>
+          !folder.hidden
+      );
+
+      group.hidden = !visible;
+    });
+  }
+
+  document.addEventListener(
+    'DOMContentLoaded',
+    () => {
+      const area =
+        document.getElementById(
+          'areaFilter'
+        );
+
+      if (area) {
+        area.addEventListener(
+          'change',
+          () => {
+            if (
+              typeof applyLibraryFilters
+              === 'function'
+            ) {
+              applyLibraryFilters();
+            }
+
+            applyAreaFilter();
+          }
+        );
+      }
+
+      const clear =
+        document.getElementById(
+          'clearLibraryFilters'
+        );
+
+      if (clear) {
+        clear.addEventListener(
+          'click',
+          () => {
+            const area =
+              document.getElementById(
+                'areaFilter'
+              );
+
+            if (area) {
+              area.value = 'all';
+            }
+
+            window.setTimeout(
+              applyAreaFilter,
+              0
+            );
+          }
+        );
+      }
+
+      applyAreaFilter();
+    }
+  );
+})();

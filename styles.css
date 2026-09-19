@@ -1492,3 +1492,15 @@ h4 {
 
   /* METRIC / OVERVIEW CARDS PIÙ COMPATTE */
   .
+
+/* V65_AREA_FILTER */
+#areaFilter {
+  min-width: 210px;
+}
+
+@media (max-width: 720px) {
+  #areaFilter {
+    width: 100%;
+    min-width: 0;
+  }
+}

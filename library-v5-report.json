@@ -1,0 +1,16 @@
+{
+  "version": 5,
+  "run_at": "2026-09-19T16:47:48.953741+00:00",
+  "library_cards_before_promotion": 1219,
+  "legacy_cards_reconciled": 0,
+  "backfill_window": "2022-2024",
+  "pubmed_query_count": 1935,
+  "pubmed_ids_fetched": 1935,
+  "new_queue_records": 975,
+  "auto_eligible_records": 884,
+  "low_confidence_records": 91,
+  "duplicates_skipped": 150,
+  "irrelevant_or_unusable_skipped": 797,
+  "next_end_year": 2021,
+  "backfill_completed": false
+}
