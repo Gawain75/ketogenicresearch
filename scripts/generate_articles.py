@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Ketogenic Research — AI article pilot V3.9
+Ketogenic Research — AI article pilot V4.0
 
 V3 editorial-quality pilot:
 - processes ONE article per run
@@ -477,13 +477,10 @@ EDITORIAL RULES FOR V3
 - For randomized trials, do not turn one experiment into a general clinical claim.
 
 2. ABSTRACT-ONLY CAUTION
+- Never state in the article body whether the note was based on an abstract, full text, PMC, publisher text, or any retrieval source.
+- Source-acquisition details are internal metadata only and must not appear in reader-facing prose.
 - Never mention AI, automation, workflow, model, generation process, or any technical production method in the published article.
 - Describe only the source limitations, not how the article was produced.
-- If no full-text material was supplied to the model, the English article MUST include this exact sentence verbatim:
-  "This note is based on the PubMed abstract."
-- If no full-text material was supplied to the model, the Italian article MUST include this exact sentence verbatim:
-  "Questa nota si basa sull'abstract di PubMed."
-- These sentences describe the source material used for the note. Do not state that a full text does not exist or is unavailable elsewhere.
 
 3. STRUCTURE
 For abstract-only Research Notes, use exactly three sections.
@@ -643,11 +640,11 @@ EDITORIAL CHECKS
 - Ketogenic terminology must be specific when relevant.
 - Conclusions must be proportional to study design and evidence quality.
 - Do not repeat the same concept unnecessarily across sections.
-- Never state or imply that full text is globally unavailable merely because it was not supplied.
-- If SOURCE MATERIAL USED is PubMed abstract, the note must clearly state that it is based on the PubMed abstract, without making claims about whether full text exists elsewhere.
+- The reader-facing article must not mention whether the source used was an abstract, full text, PMC text, publisher text, Unpaywall, or any retrieval workflow.
+- Source-acquisition details are internal metadata only.
 
-STRUCTURE CHECKS FOR ABSTRACT-ONLY RESEARCH NOTES
-If SOURCE MATERIAL USED is PubMed abstract, the English section headings must be exactly:
+STRUCTURE CHECKS FOR RESEARCH NOTES
+For Research Notes, the English section headings must be exactly:
 1. Study and findings
 2. Clinical interpretation
 3. Limitations and open questions
@@ -660,7 +657,7 @@ The Italian section headings must be exactly:
 No duplicate section headings are allowed.
 
 STRUCTURE CHECKS FOR FULL-TEXT RESEARCH ANALYSES
-If a full-text source was supplied, a more detailed structure is allowed when justified by the source. Do not require the three Research Note headings.
+For Research Analyses, a more detailed structure is allowed when justified by the source.
 
 SOURCE PRESENTATION
 - Source identifiers must not be redundantly repeated in the article body.
@@ -707,7 +704,7 @@ date: {json.dumps(rec.get("date",""))}
 journal: {json.dumps(rec.get("journal",""), ensure_ascii=False)}
 article_type: {json.dumps(draft.get("article_type",""))}
 article_type_it: {json.dumps(draft.get("article_type_it",""))}
-generator_version: "3.9"
+generator_version: "4.0"
 editorial_byline: "Ketogenic Research Editorial"
 scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
