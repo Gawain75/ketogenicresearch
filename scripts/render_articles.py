@@ -112,7 +112,9 @@ def article_page(meta, en_title, en_html, it_title, it_html):
 </head>
 <body class="article-page">
 <header class="article-topbar">
-  <a href="../index.html" class="article-brand">Ketogenic Research</a>
+  <a href="../index.html" class="article-brand" aria-label="Ketogenic Research">
+    <img src="../logo-ketogenic-research.png" alt="Ketogenic Research" class="article-logo">
+  </a>
   <div class="article-lang">
     <button type="button" class="active" data-lang="en">EN</button>
     <button type="button" data-lang="it">IT</button>
@@ -126,9 +128,9 @@ def article_page(meta, en_title, en_html, it_title, it_html):
     <div class="article-kicker">{html.escape(article_type)}</div>
     <div class="article-meta">{html.escape(meta_en)}</div>
     <div class="article-content">{en_html}</div>
-    <div class="article-byline">
-      <strong>Ketogenic Research Editorial</strong><br>
-      Scientific oversight: <strong>Marco Medeot, Scientific Director</strong>
+    <div class="article-byline article-byline-top">
+      <strong>Ketogenic Research Editorial</strong>
+      <span>Scientific oversight: Marco Medeot, Scientific Director</span>
     </div>
   </section>
 
@@ -136,9 +138,9 @@ def article_page(meta, en_title, en_html, it_title, it_html):
     <div class="article-kicker">Nota di ricerca</div>
     <div class="article-meta">{html.escape(meta_it)}</div>
     <div class="article-content">{it_html}</div>
-    <div class="article-byline">
-      <strong>Ketogenic Research Editorial</strong><br>
-      Supervisione scientifica: <strong>Marco Medeot, Direttore Scientifico</strong>
+    <div class="article-byline article-byline-top">
+      <strong>Ketogenic Research Editorial</strong>
+      <span>Supervisione scientifica: Marco Medeot, Direttore Scientifico</span>
     </div>
   </section>
 
@@ -179,7 +181,9 @@ def index_page(cards):
 </head>
 <body class="article-index-page">
 <header class="article-topbar">
-  <a href="index.html" class="article-brand">Ketogenic Research</a>
+  <a href="index.html" class="article-brand" aria-label="Ketogenic Research">
+    <img src="logo-ketogenic-research.png" alt="Ketogenic Research" class="article-logo">
+  </a>
   <div class="article-lang">
     <button type="button" class="active" data-lang="en">EN</button>
     <button type="button" data-lang="it">IT</button>
@@ -234,6 +238,12 @@ def main():
         en_md, it_md = split_languages(body)
         en_title, en_html = markdown_to_html(en_md)
         it_title, it_html = markdown_to_html(it_md)
+
+        # The generated Markdown contains the article type immediately below the H1.
+        # It is already displayed as the page kicker, so remove that duplicate paragraph.
+        en_html = re.sub(r'<p><strong>Research Note</strong></p>', '', en_html, count=1)
+        it_html = re.sub(r'<p><strong>Nota di ricerca</strong></p>', '', it_html, count=1)
+
         if not en_title:
             continue
 
