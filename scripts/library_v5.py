@@ -25,6 +25,7 @@ BACKFILL_START_YEAR = int(os.getenv("BACKFILL_START_YEAR", "2024"))
 BACKFILL_MIN_YEAR = int(os.getenv("BACKFILL_MIN_YEAR", "1970"))
 BACKFILL_MAX_RECORDS = max(100, int(os.getenv("BACKFILL_MAX_RECORDS", "3000")))
 RECONCILE_MAX = max(0, int(os.getenv("RECONCILE_MAX", "50")))
+PROMOTION_BATCH_MAX = max(1, int(os.getenv("PROMOTION_BATCH_MAX", "400")))
 FETCH_BATCH = 200
 
 
@@ -355,6 +356,20 @@ def merge_queue(new_records: list[dict]) -> int:
     return added
 
 
+
+def historical_promotion_backlog() -> int:
+    data = load_json(QUEUE, {"records": []})
+    count = 0
+    for rec in data.get("records", []):
+        if not rec.get("auto_eligible"):
+            continue
+        if not rec.get("backfill_window"):
+            continue
+        if rec.get("promotion_status") == "promoted":
+            continue
+        count += 1
+    return count
+
 def main():
     if not LIBRARY.exists():
         raise SystemExit("library.html not found.")
@@ -373,7 +388,7 @@ def main():
     state = load_json(
         STATE,
         {
-            "version": 5,
+            "version": 5.1,
             "next_end_year": BACKFILL_START_YEAR,
             "min_year": BACKFILL_MIN_YEAR,
             "years_per_run": BACKFILL_YEARS_PER_RUN,
@@ -383,8 +398,19 @@ def main():
 
     end_year = int(state.get("next_end_year", BACKFILL_START_YEAR))
     min_year = int(state.get("min_year", BACKFILL_MIN_YEAR))
+    backlog_before = historical_promotion_backlog()
 
-    if state.get("completed") or end_year < min_year:
+    # V5.1: do not discover another historical window while a large backlog
+    # from earlier V5 discovery still awaits controlled promotion.
+    if backlog_before >= PROMOTION_BATCH_MAX:
+        print(
+            f"Historical discovery paused: {backlog_before} eligible V5 records "
+            f"are still awaiting promotion."
+        )
+        start_year = None
+        ids = []
+        pubmed_count = 0
+    elif state.get("completed") or end_year < min_year:
         print("Historical backfill already complete.")
         start_year = None
         ids = []
@@ -440,6 +466,11 @@ def main():
             if auto_eligible
             else "excluded-low-confidence"
         )
+        rec["promotion_status"] = (
+            "pending"
+            if auto_eligible
+            else "not-eligible"
+        )
         rec["backfill_window"] = (
             f"{start_year}-{end_year}"
             if start_year is not None
@@ -460,7 +491,7 @@ def main():
         next_end = start_year - 1
         state.update(
             {
-                "version": 5,
+                "version": 5.1,
                 "last_completed_window": f"{start_year}-{end_year}",
                 "last_run": dt.datetime.now(dt.timezone.utc).isoformat(),
                 "next_end_year": next_end,
@@ -472,7 +503,7 @@ def main():
         save_json(STATE, state)
 
     report = {
-        "version": 5,
+        "version": 5.1,
         "run_at": dt.datetime.now(dt.timezone.utc).isoformat(),
         "library_cards_before_promotion": before_cards,
         "legacy_cards_reconciled": reconciled,
@@ -490,6 +521,8 @@ def main():
         "irrelevant_or_unusable_skipped": rejected_irrelevant,
         "next_end_year": state.get("next_end_year"),
         "backfill_completed": state.get("completed", False),
+        "promotion_backlog_before": backlog_before,
+        "promotion_batch_max": PROMOTION_BATCH_MAX,
     }
     save_json(REPORT, report)
 
