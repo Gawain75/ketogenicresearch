@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Ketogenic Research — AI article pilot V3.8
+Ketogenic Research — AI article pilot V3.9
 
 V3 editorial-quality pilot:
 - processes ONE article per run
@@ -628,64 +628,50 @@ def verifier_prompt(packet: str, draft: dict[str, Any]) -> str:
 Compare the DRAFT only against the SOURCE PACKET.
 
 FACTUAL CHECKS
-- every number is supported;
-- study design is correct;
-- population is correct;
-- no unsupported causal claim;
-- no unsupported clinical recommendation;
-- no invented limitation;
-- no external factual claims;
-- PMID/DOI/source status are correct;
-- abstract-only status is clearly disclosed when applicable.
+- Every quantitative claim must be supported by the supplied source.
+- Study design and population must be described accurately.
+- Do not allow unsupported causal claims.
+- Do not allow unsupported clinical recommendations.
+- Do not allow invented limitations.
+- Do not allow external factual claims absent from the supplied source.
+- PMID, DOI, PMCID and source status must be correct.
+- Statistical significance must not be presented as clinical importance without support.
 
 EDITORIAL CHECKS
-- never state or imply that the full text is globally unavailable merely because no full-text material was supplied;
-- when only the PubMed abstract was supplied, describe the note as abstract-based without making claims about publisher availability;
-- for abstract-only Research Notes, English headings are exactly: Study and findings; Clinical interpretation; Limitations and open questions;
-- for abstract-only Research Notes, Italian headings are exactly: Studio e risultati; Interpretazione clinica; Limiti e questioni aperte;
-- no duplicate section headings;
-- source identifiers are not redundantly repeated in the article body;
-- prose is natural, varied, and not mechanically patterned;
-- no stereotyped AI-like filler or formulaic transitions;
-- no promotional, journalistic, or unnecessarily emphatic wording;
-- ketogenic terminology is specific and not used as an undifferentiated category;
-- statistical significance is not presented as clinical importance without support;
-- conclusions are proportional to study design and evidence quality;
-- there are no redundant repetitions of the same concept across sections;
-- the article contains no mention of AI, automation, workflow, model, generation process, or technical production method;
-- if the source is abstract-only, the English draft contains exactly:
-  "This note is based on the PubMed abstract."
-- if the source is abstract-only, the Italian draft contains exactly:
-  "Questa nota si basa sull'abstract di PubMed."
-- the article contains no mention of AI, automation, workflow, model, generation process, or technical production method;
-- titles are descriptive rather than overstated;
-- no section heading is duplicated;
-- English section headings are exactly:
-  Key finding
-  Study design
-  Main results
-  Cautious interpretation
-  Limitations of this note
-- Italian section headings are exactly:
-  Risultato chiave
-  Disegno dello studio
-  Risultati principali
-  Interpretazione cauta
-  Limiti della nota
-- the Italian is natural scientific Italian, not a literal or awkward translation;
-- "throughput" is not translated as "produttività" in a performance-testing context;
-- wording distinguishes observed findings from authors' interpretation;
-- abstract-only notes do not imply review of the full paper.
+- Prose must be natural, varied, sober and scientifically precise.
+- Do not allow stereotyped filler, repetitive transitions, promotional wording, or journalistic emphasis.
+- Ketogenic terminology must be specific when relevant.
+- Conclusions must be proportional to study design and evidence quality.
+- Do not repeat the same concept unnecessarily across sections.
+- Never state or imply that full text is globally unavailable merely because it was not supplied.
+- If SOURCE MATERIAL USED is PubMed abstract, the note must clearly state that it is based on the PubMed abstract, without making claims about whether full text exists elsewhere.
 
-If any factual or editorial check fails, verdict must be FAIL.
+STRUCTURE CHECKS FOR ABSTRACT-ONLY RESEARCH NOTES
+If SOURCE MATERIAL USED is PubMed abstract, the English section headings must be exactly:
+1. Study and findings
+2. Clinical interpretation
+3. Limitations and open questions
+
+The Italian section headings must be exactly:
+1. Studio e risultati
+2. Interpretazione clinica
+3. Limiti e questioni aperte
+
+No duplicate section headings are allowed.
+
+STRUCTURE CHECKS FOR FULL-TEXT RESEARCH ANALYSES
+If a full-text source was supplied, a more detailed structure is allowed when justified by the source. Do not require the three Research Note headings.
+
+SOURCE PRESENTATION
+- Source identifiers must not be redundantly repeated in the article body.
+- Public page rendering provides separate PubMed/DOI links.
 
 Return JSON with exactly:
-verdict
-issues
-unsupported_claims
-
-verdict must be PASS or FAIL.
-issues and unsupported_claims must be arrays of strings.
+{{
+  "verdict": "PASS" or "FAIL",
+  "issues": ["..."],
+  "unsupported_claims": ["..."]
+}}
 
 SOURCE PACKET:
 {packet}
@@ -721,7 +707,7 @@ date: {json.dumps(rec.get("date",""))}
 journal: {json.dumps(rec.get("journal",""), ensure_ascii=False)}
 article_type: {json.dumps(draft.get("article_type",""))}
 article_type_it: {json.dumps(draft.get("article_type_it",""))}
-generator_version: "3.8"
+generator_version: "3.9"
 editorial_byline: "Ketogenic Research Editorial"
 scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
