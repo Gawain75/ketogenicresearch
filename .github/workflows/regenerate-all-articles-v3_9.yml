@@ -1,0 +1,52 @@
+name: Regenerate all articles V3.9
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: regenerate-all-articles-v39
+  cancel-in-progress: false
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install article dependencies
+        run: python -m pip install pypdf
+
+      - name: Regenerate up to four older articles
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GROQ_MODEL: openai/gpt-oss-120b
+          NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
+          NCBI_EMAIL: info@ketogenicresearch.org
+          MAX_REGEN_ARTICLES: "4"
+        run: python scripts/regenerate_all_articles_v3_9.py
+
+      - name: Re-render public article pages
+        run: python scripts/render_articles.py
+
+      - name: Commit regenerated articles
+        run: |
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add articles-drafts/ articles/ articles.html
+          if git diff --cached --quiet; then
+            echo "No articles changed."
+          else
+            git commit -m "Regenerate research articles with V3.9"
+            git push
+          fi
