@@ -32,7 +32,7 @@ The data suggest that exogenous ketone ester can modulate the inflammatory respo
 
 ## Limitations and open questions
 
-This note is based on the PubMed abstract. The investigation was limited to a single acute LPS model in male C57BL/6 mice, which may not capture the heterogeneity of human sepsis. The knock‑in approach isolates the K679 site but does not address potential contributions of other Kbhb sites or parallel pathways. Effects were observed with pretreatment; the therapeutic window after sepsis onset remains unknown. Translating β‑OHB concentrations achieved by KE to clinically feasible dosing, and confirming safety in critically ill patients, are essential next steps.
+The investigation was limited to a single acute LPS model in male C57BL/6 mice, which may not capture the heterogeneity of human sepsis. The knock‑in approach isolates the K679 site but does not address potential contributions of other Kbhb sites or parallel pathways. Effects were observed with pretreatment; the therapeutic window after sepsis onset remains unknown. Translating β‑OHB concentrations achieved by KE to clinically feasible dosing, and confirming safety in critically ill patients, are essential next steps.
 
 ### Source
 
@@ -59,7 +59,7 @@ I risultati suggeriscono che l'ester chetone esogeno possa modulare la risposta 
 
 ## Limiti e questioni aperte
 
-Questa nota si basa sull'abstract di PubMed. Lo studio è stato condotto in un unico modello acuto di LPS su topi maschi C57BL/6, il che potrebbe non riflettere la variabilità della sepsi umana. L'approccio knock‑in isola il sito K679 ma non esclude il possibile ruolo di altre site di Kbhb o di vie parallele. Gli effetti sono stati osservati con pretreatment; il potenziale beneficio quando il trattamento è iniziato dopo l'insorgenza della sepsi rimane incerto. È necessario tradurre le concentrazioni di β‑OHB raggiunte con KE in dosaggi clinicamente praticabili e confermare la sicurezza nei pazienti critici.
+Lo studio è stato condotto in un unico modello acuto di LPS su topi maschi C57BL/6, il che potrebbe non riflettere la variabilità della sepsi umana. L'approccio knock‑in isola il sito K679 ma non esclude il possibile ruolo di altre site di Kbhb o di vie parallele. Gli effetti sono stati osservati con pretreatment; il potenziale beneficio quando il trattamento è iniziato dopo l'insorgenza della sepsi rimane incerto. È necessario tradurre le concentrazioni di β‑OHB raggiunte con KE in dosaggi clinicamente praticabili e confermare la sicurezza nei pazienti critici.
 
 ### Fonte
 
