@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Ketogenic Research — AI article pilot V3.2
+Ketogenic Research — AI article pilot V3.3
 
 V3 editorial-quality pilot:
 - processes ONE article per run
@@ -278,14 +278,11 @@ EDITORIAL RULES FOR V3
 2. ABSTRACT-ONLY CAUTION
 - Never mention AI, automation, workflow, model, generation process, or any technical production method in the published article.
 - Describe only the source limitations, not how the article was produced.
-- If full text is unavailable, the article must be explicitly labelled:
-  English: "{article_type_en}"
-  Italian: "{article_type_it}"
-- The English text must include this exact disclosure:
+- If the full text is unavailable, the English article MUST include this exact sentence verbatim:
   "Interpretation is based on the PubMed abstract; the full text was not available."
-- The Italian text must include this exact disclosure:
+- If the full text is unavailable, the Italian article MUST include this exact sentence verbatim:
   "L'interpretazione si basa sull'abstract di PubMed; il testo completo non era disponibile."
-- Do not speculate about methods, adverse events, conflicts of interest, secondary endpoints, or limitations that are not stated in the source.
+- These two sentences are mandatory and must not be paraphrased.
 
 3. STRUCTURE
 Use these English section headings exactly once and in this order:
@@ -320,6 +317,12 @@ Do not duplicate headings.
 - Do not make clinical recommendations.
 - Do not use promotional language.
 - If the supplied source does not support a statement, omit it.
+- Prefer wording such as "was associated with", "was linked to", "the study reported",
+  "the authors found", "the pooled analysis showed", or "the results suggest".
+- Avoid phrases such as "can improve", "can reduce", "improves", "reduces",
+  "enhances", "protects", "prevents", or "causes" unless the supplied source
+  explicitly supports that wording and the study design justifies it.
+- In retrospective or observational studies, causal language is prohibited.
 
 Return JSON with exactly these top-level keys:
 article_type
@@ -362,6 +365,11 @@ FACTUAL CHECKS
 - abstract-only status is clearly disclosed when applicable.
 
 EDITORIAL CHECKS
+- the article contains no mention of AI, automation, workflow, model, generation process, or technical production method;
+- if the source is abstract-only, the English draft contains exactly:
+  "Interpretation is based on the PubMed abstract; the full text was not available."
+- if the source is abstract-only, the Italian draft contains exactly:
+  "L'interpretazione si basa sull'abstract di PubMed; il testo completo non era disponibile."
 - the article contains no mention of AI, automation, workflow, model, generation process, or technical production method;
 - titles are descriptive rather than overstated;
 - no section heading is duplicated;
