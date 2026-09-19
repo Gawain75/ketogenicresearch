@@ -1,0 +1,63 @@
+name: Expand Scientific Library V5
+
+on:
+  schedule:
+    - cron: "41 4 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ketogenicresearch-content-write
+  cancel-in-progress: false
+
+jobs:
+  expand-library:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install curator dependency
+        run: python -m pip install beautifulsoup4
+
+      - name: Reconcile legacy records and discover historical literature
+        env:
+          NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
+          NCBI_EMAIL: info@ketogenicresearch.org
+          BACKFILL_START_YEAR: "2024"
+          BACKFILL_MIN_YEAR: "1970"
+          BACKFILL_YEARS_PER_RUN: "3"
+          BACKFILL_MAX_RECORDS: "3000"
+          RECONCILE_MAX: "50"
+        run: python scripts/library_v5.py
+
+      - name: Promote eligible historical publications
+        run: python scripts/promote_auto.py
+
+      - name: Commit Scientific Library V5 changes
+        run: |
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add             library.html             index.html             script.js             styles.css             review-queue.json             library-backfill-state.json             library-v5-report.json
+
+          if git diff --cached --quiet; then
+            echo "No Scientific Library changes."
+            exit 0
+          fi
+
+          git commit -m "Expand Scientific Library with V5"
+          git pull --rebase origin main
+          git push origin main
