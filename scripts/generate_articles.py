@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Ketogenic Research — AI article pilot V3.5
+Ketogenic Research — AI article pilot V3.6
 
 V3 editorial-quality pilot:
 - processes ONE article per run
@@ -227,7 +227,7 @@ def source_packet(
 ) -> str:
     authors = ", ".join(rec.get("authors") or [])
     areas = ", ".join(rec.get("areas") or [])
-    access = "PMC FULL TEXT AVAILABLE" if full_text else "ABSTRACT ONLY"
+    access = "PMC FULL TEXT USED" if full_text else "PUBMED ABSTRACT USED"
 
     return f"""SOURCE ACCESS: {access}
 
@@ -278,11 +278,11 @@ EDITORIAL RULES FOR V3
 2. ABSTRACT-ONLY CAUTION
 - Never mention AI, automation, workflow, model, generation process, or any technical production method in the published article.
 - Describe only the source limitations, not how the article was produced.
-- If the full text is unavailable, the English article MUST include this exact sentence verbatim:
-  "Interpretation is based on the PubMed abstract; the full text was not available."
-- If the full text is unavailable, the Italian article MUST include this exact sentence verbatim:
-  "L'interpretazione si basa sull'abstract di PubMed; il testo completo non era disponibile."
-- These two sentences are mandatory and must not be paraphrased.
+- If no PMC full text was supplied to the model, the English article MUST include this exact sentence verbatim:
+  "This note is based on the PubMed abstract."
+- If no PMC full text was supplied to the model, the Italian article MUST include this exact sentence verbatim:
+  "Questa nota si basa sull'abstract di PubMed."
+- These sentences describe the source material used for the note. Do not state that a full text does not exist or is unavailable elsewhere.
 
 3. STRUCTURE
 For abstract-only Research Notes, use exactly three sections.
@@ -438,6 +438,8 @@ FACTUAL CHECKS
 - abstract-only status is clearly disclosed when applicable.
 
 EDITORIAL CHECKS
+- never state or imply that the full text is globally unavailable merely because no PMC full text was supplied;
+- when only the PubMed abstract was supplied, describe the note as abstract-based without making claims about publisher availability;
 - for abstract-only Research Notes, English headings are exactly: Study and findings; Clinical interpretation; Limitations and open questions;
 - for abstract-only Research Notes, Italian headings are exactly: Studio e risultati; Interpretazione clinica; Limiti e questioni aperte;
 - no duplicate section headings;
@@ -451,9 +453,9 @@ EDITORIAL CHECKS
 - there are no redundant repetitions of the same concept across sections;
 - the article contains no mention of AI, automation, workflow, model, generation process, or technical production method;
 - if the source is abstract-only, the English draft contains exactly:
-  "Interpretation is based on the PubMed abstract; the full text was not available."
+  "This note is based on the PubMed abstract."
 - if the source is abstract-only, the Italian draft contains exactly:
-  "L'interpretazione si basa sull'abstract di PubMed; il testo completo non era disponibile."
+  "Questa nota si basa sull'abstract di PubMed."
 - the article contains no mention of AI, automation, workflow, model, generation process, or technical production method;
 - titles are descriptive rather than overstated;
 - no section heading is duplicated;
