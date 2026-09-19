@@ -2,26 +2,18 @@
 from __future__ import annotations
 
 import json
-import os
 import re
 from pathlib import Path
 
 from bs4 import BeautifulSoup
+
+from pubmed_record_guard import fetch_pubmed_records, norm_doi, norm_title, verified_record
 
 ROOT = Path(__file__).resolve().parents[1]
 QUEUE = ROOT / "review-queue.json"
 LIBRARY = ROOT / "library.html"
 INDEX = ROOT / "index.html"
 SCRIPT = ROOT / "script.js"
-REPORT = ROOT / "library-v5-report.json"
-
-MAX_PROMOTIONS = max(1, int(os.getenv("PROMOTION_BATCH_MAX", "400")))
-
-
-def norm(value: str) -> str:
-    value = re.sub(r"^\s*\d+\.\s*", "", value or "")
-    value = re.sub(r"\s+", " ", value).strip().lower()
-    return re.sub(r"[^a-z0-9β]+", " ", value)
 
 
 def load_json(path: Path, default):
@@ -33,15 +25,21 @@ def load_json(path: Path, default):
         return default
 
 
-def save_json(path: Path, data):
-    path.write_text(
-        json.dumps(data, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
+def main() -> None:
+    queue = load_json(QUEUE, {"records": []})
+    max_promotions = max(1, int(__import__("os").getenv("PROMOTION_BATCH_MAX", "400")))
+    candidates = [
+        r for r in queue.get("records", [])
+        if r.get("auto_eligible")
+        and r.get("pmid")
+        and r.get("backfill_window")
+        and r.get("promotion_status") != "promoted"
+    ][:max_promotions]
+
+    pubmed_map = fetch_pubmed_records(
+        [str(r.get("pmid")) for r in candidates]
     )
 
-
-def main():
-    queue = load_json(QUEUE, {"records": []})
     soup = BeautifulSoup(LIBRARY.read_text(encoding="utf-8"), "html.parser")
 
     sections = {}
@@ -52,7 +50,7 @@ def main():
             sections[title] = details
 
     existing_titles = {
-        norm(h.get("data-en") or h.get_text(" ", strip=True))
+        norm_title(h.get("data-en") or h.get_text(" ", strip=True))
         for h in soup.select("article.folder-paper h4")
     }
     existing_pmids = {
@@ -61,46 +59,41 @@ def main():
         if a.get("data-pmid")
     }
     existing_dois = {
-        str(a.get("data-doi") or "").strip().lower()
+        norm_doi(a.get("data-doi") or "")
         for a in soup.select("article.folder-paper")
         if a.get("data-doi")
     }
 
-    candidates = []
-    for rec in queue.get("records", []):
-        if not rec.get("auto_eligible"):
-            continue
-        if not rec.get("backfill_window"):
-            continue
-        if rec.get("promotion_status") == "promoted":
-            continue
-        candidates.append(rec)
-
-    # Prefer older pending records first; queue order is stable.
-    candidates = candidates[:MAX_PROMOTIONS]
-
-    promoted_records = 0
+    promoted = 0
     cards_added = 0
 
-    for record in candidates:
-        pmid = str(record.get("pmid") or "").strip()
-        doi = str(record.get("doi") or "").strip().lower()
-        title = record.get("title") or ""
-        title_key = norm(title)
-
-        if (
-            not title
-            or title_key in existing_titles
-            or (pmid and pmid in existing_pmids)
-            or (doi and doi in existing_dois)
-        ):
-            record["promotion_status"] = "promoted"
-            record["promotion_note"] = "Already represented in library"
+    for raw in candidates:
+        record = verified_record(raw, pubmed_map)
+        if not record:
+            raw["promotion_status"] = "blocked-bibliography-verification"
             continue
 
-        valid_areas = [a for a in (record.get("areas") or []) if a in sections]
+        pmid = record["pmid"]
+        doi = norm_doi(record.get("doi") or "")
+        title = record.get("title") or ""
+        title_key = norm_title(title)
+
+        if (
+            title_key in existing_titles
+            or pmid in existing_pmids
+            or (doi and doi in existing_dois)
+        ):
+            raw["promotion_status"] = "promoted"
+            raw["promotion_note"] = "Already represented in library"
+            continue
+
+        valid_areas = [
+            a for a in (record.get("areas") or [])
+            if a in sections
+        ]
         if not valid_areas:
-            record["promotion_status"] = "blocked-no-valid-area"
+            print(f"Skipping PMID {pmid}: no valid curated area.")
+            raw["promotion_status"] = "blocked-no-valid-area"
             continue
 
         for area in valid_areas:
@@ -111,8 +104,7 @@ def main():
 
             current = len(details.select("article.folder-paper"))
             art = soup.new_tag("article", attrs={"class": "folder-paper"})
-            if pmid:
-                art["data-pmid"] = pmid
+            art["data-pmid"] = pmid
             if doi:
                 art["data-doi"] = doi
             art["data-evidence"] = (
@@ -148,17 +140,16 @@ def main():
             art.append(meta)
 
             links = soup.new_tag("div", attrs={"class": "paper-links"})
-            if record.get("pubmed_url"):
-                a = soup.new_tag(
-                    "a",
-                    href=record["pubmed_url"],
-                    target="_blank",
-                    rel="noopener",
-                )
-                a["data-en"] = "PubMed ↗"
-                a["data-it"] = "PubMed ↗"
-                a.string = "PubMed ↗"
-                links.append(a)
+
+            a = soup.new_tag(
+                "a",
+                href=record["pubmed_url"],
+                target="_blank",
+                rel="noopener",
+            )
+            a["data-en"] = a["data-it"] = "PubMed ↗"
+            a.string = "PubMed ↗"
+            links.append(a)
 
             if record.get("doi_url"):
                 a = soup.new_tag(
@@ -167,8 +158,7 @@ def main():
                     target="_blank",
                     rel="noopener",
                 )
-                a["data-en"] = "DOI ↗"
-                a["data-it"] = "DOI ↗"
+                a["data-en"] = a["data-it"] = "DOI ↗"
                 a.string = "DOI ↗"
                 links.append(a)
 
@@ -188,14 +178,21 @@ def main():
             wrap.append(art)
             cards_added += 1
 
-        record["promotion_status"] = "promoted"
-        record["promotion_note"] = "Published by controlled V5.1 batch"
-        promoted_records += 1
         existing_titles.add(title_key)
-        if pmid:
-            existing_pmids.add(pmid)
+        existing_pmids.add(pmid)
         if doi:
             existing_dois.add(doi)
+        raw["promotion_status"] = "promoted"
+        raw["promotion_note"] = "Published after fresh PubMed bibliographic verification"
+        promoted += 1
+
+    if not promoted:
+        QUEUE.write_text(
+            json.dumps(queue, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        print("No new PubMed-verified records to promote.")
+        return
 
     total = len(soup.select("article.folder-paper"))
     areas_count = len(soup.select("details.library-folder"))
@@ -213,6 +210,10 @@ def main():
                 st.string = str(areas_count)
 
     LIBRARY.write_text(str(soup), encoding="utf-8")
+    QUEUE.write_text(
+        json.dumps(queue, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
 
     home = BeautifulSoup(INDEX.read_text(encoding="utf-8"), "html.parser")
     for item in home.select(".home-metric"):
@@ -246,28 +247,10 @@ def main():
     js = re.sub(r"(clinicalAreas:\s*)\d+", rf"\g<1>{areas_count}", js)
     SCRIPT.write_text(js, encoding="utf-8")
 
-    queue["records"] = queue.get("records", [])
-    save_json(QUEUE, queue)
-
-    remaining = sum(
-        1
-        for r in queue["records"]
-        if r.get("auto_eligible")
-        and r.get("backfill_window")
-        and r.get("promotion_status") != "promoted"
+    print(
+        f"PubMed-verified promotions: {promoted}; "
+        f"cards added: {cards_added}; curated total: {total}"
     )
-
-    report = load_json(REPORT, {})
-    report["controlled_promotions_this_run"] = promoted_records
-    report["library_cards_added_this_run"] = cards_added
-    report["promotion_backlog_after"] = remaining
-    report["curated_total_after_promotion"] = total
-    save_json(REPORT, report)
-
-    print(f"Controlled V5.1 promotions: {promoted_records}")
-    print(f"Library cards added: {cards_added}")
-    print(f"Historical promotion backlog remaining: {remaining}")
-    print(f"Curated total: {total}")
 
 
 if __name__ == "__main__":
