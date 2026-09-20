@@ -1,0 +1,47 @@
+name: Strengthen research center homepage
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ketogenicresearch-content-write
+  cancel-in-progress: false
+
+jobs:
+  homepage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Strengthen institutional homepage
+        run: python scripts/strengthen_homepage_identity.py
+
+      - name: Commit homepage
+        run: |
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add index.html
+
+          if git diff --cached --quiet; then
+            echo "No homepage changes."
+            exit 0
+          fi
+
+          git commit -m "Strengthen research center homepage"
+          git pull --rebase origin main
+          git push origin main
