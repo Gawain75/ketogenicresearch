@@ -17,7 +17,7 @@ STATE = ROOT / "library-title-translation-state.json"
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "").strip()
 GROQ_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b").strip()
-MAX_TITLES = max(1, int(os.getenv("TRANSLATION_BATCH_MAX", "120")))
+MAX_TITLES = max(1, int(os.getenv("TRANSLATION_BATCH_MAX", "40")))
 
 
 def strip_number(value: str) -> tuple[str, str]:
@@ -48,7 +48,7 @@ def groq_translate(titles: list[str]) -> list[str]:
 
 Rules:
 - Preserve scientific meaning exactly.
-- Use natural professional Italian, not literal machine-like phrasing.
+- Use natural professional Italian.
 - Preserve gene symbols, protein names, abbreviations, drug names, chemical names, study acronyms, and proper nouns when appropriate.
 - Do not add explanations, commentary, quotation marks, numbering, or citations.
 - Keep each output aligned with the corresponding input.
@@ -58,66 +58,108 @@ Rules:
 Titles:
 """ + json.dumps(titles, ensure_ascii=False)
 
-    payload = json.dumps(
-        {
-            "model": GROQ_MODEL,
-            "messages": [
-                {
-                    "role": "system",
-                    "content": (
-                        "You are a scientific English-to-Italian translator "
-                        "specialized in clinical nutrition, metabolism, neurology "
-                        "and biomedical research. Return JSON only."
-                    ),
-                },
-                {"role": "user", "content": prompt},
-            ],
-            "temperature": 0.1,
-            "response_format": {"type": "json_object"},
-            "max_tokens": 7000,
-        }
-    ).encode("utf-8")
+    payload = {
+        "model": GROQ_MODEL,
+        "messages": [
+            {
+                "role": "system",
+                "content": (
+                    "You are a scientific English-to-Italian translator "
+                    "specialized in clinical nutrition, metabolism, neurology "
+                    "and biomedical research. Return JSON only."
+                ),
+            },
+            {"role": "user", "content": prompt},
+        ],
+        "temperature": 0.1,
+        "max_completion_tokens": 3500,
+        "reasoning_effort": "low",
+        "reasoning_format": "hidden",
+        "response_format": {"type": "json_object"},
+    }
 
-    req = urllib.request.Request(
-        "https://api.groq.com/openai/v1/chat/completions",
-        data=payload,
-        headers={
-            "Authorization": f"Bearer {GROQ_API_KEY}",
-            "Content-Type": "application/json",
-        },
-        method="POST",
-    )
+    encoded = json.dumps(payload).encode("utf-8")
 
     last_error = None
-    for attempt in range(6):
+    for attempt in range(1, 6):
+        req = urllib.request.Request(
+            "https://api.groq.com/openai/v1/chat/completions",
+            data=encoded,
+            headers={
+                "Authorization": f"Bearer {GROQ_API_KEY}",
+                "Content-Type": "application/json",
+                "User-Agent": "KetogenicResearch/Library-Translation-V1.1",
+            },
+            method="POST",
+        )
+
         try:
             with urllib.request.urlopen(req, timeout=120) as response:
                 data = json.loads(response.read().decode("utf-8"))
-            content = data["choices"][0]["message"]["content"]
-            parsed = json.loads(content)
+
+            content = data["choices"][0]["message"]["content"].strip()
+
+            try:
+                parsed = json.loads(content)
+            except json.JSONDecodeError:
+                begin = content.find("{")
+                finish = content.rfind("}")
+                if begin < 0 or finish <= begin:
+                    raise RuntimeError("Translation response was not valid JSON.")
+                parsed = json.loads(content[begin:finish + 1])
+
             translations = parsed.get("translations") or []
             if len(translations) != len(titles):
                 raise RuntimeError(
-                    f"Translation count mismatch: expected {len(titles)}, got {len(translations)}"
+                    f"Translation count mismatch: expected {len(titles)}, "
+                    f"got {len(translations)}"
                 )
+
             return [str(x).strip() for x in translations]
 
         except urllib.error.HTTPError as exc:
             last_error = exc
-            if exc.code == 429 or 500 <= exc.code < 600:
-                wait = min(90, max(8, 10 * (attempt + 1)))
-                print(f"Groq HTTP {exc.code}; waiting {wait}s before retry.")
+            body = ""
+            try:
+                body = exc.read().decode("utf-8", errors="replace")
+            except Exception:
+                pass
+
+            if exc.code == 429 and attempt < 5:
+                retry_after = exc.headers.get("Retry-After")
+                try:
+                    wait = max(30, int(float(retry_after)))
+                except Exception:
+                    wait = 45 * attempt
+                print(
+                    f"Groq rate limit reached (429). Waiting {wait}s "
+                    f"before retry {attempt + 1}/5."
+                )
                 time.sleep(wait)
                 continue
-            raise
+
+            if 500 <= exc.code < 600 and attempt < 5:
+                wait = 20 * attempt
+                print(
+                    f"Groq temporary HTTP {exc.code}. Waiting {wait}s "
+                    f"before retry {attempt + 1}/5."
+                )
+                time.sleep(wait)
+                continue
+
+            raise RuntimeError(
+                f"Groq HTTP {exc.code}: {body[:1000]}"
+            ) from exc
+
         except (urllib.error.URLError, TimeoutError, RuntimeError, json.JSONDecodeError) as exc:
             last_error = exc
-            wait = min(60, 8 * (attempt + 1))
-            print(f"Translation request failed; waiting {wait}s: {exc}")
+            if attempt >= 5:
+                raise
+            wait = 20 * attempt
+            print(f"Translation request failed. Waiting {wait}s: {exc}")
             time.sleep(wait)
 
     raise RuntimeError(f"Translation failed after retries: {last_error}")
-
 
 def main():
     soup = BeautifulSoup(LIBRARY.read_text(encoding="utf-8"), "html.parser")
