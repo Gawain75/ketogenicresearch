@@ -1504,3 +1504,104 @@ h4 {
     min-width: 0;
   }
 }
+
+
+/* Institutional primary navigation */
+.site-nav{
+  display:flex;
+  align-items:center;
+  gap:1.15rem;
+}
+.site-nav>a,
+.nav-parent{
+  appearance:none;
+  border:0;
+  background:transparent;
+  color:inherit;
+  font:inherit;
+  font-weight:600;
+  text-decoration:none;
+  cursor:pointer;
+  padding:.65rem 0;
+  white-space:nowrap;
+}
+.nav-group{position:relative}
+.nav-parent{display:flex;align-items:center;gap:.35rem}
+.nav-caret{font-size:.72em;transition:transform .18s ease}
+.nav-submenu{
+  position:absolute;
+  top:calc(100% + .35rem);
+  left:50%;
+  transform:translateX(-50%) translateY(-4px);
+  min-width:220px;
+  padding:.45rem;
+  background:#fff;
+  border:1px solid rgba(36,71,99,.15);
+  border-radius:12px;
+  box-shadow:0 12px 32px rgba(26,54,78,.13);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .16s ease,transform .16s ease,visibility .16s ease;
+  z-index:1000;
+}
+.nav-submenu a{
+  display:block;
+  padding:.72rem .85rem;
+  border-radius:8px;
+  color:#173b5c;
+  text-decoration:none;
+  font-weight:600;
+  line-height:1.25;
+}
+.nav-submenu a:hover,
+.nav-submenu a:focus{background:#f1f6f9}
+.nav-group:hover .nav-submenu,
+.nav-group:focus-within .nav-submenu,
+.nav-group.open .nav-submenu{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:translateX(-50%) translateY(0);
+}
+.nav-group.open .nav-caret{transform:rotate(180deg)}
+
+@media(max-width:900px){
+  .site-nav{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    right:0;
+    padding:1rem 1.1rem 1.25rem;
+    background:#fff;
+    border-top:1px solid rgba(36,71,99,.12);
+    box-shadow:0 14px 28px rgba(26,54,78,.10);
+    flex-direction:column;
+    align-items:stretch;
+    gap:.15rem;
+    z-index:999;
+  }
+  .site-nav.open{display:flex}
+  .site-nav>a,
+  .nav-parent{width:100%;padding:.78rem .2rem}
+  .nav-parent{justify-content:space-between}
+  .nav-group{width:100%}
+  .nav-submenu{
+    position:static;
+    transform:none !important;
+    min-width:0;
+    box-shadow:none;
+    border:0;
+    border-left:2px solid #d8e4eb;
+    border-radius:0;
+    margin:0 0 .35rem .35rem;
+    padding:.1rem 0 .1rem .65rem;
+    display:none;
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    background:transparent;
+  }
+  .nav-group.open .nav-submenu{display:block}
+}

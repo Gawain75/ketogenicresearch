@@ -86,16 +86,47 @@
 <a aria-label="Ketogenic Research" class="brand" href="index.html">
 <img alt="Ketogenic Research" class="site-logo" src="logo-ketogenic-research.png"/>
 </a>
-<nav>
+
+<nav class="site-nav" aria-label="Primary navigation">
 <a href="index.html">Home</a>
-<a data-en="Research" data-it="Ricerca" href="research.html">Research</a>
-<a data-en="Scientific Library" data-it="Biblioteca Scientifica" href="library.html">Scientific Library</a><a data-en="Latest Evidence" data-it="Ultime pubblicazioni" href="latest.html">Latest Evidence</a><a data-en="Evidence Trends" data-it="Andamento evidenze" href="evidence-trends.html">Evidence Trends</a>
-<a data-en="Articles" data-it="Articoli" href="articles.html">
-        Articles
-      </a><a data-en="Methodology" data-it="Metodologia" href="methodology.html">Methodology</a>
-<a data-en="Scientific Method" data-it="Metodo scientifico" href="methodology.html">Scientific Method</a>
+
+<div class="nav-group">
+<button class="nav-parent" type="button" aria-expanded="false">
+<span data-en="Research" data-it="Ricerca">Research</span>
+<span class="nav-caret" aria-hidden="true">&#9662;</span>
+</button>
+<div class="nav-submenu">
+<a data-en="Research Areas" data-it="Aree di ricerca" href="research.html">Research Areas</a>
+<a data-en="Evidence Trends" data-it="Andamento evidenze" href="evidence-trends.html">Evidence Trends</a>
+</div>
+</div>
+
+<div class="nav-group">
+<button class="nav-parent" type="button" aria-expanded="false">
+<span data-en="Evidence" data-it="Evidenze">Evidence</span>
+<span class="nav-caret" aria-hidden="true">&#9662;</span>
+</button>
+<div class="nav-submenu">
+<a data-en="Scientific Library" data-it="Biblioteca Scientifica" href="library.html">Scientific Library</a>
+<a data-en="Latest Evidence" data-it="Ultime pubblicazioni" href="latest.html">Latest Evidence</a>
+</div>
+</div>
+
+<a data-en="Articles" data-it="Articoli" href="articles.html">Articles</a>
+<a data-en="Scientific Direction" data-it="Direzione scientifica" href="director.html">Scientific Direction</a>
+
+<div class="nav-group">
+<button class="nav-parent" type="button" aria-expanded="false">
+<span data-en="About" data-it="Informazioni">About</span>
+<span class="nav-caret" aria-hidden="true">&#9662;</span>
+</button>
+<div class="nav-submenu">
+<a data-en="Methodology" data-it="Metodologia" href="methodology.html">Methodology</a>
 <a data-en="Contact" data-it="Contatti" href="contact.html">Contact</a>
+</div>
+</div>
 </nav>
+
 <div class="actions">
 <div class="lang"><button class="active" data-lang="en">EN</button><button data-lang="it">IT</button></div>
 <button aria-label="Menu" class="menu">☰</button>
@@ -296,5 +327,44 @@ Scientific focus: ketogenic metabolic therapies, clinical nutrition, obesity, bo
 </main>
 <section class="section" id="latest-evidence-home"><div class="wrap"><h2 data-en="Latest Evidence" data-it="Ultime pubblicazioni">Latest Evidence</h2><p data-en="Recent PubMed-indexed literature in ketogenic and metabolic research, presented separately from the curated Scientific Library." data-it="Letteratura recente indicizzata in PubMed sulla ricerca chetogenica e metabolica, presentata separatamente dalla Biblioteca Scientifica curata.">Recent PubMed-indexed literature in ketogenic and metabolic research, presented separately from the curated Scientific Library.</p><a class="btn-secondary" data-en="View latest publications" data-it="Vedi le ultime pubblicazioni" href="latest.html">View latest publications</a></div></section><footer><div class="wrap footer"><span>KETOGENIC RESEARCH</span><span>© 2026 Ketogenic Research</span></div></footer>
 <script src="script.js?v=70"></script>
+
+<script id="kr-dropdown-nav">
+(function(){
+  function bindNavigation(){
+    document.querySelectorAll(".nav-parent").forEach(function(btn){
+      btn.addEventListener("click",function(ev){
+        var group=btn.closest(".nav-group");
+        if(!group)return;
+        document.querySelectorAll(".nav-group.open").forEach(function(other){
+          if(other!==group){
+            other.classList.remove("open");
+            var ob=other.querySelector(".nav-parent");
+            if(ob)ob.setAttribute("aria-expanded","false");
+          }
+        });
+        var open=group.classList.toggle("open");
+        btn.setAttribute("aria-expanded",open?"true":"false");
+        ev.stopPropagation();
+      });
+    });
+    document.addEventListener("click",function(){
+      document.querySelectorAll(".nav-group.open").forEach(function(group){
+        group.classList.remove("open");
+        var btn=group.querySelector(".nav-parent");
+        if(btn)btn.setAttribute("aria-expanded","false");
+      });
+    });
+    document.querySelectorAll(".nav-submenu").forEach(function(menu){
+      menu.addEventListener("click",function(ev){ev.stopPropagation()});
+    });
+  }
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",bindNavigation);
+  }else{
+    bindNavigation();
+  }
+})();
+</script>
+
 </body>
 </html>
