@@ -1,0 +1,47 @@
+name: Remove research-center wording
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ketogenicresearch-content-write
+  cancel-in-progress: false
+
+jobs:
+  homepage-wording:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Remove explicit center wording
+        run: python scripts/remove_research_center_wording.py
+
+      - name: Commit homepage wording
+        run: |
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add index.html
+
+          if git diff --cached --quiet; then
+            echo "No wording changes needed."
+            exit 0
+          fi
+
+          git commit -m "Remove explicit research-center wording"
+          git pull --rebase origin main
+          git push origin main
