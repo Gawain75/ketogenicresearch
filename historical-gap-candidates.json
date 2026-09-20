@@ -1,7 +1,7 @@
 {
   "version": "historical-gap-candidates-v1",
-  "updated_at": "2026-09-20T20:40:24.541104+00:00",
-  "count": 408,
+  "updated_at": "2026-09-20T20:41:21.633051+00:00",
+  "count": 410,
   "records": [
     {
       "pmid": "40692466",
@@ -13821,6 +13821,62 @@
       "first_seen": "2026-09-20",
       "status": "historical-index",
       "audit_year": 1980,
+      "audit_status": "missing-from-library",
+      "auto_eligible": false,
+      "curation_status": "audit-review-needed"
+    },
+    {
+      "pmid": "4747287",
+      "title": "Nutritional ketosis.",
+      "authors": [],
+      "journal": "Modern veterinary practice",
+      "date": "1973-10-01",
+      "date_precision": "day",
+      "year": 1973,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/4747287/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-20",
+      "status": "historical-index",
+      "audit_year": 1973,
+      "audit_status": "missing-from-library",
+      "auto_eligible": false,
+      "curation_status": "audit-review-needed"
+    },
+    {
+      "pmid": "6047450",
+      "title": "Letters to the editor: (Fasting versus a ketogenic diet).",
+      "authors": [
+        "Grande F"
+      ],
+      "journal": "Nutrition reviews",
+      "date": "1967-06-01",
+      "date_precision": "day",
+      "year": 1967,
+      "doi": "10.1111/j.1753-4887.1967.tb05632.x",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/6047450/",
+      "doi_url": "https://doi.org/10.1111/j.1753-4887.1967.tb05632.x",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-20",
+      "status": "historical-index",
+      "audit_year": 1967,
       "audit_status": "missing-from-library",
       "auto_eligible": false,
       "curation_status": "audit-review-needed"

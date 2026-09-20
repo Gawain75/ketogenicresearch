@@ -1,18 +1,18 @@
 {
   "version": "historical-gap-audit-v1",
-  "updated_at": "2026-09-20T20:40:24.540865+00:00",
+  "updated_at": "2026-09-20T20:41:21.632660+00:00",
   "range": [
     1921,
     2025
   ],
   "completed": false,
-  "years_audited": 50,
+  "years_audited": 60,
   "totals": {
-    "pertinent_records": 3613,
-    "already_present": 3205,
-    "missing_from_library": 408,
+    "pertinent_records": 3633,
+    "already_present": 3223,
+    "missing_from_library": 410,
     "auto_eligible_missing": 120,
-    "review_needed_missing": 288
+    "review_needed_missing": 290
   },
   "years": [
     {
@@ -609,6 +609,126 @@
       "pubmed_ids_fetched": 7,
       "pertinent_records": 3,
       "already_present": 3,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1975,
+      "pubmed_query_count": 10,
+      "pubmed_ids_fetched": 10,
+      "pertinent_records": 5,
+      "already_present": 5,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1974,
+      "pubmed_query_count": 2,
+      "pubmed_ids_fetched": 2,
+      "pertinent_records": 2,
+      "already_present": 2,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1973,
+      "pubmed_query_count": 6,
+      "pubmed_ids_fetched": 6,
+      "pertinent_records": 5,
+      "already_present": 4,
+      "missing_from_library": 1,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 1,
+      "unusable_records": 0,
+      "coverage_percent": 80.0
+    },
+    {
+      "year": 1972,
+      "pubmed_query_count": 2,
+      "pubmed_ids_fetched": 2,
+      "pertinent_records": 1,
+      "already_present": 1,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1971,
+      "pubmed_query_count": 1,
+      "pubmed_ids_fetched": 1,
+      "pertinent_records": 1,
+      "already_present": 1,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1970,
+      "pubmed_query_count": 2,
+      "pubmed_ids_fetched": 2,
+      "pertinent_records": 2,
+      "already_present": 2,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1969,
+      "pubmed_query_count": 1,
+      "pubmed_ids_fetched": 1,
+      "pertinent_records": 1,
+      "already_present": 1,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1968,
+      "pubmed_query_count": 2,
+      "pubmed_ids_fetched": 2,
+      "pertinent_records": 0,
+      "already_present": 0,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1967,
+      "pubmed_query_count": 2,
+      "pubmed_ids_fetched": 2,
+      "pertinent_records": 2,
+      "already_present": 1,
+      "missing_from_library": 1,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 1,
+      "unusable_records": 0,
+      "coverage_percent": 50.0
+    },
+    {
+      "year": 1966,
+      "pubmed_query_count": 1,
+      "pubmed_ids_fetched": 1,
+      "pertinent_records": 1,
+      "already_present": 1,
       "missing_from_library": 0,
       "auto_eligible_missing": 0,
       "review_needed_missing": 0,
