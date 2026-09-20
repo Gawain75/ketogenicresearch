@@ -34,7 +34,7 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GROQ_MODEL: openai/gpt-oss-120b
-          TRANSLATION_BATCH_MAX: "120"
+          TRANSLATION_BATCH_MAX: "40"
         run: python scripts/translate_library_titles.py
 
       - name: Commit translated titles
