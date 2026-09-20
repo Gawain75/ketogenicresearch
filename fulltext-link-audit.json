@@ -1,0 +1,10 @@
+{
+  "cards_with_fulltext_links": 2141,
+  "unique_pmids_checked": 1473,
+  "verified_pmcid_available": 1430,
+  "corrected_wrong_fulltext_links": 1742,
+  "removed_unverified_or_duplicate_fulltext_links": 62,
+  "already_correct": 337,
+  "links_removed_because_no_pmid": 0,
+  "policy": "A Full text link is retained only when PubMed ArticleIdList provides a PMCID for the same PMID. Otherwise the Full text link is removed."
+}
