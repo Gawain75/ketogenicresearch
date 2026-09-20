@@ -1,0 +1,119 @@
+{
+  "version": "1921-1970-targeted-backfill-v1",
+  "run_at": "2026-09-20T17:07:40.481708+00:00",
+  "target_range": [
+    1921,
+    1970
+  ],
+  "window_years": 5,
+  "new_queue_records": 20,
+  "pubmed_query_count": 34,
+  "pubmed_ids_fetched": 34,
+  "new_records_found": 20,
+  "auto_eligible_records": 13,
+  "low_confidence_records": 7,
+  "duplicates_skipped": 2,
+  "irrelevant_or_unusable_skipped": 12,
+  "windows": [
+    {
+      "window": "1921-1925",
+      "pubmed_query_count": 0,
+      "pubmed_ids_fetched": 0,
+      "new_records": 0,
+      "auto_eligible": 0,
+      "low_confidence": 0,
+      "duplicates_skipped": 0,
+      "irrelevant_or_unusable_skipped": 0
+    },
+    {
+      "window": "1926-1930",
+      "pubmed_query_count": 1,
+      "pubmed_ids_fetched": 1,
+      "new_records": 1,
+      "auto_eligible": 1,
+      "low_confidence": 0,
+      "duplicates_skipped": 0,
+      "irrelevant_or_unusable_skipped": 0
+    },
+    {
+      "window": "1931-1935",
+      "pubmed_query_count": 10,
+      "pubmed_ids_fetched": 10,
+      "new_records": 3,
+      "auto_eligible": 1,
+      "low_confidence": 2,
+      "duplicates_skipped": 0,
+      "irrelevant_or_unusable_skipped": 7
+    },
+    {
+      "window": "1936-1940",
+      "pubmed_query_count": 0,
+      "pubmed_ids_fetched": 0,
+      "new_records": 0,
+      "auto_eligible": 0,
+      "low_confidence": 0,
+      "duplicates_skipped": 0,
+      "irrelevant_or_unusable_skipped": 0
+    },
+    {
+      "window": "1941-1945",
+      "pubmed_query_count": 0,
+      "pubmed_ids_fetched": 0,
+      "new_records": 0,
+      "auto_eligible": 0,
+      "low_confidence": 0,
+      "duplicates_skipped": 0,
+      "irrelevant_or_unusable_skipped": 0
+    },
+    {
+      "window": "1946-1950",
+      "pubmed_query_count": 2,
+      "pubmed_ids_fetched": 2,
+      "new_records": 1,
+      "auto_eligible": 1,
+      "low_confidence": 0,
+      "duplicates_skipped": 0,
+      "irrelevant_or_unusable_skipped": 1
+    },
+    {
+      "window": "1951-1955",
+      "pubmed_query_count": 2,
+      "pubmed_ids_fetched": 2,
+      "new_records": 2,
+      "auto_eligible": 1,
+      "low_confidence": 1,
+      "duplicates_skipped": 0,
+      "irrelevant_or_unusable_skipped": 0
+    },
+    {
+      "window": "1956-1960",
+      "pubmed_query_count": 3,
+      "pubmed_ids_fetched": 3,
+      "new_records": 3,
+      "auto_eligible": 0,
+      "low_confidence": 3,
+      "duplicates_skipped": 0,
+      "irrelevant_or_unusable_skipped": 0
+    },
+    {
+      "window": "1961-1965",
+      "pubmed_query_count": 8,
+      "pubmed_ids_fetched": 8,
+      "new_records": 6,
+      "auto_eligible": 6,
+      "low_confidence": 0,
+      "duplicates_skipped": 0,
+      "irrelevant_or_unusable_skipped": 2
+    },
+    {
+      "window": "1966-1970",
+      "pubmed_query_count": 8,
+      "pubmed_ids_fetched": 8,
+      "new_records": 4,
+      "auto_eligible": 3,
+      "low_confidence": 1,
+      "duplicates_skipped": 2,
+      "irrelevant_or_unusable_skipped": 2
+    }
+  ]
+}
