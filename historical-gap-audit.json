@@ -1,12 +1,12 @@
 {
   "version": "historical-gap-audit-v1",
-  "updated_at": "2026-09-20T20:49:31.065208+00:00",
+  "updated_at": "2026-09-20T20:50:03.230188+00:00",
   "range": [
     1921,
     2025
   ],
-  "completed": false,
-  "years_audited": 100,
+  "completed": true,
+  "years_audited": 105,
   "totals": {
     "pertinent_records": 3649,
     "already_present": 3233,
@@ -1205,6 +1205,66 @@
     },
     {
       "year": 1926,
+      "pubmed_query_count": 0,
+      "pubmed_ids_fetched": 0,
+      "pertinent_records": 0,
+      "already_present": 0,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1925,
+      "pubmed_query_count": 0,
+      "pubmed_ids_fetched": 0,
+      "pertinent_records": 0,
+      "already_present": 0,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1924,
+      "pubmed_query_count": 0,
+      "pubmed_ids_fetched": 0,
+      "pertinent_records": 0,
+      "already_present": 0,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1923,
+      "pubmed_query_count": 0,
+      "pubmed_ids_fetched": 0,
+      "pertinent_records": 0,
+      "already_present": 0,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1922,
+      "pubmed_query_count": 0,
+      "pubmed_ids_fetched": 0,
+      "pertinent_records": 0,
+      "already_present": 0,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1921,
       "pubmed_query_count": 0,
       "pubmed_ids_fetched": 0,
       "pertinent_records": 0,
