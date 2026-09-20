@@ -1,7 +1,7 @@
 {
   "version": "historical-gap-candidates-v1",
-  "updated_at": "2026-09-20T20:47:34.361065+00:00",
-  "count": 414,
+  "updated_at": "2026-09-20T20:49:31.065658+00:00",
+  "count": 416,
   "records": [
     {
       "pmid": "40692466",
@@ -13998,6 +13998,62 @@
       "first_seen": "2026-09-20",
       "status": "historical-index",
       "audit_year": 1954,
+      "audit_status": "missing-from-library",
+      "auto_eligible": false,
+      "curation_status": "audit-review-needed"
+    },
+    {
+      "pmid": "18743099",
+      "title": "The Ketogenic Diet-pH Determinations.",
+      "authors": [],
+      "journal": "California and western medicine",
+      "date": "1934-11-01",
+      "date_precision": "day",
+      "year": 1934,
+      "doi": "",
+      "pmc": "PMC1751943",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/18743099/",
+      "doi_url": "",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1751943/",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-20",
+      "status": "historical-index",
+      "audit_year": 1934,
+      "audit_status": "missing-from-library",
+      "auto_eligible": false,
+      "curation_status": "audit-review-needed"
+    },
+    {
+      "pmid": "16745232",
+      "title": "The nature of the bactericidal substance in the urine of patients receiving a ketogenic diet.",
+      "authors": [
+        "Fuller AT"
+      ],
+      "journal": "The Biochemical journal",
+      "date": "1933-01-01",
+      "date_precision": "day",
+      "year": 1933,
+      "doi": "10.1042/bj0270976",
+      "pmc": "PMC1252974",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/16745232/",
+      "doi_url": "https://doi.org/10.1042/bj0270976",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1252974/",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-20",
+      "status": "historical-index",
+      "audit_year": 1933,
       "audit_status": "missing-from-library",
       "auto_eligible": false,
       "curation_status": "audit-review-needed"
