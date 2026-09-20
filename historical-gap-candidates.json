@@ -1,7 +1,7 @@
 {
   "version": "historical-gap-candidates-v1",
-  "updated_at": "2026-09-20T20:38:26.385654+00:00",
-  "count": 402,
+  "updated_at": "2026-09-20T20:39:18.504333+00:00",
+  "count": 405,
   "records": [
     {
       "pmid": "40692466",
@@ -13632,6 +13632,100 @@
       "first_seen": "2026-09-20",
       "status": "historical-index",
       "audit_year": 1996,
+      "audit_status": "missing-from-library",
+      "auto_eligible": false,
+      "curation_status": "audit-review-needed"
+    },
+    {
+      "pmid": "8238444",
+      "title": "Plasma beta-hydroxybutyrate after octanoate challenge: attenuated ketogenic capacity in neonatal swine.",
+      "authors": [
+        "Adams SH",
+        "Odle J"
+      ],
+      "journal": "The American journal of physiology",
+      "date": "1993-10-01",
+      "date_precision": "day",
+      "year": 1993,
+      "doi": "10.1152/ajpregu.1993.265.4.R761",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/8238444/",
+      "doi_url": "https://doi.org/10.1152/ajpregu.1993.265.4.R761",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-20",
+      "status": "historical-index",
+      "audit_year": 1993,
+      "audit_status": "missing-from-library",
+      "auto_eligible": false,
+      "curation_status": "audit-review-needed"
+    },
+    {
+      "pmid": "1514604",
+      "title": "Epinephrine's ketogenic effect in humans is mediated principally by lipolysis.",
+      "authors": [
+        "Avogaro A",
+        "Cryer PE",
+        "Bier DM"
+      ],
+      "journal": "The American journal of physiology",
+      "date": "1992-08-01",
+      "date_precision": "day",
+      "year": 1992,
+      "doi": "10.1152/ajpendo.1992.263.2.E250",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/1514604/",
+      "doi_url": "https://doi.org/10.1152/ajpendo.1992.263.2.E250",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-20",
+      "status": "historical-index",
+      "audit_year": 1992,
+      "audit_status": "missing-from-library",
+      "auto_eligible": false,
+      "curation_status": "audit-review-needed"
+    },
+    {
+      "pmid": "2101085",
+      "title": "Saturated fatty acids with different chain lengths as ketogenic substrates in the rat liver.",
+      "authors": [
+        "Constantin J",
+        "Kelmer-Bracht AM",
+        "Ishii-Iwamoto EL",
+        "Ferraresi-Filho O",
+        "Bracht A"
+      ],
+      "journal": "Brazilian journal of medical and biological research = Revista brasileira de pesquisas medicas e biologicas",
+      "date": "1990-01-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2101085/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-20",
+      "status": "historical-index",
+      "audit_year": 1990,
       "audit_status": "missing-from-library",
       "auto_eligible": false,
       "curation_status": "audit-review-needed"
