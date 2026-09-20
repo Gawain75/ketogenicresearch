@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Ketogenic Research — AI article pilot V4.0
+Ketogenic Research — AI article pilot V4.1
 
 V3 editorial-quality pilot:
 - processes ONE article per run
@@ -465,7 +465,32 @@ Follow this policy exactly:
 Write one bilingual article based ONLY on the SOURCE PACKET.
 Do not add background facts that are not explicitly present in the source.
 
-EDITORIAL RULES FOR V3
+READER-FIRST EDITORIAL TRANSFORMATION — V4.1
+
+The published article must NOT read like a translated, expanded, or reordered abstract.
+
+Treat the source as evidence to interpret, not as prose to reproduce.
+
+- Do not follow the abstract's sentence order.
+- Do not mirror the sequence Objective → Methods → Results → Conclusion unless it is genuinely the clearest way to explain the study.
+- Do not paraphrase every sentence or every numerical result from the abstract.
+- Select only the methodological details necessary to understand the credibility and meaning of the findings.
+- Prefer one clear explanation of the central finding over several technically similar statements.
+- Translate specialist terminology into precise but readable scientific language when this can be done without loss of meaning.
+- Define an acronym only when it materially helps the reader; avoid dense acronym clusters.
+- Avoid strings of percentages, p-values, biomarkers, genes, molecular targets, or subgroup statistics unless they are essential to interpretation.
+- Keep the direct description of the study to roughly 20–30% of the article. The majority should explain what the findings mean, how confidently they can be interpreted, and what question remains unresolved.
+- Interpretation must still remain strictly within what the supplied source supports. Do not invent external literature, mechanisms, prevalence estimates, clinical guidelines, or background facts.
+- Write for clinicians, researchers, dietitians, and scientifically informed readers who may not be specialists in the paper's narrow subfield.
+- If a technical term is unavoidable, explain its practical meaning in the same sentence or immediately after it.
+- The article should sound like an experienced scientific editor explaining a paper to another professional, not like a manuscript abstract.
+- Avoid redundant numerical precision. When several numbers express the same finding, retain the one or two that best convey magnitude.
+- A methodological detail belongs in the article only if omitting it would change the interpretation of the result.
+- Do not make "Clinical interpretation" a restatement of the results. It must answer: what does this result actually tell us, and what does it not tell us?
+- Do not make "Limitations and open questions" a generic checklist. Include only limitations that materially affect confidence, applicability, or causality.
+- End on the unresolved scientific question, not on a formulaic conclusion.
+
+EDITORIAL RULES FOR V4.1
 
 1. TITLE CAUTION
 - Do not use causal or definitive verbs such as "improves", "enhances", "prevents",
@@ -483,7 +508,7 @@ EDITORIAL RULES FOR V3
 - Describe only the source limitations, not how the article was produced.
 
 3. STRUCTURE
-For abstract-only Research Notes, use exactly three sections.
+For Research Notes, use exactly three sections.
 
 English headings, once each and in this order:
 - Study and findings
@@ -501,6 +526,16 @@ Do not force every paragraph into the same length or rhetorical pattern.
 Avoid repeating the same quantitative result in the summary and again in multiple sections.
 
 For full-text Research Analyses, a more detailed structure is allowed when justified by the source.
+
+3A. LENGTH AND DENSITY
+- Prefer approximately 650–1000 words total across the English and Italian versions combined only if the source supports that amount of content; do not pad thin evidence.
+- Keep paragraphs compact, usually 2–5 sentences.
+- Avoid paragraphs that consist mainly of measurements, percentages, molecular labels, or methodological terminology.
+- Do not repeat the same finding in the summary, first section, interpretation, and limitations.
+- The summary should be editorial: 2–3 sentences explaining the question and the main finding, not a compressed abstract.
+- In the first section, explain the study in plain scientific prose before giving technical detail.
+- In the interpretation section, prioritize meaning over mechanics.
+- In the limitations section, prioritize applicability and uncertainty over procedural minutiae.
 
 4. ITALIAN QUALITY
 - Use natural scientific Italian, not literal machine translation.
@@ -637,6 +672,12 @@ FACTUAL CHECKS
 EDITORIAL CHECKS
 - Prose must be natural, varied, sober and scientifically precise.
 - Do not allow stereotyped filler, repetitive transitions, promotional wording, or journalistic emphasis.
+- FAIL the draft if it reads primarily as a translated/paraphrased abstract rather than an editorial scientific article.
+- FAIL the draft if it follows the source abstract sentence-by-sentence or reproduces Objective/Methods/Results/Conclusion mechanically.
+- FAIL the draft if excessive methodological or molecular detail obscures the central finding.
+- FAIL the draft if the Clinical interpretation section mostly repeats results instead of explaining their meaning and evidentiary limits.
+- FAIL the draft if numerical detail is repeated without adding interpretive value.
+- Prefer accessible scientific language when an equally accurate simpler formulation is possible.
 - Ketogenic terminology must be specific when relevant.
 - Conclusions must be proportional to study design and evidence quality.
 - Do not repeat the same concept unnecessarily across sections.
@@ -704,7 +745,7 @@ date: {json.dumps(rec.get("date",""))}
 journal: {json.dumps(rec.get("journal",""), ensure_ascii=False)}
 article_type: {json.dumps(draft.get("article_type",""))}
 article_type_it: {json.dumps(draft.get("article_type_it",""))}
-generator_version: "4.0"
+generator_version: "4.1"
 editorial_byline: "Ketogenic Research Editorial"
 scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
