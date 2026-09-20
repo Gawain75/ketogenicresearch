@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20T17:07:54+00:00",
+  "generated_at": "2026-09-20T17:30:04+00:00",
   "current_year": 2026,
   "previous_year": 2025,
   "scope_note": {
@@ -7,11 +7,15 @@
     "it": "I conteggi si riferiscono alle pubblicazioni uniche indicizzate nella Biblioteca Scientifica di Ketogenic Research, non a tutte le pubblicazioni esistenti a livello mondiale."
   },
   "global": {
-    "total_unique": 3917,
-    "known_year": 3577,
+    "total_unique": 3922,
+    "known_year": 3582,
     "unknown_year": 340,
-    "first_year": 1927,
+    "first_year": 1921,
     "by_year": {
+      "1921": 2,
+      "1924": 1,
+      "1925": 1,
+      "1926": 1,
       "1927": 1,
       "1933": 1,
       "1948": 1,
@@ -561,10 +565,14 @@
         "en": "Epilepsy",
         "it": "Epilessia"
       },
-      "total_unique": 1457,
-      "known_year": 1429,
+      "total_unique": 1462,
+      "known_year": 1434,
       "unknown_year": 28,
       "by_year": {
+        "1921": 2,
+        "1924": 1,
+        "1925": 1,
+        "1926": 1,
         "1927": 1,
         "1933": 1,
         "1948": 1,
