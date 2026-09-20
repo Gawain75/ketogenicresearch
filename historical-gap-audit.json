@@ -1,18 +1,18 @@
 {
   "version": "historical-gap-audit-v1",
-  "updated_at": "2026-09-20T20:35:52.650684+00:00",
+  "updated_at": "2026-09-20T20:37:18.427970+00:00",
   "range": [
     1921,
     2025
   ],
   "completed": false,
-  "years_audited": 10,
+  "years_audited": 20,
   "totals": {
-    "pertinent_records": 2710,
-    "already_present": 2417,
-    "missing_from_library": 293,
-    "auto_eligible_missing": 68,
-    "review_needed_missing": 225
+    "pertinent_records": 3351,
+    "already_present": 2971,
+    "missing_from_library": 380,
+    "auto_eligible_missing": 114,
+    "review_needed_missing": 266
   },
   "years": [
     {
@@ -134,6 +134,126 @@
       "review_needed_missing": 5,
       "unusable_records": 0,
       "coverage_percent": 87.5
+    },
+    {
+      "year": 2015,
+      "pubmed_query_count": 226,
+      "pubmed_ids_fetched": 226,
+      "pertinent_records": 94,
+      "already_present": 80,
+      "missing_from_library": 14,
+      "auto_eligible_missing": 8,
+      "review_needed_missing": 6,
+      "unusable_records": 0,
+      "coverage_percent": 85.1
+    },
+    {
+      "year": 2014,
+      "pubmed_query_count": 208,
+      "pubmed_ids_fetched": 208,
+      "pertinent_records": 88,
+      "already_present": 77,
+      "missing_from_library": 11,
+      "auto_eligible_missing": 3,
+      "review_needed_missing": 8,
+      "unusable_records": 0,
+      "coverage_percent": 87.5
+    },
+    {
+      "year": 2013,
+      "pubmed_query_count": 174,
+      "pubmed_ids_fetched": 174,
+      "pertinent_records": 68,
+      "already_present": 58,
+      "missing_from_library": 10,
+      "auto_eligible_missing": 6,
+      "review_needed_missing": 4,
+      "unusable_records": 0,
+      "coverage_percent": 85.3
+    },
+    {
+      "year": 2012,
+      "pubmed_query_count": 149,
+      "pubmed_ids_fetched": 149,
+      "pertinent_records": 55,
+      "already_present": 46,
+      "missing_from_library": 9,
+      "auto_eligible_missing": 5,
+      "review_needed_missing": 4,
+      "unusable_records": 0,
+      "coverage_percent": 83.6
+    },
+    {
+      "year": 2011,
+      "pubmed_query_count": 150,
+      "pubmed_ids_fetched": 150,
+      "pertinent_records": 70,
+      "already_present": 61,
+      "missing_from_library": 9,
+      "auto_eligible_missing": 5,
+      "review_needed_missing": 4,
+      "unusable_records": 0,
+      "coverage_percent": 87.1
+    },
+    {
+      "year": 2010,
+      "pubmed_query_count": 112,
+      "pubmed_ids_fetched": 112,
+      "pertinent_records": 56,
+      "already_present": 49,
+      "missing_from_library": 7,
+      "auto_eligible_missing": 2,
+      "review_needed_missing": 5,
+      "unusable_records": 0,
+      "coverage_percent": 87.5
+    },
+    {
+      "year": 2009,
+      "pubmed_query_count": 110,
+      "pubmed_ids_fetched": 110,
+      "pertinent_records": 55,
+      "already_present": 50,
+      "missing_from_library": 5,
+      "auto_eligible_missing": 4,
+      "review_needed_missing": 1,
+      "unusable_records": 0,
+      "coverage_percent": 90.9
+    },
+    {
+      "year": 2008,
+      "pubmed_query_count": 130,
+      "pubmed_ids_fetched": 130,
+      "pertinent_records": 73,
+      "already_present": 60,
+      "missing_from_library": 13,
+      "auto_eligible_missing": 8,
+      "review_needed_missing": 5,
+      "unusable_records": 0,
+      "coverage_percent": 82.2
+    },
+    {
+      "year": 2007,
+      "pubmed_query_count": 89,
+      "pubmed_ids_fetched": 89,
+      "pertinent_records": 48,
+      "already_present": 42,
+      "missing_from_library": 6,
+      "auto_eligible_missing": 4,
+      "review_needed_missing": 2,
+      "unusable_records": 0,
+      "coverage_percent": 87.5
+    },
+    {
+      "year": 2006,
+      "pubmed_query_count": 73,
+      "pubmed_ids_fetched": 73,
+      "pertinent_records": 34,
+      "already_present": 31,
+      "missing_from_library": 3,
+      "auto_eligible_missing": 1,
+      "review_needed_missing": 2,
+      "unusable_records": 0,
+      "coverage_percent": 91.2
     }
   ]
 }
