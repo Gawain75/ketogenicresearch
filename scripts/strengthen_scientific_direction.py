@@ -1,0 +1,225 @@
+#!/usr/bin/env python3
+from pathlib import Path
+import re
+
+ROOT = Path(__file__).resolve().parents[1]
+TARGET = ROOT / "director.html"
+
+html = TARGET.read_text(encoding="utf-8")
+
+html = re.sub(r"<title>.*?</title>",
+              "<title>Scientific Direction | Marco Medeot | Ketogenic Research</title>",
+              html, count=1, flags=re.S)
+
+html = re.sub(
+    r'<meta\s+content="[^"]*"\s+name="description"\s*/>',
+    '<meta content="Scientific direction at Ketogenic Research: methodological oversight, evidence interpretation and the research profile of Marco Medeot." name="description"/>',
+    html, count=1, flags=re.S
+)
+
+html = html.replace("Ketogenic Research Hub", "Ketogenic Research")
+html = html.replace('"@type": "ResearchOrganization"', '"@type": "Organization"')
+
+html = re.sub(
+    r'<meta\s+content="[^"]*"\s+name="kr-title-en"\s*/>',
+    '<meta content="Scientific Direction | Marco Medeot | Ketogenic Research" name="kr-title-en"/>',
+    html, count=1, flags=re.S
+)
+html = re.sub(
+    r'<meta\s+content="[^"]*"\s+name="kr-title-it"\s*/>',
+    '<meta content="Direzione scientifica | Marco Medeot | Ketogenic Research" name="kr-title-it"/>',
+    html, count=1, flags=re.S
+)
+
+main = r'''
+<main>
+
+<section class="page-hero">
+<div class="wrap">
+<p class="kicker" data-en="SCIENTIFIC DIRECTION" data-it="DIREZIONE SCIENTIFICA">SCIENTIFIC DIRECTION</p>
+<h1 data-en="Scientific oversight and research direction" data-it="Supervisione scientifica e indirizzo della ricerca">Scientific oversight and research direction</h1>
+<p class="lead"
+   data-en="Scientific direction defines the methodological framework, research priorities and standards used to evaluate and interpret evidence across Ketogenic Research."
+   data-it="La Direzione scientifica definisce il quadro metodologico, le priorità di ricerca e gli standard utilizzati per valutare e interpretare le evidenze in Ketogenic Research.">
+Scientific direction defines the methodological framework, research priorities and standards used to evaluate and interpret evidence across Ketogenic Research.
+</p>
+</div>
+</section>
+
+<section class="section">
+<div class="wrap">
+<div class="methodology-two-col">
+
+<article class="method-card">
+<p class="kicker" data-en="MANDATE" data-it="MANDATO">MANDATE</p>
+<h2 data-en="Scientific governance" data-it="Governance scientifica">Scientific governance</h2>
+<p data-en="The Scientific Direction oversees the coherence between research questions, literature surveillance, evidence classification and public interpretation. Its role is to keep conclusions proportional to study design, population, comparator, outcomes and methodological limitations."
+   data-it="La Direzione scientifica supervisiona la coerenza tra domande di ricerca, sorveglianza della letteratura, classificazione delle evidenze e interpretazione pubblica. Il suo ruolo è mantenere le conclusioni proporzionate al disegno dello studio, alla popolazione, al comparatore, agli outcome e ai limiti metodologici.">
+The Scientific Direction oversees the coherence between research questions, literature surveillance, evidence classification and public interpretation.
+</p>
+</article>
+
+<article class="method-card">
+<p class="kicker" data-en="RESPONSIBILITIES" data-it="RESPONSABILITÀ">RESPONSIBILITIES</p>
+<h2 data-en="From evidence control to interpretation" data-it="Dal controllo delle evidenze all’interpretazione">From evidence control to interpretation</h2>
+<p data-en="Responsibilities include methodological supervision, definition of research priorities, oversight of evidence interpretation, review of clinically relevant claims and separation between bibliographic inclusion and scientific endorsement."
+   data-it="Le responsabilità comprendono supervisione metodologica, definizione delle priorità di ricerca, controllo dell’interpretazione delle evidenze, revisione delle affermazioni clinicamente rilevanti e distinzione tra inclusione bibliografica e validazione scientifica.">
+Responsibilities include methodological supervision, definition of research priorities, oversight of evidence interpretation and review of clinically relevant claims.
+</p>
+</article>
+
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="wrap director">
+
+<figure class="portrait">
+<img alt="Marco Medeot"
+     src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Marco_Medeot_portrait.jpg"/>
+<figcaption>Marco Medeot · Wikimedia Commons · CC BY-SA 4.0</figcaption>
+</figure>
+
+<div>
+<p class="kicker" data-en="SCIENTIFIC DIRECTOR" data-it="DIRETTORE SCIENTIFICO">SCIENTIFIC DIRECTOR</p>
+<h2>Marco Medeot</h2>
+<p class="role" data-en="Scientific Director · Ketogenic Research" data-it="Direttore Scientifico · Ketogenic Research">
+Scientific Director · Ketogenic Research
+</p>
+
+<p data-en="Marco Medeot's work is focused on ketogenic nutritional therapies, clinical nutrition, obesity, body composition, lean-mass preservation and metabolic physiology. His recent scientific output also addresses the interaction between ketogenic metabolic therapy and GLP-1 receptor agonist treatment."
+   data-it="L’attività di Marco Medeot è focalizzata su terapie nutrizionali chetogeniche, nutrizione clinica, obesità, composizione corporea, preservazione della massa magra e fisiologia metabolica. La sua produzione scientifica recente affronta anche l’interazione tra terapia metabolica chetogenica e trattamento con agonisti del recettore GLP-1.">
+Marco Medeot's work is focused on ketogenic nutritional therapies, clinical nutrition, obesity, body composition, lean-mass preservation and metabolic physiology.
+</p>
+
+<div class="director-data">
+<div>
+<strong data-en="Ketogenic therapies" data-it="Terapie chetogeniche">Ketogenic therapies</strong>
+<small data-en="Clinical nutrition" data-it="Nutrizione clinica">Clinical nutrition</small>
+</div>
+<div>
+<strong data-en="Body composition" data-it="Composizione corporea">Body composition</strong>
+<small data-en="Lean-mass preservation" data-it="Preservazione della massa magra">Lean-mass preservation</small>
+</div>
+<div>
+<strong data-en="Metabolic physiology" data-it="Fisiologia metabolica">Metabolic physiology</strong>
+<small data-en="Clinical interpretation" data-it="Interpretazione clinica">Clinical interpretation</small>
+</div>
+</div>
+
+<div class="institutional-block">
+<p class="kicker" data-en="SCIENTIFIC FOCUS" data-it="FOCUS SCIENTIFICO">SCIENTIFIC FOCUS</p>
+<ul>
+<li data-en="Ketogenic metabolic therapies and clinical nutrition"
+    data-it="Terapie metaboliche chetogeniche e nutrizione clinica">
+Ketogenic metabolic therapies and clinical nutrition
+</li>
+<li data-en="Obesity, body composition and quality of weight loss"
+    data-it="Obesità, composizione corporea e qualità della perdita di peso">
+Obesity, body composition and quality of weight loss
+</li>
+<li data-en="Lean-mass preservation during metabolic interventions"
+    data-it="Preservazione della massa magra durante gli interventi metabolici">
+Lean-mass preservation during metabolic interventions
+</li>
+<li data-en="Protein requirements during very-low-energy ketogenic therapy"
+    data-it="Fabbisogno proteico durante la terapia chetogenica a bassissimo apporto energetico">
+Protein requirements during very-low-energy ketogenic therapy
+</li>
+<li data-en="Translation of metabolic evidence into clinically meaningful interpretation"
+    data-it="Traduzione delle evidenze metaboliche in interpretazioni clinicamente significative">
+Translation of metabolic evidence into clinically meaningful interpretation
+</li>
+</ul>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="section director-publications">
+<div class="wrap">
+
+<div class="section-heading">
+<p class="kicker" data-en="SELECTED SCIENTIFIC OUTPUT" data-it="PRODUZIONE SCIENTIFICA SELEZIONATA">SELECTED SCIENTIFIC OUTPUT</p>
+<h2 data-en="Recent publications and scientific contributions" data-it="Pubblicazioni e contributi scientifici recenti">Recent publications and scientific contributions</h2>
+<p data-en="Selected public records documenting current research themes and scientific activity."
+   data-it="Una selezione di record pubblici che documentano temi di ricerca e attività scientifica recenti.">
+Selected public records documenting current research themes and scientific activity.
+</p>
+</div>
+
+<div class="research-grid">
+
+<article class="research-card">
+<p class="kicker">OPINION · 2026</p>
+<h3>Preserving Lean Mass During GLP-1RA-Induced Weight Loss: The Potential Role of Ketogenic Metabolic Therapy in Improving Weight-Loss Quality</h3>
+<p>Marco Medeot · <em>Biomedicine Advances</em> · 2026;3(3):89–91</p>
+<p><strong>DOI:</strong> 10.34172/bma.74</p>
+<a class="btn-secondary" href="https://biomedad.ae/Article/bma-74" rel="noopener" target="_blank"
+   data-en="View publication" data-it="Vedi pubblicazione">View publication</a>
+</article>
+
+<article class="research-card">
+<p class="kicker">REVIEW · 2026</p>
+<h3>Protein Requirements During Very-Low-Calorie Ketogenic Diet for Obesity—Limitations of Ideal Body Weight: An Updated Mini-Review</h3>
+<p>Marco Medeot · <em>Biomedicine Advances</em> · 2026</p>
+<p><strong>DOI:</strong> 10.34172/bma.76</p>
+<a class="btn-secondary" href="https://biomedad.ae/Article/bma-76" rel="noopener" target="_blank"
+   data-en="View publication" data-it="Vedi pubblicazione">View publication</a>
+</article>
+
+<article class="research-card">
+<p class="kicker" data-en="SCIENTIFIC CONGRESS · 2026" data-it="CONGRESSO SCIENTIFICO · 2026">SCIENTIFIC CONGRESS · 2026</p>
+<h3>Integrating ketogenic metabolic therapy to mitigate lean mass loss during GLP-1 receptor agonist therapy</h3>
+<p data-en="Scientific program contribution · Obesity &amp; Weight Management Congress 2026"
+   data-it="Contributo al programma scientifico · Obesity &amp; Weight Management Congress 2026">
+Scientific program contribution · Obesity &amp; Weight Management Congress 2026
+</p>
+<a class="btn-secondary"
+   href="https://obesityworldconference.com/program/scientific-program/2026/integrating-ketogenic-metabolic-therapy-to-mitigate-lean-mass-loss-during-glp-1-receptor-agonist-therapy"
+   rel="noopener" target="_blank"
+   data-en="View congress record" data-it="Vedi record congressuale">View congress record</a>
+</article>
+
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="wrap">
+<div class="methodology-two-col">
+
+<article class="method-card">
+<p class="kicker" data-en="EVIDENCE STANDARD" data-it="STANDARD DELLE EVIDENZE">EVIDENCE STANDARD</p>
+<h2 data-en="No automatic equivalence between publication and proof" data-it="Nessuna equivalenza automatica tra pubblicazione e prova">No automatic equivalence between publication and proof</h2>
+<p data-en="The presence of a publication in the Scientific Library or among selected outputs does not establish clinical efficacy. Scientific interpretation depends on study design, quality, consistency, effect size and applicability to the population of interest."
+   data-it="La presenza di una pubblicazione nella Biblioteca Scientifica o tra i contributi selezionati non stabilisce efficacia clinica. L’interpretazione scientifica dipende dal disegno dello studio, dalla qualità, dalla coerenza dei risultati, dall’entità dell’effetto e dall’applicabilità alla popolazione di interesse.">
+The presence of a publication does not establish clinical efficacy.
+</p>
+</article>
+
+<article class="method-card">
+<p class="kicker" data-en="METHOD" data-it="METODO">METHOD</p>
+<h2 data-en="Scientific direction is tied to a declared methodology" data-it="La direzione scientifica è collegata a una metodologia dichiarata">Scientific direction is tied to a declared methodology</h2>
+<p data-en="The standards used for literature surveillance, bibliographic verification, classification and interpretation are described publicly in the Methodology section."
+   data-it="Gli standard utilizzati per sorveglianza della letteratura, verifica bibliografica, classificazione e interpretazione sono descritti pubblicamente nella sezione Metodologia.">
+The standards used for literature surveillance, bibliographic verification, classification and interpretation are described publicly in the Methodology section.
+</p>
+<a class="btn-primary" href="methodology.html" data-en="Scientific Methodology" data-it="Metodologia scientifica">Scientific Methodology</a>
+</article>
+
+</div>
+</div>
+</section>
+
+</main>
+'''
+
+if "<main" not in html or "</main>" not in html:
+    raise RuntimeError("director.html main element not found")
+
+html = re.sub(r"<main.*?</main>", main, html, count=1, flags=re.S)
+TARGET.write_text(html, encoding="utf-8")
+print("Scientific Direction page updated.")
