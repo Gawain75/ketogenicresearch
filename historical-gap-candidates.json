@@ -1,7 +1,7 @@
 {
   "version": "historical-gap-candidates-v1",
-  "updated_at": "2026-09-20T20:42:55.369191+00:00",
-  "count": 413,
+  "updated_at": "2026-09-20T20:45:16.772179+00:00",
+  "count": 414,
   "records": [
     {
       "pmid": "40692466",
@@ -13969,6 +13969,35 @@
       "first_seen": "2026-09-20",
       "status": "historical-index",
       "audit_year": 1956,
+      "audit_status": "missing-from-library",
+      "auto_eligible": false,
+      "curation_status": "audit-review-needed"
+    },
+    {
+      "pmid": "13210942",
+      "title": "Studies on Plasmodium berghei Vincke and Lips, 1948. XVI. Effect of ketogenic diet on the course of blood-induced infection in rats.",
+      "authors": [
+        "RAMAKRISHNAN SP"
+      ],
+      "journal": "Indian journal of malariology",
+      "date": "1954-06-01",
+      "date_precision": "day",
+      "year": 1954,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13210942/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-20",
+      "status": "historical-index",
+      "audit_year": 1954,
       "audit_status": "missing-from-library",
       "auto_eligible": false,
       "curation_status": "audit-review-needed"
