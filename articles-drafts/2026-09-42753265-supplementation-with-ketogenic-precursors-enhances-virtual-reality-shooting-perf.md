@@ -6,34 +6,34 @@ date: "2026-09-17"
 journal: "Military medicine"
 article_type: "Research Note"
 article_type_it: "Nota di ricerca"
-generator_version: "4.0"
+generator_version: "4.1"
 editorial_byline: "Ketogenic Research Editorial"
 scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
-verified_at: "2026-09-19T14:24:51.233418+00:00"
+verified_at: "2026-09-20T08:34:16.006830+00:00"
 ---
 
-# Ketogenic precursor supplementation linked to higher virtual‑reality shooting performance during sleep restriction
+# Ketogenic Precursor Supplementation Linked to Higher Shooting Hit Factor During Short‑Term Sleep Restriction
 
 **Research Note**
 
 **Ketogenic Research Editorial**  
 Scientific oversight: **Marco Medeot, Scientific Director**
 
-In a double‑blind, placebo‑controlled crossover trial, acute supplementation with bis‑octanoyl (R)-1,3‑butanediol raised capillary ketone levels and was associated with an 8% increase in hit factor, faster task completion, modestly higher accuracy and throughput during a virtual‑reality shooting test performed under 50% sleep restriction.
+In a double‑blind, crossover trial, acute supplementation with bis‑octanoyl (R)‑1,3‑butanediol (BO‑BD) raised blood ketones and modestly increased deep‑sleep time. Compared with placebo, BO‑BD improved the primary shooting metric (Hit Factor) by about 8% and shortened task completion time, while accuracy and decision‑making were unchanged.
 
 ## Study and findings
 
-Thirty‑two healthy adults (half women) completed two 4‑night periods of 50% sleep restriction in a randomized, double‑blind, placebo‑controlled crossover design. Participants received 25 g of bis‑octanoyl (R)-1,3‑butanediol (BO‑BD) or an isocaloric flavor‑matched placebo before, twice daily during, and once after each restriction period (nine doses per sequence). Capillary ketone concentrations exceeded 1.0 mM after BO‑BD, and deep‑sleep time increased by 13% relative to placebo (P = 0.042). Compared with placebo, BO‑BD produced an 8% higher Hit Factor (P < 0.001), a 7% faster completion time (P < 0.001), a 1% higher accuracy (P = 0.023) and a 7% greater throughput (P < 0.001) on the Steel Plates shooting task. Marksmanship and decision‑making scores were unchanged, while loss of vertical rifle steadiness showed a trend toward worsening with sleep loss (P = 0.052).
+Thirty‑two healthy adults (half women) completed two 4‑night periods of 50 % sleep restriction in a randomized, double‑blind, placebo‑controlled crossover design. Each period involved nine doses of either 25 g BO‑BD or an isocaloric flavor‑matched placebo administered before, twice daily during, and once after the restriction. Capillary β‑hydroxybutyrate rose above 1.0 mM with BO‑BD, confirming a transient state of nutritional ketosis. Sleep monitoring showed a 13 % increase in deep‑sleep proportion under BO‑BD versus placebo (P = 0.042). The virtual‑reality shooting task measured Hit Factor [(hits‑misses)/time] as the primary outcome. BO‑BD produced an 8 % higher Hit Factor (P < 0.001), a 7 % faster completion time (P < 0.001), a 1 % rise in accuracy (P = 0.023), and a 7 % increase in throughput (P < 0.001) relative to placebo, independent of the sleep restriction. Marksmanship and decision‑making scores were not significantly altered, although a trend toward reduced vertical rifle steadiness was noted with sleep loss (P = 0.052).
 
 ## Clinical interpretation
 
-The trial demonstrates that acute BO‑BD supplementation can induce a transient nutritional ketosis that coincides with modest improvements in speed‑related shooting metrics during short‑term sleep restriction. The observed enhancements pertain to task efficiency (Hit Factor, throughput) and reaction time rather than to accuracy or decision quality, suggesting that ketone‑derived metabolic support may mitigate some performance decrements linked to reduced sleep. However, the magnitude of change is modest and confined to a controlled virtual‑reality environment; extrapolation to real‑world marksmanship or operational settings requires caution.
+The data suggest that acute BO‑BD supplementation can sustain or modestly enhance certain aspects of motor performance—specifically shooting speed and efficiency—when individuals are subjected to short‑term sleep loss. The observed increase in deep‑sleep time may reflect a ketone‑mediated effect on sleep architecture, which could contribute to the performance benefit, although the study did not isolate the relative contributions of ketosis versus sleep changes. Importantly, the improvement was limited to speed‑related metrics; accuracy and higher‑order decision‑making remained unchanged, indicating that ketone‑induced ketosis does not uniformly boost all cognitive‑motor domains under sleep restriction.
 
 ## Limitations and open questions
 
-The study relied on a single, laboratory‑based performance test and a relatively small sample size, limiting statistical power for secondary outcomes such as rifle steadiness. Sleep restriction was acute (four nights) and may not reflect chronic sleep deprivation encountered in some military contexts. The crossover design controls for inter‑individual variability but does not address potential order effects despite washout periods. Future investigations should examine longer supplementation periods, diverse operational tasks, and whether similar effects are observed with other ketogenic precursors or dietary regimens.
+The trial was limited to a laboratory‑based virtual‑reality task and a short 4‑night sleep restriction; external validity to real‑world combat or prolonged sleep deprivation is uncertain. The sample size (n = 32) restricts detection of smaller effects and precludes subgroup analyses (e.g., sex differences). Only one ketone precursor and dose were tested, so dose‑response relationships remain unknown. Finally, the mechanism linking elevated ketones, deeper sleep, and faster shooting performance was not explored; future studies should measure neurophysiological markers and compare BO‑BD with other ketogenic strategies.
 
 ### Source
 
@@ -41,26 +41,26 @@ PMID: 42753265; DOI: 10.1093/milmed/usag429.
 
 ---
 
-# Integrazione di precursori chetogenici associata a migliori prestazioni di tiro in realtà virtuale durante restrizione del sonno
+# Integrazione con precursori chetogenici associata a un Hit Factor più elevato nella tiro di precisione durante restrizione di sonno a breve termine
 
 **Nota di ricerca**
 
 **Ketogenic Research Editorial**  
 Supervisione scientifica: **Marco Medeot, Direttore Scientifico**
 
-In uno studio crossover, doppio cieco e controllato con placebo, l’integrazione acuta di bis‑octanoyl (R)-1,3‑butanediolo ha aumentato i chetoni capillari ed è stata associata a un incremento dell’8% del Hit Factor, a una più rapida esecuzione del compito, a una lieve crescita di accuratezza e throughput durante un test di tiro in realtà virtuale sotto restrizione del sonno del 50%.
+In uno studio crossover, doppio cieco, l’integrazione acuta di bis‑octanoyl (R)‑1,3‑butanediolo (BO‑BD) ha aumentato i chetoni capillari e il tempo di sonno profondo. Rispetto al placebo, BO‑BD ha migliorato l’indice principale di tiro (Hit Factor) di circa 8 % e ridotto il tempo di esecuzione, senza modificare accuratezza e decision‑making.
 
 ## Studio e risultati
 
-Trenta‑due adulti sani (metà donne) hanno completato due periodi di 4 notti con restrizione del sonno del 50% in uno studio crossover randomizzato, doppio cieco e controllato con placebo. I partecipanti hanno assunto 25 g di bis‑octanoyl (R)-1,3‑butanediolo (BO‑BD) o un placebo isocalorico con lo stesso sapore prima, due volte al giorno durante e una volta dopo ogni periodo di restrizione (nove dosi per sequenza). I chetoni capillari hanno superato 1,0 mM dopo BO‑BD, e il tempo di sonno profondo è aumentato del 13% rispetto al placebo (P = 0,042). Rispetto al placebo, BO‑BD ha prodotto un Hit Factor superiore dell’8% (P < 0,001), un tempo di completamento più veloce del 7% (P < 0,001), un’accuratezza aumentata dell’1% (P = 0,023) e un throughput maggiore del 7% (P < 0,001) nel compito di tiro “Steel Plates”. I punteggi di precisione di tiro e di decisione sono rimasti invariati, mentre la perdita di stabilità verticale del fucile ha mostrato una tendenza a peggiorare con la perdita di sonno (P = 0,052).
+Trenta‑due adulti sani (16 donne) hanno completato due periodi di 4 notti con restrizione del sonno al 50 % in uno studio crossover, randomizzato, doppio cieco e controllato con placebo. In ciascun periodo sono state somministrate nove dosi di 25 g di bis‑octanoyl (R)‑1,3‑butanediolo (BO‑BD) o di un placebo isocalorico, prima, due volte al giorno durante e una volta dopo la restrizione. I chetoni capillari sono aumentati oltre 1,0 mM con BO‑BD, confermando uno stato transitorio di chetosi nutrizionale. Il monitoraggio del sonno ha mostrato un incremento del 13 % del tempo in sonno profondo rispetto al placebo (P = 0,042). Il compito di tiro in realtà virtuale ha valutato l’Hit Factor [(colpi‑mancati)/tempo] come risultato primario. BO‑BD ha prodotto un Hit Factor superiore dell’8 % (P < 0,001), un tempo di completamento più veloce del 7 % (P < 0,001), un aumento dell’accuratezza dell’1 % (P = 0,023) e un incremento del throughput del 7 % (P < 0,001) rispetto al placebo, indipendentemente dalla restrizione del sonno. I punteggi di precisione di tiro e di decision‑making non sono cambiati significativamente, sebbene sia stata osservata una tendenza a una minore stabilità verticale del fucile con la perdita di sonno (P = 0,052).
 
 ## Interpretazione clinica
 
-Il trial mostra che l’integrazione acuta di BO‑BD può indurre una chetosi nutrizionale transitoria associata a miglioramenti modesti delle metriche di velocità nel tiro durante una restrizione del sonno a breve termine. Le migliorie osservate riguardano l’efficienza del compito (Hit Factor, throughput) e il tempo di reazione, senza influire sull’accuratezza o sulla qualità decisionale, suggerendo che il supporto metabolico derivante dai chetoni possa attenuare alcune riduzioni di performance legate al sonno ridotto. Tuttavia, l’entità del cambiamento è limitata e confinata a un ambiente di realtà virtuale controllato; l’estensione a situazioni operative reali richiede prudenza.
+I risultati suggeriscono che l’integrazione acuta di BO‑BD può mantenere o migliorare modestamente alcuni aspetti della performance motoria – in particolare velocità ed efficienza del tiro – durante una breve restrizione del sonno. L’aumento del 13 % del sonno profondo potrebbe indicare un effetto dei chetoni sull’architettura del sonno, potenzialmente contribuendo al beneficio osservato, anche se lo studio non ha separato l’influenza della chetosi da quella del sonno. È rilevante notare che il miglioramento riguarda metriche legate alla rapidità; accuratezza e decision‑making non sono stati influenzati, indicando che la chetosi non potenzia uniformemente tutti i domini cognitivo‑motorii sotto restrizione del sonno.
 
 ## Limiti e questioni aperte
 
-Lo studio si è basato su un unico test di performance in laboratorio e su un campione di dimensioni contenute, limitando la potenza statistica per gli esiti secondari come la stabilità del fucile. La restrizione del sonno è stata acuta (quattro notti) e potrebbe non riflettere la privazione cronica di sonno presente in alcuni contesti militari. Il design crossover controlla la variabilità inter‑individuale ma non esclude possibili effetti di ordine nonostante i periodi di wash‑out. Ricerche future dovrebbero valutare periodi di integrazione più lunghi, compiti operativi più diversificati e verificare se effetti analoghi si osservano con altri precursori chetogenici o con regimi dietetici differenti.
+Lo studio è stato condotto con un compito di tiro in realtà virtuale e una restrizione del sonno di sole quattro notti; la validità esterna a scenari operativi reali o a privazioni di sonno più prolungate rimane incerta. La dimensione del campione (n = 32) limita la capacità di rilevare effetti più piccoli e impedisce analisi di sottogruppi (ad es. differenze di sesso). È stato testato un solo precursore chetonico e una sola dose, perciò le relazioni dose‑risposta non sono note. Infine, il meccanismo che collega l’aumento dei chetoni, il sonno profondo più lungo e la maggiore velocità di tiro non è stato indagato; studi futuri dovrebbero includere marcatori neurofisiologici e confrontare BO‑BD con altre strategie chetogeniche.
 
 ### Fonte
 
