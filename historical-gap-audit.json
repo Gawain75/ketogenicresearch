@@ -1,18 +1,18 @@
 {
   "version": "historical-gap-audit-v1",
-  "updated_at": "2026-09-20T20:41:21.632660+00:00",
+  "updated_at": "2026-09-20T20:42:55.368868+00:00",
   "range": [
     1921,
     2025
   ],
   "completed": false,
-  "years_audited": 60,
+  "years_audited": 70,
   "totals": {
-    "pertinent_records": 3633,
-    "already_present": 3223,
-    "missing_from_library": 410,
+    "pertinent_records": 3642,
+    "already_present": 3229,
+    "missing_from_library": 413,
     "auto_eligible_missing": 120,
-    "review_needed_missing": 290
+    "review_needed_missing": 293
   },
   "years": [
     {
@@ -734,6 +734,126 @@
       "review_needed_missing": 0,
       "unusable_records": 0,
       "coverage_percent": 100.0
+    },
+    {
+      "year": 1965,
+      "pubmed_query_count": 5,
+      "pubmed_ids_fetched": 5,
+      "pertinent_records": 3,
+      "already_present": 3,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1964,
+      "pubmed_query_count": 3,
+      "pubmed_ids_fetched": 3,
+      "pertinent_records": 3,
+      "already_present": 3,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1963,
+      "pubmed_query_count": 0,
+      "pubmed_ids_fetched": 0,
+      "pertinent_records": 0,
+      "already_present": 0,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1962,
+      "pubmed_query_count": 0,
+      "pubmed_ids_fetched": 0,
+      "pertinent_records": 0,
+      "already_present": 0,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1961,
+      "pubmed_query_count": 0,
+      "pubmed_ids_fetched": 0,
+      "pertinent_records": 0,
+      "already_present": 0,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1960,
+      "pubmed_query_count": 0,
+      "pubmed_ids_fetched": 0,
+      "pertinent_records": 0,
+      "already_present": 0,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1959,
+      "pubmed_query_count": 0,
+      "pubmed_ids_fetched": 0,
+      "pertinent_records": 0,
+      "already_present": 0,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1958,
+      "pubmed_query_count": 1,
+      "pubmed_ids_fetched": 1,
+      "pertinent_records": 1,
+      "already_present": 0,
+      "missing_from_library": 1,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 1,
+      "unusable_records": 0,
+      "coverage_percent": 0.0
+    },
+    {
+      "year": 1957,
+      "pubmed_query_count": 1,
+      "pubmed_ids_fetched": 1,
+      "pertinent_records": 1,
+      "already_present": 0,
+      "missing_from_library": 1,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 1,
+      "unusable_records": 0,
+      "coverage_percent": 0.0
+    },
+    {
+      "year": 1956,
+      "pubmed_query_count": 1,
+      "pubmed_ids_fetched": 1,
+      "pertinent_records": 1,
+      "already_present": 0,
+      "missing_from_library": 1,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 1,
+      "unusable_records": 0,
+      "coverage_percent": 0.0
     }
   ]
 }

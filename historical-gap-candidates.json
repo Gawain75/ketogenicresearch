@@ -1,7 +1,7 @@
 {
   "version": "historical-gap-candidates-v1",
-  "updated_at": "2026-09-20T20:41:21.633051+00:00",
-  "count": 410,
+  "updated_at": "2026-09-20T20:42:55.369191+00:00",
+  "count": 413,
   "records": [
     {
       "pmid": "40692466",
@@ -13877,6 +13877,98 @@
       "first_seen": "2026-09-20",
       "status": "historical-index",
       "audit_year": 1967,
+      "audit_status": "missing-from-library",
+      "auto_eligible": false,
+      "curation_status": "audit-review-needed"
+    },
+    {
+      "pmid": "13591501",
+      "title": "The effects of environment and other factors on nutritional ketosis.",
+      "authors": [
+        "SARGENT F",
+        "JOHNSON RE",
+        "ROBBINS E",
+        "SAWYER L"
+      ],
+      "journal": "Quarterly journal of experimental physiology and cognate medical sciences",
+      "date": "1958-10-01",
+      "date_precision": "day",
+      "year": 1958,
+      "doi": "10.1113/expphysiol.1958.sp001347",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13591501/",
+      "doi_url": "https://doi.org/10.1113/expphysiol.1958.sp001347",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-20",
+      "status": "historical-index",
+      "audit_year": 1958,
+      "audit_status": "missing-from-library",
+      "auto_eligible": false,
+      "curation_status": "audit-review-needed"
+    },
+    {
+      "pmid": "13490332",
+      "title": "Ketogenic and adipokinetic activities of pituitary hormones.",
+      "authors": [
+        "ENGEL FL",
+        "ENGEL MG",
+        "McPHERSON HT"
+      ],
+      "journal": "Endocrinology",
+      "date": "1957-12-01",
+      "date_precision": "day",
+      "year": 1957,
+      "doi": "10.1210/endo-61-6-713",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13490332/",
+      "doi_url": "https://doi.org/10.1210/endo-61-6-713",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-20",
+      "status": "historical-index",
+      "audit_year": 1957,
+      "audit_status": "missing-from-library",
+      "auto_eligible": false,
+      "curation_status": "audit-review-needed"
+    },
+    {
+      "pmid": "13400685",
+      "title": "[Studies on ketogenic reaction in certain pathological conditions].",
+      "authors": [
+        "DAWIDOWICZ A"
+      ],
+      "journal": "Polski tygodnik lekarski",
+      "date": "1956-10-15",
+      "date_precision": "day",
+      "year": 1956,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13400685/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-20",
+      "status": "historical-index",
+      "audit_year": 1956,
       "audit_status": "missing-from-library",
       "auto_eligible": false,
       "curation_status": "audit-review-needed"
