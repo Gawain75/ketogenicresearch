@@ -1,7 +1,7 @@
 {
   "version": "historical-gap-candidates-v1",
-  "updated_at": "2026-09-20T20:39:18.504333+00:00",
-  "count": 405,
+  "updated_at": "2026-09-20T20:40:24.541104+00:00",
+  "count": 408,
   "records": [
     {
       "pmid": "40692466",
@@ -13726,6 +13726,101 @@
       "first_seen": "2026-09-20",
       "status": "historical-index",
       "audit_year": 1990,
+      "audit_status": "missing-from-library",
+      "auto_eligible": false,
+      "curation_status": "audit-review-needed"
+    },
+    {
+      "pmid": "6735620",
+      "title": "[Thermogenesis from the breakdown of a ketogenic diet in an experimental model using swine].",
+      "authors": [
+        "Kirchgessner M",
+        "Müller HL"
+      ],
+      "journal": "International journal for vitamin and nutrition research. Internationale Zeitschrift fur Vitamin- und Ernahrungsforschung. Journal international de vitaminologie et de nutrition",
+      "date": "1984-01-01",
+      "date_precision": "day",
+      "year": 1984,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/6735620/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-20",
+      "status": "historical-index",
+      "audit_year": 1984,
+      "audit_status": "missing-from-library",
+      "auto_eligible": false,
+      "curation_status": "audit-review-needed"
+    },
+    {
+      "pmid": "6746436",
+      "title": "Fetal hepatic and neural substrate utilization as affected by induced nutritional ketosis in swine.",
+      "authors": [
+        "Steele NC",
+        "Rosebrough RW",
+        "McMurtry JP"
+      ],
+      "journal": "Journal of animal science",
+      "date": "1984-06-01",
+      "date_precision": "day",
+      "year": 1984,
+      "doi": "10.2527/jas1984.5861388x",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/6746436/",
+      "doi_url": "https://doi.org/10.2527/jas1984.5861388x",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-20",
+      "status": "historical-index",
+      "audit_year": 1984,
+      "audit_status": "missing-from-library",
+      "auto_eligible": false,
+      "curation_status": "audit-review-needed"
+    },
+    {
+      "pmid": "7353309",
+      "title": "Ketogenic response to fasting in human carnitine deficiencies.",
+      "authors": [
+        "Di Donato S",
+        "Peluchetti D",
+        "Rimoldi M",
+        "Bertagnolio B",
+        "Uziel G",
+        "Cornelio F"
+      ],
+      "journal": "Clinica chimica acta; international journal of clinical chemistry",
+      "date": "1980-01-31",
+      "date_precision": "day",
+      "year": 1980,
+      "doi": "10.1016/0009-8981(80)90268-5",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/7353309/",
+      "doi_url": "https://doi.org/10.1016/0009-8981(80)90268-5",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-20",
+      "status": "historical-index",
+      "audit_year": 1980,
       "audit_status": "missing-from-library",
       "auto_eligible": false,
       "curation_status": "audit-review-needed"

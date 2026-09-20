@@ -1,18 +1,18 @@
 {
   "version": "historical-gap-audit-v1",
-  "updated_at": "2026-09-20T20:39:18.504001+00:00",
+  "updated_at": "2026-09-20T20:40:24.540865+00:00",
   "range": [
     1921,
     2025
   ],
   "completed": false,
-  "years_audited": 40,
+  "years_audited": 50,
   "totals": {
-    "pertinent_records": 3581,
-    "already_present": 3176,
-    "missing_from_library": 405,
+    "pertinent_records": 3613,
+    "already_present": 3205,
+    "missing_from_library": 408,
     "auto_eligible_missing": 120,
-    "review_needed_missing": 285
+    "review_needed_missing": 288
   },
   "years": [
     {
@@ -489,6 +489,126 @@
       "pubmed_ids_fetched": 8,
       "pertinent_records": 2,
       "already_present": 2,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1985,
+      "pubmed_query_count": 11,
+      "pubmed_ids_fetched": 11,
+      "pertinent_records": 3,
+      "already_present": 3,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1984,
+      "pubmed_query_count": 11,
+      "pubmed_ids_fetched": 11,
+      "pertinent_records": 4,
+      "already_present": 2,
+      "missing_from_library": 2,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 2,
+      "unusable_records": 0,
+      "coverage_percent": 50.0
+    },
+    {
+      "year": 1983,
+      "pubmed_query_count": 14,
+      "pubmed_ids_fetched": 14,
+      "pertinent_records": 2,
+      "already_present": 2,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1982,
+      "pubmed_query_count": 10,
+      "pubmed_ids_fetched": 10,
+      "pertinent_records": 2,
+      "already_present": 2,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1981,
+      "pubmed_query_count": 11,
+      "pubmed_ids_fetched": 11,
+      "pertinent_records": 3,
+      "already_present": 3,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1980,
+      "pubmed_query_count": 8,
+      "pubmed_ids_fetched": 8,
+      "pertinent_records": 6,
+      "already_present": 5,
+      "missing_from_library": 1,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 1,
+      "unusable_records": 0,
+      "coverage_percent": 83.3
+    },
+    {
+      "year": 1979,
+      "pubmed_query_count": 7,
+      "pubmed_ids_fetched": 7,
+      "pertinent_records": 2,
+      "already_present": 2,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1978,
+      "pubmed_query_count": 7,
+      "pubmed_ids_fetched": 7,
+      "pertinent_records": 4,
+      "already_present": 4,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1977,
+      "pubmed_query_count": 9,
+      "pubmed_ids_fetched": 9,
+      "pertinent_records": 3,
+      "already_present": 3,
+      "missing_from_library": 0,
+      "auto_eligible_missing": 0,
+      "review_needed_missing": 0,
+      "unusable_records": 0,
+      "coverage_percent": 100.0
+    },
+    {
+      "year": 1976,
+      "pubmed_query_count": 7,
+      "pubmed_ids_fetched": 7,
+      "pertinent_records": 3,
+      "already_present": 3,
       "missing_from_library": 0,
       "auto_eligible_missing": 0,
       "review_needed_missing": 0,
