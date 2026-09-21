@@ -1,0 +1,206 @@
+name: Repair PMID 42709766
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ketogenicresearch-content-write
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install beautifulsoup4 pypdf
+
+      - name: Refresh PubMed metadata with corrected identifier extraction
+        env:
+          NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
+          NCBI_EMAIL: info@ketogenicresearch.org
+        run: python scripts/update_latest.py
+
+      - name: Remove stale PMID 42709766 article and unlock regeneration
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          pmid = "42709766"
+          index_path = Path("articles-drafts/generated-index.json")
+
+          if index_path.exists():
+              obj = json.loads(index_path.read_text(encoding="utf-8"))
+              obj["generated_pmids"] = [
+                  str(x) for x in obj.get("generated_pmids", [])
+                  if str(x) != pmid
+              ]
+              index_path.write_text(
+                  json.dumps(obj, indent=2, ensure_ascii=False) + "\n",
+                  encoding="utf-8",
+              )
+              print("Removed PMID 42709766 from generated-index.json")
+          PY
+
+          rm -f articles-drafts/*-42709766-*.md
+          rm -f articles/*-42709766-*.html
+
+      - name: Prepare only PMID 42709766 for regeneration
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp latest-publications.json /tmp/latest-publications-refreshed.json
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          pmid = "42709766"
+          path = Path("latest-publications.json")
+          obj = json.loads(path.read_text(encoding="utf-8"))
+          pubs = [
+              p for p in obj.get("publications", [])
+              if str(p.get("pmid", "")).strip() == pmid
+          ]
+
+          if len(pubs) != 1:
+              raise SystemExit(
+                  f"Expected exactly one record for PMID {pmid}; found {len(pubs)}"
+              )
+
+          rec = pubs[0]
+          expected_doi = "10.1371/journal.pone.0357797"
+          expected_pmc = "PMC13552735"
+
+          if (rec.get("doi") or "").lower() != expected_doi:
+              raise SystemExit(
+                  f"Refreshed PubMed metadata still has wrong DOI: {rec.get('doi')!r}"
+              )
+
+          if (rec.get("pmc") or "") != expected_pmc:
+              raise SystemExit(
+                  f"Refreshed PubMed metadata still has wrong PMCID: {rec.get('pmc')!r}"
+              )
+
+          rec["status"] = "new"
+          obj["publications"] = [rec]
+          obj["count"] = 1
+
+          path.write_text(
+              json.dumps(obj, indent=2, ensure_ascii=False) + "\n",
+              encoding="utf-8",
+          )
+          print("Prepared authoritative PMID 42709766 record.")
+          PY
+
+      - name: Regenerate article from authoritative PubMed record
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GROQ_MODEL: openai/gpt-oss-120b
+          NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
+          NCBI_EMAIL: info@ketogenicresearch.org
+          MAX_CANDIDATE_SCAN: "1"
+        run: python scripts/generate_articles.py
+
+      - name: Restore complete refreshed literature feed
+        run: cp /tmp/latest-publications-refreshed.json latest-publications.json
+
+      - name: Verify corrected draft before publication
+        shell: bash
+        run: |
+          set -euo pipefail
+          draft="$(find articles-drafts -maxdepth 1 -type f -name '*-42709766-*.md' | head -n 1)"
+          test -n "$draft"
+
+          grep -Fq 'doi: "10.1371/journal.pone.0357797"' "$draft"
+          grep -Fq 'pmcid: "PMC13552735"' "$draft"
+
+          if grep -Fq '10.1016/j.heliyon.2023.e21098' "$draft"; then
+            echo "Old incorrect DOI is still present in the draft."
+            exit 1
+          fi
+
+          if grep -Fq 'PMC10623287' "$draft"; then
+            echo "Old incorrect PMCID is still present in the draft."
+            exit 1
+          fi
+
+          echo "Draft source identifiers are correct."
+
+      - name: Audit generated article sources
+        env:
+          NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
+          NCBI_EMAIL: info@ketogenicresearch.org
+        run: python scripts/audit_article_sources.py
+
+      - name: Render public articles
+        run: python scripts/render_articles.py
+
+      - name: Verify corrected public article
+        shell: bash
+        run: |
+          set -euo pipefail
+          page="$(find articles -maxdepth 1 -type f -name '*-42709766-*.html' | head -n 1)"
+          test -n "$page"
+
+          grep -Fq '10.1371/journal.pone.0357797' "$page"
+          grep -Fq 'PMC13552735' "$page" || true
+
+          if grep -Fq '10.1016/j.heliyon.2023.e21098' "$page"; then
+            echo "Old incorrect DOI is still present in public HTML."
+            exit 1
+          fi
+
+          if grep -Fq 'PMC10623287' "$page"; then
+            echo "Old incorrect PMCID is still present in public HTML."
+            exit 1
+          fi
+
+          echo "Public article source identifiers are correct."
+
+      - name: Commit repaired article and refreshed metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Never commit workflow-file changes from inside Actions.
+          git restore --source=HEAD --staged --worktree .github/workflows || true
+          git clean -fd .github/workflows || true
+
+          git add -A
+          git restore --staged .github/workflows || true
+
+          if git diff --cached --quiet; then
+            echo "No repair changes to commit."
+          else
+            git commit -m "Repair PMID 42709766 source identity"
+            git pull --rebase origin main
+            git push origin main
+          fi
+
+      - name: Final result
+        run: |
+          echo "PMID 42709766 repaired."
+          echo "Expected DOI: 10.1371/journal.pone.0357797"
+          echo "Expected PMCID: PMC13552735"
