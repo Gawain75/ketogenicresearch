@@ -76,10 +76,18 @@ def clean_library_html(html: str) -> str:
             flags=re.I,
         )
 
-    # Brand/home links sometimes use "/" instead of index.html.
+    # Any root-relative Home link inside the protected subdomain must go
+    # back to the public website. Otherwise "/" on library.ketogenicresearch.org
+    # opens the login page again.
     html = re.sub(
-        r'(<a[^>]+class=(["\'])brand\2[^>]+href=)(["\'])/\3',
-        rf'\1"https://ketogenicresearch.org/"',
+        r'href=(["\'])/\1',
+        'href="https://ketogenicresearch.org/"',
+        html,
+        flags=re.I,
+    )
+    html = re.sub(
+        r'href=(["\'])\./\1',
+        'href="https://ketogenicresearch.org/"',
         html,
         flags=re.I,
     )
@@ -127,6 +135,9 @@ def main():
 
     if 'href="index.html"' in library_out:
         raise SystemExit("Relative Home link still present in protected Library")
+
+    if re.search(r'href=(["\'])/\1', library_out, re.I):
+        raise SystemExit("Root-relative Home link still present in protected Library")
 
     if 'https://ketogenicresearch.org/' not in library_out:
         raise SystemExit("Main-site Home URL missing from protected Library")
