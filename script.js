@@ -113,6 +113,55 @@ function evidenceMatches(rawValue, selected) {
   return norm === selected;
 }
 
+function topicMatches(rawText, selected) {
+  if (selected === 'all') return true;
+  const text = (rawText || '').toLowerCase();
+
+  if (selected === 'glp1-keto') {
+    const glpTerms = [
+      'glp-1',
+      'glp1',
+      'glucagon-like peptide-1',
+      'semaglutide',
+      'liraglutide',
+      'dulaglutide',
+      'exenatide',
+      'lixisenatide',
+      'tirzepatide',
+      'retatrutide',
+      'survodutide',
+      'orforglipron',
+      'cagrisema'
+    ];
+
+    const ketoTerms = [
+      'ketogenic',
+      'ketosis',
+      'ketone',
+      'ketones',
+      'ketonemia',
+      'ketonaemia',
+      'beta-hydroxybutyrate',
+      'β-hydroxybutyrate',
+      'b-hydroxybutyrate',
+      'bhb',
+      'vlckd',
+      'vlekt',
+      'low-energy ketogenic',
+      'very low-calorie ketogenic',
+      'very-low-calorie ketogenic',
+      'keto diet'
+    ];
+
+    return (
+      glpTerms.some(term => text.includes(term)) &&
+      ketoTerms.some(term => text.includes(term))
+    );
+  }
+
+  return true;
+}
+
 function publicationIdentity(paper) {
   const h4 = paper.querySelector('h4');
   const rawTitle = h4?.dataset?.en || h4?.textContent || '';
@@ -137,11 +186,13 @@ function applyLibraryFilters() {
 
   const searchEl = document.getElementById('librarySearch');
   const evidenceEl = document.getElementById('evidenceFilter');
+  const topicEl = document.getElementById('topicFilter');
   const yearEl = document.getElementById('yearFilter');
   const areaEl = document.getElementById('areaFilter');
 
   const q = (searchEl?.value || '').trim().toLowerCase();
   const ev = evidenceEl?.value || 'all';
+  const topic = topicEl?.value || 'all';
   const yr = yearEl?.value || 'all';
   const area = areaEl?.value || 'all';
 
@@ -173,6 +224,7 @@ function applyLibraryFilters() {
 
       const qOk = !q || blob.includes(q);
       const evOk = evidenceMatches(paper.dataset.evidence, ev);
+      const topicOk = topicMatches(blob, topic);
 
       let yrOk = true;
       if (yr !== 'all') {
@@ -186,7 +238,7 @@ function applyLibraryFilters() {
         }
       }
 
-      const show = qOk && evOk && yrOk;
+      const show = qOk && evOk && topicOk && yrOk;
       paper.hidden = !show;
 
       if (show) {
@@ -202,7 +254,7 @@ function applyLibraryFilters() {
 
     if (showFolder) {
       visibleFolders++;
-      if (q || ev !== 'all' || yr !== 'all' || area !== 'all') {
+      if (q || ev !== 'all' || topic !== 'all' || yr !== 'all' || area !== 'all') {
         folder.open = true;
       }
     }
@@ -225,7 +277,7 @@ function applyLibraryFilters() {
 }
 
 function initLibrary() {
-  ['librarySearch', 'evidenceFilter', 'yearFilter', 'areaFilter'].forEach(id => {
+  ['librarySearch', 'evidenceFilter', 'topicFilter', 'yearFilter', 'areaFilter'].forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
 
@@ -240,11 +292,13 @@ function initLibrary() {
     clear.addEventListener('click', () => {
       const search = document.getElementById('librarySearch');
       const evidence = document.getElementById('evidenceFilter');
+      const topic = document.getElementById('topicFilter');
       const year = document.getElementById('yearFilter');
       const area = document.getElementById('areaFilter');
 
       if (search) search.value = '';
       if (evidence) evidence.value = 'all';
+      if (topic) topic.value = 'all';
       if (year) year.value = 'all';
       if (area) area.value = 'all';
 
