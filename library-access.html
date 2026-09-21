@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Scientific Library Access | Ketogenic Research</title>
+  <meta name="robots" content="noindex,follow">
+  <link rel="stylesheet" href="library-auth.css">
+</head>
+<body>
+<main class="auth-shell">
+  <section class="auth-card">
+    <div class="auth-top">
+      <div class="auth-brand">Ketogenic Research — Scientific Library</div>
+      <div class="lang-switch">
+        <button type="button" data-lang="en" class="active">EN</button>
+        <button type="button" data-lang="it">IT</button>
+      </div>
+    </div>
+
+    <h1 data-en="Access the Scientific Library" data-it="Accedi alla Libreria Scientifica">Access the Scientific Library</h1>
+    <p class="note" data-en="Registration is free. Verified users can access the curated scientific library."
+       data-it="La registrazione è gratuita. Gli utenti verificati possono accedere alla libreria scientifica curata.">
+       Registration is free. Verified users can access the curated scientific library.
+    </p>
+
+    <div class="auth-tabs">
+      <button type="button" id="loginTab" class="active" data-en="Login" data-it="Accedi">Login</button>
+      <button type="button" id="registerTab" data-en="Create free account" data-it="Registrati gratuitamente">Create free account</button>
+    </div>
+
+    <form id="loginForm" class="auth-form">
+      <div class="field"><label>Email</label><input id="loginEmail" type="email" required autocomplete="email"></div>
+      <div class="field"><label data-en="Password" data-it="Password">Password</label><input id="loginPassword" type="password" required autocomplete="current-password"></div>
+      <button class="primary" type="submit" data-en="Login" data-it="Accedi">Login</button>
+    </form>
+
+    <form id="registerForm" class="auth-form hidden">
+      <div class="field">
+        <label data-en="Country" data-it="Paese">Country</label>
+        <select id="country" required>
+          <option value="Italy">Italia</option>
+          <option value="foreign">Other country / Altro Paese</option>
+        </select>
+      </div>
+
+      <div id="italyFields">
+        <div class="grid-2">
+          <div class="field"><label data-en="First name" data-it="Nome">First name</label><input id="firstName"></div>
+          <div class="field"><label data-en="Last name" data-it="Cognome">Last name</label><input id="lastName"></div>
+        </div>
+
+        <div class="field">
+          <label data-en="Are you a healthcare professional?" data-it="Sei un professionista sanitario?">Are you a healthcare professional?</label>
+          <div class="inline">
+            <label><input type="radio" name="hcp" value="yes"> <span data-en="Yes" data-it="Sì">Yes</span></label>
+            <label><input type="radio" name="hcp" value="no"> No</label>
+          </div>
+        </div>
+
+        <div id="professionWrap" class="field hidden">
+          <label data-en="Profession" data-it="Professione">Profession</label>
+          <select id="profession">
+            <option value="">—</option>
+            <option value="medico">Medico</option>
+            <option value="biologo">Biologo</option>
+            <option value="dietista">Dietista</option>
+            <option value="altro">Altro</option>
+          </select>
+        </div>
+
+        <div id="professionOtherWrap" class="field hidden">
+          <label data-en="Specify profession" data-it="Specifica professione">Specify profession</label>
+          <input id="professionOther">
+        </div>
+
+        <div class="field"><label data-en="Region" data-it="Regione">Region</label><select id="region"><option value="">—</option></select></div>
+        <div class="field"><label data-en="Province" data-it="Provincia">Province</label><select id="province" disabled><option value="">—</option></select></div>
+        <div class="field"><label data-en="City" data-it="Città">City</label><select id="city" disabled><option value="">—</option></select></div>
+        <div class="field"><label data-en="Phone number" data-it="Numero di telefono">Phone number</label><input id="phone" type="tel" autocomplete="tel"></div>
+      </div>
+
+      <div id="foreignFields" class="hidden">
+        <div class="grid-2">
+          <div class="field"><label data-en="Country / State" data-it="Stato">Country / State</label><input id="foreignCountry"></div>
+          <div class="field"><label data-en="City" data-it="Città">City</label><input id="foreignCity"></div>
+        </div>
+      </div>
+
+      <div class="field"><label>Email</label><input id="registerEmail" type="email" required autocomplete="email"></div>
+      <div class="field"><label>Password</label><input id="registerPassword" type="password" minlength="8" required autocomplete="new-password"></div>
+
+      <label class="privacy">
+        <input id="privacy" type="checkbox" required>
+        <span data-en="I have read the privacy information and consent to processing of the data necessary to manage my Scientific Library account."
+              data-it="Ho letto l'informativa privacy e acconsento al trattamento dei dati necessari alla gestione del mio account della Libreria Scientifica.">
+          I have read the privacy information and consent to processing of the data necessary to manage my Scientific Library account.
+        </span>
+      </label>
+
+      <button class="primary" type="submit" data-en="Create free account" data-it="Registrati gratuitamente">Create free account</button>
+    </form>
+
+    <div id="status" class="status hidden"></div>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="library-auth.js"></script>
+</body>
+</html>
