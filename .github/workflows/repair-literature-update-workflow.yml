@@ -1,0 +1,48 @@
+name: Repair literature update workflow
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Repair commit step
+        run: |
+          if [ -f scripts/repair_literature_workflow.py ]; then
+            python scripts/repair_literature_workflow.py
+          else
+            python repair_literature_workflow.py
+          fi
+
+      - name: Commit repaired workflow
+        run: |
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add .github/workflows/*.yml .github/workflows/*.yaml 2>/dev/null || true
+
+          if git diff --cached --quiet; then
+            echo "No workflow changes."
+            exit 0
+          fi
+
+          git commit -m "Repair literature update commit step"
+          git pull --rebase origin main
+          git push origin main
