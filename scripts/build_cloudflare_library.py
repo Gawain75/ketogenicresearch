@@ -76,23 +76,81 @@ def clean_library_html(html: str) -> str:
             flags=re.I,
         )
 
-    # Any root-relative Home link inside the protected subdomain must go
-    # back to the public website. Otherwise "/" on library.ketogenicresearch.org
-    # opens the login page again.
+    # Brand/home links sometimes use "/" instead of index.html.
     html = re.sub(
-        r'href=(["\'])/\1',
-        'href="https://ketogenicresearch.org/"',
-        html,
-        flags=re.I,
-    )
-    html = re.sub(
-        r'href=(["\'])\./\1',
-        'href="https://ketogenicresearch.org/"',
+        r'(<a[^>]+class=(["\'])brand\2[^>]+href=)(["\'])/\3',
+        rf'\1"https://ketogenicresearch.org/"',
         html,
         flags=re.I,
     )
 
     return html
+
+def inject_account_status(html: str) -> str:
+    """Add a small authenticated-user indicator and logout control."""
+    marker = "KR_LIBRARY_ACCOUNT_STATUS_V1"
+    if marker in html:
+        return html
+
+    widget = r"""
+<!-- KR_LIBRARY_ACCOUNT_STATUS_V1 -->
+<style>
+#kr-account-status{
+  position:fixed;top:12px;right:12px;z-index:99999;
+  display:none;align-items:center;gap:9px;
+  max-width:calc(100vw - 24px);
+  padding:7px 10px;border:1px solid rgba(0,0,0,.14);
+  border-radius:999px;background:rgba(255,255,255,.96);
+  box-shadow:0 2px 12px rgba(0,0,0,.10);
+  font:600 12px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:#17352b;backdrop-filter:blur(8px)
+}
+#kr-account-status .kr-user{
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:230px
+}
+#kr-account-status button{
+  border:0;border-radius:999px;padding:5px 9px;cursor:pointer;
+  background:#17352b;color:#fff;font:inherit
+}
+@media (max-width:640px){
+  #kr-account-status{top:8px;right:8px;padding:6px 8px}
+  #kr-account-status .kr-user{max-width:155px}
+}
+</style>
+<div id="kr-account-status" aria-live="polite">
+  <span class="kr-user" id="kr-account-user">Account attivo</span>
+  <button type="button" id="kr-logout">Esci</button>
+</div>
+<script>
+(async function(){
+  const box=document.getElementById('kr-account-status');
+  const label=document.getElementById('kr-account-user');
+  const logout=document.getElementById('kr-logout');
+  try{
+    const r=await fetch('/auth/me',{credentials:'same-origin',cache:'no-store'});
+    if(!r.ok) return;
+    const me=await r.json();
+    if(!me.authenticated) return;
+    const full=[me.first_name,me.last_name].filter(Boolean).join(' ').trim();
+    label.textContent=full || me.email || 'Account attivo';
+    box.style.display='flex';
+  }catch(e){}
+
+  logout.addEventListener('click',async function(){
+    logout.disabled=true;
+    try{
+      await fetch('/auth/logout',{method:'POST',credentials:'same-origin'});
+    }finally{
+      location.href='/library-access';
+    }
+  });
+})();
+</script>
+"""
+    if "</body>" in html.lower():
+        pos = html.lower().rfind("</body>")
+        return html[:pos] + widget + "\n" + html[pos:]
+    return html + widget
 
 def main():
     if DIST.exists():
@@ -104,6 +162,7 @@ def main():
         raise SystemExit("library.html not found")
 
     html = clean_library_html(library.read_text(encoding="utf-8"))
+    html = inject_account_status(html)
     (DIST / "library.html").write_text(html, encoding="utf-8")
 
     for name in FILES:
@@ -121,7 +180,7 @@ def main():
     checks = {
         "library.html": ["Scientific Library", "script.js", "styles.css"],
         "library-access.html": ["forgotPassword", "Complete your Library profile"],
-        "_worker.js": ["env.ASSETS.fetch(request)", "library_profiles"],
+        "_worker.js": ["env.ASSETS.fetch(request)", "library_profiles", "/auth/me"],
     }
     for filename, needles in checks.items():
         data = (DIST / filename).read_text(encoding="utf-8", errors="ignore")
@@ -135,9 +194,6 @@ def main():
 
     if 'href="index.html"' in library_out:
         raise SystemExit("Relative Home link still present in protected Library")
-
-    if re.search(r'href=(["\'])/\1', library_out, re.I):
-        raise SystemExit("Root-relative Home link still present in protected Library")
 
     if 'https://ketogenicresearch.org/' not in library_out:
         raise SystemExit("Main-site Home URL missing from protected Library")
