@@ -10,7 +10,7 @@ NAV_HTML = """
 <nav class="site-nav" aria-label="Primary navigation">
   <a href="index.html">Home</a>
   <a class="nav-priority" data-en="Research" data-it="Ricerca" href="research.html">Research</a>
-  <a class="nav-priority" data-en="Scientific Library" data-it="Biblioteca Scientifica" href="https://library.ketogenicresearch.org">Scientific Library</a>
+  <a class="nav-priority" data-en="Scientific Library" data-it="Biblioteca Scientifica" href="https://library.ketogenicresearch.org/library">Scientific Library</a>
   <a data-en="Evidence Trends" data-it="Andamento evidenze" href="evidence-trends.html">Evidence Trends</a>
   <a data-en="Articles" data-it="Articoli" href="articles.html">Articles</a>
   <a data-en="Scientific Direction" data-it="Direzione scientifica" href="director.html">Scientific Direction</a>
@@ -106,7 +106,7 @@ AREA_BLOCK = """
   </div>
 
   <div class="research-taxonomy-actions">
-    <a class="btn-primary" href="https://library.ketogenicresearch.org" data-en="Explore all clinical areas" data-it="Esplora tutte le aree cliniche">Explore all clinical areas</a>
+    <a class="btn-primary" href="https://library.ketogenicresearch.org/library" data-en="Explore all clinical areas" data-it="Esplora tutte le aree cliniche">Explore all clinical areas</a>
     <a class="btn-secondary" href="evidence-trends.html" data-en="View Evidence Trends" data-it="Vedi andamento evidenze">View Evidence Trends</a>
   </div>
 </div>

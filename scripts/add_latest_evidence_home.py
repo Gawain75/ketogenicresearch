@@ -29,7 +29,7 @@ SECTION = r"""
 
   <div class="home-latest-actions">
     <a class="btn-primary" href="latest.html" data-en="View all Latest Evidence" data-it="Vedi tutte le ultime evidenze">View all Latest Evidence</a>
-    <a class="btn-secondary" href="https://library.ketogenicresearch.org" data-en="Scientific Library" data-it="Biblioteca Scientifica">Scientific Library</a>
+    <a class="btn-secondary" href="https://library.ketogenicresearch.org/library" data-en="Scientific Library" data-it="Biblioteca Scientifica">Scientific Library</a>
   </div>
 </div>
 </section>

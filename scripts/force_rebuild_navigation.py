@@ -9,7 +9,7 @@ NAV = r'''
 <nav class="site-nav" aria-label="Primary navigation">
   <a href="index.html">Home</a>
   <a data-en="Research" data-it="Ricerca" href="research.html">Research</a>
-  <a data-en="Scientific Library" data-it="Biblioteca Scientifica" href="https://library.ketogenicresearch.org">Scientific Library</a>
+  <a data-en="Scientific Library" data-it="Biblioteca Scientifica" href="https://library.ketogenicresearch.org/library">Scientific Library</a>
   <a data-en="Latest Evidence" data-it="Ultime evidenze" href="latest.html">Latest Evidence</a>
   <a data-en="Evidence Trends" data-it="Andamento evidenze" href="evidence-trends.html">Evidence Trends</a>
   <a data-en="Articles" data-it="Articoli" href="articles.html">Articles</a>

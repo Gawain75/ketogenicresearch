@@ -61,7 +61,7 @@ if 'data-en="CORE ACTIVITIES"' not in text:
 <span data-en="Clinical &amp; translational programs" data-it="Programmi clinici e traslazionali">Clinical &amp; translational programs</span>
 <p data-en="Defined research domains spanning ketogenic metabolism, clinical nutrition, metabolic health, body composition and neurological applications." data-it="Aree di ricerca definite che comprendono metabolismo chetogenico, nutrizione clinica, salute metabolica, composizione corporea e applicazioni neurologiche.">Defined research domains spanning ketogenic metabolism, clinical nutrition, metabolic health, body composition and neurological applications.</p>
 </a>
-<a class="update-card" href="https://library.ketogenicresearch.org">
+<a class="update-card" href="https://library.ketogenicresearch.org/library">
 <strong data-en="Evidence" data-it="Evidenze">Evidence</strong>
 <span data-en="Scientific Library &amp; surveillance" data-it="Biblioteca scientifica e sorveglianza">Scientific Library &amp; surveillance</span>
 <p data-en="Continuous PubMed surveillance, bibliographic verification and structured assessment and organization by clinical area and evidence type." data-it="Sorveglianza continua di PubMed, verifica bibliografica e valutazione e organizzazione strutturata per area clinica e tipo di evidenza.">Continuous PubMed surveillance, bibliographic verification and structured assessment and organization by clinical area and evidence type.</p>

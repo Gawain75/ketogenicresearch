@@ -3,7 +3,7 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-CANONICAL = "https://library.ketogenicresearch.org/library"
+CANONICAL = "https://library.ketogenicresearch.org/library/librarylibrary"
 
 EXCLUDED_HTML = {
     "library.html",          # source used to build the protected library
@@ -16,10 +16,10 @@ def patch_text(text: str) -> tuple[str, int]:
 
     # Normalize every known public link form.
     replacements = [
-        ("https://library.ketogenicresearch.org/library.html", CANONICAL),
-        ("https://library.ketogenicresearch.org/", CANONICAL),
-        ("https://library.ketogenicresearch.org", CANONICAL),
-        ("https://ketogenicresearch.org/library.html", CANONICAL),
+        ("https://library.ketogenicresearch.org/library/librarylibrary", CANONICAL),
+        ("https://library.ketogenicresearch.org/library/library", CANONICAL),
+        ("https://library.ketogenicresearch.org/library", CANONICAL),
+        ("https://library.ketogenicresearch.org/library", CANONICAL),
     ]
     for old, new in replacements:
         text = text.replace(old, new)
@@ -85,7 +85,7 @@ for path in ROOT.glob("*.html"):
     if path.name in EXCLUDED_HTML:
         continue
     text = path.read_text(encoding="utf-8", errors="replace")
-    if "https://library.ketogenicresearch.org/library.html" in text:
+    if "https://library.ketogenicresearch.org/library/librarylibrary" in text:
         bad.append(f"{path.name}: library.html")
     # exact root-domain href, with or without trailing slash
     if re.search(r'href=["\']https://library\.ketogenicresearch\.org/?["\']', text, re.I):

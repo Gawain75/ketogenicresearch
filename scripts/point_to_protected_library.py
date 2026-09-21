@@ -5,7 +5,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SECURE_LIBRARY = "https://library.ketogenicresearch.org"
+SECURE_LIBRARY = "https://library.ketogenicresearch.org/library"
 
 HTML_PATTERNS = (
     (re.compile(r'href=(["\'])library\.html\1', re.I), f'href="{SECURE_LIBRARY}"'),

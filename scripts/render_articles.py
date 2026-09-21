@@ -365,7 +365,7 @@ def main():
     static_urls = [
         ("https://ketogenicresearch.org/", "weekly", "1.0"),
         ("https://ketogenicresearch.org/research.html", "monthly", "0.9"),
-        ("https://ketogenicresearch.org/library.html", "weekly", "1.0"),
+        ("https://library.ketogenicresearch.org/library", "weekly", "1.0"),
         ("https://ketogenicresearch.org/latest.html", "daily", "0.9"),
         ("https://ketogenicresearch.org/articles.html", "daily", "0.9"),
         ("https://ketogenicresearch.org/evidence-trends.html", "weekly", "0.8"),
