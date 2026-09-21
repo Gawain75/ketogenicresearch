@@ -134,6 +134,71 @@ PAGE_HTML = r'''<!DOCTYPE html>
 .area-table{width:100%;border-collapse:collapse;margin-top:16px}.area-table th,.area-table td{text-align:left;padding:11px 9px;border-bottom:1px solid #e4ebf1}
 .area-table th{font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;color:#5b6d7e}.area-table td:nth-child(n+2),.area-table th:nth-child(n+2){text-align:right}
 @media(max-width:760px){.trends-controls{grid-template-columns:1fr 1fr}.trends-controls label:first-child{grid-column:1/-1}.trend-kpis{grid-template-columns:1fr 1fr}}
+
+/* Evidence Trends responsive fit */
+.evidence-trends-chart,
+.evidence-chart,
+.trend-chart,
+.chart-wrap,
+.chart-container,
+.chart-scroll,
+.chart-panel,
+#trendChart,
+#evidenceTrendChart {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box;
+}
+
+.evidence-trends-chart svg,
+.evidence-chart svg,
+.trend-chart svg,
+.chart-wrap svg,
+.chart-container svg,
+.chart-scroll svg,
+.chart-panel svg,
+#trendChart svg,
+#evidenceTrendChart svg,
+svg.evidence-trends-svg {
+  display: block;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  overflow: visible;
+}
+
+@media (max-width: 720px) {
+  .evidence-trends-chart,
+  .evidence-chart,
+  .trend-chart,
+  .chart-wrap,
+  .chart-container,
+  .chart-scroll,
+  .chart-panel,
+  #trendChart,
+  #evidenceTrendChart {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .evidence-trends-chart svg text,
+  .evidence-chart svg text,
+  .trend-chart svg text,
+  .chart-wrap svg text,
+  .chart-container svg text,
+  .chart-scroll svg text,
+  .chart-panel svg text,
+  #trendChart svg text,
+  #evidenceTrendChart svg text {
+    font-size: 10px !important;
+  }
+}
+
 </style>
 </head>
 <body>
