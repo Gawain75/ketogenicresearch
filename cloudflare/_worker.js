@@ -15,7 +15,7 @@ function parseCookies(request) {
 const SUPABASE_URL = "https://kfctugbpwmjdupmtfjen.supabase.co";
 const SUPABASE_ISSUER = `${SUPABASE_URL}/auth/v1`;
 const SUPABASE_JWKS = `${SUPABASE_URL}/auth/v1/.well-known/jwks.json`;
-const SUPABASE_PUBLISHABLE_KEY = SUPABASE_PUBLISHABLE_KEY;
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_fz-WHqnfABeqFiTjBz8Utg_psM2G6sY";
 
 let jwksCache = { keys: [], expiresAt: 0 };
 
