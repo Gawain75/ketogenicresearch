@@ -16,7 +16,7 @@ scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
 verified_at: "2026-09-21T10:51:32.407964+00:00"
-source_identity_checked_at: "2026-09-21T10:51:32.880746+00:00"
+source_identity_checked_at: "2026-09-21T11:05:14.908606+00:00"
 ---
 
 # Classic ketogenic diet associated with seizure control and developmental gains in an infant with concurrent non‑ketotic hyperglycinemia and biotinidase deficiency

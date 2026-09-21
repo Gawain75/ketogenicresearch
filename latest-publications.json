@@ -1,10 +1,40 @@
 {
-  "generated_at": "2026-09-20T03:28:17+00:00",
+  "generated_at": "2026-09-21T11:03:53+00:00",
   "window_days": 90,
   "max_records": 100,
   "source": "PubMed / NCBI E-utilities",
-  "count": 96,
+  "count": 99,
   "publications": [
+    {
+      "pmid": "42763564",
+      "title": "Managing Drug-Resistant Epilepsy and Severe Feeding Difficulties in Miller-Dieker Syndrome: The Role of Enteral Ketogenic Diet.",
+      "authors": [
+        "Michela P",
+        "Matteo P",
+        "Pasqua P",
+        "Paola R",
+        "Silvana G",
+        "Monica F"
+      ],
+      "journal": "Case reports in pediatrics",
+      "date": "2026-09-18",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1155/crpe/8660691",
+      "pmc": "PMC13589161",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42763564/",
+      "doi_url": "https://doi.org/10.1155/crpe/8660691",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13589161/",
+      "areas": [
+        "Epilepsy"
+      ],
+      "category_confidence": 13,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-21",
+      "status": "new"
+    },
     {
       "pmid": "42760380",
       "title": "Precision diagnosis guides ketogenic diet therapy in inherited metabolic epilepsies: Concurrent non-ketotic hyperglycinemia and biotinidase deficiency.",
@@ -33,10 +63,10 @@
         "Epilepsy"
       ],
       "category_confidence": 3,
-      "evidence_type": "Case report / case series",
-      "evidence_type_it": "Case report / case series",
+      "evidence_type": "Clinical trial / intervention",
+      "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "new"
     },
     {
@@ -76,7 +106,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-19",
+      "first_seen": "2026-09-21",
       "status": "new"
     },
     {
@@ -120,7 +150,7 @@
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "new"
     },
     {
@@ -157,7 +187,7 @@
       "evidence_type": "Observational human study",
       "evidence_type_it": "Studio osservazionale umano",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "new"
     },
     {
@@ -189,7 +219,37 @@
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
+      "status": "new"
+    },
+    {
+      "pmid": "42763398",
+      "title": "Evaluating the therapeutic efficacy of a modified ketogenic diet in children with autism spectrum disorder: a randomized controlled trial.",
+      "authors": [
+        "Liu L",
+        "Zhao Q",
+        "Zhou J",
+        "Liu Z",
+        "Wu D",
+        "He K"
+      ],
+      "journal": "BMC pediatrics",
+      "date": "2026-09-11",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1186/s12887-026-07708-3",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42763398/",
+      "doi_url": "https://doi.org/10.1186/s12887-026-07708-3",
+      "pmc_url": "",
+      "areas": [
+        "Autism Spectrum Disorder"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Randomized clinical trial",
+      "evidence_type_it": "Trial clinico randomizzato",
+      "source": "PubMed",
+      "first_seen": "2026-09-21",
       "status": "new"
     },
     {
@@ -220,10 +280,10 @@
         "MASLD / Metabolic Liver Disease"
       ],
       "category_confidence": 6,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "new"
     },
     {
@@ -237,11 +297,11 @@
       "date": "2026-09-09",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1007/s00063-023-01001-2",
-      "pmc": "PMC10106891",
+      "doi": "10.1186/s42466-026-00533-0",
+      "pmc": "PMC13560121",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42717355/",
-      "doi_url": "https://doi.org/10.1007/s00063-023-01001-2",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10106891/",
+      "doi_url": "https://doi.org/10.1186/s42466-026-00533-0",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13560121/",
       "areas": [
         "Epilepsy"
       ],
@@ -249,7 +309,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "new"
     },
     {
@@ -282,7 +342,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "new"
     },
     {
@@ -301,11 +361,11 @@
       "date": "2026-09-07",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.3389/fendo.2023.1042744",
-      "pmc": "PMC9932495",
+      "doi": "10.3390/nu18172933",
+      "pmc": "PMC13566994",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42739105/",
-      "doi_url": "https://doi.org/10.3389/fendo.2023.1042744",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9932495/",
+      "doi_url": "https://doi.org/10.3390/nu18172933",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13566994/",
       "areas": [
         "Aesthetic Medicine & Body Composition",
         "Obesity"
@@ -314,7 +374,7 @@
       "evidence_type": "Review",
       "evidence_type_it": "Revisione",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "new"
     },
     {
@@ -345,11 +405,11 @@
       "date": "2026-09-07",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1186/s12913-022-07577-3",
-      "pmc": "PMC8887649",
+      "doi": "10.1002/epi4.70345",
+      "pmc": "PMC13548819",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42704249/",
-      "doi_url": "https://doi.org/10.1186/s12913-022-07577-3",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8887649/",
+      "doi_url": "https://doi.org/10.1002/epi4.70345",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13548819/",
       "areas": [
         "Epilepsy"
       ],
@@ -357,7 +417,7 @@
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "new"
     },
     {
@@ -372,20 +432,20 @@
       "date": "2026-09-06",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1002/epi4.12225",
-      "pmc": "PMC5983110",
+      "doi": "10.3390/nu18172917",
+      "pmc": "PMC13567693",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42739089/",
-      "doi_url": "https://doi.org/10.1002/epi4.12225",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5983110/",
+      "doi_url": "https://doi.org/10.3390/nu18172917",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13567693/",
       "areas": [
         "Oncology & Cancer Metabolism"
       ],
       "category_confidence": 9,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
-      "status": "new"
+      "first_seen": "2026-09-21",
+      "status": "indexed"
     },
     {
       "pmid": "42700934",
@@ -413,7 +473,44 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42761797",
+      "title": "Metabolic switching in MASLD: therapeutic roles of ketogenic diet, intermittent fasting, and the gut-liver axis.",
+      "authors": [
+        "Khanuja PK",
+        "Mohan V",
+        "Perez Martinez A",
+        "Nellutla M",
+        "Alamgir M",
+        "Anjum A",
+        "Jamaleddin Ahmad FA",
+        "Oguntona TS",
+        "Mohamed Ali Saari HA",
+        "Suresh D",
+        "Ansar N",
+        "Alaawad M",
+        "Hadi Z"
+      ],
+      "journal": "Frontiers in nutrition",
+      "date": "2026-09-04",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3389/fnut.2026.1860047",
+      "pmc": "PMC13587464",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42761797/",
+      "doi_url": "https://doi.org/10.3389/fnut.2026.1860047",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13587464/",
+      "areas": [
+        "MASLD / Metabolic Liver Disease"
+      ],
+      "category_confidence": 9,
+      "evidence_type": "Clinical trial / intervention",
+      "evidence_type_it": "Trial clinico / intervento",
+      "source": "PubMed",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -430,11 +527,11 @@
       "date": "2026-09-02",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.3389/fmicb.2025.1659783",
-      "pmc": "PMC12685912",
+      "doi": "10.3389/fnut.2026.1945464",
+      "pmc": "PMC13580613",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42751354/",
-      "doi_url": "https://doi.org/10.3389/fmicb.2025.1659783",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12685912/",
+      "doi_url": "https://doi.org/10.3389/fnut.2026.1945464",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13580613/",
       "areas": [
         "Gut Microbiome",
         "Polyendocrine Metabolic Ovarian Syndrome (PMOS, formerly PCOS)",
@@ -444,7 +541,7 @@
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -467,11 +564,11 @@
       "date": "2026-09-02",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.3390/nu11112812",
-      "pmc": "PMC6893818",
+      "doi": "10.1186/s12888-026-08547-3",
+      "pmc": "PMC13536674",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42687165/",
-      "doi_url": "https://doi.org/10.3390/nu11112812",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6893818/",
+      "doi_url": "https://doi.org/10.1186/s12888-026-08547-3",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13536674/",
       "areas": [
         "Gut Microbiome"
       ],
@@ -479,7 +576,7 @@
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -508,7 +605,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -525,11 +622,11 @@
       "date": "2026-08-27",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.3390/ijms25052475",
-      "pmc": "PMC10931171",
+      "doi": "10.3389/fimmu.2026.1920156",
+      "pmc": "PMC13557986",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42723855/",
-      "doi_url": "https://doi.org/10.3390/ijms25052475",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10931171/",
+      "doi_url": "https://doi.org/10.3389/fimmu.2026.1920156",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13557986/",
       "areas": [
         "Obesity"
       ],
@@ -537,7 +634,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -553,11 +650,11 @@
       "date": "2026-08-27",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1080/1028415X.2021.1905371",
-      "pmc": "10368245",
+      "doi": "10.1038/s41390-026-05410-9",
+      "pmc": "",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42661052/",
-      "doi_url": "https://doi.org/10.1080/1028415X.2021.1905371",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/10368245/",
+      "doi_url": "https://doi.org/10.1038/s41390-026-05410-9",
+      "pmc_url": "",
       "areas": [
         "Epilepsy"
       ],
@@ -565,7 +662,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -599,7 +696,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -615,11 +712,11 @@
       "date": "2026-08-26",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1016/j.appet.2017.03.004",
-      "pmc": "PMC6862729",
+      "doi": "10.3390/nu18172788",
+      "pmc": "PMC13567184",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42738960/",
-      "doi_url": "https://doi.org/10.1016/j.appet.2017.03.004",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6862729/",
+      "doi_url": "https://doi.org/10.3390/nu18172788",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13567184/",
       "areas": [
         "Epilepsy"
       ],
@@ -627,7 +724,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -657,7 +754,7 @@
       "evidence_type": "Case report / case series",
       "evidence_type_it": "Case report / case series",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -681,7 +778,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -708,7 +805,7 @@
       "evidence_type": "Review",
       "evidence_type_it": "Revisione",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -727,11 +824,11 @@
       "date": "2026-08-24",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1001/jamacardio.2020.6184",
-      "pmc": "PMC7666429",
+      "doi": "10.1186/s12944-026-03034-w",
+      "pmc": "PMC13520245",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42661192/",
-      "doi_url": "https://doi.org/10.1001/jamacardio.2020.6184",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7666429/",
+      "doi_url": "https://doi.org/10.1186/s12944-026-03034-w",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13520245/",
       "areas": [
         "Dyslipidemia & Lipid Metabolism"
       ],
@@ -739,7 +836,7 @@
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -757,11 +854,11 @@
       "date": "2026-08-22",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1186/s13148-025-01895-z",
-      "pmc": "PMC12125769",
+      "doi": "10.1016/j.ebiom.2026.106449",
+      "pmc": "PMC13524883",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42632233/",
-      "doi_url": "https://doi.org/10.1186/s13148-025-01895-z",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12125769/",
+      "doi_url": "https://doi.org/10.1016/j.ebiom.2026.106449",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13524883/",
       "areas": [
         "Epilepsy"
       ],
@@ -769,7 +866,7 @@
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -802,7 +899,7 @@
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -824,20 +921,20 @@
       "date": "2026-08-19",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1002/epi4.13135",
-      "pmc": "PMC12014909",
+      "doi": "10.3390/jcm15166419",
+      "pmc": "PMC13514181",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42652823/",
-      "doi_url": "https://doi.org/10.1002/epi4.13135",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12014909/",
+      "doi_url": "https://doi.org/10.3390/jcm15166419",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13514181/",
       "areas": [
         "GLUT1 Deficiency Syndrome",
         "Diabetes & Glucose Metabolism"
       ],
       "category_confidence": 7,
-      "evidence_type": "Observational human study",
-      "evidence_type_it": "Studio osservazionale umano",
+      "evidence_type": "Case report / case series",
+      "evidence_type_it": "Case report / case series",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -870,7 +967,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -900,7 +997,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -914,11 +1011,11 @@
       "date": "2026-08-17",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.3390/nu9101158",
-      "pmc": "PMC5691774",
+      "doi": "10.3390/nu18162681",
+      "pmc": "PMC13517051",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42654261/",
-      "doi_url": "https://doi.org/10.3390/nu9101158",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5691774/",
+      "doi_url": "https://doi.org/10.3390/nu18162681",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13517051/",
       "areas": [
         "Obesity"
       ],
@@ -926,7 +1023,7 @@
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -944,11 +1041,11 @@
       "date": "2026-08-16",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1038/s41392-021-00831-w",
-      "pmc": "PMC8761750",
+      "doi": "10.1002/fsn3.72263",
+      "pmc": "PMC13478377",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42609476/",
-      "doi_url": "https://doi.org/10.1038/s41392-021-00831-w",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8761750/",
+      "doi_url": "https://doi.org/10.1002/fsn3.72263",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13478377/",
       "areas": [
         "Other / General"
       ],
@@ -956,7 +1053,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -973,11 +1070,11 @@
       "date": "2026-08-14",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1001/jama.2013.277669",
-      "pmc": "PMC4450354",
+      "doi": "10.3389/fnut.2026.1855196",
+      "pmc": "PMC13521770",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42666203/",
-      "doi_url": "https://doi.org/10.1001/jama.2013.277669",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4450354/",
+      "doi_url": "https://doi.org/10.3389/fnut.2026.1855196",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13521770/",
       "areas": [
         "Diabetes & Glucose Metabolism"
       ],
@@ -985,7 +1082,7 @@
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1014,7 +1111,7 @@
       "evidence_type": "Observational human study",
       "evidence_type_it": "Studio osservazionale umano",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1028,19 +1125,19 @@
       "date": "2026-08-12",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1101/sqb.2011.76.012856",
-      "pmc": "PMC7188283",
+      "doi": "10.3390/cancers18162600",
+      "pmc": "PMC13511420",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42649914/",
-      "doi_url": "https://doi.org/10.1101/sqb.2011.76.012856",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7188283/",
+      "doi_url": "https://doi.org/10.3390/cancers18162600",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13511420/",
       "areas": [
         "Oncology & Cancer Metabolism"
       ],
       "category_confidence": 8,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1054,10 +1151,10 @@
       "date_precision": "day",
       "year": 2026,
       "doi": "10.1177/15357597261468567",
-      "pmc": "PMC5550564",
+      "pmc": "PMC13457408",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42582329/",
       "doi_url": "https://doi.org/10.1177/15357597261468567",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5550564/",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13457408/",
       "areas": [
         "Other / General"
       ],
@@ -1083,11 +1180,11 @@
       "date": "2026-08-10",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.2337/diabetes.50.8.1714",
-      "pmc": "PMC2517556",
+      "doi": "10.1371/journal.pone.0355475",
+      "pmc": "PMC13456251",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42574433/",
-      "doi_url": "https://doi.org/10.2337/diabetes.50.8.1714",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2517556/",
+      "doi_url": "https://doi.org/10.1371/journal.pone.0355475",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13456251/",
       "areas": [
         "Medium-Chain Triglycerides (MCT)",
         "Dyslipidemia & Lipid Metabolism"
@@ -1096,7 +1193,7 @@
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1115,10 +1212,10 @@
       "date_precision": "day",
       "year": 2026,
       "doi": "10.7759/cureus.114227",
-      "pmc": "PMC3748788",
+      "pmc": "PMC13453335",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42572719/",
       "doi_url": "https://doi.org/10.7759/cureus.114227",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3748788/",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13453335/",
       "areas": [
         "Diabetes & Glucose Metabolism"
       ],
@@ -1126,7 +1223,7 @@
       "evidence_type": "Case report / case series",
       "evidence_type_it": "Case report / case series",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1157,7 +1254,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1170,11 +1267,11 @@
       "date": "2026-08-06",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1002/eat.22513",
-      "pmc": "PMC7350506",
+      "doi": "10.3389/fnut.2026.1879746",
+      "pmc": "PMC13489925",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42625708/",
-      "doi_url": "https://doi.org/10.1002/eat.22513",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7350506/",
+      "doi_url": "https://doi.org/10.3389/fnut.2026.1879746",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13489925/",
       "areas": [
         "Psychiatry & Mental Health"
       ],
@@ -1182,7 +1279,7 @@
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1197,11 +1294,11 @@
       "date": "2026-08-05",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1155/2022/3506213",
-      "pmc": "PMC9467749",
+      "doi": "10.3389/fnmol.2026.1914756",
+      "pmc": "PMC13486180",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42621104/",
-      "doi_url": "https://doi.org/10.1155/2022/3506213",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9467749/",
+      "doi_url": "https://doi.org/10.3389/fnmol.2026.1914756",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13486180/",
       "areas": [
         "Parkinson’s Disease"
       ],
@@ -1209,7 +1306,7 @@
       "evidence_type": "Review",
       "evidence_type_it": "Revisione",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1229,11 +1326,11 @@
       "date": "2026-08-04",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.3390/biomedicines8070191",
-      "pmc": "PMC7400404",
+      "doi": "10.1016/j.ibneur.2026.08.001",
+      "pmc": "PMC13463253",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42591798/",
-      "doi_url": "https://doi.org/10.3390/biomedicines8070191",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7400404/",
+      "doi_url": "https://doi.org/10.1016/j.ibneur.2026.08.001",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13463253/",
       "areas": [
         "Epilepsy"
       ],
@@ -1241,7 +1338,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1255,11 +1352,11 @@
       "date": "2026-08-04",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.22037/ghfbb.v15i4.2600",
-      "pmc": "PMC9876773",
+      "doi": "10.3390/nu18152525",
+      "pmc": "PMC13468603",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42588148/",
-      "doi_url": "https://doi.org/10.22037/ghfbb.v15i4.2600",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9876773/",
+      "doi_url": "https://doi.org/10.3390/nu18152525",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13468603/",
       "areas": [
         "Obesity"
       ],
@@ -1267,7 +1364,7 @@
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1282,19 +1379,19 @@
       "date": "2026-08-03",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.3390/ijms25116204",
-      "pmc": "PMC11172483",
+      "doi": "10.3390/nu18152498",
+      "pmc": "PMC13467616",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42588121/",
-      "doi_url": "https://doi.org/10.3390/ijms25116204",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11172483/",
+      "doi_url": "https://doi.org/10.3390/nu18152498",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13467616/",
       "areas": [
         "Oncology & Cancer Metabolism"
       ],
       "category_confidence": 10,
-      "evidence_type": "Randomized clinical trial",
-      "evidence_type_it": "Trial clinico randomizzato",
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1323,7 +1420,7 @@
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1353,7 +1450,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1376,11 +1473,11 @@
       "date": "2026-07-31",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1080/07853890.2025.2603016",
-      "pmc": "PMC12777878",
+      "doi": "10.3390/biomedicines14081728",
+      "pmc": "PMC13510086",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42652111/",
-      "doi_url": "https://doi.org/10.1080/07853890.2025.2603016",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12777878/",
+      "doi_url": "https://doi.org/10.3390/biomedicines14081728",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13510086/",
       "areas": [
         "Other / General"
       ],
@@ -1388,7 +1485,7 @@
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1411,7 +1508,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1429,11 +1526,11 @@
       "date": "2026-07-30",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1002/mnfr.201700599",
-      "pmc": "8467528",
+      "doi": "10.1007/s10735-026-10907-y",
+      "pmc": "",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42530689/",
-      "doi_url": "https://doi.org/10.1002/mnfr.201700599",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/8467528/",
+      "doi_url": "https://doi.org/10.1007/s10735-026-10907-y",
+      "pmc_url": "",
       "areas": [
         "Thyroid Disorders",
         "Obesity"
@@ -1442,7 +1539,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1472,7 +1569,7 @@
       "evidence_type": "Observational human study",
       "evidence_type_it": "Studio osservazionale umano",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1485,11 +1582,11 @@
       "date": "2026-07-29",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1016/j.jnha.2024.100219",
-      "pmc": "12275738",
+      "doi": "10.1007/s11010-026-05672-1",
+      "pmc": "",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42525374/",
-      "doi_url": "https://doi.org/10.1016/j.jnha.2024.100219",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/12275738/",
+      "doi_url": "https://doi.org/10.1007/s11010-026-05672-1",
+      "pmc_url": "",
       "areas": [
         "Cardiovascular Health"
       ],
@@ -1497,7 +1594,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1514,11 +1611,11 @@
       "date": "2026-07-28",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1093/geront/30.5.583",
-      "pmc": "9744255",
+      "doi": "10.1038/s41390-026-05330-8",
+      "pmc": "",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42521800/",
-      "doi_url": "https://doi.org/10.1093/geront/30.5.583",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/9744255/",
+      "doi_url": "https://doi.org/10.1038/s41390-026-05330-8",
+      "pmc_url": "",
       "areas": [
         "Epilepsy"
       ],
@@ -1526,7 +1623,7 @@
       "evidence_type": "Observational human study",
       "evidence_type_it": "Studio osservazionale umano",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1552,21 +1649,21 @@
       "date": "2026-07-27",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1016/j.jri.2005.10.006",
-      "pmc": "PMC3814393",
+      "doi": "10.3390/ijms27156681",
+      "pmc": "PMC13466703",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42589338/",
-      "doi_url": "https://doi.org/10.1016/j.jri.2005.10.006",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3814393/",
+      "doi_url": "https://doi.org/10.3390/ijms27156681",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13466703/",
       "areas": [
         "Gut Microbiome",
         "Obesity",
         "Reproduction & Fertility"
       ],
       "category_confidence": 8,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1580,11 +1677,11 @@
       "date": "2026-07-24",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1210/jc.2007-2177",
-      "pmc": "PMC5686636",
+      "doi": "10.3390/nu18152417",
+      "pmc": "PMC13467967",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42588040/",
-      "doi_url": "https://doi.org/10.1210/jc.2007-2177",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5686636/",
+      "doi_url": "https://doi.org/10.3390/nu18152417",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13467967/",
       "areas": [
         "Obesity",
         "Reproduction & Fertility"
@@ -1593,7 +1690,7 @@
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1610,11 +1707,11 @@
       "date": "2026-07-24",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.55730/1300-0144.5587",
-      "pmc": "PMC10387848",
+      "doi": "10.1016/j.jnha.2026.100930",
+      "pmc": "PMC13420710",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42497811/",
-      "doi_url": "https://doi.org/10.55730/1300-0144.5587",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10387848/",
+      "doi_url": "https://doi.org/10.1016/j.jnha.2026.100930",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13420710/",
       "areas": [
         "Alzheimer’s Disease",
         "Cognitive Function"
@@ -1623,7 +1720,7 @@
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1649,10 +1746,10 @@
         "Psychiatry & Mental Health"
       ],
       "category_confidence": 8,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
+      "evidence_type": "Case report / case series",
+      "evidence_type_it": "Case report / case series",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1667,11 +1764,11 @@
       "date": "2026-07-22",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1001/jamapsychiatry.2025.4431",
-      "pmc": "PMC12874075",
+      "doi": "10.3389/fnut.2026.1870412",
+      "pmc": "PMC13437400",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42558188/",
-      "doi_url": "https://doi.org/10.1001/jamapsychiatry.2025.4431",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12874075/",
+      "doi_url": "https://doi.org/10.3389/fnut.2026.1870412",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13437400/",
       "areas": [
         "Psychiatry & Mental Health"
       ],
@@ -1679,7 +1776,7 @@
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1694,11 +1791,11 @@
       "date": "2026-07-22",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1016/j.nut.2020.111018",
-      "pmc": "PMC10086139",
+      "doi": "10.3390/nu18142388",
+      "pmc": "PMC13415439",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42514457/",
-      "doi_url": "https://doi.org/10.1016/j.nut.2020.111018",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10086139/",
+      "doi_url": "https://doi.org/10.3390/nu18142388",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13415439/",
       "areas": [
         "Exercise & Performance"
       ],
@@ -1706,7 +1803,7 @@
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1729,11 +1826,11 @@
       "date": "2026-07-22",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.3389/fphar.2019.00443",
-      "pmc": "PMC6503817",
+      "doi": "10.3390/biom16071071",
+      "pmc": "PMC13407059",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42509863/",
-      "doi_url": "https://doi.org/10.3389/fphar.2019.00443",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6503817/",
+      "doi_url": "https://doi.org/10.3390/biom16071071",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13407059/",
       "areas": [
         "Oncology & Cancer Metabolism"
       ],
@@ -1741,7 +1838,7 @@
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1768,7 +1865,7 @@
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1796,7 +1893,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1817,11 +1914,11 @@
       "date": "2026-07-17",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1016/j.yebeh.2020.107493",
-      "pmc": "PMC7532773",
+      "doi": "10.3389/fneur.2026.1872749",
+      "pmc": "PMC13423960",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42539589/",
-      "doi_url": "https://doi.org/10.1016/j.yebeh.2020.107493",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7532773/",
+      "doi_url": "https://doi.org/10.3389/fneur.2026.1872749",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13423960/",
       "areas": [
         "Epilepsy"
       ],
@@ -1829,7 +1926,7 @@
       "evidence_type": "Observational human study",
       "evidence_type_it": "Studio osservazionale umano",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1846,11 +1943,11 @@
       "date": "2026-07-17",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1016/j.pediatrneurol.2007.02.008",
-      "pmc": "PMC1940242",
+      "doi": "10.3390/nu18142347",
+      "pmc": "PMC13415213",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42514416/",
-      "doi_url": "https://doi.org/10.1016/j.pediatrneurol.2007.02.008",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1940242/",
+      "doi_url": "https://doi.org/10.3390/nu18142347",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13415213/",
       "areas": [
         "Epilepsy"
       ],
@@ -1858,7 +1955,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1888,7 +1985,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1909,20 +2006,20 @@
       "date": "2026-07-16",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1016/j.jclinepi.2017.04.026",
-      "pmc": "PMC5579327",
+      "doi": "10.3389/fnut.2026.1873930",
+      "pmc": "PMC13422547",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42535090/",
-      "doi_url": "https://doi.org/10.1016/j.jclinepi.2017.04.026",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5579327/",
+      "doi_url": "https://doi.org/10.3389/fnut.2026.1873930",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13422547/",
       "areas": [
         "Diabetes & Glucose Metabolism",
         "Psychiatry & Mental Health"
       ],
       "category_confidence": 6,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
+      "evidence_type": "Case report / case series",
+      "evidence_type_it": "Case report / case series",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1949,11 +2046,11 @@
       "date": "2026-07-15",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1021/jasms.1c00203",
-      "pmc": "8985811",
+      "doi": "10.1038/s41586-026-10779-y",
+      "pmc": "",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42457955/",
-      "doi_url": "https://doi.org/10.1021/jasms.1c00203",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/8985811/",
+      "doi_url": "https://doi.org/10.1038/s41586-026-10779-y",
+      "pmc_url": "",
       "areas": [
         "Oncology & Cancer Metabolism",
         "Dyslipidemia & Lipid Metabolism"
@@ -1962,7 +2059,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -1994,7 +2091,7 @@
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2015,11 +2112,11 @@
       "date": "2026-07-14",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.4088/PCC.23m03486",
-      "pmc": "PMC12447577",
+      "doi": "10.3389/fpubh.2026.1854868",
+      "pmc": "PMC13418445",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42529640/",
-      "doi_url": "https://doi.org/10.4088/PCC.23m03486",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12447577/",
+      "doi_url": "https://doi.org/10.3389/fpubh.2026.1854868",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13418445/",
       "areas": [
         "Psychiatry & Mental Health"
       ],
@@ -2027,7 +2124,7 @@
       "evidence_type": "Guideline / consensus",
       "evidence_type_it": "Linea guida / consensus",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2061,7 +2158,7 @@
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2095,7 +2192,7 @@
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2127,7 +2224,7 @@
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2153,10 +2250,10 @@
         "Chronic Kidney Disease"
       ],
       "category_confidence": 7,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
+      "evidence_type": "Case report / case series",
+      "evidence_type_it": "Case report / case series",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2181,7 +2278,7 @@
       "evidence_type": "Review",
       "evidence_type_it": "Revisione",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2213,7 +2310,7 @@
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2229,18 +2326,18 @@
       "date_precision": "day",
       "year": 2026,
       "doi": "10.1159/000552503",
-      "pmc": "PMC10065201",
+      "pmc": "PMC13489614",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42621621/",
       "doi_url": "https://doi.org/10.1159/000552503",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10065201/",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13489614/",
       "areas": [
         "Epilepsy"
       ],
       "category_confidence": 3,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
+      "evidence_type": "Case report / case series",
+      "evidence_type_it": "Case report / case series",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2259,11 +2356,11 @@
       "date": "2026-07-10",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.2174/1573399818666220425093535",
-      "pmc": "PMC8469734",
+      "doi": "10.3389/fnut.2026.1884256",
+      "pmc": "PMC13395721",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42500249/",
-      "doi_url": "https://doi.org/10.2174/1573399818666220425093535",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8469734/",
+      "doi_url": "https://doi.org/10.3389/fnut.2026.1884256",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13395721/",
       "areas": [
         "Dyslipidemia & Lipid Metabolism"
       ],
@@ -2271,7 +2368,7 @@
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2305,7 +2402,7 @@
       "evidence_type": "Observational human study",
       "evidence_type_it": "Studio osservazionale umano",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2334,10 +2431,10 @@
         "Epilepsy"
       ],
       "category_confidence": 2,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2367,7 +2464,7 @@
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2405,7 +2502,7 @@
       "evidence_type": "Observational human study",
       "evidence_type_it": "Studio osservazionale umano",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2439,7 +2536,7 @@
       "evidence_type": "Observational human study",
       "evidence_type_it": "Studio osservazionale umano",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2473,7 +2570,7 @@
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2493,10 +2590,10 @@
       "date_precision": "day",
       "year": 2026,
       "doi": "10.1177/23743735261459218",
-      "pmc": "PMC8753091",
+      "pmc": "PMC13338534",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42416120/",
       "doi_url": "https://doi.org/10.1177/23743735261459218",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8753091/",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13338534/",
       "areas": [
         "COVID-19 & Metabolism"
       ],
@@ -2504,7 +2601,7 @@
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2528,11 +2625,11 @@
       "date": "2026-07-04",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1016/j.freeradbiomed.2024.07.038",
-      "pmc": "PMC11273387",
+      "doi": "10.3390/antiox15070844",
+      "pmc": "PMC13404200",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42510575/",
-      "doi_url": "https://doi.org/10.1016/j.freeradbiomed.2024.07.038",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11273387/",
+      "doi_url": "https://doi.org/10.3390/antiox15070844",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13404200/",
       "areas": [
         "Diabetes & Glucose Metabolism",
         "Obesity"
@@ -2541,7 +2638,7 @@
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2564,11 +2661,11 @@
       "date": "2026-07-03",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1111/obr.13053",
-      "pmc": "PMC7539910",
+      "doi": "10.3390/nu18132166",
+      "pmc": "PMC13363701",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42451166/",
-      "doi_url": "https://doi.org/10.1111/obr.13053",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7539910/",
+      "doi_url": "https://doi.org/10.3390/nu18132166",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13363701/",
       "areas": [
         "Oncology & Cancer Metabolism"
       ],
@@ -2576,7 +2673,7 @@
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2598,11 +2695,11 @@
       "date": "2026-07-03",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1016/j.ajcnut.2024.04.021",
-      "pmc": "PMC6175383",
+      "doi": "10.26599/1671-5411.2026.05.005",
+      "pmc": "PMC13324333",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42395849/",
-      "doi_url": "https://doi.org/10.1016/j.ajcnut.2024.04.021",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6175383/",
+      "doi_url": "https://doi.org/10.26599/1671-5411.2026.05.005",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13324333/",
       "areas": [
         "Longevity & Healthy Aging",
         "Cardiovascular Health",
@@ -2612,7 +2709,7 @@
       "evidence_type": "Review",
       "evidence_type_it": "Revisione",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2627,11 +2724,11 @@
       "date": "2026-07-02",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1007/s00134-024-07660-9",
-      "pmc": "PMC9377015",
+      "doi": "10.1371/journal.pone.0333334",
+      "pmc": "PMC13327284",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42391224/",
-      "doi_url": "https://doi.org/10.1007/s00134-024-07660-9",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9377015/",
+      "doi_url": "https://doi.org/10.1371/journal.pone.0333334",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13327284/",
       "areas": [
         "Epilepsy"
       ],
@@ -2639,7 +2736,7 @@
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2658,11 +2755,11 @@
       "date": "2026-06-30",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1067/mod.2003.45",
-      "pmc": "PMC12275738",
+      "doi": "10.54589/aol.39/1/30",
+      "pmc": "PMC13543405",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42678105/",
-      "doi_url": "https://doi.org/10.1067/mod.2003.45",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12275738/",
+      "doi_url": "https://doi.org/10.54589/aol.39/1/30",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13543405/",
       "areas": [
         "Other / General"
       ],
@@ -2670,7 +2767,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2703,10 +2800,10 @@
         "Gut Microbiome"
       ],
       "category_confidence": 7,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2732,11 +2829,11 @@
       "date": "2026-06-29",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1016/j.ijrobp.2018.08.033",
-      "pmc": "PMC6849509",
+      "doi": "10.1093/noajnl/vdag165",
+      "pmc": "PMC13427763",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42542667/",
-      "doi_url": "https://doi.org/10.1016/j.ijrobp.2018.08.033",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6849509/",
+      "doi_url": "https://doi.org/10.1093/noajnl/vdag165",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13427763/",
       "areas": [
         "Oncology & Cancer Metabolism",
         "Exercise & Performance",
@@ -2746,7 +2843,7 @@
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2778,7 +2875,7 @@
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2797,11 +2894,11 @@
       "date": "2026-06-29",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1159/000515381",
-      "pmc": "PMC8138199",
+      "doi": "10.3389/fnut.2026.1858811",
+      "pmc": "PMC13357534",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42445796/",
-      "doi_url": "https://doi.org/10.1159/000515381",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8138199/",
+      "doi_url": "https://doi.org/10.3389/fnut.2026.1858811",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13357534/",
       "areas": [
         "Other / General"
       ],
@@ -2809,7 +2906,7 @@
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2825,19 +2922,19 @@
       "date": "2026-06-29",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1016/j.mri.2012.05.001",
-      "pmc": "PMC3466397",
+      "doi": "10.3389/fnut.2026.1843178",
+      "pmc": "PMC13357147",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42445794/",
-      "doi_url": "https://doi.org/10.1016/j.mri.2012.05.001",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3466397/",
+      "doi_url": "https://doi.org/10.3389/fnut.2026.1843178",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13357147/",
       "areas": [
         "Supplementation & Nutraceuticals"
       ],
       "category_confidence": 12,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2863,7 +2960,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2878,11 +2975,11 @@
       "date": "2026-06-27",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1016/j.phrs.2023.106780",
-      "pmc": "PMC3917578",
+      "doi": "10.3390/nu18132101",
+      "pmc": "PMC13363485",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42451105/",
-      "doi_url": "https://doi.org/10.1016/j.phrs.2023.106780",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3917578/",
+      "doi_url": "https://doi.org/10.3390/nu18132101",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13363485/",
       "areas": [
         "Epilepsy"
       ],
@@ -2890,7 +2987,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2920,8 +3017,8 @@
         "Other / General"
       ],
       "category_confidence": 0,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
       "source": "PubMed",
       "first_seen": "2026-09-18",
       "status": "indexed"
@@ -2949,7 +3046,7 @@
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     },
     {
@@ -2974,11 +3071,11 @@
       "date": "2026-06-25",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1179/1476830510Y.0000000001",
-      "pmc": "PMC8453917",
+      "doi": "10.1007/s12035-026-06023-3",
+      "pmc": "PMC13294337",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42342999/",
-      "doi_url": "https://doi.org/10.1179/1476830510Y.0000000001",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8453917/",
+      "doi_url": "https://doi.org/10.1007/s12035-026-06023-3",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13294337/",
       "areas": [
         "Dyslipidemia & Lipid Metabolism",
         "Psychiatry & Mental Health"
@@ -2987,7 +3084,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "status": "indexed"
     }
   ]

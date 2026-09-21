@@ -13,7 +13,7 @@ scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
 verified_at: "2026-09-20T08:34:16.006830+00:00"
 source_identity: "PASS"
-source_identity_checked_at: "2026-09-21T10:51:32.880746+00:00"
+source_identity_checked_at: "2026-09-21T11:05:14.908606+00:00"
 ---
 
 # Ketogenic Precursor Supplementation Linked to Higher Shooting Hit Factor During Short‑Term Sleep Restriction
