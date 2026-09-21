@@ -16,7 +16,7 @@ scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
 verified_at: "2026-09-21T11:05:14.539009+00:00"
-source_identity_checked_at: "2026-09-21T11:05:14.908606+00:00"
+source_identity_checked_at: "2026-09-21T11:20:02.932967+00:00"
 ---
 
 # Ketogenic diet modifies hepatic CYP enzymes and shows a non‑significant trend toward higher ozanimod exposure in mice

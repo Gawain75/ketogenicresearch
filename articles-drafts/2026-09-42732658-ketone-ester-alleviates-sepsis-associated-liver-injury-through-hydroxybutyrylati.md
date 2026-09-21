@@ -13,7 +13,7 @@ scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
 verified_at: "2026-09-20T08:28:31.895556+00:00"
 source_identity: "PASS"
-source_identity_checked_at: "2026-09-21T11:05:14.908606+00:00"
+source_identity_checked_at: "2026-09-21T11:20:02.932967+00:00"
 ---
 
 # Ketone ester reduces LPS‑induced liver injury in mice via STAT1 K679 β‑hydroxybutyrylation
