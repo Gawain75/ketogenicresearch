@@ -1,0 +1,74 @@
+name: Deploy Scientific Library to Cloudflare
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "library.html"
+      - "script.js"
+      - "styles.css"
+      - "latest-publications.json"
+      - "logo-ketogenic-research.png"
+      - "favicon.svg"
+      - "cloudflare/**"
+      - "scripts/build_cloudflare_library.py"
+      - ".github/workflows/deploy-cloudflare-library.yml"
+  schedule:
+    # Daily safety sync at 05:20 UTC.
+    - cron: "20 5 * * *"
+
+permissions:
+  contents: read
+  deployments: write
+
+concurrency:
+  group: cloudflare-scientific-library-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out current main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build protected Cloudflare Library
+        run: python scripts/build_cloudflare_library.py
+
+      - name: Check JavaScript syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check cloudflare-dist/script.js
+          node --check cloudflare-dist/_worker.js
+
+      - name: Deploy production to Cloudflare Pages
+        id: cloudflare
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy cloudflare-dist --project-name=ketogenicresearch-library --branch=main --commit-dirty=true
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deployment summary
+        shell: bash
+        env:
+          DEPLOYMENT_URL: ${{ steps.cloudflare.outputs.deployment-url }}
+        run: |
+          echo "### Scientific Library deployed" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Cloudflare Pages project: \`ketogenicresearch-library\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "Deployment URL: $DEPLOYMENT_URL" >> "$GITHUB_STEP_SUMMARY"
