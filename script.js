@@ -1,7 +1,7 @@
 // Ketogenic Research — V70 recovery script
 
 const KR_LIBRARY_STATS = {
-  publications: 5609,
+  publications: 3922,
   clinicalAreas: 53
 };
 
@@ -89,18 +89,43 @@ function initHeader() {
 // ------------------------------------------------------------
 
 function normalizeEvidence(value) {
-  const map = {
-    'systematic-review': 'systematic-review',
-    'systematic_review': 'systematic-review',
-    'guideline': 'guideline',
-    'clinical-trial': 'clinical-trial',
-    'clinical_trial': 'clinical-trial',
-    'human': 'human',
-    'review': 'review',
-    'mechanistic': 'mechanistic',
-    'other': 'other'
-  };
-  return map[value || ''] || value || 'other';
+  const v = (value || '').toLowerCase();
+  if (!v) return 'other';
+  if (v.includes('systematic-review') && v.includes('meta-analysis')) return 'systematic-review-meta-analysis';
+  if (v.includes('meta-analysis')) return 'meta-analysis';
+  if (v.includes('systematic-review') || v.includes('systematic_review')) return 'systematic-review';
+  if (v.includes('guideline') || v.includes('consensus') || v.includes('position-statement')) return 'guideline';
+  if (v.includes('randomized-clinical-trial') || v.includes('clinical-trial') || v.includes('clinical_trial')) return 'clinical-trial';
+  if (v.includes('observational-human-study') || v.includes('case-report') || v === 'human') return 'human';
+  if (v.includes('preclinical') || v.includes('mechanistic')) return 'mechanistic';
+  if (v.includes('review')) return 'review';
+  return 'other';
+}
+
+function evidenceMatches(rawValue, selected) {
+  if (selected === 'all') return true;
+  const raw = (rawValue || '').toLowerCase();
+  const norm = normalizeEvidence(raw);
+  if (selected === 'meta-analysis') return raw.includes('meta-analysis');
+  if (selected === 'systematic-review') return raw.includes('systematic-review') || norm === 'systematic-review-meta-analysis';
+  if (selected === 'clinical-trial') return norm === 'clinical-trial';
+  if (selected === 'human') return norm === 'human' || norm === 'clinical-trial';
+  return norm === selected;
+}
+
+function publicationIdentity(paper) {
+  const h4 = paper.querySelector('h4');
+  const rawTitle = h4?.dataset?.en || h4?.textContent || '';
+  const title = rawTitle
+    .replace(/^\s*\d+\.\s*/, '')
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '');
+  if (title) return `title:${title}`;
+  if (paper.dataset.pmid) return `pmid:${paper.dataset.pmid}`;
+  if (paper.dataset.doi) return `doi:${paper.dataset.doi.toLowerCase()}`;
+  return `card:${paper.dataset.search || ''}`;
 }
 
 function applyLibraryFilters() {
@@ -113,11 +138,14 @@ function applyLibraryFilters() {
   const searchEl = document.getElementById('librarySearch');
   const evidenceEl = document.getElementById('evidenceFilter');
   const yearEl = document.getElementById('yearFilter');
+  const areaEl = document.getElementById('areaFilter');
 
   const q = (searchEl?.value || '').trim().toLowerCase();
   const ev = evidenceEl?.value || 'all';
   const yr = yearEl?.value || 'all';
+  const area = areaEl?.value || 'all';
 
+  const visiblePublicationKeys = new Set();
   let visiblePapers = 0;
   let visibleFolders = 0;
 
@@ -144,7 +172,7 @@ function applyLibraryFilters() {
       const paperYear = paper.dataset.year || 'unknown';
 
       const qOk = !q || blob.includes(q);
-      const evOk = ev === 'all' || paperEv === ev;
+      const evOk = evidenceMatches(paper.dataset.evidence, ev);
 
       let yrOk = true;
       if (yr !== 'all') {
@@ -164,15 +192,17 @@ function applyLibraryFilters() {
       if (show) {
         folderMatches++;
         visiblePapers++;
+        visiblePublicationKeys.add(publicationIdentity(paper));
       }
     });
 
-    const showFolder = folderMatches > 0;
+    const areaOk = area === 'all' || folder.id === area;
+    const showFolder = folderMatches > 0 && areaOk;
     folder.hidden = !showFolder;
 
     if (showFolder) {
       visibleFolders++;
-      if (q || ev !== 'all' || yr !== 'all') {
+      if (q || ev !== 'all' || yr !== 'all' || area !== 'all') {
         folder.open = true;
       }
     }
@@ -189,13 +219,13 @@ function applyLibraryFilters() {
   const count = document.getElementById('libraryResultCount');
   if (count) {
     count.textContent = currentLang() === 'it'
-      ? `${visiblePapers} pubblicazioni in ${visibleFolders} aree`
-      : `${visiblePapers} publications across ${visibleFolders} areas`;
+      ? `${visiblePublicationKeys.size} pubblicazioni uniche in ${visibleFolders} aree`
+      : `${visiblePublicationKeys.size} unique publications across ${visibleFolders} areas`;
   }
 }
 
 function initLibrary() {
-  ['librarySearch', 'evidenceFilter', 'yearFilter'].forEach(id => {
+  ['librarySearch', 'evidenceFilter', 'yearFilter', 'areaFilter'].forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
 
@@ -211,10 +241,12 @@ function initLibrary() {
       const search = document.getElementById('librarySearch');
       const evidence = document.getElementById('evidenceFilter');
       const year = document.getElementById('yearFilter');
+      const area = document.getElementById('areaFilter');
 
       if (search) search.value = '';
       if (evidence) evidence.value = 'all';
       if (year) year.value = 'all';
+      if (area) area.value = 'all';
 
       applyLibraryFilters();
     });
@@ -227,10 +259,13 @@ function updateLibraryCounters() {
   let publications = KR_LIBRARY_STATS.publications;
   let clinicalAreas = KR_LIBRARY_STATS.clinicalAreas;
 
-  const papers = document.querySelectorAll('article.folder-paper');
+  const papers = [...document.querySelectorAll('article.folder-paper')];
   const folders = document.querySelectorAll('details.library-folder');
 
-  if (papers.length) publications = papers.length;
+  if (papers.length) {
+    const keys = new Set(papers.map(publicationIdentity));
+    publications = keys.size;
+  }
   if (folders.length) clinicalAreas = folders.length;
 
   const locale = currentLang() === 'it' ? 'it-IT' : 'en-US';
@@ -637,99 +672,3 @@ window.addEventListener(
   openLibraryAreaFromHash
 );
 
-// V65_AREA_FILTER
-(function () {
-  function applyAreaFilter() {
-    const area = document.getElementById('areaFilter');
-    if (!area) return;
-
-    const chosen = area.value;
-
-    document.querySelectorAll(
-      'details.library-folder'
-    ).forEach(folder => {
-      const areaMatch =
-        chosen === 'all' ||
-        folder.id === chosen;
-
-      if (!areaMatch) {
-        folder.hidden = true;
-      } else {
-        folder.hidden = false;
-
-        if (chosen !== 'all') {
-          folder.open = true;
-        }
-      }
-    });
-
-    document.querySelectorAll(
-      '.library-group'
-    ).forEach(group => {
-      const visible = [
-        ...group.querySelectorAll(
-          'details.library-folder'
-        )
-      ].some(
-        folder =>
-          !folder.hidden
-      );
-
-      group.hidden = !visible;
-    });
-  }
-
-  document.addEventListener(
-    'DOMContentLoaded',
-    () => {
-      const area =
-        document.getElementById(
-          'areaFilter'
-        );
-
-      if (area) {
-        area.addEventListener(
-          'change',
-          () => {
-            if (
-              typeof applyLibraryFilters
-              === 'function'
-            ) {
-              applyLibraryFilters();
-            }
-
-            applyAreaFilter();
-          }
-        );
-      }
-
-      const clear =
-        document.getElementById(
-          'clearLibraryFilters'
-        );
-
-      if (clear) {
-        clear.addEventListener(
-          'click',
-          () => {
-            const area =
-              document.getElementById(
-                'areaFilter'
-              );
-
-            if (area) {
-              area.value = 'all';
-            }
-
-            window.setTimeout(
-              applyAreaFilter,
-              0
-            );
-          }
-        );
-      }
-
-      applyAreaFilter();
-    }
-  );
-})();

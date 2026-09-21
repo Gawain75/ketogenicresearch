@@ -12,6 +12,8 @@ scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
 verified_at: "2026-09-20T03:27:43.015102+00:00"
+source_identity: "PASS"
+source_identity_checked_at: "2026-09-21T10:51:32.880746+00:00"
 ---
 
 # Ketogenic diet linked to reduced Müller cell activation and retinal neuroinflammation in experimental autoimmune glaucoma

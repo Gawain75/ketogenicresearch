@@ -35,13 +35,16 @@ def doi_from(article):
     return m.group(0).rstrip(".,;)").lower() if m else None
 
 def paper_key(article):
+    h = article.find("h4")
+    title = h.get("data-en") if h and h.has_attr("data-en") else (h.get_text(" ", strip=True) if h else "")
+    title_key = norm_title(title)
+    if title_key:
+        return "title:" + title_key
     p = pmid_from(article)
     if p: return "pmid:" + p
     d = doi_from(article)
     if d: return "doi:" + d
-    h = article.find("h4")
-    title = h.get("data-en") if h and h.has_attr("data-en") else (h.get_text(" ", strip=True) if h else "")
-    return "title:" + norm_title(title)
+    return ""
 
 def paper_year(article):
     raw = (article.get("data-year") or "").strip()

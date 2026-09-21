@@ -12,6 +12,8 @@ scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
 verified_at: "2026-09-20T08:31:25.397353+00:00"
+source_identity: "PASS"
+source_identity_checked_at: "2026-09-21T10:51:32.880746+00:00"
 ---
 
 # Effectiveness and tolerability of ketogenic diet therapy in children with early‑onset genetic developmental and epileptic encephalopathy

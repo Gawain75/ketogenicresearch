@@ -12,6 +12,8 @@ scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
 verified_at: "2026-09-20T08:37:06.211550+00:00"
+source_identity: "PASS"
+source_identity_checked_at: "2026-09-21T10:51:32.880746+00:00"
 ---
 
 # Ketogenic dietary strategies and cognitive function in older adults: findings from a systematic review and meta‑analysis

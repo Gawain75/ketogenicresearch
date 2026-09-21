@@ -1,0 +1,49 @@
+name: Fix article fallback
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fix-article-fallback
+  cancel-in-progress: false
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Patch article generator
+        run: python scripts/fix_article_fallback.py
+
+      - name: Verify Python syntax
+        run: python -m py_compile scripts/generate_articles.py
+
+      - name: Verify fallback logic is present
+        run: |
+          grep -q "Trying next candidate" scripts/generate_articles.py
+          grep -q "MAX_CANDIDATE_SCAN" scripts/generate_articles.py
+          grep -q "NO ARTICLE PUBLISHED" scripts/generate_articles.py
+
+      - name: Commit corrected generator
+        run: |
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add scripts/generate_articles.py
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Fix article generation fallback"
+            git push
+          fi

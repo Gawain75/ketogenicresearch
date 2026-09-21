@@ -1,0 +1,39 @@
+name: Clean legacy article wording
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  clean-legacy-wording:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Remove legacy automation wording
+        run: python scripts/sanitize_article_drafts.py
+
+      - name: Re-render public article pages
+        run: python scripts/render_articles.py
+
+      - name: Commit cleaned drafts and pages
+        run: |
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add articles-drafts/ articles/ articles.html
+          if git diff --cached --quiet; then
+            echo "No legacy wording found."
+          else
+            git commit -m "Remove legacy automation wording from articles"
+            git push
+          fi

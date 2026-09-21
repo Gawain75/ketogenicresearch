@@ -25,6 +25,25 @@ def load_json(path: Path, default):
         return default
 
 
+
+def unique_publication_count(soup: BeautifulSoup) -> int:
+    keys = set()
+    for card in soup.select("article.folder-paper"):
+        h4 = card.find("h4")
+        title = norm_title(
+            (h4.get("data-en") if h4 else "")
+            or (h4.get_text(" ", strip=True) if h4 else "")
+        )
+        pmid = str(card.get("data-pmid") or "").strip()
+        doi = norm_doi(str(card.get("data-doi") or ""))
+        if title:
+            keys.add("title:" + title)
+        elif pmid:
+            keys.add("pmid:" + pmid)
+        elif doi:
+            keys.add("doi:" + doi)
+    return len(keys)
+
 def main() -> None:
     queue = load_json(QUEUE, {"records": []})
     max_promotions = max(1, int(__import__("os").getenv("PROMOTION_BATCH_MAX", "400")))
@@ -194,7 +213,7 @@ def main() -> None:
         print("No new PubMed-verified records to promote.")
         return
 
-    total = len(soup.select("article.folder-paper"))
+    total = unique_publication_count(soup)
     areas_count = len(soup.select("details.library-folder"))
 
     for item in soup.select(".library-status-item"):

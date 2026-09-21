@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DRAFTS = ROOT / "articles-drafts"
 PUBLIC = ROOT / "articles"
 INDEX = ROOT / "articles.html"
+SITEMAP = ROOT / "sitemap.xml"
 
 def parse_frontmatter(text: str):
     if not text.startswith("---\n"):
@@ -84,12 +85,46 @@ def pretty_date(value: str, lang: str) -> str:
     except Exception:
         return value
 
-def article_page(meta, en_title, en_html, it_title, it_html):
+def plain_description(md: str, limit: int = 158) -> str:
+    paragraphs = []
+    current = []
+    for raw in md.splitlines():
+        line = raw.strip()
+        if not line:
+            if current:
+                paragraphs.append(" ".join(current))
+                current = []
+            continue
+        if line.startswith("#") or line.startswith("**Ketogenic Research Editorial") or line.startswith("Scientific oversight:"):
+            continue
+        if line in {"**Research Note**", "**Research Analysis**", "**Nota di ricerca**", "**Analisi di ricerca**"}:
+            continue
+        current.append(re.sub(r"\*\*", "", line))
+    if current:
+        paragraphs.append(" ".join(current))
+    value = next((p for p in paragraphs if len(p) > 40), "")
+    value = re.sub(r"\s+", " ", value).strip()
+    if len(value) <= limit:
+        return value
+    return value[:limit - 1].rsplit(" ", 1)[0] + "…"
+
+def date_sort_key(meta: dict) -> tuple:
+    value = str(meta.get("date") or "")
+    try:
+        if re.fullmatch(r"\d{4}-\d{2}", value):
+            value += "-01"
+        d = datetime.strptime(value[:10], "%Y-%m-%d")
+        return (d, str(meta.get("pmid") or ""))
+    except Exception:
+        return (datetime.min, str(meta.get("pmid") or ""))
+
+def article_page(meta, en_title, en_html, it_title, it_html, slug, description):
     date = str(meta.get("date", ""))
     journal = str(meta.get("journal", ""))
     pmid = str(meta.get("pmid", ""))
     doi = str(meta.get("doi", ""))
     article_type = str(meta.get("article_type", "Research Note"))
+    article_type_it = str(meta.get("article_type_it", "Nota di ricerca"))
 
     meta_en = " · ".join(x for x in [pretty_date(date, "en"), journal] if x)
     meta_it = " · ".join(x for x in [pretty_date(date, "it"), journal] if x)
@@ -106,6 +141,16 @@ def article_page(meta, en_title, en_html, it_title, it_html):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{html.escape(en_title)} | Ketogenic Research</title>
+<meta name="description" content="{html.escape(description, quote=True)}">
+<link rel="canonical" href="https://ketogenicresearch.org/articles/{html.escape(slug)}.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Ketogenic Research">
+<meta property="og:title" content="{html.escape(en_title, quote=True)}">
+<meta property="og:description" content="{html.escape(description, quote=True)}">
+<meta property="og:url" content="https://ketogenicresearch.org/articles/{html.escape(slug)}.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{html.escape(en_title, quote=True)}">
+<meta name="twitter:description" content="{html.escape(description, quote=True)}">
 <link href="../favicon.svg" rel="icon">
 <link href="../styles.css?v=70" rel="stylesheet">
 <link href="../articles.css?v=1" rel="stylesheet">
@@ -135,7 +180,7 @@ def article_page(meta, en_title, en_html, it_title, it_html):
   </section>
 
   <section class="article-language" data-article-lang="it">
-    <div class="article-kicker">Nota di ricerca</div>
+    <div class="article-kicker">{html.escape(article_type_it)}</div>
     <div class="article-meta">{html.escape(meta_it)}</div>
     <div class="article-content">{it_html}</div>
     <div class="article-byline article-byline-top">
@@ -175,6 +220,13 @@ def index_page(cards):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Articles | Ketogenic Research</title>
+<meta name="description" content="Research notes and scientific analyses based on recent peer-reviewed ketogenic literature.">
+<link rel="canonical" href="https://ketogenicresearch.org/articles.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ketogenic Research">
+<meta property="og:title" content="Articles | Ketogenic Research">
+<meta property="og:description" content="Research notes and scientific analyses based on recent peer-reviewed ketogenic literature.">
+<meta property="og:url" content="https://ketogenicresearch.org/articles.html">
 <link href="favicon.svg" rel="icon">
 <link href="styles.css?v=70" rel="stylesheet">
 <link href="articles.css?v=1" rel="stylesheet">
@@ -230,11 +282,14 @@ def main():
     PUBLIC.mkdir(exist_ok=True)
     cards = []
 
-    for path in sorted(DRAFTS.glob("*.md"), reverse=True):
+    entries = []
+    for path in DRAFTS.glob("*.md"):
         meta, body = parse_frontmatter(path.read_text(encoding="utf-8"))
         if str(meta.get("verification", "")).upper() != "PASS":
             continue
+        entries.append((date_sort_key(meta), path, meta, body))
 
+    for _, path, meta, body in sorted(entries, key=lambda x: x[0], reverse=True):
         en_md, it_md = split_languages(body)
         en_title, en_html = markdown_to_html(en_md)
         it_title, it_html = markdown_to_html(it_md)
@@ -263,7 +318,10 @@ def main():
 
         slug = path.stem
         (PUBLIC / f"{slug}.html").write_text(
-            article_page(meta, en_title, en_html, it_title, it_html),
+            article_page(
+                meta, en_title, en_html, it_title, it_html, slug,
+                plain_description(en_md),
+            ),
             encoding="utf-8"
         )
 
@@ -276,12 +334,12 @@ def main():
 <article class="article-card">
   <a href="articles/{slug}.html">
     <div class="article-card-language active" data-card-lang="en">
-      <span class="article-card-type">Research Note</span>
+      <span class="article-card-type">{html.escape(str(meta.get("article_type", "Research Note")))}</span>
       <h2>{html.escape(en_title)}</h2>
       <p>{html.escape(en_meta)}</p>
     </div>
     <div class="article-card-language" data-card-lang="it">
-      <span class="article-card-type">Nota di ricerca</span>
+      <span class="article-card-type">{html.escape(str(meta.get("article_type_it", "Nota di ricerca")))}</span>
       <h2>{html.escape(it_title or en_title)}</h2>
       <p>{html.escape(it_meta)}</p>
     </div>
@@ -289,7 +347,40 @@ def main():
 </article>''')
 
     INDEX.write_text(index_page(cards), encoding="utf-8")
-    print(f"Rendered {len(cards)} public article(s).")
+
+    static_urls = [
+        ("https://ketogenicresearch.org/", "weekly", "1.0"),
+        ("https://ketogenicresearch.org/research.html", "monthly", "0.9"),
+        ("https://ketogenicresearch.org/library.html", "weekly", "1.0"),
+        ("https://ketogenicresearch.org/latest.html", "daily", "0.9"),
+        ("https://ketogenicresearch.org/articles.html", "daily", "0.9"),
+        ("https://ketogenicresearch.org/evidence-trends.html", "weekly", "0.8"),
+        ("https://ketogenicresearch.org/methodology.html", "monthly", "0.8"),
+        ("https://ketogenicresearch.org/director.html", "monthly", "0.8"),
+        ("https://ketogenicresearch.org/contact.html", "yearly", "0.6"),
+    ]
+    urls = [
+        f"  <url>\n    <loc>{loc}</loc>\n    <changefreq>{freq}</changefreq>\n    <priority>{priority}</priority>\n  </url>"
+        for loc, freq, priority in static_urls
+    ]
+    for _, path, meta, _ in sorted(entries, key=lambda x: x[0], reverse=True):
+        slug = path.stem
+        urls.append(
+            "  <url>\n"
+            f"    <loc>https://ketogenicresearch.org/articles/{slug}.html</loc>\n"
+            "    <changefreq>monthly</changefreq>\n"
+            "    <priority>0.7</priority>\n"
+            "  </url>"
+        )
+    SITEMAP.write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + "\n".join(urls)
+        + "\n</urlset>\n",
+        encoding="utf-8",
+    )
+
+    print(f"Rendered {len(cards)} public article(s) and updated sitemap.xml.")
 
 if __name__ == "__main__":
     main()

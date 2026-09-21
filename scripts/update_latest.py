@@ -323,42 +323,58 @@ def evidence(
     item,
     title,
     abstract,
+    mesh,
 ):
-    types = " ".join(
-        text(n).lower()
+    publication_types = [
+        text(n).strip().lower()
         for n in item.findall(
-            ".//PublicationTypeList/PublicationType"
+            "./MedlineCitation/Article/PublicationTypeList/PublicationType"
         )
+        if text(n).strip()
+    ]
+    types = " ".join(publication_types)
+
+    body = (title + " " + abstract).lower()
+    title_l = title.lower()
+    mesh_l = {m.strip().lower() for m in mesh if m and m.strip()}
+
+    # Prefer structured PubMed indexing when available. Recent records may not
+    # yet be fully MEDLINE-indexed, so conservative text rules remain as a
+    # fallback. Animal evidence must not become a human clinical study simply
+    # because the abstract mentions patients in the background/discussion.
+    mesh_humans = "humans" in mesh_l
+    mesh_animals = (
+        "animals" in mesh_l
+        or any(x in mesh_l for x in ("mice", "rats", "zebrafish"))
     )
 
-    body = (
-        title + " " + abstract
-    ).lower()
+    animal_title = re.search(
+        r"\b(mouse|mice|murine|rat|rats|rodent|rodents|zebrafish|drosophila|rabbit|rabbits|porcine|swine)\b",
+        title_l,
+    ) is not None
+    animal_methods = re.search(
+        r"\b(mouse|mice|murine|rat|rats|rodent|rodents|zebrafish|drosophila|rabbit|rabbits|porcine|swine)\b.{0,45}\b(fed|treated|randomi[sz]ed|assigned|received|injected|model|models)\b",
+        body,
+    ) is not None
+    explicit_preclinical = (
+        animal_title
+        or animal_methods
+        or "animal model" in body
+        or "animal study" in body
+        or "preclinical" in body
+        or "in vitro" in body
+        or "cell line" in body
+        or "cell culture" in body
+        or (mesh_animals and not mesh_humans)
+    )
 
-    # V5: detect clearly non-human/preclinical work BEFORE looking for
-    # words such as "randomized". Animal experiments can be randomized too.
-    preclinical_terms = [
-        "mouse", "mice", "murine",
-        " rat ", "rats", "rodent",
-        "animal model", "animal study",
-        "preclinical", "in vitro",
-        "cell line", "cell culture",
-        "zebrafish", "drosophila",
-        "porcine", "swine model",
-    ]
-
-    human_terms = [
-        "patient", "patients", "participant", "participants",
-        "human", "humans", "men", "women", "children",
-        "adolescent", "adolescents", "adult", "adults",
-        "clinical trial",
-    ]
-
-    explicit_preclinical = any(x in body for x in preclinical_terms)
-    explicit_human = any(x in body for x in human_terms)
-
-    if explicit_preclinical and not explicit_human:
-        return "Preclinical / mechanistic"
+    explicit_human = (
+        mesh_humans
+        or re.search(
+            r"\b(patient|patients|participant|participants|volunteer|volunteers|men|women|children|adolescent|adolescents|adult|adults)\b",
+            body,
+        ) is not None
+    )
 
     if (
         "meta-analysis" in types
@@ -370,10 +386,24 @@ def evidence(
 
     if (
         "guideline" in types
+        or "practice guideline" in types
         or "consensus" in body
         or "position statement" in body
     ):
         return "Guideline / consensus"
+
+    # Case reports/series must be classified before generic clinical language.
+    if (
+        "case reports" in types
+        or "case report" in types
+        or "case report" in body
+        or "case series" in body
+    ) and not explicit_preclinical:
+        return "Case report / case series"
+
+    # Strong animal evidence takes precedence over incidental human wording.
+    if explicit_preclinical and not (mesh_humans and not mesh_animals):
+        return "Preclinical / mechanistic"
 
     if (
         "randomized controlled trial" in types
@@ -381,6 +411,7 @@ def evidence(
         or (
             ("randomized" in body or "randomised" in body)
             and explicit_human
+            and not explicit_preclinical
         )
     ):
         return "Randomized clinical trial"
@@ -388,12 +419,9 @@ def evidence(
     if (
         "clinical trial" in types
         or (
-            "clinical trial" in body
+            ("clinical trial" in body or "intervention" in body)
             and explicit_human
-        )
-        or (
-            "intervention" in body
-            and explicit_human
+            and not explicit_preclinical
         )
     ):
         return "Clinical trial / intervention"
@@ -403,32 +431,26 @@ def evidence(
             x in types
             for x in [
                 "observational study",
-                "cohort",
-                "case-control",
+                "cohort studies",
+                "case-control studies",
             ]
         )
-        or any(
-            x in body
-            for x in [
-                "prospective",
-                "retrospective",
-                "cohort study",
-                "cross-sectional",
-            ]
+        or (
+            any(
+                x in body
+                for x in [
+                    "prospective",
+                    "retrospective",
+                    "cohort study",
+                    "cross-sectional",
+                ]
+            )
+            and explicit_human
         )
     ) and not explicit_preclinical:
         return "Observational human study"
 
-    if (
-        "case report" in types
-        or "case series" in body
-    ) and not explicit_preclinical:
-        return "Case report / case series"
-
-    if (
-        "review" in types
-        or "review" in body
-    ):
+    if "review" in types or "review" in body:
         return "Review"
 
     if explicit_preclinical:
@@ -688,8 +710,11 @@ def main():
         doi = ""
         pmc = ""
 
+        # Accept only identifiers belonging to the PubMed record itself.
+        # Descendant-wide ArticleId searches can accidentally pick identifiers
+        # from cited references.
         for article_id in item.findall(
-            ".//ArticleId"
+            "./PubmedData/ArticleIdList/ArticleId"
         ):
             kind = (
                 article_id.attrib.get(
@@ -726,6 +751,7 @@ def main():
             item,
             title,
             abstract,
+            mesh,
         )
 
         date_string = (

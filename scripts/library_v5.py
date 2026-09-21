@@ -111,7 +111,7 @@ def record_from_item(item: ET.Element) -> dict | None:
 
     doi = ""
     pmc = ""
-    for article_id in item.findall(".//ArticleId"):
+    for article_id in item.findall("./PubmedData/ArticleIdList/ArticleId"):
         kind = (article_id.attrib.get("IdType") or "").lower()
         if kind == "doi":
             doi = U.text(article_id)
@@ -137,7 +137,7 @@ def record_from_item(item: ET.Element) -> dict | None:
         return None
 
     areas, confidence = U.classify(title, abstract, mesh)
-    evidence_type = U.evidence(item, title, abstract)
+    evidence_type = U.evidence(item, title, abstract, mesh)
 
     if precision == "day":
         date_string = date_value.isoformat()

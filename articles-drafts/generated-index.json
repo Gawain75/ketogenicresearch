@@ -154,14 +154,26 @@
       "at": "2026-09-21T09:39:24.856686+00:00",
       "stage": "source",
       "error": "PubMed abstract unavailable"
+    },
+    {
+      "pmid": "42709766",
+      "at": "2026-09-21T10:47:12.934597+00:00",
+      "stage": "source_identity_manual_audit",
+      "error": "Stored DOI/PMCID did not belong to this PubMed record."
+    },
+    {
+      "pmid": "42760380",
+      "at": "2026-09-21T10:47:12.934597+00:00",
+      "stage": "source_identity_manual_audit",
+      "error": "Stored DOI/PMCID/full-text source did not belong to this PubMed record."
     }
   ],
-  "updated_at": "2026-09-21T09:40:45.554366+00:00",
+  "updated_at": "2026-09-21T10:51:32.880746+00:00",
   "source_unavailable_pmids": [
     "42717355"
   ],
   "last_run": {
-    "attempted_candidates": 2,
+    "attempted_candidates": 1,
     "published_articles": 1,
     "status": "published"
   }

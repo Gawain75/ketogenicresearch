@@ -1,0 +1,56 @@
+name: Repair 2025 publication years
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ketogenicresearch-content-write
+  cancel-in-progress: false
+
+jobs:
+  repair-2025:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install parser
+        run: python -m pip install beautifulsoup4
+
+      - name: Repair 2025 publication years
+        env:
+          YEAR_2025_BATCH_MAX: "150"
+          NCBI_PAUSE_SECONDS: "0.4"
+        run: python scripts/repair_2025_publication_years.py
+
+      - name: Rebuild evidence trends
+        run: python scripts/build_evidence_trends.py
+
+      - name: Commit 2025 repair
+        run: |
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add library.html library-2025-year-repair-state.json data/evidence-trends.json evidence-trends.html *.html
+
+          if git diff --cached --quiet; then
+            echo "No 2025 changes."
+            exit 0
+          fi
+
+          git commit -m "Repair 2025 publication years"
+          git pull --rebase origin main
+          git push origin main

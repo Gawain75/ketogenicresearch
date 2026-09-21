@@ -81,37 +81,103 @@ def text_content(node: ET.Element | None) -> str:
         return ""
     return " ".join("".join(node.itertext()).split())
 
+def norm_title(value: str) -> str:
+    value = (value or "").lower().replace("β", "beta")
+    value = re.sub(r"[^a-z0-9]+", " ", value)
+    return re.sub(r"\s+", " ", value).strip()
+
+def norm_doi(value: str) -> str:
+    value = (value or "").strip().lower()
+    value = re.sub(r"^https?://(?:dx\.)?doi\.org/", "", value)
+    return value.rstrip(".,; ")
+
 def extract_pubmed_source(root: ET.Element) -> dict[str, Any]:
-    article = root.find(".//PubmedArticle")
-    if article is None:
+    record = root.find(".//PubmedArticle")
+    if record is None:
+        return {}
+
+    citation = record.find("MedlineCitation")
+    article = citation.find("Article") if citation is not None else None
+    if citation is None or article is None:
         return {}
 
     abstract_parts = []
-    for node in article.findall(".//Abstract/AbstractText"):
+    for node in article.findall("Abstract/AbstractText"):
         label = node.attrib.get("Label", "").strip()
-        text = text_content(node)
-        if text:
-            abstract_parts.append(f"{label}: {text}" if label else text)
+        value = text_content(node)
+        if value:
+            abstract_parts.append(f"{label}: {value}" if label else value)
 
     ids: dict[str, str] = {}
-    for node in article.findall(".//ArticleIdList/ArticleId"):
-        kind = node.attrib.get("IdType", "").lower()
+    # CRITICAL: identifiers must come only from this record's PubmedData.
+    # A descendant-wide lookup can pick DOI/PMCID values from references.
+    for node in record.findall("./PubmedData/ArticleIdList/ArticleId"):
+        kind = (node.attrib.get("IdType") or "").lower()
         value = text_content(node)
         if kind and value:
             ids[kind] = value
 
     mesh = []
-    for node in article.findall(".//MeshHeading/DescriptorName"):
+    for node in citation.findall("MeshHeadingList/MeshHeading/DescriptorName"):
         value = text_content(node)
         if value:
             mesh.append(value)
 
     return {
+        "pmid": text_content(citation.find("PMID")),
+        "title": text_content(article.find("ArticleTitle")),
         "abstract": "\n".join(abstract_parts).strip(),
         "pmcid": ids.get("pmc", ""),
-        "doi_from_pubmed": ids.get("doi", ""),
+        "doi_from_pubmed": norm_doi(ids.get("doi", "")),
         "mesh": mesh[:30],
     }
+
+def verify_source_identity(rec: dict[str, Any], extra: dict[str, Any]) -> dict[str, Any]:
+    """Return a record corrected to authoritative PubMed identifiers.
+
+    The generator must never use a DOI/PMCID from local JSON unless it agrees
+    with the PubMed record selected by PMID. Title mismatch is treated as fatal.
+    """
+    expected_pmid = str(rec.get("pmid") or "").strip()
+    pubmed_pmid = str(extra.get("pmid") or "").strip()
+    if not expected_pmid or expected_pmid != pubmed_pmid:
+        raise RuntimeError(
+            f"PubMed identity mismatch: requested PMID {expected_pmid}, returned {pubmed_pmid or '[missing]'}"
+        )
+
+    local_title = norm_title(str(rec.get("title") or ""))
+    pubmed_title = norm_title(str(extra.get("title") or ""))
+    if not local_title or not pubmed_title or local_title != pubmed_title:
+        raise RuntimeError(
+            "PubMed identity mismatch: local title does not match the authoritative PMID title."
+        )
+
+    authoritative_doi = norm_doi(str(extra.get("doi_from_pubmed") or ""))
+    authoritative_pmc = str(extra.get("pmcid") or "").strip()
+    local_doi = norm_doi(str(rec.get("doi") or ""))
+    local_pmc = str(rec.get("pmc") or "").strip()
+
+    if local_doi and local_doi != authoritative_doi:
+        print(
+            f"Correcting stale DOI for PMID {expected_pmid}: "
+            f"{local_doi} -> {authoritative_doi or '[none in PubMed]'}"
+        )
+    if local_pmc and local_pmc != authoritative_pmc:
+        print(
+            f"Correcting stale PMCID for PMID {expected_pmid}: "
+            f"{local_pmc} -> {authoritative_pmc or '[none in PubMed]'}"
+        )
+
+    corrected = dict(rec)
+    corrected["title"] = extra.get("title") or rec.get("title")
+    corrected["doi"] = authoritative_doi
+    corrected["pmc"] = authoritative_pmc
+    corrected["doi_url"] = f"https://doi.org/{authoritative_doi}" if authoritative_doi else ""
+    corrected["pmc_url"] = (
+        f"https://pmc.ncbi.nlm.nih.gov/articles/{authoritative_pmc}/"
+        if authoritative_pmc else ""
+    )
+    return corrected
 
 def pmc_full_text(pmcid: str) -> str:
     if not pmcid:
@@ -722,7 +788,9 @@ def markdown(
     rec: dict[str, Any],
     extra: dict[str, Any],
     draft: dict[str, Any],
-    verified_at: str
+    verified_at: str,
+    full_text_source: str = "PubMed abstract",
+    full_text_url: str = "",
 ) -> str:
     def sections(items: list[dict[str, str]]) -> str:
         blocks = []
@@ -745,7 +813,11 @@ date: {json.dumps(rec.get("date",""))}
 journal: {json.dumps(rec.get("journal",""), ensure_ascii=False)}
 article_type: {json.dumps(draft.get("article_type",""))}
 article_type_it: {json.dumps(draft.get("article_type_it",""))}
-generator_version: "4.1"
+generator_version: "4.2"
+source_identity: "PASS"
+source_identity_basis: "PubMed PMID/title/DOI/PMCID"
+full_text_source: {json.dumps(full_text_source)}
+full_text_url: {json.dumps(full_text_url)}
 editorial_byline: "Ketogenic Research Editorial"
 scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
@@ -848,6 +920,7 @@ def main() -> None:
         try:
             pubmed = pubmed_xml(pmid)
             extra = extract_pubmed_source(pubmed)
+            rec = verify_source_identity(rec, extra)
 
             if not extra.get("abstract"):
                 if pmid not in source_unavailable:
@@ -865,8 +938,14 @@ def main() -> None:
                 )
                 continue
 
-            full_text = pmc_full_text(extra.get("pmcid", ""))
-            packet = source_packet(rec, extra, full_text)
+            full_text, full_text_source, full_text_url = discover_full_text(rec, extra)
+            packet = source_packet(
+                rec,
+                extra,
+                full_text,
+                full_text_source,
+                full_text_url,
+            )
 
             print("Generating bilingual article...")
             draft = groq_json(
@@ -931,7 +1010,14 @@ def main() -> None:
             )
 
             (OUT / filename).write_text(
-                markdown(rec, extra, draft, verified_at),
+                markdown(
+                    rec,
+                    extra,
+                    draft,
+                    verified_at,
+                    full_text_source,
+                    full_text_url,
+                ),
                 encoding="utf-8",
             )
 

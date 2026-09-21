@@ -1,0 +1,39 @@
+name: Remove source-basis phrases
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  clean-articles:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Remove abstract/full-text wording from existing drafts
+        run: python scripts/remove_source_basis_phrases.py
+
+      - name: Re-render public article pages
+        run: python scripts/render_articles.py
+
+      - name: Commit cleaned articles
+        run: |
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add articles-drafts/ articles/ articles.html
+          if git diff --cached --quiet; then
+            echo "No source-basis phrases found."
+          else
+            git commit -m "Remove source-basis wording from research articles"
+            git push
+          fi
