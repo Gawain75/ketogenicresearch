@@ -1,0 +1,63 @@
+name: Add Obesity GLP-1 ketogenic subcategory
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ketogenicresearch-content-write
+  cancel-in-progress: false
+
+jobs:
+  add-subcategory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependency
+        run: python -m pip install beautifulsoup4
+
+      - name: Add Obesity GLP-1RA ketogenic subcategory
+        run: python scripts/add_obesity_glp1_keto_subcategory.py
+
+      - name: Verify JavaScript
+        run: node --check script.js
+
+      - name: Commit subcategory
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git restore --source=HEAD --staged --worktree .github/workflows || true
+          git clean -fd .github/workflows || true
+
+          git add library.html script.js styles.css scripts/add_obesity_glp1_keto_subcategory.py
+          git restore --staged .github/workflows || true
+
+          if git diff --cached --quiet; then
+            echo "Subcategory already installed."
+          else
+            git commit -m "Add GLP-1 ketogenic subcategory under Obesity"
+            git pull --rebase origin main
+            git push origin main
+          fi
+
+      - name: Summary
+        run: |
+          echo "Added Obesity > GLP-1RA + ketogenic / ketosis / ketones."
+          echo "The subsection is populated automatically from Obesity records on each page load."
