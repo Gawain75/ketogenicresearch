@@ -95,6 +95,66 @@ export default {
       return new Response(JSON.stringify({ ok: true }), { status: 200, headers });
     }
 
+    if (url.pathname === "/auth/me" && request.method === "GET") {
+      const cookies = parseCookies(request);
+      let access = cookies.kr_access_token || "";
+      let user = await validateUser(access);
+      let refreshed = null;
+
+      if (!user) {
+        refreshed = await refreshSession(cookies.kr_refresh_token || "");
+        if (!refreshed?.access_token) {
+          return Response.json({ authenticated: false }, {
+            status: 401,
+            headers: { "Cache-Control": "no-store" }
+          });
+        }
+        access = refreshed.access_token;
+        user = await validateUser(access);
+        if (!user) {
+          return Response.json({ authenticated: false }, {
+            status: 401,
+            headers: { "Cache-Control": "no-store" }
+          });
+        }
+      }
+
+      let profile = null;
+      try {
+        const pr = await fetch(
+          `https://kfctugbpwmjdupmtfjen.supabase.co/rest/v1/library_profiles?user_id=eq.${encodeURIComponent(user.id)}&select=first_name,last_name,email&limit=1`,
+          {
+            headers: {
+              "apikey": "sb_publishable_fz-WHqnfABeqFiTjBz8Utg_psM2G6sY",
+              "Authorization": `Bearer ${access}`,
+              "Accept": "application/json"
+            }
+          }
+        );
+        if (pr.ok) {
+          const rows = await pr.json();
+          if (Array.isArray(rows) && rows.length) profile = rows[0];
+        }
+      } catch {}
+
+      const headers = new Headers({
+        "Content-Type": "application/json; charset=utf-8",
+        "Cache-Control": "no-store"
+      });
+
+      if (refreshed?.access_token && refreshed?.refresh_token) {
+        headers.append("Set-Cookie", cookie("kr_access_token", refreshed.access_token, 60 * 60 * 24 * 30));
+        headers.append("Set-Cookie", cookie("kr_refresh_token", refreshed.refresh_token, 60 * 60 * 24 * 30));
+      }
+
+      return new Response(JSON.stringify({
+        authenticated: true,
+        email: user.email || profile?.email || "",
+        first_name: profile?.first_name || "",
+        last_name: profile?.last_name || ""
+      }), { status: 200, headers });
+    }
+
     if (url.pathname === "/auth/logout" && request.method === "POST") {
       const headers = new Headers({
         "Content-Type": "application/json; charset=utf-8",
