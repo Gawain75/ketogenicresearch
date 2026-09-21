@@ -42,6 +42,22 @@ KETO_TERMS = (
     "very-low-calorie ketogenic", "keto diet",
 )
 
+SUPPLEMENTAL_ARTICLES = [
+    {
+        "title_en": "Preserving Lean Mass During GLP-1RA-Induced Weight Loss: The Potential Role of Ketogenic Metabolic Therapy in Improving Weight-Loss Quality",
+        "title_it": "Preservare la massa magra durante la perdita di peso indotta da GLP-1RA: il potenziale ruolo della terapia metabolica chetogenica nel migliorare la qualità del dimagrimento",
+        "authors": "Marco Medeot",
+        "journal": "Biomedicine Advances",
+        "citation": "Biomed adv. 2026;3(3):89-91.",
+        "article_type_en": "Opinion",
+        "article_type_it": "Opinion",
+        "year": "2026",
+        "doi": "10.34172/bma.74",
+        "article_url": "https://biomedad.ae/Article/bma-74",
+        "search": "glp-1ra glp-1 ketogenic metabolic therapy ketogenic diet ketosis ketones lean mass obesity weight loss semaglutide tirzepatide body composition",
+    },
+]
+
 def text(node) -> str:
     if node is None:
         return ""
@@ -128,6 +144,58 @@ def clone_node(node):
         return None
     return BeautifulSoup(str(node), "html.parser").find()
 
+def make_supplemental_card(soup: BeautifulSoup, article: dict[str, str]):
+    card = soup.new_tag("article")
+    card["class"] = ["folder-paper", "drive-paper", "supplemental-paper"]
+    card["data-doi"] = article["doi"]
+    card["data-evidence"] = "opinion"
+    card["data-search"] = article["search"]
+    card["data-year"] = article["year"]
+
+    badge = soup.new_tag("span")
+    badge["class"] = ["evidence-level"]
+    badge["data-en"] = article["article_type_en"]
+    badge["data-it"] = article["article_type_it"]
+    badge.string = article["article_type_en"]
+    card.append(badge)
+
+    h4 = soup.new_tag("h4")
+    h4["data-en"] = article["title_en"]
+    h4["data-it"] = article["title_it"]
+    h4.string = article["title_en"]
+    card.append(h4)
+
+    p = soup.new_tag("p")
+    meta_en = f'{article["authors"]}. {article["citation"]}'
+    meta_it = meta_en
+    p["data-en"] = meta_en
+    p["data-it"] = meta_it
+    p.string = meta_en
+    card.append(p)
+
+    links = soup.new_tag("div")
+    links["class"] = ["paper-links"]
+
+    article_link = soup.new_tag("a", href=article["article_url"])
+    article_link["target"] = "_blank"
+    article_link["rel"] = "noopener"
+    article_link["data-en"] = "Article ↗"
+    article_link["data-it"] = "Articolo ↗"
+    article_link.string = "Article ↗"
+    links.append(article_link)
+
+    doi_link = soup.new_tag("a", href=f'https://doi.org/{article["doi"]}')
+    doi_link["target"] = "_blank"
+    doi_link["rel"] = "noopener"
+    doi_link["data-en"] = "DOI ↗"
+    doi_link["data-it"] = "DOI ↗"
+    doi_link.string = "DOI ↗"
+    links.append(doi_link)
+
+    card.append(links)
+    return card
+
+
 def make_folder(soup: BeautifulSoup, matches: list[tuple[str, object]]):
     folder = soup.new_tag("details")
     folder["class"] = ["library-folder"]
@@ -164,9 +232,20 @@ def make_folder(soup: BeautifulSoup, matches: list[tuple[str, object]]):
     strong["data-it"] = "GLP-1RA + metabolismo chetogenico"
     strong.string = strong["data-en"]
 
+    matched_dois = {
+        str(card.get("data-doi") or "").strip().lower()
+        for _, card in matches
+        if str(card.get("data-doi") or "").strip()
+    }
+    supplemental = [
+        article for article in SUPPLEMENTAL_ARTICLES
+        if article["doi"].lower() not in matched_dois
+    ]
+    total_count = len(matches) + len(supplemental)
+
     small = soup.new_tag("small")
-    small["data-en"] = f"{len(matches)} studies combining GLP-1-based therapies with ketogenic interventions, ketosis or ketones"
-    small["data-it"] = f"{len(matches)} studi che combinano terapie basate su GLP-1 con chetogenica, chetosi o chetoni"
+    small["data-en"] = f"{total_count} studies/publications combining GLP-1-based therapies with ketogenic interventions, ketosis or ketones"
+    small["data-it"] = f"{total_count} studi/pubblicazioni che combinano terapie basate su GLP-1 con chetogenica, chetosi o chetoni"
     small.string = small["data-en"]
 
     labels.append(strong)
@@ -212,6 +291,9 @@ def make_folder(soup: BeautifulSoup, matches: list[tuple[str, object]]):
         clone = clone_node(source)
         if clone is not None:
             curated.append(clone)
+
+    for article in supplemental:
+        curated.append(make_supplemental_card(soup, article))
 
     body.append(curated)
     folder.append(body)
@@ -261,9 +343,13 @@ def rebuild():
     pubmed = fetch_pubmed_text([pmid for pmid, _ in cards])
 
     matches = [(pmid, card) for pmid, card in cards if is_match(pubmed.get(pmid, ""))]
-    print(f"Matched {len(matches)} GLP-1RA + ketogenic/ketosis/ketone studies.")
+    print(f"Matched {len(matches)} PubMed-indexed GLP-1RA + ketogenic/ketosis/ketone studies.")
     if matches:
         print("Matched PMIDs: " + ", ".join(pmid for pmid, _ in matches))
+    print(
+        f"Supplemental peer-reviewed publications configured: "
+        f"{len(SUPPLEMENTAL_ARTICLES)}"
+    )
 
     new_folder = make_folder(soup, matches)
 
@@ -299,6 +385,8 @@ def main():
         raise RuntimeError("Final GLP-1RA metabolic folder verification failed")
     if f'id="{OLD_ID}"' in check:
         raise RuntimeError("Old Obesity subsection still present")
+    if '10.34172/bma.74' not in check:
+        raise RuntimeError("Biomedicine Advances opinion DOI 10.34172/bma.74 missing")
 
     print("GLP-1RA + Ketogenic Metabolism folder installed under Metabolic & Endocrine.")
 
