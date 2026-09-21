@@ -322,7 +322,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
     if(error)return showStatus(error.message,true);
 
-    setCookies(data.session);
+    try{
+      await syncServerSession(data.session);
+    }catch(err){
+      return showStatus((lang==='it'?'Errore sessione: ':'Session error: ')+(err?.message||String(err)),true);
+    }
 
     const {data:profile,error:profileError}=await client
       .from('library_profiles')
@@ -397,7 +401,7 @@ window.addEventListener('DOMContentLoaded', () => {
         privacy_accepted_at:new Date().toISOString()
       });
       if(pErr)return showStatus((lang==='it'?'Errore salvataggio profilo: ':'Profile save error: ')+pErr.message,true);
-      location.href='/library.html';
+      location.href='/library';
       return;
     }
 
