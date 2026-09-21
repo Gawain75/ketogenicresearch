@@ -1,4 +1,6 @@
 ---
+source_citation_checked_at: "2026-09-21T12:17:16.439939+00:00"
+source_citation_basis: "PubMed structured metadata"
 pmid: "42753265"
 doi: "10.1093/milmed/usag429"
 pmcid: ""
@@ -13,7 +15,7 @@ scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
 verified_at: "2026-09-20T08:34:16.006830+00:00"
 source_identity: "PASS"
-source_identity_checked_at: "2026-09-21T11:20:02.932967+00:00"
+source_identity_checked_at: "2026-09-21T12:17:17.478159+00:00"
 ---
 
 # Ketogenic Precursor Supplementation Linked to Higher Shooting Hit Factor During Short‑Term Sleep Restriction
@@ -39,7 +41,7 @@ The trial was limited to a laboratory‑based virtual‑reality task and a short
 
 ### Source
 
-PMID: 42753265; DOI: 10.1093/milmed/usag429.
+Buga A, Stoner JT, Sapper TN, Crabtree CD, Decker DD, Robinson BT, et al. Supplementation With Ketogenic Precursors Enhances Virtual Reality Shooting Performance During Sleep Restriction: A Randomized, Placebo-Controlled, Crossover Trial. Mil Med. 2026:usag429. doi: 10.1093/milmed/usag429. PMID: 42753265.
 
 ---
 
@@ -66,5 +68,4 @@ Lo studio è stato condotto con un compito di tiro in realtà virtuale e una res
 
 ### Fonte
 
-PMID: 42753265; DOI: 10.1093/milmed/usag429.
-
+Buga A, Stoner JT, Sapper TN, Crabtree CD, Decker DD, Robinson BT, et al. Supplementation With Ketogenic Precursors Enhances Virtual Reality Shooting Performance During Sleep Restriction: A Randomized, Placebo-Controlled, Crossover Trial. Mil Med. 2026:usag429. doi: 10.1093/milmed/usag429. PMID: 42753265.

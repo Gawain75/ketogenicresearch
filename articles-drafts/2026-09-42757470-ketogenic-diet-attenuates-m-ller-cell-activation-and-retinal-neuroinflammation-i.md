@@ -1,4 +1,6 @@
 ---
+source_citation_checked_at: "2026-09-21T12:17:16.439939+00:00"
+source_citation_basis: "PubMed structured metadata"
 pmid: "42757470"
 doi: "10.3892/ijmm.2026.5992"
 pmcid: ""
@@ -13,7 +15,7 @@ scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
 verified_at: "2026-09-20T03:27:43.015102+00:00"
 source_identity: "PASS"
-source_identity_checked_at: "2026-09-21T11:20:02.932967+00:00"
+source_identity_checked_at: "2026-09-21T12:17:17.478159+00:00"
 ---
 
 # Ketogenic diet linked to reduced Müller cell activation and retinal neuroinflammation in experimental autoimmune glaucoma
@@ -39,7 +41,7 @@ The study is confined to a single animal model and in vitro Müller cell culture
 
 ### Source
 
-Tan S et al. Ketogenic diet attenuates Müller cell activation and retinal neuroinflammation in autoimmune glaucoma through acetylation‑mediated FOXO signalling. Int J Mol Med. 2026;58:321. PMID: 42757470.
+Tan S, Wang X, Zheng Y, Mou Z, Zeng L, Yuan J, et al. Ketogenic diet attenuates Müller cell activation and retinal neuroinflammation in autoimmune glaucoma through acetylation‑mediated FOXO signalling. Int J Mol Med. 2026;58(5):321. doi: 10.3892/ijmm.2026.5992. PMID: 42757470.
 
 ---
 
@@ -66,5 +68,4 @@ Lo studio è limitato a un unico modello animale e a colture in vitro di cellule
 
 ### Fonte
 
-Tan S et al. Ketogenic diet attenuates Müller cell activation and retinal neuroinflammation in autoimmune glaucoma through acetylation‑mediated FOXO signalling. Int J Mol Med. 2026;58:321. PMID: 42757470.
-
+Tan S, Wang X, Zheng Y, Mou Z, Zeng L, Yuan J, et al. Ketogenic diet attenuates Müller cell activation and retinal neuroinflammation in autoimmune glaucoma through acetylation‑mediated FOXO signalling. Int J Mol Med. 2026;58(5):321. doi: 10.3892/ijmm.2026.5992. PMID: 42757470.

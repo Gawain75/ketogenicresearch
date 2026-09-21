@@ -26,6 +26,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from pubmed_citation import extract_citation_metadata, format_citation
 ROOT = Path(__file__).resolve().parents[1]
 LATEST = ROOT / "latest-publications.json"
 OUT = ROOT / "articles-drafts"
@@ -130,6 +131,7 @@ def extract_pubmed_source(root: ET.Element) -> dict[str, Any]:
         "pmcid": ids.get("pmc", ""),
         "doi_from_pubmed": norm_doi(ids.get("doi", "")),
         "mesh": mesh[:30],
+        "citation_meta": extract_citation_metadata(record),
     }
 
 def verify_source_identity(rec: dict[str, Any], extra: dict[str, Any]) -> dict[str, Any]:
@@ -805,6 +807,9 @@ def markdown(
     doi = rec.get("doi") or extra.get("doi_from_pubmed", "")
     pmcid = extra.get("pmcid", "")
 
+    source_citation = format_citation(extra.get("citation_meta") or {})
+    if not source_citation:
+        raise RuntimeError(f"Unable to build authoritative PubMed citation for PMID {pmid}")
     return f"""---
 pmid: {json.dumps(pmid)}
 doi: {json.dumps(doi)}
@@ -813,7 +818,7 @@ date: {json.dumps(rec.get("date",""))}
 journal: {json.dumps(rec.get("journal",""), ensure_ascii=False)}
 article_type: {json.dumps(draft.get("article_type",""))}
 article_type_it: {json.dumps(draft.get("article_type_it",""))}
-generator_version: "4.2"
+generator_version: "4.3"
 source_identity: "PASS"
 source_identity_basis: "PubMed PMID/title/DOI/PMCID"
 full_text_source: {json.dumps(full_text_source)}
@@ -838,7 +843,7 @@ Scientific oversight: **Marco Medeot, Scientific Director**
 
 ### Source
 
-{draft.get("source_note_en","")}
+{source_citation}
 
 ---
 
@@ -855,7 +860,7 @@ Supervisione scientifica: **Marco Medeot, Direttore Scientifico**
 
 ### Fonte
 
-{draft.get("source_note_it","")}
+{source_citation}
 
 """
 

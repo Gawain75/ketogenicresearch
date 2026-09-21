@@ -1,4 +1,6 @@
 ---
+source_citation_checked_at: "2026-09-21T12:17:16.439939+00:00"
+source_citation_basis: "PubMed structured metadata"
 pmid: "42732658"
 doi: "10.1016/j.imbio.2026.153243"
 pmcid: ""
@@ -13,7 +15,7 @@ scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
 verified_at: "2026-09-20T08:28:31.895556+00:00"
 source_identity: "PASS"
-source_identity_checked_at: "2026-09-21T11:20:02.932967+00:00"
+source_identity_checked_at: "2026-09-21T12:17:17.478159+00:00"
 ---
 
 # Ketone ester reduces LPS‑induced liver injury in mice via STAT1 K679 β‑hydroxybutyrylation
@@ -39,7 +41,7 @@ The investigation relied on a single mouse strain and an acute LPS model, which 
 
 ### Source
 
-PMID: 42732658; DOI: 10.1016/j.imbio.2026.153243.
+Bai Y, Li K, Zhu D, Li R, Yan Y, Zhong C, et al. Ketone ester alleviates sepsis-associated liver injury through β-hydroxybutyrylation of STAT1. Immunobiology. 2026;231(5):153243. doi: 10.1016/j.imbio.2026.153243. PMID: 42732658.
 
 ---
 
@@ -66,5 +68,4 @@ Lo studio è stato condotto su un’unica linea murina e su un modello acuto di 
 
 ### Fonte
 
-PMID: 42732658; DOI: 10.1016/j.imbio.2026.153243.
-
+Bai Y, Li K, Zhu D, Li R, Yan Y, Zhong C, et al. Ketone ester alleviates sepsis-associated liver injury through β-hydroxybutyrylation of STAT1. Immunobiology. 2026;231(5):153243. doi: 10.1016/j.imbio.2026.153243. PMID: 42732658.

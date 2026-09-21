@@ -1,4 +1,6 @@
 ---
+source_citation_checked_at: "2026-09-21T12:17:16.439939+00:00"
+source_citation_basis: "PubMed structured metadata"
 pmid: "42742013"
 doi: "10.3760/cma.j.cn112140-20260601-00420"
 pmcid: ""
@@ -13,7 +15,7 @@ scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
 verified_at: "2026-09-20T08:31:25.397353+00:00"
 source_identity: "PASS"
-source_identity_checked_at: "2026-09-21T11:20:02.932967+00:00"
+source_identity_checked_at: "2026-09-21T12:17:17.478159+00:00"
 ---
 
 # Effectiveness and tolerability of ketogenic diet therapy in children with early‑onset genetic developmental and epileptic encephalopathy
@@ -39,7 +41,7 @@ The retrospective design limits causal inference; unmeasured confounders such as
 
 ### Source
 
-PMID: 42742013
+Song TY, Deng J, Chen CH, Wang XH, Tian XJ, Wu ML, et al. [Effectiveness and tolerability of ketogenic diet therapy in children with genetic developmental and epileptic encephalopathy onset within 2 years of age]. Zhonghua Er Ke Za Zhi. 2026;64(10):1130-1136. doi: 10.3760/cma.j.cn112140-20260601-00420. PMID: 42742013.
 
 ---
 
@@ -66,5 +68,4 @@ Il disegno retrospettivo limita l’inferenza causale; fattori non misurati come
 
 ### Fonte
 
-PMID: 42742013
-
+Song TY, Deng J, Chen CH, Wang XH, Tian XJ, Wu ML, et al. [Effectiveness and tolerability of ketogenic diet therapy in children with genetic developmental and epileptic encephalopathy onset within 2 years of age]. Zhonghua Er Ke Za Zhi. 2026;64(10):1130-1136. doi: 10.3760/cma.j.cn112140-20260601-00420. PMID: 42742013.

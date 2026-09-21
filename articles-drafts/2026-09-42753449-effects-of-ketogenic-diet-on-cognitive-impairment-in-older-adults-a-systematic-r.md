@@ -1,4 +1,6 @@
 ---
+source_citation_checked_at: "2026-09-21T12:17:16.439939+00:00"
+source_citation_basis: "PubMed structured metadata"
 pmid: "42753449"
 doi: "10.1016/j.archger.2026.106409"
 pmcid: ""
@@ -13,7 +15,7 @@ scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
 verified_at: "2026-09-20T08:37:06.211550+00:00"
 source_identity: "PASS"
-source_identity_checked_at: "2026-09-21T11:20:02.932967+00:00"
+source_identity_checked_at: "2026-09-21T12:17:17.478159+00:00"
 ---
 
 # Ketogenic dietary strategies and cognitive function in older adults: findings from a systematic review and meta‑analysis
@@ -39,7 +41,7 @@ All included trials were relatively small and varied in diet composition, calori
 
 ### Source
 
-Source: Xi L et al. Effects of ketogenic diet on cognitive impairment in older adults: a systematic review and meta-analysis. Archives of Gerontology and Geriatrics. 2026; PMID 42753449; DOI 10.1016/j.archger.2026.106409.
+Xi L, Wan J, Hua Y, Guo M, Du J, Luo X, et al. Effects of ketogenic diet on cognitive impairment in older adults: a systematic review and meta-analysis. Arch Gerontol Geriatr. 2026;151:106409. doi: 10.1016/j.archger.2026.106409. PMID: 42753449.
 
 ---
 
@@ -66,5 +68,4 @@ Tutti gli studi inclusi erano di piccola dimensione e presentavano variazioni ne
 
 ### Fonte
 
-Fonte: Xi L et al. Effects of ketogenic diet on cognitive impairment in older adults: a systematic review and meta-analysis. Archives of Gerontology and Geriatrics. 2026; PMID 42753449; DOI 10.1016/j.archger.2026.106409.
-
+Xi L, Wan J, Hua Y, Guo M, Du J, Luo X, et al. Effects of ketogenic diet on cognitive impairment in older adults: a systematic review and meta-analysis. Arch Gerontol Geriatr. 2026;151:106409. doi: 10.1016/j.archger.2026.106409. PMID: 42753449.

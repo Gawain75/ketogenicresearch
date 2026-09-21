@@ -1,4 +1,6 @@
 ---
+source_citation_checked_at: "2026-09-21T12:17:16.439939+00:00"
+source_citation_basis: "PubMed structured metadata"
 pmid: "42760380"
 doi: "10.1038/s41430-026-01821-3"
 pmcid: ""
@@ -16,7 +18,7 @@ scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
 verified_at: "2026-09-21T10:51:32.407964+00:00"
-source_identity_checked_at: "2026-09-21T11:20:02.932967+00:00"
+source_identity_checked_at: "2026-09-21T12:17:17.478159+00:00"
 ---
 
 # Classic ketogenic diet associated with seizure control and developmental gains in an infant with concurrent non‑ketotic hyperglycinemia and biotinidase deficiency
@@ -42,7 +44,7 @@ The evidence derives from a single case report without a control comparator, lim
 
 ### Source
 
-Source: Elbarky A et al. Precision diagnosis guides ketogenic diet therapy in inherited metabolic epilepsies: Concurrent non‑ketotic hyperglycinemia and biotinidase deficiency. Eur J Clin Nutr. 2026 Sep 18; PMID 42760380; DOI 10.1038/s41430-026-01821-3.
+Elbarky A, El Amrousy D, Mahmoud S, Lotfy A, Aboeisa M, Elballat KE, et al. Precision diagnosis guides ketogenic diet therapy in inherited metabolic epilepsies: Concurrent non-ketotic hyperglycinemia and biotinidase deficiency. Eur J Clin Nutr. 2026. doi: 10.1038/s41430-026-01821-3. PMID: 42760380.
 
 ---
 
@@ -69,5 +71,4 @@ La prova proviene da un singolo caso senza gruppo di controllo, limitando la gen
 
 ### Fonte
 
-Fonte: Elbarky A et al. Precision diagnosis guides ketogenic diet therapy in inherited metabolic epilepsies: Concurrent non‑ketotic hyperglycinemia and biotinidase deficiency. Eur J Clin Nutr. 2026 Sep 18; PMID 42760380; DOI 10.1038/s41430-026-01821-3.
-
+Elbarky A, El Amrousy D, Mahmoud S, Lotfy A, Aboeisa M, Elballat KE, et al. Precision diagnosis guides ketogenic diet therapy in inherited metabolic epilepsies: Concurrent non-ketotic hyperglycinemia and biotinidase deficiency. Eur J Clin Nutr. 2026. doi: 10.1038/s41430-026-01821-3. PMID: 42760380.

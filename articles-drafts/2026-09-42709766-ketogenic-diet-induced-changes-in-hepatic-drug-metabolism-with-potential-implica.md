@@ -1,4 +1,6 @@
 ---
+source_citation_checked_at: "2026-09-21T12:17:16.439939+00:00"
+source_citation_basis: "PubMed structured metadata"
 pmid: "42709766"
 doi: "10.1371/journal.pone.0357797"
 pmcid: "PMC13552735"
@@ -16,7 +18,7 @@ scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
 verified_at: "2026-09-21T11:05:14.539009+00:00"
-source_identity_checked_at: "2026-09-21T11:20:02.932967+00:00"
+source_identity_checked_at: "2026-09-21T12:17:17.478159+00:00"
 ---
 
 # Ketogenic diet modifies hepatic CYP enzymes and shows a non‑significant trend toward higher ozanimod exposure in mice
@@ -44,7 +46,7 @@ The study was conducted in a single mouse strain, limiting extrapolation to huma
 
 ### Source
 
-Frybortova V et al. Ketogenic diet-induced changes in hepatic drug metabolism with potential implications for ozanimod pharmacokinetics in mice. PLoS One. 2026;15:e357797. PMID: 42709766; PMCID: PMC13552735.
+Frybortova V, Satka S, Jourova L, Anzenbacher P, Zapletalova I, Kraus M, et al. Ketogenic diet-induced changes in hepatic drug metabolism with potential implications for ozanimod pharmacokinetics in mice. PLoS One. 2026;21(9):e0357797. doi: 10.1371/journal.pone.0357797. PMID: 42709766.
 
 ---
 
@@ -73,5 +75,4 @@ Lo studio è stato condotto su un unico ceppo di topo, limitando la generalizzab
 
 ### Fonte
 
-Frybortova V et al. Ketogenic diet-induced changes in hepatic drug metabolism with potential implications for ozanimod pharmacokinetics in mice. PLoS One. 2026;15:e357797. PMID: 42709766; PMCID: PMC13552735.
-
+Frybortova V, Satka S, Jourova L, Anzenbacher P, Zapletalova I, Kraus M, et al. Ketogenic diet-induced changes in hepatic drug metabolism with potential implications for ozanimod pharmacokinetics in mice. PLoS One. 2026;21(9):e0357797. doi: 10.1371/journal.pone.0357797. PMID: 42709766.
