@@ -79,7 +79,18 @@
 }
 </script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
-<meta content="Scientific Library | VLCKD, GLP-1RA &amp; Ketogenic Research" name="kr-title-en"/><meta content="Biblioteca scientifica | Ketogenic Research Hub" name="kr-title-it"/></head>
+<meta content="Scientific Library | VLCKD, GLP-1RA &amp; Ketogenic Research" name="kr-title-en"/><meta content="Biblioteca scientifica | Ketogenic Research Hub" name="kr-title-it"/><!-- KR_LIBRARY_AUTH_GATE_V1 -->
+<script>
+  document.documentElement.classList.add('kr-auth-pending');
+</script>
+<style id="kr-library-auth-gate-style">
+  html.kr-auth-pending body { visibility: hidden !important; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="library-gate.js" defer></script>
+
+</head>
 <body>
 <header class="header">
 <div class="wrap nav">
