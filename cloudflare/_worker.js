@@ -39,7 +39,7 @@ async function refreshSession(refreshToken) {
 }
 
 function cookie(name, value, maxAge) {
-  return `${name}=${encodeURIComponent(value)}; Path=/; Secure; SameSite=Lax; Max-Age=${maxAge}`;
+  return `${name}=${encodeURIComponent(value)}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${maxAge}`;
 }
 
 function redirectToLogin(request, reason) {
@@ -59,6 +59,45 @@ export default {
       canonical.hostname = "library.ketogenicresearch.org";
       canonical.protocol = "https:";
       return Response.redirect(canonical.toString(), 301);
+    }
+
+    // Browser authentication is converted into first-party HttpOnly cookies here.
+    // This avoids relying on JavaScript-created cookies and prevents login loops
+    // on the custom domain.
+    if (url.pathname === "/auth/session" && request.method === "POST") {
+      let payload;
+      try {
+        payload = await request.json();
+      } catch {
+        return Response.json({ error: "Invalid request body" }, { status: 400 });
+      }
+
+      const accessToken = payload?.access_token || "";
+      const refreshToken = payload?.refresh_token || "";
+      const user = await validateUser(accessToken);
+
+      if (!user || !refreshToken) {
+        return Response.json({ error: "Invalid Supabase session" }, { status: 401 });
+      }
+
+      const headers = new Headers({
+        "Content-Type": "application/json; charset=utf-8",
+        "Cache-Control": "no-store"
+      });
+      headers.append("Set-Cookie", cookie("kr_access_token", accessToken, 60 * 60 * 24 * 30));
+      headers.append("Set-Cookie", cookie("kr_refresh_token", refreshToken, 60 * 60 * 24 * 30));
+
+      return new Response(JSON.stringify({ ok: true }), { status: 200, headers });
+    }
+
+    if (url.pathname === "/auth/logout" && request.method === "POST") {
+      const headers = new Headers({
+        "Content-Type": "application/json; charset=utf-8",
+        "Cache-Control": "no-store"
+      });
+      headers.append("Set-Cookie", "kr_access_token=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0");
+      headers.append("Set-Cookie", "kr_refresh_token=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0");
+      return new Response(JSON.stringify({ ok: true }), { status: 200, headers });
     }
 
     const protectedPath = url.pathname === "/library.html" || url.pathname === "/library" || url.pathname === "/library/";
