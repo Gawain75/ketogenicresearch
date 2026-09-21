@@ -61,11 +61,9 @@ export default {
       return Response.redirect(canonical.toString(), 301);
     }
 
-    // The Library HTML still contains a Home link to index.html.
-    // On the protected subdomain index.html is the login entry point, so
-    // redirect that route explicitly to the public main website.
-    if (url.pathname === "/index.html") {
-      return Response.redirect("https://ketogenicresearch.org/", 302);
+    // Normalize legacy .html links to the canonical protected route.
+    if (url.pathname === "/library.html") {
+      return Response.redirect("https://library.ketogenicresearch.org/library", 302);
     }
 
     // Browser authentication is converted into first-party HttpOnly cookies here.
