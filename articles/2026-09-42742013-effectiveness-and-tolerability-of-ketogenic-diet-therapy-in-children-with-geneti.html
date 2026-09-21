@@ -11,9 +11,12 @@
 <meta property="og:title" content="Effectiveness and tolerability of ketogenic diet therapy in children with early‑onset genetic developmental and epileptic encephalopathy">
 <meta property="og:description" content="In a retrospective cohort of 90 infants with genetically confirmed developmental and epileptic encephalopathy (DEE) whose seizures began before two years of…">
 <meta property="og:url" content="https://ketogenicresearch.org/articles/2026-09-42742013-effectiveness-and-tolerability-of-ketogenic-diet-therapy-in-children-with-geneti.html">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://ketogenicresearch.org/logo-ketogenic-research.png">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Effectiveness and tolerability of ketogenic diet therapy in children with early‑onset genetic developmental and epileptic encephalopathy">
 <meta name="twitter:description" content="In a retrospective cohort of 90 infants with genetically confirmed developmental and epileptic encephalopathy (DEE) whose seizures began before two years of…">
+<meta name="twitter:image" content="https://ketogenicresearch.org/logo-ketogenic-research.png">
 <link href="../favicon.svg" rel="icon">
 <link href="../styles.css?v=70" rel="stylesheet">
 <link href="../articles.css?v=1" rel="stylesheet">
@@ -31,12 +34,14 @@
 
 <main class="article-shell">
   <a class="article-back" href="../articles.html">&larr; <span data-label-en="Articles" data-label-it="Articoli">Articles</span></a>
+  <h1 class="article-main-title"
+      data-title-en="Effectiveness and tolerability of ketogenic diet therapy in children with early‑onset genetic developmental and epileptic encephalopathy"
+      data-title-it="Efficacia e tollerabilità della terapia dietetica chetogenica nei bambini con encefalopatia epilettica dello sviluppo di esordio precoce di origine genetica">Effectiveness and tolerability of ketogenic diet therapy in children with early‑onset genetic developmental and epileptic encephalopathy</h1>
 
   <section class="article-language active" data-article-lang="en">
     <div class="article-kicker">Research Note</div>
     <div class="article-meta">September 15, 2026 · Zhonghua er ke za zhi = Chinese journal of pediatrics</div>
-    <div class="article-content"><h1>Effectiveness and tolerability of ketogenic diet therapy in children with early‑onset genetic developmental and epileptic encephalopathy</h1>
-
+    <div class="article-content">
 
 <p>In a retrospective cohort of 90 infants with genetically confirmed developmental and epileptic encephalopathy (DEE) whose seizures began before two years of age, ketogenic diet therapy (KDT) achieved seizure freedom in one‑third of the children. Earlier start of the diet and variants in non‑ion‑channel genes were linked to better outcomes, while the lipid‑to‑non‑lipid ratio did not differ between seizure‑free and uncontrolled groups. Adverse events were common but mostly gastrointestinal and rarely led to discontinuation.</p>
 <h2>Study and findings</h2>
@@ -56,8 +61,7 @@
   <section class="article-language" data-article-lang="it">
     <div class="article-kicker">Nota di ricerca</div>
     <div class="article-meta">15 settembre 2026 · Zhonghua er ke za zhi = Chinese journal of pediatrics</div>
-    <div class="article-content"><h1>Efficacia e tollerabilità della terapia dietetica chetogenica nei bambini con encefalopatia epilettica dello sviluppo di esordio precoce di origine genetica</h1>
-
+    <div class="article-content">
 
 <p>In una coorte retrospettiva di 90 neonati con encefalopatia epilettica dello sviluppo (DEE) confermata geneticamente, il cui esordio delle crisi era avvenuto prima dei due anni, la terapia dietetica chetogenica (KDT) ha indotto la libertà dalle crisi in un terzo dei bambini. Un avvio più precoce della dieta e varianti in geni non legati a canali ionici sono stati associati a risultati migliori, mentre il rapporto lipidico‑non‑lipidico non differiva tra i gruppi liberi da crisi e non controllati. Gli eventi avversi erano frequenti, prevalentemente gastrointestinali, e raramente hanno causato l’interruzione della terapia.</p>
 <h2>Studio e risultati</h2>
@@ -82,11 +86,13 @@
   const buttons=[...document.querySelectorAll('[data-lang]')];
   const sections=[...document.querySelectorAll('[data-article-lang]')];
   const back=document.querySelector('[data-label-en]');
+  const title=document.querySelector('[data-title-en]');
   function setLang(lang){
     document.documentElement.lang=lang;
     buttons.forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
     sections.forEach(s=>s.classList.toggle('active',s.dataset.articleLang===lang));
     if(back) back.textContent=lang==='it'?back.dataset.labelIt:back.dataset.labelEn;
+    if(title) title.textContent=lang==='it'?title.dataset.titleIt:title.dataset.titleEn;
     try{localStorage.setItem('kr-lang',lang)}catch(e){}
   }
   buttons.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));

@@ -11,9 +11,12 @@
 <meta property="og:title" content="Ketogenic diet linked to reduced Müller cell activation and retinal neuroinflammation in experimental autoimmune glaucoma">
 <meta property="og:description" content="In a mouse model of experimental autoimmune glaucoma, a ketogenic diet increased circulating β‑hydroxybutyrate, suppressed Müller cell activation, and…">
 <meta property="og:url" content="https://ketogenicresearch.org/articles/2026-09-42757470-ketogenic-diet-attenuates-m-ller-cell-activation-and-retinal-neuroinflammation-i.html">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://ketogenicresearch.org/logo-ketogenic-research.png">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ketogenic diet linked to reduced Müller cell activation and retinal neuroinflammation in experimental autoimmune glaucoma">
 <meta name="twitter:description" content="In a mouse model of experimental autoimmune glaucoma, a ketogenic diet increased circulating β‑hydroxybutyrate, suppressed Müller cell activation, and…">
+<meta name="twitter:image" content="https://ketogenicresearch.org/logo-ketogenic-research.png">
 <link href="../favicon.svg" rel="icon">
 <link href="../styles.css?v=70" rel="stylesheet">
 <link href="../articles.css?v=1" rel="stylesheet">
@@ -31,12 +34,14 @@
 
 <main class="article-shell">
   <a class="article-back" href="../articles.html">&larr; <span data-label-en="Articles" data-label-it="Articoli">Articles</span></a>
+  <h1 class="article-main-title"
+      data-title-en="Ketogenic diet linked to reduced Müller cell activation and retinal neuroinflammation in experimental autoimmune glaucoma"
+      data-title-it="Dieta chetogenica associata a minore attivazione delle cellule di Müller e neuroinfiammazione retinica nel glaucoma autoimmune sperimentale">Ketogenic diet linked to reduced Müller cell activation and retinal neuroinflammation in experimental autoimmune glaucoma</h1>
 
   <section class="article-language active" data-article-lang="en">
     <div class="article-kicker">Research Analysis</div>
     <div class="article-meta">September 18, 2026 · International journal of molecular medicine</div>
-    <div class="article-content"><h1>Ketogenic diet linked to reduced Müller cell activation and retinal neuroinflammation in experimental autoimmune glaucoma</h1>
-<p><strong>Research Analysis</strong></p>
+    <div class="article-content">
 
 <p>In a mouse model of experimental autoimmune glaucoma, a ketogenic diet increased circulating β‑hydroxybutyrate, suppressed Müller cell activation, and lowered retinal neuroinflammatory markers. Proteomic analysis identified altered FOXO3A acetylation and up‑regulation of metallothionein‑2A as potential mediators.</p>
 <h2>Study and findings</h2>
@@ -56,8 +61,7 @@
   <section class="article-language" data-article-lang="it">
     <div class="article-kicker">Analisi di ricerca</div>
     <div class="article-meta">18 settembre 2026 · International journal of molecular medicine</div>
-    <div class="article-content"><h1>Dieta chetogenica associata a minore attivazione delle cellule di Müller e neuroinfiammazione retinica nel glaucoma autoimmune sperimentale</h1>
-<p><strong>Analisi di ricerca</strong></p>
+    <div class="article-content">
 
 <p>In un modello murino di glaucoma autoimmune sperimentale, una dieta chetogenica ha aumentato i livelli plasmatici di β‑idrossibutirrato, ridotto l’attivazione delle cellule di Müller e diminuito i marcatori di neuroinfiammazione retinica. L’analisi proteomica ha evidenziato una modificazione dell’acetilazione di FOXO3A e un aumento di metallotioneina‑2A come possibili mediatori.</p>
 <h2>Studio e risultati</h2>
@@ -82,11 +86,13 @@
   const buttons=[...document.querySelectorAll('[data-lang]')];
   const sections=[...document.querySelectorAll('[data-article-lang]')];
   const back=document.querySelector('[data-label-en]');
+  const title=document.querySelector('[data-title-en]');
   function setLang(lang){
     document.documentElement.lang=lang;
     buttons.forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
     sections.forEach(s=>s.classList.toggle('active',s.dataset.articleLang===lang));
     if(back) back.textContent=lang==='it'?back.dataset.labelIt:back.dataset.labelEn;
+    if(title) title.textContent=lang==='it'?title.dataset.titleIt:title.dataset.titleEn;
     try{localStorage.setItem('kr-lang',lang)}catch(e){}
   }
   buttons.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));

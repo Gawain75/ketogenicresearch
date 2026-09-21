@@ -11,9 +11,12 @@
 <meta property="og:title" content="Ketogenic dietary strategies and cognitive function in older adults: findings from a systematic review and meta‑analysis">
 <meta property="og:description" content="A meta‑analysis of twelve randomized trials (707 participants) found that ketogenic‑related dietary interventions produced modest improvements in global…">
 <meta property="og:url" content="https://ketogenicresearch.org/articles/2026-09-42753449-effects-of-ketogenic-diet-on-cognitive-impairment-in-older-adults-a-systematic-r.html">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://ketogenicresearch.org/logo-ketogenic-research.png">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ketogenic dietary strategies and cognitive function in older adults: findings from a systematic review and meta‑analysis">
 <meta name="twitter:description" content="A meta‑analysis of twelve randomized trials (707 participants) found that ketogenic‑related dietary interventions produced modest improvements in global…">
+<meta name="twitter:image" content="https://ketogenicresearch.org/logo-ketogenic-research.png">
 <link href="../favicon.svg" rel="icon">
 <link href="../styles.css?v=70" rel="stylesheet">
 <link href="../articles.css?v=1" rel="stylesheet">
@@ -31,12 +34,14 @@
 
 <main class="article-shell">
   <a class="article-back" href="../articles.html">&larr; <span data-label-en="Articles" data-label-it="Articoli">Articles</span></a>
+  <h1 class="article-main-title"
+      data-title-en="Ketogenic dietary strategies and cognitive function in older adults: findings from a systematic review and meta‑analysis"
+      data-title-it="Strategie dietetiche chetogeniche e funzione cognitiva negli adulti anziani: risultati da una revisione sistematica e meta‑analisi">Ketogenic dietary strategies and cognitive function in older adults: findings from a systematic review and meta‑analysis</h1>
 
   <section class="article-language active" data-article-lang="en">
     <div class="article-kicker">Research Note</div>
     <div class="article-meta">September 12, 2026 · Archives of gerontology and geriatrics</div>
-    <div class="article-content"><h1>Ketogenic dietary strategies and cognitive function in older adults: findings from a systematic review and meta‑analysis</h1>
-
+    <div class="article-content">
 
 <p>A meta‑analysis of twelve randomized trials (707 participants) found that ketogenic‑related dietary interventions produced modest improvements in global cognition, memory and language in older adults with mild cognitive impairment or Alzheimer’s disease, while raising total and LDL cholesterol.</p>
 <h2>Study and findings</h2>
@@ -56,8 +61,7 @@
   <section class="article-language" data-article-lang="it">
     <div class="article-kicker">Nota di ricerca</div>
     <div class="article-meta">12 settembre 2026 · Archives of gerontology and geriatrics</div>
-    <div class="article-content"><h1>Strategie dietetiche chetogeniche e funzione cognitiva negli adulti anziani: risultati da una revisione sistematica e meta‑analisi</h1>
-
+    <div class="article-content">
 
 <p>Una meta‑analisi di dodici studi randomizzati (707 partecipanti) ha evidenziato che le diete chetogeniche o strategie correlate migliorano modestamente la cognizione globale, la memoria e il linguaggio in anziani con lieve compromissione cognitiva o Alzheimer, ma aumentano colesterolo totale e LDL.</p>
 <h2>Studio e risultati</h2>
@@ -82,11 +86,13 @@
   const buttons=[...document.querySelectorAll('[data-lang]')];
   const sections=[...document.querySelectorAll('[data-article-lang]')];
   const back=document.querySelector('[data-label-en]');
+  const title=document.querySelector('[data-title-en]');
   function setLang(lang){
     document.documentElement.lang=lang;
     buttons.forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
     sections.forEach(s=>s.classList.toggle('active',s.dataset.articleLang===lang));
     if(back) back.textContent=lang==='it'?back.dataset.labelIt:back.dataset.labelEn;
+    if(title) title.textContent=lang==='it'?title.dataset.titleIt:title.dataset.titleEn;
     try{localStorage.setItem('kr-lang',lang)}catch(e){}
   }
   buttons.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));

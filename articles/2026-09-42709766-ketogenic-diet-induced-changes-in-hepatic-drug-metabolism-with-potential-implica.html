@@ -11,9 +11,12 @@
 <meta property="og:title" content="Ketogenic diet modifies hepatic CYP enzymes and shows a non‑significant trend toward higher ozanimod exposure in mice">
 <meta property="og:description" content="In female C57BL/6 mice, a 4‑week high‑fat ketogenic diet altered hepatic cytochrome P450 expression and activity, notably increasing CYP1A and decreasing…">
 <meta property="og:url" content="https://ketogenicresearch.org/articles/2026-09-42709766-ketogenic-diet-induced-changes-in-hepatic-drug-metabolism-with-potential-implica.html">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://ketogenicresearch.org/logo-ketogenic-research.png">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ketogenic diet modifies hepatic CYP enzymes and shows a non‑significant trend toward higher ozanimod exposure in mice">
 <meta name="twitter:description" content="In female C57BL/6 mice, a 4‑week high‑fat ketogenic diet altered hepatic cytochrome P450 expression and activity, notably increasing CYP1A and decreasing…">
+<meta name="twitter:image" content="https://ketogenicresearch.org/logo-ketogenic-research.png">
 <link href="../favicon.svg" rel="icon">
 <link href="../styles.css?v=70" rel="stylesheet">
 <link href="../articles.css?v=1" rel="stylesheet">
@@ -31,12 +34,14 @@
 
 <main class="article-shell">
   <a class="article-back" href="../articles.html">&larr; <span data-label-en="Articles" data-label-it="Articoli">Articles</span></a>
+  <h1 class="article-main-title"
+      data-title-en="Ketogenic diet modifies hepatic CYP enzymes and shows a non‑significant trend toward higher ozanimod exposure in mice"
+      data-title-it="La dieta chetogenica modifica gli enzimi epatici CYP e mostra una tendenza non significativa verso una maggiore esposizione a ozanimod nei topi">Ketogenic diet modifies hepatic CYP enzymes and shows a non‑significant trend toward higher ozanimod exposure in mice</h1>
 
   <section class="article-language active" data-article-lang="en">
     <div class="article-kicker">Research Analysis</div>
     <div class="article-meta">September 8, 2026 · PloS one</div>
-    <div class="article-content"><h1>Ketogenic diet modifies hepatic CYP enzymes and shows a non‑significant trend toward higher ozanimod exposure in mice</h1>
-<p><strong>Research Analysis</strong></p>
+    <div class="article-content">
 
 <p>In female C57BL/6 mice, a 4‑week high‑fat ketogenic diet altered hepatic cytochrome P450 expression and activity, notably increasing CYP1A and decreasing CYP2C activity. Ozanimod plasma exposure was on average 17 % higher, but the difference did not reach statistical significance.</p>
 <h2>Study and findings</h2>
@@ -57,8 +62,7 @@
   <section class="article-language" data-article-lang="it">
     <div class="article-kicker">Analisi di ricerca</div>
     <div class="article-meta">8 settembre 2026 · PloS one</div>
-    <div class="article-content"><h1>La dieta chetogenica modifica gli enzimi epatici CYP e mostra una tendenza non significativa verso una maggiore esposizione a ozanimod nei topi</h1>
-<p><strong>Analisi di ricerca</strong></p>
+    <div class="article-content">
 
 <p>In topi femmine C57BL/6, una dieta chetogenica ad alto contenuto di grassi per 4 settimane ha modificato l’espressione e l’attività dei citocromi P450 epatici, aumentando significativamente la CYP1A e riducendo l’attività della CYP2C. L’esposizione plasmatica a ozanimod è risultata in media del 17 % più alta, ma la differenza non è risultata statisticamente significativa.</p>
 <h2>Studio e risultati</h2>
@@ -84,11 +88,13 @@
   const buttons=[...document.querySelectorAll('[data-lang]')];
   const sections=[...document.querySelectorAll('[data-article-lang]')];
   const back=document.querySelector('[data-label-en]');
+  const title=document.querySelector('[data-title-en]');
   function setLang(lang){
     document.documentElement.lang=lang;
     buttons.forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
     sections.forEach(s=>s.classList.toggle('active',s.dataset.articleLang===lang));
     if(back) back.textContent=lang==='it'?back.dataset.labelIt:back.dataset.labelEn;
+    if(title) title.textContent=lang==='it'?title.dataset.titleIt:title.dataset.titleEn;
     try{localStorage.setItem('kr-lang',lang)}catch(e){}
   }
   buttons.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));

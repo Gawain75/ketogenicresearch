@@ -64,7 +64,7 @@ def markdown_to_html(md: str):
             flush()
             if not title:
                 title = line[2:].strip()
-            out.append(f"<h1>{md_inline(line[2:].strip())}</h1>")
+            # H1 rendered once by article_page(), outside language sections.
         elif line.startswith("## "):
             flush()
             out.append(f"<h2>{md_inline(line[3:].strip())}</h2>")
@@ -148,9 +148,12 @@ def article_page(meta, en_title, en_html, it_title, it_html, slug, description):
 <meta property="og:title" content="{html.escape(en_title, quote=True)}">
 <meta property="og:description" content="{html.escape(description, quote=True)}">
 <meta property="og:url" content="https://ketogenicresearch.org/articles/{html.escape(slug)}.html">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://ketogenicresearch.org/logo-ketogenic-research.png">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{html.escape(en_title, quote=True)}">
 <meta name="twitter:description" content="{html.escape(description, quote=True)}">
+<meta name="twitter:image" content="https://ketogenicresearch.org/logo-ketogenic-research.png">
 <link href="../favicon.svg" rel="icon">
 <link href="../styles.css?v=70" rel="stylesheet">
 <link href="../articles.css?v=1" rel="stylesheet">
@@ -168,6 +171,9 @@ def article_page(meta, en_title, en_html, it_title, it_html, slug, description):
 
 <main class="article-shell">
   <a class="article-back" href="../articles.html">&larr; <span data-label-en="Articles" data-label-it="Articoli">Articles</span></a>
+  <h1 class="article-main-title"
+      data-title-en="{html.escape(en_title, quote=True)}"
+      data-title-it="{html.escape(it_title or en_title, quote=True)}">{html.escape(en_title)}</h1>
 
   <section class="article-language active" data-article-lang="en">
     <div class="article-kicker">{html.escape(article_type)}</div>
@@ -197,11 +203,13 @@ def article_page(meta, en_title, en_html, it_title, it_html, slug, description):
   const buttons=[...document.querySelectorAll('[data-lang]')];
   const sections=[...document.querySelectorAll('[data-article-lang]')];
   const back=document.querySelector('[data-label-en]');
+  const title=document.querySelector('[data-title-en]');
   function setLang(lang){{
     document.documentElement.lang=lang;
     buttons.forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
     sections.forEach(s=>s.classList.toggle('active',s.dataset.articleLang===lang));
     if(back) back.textContent=lang==='it'?back.dataset.labelIt:back.dataset.labelEn;
+    if(title) title.textContent=lang==='it'?title.dataset.titleIt:title.dataset.titleEn;
     try{{localStorage.setItem('kr-lang',lang)}}catch(e){{}}
   }}
   buttons.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
@@ -227,6 +235,12 @@ def index_page(cards):
 <meta property="og:title" content="Articles | Ketogenic Research">
 <meta property="og:description" content="Research notes and scientific analyses based on recent peer-reviewed ketogenic literature.">
 <meta property="og:url" content="https://ketogenicresearch.org/articles.html">
+<meta property="og:image" content="https://ketogenicresearch.org/logo-ketogenic-research.png">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Articles | Ketogenic Research">
+<meta name="twitter:description" content="Research notes and scientific analyses based on recent peer-reviewed ketogenic literature.">
+<meta name="twitter:image" content="https://ketogenicresearch.org/logo-ketogenic-research.png">
 <link href="favicon.svg" rel="icon">
 <link href="styles.css?v=70" rel="stylesheet">
 <link href="articles.css?v=1" rel="stylesheet">
@@ -295,8 +309,8 @@ def main():
         it_title, it_html = markdown_to_html(it_md)
 
         # Remove duplicated article type and duplicated editorial byline from the Markdown body.
-        en_html = re.sub(r'<p><strong>Research Note</strong></p>', '', en_html, count=1)
-        it_html = re.sub(r'<p><strong>Nota di ricerca</strong></p>', '', it_html, count=1)
+        en_html = re.sub(r'<p><strong>Research (?:Note|Analysis)</strong></p>', '', en_html, count=1)
+        it_html = re.sub(r'<p><strong>(?:Nota di ricerca|Analisi di ricerca)</strong></p>', '', it_html, count=1)
 
         en_html = re.sub(
             r'<p><strong>Ketogenic Research Editorial</strong>\s*Scientific oversight:\s*<strong>Marco Medeot, Scientific Director</strong></p>',

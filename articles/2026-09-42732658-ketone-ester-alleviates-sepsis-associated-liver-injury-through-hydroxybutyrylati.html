@@ -11,9 +11,12 @@
 <meta property="og:title" content="Ketone ester reduces LPS‑induced liver injury in mice via STAT1 K679 β‑hydroxybutyrylation">
 <meta property="og:description" content="In a mouse model of sepsis‑related liver injury, pretreatment with a ketone ester lowered serum transaminases and histologic damage. The benefit depended on…">
 <meta property="og:url" content="https://ketogenicresearch.org/articles/2026-09-42732658-ketone-ester-alleviates-sepsis-associated-liver-injury-through-hydroxybutyrylati.html">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://ketogenicresearch.org/logo-ketogenic-research.png">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ketone ester reduces LPS‑induced liver injury in mice via STAT1 K679 β‑hydroxybutyrylation">
 <meta name="twitter:description" content="In a mouse model of sepsis‑related liver injury, pretreatment with a ketone ester lowered serum transaminases and histologic damage. The benefit depended on…">
+<meta name="twitter:image" content="https://ketogenicresearch.org/logo-ketogenic-research.png">
 <link href="../favicon.svg" rel="icon">
 <link href="../styles.css?v=70" rel="stylesheet">
 <link href="../articles.css?v=1" rel="stylesheet">
@@ -31,12 +34,14 @@
 
 <main class="article-shell">
   <a class="article-back" href="../articles.html">&larr; <span data-label-en="Articles" data-label-it="Articoli">Articles</span></a>
+  <h1 class="article-main-title"
+      data-title-en="Ketone ester reduces LPS‑induced liver injury in mice via STAT1 K679 β‑hydroxybutyrylation"
+      data-title-it="L’estere chetone attenua il danno epatico indotto da LPS nei topi tramite β‑idrossibutirrulazione del STAT1 K679">Ketone ester reduces LPS‑induced liver injury in mice via STAT1 K679 β‑hydroxybutyrylation</h1>
 
   <section class="article-language active" data-article-lang="en">
     <div class="article-kicker">Research Note</div>
     <div class="article-meta">September 11, 2026 · Immunobiology</div>
-    <div class="article-content"><h1>Ketone ester reduces LPS‑induced liver injury in mice via STAT1 K679 β‑hydroxybutyrylation</h1>
-
+    <div class="article-content">
 
 <p>In a mouse model of sepsis‑related liver injury, pretreatment with a ketone ester lowered serum transaminases and histologic damage. The benefit depended on lysine β‑hydroxybutyrylation of STAT1 at residue K679, a modification that limited M1 macrophage polarization.</p>
 <h2>Study and findings</h2>
@@ -56,8 +61,7 @@
   <section class="article-language" data-article-lang="it">
     <div class="article-kicker">Nota di ricerca</div>
     <div class="article-meta">11 settembre 2026 · Immunobiology</div>
-    <div class="article-content"><h1>L’estere chetone attenua il danno epatico indotto da LPS nei topi tramite β‑idrossibutirrulazione del STAT1 K679</h1>
-
+    <div class="article-content">
 
 <p>In un modello murino di danno epatico associato a sepsi, la pretattamento con estere chetone ha ridotto gli aminotransferasi sierici e il danno istologico. Il beneficio è risultato dipendente dalla β‑idrossibutirrulazione della lisina K679 del STAT1, una modifica che ha limitato la polarizzazione M1 dei macrofagi.</p>
 <h2>Studio e risultati</h2>
@@ -82,11 +86,13 @@
   const buttons=[...document.querySelectorAll('[data-lang]')];
   const sections=[...document.querySelectorAll('[data-article-lang]')];
   const back=document.querySelector('[data-label-en]');
+  const title=document.querySelector('[data-title-en]');
   function setLang(lang){
     document.documentElement.lang=lang;
     buttons.forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
     sections.forEach(s=>s.classList.toggle('active',s.dataset.articleLang===lang));
     if(back) back.textContent=lang==='it'?back.dataset.labelIt:back.dataset.labelEn;
+    if(title) title.textContent=lang==='it'?title.dataset.titleIt:title.dataset.titleEn;
     try{localStorage.setItem('kr-lang',lang)}catch(e){}
   }
   buttons.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));

@@ -11,9 +11,12 @@
 <meta property="og:title" content="Classic ketogenic diet associated with seizure control and developmental gains in an infant with concurrent non‑ketotic hyperglycinemia and biotinidase deficiency">
 <meta property="og:description" content="A single infant with genetically confirmed non‑ketotic hyperglycinemia and biotinidase deficiency received a classic 3:1 ketogenic diet at 18 months. Within…">
 <meta property="og:url" content="https://ketogenicresearch.org/articles/2026-09-42760380-precision-diagnosis-guides-ketogenic-diet-therapy-in-inherited-metabolic-epileps.html">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://ketogenicresearch.org/logo-ketogenic-research.png">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Classic ketogenic diet associated with seizure control and developmental gains in an infant with concurrent non‑ketotic hyperglycinemia and biotinidase deficiency">
 <meta name="twitter:description" content="A single infant with genetically confirmed non‑ketotic hyperglycinemia and biotinidase deficiency received a classic 3:1 ketogenic diet at 18 months. Within…">
+<meta name="twitter:image" content="https://ketogenicresearch.org/logo-ketogenic-research.png">
 <link href="../favicon.svg" rel="icon">
 <link href="../styles.css?v=70" rel="stylesheet">
 <link href="../articles.css?v=1" rel="stylesheet">
@@ -31,12 +34,14 @@
 
 <main class="article-shell">
   <a class="article-back" href="../articles.html">&larr; <span data-label-en="Articles" data-label-it="Articoli">Articles</span></a>
+  <h1 class="article-main-title"
+      data-title-en="Classic ketogenic diet associated with seizure control and developmental gains in an infant with concurrent non‑ketotic hyperglycinemia and biotinidase deficiency"
+      data-title-it="Dieta chetogenica classica associata al controllo delle crisi e a progressi dello sviluppo in un neonato con iperglicinemia non chetogenica e deficit di biotinidasi concomitanti">Classic ketogenic diet associated with seizure control and developmental gains in an infant with concurrent non‑ketotic hyperglycinemia and biotinidase deficiency</h1>
 
   <section class="article-language active" data-article-lang="en">
     <div class="article-kicker">Research Note</div>
     <div class="article-meta">September 18, 2026 · European journal of clinical nutrition</div>
-    <div class="article-content"><h1>Classic ketogenic diet associated with seizure control and developmental gains in an infant with concurrent non‑ketotic hyperglycinemia and biotinidase deficiency</h1>
-
+    <div class="article-content">
 
 <p>A single infant with genetically confirmed non‑ketotic hyperglycinemia and biotinidase deficiency received a classic 3:1 ketogenic diet at 18 months. Within two weeks seizures decreased, and over the following year seizure burden was eliminated, several anti‑seizure drugs were withdrawn, and neurodevelopmental milestones were achieved.</p>
 <h2>Study and findings</h2>
@@ -56,8 +61,7 @@
   <section class="article-language" data-article-lang="it">
     <div class="article-kicker">Nota di ricerca</div>
     <div class="article-meta">18 settembre 2026 · European journal of clinical nutrition</div>
-    <div class="article-content"><h1>Dieta chetogenica classica associata al controllo delle crisi e a progressi dello sviluppo in un neonato con iperglicinemia non chetogenica e deficit di biotinidasi concomitanti</h1>
-
+    <div class="article-content">
 
 <p>Un neonato con iperglicinemia non chetogenica e deficit di biotinidasi confermati geneticamente è stato trattato con una dieta chetogenica classica 3:1 a 18 mesi. Dopo due settimane le crisi sono diminuite e, nell’anno successivo, il carico convulsivo è stato eliminato, diversi farmaci antiepilettici sono stati sospesi e sono stati raggiunti traguardi dello sviluppo neurocognitivo.</p>
 <h2>Studio e risultati</h2>
@@ -82,11 +86,13 @@
   const buttons=[...document.querySelectorAll('[data-lang]')];
   const sections=[...document.querySelectorAll('[data-article-lang]')];
   const back=document.querySelector('[data-label-en]');
+  const title=document.querySelector('[data-title-en]');
   function setLang(lang){
     document.documentElement.lang=lang;
     buttons.forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
     sections.forEach(s=>s.classList.toggle('active',s.dataset.articleLang===lang));
     if(back) back.textContent=lang==='it'?back.dataset.labelIt:back.dataset.labelEn;
+    if(title) title.textContent=lang==='it'?title.dataset.titleIt:title.dataset.titleEn;
     try{localStorage.setItem('kr-lang',lang)}catch(e){}
   }
   buttons.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
