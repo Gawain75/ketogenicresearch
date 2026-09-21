@@ -53,6 +53,37 @@ def clean_library_html(html: str) -> str:
         flags=re.I,
     )
     html = html.replace("kr-auth-pending", "")
+
+    # The protected Library lives on library.ketogenicresearch.org, while the
+    # rest of the website lives on ketogenicresearch.org. Convert the Library
+    # navigation back to absolute main-site URLs so Home/Research/etc. never
+    # resolve inside the protected subdomain.
+    public_pages = {
+        "index.html": "https://ketogenicresearch.org/",
+        "research.html": "https://ketogenicresearch.org/research.html",
+        "latest.html": "https://ketogenicresearch.org/latest.html",
+        "evidence-trends.html": "https://ketogenicresearch.org/evidence-trends.html",
+        "articles.html": "https://ketogenicresearch.org/articles.html",
+        "director.html": "https://ketogenicresearch.org/director.html",
+        "methodology.html": "https://ketogenicresearch.org/methodology.html",
+        "contact.html": "https://ketogenicresearch.org/contact.html",
+    }
+    for relative, absolute in public_pages.items():
+        html = re.sub(
+            rf'href=(["\']){re.escape(relative)}\1',
+            f'href="{absolute}"',
+            html,
+            flags=re.I,
+        )
+
+    # Brand/home links sometimes use "/" instead of index.html.
+    html = re.sub(
+        r'(<a[^>]+class=(["\'])brand\2[^>]+href=)(["\'])/\3',
+        rf'\1"https://ketogenicresearch.org/"',
+        html,
+        flags=re.I,
+    )
+
     return html
 
 def main():
@@ -90,8 +121,15 @@ def main():
             if needle not in data:
                 raise SystemExit(f"Verification failed: {needle!r} missing from {filename}")
 
-    if "library-gate.js" in (DIST / "library.html").read_text(encoding="utf-8"):
+    library_out = (DIST / "library.html").read_text(encoding="utf-8")
+    if "library-gate.js" in library_out:
         raise SystemExit("Old client-side library gate still present")
+
+    if 'href="index.html"' in library_out:
+        raise SystemExit("Relative Home link still present in protected Library")
+
+    if 'https://ketogenicresearch.org/' not in library_out:
+        raise SystemExit("Main-site Home URL missing from protected Library")
 
     print("Cloudflare Library package built successfully.")
     print("Files:")
