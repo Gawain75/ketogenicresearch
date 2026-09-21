@@ -1,0 +1,52 @@
+name: Fit Evidence Trends chart on mobile
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ketogenicresearch-content-write
+  cancel-in-progress: false
+
+jobs:
+  fit-chart:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fit Evidence Trends chart
+        run: |
+          if [ -f scripts/fit_evidence_trends_chart.py ]; then
+            python scripts/fit_evidence_trends_chart.py
+          else
+            python fit_evidence_trends_chart.py
+          fi
+
+      - name: Commit responsive chart fix
+        run: |
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add evidence-trends.html styles.css scripts/build_evidence_trends.py 2>/dev/null || true
+
+          if git diff --cached --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+
+          git commit -m "Fit Evidence Trends chart to mobile viewport"
+          git pull --rebase origin main
+          git push origin main
