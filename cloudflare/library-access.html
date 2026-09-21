@@ -287,11 +287,29 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  function setCookies(session){
-    const secure=location.protocol==='https:'?'; Secure':'';
-    const maxAge=60*60*24*30;
-    document.cookie=`kr_access_token=${encodeURIComponent(session.access_token)}; Path=/; SameSite=Lax${secure}; Max-Age=${maxAge}`;
-    document.cookie=`kr_refresh_token=${encodeURIComponent(session.refresh_token)}; Path=/; SameSite=Lax${secure}; Max-Age=${maxAge}`;
+  async function syncServerSession(session){
+    if(!session?.access_token || !session?.refresh_token){
+      throw new Error(lang==='it' ? 'Sessione non valida.' : 'Invalid session.');
+    }
+
+    const response = await fetch('/auth/session', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        access_token: session.access_token,
+        refresh_token: session.refresh_token
+      })
+    });
+
+    if(!response.ok){
+      let message = 'Unable to create server session.';
+      try{
+        const payload = await response.json();
+        if(payload?.error) message = payload.error;
+      }catch{}
+      throw new Error(message);
+    }
   }
 
   $('loginForm').addEventListener('submit',async e=>{
@@ -321,7 +339,7 @@ window.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    location.href="https://library.ketogenicresearch.org";
+    location.href='/library.html';
   });
 
   document.querySelectorAll('input[name="hcp"]').forEach(r=>r.addEventListener('change',()=>{
@@ -379,7 +397,7 @@ window.addEventListener('DOMContentLoaded', () => {
         privacy_accepted_at:new Date().toISOString()
       });
       if(pErr)return showStatus((lang==='it'?'Errore salvataggio profilo: ':'Profile save error: ')+pErr.message,true);
-      location.href="https://library.ketogenicresearch.org";
+      location.href='/library.html';
       return;
     }
 
@@ -395,7 +413,12 @@ window.addEventListener('DOMContentLoaded', () => {
         user_id:data.user.id,email,...profile,privacy_version:'2026-09',privacy_accepted_at:new Date().toISOString()
       });
       if(pErr)return showStatus(pErr.message,true);
-      setCookies(data.session);location.href="https://library.ketogenicresearch.org";
+      try{
+        await syncServerSession(data.session);
+      }catch(err){
+        return showStatus((lang==='it'?'Errore sessione: ':'Session error: ')+(err?.message||String(err)),true);
+      }
+      location.href='/library';
     }else{
       localStorage.setItem('kr_pending_profile',JSON.stringify({email,profile}));
       showStatus(lang==='it'?'Registrazione ricevuta. Controlla la tua email e conferma l’indirizzo.':'Registration received. Check your email and confirm your address.');
@@ -405,7 +428,12 @@ window.addEventListener('DOMContentLoaded', () => {
   async function finalizePending(){
     const {data}=await client.auth.getSession();
     if(!data.session)return;
-    setCookies(data.session);
+    try{
+      await syncServerSession(data.session);
+    }catch(err){
+      showStatus((lang==='it'?'Errore sessione: ':'Session error: ')+(err?.message||String(err)),true);
+      return;
+    }
     const raw=localStorage.getItem('kr_pending_profile');
     if(raw){
       try{
@@ -417,7 +445,7 @@ window.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('kr_pending_profile');
       }catch{}
     }
-    if(new URLSearchParams(location.search).get('confirmed')==='1')location.href="https://library.ketogenicresearch.org";
+    if(new URLSearchParams(location.search).get('confirmed')==='1')location.href='/library';
   }
 
   setLang(lang);
