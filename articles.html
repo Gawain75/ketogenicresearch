@@ -136,30 +136,5 @@
   setLang(initial);
 })();
 </script>
-
-<script id="kr-research-nav">
-(function(){
-  function bind(){
-    document.querySelectorAll(".nav-parent").forEach(function(btn){
-      btn.addEventListener("click",function(ev){
-        var group=btn.closest(".nav-group");
-        if(!group)return;
-        var open=group.classList.toggle("open");
-        btn.setAttribute("aria-expanded",open?"true":"false");
-        ev.stopPropagation();
-      });
-    });
-    document.addEventListener("click",function(){
-      document.querySelectorAll(".nav-group.open").forEach(function(group){
-        group.classList.remove("open");
-        var btn=group.querySelector(".nav-parent");
-        if(btn)btn.setAttribute("aria-expanded","false");
-      });
-    });
-  }
-  if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",bind)}else{bind()}
-})();
-</script>
-
 </body>
 </html>
