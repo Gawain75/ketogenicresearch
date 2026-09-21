@@ -1,0 +1,91 @@
+name: Fix deterministic article sources
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ketogenicresearch-content-write
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deterministic PubMed citations and backfill all articles
+        env:
+          NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
+          NCBI_EMAIL: info@ketogenicresearch.org
+        run: python scripts/fix_deterministic_sources.py
+
+      - name: Audit PMID DOI PMCID identity
+        env:
+          NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
+          NCBI_EMAIL: info@ketogenicresearch.org
+        run: python scripts/audit_article_sources.py
+
+      - name: Rebuild public article pages
+        run: python scripts/render_articles.py
+
+      - name: Verify rendered citations
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/generate_articles.py scripts/pubmed_citation.py
+
+          page="$(find articles -maxdepth 1 -type f -name '*-42709766-*.html' | head -n 1)"
+          test -n "$page"
+          grep -Fq 'PLoS One. 2026;21(9):e0357797.' "$page"
+
+          if grep -Fq 'PLoS One. 2026;15:e357797' "$page"; then
+            echo "Known incorrect citation is still present."
+            exit 1
+          fi
+
+          if grep -R -Fq '10.1016/j.heliyon.2023.e21098' articles-drafts articles; then
+            echo "Known stale DOI remains in article content."
+            exit 1
+          fi
+
+          echo "Deterministic source citation checks passed."
+
+      - name: Commit repaired source citations
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git restore --source=HEAD --staged --worktree .github/workflows || true
+          git clean -fd .github/workflows || true
+
+          git add -A
+          git restore --staged .github/workflows || true
+
+          if git diff --cached --quiet; then
+            echo "No source citation changes required."
+          else
+            git commit -m "Generate article citations from PubMed metadata"
+            git pull --rebase origin main
+            git push origin main
+          fi
+
+      - name: Summary
+        run: |
+          echo "All published article Source/Fonte citations were rebuilt from structured PubMed metadata."
+          echo "Future articles no longer allow the AI writer to generate bibliographic citations."
