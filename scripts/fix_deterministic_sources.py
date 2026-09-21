@@ -252,51 +252,73 @@ def format_citation(meta: dict[str, Any]) -> str:
 
 def patch_generator() -> None:
     s = GENERATOR.read_text(encoding="utf-8")
+
+    # 1) Import the deterministic PubMed citation helper.
     import_line = "from pubmed_citation import extract_citation_metadata, format_citation\n"
     if import_line not in s:
-        marker = "from typing import Any\n"
-        if marker not in s:
-            raise RuntimeError("Could not locate import marker in generate_articles.py")
-        s = s.replace(marker, marker + import_line, 1)
+        s, n = re.subn(
+            r"(from typing import Any\s*\n)",
+            r"\1" + import_line,
+            s,
+            count=1,
+        )
+        if n != 1:
+            raise RuntimeError("Could not install pubmed_citation import")
 
+    # 2) Attach structured citation metadata to the authoritative PubMed record.
     if '"citation_meta": extract_citation_metadata(record),' not in s:
-        marker = '''        "mesh": mesh[:30],
-    }'''
-        replacement = '''        "mesh": mesh[:30],
-        "citation_meta": extract_citation_metadata(record),
-    }'''
-        if marker not in s:
-            raise RuntimeError("Could not locate extract_pubmed_source return block")
-        s = s.replace(marker, replacement, 1)
+        s, n = re.subn(
+            r'(?m)^(\s*)"mesh":\s*mesh\[:30\],\s*$',
+            lambda m: (
+                f'{m.group(1)}"mesh": mesh[:30],\n'
+                f'{m.group(1)}"citation_meta": extract_citation_metadata(record),'
+            ),
+            s,
+            count=1,
+        )
+        if n != 1:
+            raise RuntimeError("Could not add citation_meta to extract_pubmed_source")
 
-    s = s.replace("source_note_en\nsource_note_it\n", "")
-    s = s.replace(
-        '- Include only one concise source note in the article body.\n- Do not repeat PMID, DOI, or PMCID in multiple places.\n- Public page rendering will provide PubMed and DOI links separately.',
-        '- Do not generate, reconstruct, infer, or paraphrase the bibliographic citation.\n- The Source/Fonte citation is created deterministically from structured PubMed metadata by code.\n- Do not include PMID, DOI, PMCID, volume, issue, pagination, or journal citation in the article prose.'
-    )
+    # 3) Build Source/Fonte from PubMed, never from model-generated text.
+    if "source_citation = format_citation(extra.get(\"citation_meta\") or {})" not in s:
+        pattern = re.compile(
+            r'(?m)^(\s*)pmcid = extra\.get\("pmcid", ""\)\s*$'
+        )
+        m = pattern.search(s)
+        if not m:
+            raise RuntimeError("Could not locate PMCID assignment in markdown()")
+        indent = m.group(1)
+        insertion = (
+            m.group(0)
+            + "\n"
+            + indent
+            + 'source_citation = format_citation(extra.get("citation_meta") or {})'
+            + "\n"
+            + indent
+            + 'if not source_citation:'
+            + "\n"
+            + indent
+            + '    raise RuntimeError(f"Unable to build authoritative PubMed citation for PMID {pmid}")'
+        )
+        s = s[:m.start()] + insertion + s[m.end():]
 
-    old = '''    pmid = rec.get("pmid", "")
-    doi = rec.get("doi") or extra.get("doi_from_pubmed", "")
-    pmcid = extra.get("pmcid", "")
-    return f"""---'''
-    new = '''    pmid = rec.get("pmid", "")
-    doi = rec.get("doi") or extra.get("doi_from_pubmed", "")
-    pmcid = extra.get("pmcid", "")
-    source_citation = format_citation(extra.get("citation_meta") or {})
-    if not source_citation:
-        raise RuntimeError(f"Unable to build authoritative PubMed citation for PMID {pmid}")
-    return f"""---'''
-    if old in s:
-        s = s.replace(old, new, 1)
-    elif "source_citation = format_citation(" not in s:
-        raise RuntimeError("Could not locate markdown metadata block")
+    en_old = '{draft.get("source_note_en","")}'
+    it_old = '{draft.get("source_note_it","")}'
+    if en_old in s:
+        s = s.replace(en_old, "{source_citation}", 1)
+    elif "{source_citation}" not in s:
+        raise RuntimeError("Could not replace English Source citation")
 
-    s = s.replace('{draft.get("source_note_en","")}', '{source_citation}')
-    s = s.replace('{draft.get("source_note_it","")}', '{source_citation}')
+    if it_old in s:
+        s = s.replace(it_old, "{source_citation}", 1)
+    elif s.count("{source_citation}") < 2:
+        raise RuntimeError("Could not replace Italian Fonte citation")
+
     s = s.replace('generator_version: "4.2"', 'generator_version: "4.3"')
 
+    # The model may still return source_note_* for backward-compatible JSON,
+    # but those fields are now deliberately ignored by markdown().
     GENERATOR.write_text(s, encoding="utf-8")
-
 
 def set_frontmatter_value(text: str, key: str, value: str) -> str:
     line = f'{key}: {json.dumps(value, ensure_ascii=False)}'
