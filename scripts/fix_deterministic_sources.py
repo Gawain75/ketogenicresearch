@@ -6,6 +6,8 @@ import os
 import re
 import subprocess
 import sys
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -26,21 +28,49 @@ def text_content(node: ET.Element | None) -> str:
     return " ".join("".join(node.itertext()).split())
 
 
-def fetch_pubmed(pmid: str) -> ET.Element:
+def fetch_pubmed_batch(pmids: list[str]) -> ET.Element:
+    if not pmids:
+        raise RuntimeError("No PMIDs supplied to PubMed batch fetch")
+
     params = {
         "db": "pubmed",
-        "id": pmid,
+        "id": ",".join(pmids),
         "retmode": "xml",
         "tool": "ketogenicresearch",
         "email": NCBI_EMAIL,
     }
     if NCBI_API_KEY:
         params["api_key"] = NCBI_API_KEY
-    url = f"{EUTILS}/efetch.fcgi?{urllib.parse.urlencode(params)}"
-    req = urllib.request.Request(url, headers={"User-Agent": "KetogenicResearch/CitationRepair"})
-    with urllib.request.urlopen(req, timeout=60) as resp:
-        return ET.fromstring(resp.read())
 
+    url = f"{EUTILS}/efetch.fcgi?{urllib.parse.urlencode(params)}"
+    req = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "KetogenicResearch/CitationRepair",
+            "Accept": "application/xml",
+        },
+    )
+
+    delays = [2, 5, 10, 20, 40, 60]
+    last_error = None
+
+    for attempt in range(len(delays) + 1):
+        try:
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                return ET.fromstring(resp.read())
+        except urllib.error.HTTPError as exc:
+            last_error = exc
+            if exc.code != 429 or attempt >= len(delays):
+                raise
+            retry_after = exc.headers.get("Retry-After")
+            try:
+                wait = max(delays[attempt], int(retry_after)) if retry_after else delays[attempt]
+            except (TypeError, ValueError):
+                wait = delays[attempt]
+            print(f"PubMed rate limit (429). Retrying batch in {wait}s...")
+            time.sleep(wait)
+
+    raise RuntimeError(f"PubMed batch fetch failed: {last_error}")
 
 def extract_citation_metadata(record: ET.Element) -> dict[str, object]:
     citation = record.find("MedlineCitation")
@@ -346,31 +376,72 @@ def backfill_existing_drafts() -> None:
     drafts = sorted(DRAFTS.glob("*.md"))
     if not drafts:
         raise RuntimeError("No article drafts found")
-    repaired = 0
+
+    draft_rows: list[tuple[Path, str, str]] = []
+    pmids: list[str] = []
+
     for path in drafts:
-        text = path.read_text(encoding="utf-8")
-        m = re.search(r'(?m)^pmid:\s*["\']?(\d+)["\']?\s*$', text)
+        article_text = path.read_text(encoding="utf-8")
+        m = re.search(r'(?m)^pmid:\s*["\']?(\d+)["\']?\s*$', article_text)
         if not m:
             raise RuntimeError(f"{path.name}: PMID missing from frontmatter")
         pmid = m.group(1)
-        root = fetch_pubmed(pmid)
-        record = root.find(".//PubmedArticle")
-        if record is None:
-            raise RuntimeError(f"PMID {pmid}: PubMed record unavailable")
+        draft_rows.append((path, pmid, article_text))
+        if pmid not in pmids:
+            pmids.append(pmid)
+
+    # One authoritative PubMed call for all current articles, instead of one
+    # request per article. This materially reduces the chance of HTTP 429.
+    root = fetch_pubmed_batch(pmids)
+
+    records: dict[str, ET.Element] = {}
+    for record in root.findall(".//PubmedArticle"):
         meta = extract_citation_metadata(record)
+        pmid = str(meta.get("pmid") or "").strip()
+        if pmid:
+            records[pmid] = record
+
+    missing = [pmid for pmid in pmids if pmid not in records]
+    if missing:
+        raise RuntimeError(
+            "PubMed batch response missing PMID(s): " + ", ".join(missing)
+        )
+
+    repaired = 0
+    for path, pmid, article_text in draft_rows:
+        record = records[pmid]
+        meta = extract_citation_metadata(record)
+
         if str(meta.get("pmid") or "") != pmid:
-            raise RuntimeError(f"PMID {pmid}: identity mismatch while building citation")
+            raise RuntimeError(
+                f"PMID {pmid}: identity mismatch while building citation"
+            )
+
         citation = format_citation(meta)
         if not citation or f"PMID: {pmid}." not in citation:
-            raise RuntimeError(f"PMID {pmid}: incomplete deterministic citation")
-        text = replace_source_blocks(text, citation)
-        text = set_frontmatter_value(text, "source_citation_basis", "PubMed structured metadata")
-        text = set_frontmatter_value(text, "source_citation_checked_at", checked_at)
-        path.write_text(text, encoding="utf-8")
+            raise RuntimeError(
+                f"PMID {pmid}: incomplete deterministic citation"
+            )
+
+        article_text = replace_source_blocks(article_text, citation)
+        article_text = set_frontmatter_value(
+            article_text,
+            "source_citation_basis",
+            "PubMed structured metadata",
+        )
+        article_text = set_frontmatter_value(
+            article_text,
+            "source_citation_checked_at",
+            checked_at,
+        )
+        path.write_text(article_text, encoding="utf-8")
         repaired += 1
         print(f"PMID {pmid}: {citation}")
-    print(f"Backfilled {repaired} deterministic PubMed citation(s).")
 
+    print(
+        f"Backfilled {repaired} deterministic PubMed citation(s) "
+        f"using one batched PubMed request."
+    )
 
 def verify_known_record() -> None:
     matches = list(DRAFTS.glob("*-42709766-*.md"))
