@@ -42,6 +42,7 @@ function setLang(lang) {
     localStorage.setItem('kr-lang', safeLang);
   } catch (error) {}
 
+  populateObesityGlp1Keto();
   applyLibraryFilters();
   updateLibraryCounters();
   renderLatestEvidence();
@@ -162,6 +163,91 @@ function topicMatches(rawText, selected) {
   return true;
 }
 
+function isGlp1KetoIntersection(paper) {
+  const titleEl = paper.querySelector('h4');
+  const text = [
+    paper.dataset.search || '',
+    titleEl?.dataset?.en || '',
+    titleEl?.dataset?.it || '',
+    titleEl?.textContent || ''
+  ].join(' ').toLowerCase();
+
+  const glpTerms = [
+    'glp-1', 'glp1', 'glp-1ra', 'glp1ra', 'glp-1 receptor agonist',
+    'glucagon-like peptide-1', 'incretin',
+    'semaglutide', 'liraglutide', 'dulaglutide', 'exenatide',
+    'lixisenatide', 'tirzepatide', 'retatrutide', 'survodutide',
+    'orforglipron', 'cagrisema'
+  ];
+
+  const ketoTerms = [
+    'ketogenic', 'ketosis', 'ketone', 'ketones',
+    'ketonemia', 'ketonaemia', 'beta-hydroxybutyrate',
+    'β-hydroxybutyrate', 'b-hydroxybutyrate', 'bhb',
+    'ketone ester', 'exogenous ketone',
+    'vlckd', 'vlekt', 'low-energy ketogenic',
+    'very low-calorie ketogenic', 'very-low-calorie ketogenic',
+    'keto diet'
+  ];
+
+  return (
+    glpTerms.some(term => text.includes(term)) &&
+    ketoTerms.some(term => text.includes(term))
+  );
+}
+
+function populateObesityGlp1Keto() {
+  const obesity = document.getElementById('obesity');
+  const host = document.getElementById('obesityGlp1KetoList');
+  const count = document.getElementById('obesityGlp1KetoCount');
+  const empty = document.getElementById('obesityGlp1KetoEmpty');
+  if (!obesity || !host) return;
+
+  const papers = Array.from(
+    obesity.querySelectorAll('.folder-curated > article.folder-paper')
+  );
+
+  const matches = papers.filter(isGlp1KetoIntersection);
+  host.innerHTML = '';
+
+  const lang = currentLang();
+
+  matches.forEach(paper => {
+    const card = document.createElement('article');
+    card.className = 'topic-subfolder-paper';
+
+    const sourceTitle = paper.querySelector('h4');
+    if (sourceTitle) {
+      const h4 = document.createElement('h4');
+      const en = sourceTitle.dataset.en || sourceTitle.textContent || '';
+      const it = sourceTitle.dataset.it || en;
+      h4.dataset.en = en;
+      h4.dataset.it = it;
+      h4.innerHTML = lang === 'it' ? it : en;
+      card.appendChild(h4);
+    }
+
+    const meta = paper.querySelector('p');
+    if (meta) {
+      const p = meta.cloneNode(true);
+      if (p.dataset.en || p.dataset.it) {
+        p.innerHTML = lang === 'it'
+          ? (p.dataset.it || p.dataset.en || p.textContent)
+          : (p.dataset.en || p.textContent);
+      }
+      card.appendChild(p);
+    }
+
+    const links = paper.querySelector('.paper-links');
+    if (links) card.appendChild(links.cloneNode(true));
+
+    host.appendChild(card);
+  });
+
+  if (count) count.textContent = String(matches.length);
+  if (empty) empty.hidden = matches.length > 0;
+}
+
 function publicationIdentity(paper) {
   const h4 = paper.querySelector('h4');
   const rawTitle = h4?.dataset?.en || h4?.textContent || '';
@@ -277,6 +363,7 @@ function applyLibraryFilters() {
 }
 
 function initLibrary() {
+  populateObesityGlp1Keto();
   ['librarySearch', 'evidenceFilter', 'topicFilter', 'yearFilter', 'areaFilter'].forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
