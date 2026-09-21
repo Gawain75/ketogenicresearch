@@ -1,1 +1,449 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Scientific Library Access | Ketogenic Research</title>
+<meta name="robots" content="noindex,follow">
+<style>
+:root{--bg:#f4f8fb;--card:#fff;--ink:#163547;--muted:#6d7f8b;--line:#d9e5ec;--primary:#146d87;--primary2:#0d5065;--soft:#eaf4f8;--danger:#a53535}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 10% 0%,rgba(39,132,160,.10),transparent 28%),linear-gradient(180deg,#f9fbfd 0%,var(--bg) 100%);color:var(--ink);min-height:100vh}
+.shell{min-height:100vh;display:grid;place-items:center;padding:28px 16px}
+.card{width:min(880px,100%);background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:0 22px 70px rgba(19,54,72,.12);overflow:hidden}
+.hero{padding:30px 32px 24px;background:linear-gradient(145deg,#f7fbfd,#eef7fb);border-bottom:1px solid var(--line)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.01em}
+.logo{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:#0f6079;color:white;box-shadow:0 8px 22px rgba(15,96,121,.25)}
+.logo svg{width:24px;height:24px}
+.lang{display:flex;gap:6px;padding:4px;border:1px solid var(--line);border-radius:999px;background:white}
+.lang button{border:0;background:transparent;border-radius:999px;padding:7px 11px;color:var(--muted);font-weight:700;cursor:pointer}
+.lang button.active{background:var(--ink);color:white}
+h1{font-size:clamp(34px,6vw,58px);line-height:1.02;margin:26px 0 12px;letter-spacing:-.035em}
+.subtitle{margin:0;max-width:680px;color:var(--muted);font-size:16px;line-height:1.6}
+.body{padding:28px 32px 32px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
+.tabs button{border:1px solid var(--line);background:white;border-radius:12px;padding:13px;font-weight:800;color:var(--ink);cursor:pointer}
+.tabs button.active{background:var(--soft);border-color:#9fc5d3;color:var(--primary2)}
+.form{display:grid;gap:16px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:grid;gap:7px}.field label{font-size:13px;font-weight:800}
+.field input,.field select{width:100%;padding:12px 13px;border:1px solid #cbd9e1;border-radius:11px;background:white;color:var(--ink);font:inherit;outline:none;transition:.15s}
+.field input:focus,.field select:focus{border-color:#78afc2;box-shadow:0 0 0 3px rgba(20,109,135,.10)}
+.inline{display:flex;gap:18px;flex-wrap:wrap;align-items:center}.inline label{font-weight:500}
+.primary{border:0;border-radius:12px;padding:13px 18px;background:linear-gradient(180deg,var(--primary),var(--primary2));color:white;font-weight:800;font-size:15px;cursor:pointer;box-shadow:0 8px 20px rgba(20,109,135,.18)}
+.link{border:0;background:transparent;color:var(--primary);padding:3px 0;text-align:left;font-weight:700;font-size:13px;cursor:pointer}
+.link:hover{text-decoration:underline}
+.note,.privacy{font-size:12px;line-height:1.5;color:var(--muted)}
+.status{padding:11px 12px;border-radius:10px;background:#eef7f9;color:var(--ink);font-size:13px;margin-top:16px}
+.status.error{background:#fff1f1;color:var(--danger)}
+.hidden{display:none!important}.divider{height:1px;background:var(--line);margin:4px 0}
+.footer-note{margin-top:18px;font-size:11px;color:#84939c;line-height:1.5}
+@media(max-width:680px){.hero,.body{padding-left:20px;padding-right:20px}.grid2{grid-template-columns:1fr}.top{align-items:flex-start}h1{font-size:42px}}
+</style>
+</head>
+<body>
+<main class="shell">
+<section class="card">
+  <div class="hero">
+    <div class="top">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6.5h11a3 3 0 0 1 3 3v8.5H7a3 3 0 0 1-3-3V6.5Z"/><path d="M7 6.5V4.5h13v10h-2"/><path d="M8 11h6M8 14h4"/></svg></div>
+        <span>Ketogenic Research — Scientific Library</span>
+      </div>
+      <div class="lang"><button type="button" id="langEn">EN</button><button type="button" id="langIt">IT</button></div>
+    </div>
+    <h1 data-en="Access the Scientific Library" data-it="Accedi alla Libreria Scientifica"></h1>
+    <p class="subtitle" data-en="Free registration. Verified users can access the curated scientific literature database on ketogenic research." data-it="Registrazione gratuita. Gli utenti verificati possono accedere al database curato della letteratura scientifica sulla ricerca chetogenica."></p>
+  </div>
 
+  <div class="body">
+    <div class="tabs">
+      <button type="button" id="loginTab" data-en="Login" data-it="Accedi"></button>
+      <button type="button" id="registerTab" data-en="Create free account" data-it="Registrati gratuitamente"></button>
+    </div>
+
+    <form id="loginForm" class="form">
+      <div class="field"><label>Email</label><input id="loginEmail" type="email" required autocomplete="email"></div>
+      <div class="field"><label>Password</label><input id="loginPassword" type="password" required autocomplete="current-password"></div>
+      <button class="primary" type="submit" data-en="Login" data-it="Accedi"></button>
+      <button class="link" type="button" id="forgotPassword" data-en="Forgot your password?" data-it="Hai dimenticato la password?"></button>
+    </form>
+
+    <div id="completeProfileBanner" class="status hidden"
+      data-en="Your account is already registered. Only the Library profile data are missing: complete them once, then access will work normally."
+      data-it="Il tuo account è già registrato. Mancano solo i dati del profilo Library: completali una volta e poi accederai normalmente."></div>
+    <button type="button" id="switchAccount" class="link hidden"
+      data-en="Use another account / Login again"
+      data-it="Usa un altro account / Torna al login"></button>
+    <div id="profileCompletionTitle" class="hidden">
+          <h2 data-en="Complete your Library profile" data-it="Completa il profilo Library" style="margin:0 0 8px;font-size:28px"></h2>
+          <p class="note" data-en="Your account is already active. We only need the information required for access to the Scientific Library."
+             data-it="Il tuo account è già attivo. Mancano solo i dati necessari per l'accesso alla Libreria Scientifica."></p>
+        </div>
+        <form id="registerForm" class="form hidden">
+      <div class="field">
+        <label data-en="Country" data-it="Paese"></label>
+        <select id="country"><option value="Italy">Italia</option><option value="foreign">Other country / Altro Paese</option></select>
+      </div>
+
+      <div id="italyFields" class="form">
+        <div class="grid2">
+          <div class="field"><label data-en="First name" data-it="Nome"></label><input id="firstName"></div>
+          <div class="field"><label data-en="Last name" data-it="Cognome"></label><input id="lastName"></div>
+        </div>
+        <div class="field">
+          <label data-en="Are you a healthcare professional?" data-it="Sei un professionista sanitario?"></label>
+          <div class="inline">
+            <label><input type="radio" name="hcp" value="yes"> <span data-en="Yes" data-it="Sì"></span></label>
+            <label><input type="radio" name="hcp" value="no"> No</label>
+          </div>
+        </div>
+        <div id="professionWrap" class="field hidden">
+          <label data-en="Profession" data-it="Professione"></label>
+          <select id="profession"><option value="">—</option><option value="medico">Medico</option><option value="biologo">Biologo</option><option value="dietista">Dietista</option><option value="altro">Altro</option></select>
+        </div>
+        <div id="professionOtherWrap" class="field hidden"><label data-en="Specify profession" data-it="Specifica professione"></label><input id="professionOther"></div>
+        <div class="grid2">
+          <div class="field"><label data-en="Region" data-it="Regione"></label><select id="region"><option value="">—</option></select></div>
+          <div class="field"><label data-en="Province" data-it="Provincia"></label><select id="province" disabled><option value="">—</option></select></div>
+        </div>
+        <div class="grid2">
+          <div class="field"><label data-en="City" data-it="Città"></label><select id="city" disabled><option value="">—</option></select></div>
+          <div class="field"><label data-en="Phone number" data-it="Numero di telefono"></label><input id="phone" type="tel" autocomplete="tel"></div>
+        </div>
+      </div>
+
+      <div id="foreignFields" class="grid2 hidden">
+        <div class="field"><label data-en="Country / State" data-it="Stato / Paese"></label><input id="foreignCountry"></div>
+        <div class="field"><label data-en="City" data-it="Città"></label><input id="foreignCity"></div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="grid2">
+        <div class="field"><label>Email</label><input id="registerEmail" type="email" required autocomplete="email"></div>
+        <div class="field"><label>Password</label><input id="registerPassword" type="password" minlength="8" required autocomplete="new-password"></div>
+      </div>
+
+      <label class="privacy"><input id="privacy" type="checkbox" required> <span data-en="I have read the privacy information and consent to processing of the data necessary to manage my Scientific Library account." data-it="Ho letto l'informativa privacy e acconsento al trattamento dei dati necessari alla gestione del mio account della Libreria Scientifica."></span></label>
+      <button class="primary" type="submit" data-en="Create free account" data-it="Registrati gratuitamente"></button>
+    </form>
+
+    <div id="status" class="status hidden"></div>
+    <p class="footer-note" data-en="Scientific Library access is reserved for registered users. Registration is free." data-it="L'accesso alla Libreria Scientifica è riservato agli utenti registrati. La registrazione è gratuita."></p>
+  </div>
+</section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  const cfg = {
+    url: "https://kfctugbpwmjdupmtfjen.supabase.co",
+    publishableKey: "sb_publishable_fz-WHqnfABeqFiTjBz8Utg_psM2G6sY",
+    siteUrl: window.location.origin
+  };
+  const client = window.supabase.createClient(cfg.url, cfg.publishableKey);
+  const $ = id => document.getElementById(id);
+  let lang = localStorage.getItem('kr-lang') || 'it';
+  let completionMode = false;
+  let completionUser = null;
+
+  function setLang(next){
+    lang = next;
+    localStorage.setItem('kr-lang', lang);
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const v = lang === 'it' ? el.dataset.it : el.dataset.en;
+      if (v !== undefined) el.textContent = v;
+    });
+    $('langEn').classList.toggle('active', lang === 'en');
+    $('langIt').classList.toggle('active', lang === 'it');
+  }
+
+  function showStatus(msg,error=false){
+    const el=$('status'); el.textContent=msg; el.className='status'+(error?' error':'');
+    el.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+  function clearStatus(){ $('status').className='status hidden'; }
+
+  $('langEn').addEventListener('click',()=>setLang('en'));
+  $('langIt').addEventListener('click',()=>setLang('it'));
+
+
+  function enterProfileCompletion(user){
+    completionMode = true;
+    completionUser = user;
+
+    $('loginForm').classList.add('hidden');
+    $('registerForm').classList.remove('hidden');
+    $('loginTab').classList.remove('active');
+    $('registerTab').classList.add('active');
+
+    $('registerEmail').value = user.email || '';
+    $('registerEmail').readOnly = true;
+
+    const pwdField = $('registerPassword').closest('.field');
+    if (pwdField) pwdField.classList.add('hidden');
+    $('registerPassword').required = false;
+
+    $('completeProfileBanner').classList.add('hidden');
+    $('profileCompletionTitle').classList.remove('hidden');
+    $('switchAccount').classList.remove('hidden');
+    document.querySelector('.tabs').classList.add('hidden');
+
+    const submitButton = $('registerForm').querySelector('button[type="submit"]');
+    submitButton.dataset.en = 'Save profile and access the Library';
+    submitButton.dataset.it = 'Salva il profilo e accedi alla Library';
+
+    setLang(lang);
+    $('registerForm').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function showTab(tab){
+    const login=tab==='login';
+    if(!completionMode) $('profileCompletionTitle').classList.add('hidden');
+    $('loginForm').classList.toggle('hidden',!login);
+    $('registerForm').classList.toggle('hidden',login);
+    $('loginTab').classList.toggle('active',login);
+    $('registerTab').classList.toggle('active',!login);
+    clearStatus();
+  }
+  $('loginTab').addEventListener('click',async()=>{
+    if(completionMode){
+      await client.auth.signOut();
+      completionMode=false;
+      completionUser=null;
+      $('completeProfileBanner').classList.add('hidden');
+      $('profileCompletionTitle').classList.add('hidden');
+      $('switchAccount').classList.add('hidden');
+      document.querySelector('.tabs').classList.remove('hidden');
+
+      const submitButton=$('registerForm').querySelector('button[type="submit"]');
+      submitButton.dataset.en='Create free account';
+      submitButton.dataset.it='Registrati gratuitamente';
+
+      $('registerEmail').readOnly=false;
+      const pwdField=$('registerPassword').closest('.field');
+      if(pwdField)pwdField.classList.remove('hidden');
+      $('registerPassword').required=true;
+      history.replaceState({}, '', '/library-access.html');
+    }
+    showTab('login');
+  });
+  $('registerTab').addEventListener('click',()=>showTab('register'));
+
+  $('switchAccount').addEventListener('click', async () => {
+    await client.auth.signOut();
+    completionMode = false;
+    completionUser = null;
+
+    $('completeProfileBanner').classList.add('hidden');
+    $('profileCompletionTitle').classList.add('hidden');
+    $('switchAccount').classList.add('hidden');
+    document.querySelector('.tabs').classList.remove('hidden');
+
+    const submitButton = $('registerForm').querySelector('button[type="submit"]');
+    submitButton.dataset.en = 'Create free account';
+    submitButton.dataset.it = 'Registrati gratuitamente';
+
+    $('registerEmail').readOnly = false;
+    const pwdField = $('registerPassword').closest('.field');
+    if (pwdField) pwdField.classList.remove('hidden');
+    $('registerPassword').required = true;
+
+    showTab('login');
+    $('loginEmail').value = '';
+    $('loginPassword').value = '';
+    history.replaceState({}, '', '/library-access.html');
+    setLang(lang);
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  $('forgotPassword').addEventListener('click', async () => {
+    clearStatus();
+    const email=$('loginEmail').value.trim();
+    if(!email){
+      showStatus(lang==='it'
+        ? 'Inserisci la tua email nel campo Email, poi premi di nuovo “Hai dimenticato la password?”.'
+        : 'Enter your email address first, then press “Forgot your password?” again.', true);
+      $('loginEmail').focus();
+      return;
+    }
+    $('forgotPassword').disabled=true;
+    $('forgotPassword').textContent=lang==='it'?'Invio in corso…':'Sending…';
+    try{
+      const {error}=await client.auth.resetPasswordForEmail(email,{
+        redirectTo:`${cfg.siteUrl}/reset-password.html`
+      });
+      if(error) throw error;
+      showStatus(lang==='it'
+        ? 'Email di recupero inviata. Controlla la posta e anche la cartella spam.'
+        : 'Password recovery email sent. Check your inbox and spam folder.');
+    }catch(err){
+      showStatus((lang==='it'?'Errore: ':'Error: ')+(err?.message||String(err)),true);
+    }finally{
+      $('forgotPassword').disabled=false;
+      setLang(lang);
+    }
+  });
+
+  function setCookies(session){
+    const secure=location.protocol==='https:'?'; Secure':'';
+    const maxAge=60*60*24*30;
+    document.cookie=`kr_access_token=${encodeURIComponent(session.access_token)}; Path=/; SameSite=Lax${secure}; Max-Age=${maxAge}`;
+    document.cookie=`kr_refresh_token=${encodeURIComponent(session.refresh_token)}; Path=/; SameSite=Lax${secure}; Max-Age=${maxAge}`;
+  }
+
+  $('loginForm').addEventListener('submit',async e=>{
+    e.preventDefault(); clearStatus();
+
+    const {data,error}=await client.auth.signInWithPassword({
+      email:$('loginEmail').value.trim(),
+      password:$('loginPassword').value
+    });
+
+    if(error)return showStatus(error.message,true);
+
+    setCookies(data.session);
+
+    const {data:profile,error:profileError}=await client
+      .from('library_profiles')
+      .select('user_id')
+      .eq('user_id',data.user.id)
+      .maybeSingle();
+
+    if(profileError){
+      return showStatus((lang==='it'?'Errore profilo: ':'Profile error: ')+profileError.message,true);
+    }
+
+    if(!profile){
+      enterProfileCompletion(data.user);
+      return;
+    }
+
+    location.href='/library.html';
+  });
+
+  document.querySelectorAll('input[name="hcp"]').forEach(r=>r.addEventListener('change',()=>{
+    const yes=document.querySelector('input[name="hcp"]:checked')?.value==='yes';
+    $('professionWrap').classList.toggle('hidden',!yes);
+    if(!yes){$('profession').value='';$('professionOtherWrap').classList.add('hidden');$('professionOther').value='';}
+  }));
+  $('profession').addEventListener('change',e=>$('professionOtherWrap').classList.toggle('hidden',e.target.value!=='altro'));
+  $('country').addEventListener('change',e=>{
+    const italy=e.target.value==='Italy';
+    $('italyFields').classList.toggle('hidden',!italy);
+    $('foreignFields').classList.toggle('hidden',italy);
+  });
+
+  const GEO='https://comuni-ita.nicolorebaioli.dev/v5';
+  async function getJson(url){const r=await fetch(url);if(!r.ok)throw new Error('Geographic service unavailable');return r.json();}
+  function rows(p){if(Array.isArray(p))return p;for(const k of ['data','results','items','regioni','province','comuni'])if(Array.isArray(p?.[k]))return p[k];return [];}
+  function val(o,keys){if(typeof o==='string')return o;for(const k of keys)if(o?.[k])return o[k];return '';}
+  function fill(sel,values){sel.innerHTML='<option value="">—</option>';[...new Set(values.filter(Boolean))].sort((a,b)=>a.localeCompare(b,'it')).forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;sel.appendChild(o);});}
+  async function loadRegions(){try{const data=rows(await getJson(`${GEO}/regioni`));fill($('region'),data.map(x=>val(x,['nome','name','regione'])));}catch(e){}}
+  async function loadProvinces(region){$('province').disabled=true;$('city').disabled=true;fill($('province'),[]);fill($('city'),[]);if(!region)return;const data=rows(await getJson(`${GEO}/province/${encodeURIComponent(region)}`));fill($('province'),data.map(x=>val(x,['nome','name','provincia'])));$('province').disabled=false;}
+  async function loadCities(province){$('city').disabled=true;fill($('city'),[]);if(!province)return;const data=rows(await getJson(`${GEO}/comuni/provincia/${encodeURIComponent(province)}`));fill($('city'),data.map(x=>val(x,['nome','name','comune'])));$('city').disabled=false;}
+  $('region').addEventListener('change',e=>loadProvinces(e.target.value).catch(()=>{}));
+  $('province').addEventListener('change',e=>loadCities(e.target.value).catch(()=>{}));
+
+  $('registerForm').addEventListener('submit',async e=>{
+    e.preventDefault();clearStatus();
+    const italy=$('country').value==='Italy';
+    const hcp=document.querySelector('input[name="hcp"]:checked');
+    if(italy&&!hcp)return showStatus(lang==='it'?'Indica se sei un professionista sanitario.':'Please indicate whether you are a healthcare professional.',true);
+    const isHcp=italy?(hcp.value==='yes'):null;
+    const profile=italy?{
+      country:'Italy',first_name:$('firstName').value.trim(),last_name:$('lastName').value.trim(),
+      is_healthcare_professional:isHcp,profession:isHcp?$('profession').value:null,
+      profession_other:isHcp&&$('profession').value==='altro'?$('professionOther').value.trim():null,
+      region:$('region').value,province:$('province').value,city:$('city').value,phone:$('phone').value.trim()
+    }:{
+      country:$('foreignCountry').value.trim(),first_name:null,last_name:null,is_healthcare_professional:null,
+      profession:null,profession_other:null,region:null,province:null,city:$('foreignCity').value.trim(),phone:null
+    };
+    if(italy){
+      for(const k of ['first_name','last_name','region','province','city','phone']) if(!profile[k]) return showStatus(lang==='it'?'Completa tutti i campi obbligatori.':'Complete all required fields.',true);
+      if(isHcp&&!profile.profession)return showStatus(lang==='it'?'Seleziona la professione.':'Select your profession.',true);
+      if(profile.profession==='altro'&&!profile.profession_other)return showStatus(lang==='it'?'Specifica la professione.':'Specify your profession.',true);
+    }else if(!profile.country||!profile.city)return showStatus(lang==='it'?'Inserisci Stato/Paese e città.':'Enter country/state and city.',true);
+
+    const email=$('registerEmail').value.trim();
+
+    if(completionMode && completionUser){
+      const {error:pErr}=await client.from('library_profiles').upsert({
+        user_id:completionUser.id,
+        email:completionUser.email||email,
+        ...profile,
+        privacy_version:'2026-09',
+        privacy_accepted_at:new Date().toISOString()
+      });
+      if(pErr)return showStatus((lang==='it'?'Errore salvataggio profilo: ':'Profile save error: ')+pErr.message,true);
+      location.href='/library.html';
+      return;
+    }
+
+    const password=$('registerPassword').value;
+    const {data,error}=await client.auth.signUp({
+      email,password,
+      options:{emailRedirectTo:`${cfg.siteUrl}/library-access.html?confirmed=1`,data:{registration_source:'scientific_library'}}
+    });
+    if(error)return showStatus(error.message,true);
+
+    if(data.session){
+      const {error:pErr}=await client.from('library_profiles').upsert({
+        user_id:data.user.id,email,...profile,privacy_version:'2026-09',privacy_accepted_at:new Date().toISOString()
+      });
+      if(pErr)return showStatus(pErr.message,true);
+      setCookies(data.session);location.href='/library.html';
+    }else{
+      localStorage.setItem('kr_pending_profile',JSON.stringify({email,profile}));
+      showStatus(lang==='it'?'Registrazione ricevuta. Controlla la tua email e conferma l’indirizzo.':'Registration received. Check your email and confirm your address.');
+    }
+  });
+
+  async function finalizePending(){
+    const {data}=await client.auth.getSession();
+    if(!data.session)return;
+    setCookies(data.session);
+    const raw=localStorage.getItem('kr_pending_profile');
+    if(raw){
+      try{
+        const pending=JSON.parse(raw);
+        await client.from('library_profiles').upsert({
+          user_id:data.session.user.id,email:pending.email||data.session.user.email,...pending.profile,
+          privacy_version:'2026-09',privacy_accepted_at:new Date().toISOString()
+        });
+        localStorage.removeItem('kr_pending_profile');
+      }catch{}
+    }
+    if(new URLSearchParams(location.search).get('confirmed')==='1')location.href='/library.html';
+  }
+
+  setLang(lang);
+  showTab('login');
+
+  const reason=new URLSearchParams(location.search).get('reason');
+  if(reason==='profile'){
+    (async()=>{
+      const {data}=await client.auth.getUser();
+      if(data?.user){
+        enterProfileCompletion(data.user);
+      }else{
+        showStatus(lang==='it'
+          ?'La sessione non è più valida. Accedi di nuovo.'
+          :'Your session is no longer valid. Please sign in again.', true);
+      }
+    })();
+  }else if(reason==='email'){
+    showStatus(lang==='it'
+      ?'Conferma prima il tuo indirizzo email.'
+      :'Please confirm your email address first.',true);
+  }
+
+  loadRegions();
+  finalizePending();
+});
+</script>
+</body>
+</html>
