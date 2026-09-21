@@ -87,39 +87,56 @@ def clean_library_html(html: str) -> str:
     return html
 
 def inject_account_status(html: str) -> str:
-    """Add a small authenticated-user indicator and logout control."""
-    marker = "KR_LIBRARY_ACCOUNT_STATUS_V1"
+    """Add a compact authenticated-user strip below the header without covering controls."""
+    marker = "KR_LIBRARY_ACCOUNT_STATUS_V2"
     if marker in html:
         return html
 
     widget = r"""
-<!-- KR_LIBRARY_ACCOUNT_STATUS_V1 -->
+<!-- KR_LIBRARY_ACCOUNT_STATUS_V2 -->
 <style>
-#kr-account-status{
-  position:fixed;top:12px;right:12px;z-index:99999;
-  display:none;align-items:center;gap:9px;
-  max-width:calc(100vw - 24px);
-  padding:7px 10px;border:1px solid rgba(0,0,0,.14);
-  border-radius:999px;background:rgba(255,255,255,.96);
-  box-shadow:0 2px 12px rgba(0,0,0,.10);
-  font:600 12px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  color:#17352b;backdrop-filter:blur(8px)
+.kr-account-strip-wrap{
+  padding:10px 18px 0;
 }
-#kr-account-status .kr-user{
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:230px
+.kr-account-strip{
+  max-width:1200px;margin:0 auto;
+  display:none;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  padding:10px 14px;border:1px solid rgba(17,24,39,.08);
+  border-radius:16px;background:#f7fbff;box-shadow:0 4px 18px rgba(15,23,42,.05);
+  font:600 14px/1.35 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:#123b35;
 }
-#kr-account-status button{
-  border:0;border-radius:999px;padding:5px 9px;cursor:pointer;
-  background:#17352b;color:#fff;font:inherit
+.kr-account-strip .kr-account-text{
+  display:flex;align-items:center;gap:10px;min-width:0;flex:1 1 260px;
 }
+.kr-account-strip .kr-account-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:28px;height:28px;padding:0 8px;border-radius:999px;
+  background:#dff3ea;color:#0d5c48;font-size:12px;font-weight:800;letter-spacing:.02em;
+}
+.kr-account-strip .kr-user{
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;
+}
+.kr-account-strip button{
+  border:0;border-radius:999px;padding:8px 14px;cursor:pointer;
+  background:#17352b;color:#fff;font:700 13px/1 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+.kr-account-strip button:disabled{opacity:.7;cursor:default}
 @media (max-width:640px){
-  #kr-account-status{top:8px;right:8px;padding:6px 8px}
-  #kr-account-status .kr-user{max-width:155px}
+  .kr-account-strip-wrap{padding:8px 12px 0}
+  .kr-account-strip{padding:10px 12px;gap:10px}
+  .kr-account-strip .kr-account-text{flex-basis:100%}
+  .kr-account-strip button{width:100%}
 }
 </style>
-<div id="kr-account-status" aria-live="polite">
-  <span class="kr-user" id="kr-account-user">Account attivo</span>
-  <button type="button" id="kr-logout">Esci</button>
+<div class="kr-account-strip-wrap">
+  <div id="kr-account-status" class="kr-account-strip" aria-live="polite">
+    <div class="kr-account-text">
+      <span class="kr-account-badge">OK</span>
+      <span class="kr-user" id="kr-account-user">Accesso attivo</span>
+    </div>
+    <button type="button" id="kr-logout">Esci</button>
+  </div>
 </div>
 <script>
 (async function(){
@@ -132,7 +149,7 @@ def inject_account_status(html: str) -> str:
     const me=await r.json();
     if(!me.authenticated) return;
     const full=[me.first_name,me.last_name].filter(Boolean).join(' ').trim();
-    label.textContent=full || me.email || 'Account attivo';
+    label.textContent='Connesso come: ' + (full || me.email || 'Account attivo');
     box.style.display='flex';
   }catch(e){}
 
@@ -147,6 +164,11 @@ def inject_account_status(html: str) -> str:
 })();
 </script>
 """
+
+    m = re.search(r'</header>', html, flags=re.I)
+    if m:
+        pos = m.end()
+        return html[:pos] + "\n" + widget + "\n" + html[pos:]
     if "</body>" in html.lower():
         pos = html.lower().rfind("</body>")
         return html[:pos] + widget + "\n" + html[pos:]
