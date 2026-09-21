@@ -275,6 +275,35 @@
 </div>
 </section>
 
+
+<section class="section home-latest-evidence" id="home-latest-evidence">
+<div class="wrap">
+  <div class="home-latest-heading">
+    <div>
+      <p class="kicker" data-en="LATEST EVIDENCE" data-it="ULTIME EVIDENZE">LATEST EVIDENCE</p>
+      <h2 data-en="Recently indexed scientific literature" data-it="Letteratura scientifica indicizzata di recente">Recently indexed scientific literature</h2>
+      <p data-en="A live view of recent PubMed-indexed publications in ketogenic and metabolic research."
+         data-it="Una vista aggiornata delle pubblicazioni recenti indicizzate in PubMed nella ricerca chetogenica e metabolica.">
+         A live view of recent PubMed-indexed publications in ketogenic and metabolic research.
+      </p>
+    </div>
+    <div class="home-latest-meta">
+      <strong id="homeLatestUpdated">—</strong>
+      <span data-en="last literature update" data-it="ultimo aggiornamento">last literature update</span>
+    </div>
+  </div>
+
+  <div class="home-latest-grid" id="homeLatestGrid">
+    <p data-en="Loading recent evidence…" data-it="Caricamento delle evidenze recenti…">Loading recent evidence…</p>
+  </div>
+
+  <div class="home-latest-actions">
+    <a class="btn-primary" href="latest.html" data-en="View all Latest Evidence" data-it="Vedi tutte le ultime evidenze">View all Latest Evidence</a>
+    <a class="btn-secondary" href="library.html" data-en="Scientific Library" data-it="Biblioteca Scientifica">Scientific Library</a>
+  </div>
+</div>
+</section>
+
 <section class="section" id="scientific-direction-home">
 <div class="wrap">
 <div class="methodology-two-col">
@@ -370,6 +399,95 @@ Scientific focus: ketogenic metabolic therapies, clinical nutrition, obesity, bo
     });
   }
   if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",bind)}else{bind()}
+})();
+</script>
+
+
+<script id="kr-home-latest-evidence">
+(function(){
+  function esc(value){
+    return String(value == null ? "" : value).replace(/[&<>"']/g,function(ch){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[ch];
+    });
+  }
+
+  function currentLang(){
+    return document.documentElement.lang === "it" ? "it" : "en";
+  }
+
+  function dateLabel(value){
+    if(!value) return "—";
+    var lang = currentLang() === "it" ? "it-IT" : "en-GB";
+    var d = new Date(value.slice(0,10) + "T00:00:00Z");
+    if(isNaN(d.getTime())) return value.slice(0,10);
+    return new Intl.DateTimeFormat(lang,{
+      year:"numeric",month:"short",day:"2-digit",timeZone:"UTC"
+    }).format(d);
+  }
+
+  function render(data){
+    var host = document.getElementById("homeLatestGrid");
+    if(!host) return;
+
+    var rows = (data.publications || []).slice(0,5);
+    var lang = currentLang();
+
+    if(!rows.length){
+      host.innerHTML = '<p>' + (lang === "it"
+        ? "Nessuna pubblicazione recente disponibile."
+        : "No recent publications available.") + '</p>';
+      return;
+    }
+
+    host.innerHTML = rows.map(function(p){
+      var evidence = lang === "it"
+        ? (p.evidence_type_it || p.evidence_type || "")
+        : (p.evidence_type || "");
+
+      var area = (p.areas || [])[0] || "";
+      var url = p.pubmed_url || p.doi_url || p.pmc_url || "latest.html";
+
+      return '<article class="home-latest-card">' +
+        '<div class="home-latest-card-top">' +
+          '<time>' + esc(dateLabel(p.date || "")) + '</time>' +
+          (evidence ? '<span class="home-latest-evidence-chip">' + esc(evidence) + '</span>' : '') +
+        '</div>' +
+        '<h3><a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(p.title || "") + '</a></h3>' +
+        '<p class="home-latest-journal">' + esc(p.journal || "") + (p.year ? " · " + esc(p.year) : "") + '</p>' +
+        (area ? '<p class="home-latest-area">' + esc(area) + '</p>' : '') +
+      '</article>';
+    }).join("");
+
+    var updated = document.getElementById("homeLatestUpdated");
+    if(updated){
+      updated.textContent = data.generated_at ? dateLabel(data.generated_at) : "—";
+    }
+  }
+
+  function load(){
+    if(!document.getElementById("homeLatestGrid")) return;
+    fetch("latest-publications.json?v=70",{cache:"no-store"})
+      .then(function(r){ if(!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(render)
+      .catch(function(){
+        var host = document.getElementById("homeLatestGrid");
+        if(host){
+          host.innerHTML = '<p>' + (currentLang() === "it"
+            ? "Le ultime evidenze non sono disponibili in questo momento."
+            : "Latest Evidence is temporarily unavailable.") + '</p>';
+        }
+      });
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", load);
+  }else{
+    load();
+  }
+
+  document.querySelectorAll("[data-lang]").forEach(function(btn){
+    btn.addEventListener("click",function(){ setTimeout(load,50); });
+  });
 })();
 </script>
 
