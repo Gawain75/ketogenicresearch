@@ -321,7 +321,7 @@ window.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    location.href='/library.html';
+    location.href="https://library.ketogenicresearch.org";
   });
 
   document.querySelectorAll('input[name="hcp"]').forEach(r=>r.addEventListener('change',()=>{
@@ -379,7 +379,7 @@ window.addEventListener('DOMContentLoaded', () => {
         privacy_accepted_at:new Date().toISOString()
       });
       if(pErr)return showStatus((lang==='it'?'Errore salvataggio profilo: ':'Profile save error: ')+pErr.message,true);
-      location.href='/library.html';
+      location.href="https://library.ketogenicresearch.org";
       return;
     }
 
@@ -395,7 +395,7 @@ window.addEventListener('DOMContentLoaded', () => {
         user_id:data.user.id,email,...profile,privacy_version:'2026-09',privacy_accepted_at:new Date().toISOString()
       });
       if(pErr)return showStatus(pErr.message,true);
-      setCookies(data.session);location.href='/library.html';
+      setCookies(data.session);location.href="https://library.ketogenicresearch.org";
     }else{
       localStorage.setItem('kr_pending_profile',JSON.stringify({email,profile}));
       showStatus(lang==='it'?'Registrazione ricevuta. Controlla la tua email e conferma l’indirizzo.':'Registration received. Check your email and confirm your address.');
@@ -417,7 +417,7 @@ window.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('kr_pending_profile');
       }catch{}
     }
-    if(new URLSearchParams(location.search).get('confirmed')==='1')location.href='/library.html';
+    if(new URLSearchParams(location.search).get('confirmed')==='1')location.href="https://library.ketogenicresearch.org";
   }
 
   setLang(lang);

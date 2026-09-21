@@ -26,7 +26,7 @@ NAV_HTML = r'''
 <span class="nav-caret" aria-hidden="true">&#9662;</span>
 </button>
 <div class="nav-submenu">
-<a data-en="Scientific Library" data-it="Biblioteca Scientifica" href="library.html">Scientific Library</a>
+<a data-en="Scientific Library" data-it="Biblioteca Scientifica" href="https://library.ketogenicresearch.org">Scientific Library</a>
 <a data-en="Latest Evidence" data-it="Ultime pubblicazioni" href="latest.html">Latest Evidence</a>
 </div>
 </div>

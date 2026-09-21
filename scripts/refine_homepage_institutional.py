@@ -75,7 +75,7 @@ activity = """
 <span data-en="Clinical and translational questions" data-it="Domande cliniche e traslazionali">Clinical and translational questions</span>
 <p data-en="Research areas organized around metabolic physiology, clinical nutrition and therapeutic applications of ketogenic strategies." data-it="Aree di ricerca organizzate attorno a fisiologia metabolica, nutrizione clinica e applicazioni terapeutiche delle strategie chetogeniche.">Research areas organized around metabolic physiology, clinical nutrition and therapeutic applications of ketogenic strategies.</p>
 </a>
-<a class="update-card" href="library.html">
+<a class="update-card" href="https://library.ketogenicresearch.org">
 <strong data-en="Evidence" data-it="Evidenze">Evidence</strong>
 <span data-en="Scientific Library" data-it="Biblioteca Scientifica">Scientific Library</span>
 <p data-en="A structured evidence map organized by clinical area and study design, with bibliographic identifiers verified against source records." data-it="Una mappa strutturata delle evidenze organizzata per area clinica e disegno dello studio, con identificatori bibliografici verificati sui record di origine.">A structured evidence map organized by clinical area and study design, with bibliographic identifiers verified against source records.</p>
