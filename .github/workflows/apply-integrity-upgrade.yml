@@ -57,23 +57,16 @@ jobs:
           python - <<'PY'
           import json, os
           from pathlib import Path
-
           path = Path("latest-publications.json")
           obj = json.loads(path.read_text(encoding="utf-8"))
           target = os.environ["TARGET_PMID"]
-          pubs = [
-              p for p in obj.get("publications", [])
-              if str(p.get("pmid", "")).strip() == target
-          ]
+          pubs = [p for p in obj.get("publications", []) if str(p.get("pmid", "")).strip() == target]
           if not pubs:
               raise SystemExit(f"Target PMID {target} not found in latest-publications.json")
           for p in pubs:
               p["status"] = "new"
           obj["publications"] = pubs
-          path.write_text(
-              json.dumps(obj, indent=2, ensure_ascii=False) + "\n",
-              encoding="utf-8",
-          )
+          path.write_text(json.dumps(obj, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
           PY
 
           python scripts/generate_articles.py
@@ -101,23 +94,16 @@ jobs:
           python - <<'PY'
           import json, os
           from pathlib import Path
-
           path = Path("latest-publications.json")
           obj = json.loads(path.read_text(encoding="utf-8"))
           target = os.environ["TARGET_PMID"]
-          pubs = [
-              p for p in obj.get("publications", [])
-              if str(p.get("pmid", "")).strip() == target
-          ]
+          pubs = [p for p in obj.get("publications", []) if str(p.get("pmid", "")).strip() == target]
           if not pubs:
               raise SystemExit(f"Target PMID {target} not found in latest-publications.json")
           for p in pubs:
               p["status"] = "new"
           obj["publications"] = pubs
-          path.write_text(
-              json.dumps(obj, indent=2, ensure_ascii=False) + "\n",
-              encoding="utf-8",
-          )
+          path.write_text(json.dumps(obj, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
           PY
 
           python scripts/generate_articles.py
@@ -149,10 +135,24 @@ jobs:
           node --check script.js
 
       - name: Commit complete integrity repair
+        shell: bash
         run: |
+          set -euo pipefail
           git config user.name "Ketogenic Research Bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Hard safety guard: never let this workflow commit changes under .github/workflows,
+          # because the Actions token may lack the special "workflows" permission.
+          git restore --source=HEAD --staged --worktree .github/workflows || true
+          git clean -fd .github/workflows || true
+
           git add -A
+
+          # Remove any staged or unstaged workflow-file changes before committing.
+          git restore --staged .github/workflows || true
+          git restore --worktree .github/workflows || true
+          git clean -fd .github/workflows || true
+
           if git diff --cached --quiet; then
             echo "Integrity upgrade already applied."
           else
@@ -181,5 +181,5 @@ jobs:
       - name: Summary
         run: |
           echo "Integrity upgrade completed."
+          echo "Workflow-file changes were intentionally excluded from the commit."
           echo "Known contaminated articles were regenerated from authoritative PubMed identity."
-          echo "Duplicate automatic workflows were disabled without modifying workflow files."
