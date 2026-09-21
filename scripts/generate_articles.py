@@ -36,7 +36,7 @@ GROQ_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-120b").strip()
 NCBI_EMAIL = os.environ.get("NCBI_EMAIL", "info@ketogenicresearch.org").strip()
 NCBI_API_KEY = os.environ.get("NCBI_API_KEY", "").strip()
 
-# Pilot V2 deliberately handles only one new record per run.
+# Publish at most one VERIFIED article per run; the fallback loop may scan multiple records.
 MAX_ARTICLES = 1
 
 EUTILS = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
@@ -807,100 +807,127 @@ def main() -> None:
     idx = load_index()
     done = set(str(x) for x in idx.get("generated_pmids", []))
 
+    # MAX_ARTICLES remains the number of articles to PUBLISH per run.
+    # We scan several candidates so an unusable first PMID cannot block the day.
+    try:
+        max_candidate_scan = max(
+            MAX_ARTICLES,
+            int(os.environ.get("MAX_CANDIDATE_SCAN", "12"))
+        )
+    except ValueError:
+        max_candidate_scan = 12
+
     candidates = [
         p for p in latest.get("publications", [])
         if p.get("pmid")
         and str(p["pmid"]) not in done
         and p.get("status") == "new"
-    ][:MAX_ARTICLES]
+    ][:max_candidate_scan]
 
     if not candidates:
         print("No new eligible record for the pilot.")
         return
 
-    rec = candidates[0]
-    pmid = str(rec["pmid"])
+    published = 0
+    attempted = 0
+    source_unavailable = set(
+        str(x) for x in idx.get("source_unavailable_pmids", [])
+    )
 
-    print(f"Processing PMID {pmid}: {rec.get('title','')[:100]}")
+    for rec in candidates:
+        if published >= MAX_ARTICLES:
+            break
 
-    try:
-        pubmed = pubmed_xml(pmid)
-        extra = extract_pubmed_source(pubmed)
+        attempted += 1
+        pmid = str(rec["pmid"])
+        print(
+            f"Candidate {attempted}/{len(candidates)} — PMID {pmid}: "
+            f"{rec.get('title', '')[:100]}"
+        )
 
-        if not extra.get("abstract"):
-            raise RuntimeError(
-                "PubMed abstract unavailable; pilot skips this record."
+        try:
+            pubmed = pubmed_xml(pmid)
+            extra = extract_pubmed_source(pubmed)
+
+            if not extra.get("abstract"):
+                if pmid not in source_unavailable:
+                    idx.setdefault("failures", []).append({
+                        "pmid": pmid,
+                        "at": datetime.now(timezone.utc).isoformat(),
+                        "stage": "source",
+                        "error": "PubMed abstract unavailable",
+                    })
+                    source_unavailable.add(pmid)
+
+                print(
+                    f"Skipping PMID {pmid}: PubMed abstract unavailable. "
+                    "Trying next candidate."
+                )
+                continue
+
+            full_text = pmc_full_text(extra.get("pmcid", ""))
+            packet = source_packet(rec, extra, full_text)
+
+            print("Generating bilingual article...")
+            draft = groq_json(
+                [
+                    {
+                        "role": "system",
+                        "content": (
+                            "Write only evidence-grounded scientific editorial content. "
+                            "Return JSON only."
+                        ),
+                    },
+                    {
+                        "role": "user",
+                        "content": writer_prompt(packet, bool(full_text)),
+                    },
+                ],
+                max_tokens=2600,
+                temperature=0.1,
             )
 
-        full_text, full_text_source, full_text_url = discover_full_text(rec, extra)
-        print(f"Source material selected: {full_text_source}")
-        if full_text_url:
-            print(f"Full-text source URL: {full_text_url}")
-        packet = source_packet(
-            rec,
-            extra,
-            full_text,
-            full_text_source,
-            full_text_url,
-        )
+            print("Waiting before verification...")
+            time.sleep(75)
 
-        print("Generating bilingual article...")
-        draft = groq_json(
-            [
-                {
-                    "role": "system",
-                    "content": (
-                        "Write only evidence-grounded scientific editorial content. "
-                        "Return JSON only."
-                    ),
-                },
-                {
-                    "role": "user",
-                    "content": writer_prompt(packet, bool(full_text)),
-                },
-            ],
-            max_tokens=2600,
-            temperature=0.1,
-        )
+            print("Verifying draft against source...")
+            check = groq_json(
+                [
+                    {
+                        "role": "system",
+                        "content": (
+                            "Act as a conservative scientific fact checker. "
+                            "Return JSON only."
+                        ),
+                    },
+                    {
+                        "role": "user",
+                        "content": verifier_prompt(packet, draft),
+                    },
+                ],
+                max_tokens=700,
+                temperature=0.0,
+            )
 
-        # Give the free tier time before the verification request.
-        print("Waiting before verification...")
-        time.sleep(75)
+            if str(check.get("verdict", "")).upper() != "PASS":
+                idx.setdefault("failures", []).append({
+                    "pmid": pmid,
+                    "at": datetime.now(timezone.utc).isoformat(),
+                    "stage": "verification",
+                    "issues": check.get("issues", []),
+                    "unsupported_claims": check.get("unsupported_claims", []),
+                })
+                print(
+                    f"Verification FAILED for PMID {pmid}; "
+                    "trying next candidate."
+                )
+                continue
 
-        print("Verifying draft against source...")
-        check = groq_json(
-            [
-                {
-                    "role": "system",
-                    "content": (
-                        "Act as a conservative scientific fact checker. "
-                        "Return JSON only."
-                    ),
-                },
-                {
-                    "role": "user",
-                    "content": verifier_prompt(packet, draft),
-                },
-            ],
-            max_tokens=700,
-            temperature=0.0,
-        )
-
-        if str(check.get("verdict", "")).upper() != "PASS":
-            idx.setdefault("failures", []).append({
-                "pmid": pmid,
-                "at": datetime.now(timezone.utc).isoformat(),
-                "stage": "verification",
-                "issues": check.get("issues", []),
-                "unsupported_claims": check.get("unsupported_claims", []),
-            })
-            print("Verification FAILED; no article file created.")
-        else:
             verified_at = datetime.now(timezone.utc).isoformat()
             date_prefix = (rec.get("date") or verified_at[:10])[:7]
             filename = (
                 f"{date_prefix}-{pmid}-"
-                f"{slugify(rec.get('title',''))}.md"
+                f"{slugify(rec.get('title', ''))}.md"
             )
 
             (OUT / filename).write_text(
@@ -909,24 +936,46 @@ def main() -> None:
             )
 
             done.add(pmid)
+            published += 1
             print(f"Verified article created: {filename}")
 
-    except Exception as exc:
-        idx.setdefault("failures", []).append({
-            "pmid": pmid,
-            "at": datetime.now(timezone.utc).isoformat(),
-            "stage": "generation",
-            "error": str(exc),
-        })
-        print(f"Pilot error for PMID {pmid}: {exc}")
+        except Exception as exc:
+            idx.setdefault("failures", []).append({
+                "pmid": pmid,
+                "at": datetime.now(timezone.utc).isoformat(),
+                "stage": "generation",
+                "error": str(exc),
+            })
+            print(
+                f"Error for PMID {pmid}: {exc}. "
+                "Trying next candidate."
+            )
+            continue
 
     idx["generated_pmids"] = sorted(done)
+    idx["source_unavailable_pmids"] = sorted(source_unavailable)
     idx["updated_at"] = datetime.now(timezone.utc).isoformat()
+    idx["last_run"] = {
+        "attempted_candidates": attempted,
+        "published_articles": published,
+        "status": "published" if published else "no_article_published",
+    }
 
     INDEX.write_text(
         json.dumps(idx, indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )
+
+    if published:
+        print(
+            f"ARTICLE PUBLISHED: {published} verified article(s) created "
+            f"after checking {attempted} candidate(s)."
+        )
+    else:
+        print(
+            f"NO ARTICLE PUBLISHED: checked {attempted} candidate(s); "
+            "none had sufficient source/verification quality."
+        )
 
 if __name__ == "__main__":
     main()
