@@ -51,6 +51,16 @@ function redirectToLogin(request, reason) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    // Always use the definitive custom domain.
+    // This also fixes old bookmarks and stale links to the pages.dev hostname.
+    if (url.hostname === "ketogenicresearch-library.pages.dev") {
+      const canonical = new URL(request.url);
+      canonical.hostname = "library.ketogenicresearch.org";
+      canonical.protocol = "https:";
+      return Response.redirect(canonical.toString(), 301);
+    }
+
     const protectedPath = url.pathname === "/library.html" || url.pathname === "/library" || url.pathname === "/library/";
 
     if (!protectedPath) {
