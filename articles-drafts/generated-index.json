@@ -1,5 +1,6 @@
 {
   "generated_pmids": [
+    "42709766",
     "42732658",
     "42742013",
     "42753265",
@@ -147,7 +148,21 @@
       "at": "2026-09-21T08:57:21.055292+00:00",
       "stage": "generation",
       "error": "PubMed abstract unavailable; pilot skips this record."
+    },
+    {
+      "pmid": "42717355",
+      "at": "2026-09-21T09:39:24.856686+00:00",
+      "stage": "source",
+      "error": "PubMed abstract unavailable"
     }
   ],
-  "updated_at": "2026-09-21T08:57:21.055324+00:00"
+  "updated_at": "2026-09-21T09:40:45.554366+00:00",
+  "source_unavailable_pmids": [
+    "42717355"
+  ],
+  "last_run": {
+    "attempted_candidates": 2,
+    "published_articles": 1,
+    "status": "published"
+  }
 }
