@@ -159,14 +159,35 @@ def article_page(meta, en_title, en_html, it_title, it_html, slug, description):
 <link href="../articles.css?v=1" rel="stylesheet">
 </head>
 <body class="article-page">
-<header class="article-topbar">
-  <a href="../index.html" class="article-brand" aria-label="Ketogenic Research">
-    <img src="../logo-ketogenic-research.png" alt="Ketogenic Research" class="article-logo">
-  </a>
-  <div class="article-lang">
-    <button type="button" class="active" data-lang="en">EN</button>
-    <button type="button" data-lang="it">IT</button>
-  </div>
+<header class="header">
+<div class="wrap nav">
+<a aria-label="Ketogenic Research" class="brand" href="../index.html">
+<img alt="Ketogenic Research" class="site-logo" src="../logo-ketogenic-research.png"/>
+</a>
+<nav aria-label="Primary navigation" class="site-nav">
+<a href="../index.html">Home</a>
+<a data-en="Research" data-it="Ricerca" href="../research.html">Research</a>
+<a data-en="Scientific Library" data-it="Biblioteca Scientifica" href="https://library.ketogenicresearch.org/library">Scientific Library</a>
+<a data-en="Latest Evidence" data-it="Ultime evidenze" href="../latest.html">Latest Evidence</a>
+<a data-en="Evidence Trends" data-it="Andamento evidenze" href="../evidence-trends.html">Evidence Trends</a>
+<a data-en="Articles" data-it="Articoli" href="../articles.html">Articles</a>
+<a data-en="Scientific Direction" data-it="Direzione scientifica" href="../director.html">Scientific Direction</a>
+<details class="nav-more">
+<summary>
+<span data-en="More" data-it="Altro">More</span>
+<span aria-hidden="true" class="nav-caret">▾</span>
+</summary>
+<div class="nav-submenu">
+<a data-en="Methodology" data-it="Metodologia" href="../methodology.html">Methodology</a>
+<a data-en="Contact" data-it="Contatti" href="../contact.html">Contact</a>
+</div>
+</details>
+</nav>
+<div class="actions">
+<div class="lang"><button aria-label="English" aria-pressed="false" class="active" data-lang="en">EN</button><button aria-label="Italiano" aria-pressed="false" data-lang="it">IT</button></div>
+<button aria-label="Menu" class="menu">☰</button>
+</div>
+</div>
 </header>
 
 <main class="article-shell">
@@ -215,6 +236,24 @@ def article_page(meta, en_title, en_html, it_title, it_html, slug, description):
   buttons.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
   let initial='en';
   try{{if(localStorage.getItem('kr-lang')==='it') initial='it'}}catch(e){{}}
+
+  const menu=document.querySelector('.header .menu');
+  const nav=document.querySelector('.header nav');
+  if(menu && nav){{
+    menu.setAttribute('aria-expanded','false');
+    menu.addEventListener('click',event=>{{
+      event.preventDefault();
+      event.stopPropagation();
+      const open=nav.classList.toggle('open');
+      menu.setAttribute('aria-expanded',open?'true':'false');
+    }});
+    nav.querySelectorAll('a').forEach(link=>{{
+      link.addEventListener('click',()=>{{
+        nav.classList.remove('open');
+        menu.setAttribute('aria-expanded','false');
+      }});
+    }});
+  }}
   setLang(initial);
 }})();
 </script>
@@ -246,14 +285,35 @@ def index_page(cards):
 <link href="articles.css?v=1" rel="stylesheet">
 </head>
 <body class="article-index-page">
-<header class="article-topbar">
-  <a href="index.html" class="article-brand" aria-label="Ketogenic Research">
-    <img src="logo-ketogenic-research.png" alt="Ketogenic Research" class="article-logo">
-  </a>
-  <div class="article-lang">
-    <button type="button" class="active" data-lang="en">EN</button>
-    <button type="button" data-lang="it">IT</button>
-  </div>
+<header class="header">
+<div class="wrap nav">
+<a aria-label="Ketogenic Research" class="brand" href="index.html">
+<img alt="Ketogenic Research" class="site-logo" src="logo-ketogenic-research.png"/>
+</a>
+<nav aria-label="Primary navigation" class="site-nav">
+<a href="index.html">Home</a>
+<a data-en="Research" data-it="Ricerca" href="research.html">Research</a>
+<a data-en="Scientific Library" data-it="Biblioteca Scientifica" href="https://library.ketogenicresearch.org/library">Scientific Library</a>
+<a data-en="Latest Evidence" data-it="Ultime evidenze" href="latest.html">Latest Evidence</a>
+<a data-en="Evidence Trends" data-it="Andamento evidenze" href="evidence-trends.html">Evidence Trends</a>
+<a data-en="Articles" data-it="Articoli" href="articles.html">Articles</a>
+<a data-en="Scientific Direction" data-it="Direzione scientifica" href="director.html">Scientific Direction</a>
+<details class="nav-more">
+<summary>
+<span data-en="More" data-it="Altro">More</span>
+<span aria-hidden="true" class="nav-caret">▾</span>
+</summary>
+<div class="nav-submenu">
+<a data-en="Methodology" data-it="Metodologia" href="methodology.html">Methodology</a>
+<a data-en="Contact" data-it="Contatti" href="contact.html">Contact</a>
+</div>
+</details>
+</nav>
+<div class="actions">
+<div class="lang"><button aria-label="English" aria-pressed="false" class="active" data-lang="en">EN</button><button aria-label="Italiano" aria-pressed="false" data-lang="it">IT</button></div>
+<button aria-label="Menu" class="menu">☰</button>
+</div>
+</div>
 </header>
 
 <main class="article-shell">
@@ -286,6 +346,24 @@ def index_page(cards):
   buttons.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
   let initial='en';
   try{{if(localStorage.getItem('kr-lang')==='it') initial='it'}}catch(e){{}}
+
+  const menu=document.querySelector('.header .menu');
+  const nav=document.querySelector('.header nav');
+  if(menu && nav){{
+    menu.setAttribute('aria-expanded','false');
+    menu.addEventListener('click',event=>{{
+      event.preventDefault();
+      event.stopPropagation();
+      const open=nav.classList.toggle('open');
+      menu.setAttribute('aria-expanded',open?'true':'false');
+    }});
+    nav.querySelectorAll('a').forEach(link=>{{
+      link.addEventListener('click',()=>{{
+        nav.classList.remove('open');
+        menu.setAttribute('aria-expanded','false');
+      }});
+    }});
+  }}
   setLang(initial);
 }})();
 </script>
@@ -365,7 +443,7 @@ def main():
     static_urls = [
         ("https://ketogenicresearch.org/", "weekly", "1.0"),
         ("https://ketogenicresearch.org/research.html", "monthly", "0.9"),
-        ("https://library.ketogenicresearch.org/library", "weekly", "1.0"),
+        ("https://ketogenicresearch.org/library.html", "weekly", "1.0"),
         ("https://ketogenicresearch.org/latest.html", "daily", "0.9"),
         ("https://ketogenicresearch.org/articles.html", "daily", "0.9"),
         ("https://ketogenicresearch.org/evidence-trends.html", "weekly", "0.8"),
