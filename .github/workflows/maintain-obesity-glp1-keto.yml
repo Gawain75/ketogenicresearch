@@ -1,4 +1,4 @@
-name: Maintain Obesity GLP-1 ketogenic subsection
+name: Maintain Metabolic GLP-1 ketogenic folder
 
 on:
   workflow_dispatch:
@@ -18,7 +18,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  maintain-subsection:
+  maintain-folder:
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -38,13 +38,13 @@ jobs:
       - name: Install dependency
         run: python -m pip install beautifulsoup4
 
-      - name: Rebuild static Obesity GLP-1RA ketogenic subsection
+      - name: Rebuild GLP-1RA ketogenic metabolic folder
         env:
           NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
           NCBI_EMAIL: info@ketogenicresearch.org
         run: python scripts/maintain_obesity_glp1_keto.py
 
-      - name: Commit subsection
+      - name: Commit folder
         shell: bash
         run: |
           set -euo pipefail
@@ -57,14 +57,14 @@ jobs:
           git add library.html styles.css scripts/maintain_obesity_glp1_keto.py
 
           if git diff --cached --quiet; then
-            echo "GLP-1RA ketogenic subsection already current."
+            echo "GLP-1RA ketogenic metabolic folder already current."
           else
-            git commit -m "Maintain Obesity GLP-1 ketogenic subsection"
+            git commit -m "Move GLP-1 ketogenic studies to Metabolic Endocrine"
             git pull --rebase origin main
             git push origin main
           fi
 
       - name: Summary
         run: |
-          echo "Obesity > GLP-1RA + ketogenic / ketosis / ketones rebuilt from PubMed."
-          echo "This subsection is static HTML and does not depend on custom JavaScript."
+          echo "GLP-1RA + Ketogenic Metabolism is now a standard folder under Metabolic & Endocrine."
+          echo "The previous Obesity subsection is removed automatically."
