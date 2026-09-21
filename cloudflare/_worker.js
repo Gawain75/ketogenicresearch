@@ -38,6 +38,28 @@ async function refreshSession(refreshToken) {
   return r.json();
 }
 
+async function fetchOwnProfile(accessToken, fields = "user_id,first_name,last_name,email") {
+  if (!accessToken) return { ok: false, status: 401, rows: [] };
+
+  const r = await fetch(
+    `https://kfctugbpwmjdupmtfjen.supabase.co/rest/v1/library_profiles?select=${encodeURIComponent(fields)}&limit=1`,
+    {
+      headers: {
+        "apikey": "sb_publishable_fz-WHqnfABeqFiTjBz8Utg_psM2G6sY",
+        "Authorization": `Bearer ${accessToken}`,
+        "Accept": "application/json"
+      }
+    }
+  );
+
+  let rows = [];
+  if (r.ok) {
+    try { rows = await r.json(); } catch {}
+  }
+
+  return { ok: r.ok, status: r.status, rows };
+}
+
 function cookie(name, value, maxAge) {
   return `${name}=${encodeURIComponent(value)}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${maxAge}`;
 }
@@ -98,10 +120,10 @@ export default {
     if (url.pathname === "/auth/me" && request.method === "GET") {
       const cookies = parseCookies(request);
       let access = cookies.kr_access_token || "";
-      let user = await validateUser(access);
       let refreshed = null;
+      let profileResult = await fetchOwnProfile(access);
 
-      if (!user) {
+      if (profileResult.status === 401 || profileResult.status === 403) {
         refreshed = await refreshSession(cookies.kr_refresh_token || "");
         if (!refreshed?.access_token) {
           return Response.json({ authenticated: false }, {
@@ -109,33 +131,29 @@ export default {
             headers: { "Cache-Control": "no-store" }
           });
         }
+
         access = refreshed.access_token;
-        user = await validateUser(access);
-        if (!user) {
-          return Response.json({ authenticated: false }, {
-            status: 401,
-            headers: { "Cache-Control": "no-store" }
-          });
-        }
+        profileResult = await fetchOwnProfile(access);
       }
 
-      let profile = null;
-      try {
-        const pr = await fetch(
-          `https://kfctugbpwmjdupmtfjen.supabase.co/rest/v1/library_profiles?user_id=eq.${encodeURIComponent(user.id)}&select=first_name,last_name,email&limit=1`,
-          {
-            headers: {
-              "apikey": "sb_publishable_fz-WHqnfABeqFiTjBz8Utg_psM2G6sY",
-              "Authorization": `Bearer ${access}`,
-              "Accept": "application/json"
-            }
-          }
+      // A temporary backend/rate-limit failure is not a logout.
+      if (!profileResult.ok) {
+        return Response.json(
+          { authenticated: true, temporary_error: true },
+          { status: 503, headers: { "Cache-Control": "no-store" } }
         );
-        if (pr.ok) {
-          const rows = await pr.json();
-          if (Array.isArray(rows) && rows.length) profile = rows[0];
-        }
-      } catch {}
+      }
+
+      const profile = Array.isArray(profileResult.rows) && profileResult.rows.length
+        ? profileResult.rows[0]
+        : null;
+
+      if (!profile) {
+        return Response.json({ authenticated: false, reason: "profile" }, {
+          status: 401,
+          headers: { "Cache-Control": "no-store" }
+        });
+      }
 
       const headers = new Headers({
         "Content-Type": "application/json; charset=utf-8",
@@ -149,9 +167,9 @@ export default {
 
       return new Response(JSON.stringify({
         authenticated: true,
-        email: user.email || profile?.email || "",
-        first_name: profile?.first_name || "",
-        last_name: profile?.last_name || ""
+        email: profile.email || "",
+        first_name: profile.first_name || "",
+        last_name: profile.last_name || ""
       }), { status: 200, headers });
     }
 
@@ -173,33 +191,36 @@ export default {
 
     const cookies = parseCookies(request);
     let access = cookies.kr_access_token || "";
-    let user = await validateUser(access);
     let refreshed = null;
+    let profileResult = await fetchOwnProfile(access, "user_id");
 
-    if (!user) {
+    if (profileResult.status === 401 || profileResult.status === 403) {
       refreshed = await refreshSession(cookies.kr_refresh_token || "");
       if (!refreshed?.access_token) return redirectToLogin(request, "login");
+
       access = refreshed.access_token;
-      user = await validateUser(access);
-      if (!user) return redirectToLogin(request, "login");
+      profileResult = await fetchOwnProfile(access, "user_id");
     }
 
-    if (!user.email_confirmed_at) return redirectToLogin(request, "email");
-
-    const profileResponse = await fetch(
-      `https://kfctugbpwmjdupmtfjen.supabase.co/rest/v1/library_profiles?user_id=eq.${encodeURIComponent(user.id)}&select=user_id&limit=1`,
-      {
-        headers: {
-          "apikey": "sb_publishable_fz-WHqnfABeqFiTjBz8Utg_psM2G6sY",
-          "Authorization": `Bearer ${access}`,
-          "Accept": "application/json"
+    // Do not convert a temporary Supabase/PostgREST failure into a logout.
+    if (!profileResult.ok) {
+      return new Response(
+        "Scientific Library is temporarily unavailable. Please retry in a few seconds.",
+        {
+          status: 503,
+          headers: {
+            "Content-Type": "text/plain; charset=utf-8",
+            "Cache-Control": "no-store",
+            "Retry-After": "5"
+          }
         }
-      }
-    );
+      );
+    }
 
-    if (!profileResponse.ok) return redirectToLogin(request, "profile");
-    const profiles = await profileResponse.json();
-    if (!Array.isArray(profiles) || profiles.length === 0) return redirectToLogin(request, "profile");
+    const profiles = profileResult.rows;
+    if (!Array.isArray(profiles) || profiles.length === 0) {
+      return redirectToLogin(request, "profile");
+    }
 
     // Important: fetch the ORIGINAL request path.
     // Cloudflare Pages canonicalizes .html URLs to extensionless routes.
