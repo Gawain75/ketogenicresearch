@@ -1,28 +1,413 @@
-#!/usr/bin/env python3
-from pathlib import Path
-import re
+<!DOCTYPE html>
 
-ROOT = Path(__file__).resolve().parents[1]
-DRAFTS = ROOT / "articles-drafts"
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Ketogenic Research | Clinical &amp; Translational research initiative</title>
+<meta content="Ketogenic Research is a scientific research initiative focused on ketogenic metabolism, clinical nutrition, metabolic health, body composition and neurological applications." name="description"/>
+<meta content="#1f4e79" name="theme-color"/>
+<link href="styles.css?v=70" rel="stylesheet"/>
+<link href="https://ketogenicresearch.org/" rel="canonical"/>
+<meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="robots"/>
+<meta content="website" property="og:type"/>
+<meta content="Ketogenic Research" property="og:site_name"/>
+<meta content="Ketogenic Research | Clinical &amp; Translational research initiative" property="og:title"/>
+<meta content="Ketogenic Research is a scientific research initiative focused on ketogenic metabolism, clinical nutrition, metabolic health, body composition and neurological applications." property="og:description"/>
+<meta content="https://ketogenicresearch.org/" property="og:url"/>
+<meta content="https://ketogenicresearch.org/logo-ketogenic-research.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Ketogenic Research | Clinical &amp; Translational research initiative" name="twitter:title"/>
+<meta content="Ketogenic Research is a scientific research initiative focused on ketogenic metabolism, clinical nutrition, metabolic health, body composition and neurological applications." name="twitter:description"/>
+<meta content="https://ketogenicresearch.org/logo-ketogenic-research.png" name="twitter:image"/>
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Ketogenic Research",
+    "url": "https://ketogenicresearch.org/",
+    "logo": "https://ketogenicresearch.org/logo-ketogenic-research.png",
+    "email": "info@ketogenicresearch.org",
+    "founder": {
+      "@type": "Person",
+      "name": "Marco Medeot",
+      "jobTitle": "Scientific Director"
+    },
+    "areaServed": "International",
+    "knowsAbout": [
+      "Ketogenic nutrition",
+      "Very-low-calorie ketogenic diet",
+      "Metabolic health",
+      "Clinical nutrition",
+      "Obesity",
+      "Body composition",
+      "Ketogenic metabolic therapy",
+      "GLP-1 receptor agonists"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Ketogenic Research",
+    "url": "https://ketogenicresearch.org/",
+    "publisher": {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Ketogenic Research",
+      "url": "https://ketogenicresearch.org/",
+      "logo": "https://ketogenicresearch.org/logo-ketogenic-research.png",
+      "email": "info@ketogenicresearch.org",
+      "founder": {
+        "@type": "Person",
+        "name": "Marco Medeot",
+        "jobTitle": "Scientific Director"
+      },
+      "areaServed": "International",
+      "knowsAbout": [
+        "Ketogenic nutrition",
+        "Very-low-calorie ketogenic diet",
+        "Metabolic health",
+        "Clinical nutrition",
+        "Obesity",
+        "Body composition",
+        "Ketogenic metabolic therapy",
+        "GLP-1 receptor agonists"
+      ]
+    }
+  }
+]
+</script>
+<link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+<meta content="Ketogenic Research | Clinical &amp; Translational research initiative" name="kr-title-en"/><meta content="Ketogenic Research | Iniziativa di ricerca clinica e traslazionale" name="kr-title-it"/></head>
+<body class="home-clean">
+<header class="header">
+<div class="wrap nav">
+<a aria-label="Ketogenic Research" class="brand" href="index.html">
+<img alt="Ketogenic Research" class="site-logo" src="logo-ketogenic-research.png"/>
+</a>
+<nav aria-label="Primary navigation" class="site-nav">
+<a href="index.html">Home</a>
+<a data-en="Research" data-it="Ricerca" href="research.html">Research</a>
+<a data-en="Scientific Library" data-it="Biblioteca Scientifica" href="https://library.ketogenicresearch.org">Scientific Library</a>
+<a data-en="Latest Evidence" data-it="Ultime evidenze" href="latest.html">Latest Evidence</a>
+<a data-en="Evidence Trends" data-it="Andamento evidenze" href="evidence-trends.html">Evidence Trends</a>
+<a data-en="Articles" data-it="Articoli" href="articles.html">Articles</a>
+<a data-en="Scientific Direction" data-it="Direzione scientifica" href="director.html">Scientific Direction</a>
+<details class="nav-more">
+<summary>
+<span data-en="More" data-it="Altro">More</span>
+<span aria-hidden="true" class="nav-caret">▾</span>
+</summary>
+<div class="nav-submenu">
+<a data-en="Methodology" data-it="Metodologia" href="methodology.html">Methodology</a>
+<a data-en="Contact" data-it="Contatti" href="contact.html">Contact</a>
+</div>
+</details>
+</nav>
+<div class="actions">
+<div class="lang"><button class="active" data-lang="en">EN</button><button data-lang="it">IT</button></div>
+<button aria-label="Menu" class="menu">☰</button>
+</div>
+</div>
+</header>
+<main>
+<section class="hero hero-clean">
+<div class="wrap hero-clean-grid">
+<div class="hero-copy">
+<p class="kicker" data-en="KETOGENIC RESEARCH" data-it="KETOGENIC RESEARCH">KETOGENIC RESEARCH</p>
+<h1 data-en="Clinical and translational research in ketogenic and metabolic science." data-it="Ricerca clinica e traslazionale nella scienza chetogenica e metabolica.">Clinical and translational research in ketogenic and metabolic science.</h1>
+<p class="lead clean-lead" data-en="A scientific research initiative dedicated to the study, critical appraisal and clinical interpretation of ketogenic and metabolic interventions." data-it="Un'iniziativa di ricerca scientifica dedicata allo studio, alla valutazione critica e all'interpretazione clinica degli interventi chetogenici e metabolici.">A scientific research initiative dedicated to the study, critical appraisal and clinical interpretation of ketogenic and metabolic interventions.</p>
+<div class="hero-actions">
+<a class="btn-primary" data-en="Research Programs" data-it="Programmi di ricerca" href="research.html">Research Programs</a>
+<a class="btn-secondary" data-en="Scientific Method" data-it="Metodo scientifico" href="methodology.html">Scientific Method</a>
+</div>
+</div>
+<div aria-hidden="true" class="science-visual">
+<svg aria-label="Animated metabolic research visualization" class="science-svg" role="img" viewbox="0 0 720 520">
+<defs>
+<radialgradient cx="50%" cy="50%" id="coreGlow" r="50%">
+<stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"></stop>
+<stop offset="45%" stop-color="#9fc6e6" stop-opacity="0.45"></stop>
+<stop offset="100%" stop-color="#2b6ca3" stop-opacity="0"></stop>
+</radialgradient>
+<lineargradient id="pathGlow" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#6fa7d4"></stop>
+<stop offset="100%" stop-color="#1f4e79"></stop>
+</lineargradient>
+<filter id="softGlow">
+<fegaussianblur result="blur" stddeviation="5"></fegaussianblur>
+<femerge>
+<femergenode in="blur"></femergenode>
+<femergenode in="SourceGraphic"></femergenode>
+</femerge>
+</filter>
+</defs>
+<circle class="sv-orbit sv-orbit-a" cx="360" cy="260" r="178"></circle>
+<circle class="sv-orbit sv-orbit-b" cx="360" cy="260" r="126"></circle>
+<circle class="sv-orbit sv-orbit-c" cx="360" cy="260" r="78"></circle>
+<g class="sv-grid">
+<path d="M110 260H610"></path>
+<path d="M360 70V450"></path>
+<path d="M185 135L535 385"></path>
+<path d="M535 135L185 385"></path>
+</g>
+<g class="sv-paths">
+<path class="sv-path sv-path-1" d="M205 320 C255 250, 275 210, 350 190 S470 185, 520 245"></path>
+<path class="sv-path sv-path-2" d="M205 205 C255 270, 305 310, 380 325 S495 315, 545 255"></path>
+<path class="sv-path sv-path-3" d="M275 120 C340 170, 400 190, 470 155"></path>
+</g>
+<circle class="sv-core-glow" cx="360" cy="260" r="112"></circle>
+<circle class="sv-core" cx="360" cy="260" r="58"></circle>
+<circle class="sv-core-ring" cx="360" cy="260" r="74"></circle>
+<g class="sv-label sv-label-main">
+<text text-anchor="middle" x="360" y="252">β-HB</text>
+<text text-anchor="middle" x="360" y="278">KETONE METABOLISM</text>
+</g>
+<g class="sv-node sv-node-1" transform="translate(206 318)">
+<circle r="14"></circle><circle class="pulse" r="24"></circle>
+<text x="22" y="-8">AcAc</text>
+<text class="minor" x="22" y="10">ketone body</text>
+</g>
+<g class="sv-node sv-node-2" transform="translate(516 244)">
+<circle r="13"></circle><circle class="pulse" r="23"></circle>
+<text text-anchor="end" x="-22" y="-10">ATP</text>
+<text class="minor" text-anchor="end" x="-22" y="8">energy flux</text>
+</g>
+<g class="sv-node sv-node-3" transform="translate(286 124)">
+<circle r="12"></circle><circle class="pulse" r="21"></circle>
+<text text-anchor="end" x="-18" y="-8">AMPK</text>
+<text class="minor" text-anchor="end" x="-18" y="10">signalling</text>
+</g>
+<g class="sv-node sv-node-4" transform="translate(470 156)">
+<circle r="11"></circle><circle class="pulse" r="20"></circle>
+<text x="18" y="-8">NAD+</text>
+<text class="minor" x="18" y="10">redox</text>
+</g>
+<g class="sv-node sv-node-5" transform="translate(380 326)">
+<circle r="10"></circle><circle class="pulse" r="18"></circle>
+<text x="16" y="18">mTOR</text>
+</g>
+<g class="sv-particle-group">
+<circle class="sv-particle p1" cx="205" cy="320" r="5"></circle>
+<circle class="sv-particle p2" cx="205" cy="205" r="4"></circle>
+<circle class="sv-particle p3" cx="275" cy="120" r="4"></circle>
+</g>
+<g class="sv-caption">
+<text text-anchor="middle" x="360" y="486">METABOLIC NETWORK • CLINICAL TRANSLATION • EVIDENCE</text>
+</g>
+</svg>
+</div>
+</div>
+</section><section aria-label="Scientific library metrics" class="home-metrics"><div class="home-metric"><strong data-clinical-area-count="">53</strong><span data-en="Clinical areas" data-it="Aree cliniche">Clinical areas</span></div><div class="home-metric"><strong data-publication-count="">3922</strong><span data-en="Curated publications" data-it="Pubblicazioni selezionate">Curated publications</span></div><div class="home-metric"><strong>2026</strong><span data-en="Current literature coverage" data-it="Copertura bibliografica aggiornata">Current literature coverage</span></div></section><section class="section whats-new">
+<div class="wrap">
+<p class="kicker" data-en="CORE ACTIVITIES" data-it="ATTIVITÀ SCIENTIFICHE">CORE ACTIVITIES</p>
+<h2 data-en="Research, evidence surveillance and scientific interpretation." data-it="Ricerca, sorveglianza delle evidenze e interpretazione scientifica.">Research, evidence surveillance and scientific interpretation.</h2>
+<div class="update-grid">
+<a class="update-card" href="research.html">
+<strong data-en="Research" data-it="Ricerca">Research</strong>
+<span data-en="Clinical &amp; translational programs" data-it="Programmi clinici e traslazionali">Clinical &amp; translational programs</span>
+<p data-en="Defined research domains spanning ketogenic metabolism, clinical nutrition, metabolic health, body composition and neurological applications." data-it="Aree di ricerca definite che comprendono metabolismo chetogenico, nutrizione clinica, salute metabolica, composizione corporea e applicazioni neurologiche.">Defined research domains spanning ketogenic metabolism, clinical nutrition, metabolic health, body composition and neurological applications.</p>
+</a>
+<a class="update-card" href="https://library.ketogenicresearch.org">
+<strong data-en="Evidence" data-it="Evidenze">Evidence</strong>
+<span data-en="Scientific Library &amp; surveillance" data-it="Biblioteca scientifica e sorveglianza">Scientific Library &amp; surveillance</span>
+<p data-en="Continuous PubMed surveillance, bibliographic verification and structured curation by clinical area and evidence type." data-it="Sorveglianza continua di PubMed, verifica bibliografica e curatela strutturata per area clinica e tipo di evidenza.">Continuous PubMed surveillance, bibliographic verification and structured curation by clinical area and evidence type.</p>
+</a>
+<a class="update-card" href="articles.html">
+<strong data-en="Interpretation" data-it="Interpretazione">Interpretation</strong>
+<span data-en="Research Articles" data-it="Articoli scientifici">Research Articles</span>
+<p data-en="Editorial analyses designed to explain what new findings mean, how strongly they can be interpreted and which questions remain open." data-it="Analisi editoriali pensate per spiegare cosa significano i nuovi risultati, quanto solidamente possono essere interpretati e quali questioni restano aperte.">Editorial analyses designed to explain what new findings mean, how strongly they can be interpreted and which questions remain open.</p>
+</a>
+</div>
+</div>
+</section>
+<section class="section whats-new"><div class="wrap"><p class="kicker" data-en="WHAT'S NEW" data-it="AGGIORNAMENTI">WHAT'S NEW</p><h2 data-en="Current evidence coverage" data-it="Aggiornamento delle evidenze">Current evidence coverage</h2><div class="update-grid"><a class="update-card" href="https://library.ketogenicresearch.org"><strong data-en="3922" data-it="3922">3922</strong><span data-en="Curated publications" data-it="Pubblicazioni curate">Curated publications</span><p data-en="Across 53 clinical areas in the Scientific Library." data-it="In 53 aree cliniche della Biblioteca Scientifica.">Across 53 clinical areas in the Scientific Library.</p></a><a class="update-card" href="latest.html"><strong data-en="90 days" data-it="90 giorni">90 days</strong><span data-en="Latest Evidence" data-it="Ultime pubblicazioni">Latest Evidence</span><p data-en="Rolling PubMed monitoring focused on directly relevant ketogenic research." data-it="Monitoraggio PubMed degli ultimi 90 giorni, focalizzato sulla letteratura direttamente pertinente alla ricerca chetogenica.">Rolling PubMed monitoring focused on directly relevant ketogenic research.</p></a><a class="update-card" href="methodology.html"><strong data-en="Method" data-it="Metodo">Method</strong><span data-en="Evidence assessment" data-it="Valutazione delle evidenze">Evidence assessment</span><p data-en="Selection criteria, study-design classification and bibliographic verification are documented in the scientific methodology." data-it="Criteri di selezione, classificazione del disegno degli studi e verifica bibliografica sono descritti nella metodologia scientifica.">Selection criteria, study-design classification and bibliographic verification are documented in the scientific methodology.</p></a></div></div></section>
+<section class="section scientific-activity" id="scientific-activity">
+<div class="wrap">
+<p class="kicker" data-en="SCIENTIFIC ACTIVITY" data-it="ATTIVITÀ SCIENTIFICA">SCIENTIFIC ACTIVITY</p>
+<h2 data-en="Research, evidence surveillance and interpretation." data-it="Ricerca, sorveglianza delle evidenze e interpretazione.">Research, evidence surveillance and interpretation.</h2>
+<div class="update-grid">
+<a class="update-card" href="research.html">
+<strong data-en="Research" data-it="Ricerca">Research</strong>
+<span data-en="Clinical and translational questions" data-it="Domande cliniche e traslazionali">Clinical and translational questions</span>
+<p data-en="Research areas organized around metabolic physiology, clinical nutrition and therapeutic applications of ketogenic strategies." data-it="Aree di ricerca organizzate attorno a fisiologia metabolica, nutrizione clinica e applicazioni terapeutiche delle strategie chetogeniche.">Research areas organized around metabolic physiology, clinical nutrition and therapeutic applications of ketogenic strategies.</p>
+</a>
+<a class="update-card" href="https://library.ketogenicresearch.org">
+<strong data-en="Evidence" data-it="Evidenze">Evidence</strong>
+<span data-en="Scientific Library" data-it="Biblioteca Scientifica">Scientific Library</span>
+<p data-en="A structured evidence map organized by clinical area and study design, with bibliographic identifiers verified against source records." data-it="Una mappa strutturata delle evidenze organizzata per area clinica e disegno dello studio, con identificatori bibliografici verificati sui record di origine.">A structured evidence map organized by clinical area and study design, with bibliographic identifiers verified against source records.</p>
+</a>
+<a class="update-card" href="latest.html">
+<strong data-en="Surveillance" data-it="Sorveglianza">Surveillance</strong>
+<span data-en="Latest Evidence" data-it="Ultime pubblicazioni">Latest Evidence</span>
+<p data-en="Continuous monitoring of newly indexed literature to keep the evidence landscape current." data-it="Monitoraggio continuo della letteratura di nuova indicizzazione per mantenere aggiornato il quadro delle evidenze.">Continuous monitoring of newly indexed literature to keep the evidence landscape current.</p>
+</a>
+<a class="update-card" href="articles.html">
+<strong data-en="Interpretation" data-it="Interpretazione">Interpretation</strong>
+<span data-en="Research Articles" data-it="Articoli scientifici">Research Articles</span>
+<p data-en="Scientific analyses focused on what studies add, what can reasonably be inferred and which questions remain open." data-it="Analisi scientifiche focalizzate su cosa aggiungono gli studi, cosa è ragionevole dedurre e quali questioni restano aperte.">Scientific analyses focused on what studies add, what can reasonably be inferred and which questions remain open.</p>
+</a>
+</div>
+</div>
+</section>
+<section class="focus-band">
+<div class="wrap focus-band-grid">
+<div><span>01</span><strong data-en="Metabolic Physiology" data-it="Fisiologia metabolica">Metabolic Physiology</strong></div>
+<div><span>02</span><strong data-en="Clinical Nutrition" data-it="Nutrizione clinica">Clinical Nutrition</strong></div>
+<div><span>03</span><strong data-en="Body Composition" data-it="Composizione corporea">Body Composition</strong></div>
+<div><span>04</span><strong data-en="Neurological Metabolism" data-it="Metabolismo neurologico">Neurological Metabolism</strong></div>
+</div>
+</section>
+<section class="home-overview">
+<div class="wrap overview-grid">
+<div>
+<p class="kicker" data-en="RESEARCH MISSION" data-it="MISSIONE DI RICERCA">RESEARCH MISSION</p>
+</div>
+<div>
+<h2 data-en="From evidence mapping to clinical interpretation." data-it="Dalla mappatura delle evidenze all'interpretazione clinica.">From evidence mapping to clinical interpretation.</h2>
+<p data-en="Ketogenic Research integrates systematic literature surveillance, structured evidence curation and scientific interpretation across metabolic health, clinical nutrition, body composition and neurological applications. The objective is not simply to collect publications, but to organize evidence according to study design, clinical relevance and translational value." data-it="Ketogenic Research integra sorveglianza sistematica della letteratura, curatela strutturata delle evidenze e interpretazione scientifica nei campi della salute metabolica, nutrizione clinica, composizione corporea e applicazioni neurologiche. L'obiettivo non è soltanto raccogliere pubblicazioni, ma organizzare le evidenze in base al disegno dello studio, alla rilevanza clinica e al valore traslazionale.">Ketogenic Research integrates systematic literature surveillance, structured evidence curation and scientific interpretation across metabolic health, clinical nutrition, body composition and neurological applications. The objective is not simply to collect publications, but to organize evidence according to study design, clinical relevance and translational value.</p>
+</div>
+</div>
+</section>
+<section class="section home-latest-evidence" id="home-latest-evidence">
+<div class="wrap">
+<div class="home-latest-heading">
+<div>
+<p class="kicker" data-en="LATEST EVIDENCE" data-it="ULTIME EVIDENZE">LATEST EVIDENCE</p>
+<h2 data-en="Recently indexed scientific literature" data-it="Letteratura scientifica indicizzata di recente">Recently indexed scientific literature</h2>
+<p data-en="A live view of recent PubMed-indexed publications in ketogenic and metabolic research." data-it="Una vista aggiornata delle pubblicazioni recenti indicizzate in PubMed nella ricerca chetogenica e metabolica.">
+         A live view of recent PubMed-indexed publications in ketogenic and metabolic research.
+      </p>
+</div>
+<div class="home-latest-meta">
+<strong id="homeLatestUpdated">—</strong>
+<span data-en="last literature update" data-it="ultimo aggiornamento">last literature update</span>
+</div>
+</div>
+<div class="home-latest-grid" id="homeLatestGrid">
+<p data-en="Loading recent evidence…" data-it="Caricamento delle evidenze recenti…">Loading recent evidence…</p>
+</div>
+<div class="home-latest-actions">
+<a class="btn-primary" data-en="View all Latest Evidence" data-it="Vedi tutte le ultime evidenze" href="latest.html">View all Latest Evidence</a>
+<a class="btn-secondary" data-en="Scientific Library" data-it="Biblioteca Scientifica" href="https://library.ketogenicresearch.org">Scientific Library</a>
+</div>
+</div>
+</section>
+<section class="section" id="scientific-direction-home">
+<div class="wrap">
+<div class="methodology-two-col">
+<div>
+<p class="kicker" data-en="SCIENTIFIC DIRECTION" data-it="DIREZIONE SCIENTIFICA">SCIENTIFIC DIRECTION</p>
+<h2 data-en="Scientific oversight and methodological direction" data-it="Supervisione scientifica e indirizzo metodologico">Scientific oversight and methodological direction</h2>
+<p data-en="Scientific direction provides methodological oversight, defines research priorities and ensures that evidence is interpreted in proportion to study design, clinical relevance and methodological limitations." data-it="La Direzione scientifica assicura la supervisione metodologica, definisce le priorità di ricerca e garantisce che le evidenze siano interpretate in proporzione al disegno dello studio, alla rilevanza clinica e ai limiti metodologici.">
+Scientific direction provides methodological oversight, defines research priorities and ensures that evidence is interpreted in proportion to study design, clinical relevance and methodological limitations.
+</p>
+<a class="btn-primary" data-en="Scientific Direction" data-it="Direzione scientifica" href="director.html">Scientific Direction</a>
+</div>
+<article class="method-card">
+<p class="kicker" data-en="SCIENTIFIC DIRECTOR" data-it="DIRETTORE SCIENTIFICO">SCIENTIFIC DIRECTOR</p>
+<h3>Marco Medeot</h3>
+<p class="role" data-en="Scientific Director - Ketogenic Research" data-it="Direttore Scientifico - Ketogenic Research">
+Scientific Director - Ketogenic Research
+</p>
+<p data-en="Scientific focus: ketogenic metabolic therapies, clinical nutrition, obesity, body composition, lean-mass preservation and metabolic physiology." data-it="Focus scientifico: terapie metaboliche chetogeniche, nutrizione clinica, obesità, composizione corporea, preservazione della massa magra e fisiologia metabolica.">
+Scientific focus: ketogenic metabolic therapies, clinical nutrition, obesity, body composition, lean-mass preservation and metabolic physiology.
+</p>
+<a class="btn-secondary" data-en="View profile and responsibilities" data-it="Profilo e responsabilità" href="director.html">View profile and responsibilities</a>
+</article>
+</div>
+</div>
+</section>
+</main>
+<section class="section" id="latest-evidence-home"><div class="wrap"><h2 data-en="Latest Evidence" data-it="Ultime pubblicazioni">Latest Evidence</h2><p data-en="Recent PubMed-indexed literature in ketogenic and metabolic research, presented separately from the curated Scientific Library." data-it="Letteratura recente indicizzata in PubMed sulla ricerca chetogenica e metabolica, presentata separatamente dalla Biblioteca Scientifica curata.">Recent PubMed-indexed literature in ketogenic and metabolic research, presented separately from the curated Scientific Library.</p><a class="btn-secondary" data-en="View latest publications" data-it="Vedi le ultime pubblicazioni" href="latest.html">View latest publications</a></div></section><footer><div class="wrap footer"><span>KETOGENIC RESEARCH</span><span>© 2026 Ketogenic Research</span></div></footer>
+<script src="script.js?v=70"></script>
+<script id="kr-home-latest-evidence">
+(function(){
+  function esc(value){
+    return String(value == null ? "" : value).replace(/[&<>"']/g,function(ch){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[ch];
+    });
+  }
 
-def clean(text: str) -> str:
-    # Keep source-note prose, but remove repeated standalone identifier lines.
-    text = re.sub(r'(?m)^PMID:\s*\S+\s{0,2}$', '', text)
-    text = re.sub(r'(?m)^DOI:\s*\S+\s{0,2}$', '', text)
-    text = re.sub(r'(?m)^PMCID:\s*(?:Not available|Non disponibile|\S+)\s*$', '', text)
-    text = re.sub(r'\n{3,}', '\n\n', text)
-    return text.strip() + '\n'
+  function currentLang(){
+    return document.documentElement.lang === "it" ? "it" : "en";
+  }
 
-def main():
-    changed = 0
-    for path in DRAFTS.glob("*.md"):
-        old = path.read_text(encoding="utf-8")
-        new = clean(old)
-        if new != old:
-            path.write_text(new, encoding="utf-8")
-            changed += 1
-            print(f"Cleaned {path.name}")
-    print(f"Drafts cleaned: {changed}")
+  function dateLabel(value){
+    if(!value) return "—";
+    var lang = currentLang() === "it" ? "it-IT" : "en-GB";
+    var d = new Date(value.slice(0,10) + "T00:00:00Z");
+    if(isNaN(d.getTime())) return value.slice(0,10);
+    return new Intl.DateTimeFormat(lang,{
+      year:"numeric",month:"short",day:"2-digit",timeZone:"UTC"
+    }).format(d);
+  }
 
-if __name__ == "__main__":
-    main()
+  function render(data){
+    var host = document.getElementById("homeLatestGrid");
+    if(!host) return;
+
+    var rows = (data.publications || []).slice(0,5);
+    var lang = currentLang();
+
+    if(!rows.length){
+      host.innerHTML = '<p>' + (lang === "it"
+        ? "Nessuna pubblicazione recente disponibile."
+        : "No recent publications available.") + '</p>';
+      return;
+    }
+
+    host.innerHTML = rows.map(function(p){
+      var evidence = lang === "it"
+        ? (p.evidence_type_it || p.evidence_type || "")
+        : (p.evidence_type || "");
+
+      var area = (p.areas || [])[0] || "";
+      var url = p.pubmed_url || p.doi_url || p.pmc_url || "latest.html";
+
+      return '<article class="home-latest-card">' +
+        '<div class="home-latest-card-top">' +
+          '<time>' + esc(dateLabel(p.date || "")) + '</time>' +
+          (evidence ? '<span class="home-latest-evidence-chip">' + esc(evidence) + '</span>' : '') +
+        '</div>' +
+        '<h3><a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(p.title || "") + '</a></h3>' +
+        '<p class="home-latest-journal">' + esc(p.journal || "") + (p.year ? " · " + esc(p.year) : "") + '</p>' +
+        (area ? '<p class="home-latest-area">' + esc(area) + '</p>' : '') +
+      '</article>';
+    }).join("");
+
+    var updated = document.getElementById("homeLatestUpdated");
+    if(updated){
+      updated.textContent = data.generated_at ? dateLabel(data.generated_at) : "—";
+    }
+  }
+
+  function load(){
+    if(!document.getElementById("homeLatestGrid")) return;
+    fetch("latest-publications.json?v=70",{cache:"no-store"})
+      .then(function(r){ if(!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(render)
+      .catch(function(){
+        var host = document.getElementById("homeLatestGrid");
+        if(host){
+          host.innerHTML = '<p>' + (currentLang() === "it"
+            ? "Le ultime evidenze non sono disponibili in questo momento."
+            : "Latest Evidence is temporarily unavailable.") + '</p>';
+        }
+      });
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", load);
+  }else{
+    load();
+  }
+
+  document.querySelectorAll("[data-lang]").forEach(function(btn){
+    btn.addEventListener("click",function(){ setTimeout(load,50); });
+  });
+})();
+</script>
+</body>
+</html>
