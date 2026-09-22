@@ -374,6 +374,47 @@ export default {
     headers.set("Cache-Control", "private, no-store");
     headers.set("X-Robots-Tag", "noindex, noarchive, nofollow");
 
+    if (isAdminSession(session, env) && assetResponse.ok) {
+      const contentType = assetResponse.headers.get("Content-Type") || "";
+      if (contentType.includes("text/html")) {
+        const rewritten = new HTMLRewriter()
+          .on("body", {
+            element(element) {
+              element.append(`
+                <a href="/admin"
+                   id="kr-admin-link"
+                   style="
+                     position:fixed;
+                     right:18px;
+                     bottom:18px;
+                     z-index:99999;
+                     padding:10px 14px;
+                     border-radius:9px;
+                     background:#0f6b7a;
+                     color:#fff;
+                     text-decoration:none;
+                     font:600 14px Arial,Helvetica,sans-serif;
+                     box-shadow:0 5px 18px rgba(0,0,0,.18);
+                   ">
+                  Amministrazione
+                </a>
+              `, { html: true });
+            }
+          })
+          .transform(assetResponse);
+
+        const rewrittenHeaders = new Headers(rewritten.headers);
+        rewrittenHeaders.set("Cache-Control", "private, no-store");
+        rewrittenHeaders.set("X-Robots-Tag", "noindex, noarchive, nofollow");
+
+        return new Response(rewritten.body, {
+          status: rewritten.status,
+          statusText: rewritten.statusText,
+          headers: rewrittenHeaders
+        });
+      }
+    }
+
     return new Response(assetResponse.body, {
       status: assetResponse.status,
       statusText: assetResponse.statusText,
