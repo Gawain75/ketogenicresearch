@@ -15,7 +15,7 @@ concurrency:
 jobs:
   update-literature:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 25
 
     steps:
       - name: Check out repository
@@ -55,7 +55,8 @@ jobs:
         env:
           NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
           NCBI_EMAIL: info@ketogenicresearch.org
-          YEAR_RECOVERY_BATCH_MAX: "600"
+          YEAR_RECOVERY_TITLE_MAX: "40"
+          YEAR_RECOVERY_RETRY_DAYS: "30"
         run: python scripts/repair_missing_publication_years.py
 
       - name: Rebuild Evidence Trends
