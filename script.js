@@ -828,3 +828,10 @@ window.addEventListener(
   openLibraryAreaFromHash
 );
 
+// Test reversibile: razionale meccanicistico Alzheimer
+if (document.getElementById('alzheimers-disease')) {
+  const krAlzheimerMechanisms = document.createElement('script');
+  krAlzheimerMechanisms.src = 'alzheimer-mechanisms.js?v=1';
+  krAlzheimerMechanisms.defer = true;
+  document.head.appendChild(krAlzheimerMechanisms);
+}
