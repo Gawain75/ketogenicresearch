@@ -322,17 +322,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
     if(error)return showStatus(error.message,true);
 
-    const {data:profile,error:profileError}=await client
-      .from('library_profiles')
-      .select('user_id')
-      .eq('user_id',data.user.id)
-      .maybeSingle();
-
-    if(profileError){
-      return showStatus((lang==='it'?'Errore profilo: ':'Profile error: ')+profileError.message,true);
+    let hasProfile=false;
+    try{
+      hasProfile=await ensureLibraryProfile(data.user);
+    }catch(err){
+      return showStatus((lang==='it'?'Errore profilo: ':'Profile error: ')+(err?.message||String(err)),true);
     }
 
-    if(!profile){
+    if(!hasProfile){
       enterProfileCompletion(data.user);
       return;
     }
@@ -345,6 +342,48 @@ window.addEventListener('DOMContentLoaded', () => {
 
     location.href='/library';
   });
+
+  function profileFromUserMetadata(user){
+    const m=user?.user_metadata||{};
+    const p=m.library_profile;
+    if(!p||typeof p!=='object')return null;
+    return {
+      country:p.country??null,
+      first_name:p.first_name??null,
+      last_name:p.last_name??null,
+      is_healthcare_professional:p.is_healthcare_professional??null,
+      profession:p.profession??null,
+      profession_other:p.profession_other??null,
+      region:p.region??null,
+      province:p.province??null,
+      city:p.city??null,
+      phone:p.phone??null
+    };
+  }
+
+  async function ensureLibraryProfile(user){
+    const {data:existing,error:readError}=await client
+      .from('library_profiles')
+      .select('user_id')
+      .eq('user_id',user.id)
+      .maybeSingle();
+    if(readError)throw readError;
+    if(existing)return true;
+
+    const metaProfile=profileFromUserMetadata(user);
+    if(!metaProfile)return false;
+
+    const m=user.user_metadata||{};
+    const {error:saveError}=await client.from('library_profiles').upsert({
+      user_id:user.id,
+      email:user.email,
+      ...metaProfile,
+      privacy_version:m.privacy_version||'2026-09',
+      privacy_accepted_at:m.privacy_accepted_at||new Date().toISOString()
+    });
+    if(saveError)throw saveError;
+    return true;
+  }
 
   document.querySelectorAll('input[name="hcp"]').forEach(r=>r.addEventListener('change',()=>{
     const yes=document.querySelector('input[name="hcp"]:checked')?.value==='yes';
@@ -420,7 +459,15 @@ window.addEventListener('DOMContentLoaded', () => {
     const password=$('registerPassword').value;
     const {data,error}=await client.auth.signUp({
       email,password,
-      options:{emailRedirectTo:`${cfg.siteUrl}/library-access.html?confirmed=1`,data:{registration_source:'scientific_library'}}
+      options:{
+        emailRedirectTo:`${cfg.siteUrl}/library-access.html?confirmed=1`,
+        data:{
+          registration_source:'scientific_library',
+          library_profile:profile,
+          privacy_version:'2026-09',
+          privacy_accepted_at:new Date().toISOString()
+        }
+      }
     });
     if(error)return showStatus(error.message,true);
 
@@ -445,41 +492,45 @@ window.addEventListener('DOMContentLoaded', () => {
     const {data}=await client.auth.getSession();
     if(!data.session)return;
 
-    const raw=localStorage.getItem('kr_pending_profile');
+    try{
+      let hasProfile=await ensureLibraryProfile(data.session.user);
 
-    if(raw){
-      let pending;
-      try{
-        pending=JSON.parse(raw);
-      }catch{
-        return showStatus(lang==='it'?'Dati di registrazione non validi.':'Invalid registration data.',true);
+      // Backward compatibility for registrations made before profile metadata was added.
+      if(!hasProfile){
+        const raw=localStorage.getItem('kr_pending_profile');
+        if(raw){
+          const pending=JSON.parse(raw);
+          const {error:pErr}=await client.from('library_profiles').upsert({
+            user_id:data.session.user.id,
+            email:pending.email||data.session.user.email,
+            ...pending.profile,
+            privacy_version:'2026-09',
+            privacy_accepted_at:new Date().toISOString()
+          });
+          if(pErr)throw pErr;
+          localStorage.removeItem('kr_pending_profile');
+          hasProfile=true;
+        }
       }
 
-      const {error:pErr}=await client.from('library_profiles').upsert({
-        user_id:data.session.user.id,
-        email:pending.email||data.session.user.email,
-        ...pending.profile,
-        privacy_version:'2026-09',
-        privacy_accepted_at:new Date().toISOString()
-      });
-
-      if(pErr){
-        showStatus((lang==='it'?'Errore salvataggio profilo: ':'Profile save error: ')+pErr.message,true);
+      if(!hasProfile){
+        if(new URLSearchParams(location.search).get('confirmed')==='1'){
+          enterProfileCompletion(data.session.user);
+        }
         return;
       }
 
-      localStorage.removeItem('kr_pending_profile');
-    }
+      try{
+        await syncServerSession(data.session);
+      }catch(err){
+        return showStatus((lang==='it'?'Errore sessione: ':'Session error: ')+(err?.message||String(err)),true);
+      }
 
-    try{
-      await syncServerSession(data.session);
+      if(new URLSearchParams(location.search).get('confirmed')==='1'){
+        location.href='/library';
+      }
     }catch(err){
-      showStatus((lang==='it'?'Errore sessione: ':'Session error: ')+(err?.message||String(err)),true);
-      return;
-    }
-
-    if(new URLSearchParams(location.search).get('confirmed')==='1'){
-      location.href='/library';
+      showStatus((lang==='it'?'Errore salvataggio profilo: ':'Profile save error: ')+(err?.message||String(err)),true);
     }
   }
 
