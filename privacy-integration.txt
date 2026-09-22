@@ -1,0 +1,71 @@
+KETOGENIC RESEARCH SCIENTIFIC LIBRARY
+Privacy integration notes — v2026-09-22
+
+1) Registration checkbox
+Replace wording such as:
+  "Acconsento al trattamento dei dati personali"
+or:
+  "Ho letto l'informativa sulla privacy"
+
+with:
+  <label>
+    <input type="checkbox" id="privacy_ack" name="privacy_ack" required>
+    Dichiaro di aver preso visione dell’<a href="/privacy.html" target="_blank" rel="noopener">Informativa Privacy</a>.
+  </label>
+
+This checkbox documents acknowledgement/availability of the notice.
+It is NOT marketing consent.
+
+2) English registration wording
+  <label>
+    <input type="checkbox" id="privacy_ack" name="privacy_ack" required>
+    I acknowledge that I have read the <a href="/privacy-en.html" target="_blank" rel="noopener">Privacy Notice</a>.
+  </label>
+
+3) Privacy version
+Save the following version together with the profile/registration record:
+  2026-09-22
+
+Suggested field:
+  privacy_version = "2026-09-22"
+
+If you also keep an acknowledgement timestamp:
+  privacy_acknowledged_at = current timestamp
+
+Do not store a field called "privacy_consent" for account creation, because the legal basis
+for the account is the requested service, not consent.
+
+4) Future newsletter
+Use a SEPARATE, optional and unticked checkbox, for example:
+  <label>
+    <input type="checkbox" id="newsletter_consent" name="newsletter_consent">
+    Desidero ricevere via email aggiornamenti e comunicazioni dalla Ketogenic Research Scientific Library.
+  </label>
+
+Store newsletter consent independently from privacy acknowledgement, with its own timestamp
+and the wording/version shown when consent was collected.
+
+5) Footer
+Add a permanent link:
+  <a href="/privacy.html">Privacy</a>
+
+If the interface has a language selector:
+  IT -> /privacy.html
+  EN -> /privacy-en.html
+
+6) Current technical cookies
+The current Worker uses:
+  kr_access_token
+  kr_refresh_token
+
+They are authentication/session cookies with Secure and SameSite=Lax.
+With the current setup and in the absence of non-essential analytics/advertising trackers,
+do not add a consent banner merely for these strictly necessary cookies.
+
+7) Important deployment check
+Before publishing, verify:
+  - the Supabase project region actually selected in the dashboard;
+  - that no Google Analytics, Meta Pixel, Hotjar, advertising or other non-essential trackers
+    are loaded elsewhere in the site;
+  - that the Supabase and Cloudflare contractual/DPA settings applicable to the account are retained;
+  - that the registration form fields match the categories described in the notice.
