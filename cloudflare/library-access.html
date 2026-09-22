@@ -322,12 +322,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     if(error)return showStatus(error.message,true);
 
-    try{
-      await syncServerSession(data.session);
-    }catch(err){
-      return showStatus((lang==='it'?'Errore sessione: ':'Session error: ')+(err?.message||String(err)),true);
-    }
-
     const {data:profile,error:profileError}=await client
       .from('library_profiles')
       .select('user_id')
@@ -343,7 +337,13 @@ window.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    location.href='/library.html';
+    try{
+      await syncServerSession(data.session);
+    }catch(err){
+      return showStatus((lang==='it'?'Errore sessione: ':'Session error: ')+(err?.message||String(err)),true);
+    }
+
+    location.href='/library';
   });
 
   document.querySelectorAll('input[name="hcp"]').forEach(r=>r.addEventListener('change',()=>{
@@ -401,6 +401,18 @@ window.addEventListener('DOMContentLoaded', () => {
         privacy_accepted_at:new Date().toISOString()
       });
       if(pErr)return showStatus((lang==='it'?'Errore salvataggio profilo: ':'Profile save error: ')+pErr.message,true);
+
+      const {data:sessionData}=await client.auth.getSession();
+      if(!sessionData?.session){
+        return showStatus(lang==='it'?'Sessione non valida. Accedi di nuovo.':'Invalid session. Please sign in again.',true);
+      }
+
+      try{
+        await syncServerSession(sessionData.session);
+      }catch(err){
+        return showStatus((lang==='it'?'Errore sessione: ':'Session error: ')+(err?.message||String(err)),true);
+      }
+
       location.href='/library';
       return;
     }
@@ -432,24 +444,43 @@ window.addEventListener('DOMContentLoaded', () => {
   async function finalizePending(){
     const {data}=await client.auth.getSession();
     if(!data.session)return;
+
+    const raw=localStorage.getItem('kr_pending_profile');
+
+    if(raw){
+      let pending;
+      try{
+        pending=JSON.parse(raw);
+      }catch{
+        return showStatus(lang==='it'?'Dati di registrazione non validi.':'Invalid registration data.',true);
+      }
+
+      const {error:pErr}=await client.from('library_profiles').upsert({
+        user_id:data.session.user.id,
+        email:pending.email||data.session.user.email,
+        ...pending.profile,
+        privacy_version:'2026-09',
+        privacy_accepted_at:new Date().toISOString()
+      });
+
+      if(pErr){
+        showStatus((lang==='it'?'Errore salvataggio profilo: ':'Profile save error: ')+pErr.message,true);
+        return;
+      }
+
+      localStorage.removeItem('kr_pending_profile');
+    }
+
     try{
       await syncServerSession(data.session);
     }catch(err){
       showStatus((lang==='it'?'Errore sessione: ':'Session error: ')+(err?.message||String(err)),true);
       return;
     }
-    const raw=localStorage.getItem('kr_pending_profile');
-    if(raw){
-      try{
-        const pending=JSON.parse(raw);
-        await client.from('library_profiles').upsert({
-          user_id:data.session.user.id,email:pending.email||data.session.user.email,...pending.profile,
-          privacy_version:'2026-09',privacy_accepted_at:new Date().toISOString()
-        });
-        localStorage.removeItem('kr_pending_profile');
-      }catch{}
+
+    if(new URLSearchParams(location.search).get('confirmed')==='1'){
+      location.href='/library';
     }
-    if(new URLSearchParams(location.search).get('confirmed')==='1')location.href='/library';
   }
 
   setLang(lang);
