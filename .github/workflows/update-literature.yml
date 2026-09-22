@@ -58,7 +58,10 @@ jobs:
         run: |
           git config user.name "Ketogenic Research Bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add latest-publications.json review-queue.json library.html index.html script.js evidence-trends.html data/evidence-trends.json
+
+          # Stage every generated change so the working tree is clean before rebase.
+          git add -A
+
           if git diff --cached --quiet; then
             echo "No literature changes."
           else
