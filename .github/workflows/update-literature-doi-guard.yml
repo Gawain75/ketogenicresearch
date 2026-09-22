@@ -39,7 +39,7 @@ jobs:
           WINDOW_DAYS: "90"
           CURATION_WINDOW_DAYS: "365"
           MAX_RECORDS: "100"
-          CURATION_MAX_RECORDS: "500"
+          CURATION_MAX_RECORDS: "2000"
         run: python scripts/update_latest.py
 
       - name: Promote only PubMed-verified publications
