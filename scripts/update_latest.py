@@ -21,7 +21,7 @@ API_KEY = os.getenv("NCBI_API_KEY", "")
 WINDOW_DAYS = int(os.getenv("WINDOW_DAYS", "90"))
 CURATION_WINDOW_DAYS = int(os.getenv("CURATION_WINDOW_DAYS", "365"))
 MAX_RECORDS = int(os.getenv("MAX_RECORDS", "100"))
-CURATION_MAX_RECORDS = int(os.getenv("CURATION_MAX_RECORDS", "500"))
+CURATION_MAX_RECORDS = int(os.getenv("CURATION_MAX_RECORDS", "2000"))
 
 BASE = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 
