@@ -945,11 +945,72 @@ def main():
         .isoformat()
     )
 
+    # Keep two dates with different meanings:
+    # - verified_at: last successful evidence check (every successful run)
+    # - content_updated_at: last time the visible Latest Evidence dataset changed
+    previous_latest = {}
+    if LATEST_OUT.exists():
+        try:
+            previous_latest = json.loads(
+                LATEST_OUT.read_text(
+                    encoding="utf-8"
+                )
+            )
+        except (
+            OSError,
+            json.JSONDecodeError,
+        ):
+            previous_latest = {}
+
+    previous_publications = (
+        previous_latest.get(
+            "publications"
+        )
+        or []
+    )
+    content_changed = (
+        previous_publications
+        != latest
+        or int(
+            previous_latest.get(
+                "window_days",
+                WINDOW_DAYS,
+            )
+            or WINDOW_DAYS
+        )
+        != WINDOW_DAYS
+        or int(
+            previous_latest.get(
+                "max_records",
+                MAX_RECORDS,
+            )
+            or MAX_RECORDS
+        )
+        != MAX_RECORDS
+    )
+
+    if content_changed:
+        content_updated_at = generated
+    else:
+        content_updated_at = (
+            previous_latest.get(
+                "content_updated_at"
+            )
+            or previous_latest.get(
+                "generated_at"
+            )
+            or generated
+        )
+
     LATEST_OUT.write_text(
         json.dumps(
             {
                 "generated_at":
                     generated,
+                "verified_at":
+                    generated,
+                "content_updated_at":
+                    content_updated_at,
                 "window_days":
                     WINDOW_DAYS,
                 "max_records":
