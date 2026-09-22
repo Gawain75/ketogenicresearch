@@ -589,7 +589,7 @@ async function loadLatestEvidence() {
 
   try {
     const response = await fetch(
-      'latest-publications.json?v=71',
+      'latest-publications.json?v=72',
       { cache: 'no-store' }
     );
 
@@ -711,7 +711,7 @@ async function syncLiteratureUpdateDate() {
 
   try {
     const response = await fetch(
-      'latest-publications.json?v=71',
+      'latest-publications.json?v=72',
       { cache: 'no-store' }
     );
 

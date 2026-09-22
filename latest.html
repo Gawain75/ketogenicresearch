@@ -28,6 +28,59 @@
   "isPartOf":{"@type":"WebSite","name":"Ketogenic Research Hub","url":"https://ketogenicresearch.org/"}
 }
 </script>
+
+<style id="latest-date-meta-style">
+/* Compact service metadata: dates are secondary to the two main KPIs */
+.latest-status-strip{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  margin-bottom:10px;
+}
+.latest-date-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 24px;
+  align-items:center;
+  margin:0 0 20px;
+  padding:10px 14px;
+  border:1px solid var(--line,#d9e2ec);
+  border-radius:12px;
+  background:rgba(255,255,255,.58);
+}
+.latest-date-meta>div{
+  display:flex;
+  align-items:baseline;
+  gap:7px;
+  min-width:0;
+}
+.latest-date-meta span{
+  font-size:.82rem;
+  color:var(--muted,#637484);
+}
+.latest-date-meta strong{
+  font-size:.9rem;
+  line-height:1.25;
+  color:var(--ink,#173b5c);
+  white-space:nowrap;
+}
+@media(max-width:760px){
+  .latest-status-strip{grid-template-columns:1fr 1fr;gap:10px}
+  .latest-status-strip>div{padding:13px}
+  .latest-status-strip strong{font-size:1.3rem}
+  .latest-date-meta{
+    display:grid;
+    gap:5px;
+    padding:9px 12px;
+    margin-bottom:18px;
+  }
+  .latest-date-meta>div{
+    justify-content:space-between;
+    gap:12px;
+  }
+  .latest-date-meta span{font-size:.78rem}
+  .latest-date-meta strong{font-size:.84rem}
+}
+</style>
+
 </head>
 <body>
 <header class="header">
@@ -112,8 +165,10 @@
 <div class="latest-status-strip">
 <div><strong id="latestCount">—</strong><span data-en="recent records" data-it="record recenti">recent records</span></div>
 <div><strong>90</strong><span data-en="day monitoring window" data-it="giorni monitorati">day monitoring window</span></div>
-<div><strong id="latestVerified">—</strong><span data-en="last evidence verification" data-it="ultima verifica delle evidenze">last evidence verification</span></div>
-<div><strong id="latestContentUpdated">—</strong><span data-en="last content update" data-it="ultimo aggiornamento dei contenuti">last content update</span></div>
+</div>
+<div class="latest-date-meta" aria-label="Evidence update dates">
+<div><span data-en="Last evidence verification" data-it="Ultima verifica delle evidenze">Last evidence verification</span><strong id="latestVerified">—</strong></div>
+<div><span data-en="Last content update" data-it="Ultimo aggiornamento dei contenuti">Last content update</span><strong id="latestContentUpdated">—</strong></div>
 </div>
 <div class="latest-method-note">
 <p data-en="Inclusion in this section does not imply endorsement, guideline status, or inclusion in the curated Scientific Library. Records should be interpreted according to study design, population and evidence quality." data-it="L’inclusione in questa sezione non implica approvazione, status di linea guida o inclusione nella Biblioteca Scientifica curata. I lavori devono essere interpretati in base al disegno dello studio, alla popolazione e alla qualità dell’evidenza.">Inclusion in this section does not imply endorsement, guideline status, or inclusion in the curated Scientific Library. Records should be interpreted according to study design, population and evidence quality.</p>
@@ -136,7 +191,7 @@
 </section>
 </main>
 <footer><div class="wrap footer"><span>KETOGENIC RESEARCH HUB</span><nav class="footer-links" aria-label="Footer"><a href="privacy.html" data-en="Privacy" data-it="Privacy">Privacy</a><a href="contact.html" data-en="Contact" data-it="Contatti">Contact</a><a href="methodology.html" data-en="Methodology" data-it="Metodologia">Methodology</a></nav><span>© 2026 Ketogenic Research Hub</span></div></footer>
-<script src="script.js?v=71"></script>
+<script src="script.js?v=72"></script>
 
 </body>
 </html>
