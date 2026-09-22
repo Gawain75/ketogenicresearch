@@ -47,3 +47,15 @@ jobs:
 
       - name: Auto-promote eligible publications
         run: python scripts/promote_auto.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add latest-publications.json review-queue.json library.html index.html script.js
+          if git diff --cached --quiet; then
+            echo "No literature changes."
+          else
+            git commit -m "Update, categorize and curate scientific literature"
+            git push
+          fi
