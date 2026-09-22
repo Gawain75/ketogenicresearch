@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T10:51:40+00:00",
+  "generated_at": "2026-09-22T04:46:41+00:00",
   "current_year": 2026,
   "previous_year": 2025,
   "scope_note": {
@@ -7,8 +7,8 @@
     "it": "I conteggi si riferiscono alle pubblicazioni uniche indicizzate nella Biblioteca Scientifica di Ketogenic Research, non a tutte le pubblicazioni esistenti a livello mondiale."
   },
   "global": {
-    "total_unique": 3922,
-    "known_year": 3588,
+    "total_unique": 3923,
+    "known_year": 3589,
     "unknown_year": 334,
     "first_year": 1921,
     "by_year": {
@@ -79,7 +79,7 @@
       "2023": 289,
       "2024": 348,
       "2025": 351,
-      "2026": 300
+      "2026": 301
     }
   },
   "areas": [
@@ -737,6 +737,23 @@
         "2014": 1,
         "2017": 1,
         "2024": 2
+      }
+    },
+    {
+      "slug": "glp1-keto-metabolic-endocrine",
+      "label": {
+        "en": "GLP-1RA + Ketogenic Metabolism",
+        "it": "GLP-1RA + metabolismo chetogenico"
+      },
+      "total_unique": 13,
+      "known_year": 13,
+      "unknown_year": 0,
+      "by_year": {
+        "2017": 1,
+        "2021": 1,
+        "2024": 1,
+        "2025": 5,
+        "2026": 5
       }
     },
     {
