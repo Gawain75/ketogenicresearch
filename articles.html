@@ -22,7 +22,6 @@
 <link href="articles.css?v=1" rel="stylesheet">
 </head>
 <body class="article-index-page">
-<!-- KR_ARTICLES_HEADER_RESTORED_V1 -->
 <header class="header">
 <div class="wrap nav">
 <a aria-label="Ketogenic Research" class="brand" href="index.html">
@@ -64,6 +63,20 @@
     </p>
   </div>
   <div class="article-list">
+<article class="article-card">
+  <a href="articles/2026-09-42763564-managing-drug-resistant-epilepsy-and-severe-feeding-difficulties-in-miller-dieke.html">
+    <div class="article-card-language active" data-card-lang="en">
+      <span class="article-card-type">Research Analysis</span>
+      <h2>Enteral Ketogenic Diet in an Infant with Miller‑Dieker Syndrome and Drug‑Resistant Epilepsy</h2>
+      <p>September 18, 2026 · Case reports in pediatrics</p>
+    </div>
+    <div class="article-card-language" data-card-lang="it">
+      <span class="article-card-type">Analisi di ricerca</span>
+      <h2>Dieta chetogenica enterale in un neonato con sindrome di Miller‑Dieker e epilessia farmacoresistente</h2>
+      <p>18 settembre 2026 · Case reports in pediatrics</p>
+    </div>
+  </a>
+</article>
 <article class="article-card">
   <a href="articles/2026-09-42760380-precision-diagnosis-guides-ketogenic-diet-therapy-in-inherited-metabolic-epileps.html">
     <div class="article-card-language active" data-card-lang="en">
@@ -164,7 +177,6 @@
 </article></div>
 </main>
 
-<script src="script.js"></script>
 <script>
 (function(){
   const buttons=[...document.querySelectorAll('[data-lang]')];
@@ -183,6 +195,24 @@
   buttons.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
   let initial='en';
   try{if(localStorage.getItem('kr-lang')==='it') initial='it'}catch(e){}
+
+  const menu=document.querySelector('.header .menu');
+  const nav=document.querySelector('.header nav');
+  if(menu && nav){
+    menu.setAttribute('aria-expanded','false');
+    menu.addEventListener('click',event=>{
+      event.preventDefault();
+      event.stopPropagation();
+      const open=nav.classList.toggle('open');
+      menu.setAttribute('aria-expanded',open?'true':'false');
+    });
+    nav.querySelectorAll('a').forEach(link=>{
+      link.addEventListener('click',()=>{
+        nav.classList.remove('open');
+        menu.setAttribute('aria-expanded','false');
+      });
+    });
+  }
   setLang(initial);
 })();
 </script>
