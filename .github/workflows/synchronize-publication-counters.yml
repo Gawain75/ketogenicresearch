@@ -47,6 +47,10 @@ jobs:
 
           git add index.html library.html
 
+          # Discard any other tracked changes produced incidentally by the script.
+          # The staged versions of index.html and library.html are preserved.
+          git restore --worktree .
+
           if git diff --cached --quiet; then
             echo "Counters already synchronized."
             exit 0
