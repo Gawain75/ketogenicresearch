@@ -131,6 +131,88 @@ async function fetchProfile(accessToken, userId) {
   return Array.isArray(rows) && rows.length ? rows[0] : null;
 }
 
+function isAdminSession(session, env) {
+  if (!session?.email || !env.ADMIN_EMAIL) return false;
+  return session.email.trim().toLowerCase() === env.ADMIN_EMAIL.trim().toLowerCase();
+}
+
+function adminPageHtml() {
+  return `<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>Amministrazione Library — Ketogenic Research</title>
+  <style>
+    :root{font-family:Arial,Helvetica,sans-serif;color:#0b2d3b;background:#f5f9fb}
+    *{box-sizing:border-box}
+    body{margin:0}
+    .wrap{max-width:760px;margin:70px auto;padding:24px}
+    .card{background:#fff;border:1px solid #d8e5ea;border-radius:16px;padding:32px;box-shadow:0 10px 30px rgba(11,45,59,.08)}
+    h1{margin:0 0 12px;font-size:28px}
+    p{line-height:1.55;color:#49636e}
+    .btn{display:inline-block;margin-top:18px;padding:14px 22px;border-radius:10px;background:#0f6b7a;color:#fff;text-decoration:none;font-weight:700}
+    .back{display:inline-block;margin-top:22px;color:#0f6b7a;text-decoration:none}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <h1>Amministrazione Scientific Library</h1>
+      <p>Esporta in Excel tutti gli utenti registrati presenti in <code>library_profiles</code>.</p>
+      <a class="btn" href="/admin/export-users">Esporta utenti in Excel</a><br>
+      <a class="back" href="/library">← Torna alla Library</a>
+    </section>
+  </main>
+</body>
+</html>`;
+}
+
+async function exportUsersXlsx(env) {
+  if (!env.ADMIN_EXPORT_SECRET) {
+    return new Response("ADMIN_EXPORT_SECRET non configurato su Cloudflare.", {
+      status: 500,
+      headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" }
+    });
+  }
+
+  const upstream = await fetch(`${SUPABASE_URL}/functions/v1/export-library-users`, {
+    method: "GET",
+    headers: {
+      "x-admin-export-secret": env.ADMIN_EXPORT_SECRET,
+      "Accept": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    }
+  });
+
+  if (!upstream.ok) {
+    const detail = await upstream.text().catch(() => "");
+    return new Response(
+      `Export non riuscito (${upstream.status}).${detail ? `\n${detail}` : ""}`,
+      {
+        status: 502,
+        headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" }
+      }
+    );
+  }
+
+  const headers = new Headers();
+  headers.set(
+    "Content-Type",
+    upstream.headers.get("Content-Type") ||
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+  );
+  headers.set(
+    "Content-Disposition",
+    upstream.headers.get("Content-Disposition") ||
+      'attachment; filename="ketogenic-research-utenti.xlsx"'
+  );
+  headers.set("Cache-Control", "private, no-store");
+  headers.set("X-Robots-Tag", "noindex, noarchive, nofollow");
+
+  return new Response(upstream.body, { status: 200, headers });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -234,6 +316,42 @@ export default {
       headers.append("Set-Cookie", clearCookie("kr_access_token"));
       headers.append("Set-Cookie", clearCookie("kr_refresh_token"));
       return new Response(JSON.stringify({ ok: true }), { status: 200, headers });
+    }
+
+    if (
+      (url.pathname === "/admin" || url.pathname === "/admin/" || url.pathname === "/admin/export-users") &&
+      request.method === "GET"
+    ) {
+      const cookies = parseCookies(request);
+      const session = await verifySession(cookies.kr_session || "", env.SESSION_SECRET);
+
+      if (!session) {
+        return redirectToLogin(request, "login");
+      }
+
+      if (!isAdminSession(session, env)) {
+        return new Response("Accesso non autorizzato.", {
+          status: 403,
+          headers: {
+            "Content-Type": "text/plain; charset=utf-8",
+            "Cache-Control": "no-store",
+            "X-Robots-Tag": "noindex, noarchive, nofollow"
+          }
+        });
+      }
+
+      if (url.pathname === "/admin/export-users") {
+        return exportUsersXlsx(env);
+      }
+
+      return new Response(adminPageHtml(), {
+        status: 200,
+        headers: {
+          "Content-Type": "text/html; charset=utf-8",
+          "Cache-Control": "private, no-store",
+          "X-Robots-Tag": "noindex, noarchive, nofollow"
+        }
+      });
     }
 
     const protectedPath =
