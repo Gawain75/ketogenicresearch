@@ -48,12 +48,25 @@ def paper_key(article):
 
 def paper_year(article):
     raw = (article.get("data-year") or "").strip()
-    if re.fullmatch(r"(19|20)\d{2}", raw):
+    if re.fullmatch(r"(18|19|20)\d{2}", raw):
         y = int(raw)
-        if 1900 <= y <= CURRENT_YEAR: return y
-    text = article.get_text(" ", strip=True)
-    m = re.search(r"\b(?:Year|Published|Publication year)\s*:?\s*((?:19|20)\d{2})\b", text, re.I)
-    return int(m.group(1)) if m else None
+        if 1800 <= y <= CURRENT_YEAR:
+            return y
+
+    # Conservative fallback: inspect bibliographic paragraphs only.
+    # Never infer a publication year from the paper title.
+    for p in article.find_all("p", recursive=False):
+        text = p.get_text(" ", strip=True)
+        for pattern in (
+            r"\b(?:Year|Published|Publication date|Publication year)\s*:?\s*((?:18|19|20)\d{2})\b",
+            r"(?:^|[·.;,(]\s*)((?:18|19|20)\d{2})(?:[-/]\d{1,2}(?:[-/]\d{1,2})?)?(?=\s|[;:.,)])",
+        ):
+            m = re.search(pattern, text, re.I)
+            if m:
+                y = int(m.group(1))
+                if 1800 <= y <= CURRENT_YEAR:
+                    return y
+    return None
 
 def area_label(folder):
     s = folder.find("summary")
@@ -106,8 +119,8 @@ def build_dataset():
         "generated_at":datetime.now().astimezone().isoformat(timespec="seconds"),
         "current_year":CURRENT_YEAR, "previous_year":CURRENT_YEAR-1,
         "scope_note":{
-            "en":"Counts refer to unique publications indexed in the Ketogenic Research Hub Scientific Library, not to all publications worldwide.",
-            "it":"I conteggi si riferiscono alle pubblicazioni uniche indicizzate nella Biblioteca Scientifica di Ketogenic Research Hub, non a tutte le pubblicazioni esistenti a livello mondiale."
+            "en":"Counts refer to unique publications indexed in the Ketogenic Research Scientific Library, not to all publications worldwide.",
+            "it":"I conteggi si riferiscono alle pubblicazioni uniche indicizzate nella Biblioteca Scientifica di Ketogenic Research, non a tutte le pubblicazioni esistenti a livello mondiale."
         },
         "global":{
             "total_unique":len(global_papers),"known_year":len(global_papers)-gu,
@@ -121,12 +134,12 @@ PAGE_HTML = r'''<!DOCTYPE html>
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>Evidence Trends | Ketogenic Research Hub</title>
-<meta content="Explore publication trends over time across the Ketogenic Research Hub Scientific Library, globally and by clinical area." name="description"/>
+<title>Evidence Trends | Ketogenic Research</title>
+<meta content="Explore publication trends over time across the Ketogenic Research Scientific Library, globally and by clinical area." name="description"/>
 <link href="styles.css?v=70" rel="stylesheet"/>
 <link href="https://ketogenicresearch.org/evidence-trends.html" rel="canonical"/>
-<meta content="Evidence Trends | Ketogenic Research Hub" name="kr-title-en"/>
-<meta content="Andamento delle evidenze | Ketogenic Research Hub" name="kr-title-it"/>
+<meta content="Evidence Trends | Ketogenic Research" name="kr-title-en"/>
+<meta content="Andamento delle evidenze | Ketogenic Research" name="kr-title-it"/>
 <style>
 .trends-controls{display:grid;grid-template-columns:minmax(220px,1fr) minmax(120px,.35fr) minmax(120px,.35fr);gap:12px;align-items:end;margin:24px 0}
 .trends-controls label{display:grid;gap:7px;font-weight:700}.trends-controls select{width:100%;padding:12px 14px;border:1px solid #cbd7e3;border-radius:10px;background:#fff;font:inherit}
@@ -206,26 +219,8 @@ svg.evidence-trends-svg {
 </head>
 <body>
 <header class="header"><div class="wrap nav">
-<a aria-label="Ketogenic Research Hub" class="brand" href="index.html"><img alt="Ketogenic Research Hub" class="site-logo" src="logo-ketogenic-research.png"/></a>
-<nav class="site-nav" aria-label="Primary navigation">
-  <a href="index.html">Home</a>
-  <a data-en="Research" data-it="Ricerca" href="research.html">Research</a>
-  <a data-en="Scientific Library" data-it="Biblioteca Scientifica" href="https://library.ketogenicresearch.org/library">Scientific Library</a>
-  <a data-en="Latest Evidence" data-it="Ultime evidenze" href="latest.html">Latest Evidence</a>
-  <a data-en="Evidence Trends" data-it="Andamento evidenze" href="evidence-trends.html">Evidence Trends</a>
-  <a data-en="Articles" data-it="Articoli" href="articles.html">Articles</a>
-  <a data-en="Scientific Direction" data-it="Direzione scientifica" href="director.html">Scientific Direction</a>
-  <details class="nav-more">
-    <summary>
-      <span data-en="More" data-it="Altro">More</span>
-      <span class="nav-caret" aria-hidden="true">&#9662;</span>
-    </summary>
-    <div class="nav-submenu">
-      <a data-en="Methodology" data-it="Metodologia" href="methodology.html">Methodology</a>
-      <a data-en="Contact" data-it="Contatti" href="contact.html">Contact</a>
-    </div>
-  </details>
-</nav>
+<a aria-label="Ketogenic Research" class="brand" href="index.html"><img alt="Ketogenic Research" class="site-logo" src="logo-ketogenic-research.png"/></a>
+<nav><a href="index.html">Home</a><a data-en="Research" data-it="Ricerca" href="research.html">Research</a><a data-en="Scientific Library" data-it="Biblioteca Scientifica" href="https://library.ketogenicresearch.org/library">Scientific Library</a><a data-en="Latest Evidence" data-it="Ultime pubblicazioni" href="latest.html">Latest Evidence</a><a data-en="Evidence Trends" data-it="Andamento evidenze" href="evidence-trends.html">Evidence Trends</a><a data-en="Articles" data-it="Articoli" href="articles.html">Articles</a><a data-en="Methodology" data-it="Metodologia" href="methodology.html">Methodology</a><a data-en="Scientific Direction" data-it="Direzione scientifica" href="director.html">Scientific Direction</a><a data-en="Contact" data-it="Contatti" href="contact.html">Contact</a></nav>
 <div class="actions"><div class="lang"><button class="active" data-lang="en">EN</button><button data-lang="it">IT</button></div><button aria-label="Menu" class="menu">☰</button></div>
 </div></header>
 <main>
@@ -237,7 +232,7 @@ svg.evidence-trends-svg {
 </div></section>
 <section class="section"><div class="wrap"><p class="kicker" data-en="AREAS AT A GLANCE" data-it="AREE IN SINTESI">AREAS AT A GLANCE</p><h2 data-en="Publication volume by clinical area" data-it="Volume delle pubblicazioni per area clinica">Publication volume by clinical area</h2><div style="overflow-x:auto"><table class="area-table"><thead><tr><th data-en="Area" data-it="Area">Area</th><th data-en="Total" data-it="Totale">Total</th><th id="tableCurrentHead"></th><th id="tablePreviousHead"></th></tr></thead><tbody id="areaTable"></tbody></table></div></div></section>
 </main>
-<footer><div class="wrap footer"><span>KETOGENIC RESEARCH HUB</span><nav class="footer-links" aria-label="Footer"><a href="privacy.html" data-en="Privacy" data-it="Privacy">Privacy</a><a href="contact.html" data-en="Contact" data-it="Contatti">Contact</a><a href="methodology.html" data-en="Methodology" data-it="Metodologia">Methodology</a></nav><span>© 2026 Ketogenic Research Hub</span></div></footer>
+<footer class="footer"><div class="wrap"><strong>Ketogenic Research</strong></div></footer>
 <script>
 let DATA=null; const $=s=>document.querySelector(s); const lang=()=>document.documentElement.lang==="it"?"it":"en";
 const n=v=>new Intl.NumberFormat(lang()==="it"?"it-IT":"en-US").format(v||0); const tf=o=>o?.[lang()]||o?.en||"";
