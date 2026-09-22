@@ -10,7 +10,8 @@
     "42757470",
     "42760380",
     "42763398",
-    "42763564"
+    "42763564",
+    "42766067"
   ],
   "failures": [
     {
@@ -172,13 +173,13 @@
       "error": "Stored DOI/PMCID/full-text source did not belong to this PubMed record."
     }
   ],
-  "updated_at": "2026-09-22T17:56:41.894788+00:00",
+  "updated_at": "2026-09-22T18:17:38.764139+00:00",
   "source_unavailable_pmids": [
     "42717355"
   ],
   "last_run": {
     "attempted_candidates": 1,
-    "published_articles": 0,
-    "status": "no_article_published"
+    "published_articles": 1,
+    "status": "published"
   }
 }
