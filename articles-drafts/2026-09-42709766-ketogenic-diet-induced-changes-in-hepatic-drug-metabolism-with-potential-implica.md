@@ -13,7 +13,7 @@ source_identity: "PASS"
 source_identity_basis: "PubMed PMID/title/DOI/PMCID"
 full_text_source: "PMC full text"
 full_text_url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC13552735/"
-editorial_byline: "Ketogenic Research Editorial"
+editorial_byline: "Ketogenic Research Hub Editorial"
 scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
@@ -25,7 +25,7 @@ source_identity_checked_at: "2026-09-21T12:17:17.478159+00:00"
 
 **Research Analysis**
 
-**Ketogenic Research Editorial**  
+**Ketogenic Research Hub Editorial**  
 Scientific oversight: **Marco Medeot, Scientific Director**
 
 In female C57BL/6 mice, a 4‑week high‑fat ketogenic diet altered hepatic cytochrome P450 expression and activity, notably increasing CYP1A and decreasing CYP2C activity. Ozanimod plasma exposure was on average 17 % higher, but the difference did not reach statistical significance.
@@ -54,7 +54,7 @@ Frybortova V, Satka S, Jourova L, Anzenbacher P, Zapletalova I, Kraus M, et al. 
 
 **Analisi di ricerca**
 
-**Ketogenic Research Editorial**  
+**Ketogenic Research Hub Editorial**  
 Supervisione scientifica: **Marco Medeot, Direttore Scientifico**
 
 In topi femmine C57BL/6, una dieta chetogenica ad alto contenuto di grassi per 4 settimane ha modificato l’espressione e l’attività dei citocromi P450 epatici, aumentando significativamente la CYP1A e riducendo l’attività della CYP2C. L’esposizione plasmatica a ozanimod è risultata in media del 17 % più alta, ma la differenza non è risultata statisticamente significativa.

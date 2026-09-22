@@ -145,3 +145,12 @@
     line-height:1.07;
   }
 }
+
+
+/* V4 evidence descriptors */
+.article-evidence-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 26px}
+.article-evidence-grid>div{padding:12px 13px;border:1px solid #d6e1ea;border-radius:10px;background:#f8fbfd}
+.article-evidence-grid span{display:block;font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:#6b7f91;font-weight:700;margin-bottom:5px}
+.article-evidence-grid strong{display:block;font-size:12px;line-height:1.35;color:#17324d}
+.article-card-evidence{margin-top:7px;font-size:11px;line-height:1.45;color:#667b8f;font-weight:600}
+@media(max-width:640px){.article-evidence-grid{grid-template-columns:1fr;gap:7px;margin-bottom:22px}.article-evidence-grid>div{padding:10px 12px}.article-card-evidence{font-size:10.5px}}

@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ketone ester reduces LPS‑induced liver injury in mice via STAT1 K679 β‑hydroxybutyrylation | Ketogenic Research</title>
+<title>Ketone ester reduces LPS‑induced liver injury in mice via STAT1 K679 β‑hydroxybutyrylation | Ketogenic Research Hub</title>
 <meta name="description" content="In a mouse model of sepsis‑related liver injury, pretreatment with a ketone ester lowered serum transaminases and histologic damage. The benefit depended on…">
 <link rel="canonical" href="https://ketogenicresearch.org/articles/2026-09-42732658-ketone-ester-alleviates-sepsis-associated-liver-injury-through-hydroxybutyrylati.html">
 <meta property="og:type" content="article">
-<meta property="og:site_name" content="Ketogenic Research">
+<meta property="og:site_name" content="Ketogenic Research Hub">
 <meta property="og:title" content="Ketone ester reduces LPS‑induced liver injury in mice via STAT1 K679 β‑hydroxybutyrylation">
 <meta property="og:description" content="In a mouse model of sepsis‑related liver injury, pretreatment with a ketone ester lowered serum transaminases and histologic damage. The benefit depended on…">
 <meta property="og:url" content="https://ketogenicresearch.org/articles/2026-09-42732658-ketone-ester-alleviates-sepsis-associated-liver-injury-through-hydroxybutyrylati.html">
@@ -24,8 +24,8 @@
 <body class="article-page">
 <header class="header">
 <div class="wrap nav">
-<a aria-label="Ketogenic Research" class="brand" href="../index.html">
-<img alt="Ketogenic Research" class="site-logo" src="../logo-ketogenic-research.png"/>
+<a aria-label="Ketogenic Research Hub" class="brand" href="../index.html">
+<img alt="Ketogenic Research Hub" class="site-logo" src="../logo-ketogenic-research.png"/>
 </a>
 <nav aria-label="Primary navigation" class="site-nav">
 <a href="../index.html">Home</a>
@@ -62,6 +62,11 @@
   <section class="article-language active" data-article-lang="en">
     <div class="article-kicker">Research Note</div>
     <div class="article-meta">September 11, 2026 · Immunobiology</div>
+    <div class="article-evidence-grid">
+      <div><span>Study design</span><strong>Preclinical / mechanistic</strong></div>
+      <div><span>Population / species</span><strong>Mouse</strong></div>
+      <div><span>Evidence status</span><strong>No clinical efficacy evidence</strong></div>
+    </div>
     <div class="article-content">
 
 <p>In a mouse model of sepsis‑related liver injury, pretreatment with a ketone ester lowered serum transaminases and histologic damage. The benefit depended on lysine β‑hydroxybutyrylation of STAT1 at residue K679, a modification that limited M1 macrophage polarization.</p>
@@ -74,7 +79,7 @@
 <h3>Source</h3>
 <p>Bai Y, Li K, Zhu D, Li R, Yan Y, Zhong C, et al. Ketone ester alleviates sepsis-associated liver injury through β-hydroxybutyrylation of STAT1. Immunobiology. 2026;231(5):153243. doi: 10.1016/j.imbio.2026.153243. PMID: 42732658.</p></div>
     <div class="article-byline article-byline-top">
-      <strong>Ketogenic Research Editorial</strong>
+      <strong>Ketogenic Research Hub Editorial</strong>
       <span>Scientific oversight: Marco Medeot, Scientific Director</span>
     </div>
   </section>
@@ -82,6 +87,11 @@
   <section class="article-language" data-article-lang="it">
     <div class="article-kicker">Nota di ricerca</div>
     <div class="article-meta">11 settembre 2026 · Immunobiology</div>
+    <div class="article-evidence-grid">
+      <div><span>Disegno dello studio</span><strong>Preclinico / meccanicistico</strong></div>
+      <div><span>Popolazione / specie</span><strong>Topo</strong></div>
+      <div><span>Stato dell’evidenza</span><strong>Nessuna evidenza di efficacia clinica</strong></div>
+    </div>
     <div class="article-content">
 
 <p>In un modello murino di danno epatico associato a sepsi, la pretattamento con estere chetone ha ridotto gli aminotransferasi sierici e il danno istologico. Il beneficio è risultato dipendente dalla β‑idrossibutirrulazione della lisina K679 del STAT1, una modifica che ha limitato la polarizzazione M1 dei macrofagi.</p>
@@ -94,13 +104,14 @@
 <h3>Fonte</h3>
 <p>Bai Y, Li K, Zhu D, Li R, Yan Y, Zhong C, et al. Ketone ester alleviates sepsis-associated liver injury through β-hydroxybutyrylation of STAT1. Immunobiology. 2026;231(5):153243. doi: 10.1016/j.imbio.2026.153243. PMID: 42732658.</p></div>
     <div class="article-byline article-byline-top">
-      <strong>Ketogenic Research Editorial</strong>
+      <strong>Ketogenic Research Hub Editorial</strong>
       <span>Supervisione scientifica: Marco Medeot, Direttore Scientifico</span>
     </div>
   </section>
 
   <div class="article-source-links"><a href="https://pubmed.ncbi.nlm.nih.gov/42732658/" target="_blank" rel="noopener">PubMed</a> <a href="https://doi.org/10.1016/j.imbio.2026.153243" target="_blank" rel="noopener">DOI</a></div>
 </main>
+<footer><div class="wrap footer"><span>KETOGENIC RESEARCH HUB</span><nav class="footer-links" aria-label="Footer"><a href="../privacy.html" data-en="Privacy" data-it="Privacy">Privacy</a><a href="../contact.html" data-en="Contact" data-it="Contatti">Contact</a><a href="../methodology.html" data-en="Methodology" data-it="Metodologia">Methodology</a></nav><span>© 2026 Ketogenic Research Hub</span></div></footer>
 
 <script>
 (function(){
@@ -112,6 +123,10 @@
     document.documentElement.lang=lang;
     buttons.forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
     sections.forEach(s=>s.classList.toggle('active',s.dataset.articleLang===lang));
+    document.querySelectorAll('[data-en]').forEach(el=>{
+      const v=lang==='it'?el.dataset.it:el.dataset.en;
+      if(v!==undefined) el.textContent=v;
+    });
     if(back) back.textContent=lang==='it'?back.dataset.labelIt:back.dataset.labelEn;
     if(title) title.textContent=lang==='it'?title.dataset.titleIt:title.dataset.titleEn;
     try{localStorage.setItem('kr-lang',lang)}catch(e){}

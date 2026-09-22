@@ -12,6 +12,8 @@ on:
       - "latest-publications.json"
       - "logo-ketogenic-research.png"
       - "favicon.svg"
+      - "privacy.html"
+      - "privacy-en.html"
       - "cloudflare/**"
       - "scripts/build_cloudflare_library.py"
       - ".github/workflows/deploy-cloudflare-library.yml"

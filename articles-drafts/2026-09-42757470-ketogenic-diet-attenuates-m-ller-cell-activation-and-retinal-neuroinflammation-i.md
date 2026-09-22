@@ -9,7 +9,7 @@ journal: "International journal of molecular medicine"
 article_type: "Research Analysis"
 article_type_it: "Analisi di ricerca"
 generator_version: "4.0"
-editorial_byline: "Ketogenic Research Editorial"
+editorial_byline: "Ketogenic Research Hub Editorial"
 scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
@@ -22,7 +22,7 @@ source_identity_checked_at: "2026-09-21T12:17:17.478159+00:00"
 
 **Research Analysis**
 
-**Ketogenic Research Editorial**  
+**Ketogenic Research Hub Editorial**  
 Scientific oversight: **Marco Medeot, Scientific Director**
 
 In a mouse model of experimental autoimmune glaucoma, a ketogenic diet increased circulating β‑hydroxybutyrate, suppressed Müller cell activation, and lowered retinal neuroinflammatory markers. Proteomic analysis identified altered FOXO3A acetylation and up‑regulation of metallothionein‑2A as potential mediators.
@@ -49,7 +49,7 @@ Tan S, Wang X, Zheng Y, Mou Z, Zeng L, Yuan J, et al. Ketogenic diet attenuates 
 
 **Analisi di ricerca**
 
-**Ketogenic Research Editorial**  
+**Ketogenic Research Hub Editorial**  
 Supervisione scientifica: **Marco Medeot, Direttore Scientifico**
 
 In un modello murino di glaucoma autoimmune sperimentale, una dieta chetogenica ha aumentato i livelli plasmatici di β‑idrossibutirrato, ridotto l’attivazione delle cellule di Müller e diminuito i marcatori di neuroinfiammazione retinica. L’analisi proteomica ha evidenziato una modificazione dell’acetilazione di FOXO3A e un aumento di metallotioneina‑2A come possibili mediatori.

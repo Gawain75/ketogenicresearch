@@ -11,7 +11,7 @@ source_identity: "PASS"
 source_identity_basis: "PubMed PMID/title/DOI/PMCID"
 full_text_source: "PMC full text"
 full_text_url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC13589161/"
-editorial_byline: "Ketogenic Research Editorial"
+editorial_byline: "Ketogenic Research Hub Editorial"
 scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
@@ -22,7 +22,7 @@ verified_at: "2026-09-22T03:28:28.704649+00:00"
 
 **Research Analysis**
 
-**Ketogenic Research Editorial**  
+**Ketogenic Research Hub Editorial**  
 Scientific oversight: **Marco Medeot, Scientific Director**
 
 A single‑case report describes the initiation of a low‑ratio (1.25:1) enteral ketogenic diet via post‑pyloric feeding and later jejunal tube in an infant with Miller‑Dieker syndrome, severe feeding intolerance, and refractory seizures. Seizure freedom was maintained until death from an unrelated surgical complication, and nutritional status improved.
@@ -49,7 +49,7 @@ Michela P, Matteo P, Pasqua P, Paola R, Silvana G, Monica F. Managing Drug-Resis
 
 **Analisi di ricerca**
 
-**Ketogenic Research Editorial**  
+**Ketogenic Research Hub Editorial**  
 Supervisione scientifica: **Marco Medeot, Direttore Scientifico**
 
 Un caso clinico descrive l’avvio di una dieta chetogenica a basso rapporto (1,25:1) somministrata per via enterale post‑pilorica e successivamente tramite tubo jejunale in un neonato con sindrome di Miller‑Dieker, grave intolleranza alimentare e crisi epilettiche refrattarie. La libertà da crisi è stata mantenuta fino al decesso per una complicanza chirurgica non correlata, con miglioramento dello stato nutrizionale.

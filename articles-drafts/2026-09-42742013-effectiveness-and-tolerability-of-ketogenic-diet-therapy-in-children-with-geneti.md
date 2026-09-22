@@ -9,7 +9,7 @@ journal: "Zhonghua er ke za zhi = Chinese journal of pediatrics"
 article_type: "Research Note"
 article_type_it: "Nota di ricerca"
 generator_version: "4.1"
-editorial_byline: "Ketogenic Research Editorial"
+editorial_byline: "Ketogenic Research Hub Editorial"
 scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
@@ -22,7 +22,7 @@ source_identity_checked_at: "2026-09-21T12:17:17.478159+00:00"
 
 **Research Note**
 
-**Ketogenic Research Editorial**  
+**Ketogenic Research Hub Editorial**  
 Scientific oversight: **Marco Medeot, Scientific Director**
 
 In a retrospective cohort of 90 infants with genetically confirmed developmental and epileptic encephalopathy (DEE) whose seizures began before two years of age, ketogenic diet therapy (KDT) achieved seizure freedom in one‑third of the children. Earlier start of the diet and variants in non‑ion‑channel genes were linked to better outcomes, while the lipid‑to‑non‑lipid ratio did not differ between seizure‑free and uncontrolled groups. Adverse events were common but mostly gastrointestinal and rarely led to discontinuation.
@@ -49,7 +49,7 @@ Song TY, Deng J, Chen CH, Wang XH, Tian XJ, Wu ML, et al. [Effectiveness and tol
 
 **Nota di ricerca**
 
-**Ketogenic Research Editorial**  
+**Ketogenic Research Hub Editorial**  
 Supervisione scientifica: **Marco Medeot, Direttore Scientifico**
 
 In una coorte retrospettiva di 90 neonati con encefalopatia epilettica dello sviluppo (DEE) confermata geneticamente, il cui esordio delle crisi era avvenuto prima dei due anni, la terapia dietetica chetogenica (KDT) ha indotto la libertà dalle crisi in un terzo dei bambini. Un avvio più precoce della dieta e varianti in geni non legati a canali ionici sono stati associati a risultati migliori, mentre il rapporto lipidico‑non‑lipidico non differiva tra i gruppi liberi da crisi e non controllati. Gli eventi avversi erano frequenti, prevalentemente gastrointestinali, e raramente hanno causato l’interruzione della terapia.

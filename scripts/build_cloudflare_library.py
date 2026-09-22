@@ -13,6 +13,8 @@ FILES = [
     "latest-publications.json",
     "logo-ketogenic-research.png",
     "favicon.svg",
+    "privacy.html",
+    "privacy-en.html",
 ]
 
 def clean_library_html(html: str) -> str:
@@ -67,6 +69,7 @@ def clean_library_html(html: str) -> str:
         "director.html": "https://ketogenicresearch.org/director.html",
         "methodology.html": "https://ketogenicresearch.org/methodology.html",
         "contact.html": "https://ketogenicresearch.org/contact.html",
+        "privacy.html": "https://ketogenicresearch.org/privacy.html",
     }
     for relative, absolute in public_pages.items():
         html = re.sub(

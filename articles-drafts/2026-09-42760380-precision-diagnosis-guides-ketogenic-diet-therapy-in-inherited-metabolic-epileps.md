@@ -13,7 +13,7 @@ source_identity: "PASS"
 source_identity_basis: "PubMed PMID/title/DOI/PMCID"
 full_text_source: "PubMed abstract"
 full_text_url: ""
-editorial_byline: "Ketogenic Research Editorial"
+editorial_byline: "Ketogenic Research Hub Editorial"
 scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
@@ -25,7 +25,7 @@ source_identity_checked_at: "2026-09-21T12:17:17.478159+00:00"
 
 **Research Note**
 
-**Ketogenic Research Editorial**  
+**Ketogenic Research Hub Editorial**  
 Scientific oversight: **Marco Medeot, Scientific Director**
 
 A single infant with genetically confirmed non‑ketotic hyperglycinemia and biotinidase deficiency received a classic 3:1 ketogenic diet at 18 months. Within two weeks seizures decreased, and over the following year seizure burden was eliminated, several anti‑seizure drugs were withdrawn, and neurodevelopmental milestones were achieved.
@@ -52,7 +52,7 @@ Elbarky A, El Amrousy D, Mahmoud S, Lotfy A, Aboeisa M, Elballat KE, et al. Prec
 
 **Nota di ricerca**
 
-**Ketogenic Research Editorial**  
+**Ketogenic Research Hub Editorial**  
 Supervisione scientifica: **Marco Medeot, Direttore Scientifico**
 
 Un neonato con iperglicinemia non chetogenica e deficit di biotinidasi confermati geneticamente è stato trattato con una dieta chetogenica classica 3:1 a 18 mesi. Dopo due settimane le crisi sono diminuite e, nell’anno successivo, il carico convulsivo è stato eliminato, diversi farmaci antiepilettici sono stati sospesi e sono stati raggiunti traguardi dello sviluppo neurocognitivo.

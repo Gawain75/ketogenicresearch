@@ -9,7 +9,7 @@ journal: "Immunobiology"
 article_type: "Research Note"
 article_type_it: "Nota di ricerca"
 generator_version: "4.1"
-editorial_byline: "Ketogenic Research Editorial"
+editorial_byline: "Ketogenic Research Hub Editorial"
 scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
@@ -22,7 +22,7 @@ source_identity_checked_at: "2026-09-21T12:17:17.478159+00:00"
 
 **Research Note**
 
-**Ketogenic Research Editorial**  
+**Ketogenic Research Hub Editorial**  
 Scientific oversight: **Marco Medeot, Scientific Director**
 
 In a mouse model of sepsis‑related liver injury, pretreatment with a ketone ester lowered serum transaminases and histologic damage. The benefit depended on lysine β‑hydroxybutyrylation of STAT1 at residue K679, a modification that limited M1 macrophage polarization.
@@ -49,7 +49,7 @@ Bai Y, Li K, Zhu D, Li R, Yan Y, Zhong C, et al. Ketone ester alleviates sepsis-
 
 **Nota di ricerca**
 
-**Ketogenic Research Editorial**  
+**Ketogenic Research Hub Editorial**  
 Supervisione scientifica: **Marco Medeot, Direttore Scientifico**
 
 In un modello murino di danno epatico associato a sepsi, la pretattamento con estere chetone ha ridotto gli aminotransferasi sierici e il danno istologico. Il beneficio è risultato dipendente dalla β‑idrossibutirrulazione della lisina K679 del STAT1, una modifica che ha limitato la polarizzazione M1 dei macrofagi.

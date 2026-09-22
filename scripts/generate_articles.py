@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Ketogenic Research — AI article pilot V4.1
+Ketogenic Research Hub — AI article pilot V4.1
 
 V3 editorial-quality pilot:
 - processes ONE article per run
@@ -523,7 +523,7 @@ def writer_prompt(packet: str, has_full_text: bool) -> str:
     article_type_en = "Research Analysis" if has_full_text else "Research Note"
     article_type_it = "Analisi di ricerca" if has_full_text else "Nota di ricerca"
 
-    return f"""You are the scientific editorial writer for Ketogenic Research.
+    return f"""You are the scientific editorial writer for Ketogenic Research Hub.
 
 Follow this policy exactly:
 --- POLICY ---
@@ -823,7 +823,7 @@ source_identity: "PASS"
 source_identity_basis: "PubMed PMID/title/DOI/PMCID"
 full_text_source: {json.dumps(full_text_source)}
 full_text_url: {json.dumps(full_text_url)}
-editorial_byline: "Ketogenic Research Editorial"
+editorial_byline: "Ketogenic Research Hub Editorial"
 scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
@@ -834,7 +834,7 @@ verified_at: {json.dumps(verified_at)}
 
 **{draft.get("article_type","Research Note")}**
 
-**Ketogenic Research Editorial**  
+**Ketogenic Research Hub Editorial**  
 Scientific oversight: **Marco Medeot, Scientific Director**
 
 {draft.get("summary_en","")}
@@ -851,7 +851,7 @@ Scientific oversight: **Marco Medeot, Scientific Director**
 
 **{draft.get("article_type_it","Nota di ricerca")}**
 
-**Ketogenic Research Editorial**  
+**Ketogenic Research Hub Editorial**  
 Supervisione scientifica: **Marco Medeot, Direttore Scientifico**
 
 {draft.get("summary_it","")}

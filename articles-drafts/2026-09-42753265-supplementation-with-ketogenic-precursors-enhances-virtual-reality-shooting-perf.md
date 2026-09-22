@@ -9,7 +9,7 @@ journal: "Military medicine"
 article_type: "Research Note"
 article_type_it: "Nota di ricerca"
 generator_version: "4.1"
-editorial_byline: "Ketogenic Research Editorial"
+editorial_byline: "Ketogenic Research Hub Editorial"
 scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
@@ -22,7 +22,7 @@ source_identity_checked_at: "2026-09-21T12:17:17.478159+00:00"
 
 **Research Note**
 
-**Ketogenic Research Editorial**  
+**Ketogenic Research Hub Editorial**  
 Scientific oversight: **Marco Medeot, Scientific Director**
 
 In a double‑blind, crossover trial, acute supplementation with bis‑octanoyl (R)‑1,3‑butanediol (BO‑BD) raised blood ketones and modestly increased deep‑sleep time. Compared with placebo, BO‑BD improved the primary shooting metric (Hit Factor) by about 8% and shortened task completion time, while accuracy and decision‑making were unchanged.
@@ -49,7 +49,7 @@ Buga A, Stoner JT, Sapper TN, Crabtree CD, Decker DD, Robinson BT, et al. Supple
 
 **Nota di ricerca**
 
-**Ketogenic Research Editorial**  
+**Ketogenic Research Hub Editorial**  
 Supervisione scientifica: **Marco Medeot, Direttore Scientifico**
 
 In uno studio crossover, doppio cieco, l’integrazione acuta di bis‑octanoyl (R)‑1,3‑butanediolo (BO‑BD) ha aumentato i chetoni capillari e il tempo di sonno profondo. Rispetto al placebo, BO‑BD ha migliorato l’indice principale di tiro (Hit Factor) di circa 8 % e ridotto il tempo di esecuzione, senza modificare accuratezza e decision‑making.
