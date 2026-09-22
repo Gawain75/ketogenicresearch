@@ -1,0 +1,511 @@
+{
+  "missing_year_instances_before": 387,
+  "updated_instances_from_existing_citation": 0,
+  "unique_titles_checked_on_pubmed": 347,
+  "unique_titles_matched_on_pubmed": 15,
+  "updated_instances_from_pubmed": 20,
+  "remaining_missing_year_instances": 367,
+  "remaining_unique_missing_titles": 332,
+  "unresolved_sample": [
+    {
+      "title": "4. Leptin/Adiponectin Ratio as a new multidimensional biomarker in obese patients with liver steatosis undergoing VLEKT",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "6. The effects of a very low-energy ketogenic therapy on body composition, gut microbiota and metabolites in overweight subjects",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "8. The impact of very-low-calorie ketogenic diets on gut microbiota in individuals with obesity: a systematic review and meta-analysis",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "9. Exploring the potential of the ketogenic diet in managing metabolic syndrome",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "10. Effects of 1-Month Very-Low-Calorie Ketogenic Diet on 24-Hour Energy Metabolism and Body Composition",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.9009
+    },
+    {
+      "title": "11. Low-Carbohydrate (Ketogenic) Diet in Children with Obesity: Diet Impact on Anthropometric Indicators and Metabolic Syndrome and Insulin Resistance",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "12. Effects of One-Month Very-Low-Calorie Ketogenic Diet on 24h Energy Metabolism",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "13. Advancing Obesity Management: Very Low-Energy Ketogenic Therapy (VLEKT) as an Evolution of the Traditional Ketogenic Diet",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "14. Epigenetic Aging Acceleration in Obesity Is Slowed Down by Nutritional Ketosis Following Very Low-Calorie Ketogenic Diet",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.8276
+    },
+    {
+      "title": "18. The Impact of a Very-Low-Calorie Ketogenic Diet on Monocyte Subsets of Patients with Obesity: A Pilot Study",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "19. An 8-Week Very Low-Calorie Ketogenic Diet (VLCKD) Alters the Landscape of Obese-Derived Small Extracellular Vesicles",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "21. Nutritional Studies Evaluating Ketogenic Diets as a Treatment for Obesity and Obesity-Associated Morbidities",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "22. The impact of a ketogenic diet on weight loss",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.2817
+    },
+    {
+      "title": "23. European Society for the Study of Obesity (EASO) Position Statement on Very Low-Calorie Ketogenic Diets",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "24. Weight loss, changes in body composition and inflammatory status after a very low-energy ketogenic therapy (VLEKT)",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "26. Metabolic Effects of Ketogenic Diets and Their Utilization in Obesity",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "27. Very Low-Calorie Ketogenic Diet (VLCKD) as Pre-Operative First-Line Dietary Therapy in Patients with Obesity Who Are Candidates for Bariatric Surgery",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "28. VLCKD in Combination with Physical Exercise Preserves Skeletal Muscle in Obesity",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "29. Very low-calorie ketogenic diet (VLCKD): an antihypertensive nutritional approach",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "30. Supplementation with medium-chain fatty acids increases body weight loss during very low-calorie ketogenic diet",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "32. Low-Carbohydrate Ketogenic Diet in Children with Obesity: Effects on Anthropometric Indicators, Metabolic Syndrome and Insulin Resistance",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "33. Effects of One-Month Very-Low-Calorie Ketogenic Diet on 24-h Energy Expenditure",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "34. Advancing Obesity Management: Very Low-Energy Ketogenic Therapy as an Evolution of the Traditional Ketogenic Diet",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "35. Epigenetic Aging Acceleration in Obesity Is Slowed Down by Nutritional Ketosis Following VLCKD",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.7121
+    },
+    {
+      "title": "37. Efficacy and Safety of Phase 1 Very Low-Energy Ketogenic Therapy in Subjects with Obesity and Mild Renal Impairment",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "38. An 8-Week Very Low-Calorie Ketogenic Diet Alters Obese-Derived Small Extracellular Vesicles and Hepatic Cell Phenotypes",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "39. Effects of a 12-Week Ketogenic Diet Intervention on Women with Overweight or Obesity and Glucose and Lipid Metabolism Disturbance",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.8784
+    },
+    {
+      "title": "40. Weight Loss, Changes in Body Composition and Inflammatory Status after a Very Low-Energy Ketogenic Therapy",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.4172
+    },
+    {
+      "title": "41. A Multi-Omics Approach to Metabolic Pathways Impacting Intestinal Permeability in Obese Patients Undergoing VLCKD",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "42. Very Low-Calorie Ketogenic Diet as Pre-Operative First-Line Dietary Therapy in Patients with Obesity Candidates for Bariatric Surgery",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "43. Very Low-Calorie Ketogenic Diet: An Antihypertensive Nutritional Approach",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "44. Supplementation with Medium-Chain Fatty Acids Increases Body Weight Loss During a Very Low-Calorie Ketogenic Diet",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "45. Ketogenic Diet Combined with Moderate Aerobic Exercise in Obesity",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "46. Comparison of a Pre-Bariatric Surgery VLCKD and Mediterranean Diet on Weight Loss, Metabolic Parameters, and Liver Size Reduction",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "47. Impact of a VLCKD on Handgrip Strength in Women with Obesity",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "48. Efficacy and Safety of Very Low-Calorie Ketogenic Diet in Patients with Overweight and Obesity",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "49. Reduction of Cardio-Metabolic Risk and Body Weight through Ketogenic Nutritional Intervention",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "52. Ketogenic Diet and Weight Loss: Is There an Effect on Energy Expenditure?",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "53. Comparison of Very Low-Calorie Ketogenic Diet with a Standard Low-Calorie Diet in Obesity",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "54. Adaptive Ketogenic–Mediterranean Protocol (AKMP) in Real Clinical Practice",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "3. Sustained metabolic improvements in a remotely delivered ketogenic nutrition intervention in type 2 diabetes",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "4. Impact of very low carbohydrate ketogenic diets on cardiovascular risk factors among patients with type 2 diabetes: systematic review and meta-analysis",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.8982
+    },
+    {
+      "title": "5. Effects of very low-carbohydrate ketogenic diet on lipid metabolism in patients with type 2 diabetes",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "7. Ketogenic diet preserves muscle mass and strength in a mouse model of type 2 diabetes",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "8. BDH1-mediated β-hydroxybutyrate metabolism ameliorates diabetic kidney disease",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "9. Managing type 1 diabetes mellitus with a ketogenic diet",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "10. The Effects of Ketogenic Diet on Insulin Sensitivity and Weight Loss",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "11. The Role of a Ketogenic Diet in the Treatment of Dementia in Type 2 Diabetes Mellitus",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "12. A ketogenic diet improves vascular hyperpermeability in type 2 diabetic mice",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.7525
+    },
+    {
+      "title": "13. Impaired ketogenesis is associated with metabolic-associated fatty liver disease in subjects with type 2 diabetes",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "14. Low carbohydrate ketogenic diets reduce cardiovascular risk factor levels in obese or overweight patients with T2DM",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.8273
+    },
+    {
+      "title": "17. Effect of Low-Carbohydrate Diets on Glycemic Control",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.5464
+    },
+    {
+      "title": "18. Greater Reduction in the Proinsulin-C-Peptide Ratio with a Ketogenic Nutritional Intervention",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "19. Sustained Metabolic Improvements in a Remotely Delivered Ketogenic Nutrition Intervention",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "20. Impact of Very Low Carbohydrate Ketogenic Diets on Cardiovascular Risk Factors among Patients with Type 2 Diabetes: GRADE-Assessed Systematic Review and Meta-Analysis",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "23. Low-Carbohydrate Ketogenic Diets Reduce Cardiovascular Risk Factor Levels in Patients with Type 2 Diabetes",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "24. Clinical Assessment of Intermittent Fasting with Ketogenic Diet in Glycemic Control and Weight Reduction in Type 2 Diabetes",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "25. Very Low Carbohydrate Ketogenic Diets in Type 2 Diabetes: Review",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "26. Ketogenic Diet Benefits to Weight Loss, Glycemic Control, and Lipid Profiles in Overweight Patients with Type 2 Diabetes: Meta-Analysis of Randomized Controlled Trials",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "27. 3-Hydroxybutyrate Ameliorates the Progression of Diabetic Nephropathy",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "30. Adherence to Low-Carbohydrate Diets in Patients with Type 2 Diabetes",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.603
+    },
+    {
+      "title": "31. Adapting Medication for Type 2 Diabetes to a Low-Carbohydrate Ketogenic Diet",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "32. The Ketogenic Diet Through a Metabolomic Lens",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "2. Very Low Energy Ketogenic Diet vs Mediterranean Diet for MASLD: Superior Steatosis Reduction in a Randomised Pilot Study",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "3. Ketogenic diets in MASLD: methodological limitations and the confounding role of protein intake",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "6. Effect of a Ketogenic Diet on Metabolic Dysfunction-Associated Steatotic Liver Disease",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.7818
+    },
+    {
+      "title": "7. An 8-Week Very Low-Calorie Ketogenic Diet Alters the Landscape of Obese-Derived Small Extracellular Vesicles, Redefining Hepatic Cell Phenotypes",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "9. Beneficial Effects of the Ketogenic Diet on Nonalcoholic Fatty Liver Disease",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "10. Ketogenic diet time-dependently prevents NAFLD",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "11. Higher-Level Steatosis Is Associated with a Greater Decrease in Metabolic Dysfunction-Associated Steatotic Liver Disease after Eight Weeks of a Very Low-Calorie Ketogenic Diet",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.8657
+    },
+    {
+      "title": "13. Investigating the Link between Ketogenic Diet, NAFLD, Mitochondria, and Oxidative Stress",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "15. Current Evidence Concerning Effects of Ketogenic Diet and Intermittent Fasting in Patients with Nonalcoholic Fatty Liver Disease",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "23. Treatment of NAFLD with Intermittent Calorie Restriction or Low-Carbohydrate Diet",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.4118
+    },
+    {
+      "title": "1. Very-low-carbohydrate ketogenic diet vs low-fat diet for long-term weight loss: a meta-analysis of randomised controlled trials",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "2. The Ketogenic Diet and Cardiovascular Diseases",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "4. Low-density lipoprotein cholesterol elevation with carbohydrate-restricted diets",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.2541
+    },
+    {
+      "title": "5. LDL Keto Trial",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.2523
+    },
+    {
+      "title": "6. Elevated LDL Cholesterol with a Carbohydrate-Restricted Diet: Evidence",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.7667
+    },
+    {
+      "title": "7. Thyroid markers and body composition predict LDL-cholesterol change in lean healthy women on a ketogenic diet",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "9. Reduction of Cardio-Metabolic Risk and Body Weight through a ketogenic dietary intervention",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "10. Italian Ketogenic Mediterranean Diet in Overweight and Obese Adults",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "11. Effects of a two-meals-a-day ketogenic diet on metabolic markers",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "12. Is a Ketogenic Diet Superior to a Low-Fat Diet?",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.4528
+    },
+    {
+      "title": "13. Efficacy and safety of very low calorie ketogenic diet (VLCKD) in patients with overweight and obesity",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "14. Effects of ketogenic diet on health",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "15. Very-Low-Carbohydrate Ketogenic Diet versus Low-Fat Diet for Long-Term Weight Loss: A Meta-Analysis of Randomised Controlled Trials",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "16. The Lipid Energy Model",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "18. Low-Density Lipoprotein Cholesterol Elevation in the Context of a Ketogenic Diet",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "19. Thyroid Markers and Body Composition Predict LDL-Cholesterol Change in Lean Healthy Women on a Ketogenic Diet: Experimental Support for the Lipid Energy Model",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "20. Elevated LDL Cholesterol with a Carbohydrate-Restricted Diet: Evidence for a Lean Mass Hyper-Responder Phenotype",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "21. Effects of a Two-Week Modified Ketogenic Diet on Circulating Lipoprotein Subclasses, GDF15, and FGF21 in Adults with Obesity",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "22. Increased LDL-C reduction with ezetimibe in ketogenic diet-induced hypercholesterolemia",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "3. Could the Ketogenic Diet induce a shift in thyroid function?",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.5315
+    },
+    {
+      "title": "2. Nutritional Intervention in Cushing’s Disease: The Potential Role of a Ketogenic Strategy",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "1. The effects of ketogenic diet on polycystic ovary syndrome: a systematic review",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.8966
+    },
+    {
+      "title": "4. A Ketogenic Diet Followed by Gradual Carbohydrate Reintroduction Restores Menstrual Cycles in Women with Polycystic Ovary Syndrome with Oligomenorrhea Independent of Body Weight Loss",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "5. Ketogenic diet improves fertility in patients with polycystic ovary syndrome",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.9102
+    },
+    {
+      "title": "7. Effects of Ketogenic Diet on Reproductive Hormones in PCOS",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "8. Low-Calorie Ketogenic Diet: Potential Application in PCOS",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "9. Ketogenic Diet as a Possible Non-pharmacological Therapy in Main Endocrine Diseases of the Female Reproductive System",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    }
+  ]
+}
