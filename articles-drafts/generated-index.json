@@ -2,6 +2,7 @@
   "generated_pmids": [
     "42709766",
     "42732658",
+    "42739105",
     "42742013",
     "42753265",
     "42753449",
@@ -170,12 +171,12 @@
       "error": "Stored DOI/PMCID/full-text source did not belong to this PubMed record."
     }
   ],
-  "updated_at": "2026-09-22T17:22:28.269410+00:00",
+  "updated_at": "2026-09-22T17:42:22.197472+00:00",
   "source_unavailable_pmids": [
     "42717355"
   ],
   "last_run": {
-    "attempted_candidates": 1,
+    "attempted_candidates": 2,
     "published_articles": 1,
     "status": "published"
   }
