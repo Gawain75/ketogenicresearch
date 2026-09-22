@@ -1,9 +1,9 @@
 {
-  "missing_year_instances_before": 387,
+  "missing_year_instances_before": 367,
   "updated_instances_from_existing_citation": 0,
-  "unique_titles_checked_on_pubmed": 347,
-  "unique_titles_matched_on_pubmed": 15,
-  "updated_instances_from_pubmed": 20,
+  "unique_titles_checked_on_pubmed": 332,
+  "unique_titles_matched_on_pubmed": 0,
+  "updated_instances_from_pubmed": 0,
   "remaining_missing_year_instances": 367,
   "remaining_unique_missing_titles": 332,
   "unresolved_sample": [
@@ -370,7 +370,7 @@
     {
       "title": "23. Treatment of NAFLD with Intermittent Calorie Restriction or Low-Carbohydrate Diet",
       "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.4118
+      "best_similarity": 0.3662
     },
     {
       "title": "1. Very-low-carbohydrate ketogenic diet vs low-fat diet for long-term weight loss: a meta-analysis of randomised controlled trials",
