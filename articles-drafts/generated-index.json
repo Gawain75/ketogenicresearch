@@ -173,13 +173,13 @@
       "error": "Stored DOI/PMCID/full-text source did not belong to this PubMed record."
     }
   ],
-  "updated_at": "2026-09-22T18:17:38.764139+00:00",
+  "updated_at": "2026-09-22T20:26:25.299465+00:00",
   "source_unavailable_pmids": [
     "42717355"
   ],
   "last_run": {
     "attempted_candidates": 1,
-    "published_articles": 1,
-    "status": "published"
+    "published_articles": 0,
+    "status": "no_article_published"
   }
 }
