@@ -589,7 +589,7 @@ async function loadLatestEvidence() {
 
   try {
     const response = await fetch(
-      'latest-publications.json?v=70',
+      'latest-publications.json?v=71',
       { cache: 'no-store' }
     );
 
@@ -608,10 +608,22 @@ async function loadLatestEvidence() {
       );
     }
 
-    const updated = document.getElementById('latestUpdated');
-    if (updated) {
-      const stamp = KR_LATEST_DATA.generated_at;
-      updated.textContent = stamp
+    const verified = document.getElementById('latestVerified');
+    if (verified) {
+      const stamp =
+        KR_LATEST_DATA.verified_at ||
+        KR_LATEST_DATA.generated_at;
+      verified.textContent = stamp
+        ? latestDateLabel(stamp.slice(0, 10))
+        : '—';
+    }
+
+    const contentUpdated = document.getElementById('latestContentUpdated');
+    if (contentUpdated) {
+      const stamp =
+        KR_LATEST_DATA.content_updated_at ||
+        KR_LATEST_DATA.generated_at;
+      contentUpdated.textContent = stamp
         ? latestDateLabel(stamp.slice(0, 10))
         : '—';
     }
@@ -699,7 +711,7 @@ async function syncLiteratureUpdateDate() {
 
   try {
     const response = await fetch(
-      'latest-publications.json?v=70',
+      'latest-publications.json?v=71',
       { cache: 'no-store' }
     );
 
@@ -708,9 +720,12 @@ async function syncLiteratureUpdateDate() {
     }
 
     const data = await response.json();
-    if (!data.generated_at) return;
+    const literatureUpdatedAt =
+      data.content_updated_at ||
+      data.generated_at;
+    if (!literatureUpdatedAt) return;
 
-    const date = new Date(data.generated_at);
+    const date = new Date(literatureUpdatedAt);
     if (Number.isNaN(date.getTime())) return;
 
     const label = new Intl.DateTimeFormat(
@@ -723,7 +738,7 @@ async function syncLiteratureUpdateDate() {
 
     targets.forEach(el => {
       el.textContent = label;
-      el.setAttribute('datetime', data.generated_at);
+      el.setAttribute('datetime', literatureUpdatedAt);
     });
 
   } catch (error) {
