@@ -15,7 +15,7 @@ concurrency:
 jobs:
   update-literature:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 35
 
     steps:
       - name: Check out repository
@@ -50,6 +50,13 @@ jobs:
 
       - name: Apply clinical-area rationales
         run: python scripts/apply_clinical_rationales.py
+
+      - name: Recover missing publication years
+        env:
+          NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
+          NCBI_EMAIL: info@ketogenicresearch.org
+          YEAR_RECOVERY_BATCH_MAX: "600"
+        run: python scripts/repair_missing_publication_years.py
 
       - name: Rebuild Evidence Trends
         run: python scripts/build_evidence_trends.py
