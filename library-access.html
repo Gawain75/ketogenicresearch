@@ -34,6 +34,7 @@ h1{font-size:clamp(34px,6vw,58px);line-height:1.02;margin:26px 0 12px;letter-spa
 .link{border:0;background:transparent;color:var(--primary);padding:3px 0;text-align:left;font-weight:700;font-size:13px;cursor:pointer}
 .link:hover{text-decoration:underline}
 .note,.privacy{font-size:12px;line-height:1.5;color:var(--muted)}.privacy a{color:var(--primary);text-decoration:underline;font-weight:800;cursor:pointer}.privacy a:hover{color:var(--primary2)}
+.privacy-page-link{margin-top:-8px;font-size:13px}.privacy-page-link a{display:inline-block;color:var(--primary);font-weight:800;text-decoration:underline;padding:6px 0;cursor:pointer}.privacy-page-link a:hover{color:var(--primary2)}
 .status{padding:11px 12px;border-radius:10px;background:#eef7f9;color:var(--ink);font-size:13px;margin-top:16px}
 .status.error{background:#fff1f1;color:var(--danger)}
 .hidden{display:none!important}.divider{height:1px;background:var(--line);margin:4px 0}
@@ -42,6 +43,7 @@ h1{font-size:clamp(34px,6vw,58px);line-height:1.02;margin:26px 0 12px;letter-spa
 </style>
 </head>
 <body>
+<!-- PRIVACY-UPDATE-2026-09-22 -->
 <main class="shell">
 <section class="card">
   <div class="hero">
@@ -123,8 +125,12 @@ h1{font-size:clamp(34px,6vw,58px);line-height:1.02;margin:26px 0 12px;letter-spa
         <div class="field"><label>Email</label><input id="registerEmail" type="email" required autocomplete="email"></div>
         <div class="field"><label>Password</label><input id="registerPassword" type="password" minlength="8" required autocomplete="new-password"></div>
       </div>
-
-      <label class="privacy"><input id="privacy" type="checkbox" required> <span data-en="I acknowledge that I have read the" data-it="Dichiaro di aver preso visione dell’"></span> <a id="privacyLink" href="/privacy.html" target="_blank" rel="noopener" data-en="Privacy Notice." data-it="Informativa Privacy."></a></label>
+      <label class="privacy"><input id="privacy" type="checkbox" required> <span data-en="I acknowledge that I have read the Privacy Notice." data-it="Dichiaro di aver preso visione dell’Informativa Privacy."></span></label>
+      <div class="privacy-page-link">
+        <a id="privacyPageLink" href="/privacy.html" target="_blank" rel="noopener"
+           data-en="Open the Privacy Notice →"
+           data-it="Apri l’Informativa Privacy →"></a>
+      </div>
       <button class="primary" type="submit" data-en="Create free account" data-it="Registrati gratuitamente"></button>
     </form>
 
@@ -158,8 +164,8 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     $('langEn').classList.toggle('active', lang === 'en');
     $('langIt').classList.toggle('active', lang === 'it');
-    const privacyLink = $('privacyLink');
-    if (privacyLink) privacyLink.href = lang === 'it' ? '/privacy.html' : '/privacy-en.html';
+    const privacyPageLink = $('privacyPageLink');
+    if (privacyPageLink) privacyPageLink.href = lang === 'it' ? '/privacy.html' : '/privacy-en.html';
   }
 
   function showStatus(msg,error=false){
