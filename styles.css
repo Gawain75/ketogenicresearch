@@ -2264,3 +2264,47 @@ svg.evidence-trends-svg {
 @media(prefers-reduced-motion:reduce){
   .science-visual-rich *{animation:none !important}
 }
+
+
+/* Desktop refinement — Latest Evidence cards only */
+@media (min-width: 981px){
+  .home-latest-grid{
+    gap:22px;
+    align-items:stretch;
+  }
+
+  .home-latest-card{
+    background:#fff;
+    border:1px solid #cfdbe6;
+    border-radius:18px;
+    padding:24px 24px 22px;
+    min-height:285px;
+    box-shadow:0 8px 24px rgba(31,78,121,.055);
+    display:flex;
+    flex-direction:column;
+  }
+
+  .home-latest-card:hover{
+    border-color:#b8cddd;
+    box-shadow:0 12px 30px rgba(31,78,121,.075);
+    transform:translateY(-1px);
+  }
+
+  .home-latest-card h3,
+  .home-latest-card h4{
+    margin-top:14px;
+    margin-bottom:16px;
+    line-height:1.28;
+  }
+
+  .home-latest-card p{
+    line-height:1.55;
+  }
+
+  .home-latest-card .home-latest-area,
+  .home-latest-card .latest-area,
+  .home-latest-card .area-tag{
+    margin-top:auto;
+    padding-top:14px;
+  }
+}
