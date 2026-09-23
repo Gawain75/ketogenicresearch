@@ -200,6 +200,7 @@ def make_folder(soup: BeautifulSoup, matches: list[tuple[str, object]]):
     folder = soup.new_tag("details")
     folder["class"] = ["library-folder"]
     folder["id"] = NEW_ID
+    folder["data-library-type"] = "thematic"
     folder["data-search"] = (
         "glp-1ra ketogenic ketosis ketones incretin semaglutide liraglutide "
         "tirzepatide retatrutide vlckd vlekt beta-hydroxybutyrate"

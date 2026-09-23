@@ -89,12 +89,19 @@ def build_dataset():
     thematic_slugs = {"glp1-keto-metabolic-endocrine"}
     records = []
     labels = {}
+    folder_types = {}
     folder_order = []
 
     for folder in soup.select("details.library-folder"):
         slug = folder.get("id") or f"area-{len(folder_order)+1}"
         en, it = area_label(folder)
         labels[slug] = {"en": en, "it": it}
+        declared_type = (folder.get("data-library-type") or "").strip().lower()
+        folder_types[slug] = (
+            declared_type
+            if declared_type in {"clinical", "thematic"}
+            else ("thematic" if slug in thematic_slugs else "clinical")
+        )
         folder_order.append(slug)
 
         for article in folder.select("article.folder-paper"):
@@ -207,7 +214,7 @@ def build_dataset():
         areas.append({
             "slug": slug,
             "label": labels[slug],
-            "type": "thematic" if slug in thematic_slugs else "clinical",
+            "type": folder_types.get(slug, "clinical"),
             "total_unique": len(comps),
             "known_year": len(comps) - unknown,
             "unknown_year": unknown,
