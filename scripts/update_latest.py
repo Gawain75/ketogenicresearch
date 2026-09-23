@@ -6,6 +6,7 @@ import json
 import os
 import re
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -129,7 +130,8 @@ MONTHS = {
 }
 
 
-def api(name, params):
+def api(name, params, attempts=7):
+    """Call NCBI E-utilities with retry/backoff for transient gateway/rate errors."""
     params = {**params, "tool": "ketogenicresearch-literature-monitor", "email": EMAIL}
     if API_KEY:
         params["api_key"] = API_KEY
@@ -143,21 +145,51 @@ def api(name, params):
             data=encoded,
             method="POST",
             headers={
-                "User-Agent": f"ketogenicresearch/2.1 ({EMAIL})",
+                "User-Agent": f"ketogenicresearch/2.2 ({EMAIL})",
                 "Content-Type": "application/x-www-form-urlencoded",
             },
         )
     else:
         req = urllib.request.Request(
             f"{endpoint}?{encoded.decode('utf-8')}",
-            headers={"User-Agent": f"ketogenicresearch/2.1 ({EMAIL})"},
+            headers={"User-Agent": f"ketogenicresearch/2.2 ({EMAIL})"},
         )
 
-    with urllib.request.urlopen(req, timeout=60) as response:
-        data = response.read()
+    transient_http = {429, 500, 502, 503, 504}
+    last_error = None
 
-    time.sleep(0.12 if API_KEY else 0.36)
-    return data
+    for attempt in range(1, attempts + 1):
+        try:
+            with urllib.request.urlopen(req, timeout=60) as response:
+                data = response.read()
+            time.sleep(0.12 if API_KEY else 0.36)
+            return data
+        except urllib.error.HTTPError as exc:
+            last_error = exc
+            if exc.code not in transient_http or attempt >= attempts:
+                raise
+            retry_after = exc.headers.get("Retry-After") if exc.headers else None
+            try:
+                wait = float(retry_after) if retry_after else min(30.0, 2.0 ** attempt)
+            except (TypeError, ValueError):
+                wait = min(30.0, 2.0 ** attempt)
+            print(
+                f"NCBI transient HTTP {exc.code} on {name}; "
+                f"retry {attempt}/{attempts} in {wait:.1f}s"
+            )
+            time.sleep(wait)
+        except (urllib.error.URLError, TimeoutError) as exc:
+            last_error = exc
+            if attempt >= attempts:
+                raise
+            wait = min(30.0, 2.0 ** attempt)
+            print(
+                f"NCBI network error on {name}: {exc}; "
+                f"retry {attempt}/{attempts} in {wait:.1f}s"
+            )
+            time.sleep(wait)
+
+    raise RuntimeError(f"NCBI request failed after {attempts} attempts: {last_error}")
 
 
 def text(node):
