@@ -123,78 +123,155 @@
 <a class="btn-secondary" data-en="Scientific Method" data-it="Metodo scientifico" href="methodology.html">Scientific Method</a>
 </div>
 </div>
-<div aria-hidden="true" class="science-visual">
-<svg aria-label="Animated metabolic research visualization" class="science-svg" role="img" viewbox="0 0 720 520">
+<div aria-hidden="true" class="science-visual science-visual-rich">
+<svg aria-label="Animated metabolic research visualization" class="science-svg" role="img" viewBox="0 0 760 620">
 <defs>
-<radialgradient cx="50%" cy="50%" id="coreGlow" r="50%">
-<stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"></stop>
-<stop offset="45%" stop-color="#9fc6e6" stop-opacity="0.45"></stop>
-<stop offset="100%" stop-color="#2b6ca3" stop-opacity="0"></stop>
-</radialgradient>
-<lineargradient id="pathGlow" x1="0%" x2="100%" y1="0%" y2="100%">
-<stop offset="0%" stop-color="#6fa7d4"></stop>
-<stop offset="100%" stop-color="#1f4e79"></stop>
-</lineargradient>
-<filter id="softGlow">
-<fegaussianblur result="blur" stddeviation="5"></fegaussianblur>
-<femerge>
-<femergenode in="blur"></femergenode>
-<femergenode in="SourceGraphic"></femergenode>
-</femerge>
-</filter>
+  <radialGradient id="heroCoreFill" cx="42%" cy="36%" r="72%">
+    <stop offset="0%" stop-color="#3b78ab"/>
+    <stop offset="58%" stop-color="#235986"/>
+    <stop offset="100%" stop-color="#153b61"/>
+  </radialGradient>
+  <radialGradient id="heroCoreGlow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#7fb7e3" stop-opacity=".58"/>
+    <stop offset="58%" stop-color="#8fc4eb" stop-opacity=".18"/>
+    <stop offset="100%" stop-color="#8fc4eb" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="heroRoute" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#3f83bd"/>
+    <stop offset="100%" stop-color="#1f5f98"/>
+  </linearGradient>
+  <filter id="heroSoftGlow" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur stdDeviation="5" result="blur"/>
+    <feMerge>
+      <feMergeNode in="blur"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+  <filter id="heroNodeShadow" x="-60%" y="-60%" width="220%" height="220%">
+    <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#477aa4" flood-opacity=".22"/>
+  </filter>
+
+  <path id="route-top" d="M190 178 C300 225 420 205 566 176"/>
+  <path id="route-mid" d="M182 365 C255 290 322 250 392 252 C490 255 536 318 603 333"/>
+  <path id="route-low" d="M222 427 C330 472 455 474 545 424"/>
+  <path id="route-cross" d="M251 220 C302 300 380 360 474 408"/>
 </defs>
-<circle class="sv-orbit sv-orbit-a" cx="360" cy="260" r="178"></circle>
-<circle class="sv-orbit sv-orbit-b" cx="360" cy="260" r="126"></circle>
-<circle class="sv-orbit sv-orbit-c" cx="360" cy="260" r="78"></circle>
-<g class="sv-grid">
-<path d="M110 260H610"></path>
-<path d="M360 70V450"></path>
-<path d="M185 135L535 385"></path>
-<path d="M535 135L185 385"></path>
+
+<!-- subtle scientific framework -->
+<g class="sv-rich-grid">
+  <circle cx="380" cy="306" r="246"/>
+  <circle cx="380" cy="306" r="191"/>
+  <circle cx="380" cy="306" r="138"/>
+  <line x1="82" y1="306" x2="678" y2="306"/>
+  <line x1="380" y1="52" x2="380" y2="560"/>
 </g>
-<g class="sv-paths">
-<path class="sv-path sv-path-1" d="M205 320 C255 250, 275 210, 350 190 S470 185, 520 245"></path>
-<path class="sv-path sv-path-2" d="M205 205 C255 270, 305 310, 380 325 S495 315, 545 255"></path>
-<path class="sv-path sv-path-3" d="M275 120 C340 170, 400 190, 470 155"></path>
+
+<!-- animated routes -->
+<g class="sv-rich-routes">
+  <use href="#route-top"/>
+  <use href="#route-mid"/>
+  <use href="#route-low"/>
+  <use href="#route-cross"/>
 </g>
-<circle class="sv-core-glow" cx="360" cy="260" r="112"></circle>
-<circle class="sv-core" cx="360" cy="260" r="66"></circle>
-<circle class="sv-core-ring" cx="360" cy="260" r="84"></circle>
-<g class="sv-label sv-label-main">
-<text text-anchor="middle" x="360" y="252">β-HB</text>
-<text text-anchor="middle" x="360" y="278">KETONE METABOLISM</text>
+
+<!-- moving particles: always visible -->
+<g class="sv-moving-particles">
+  <circle r="7"><animateMotion dur="7s" repeatCount="indefinite"><mpath href="#route-top"/></animateMotion></circle>
+  <circle r="6"><animateMotion dur="8.8s" begin="-2.2s" repeatCount="indefinite"><mpath href="#route-mid"/></animateMotion></circle>
+  <circle r="6"><animateMotion dur="10s" begin="-4.5s" repeatCount="indefinite"><mpath href="#route-low"/></animateMotion></circle>
+  <circle r="5"><animateMotion dur="9.4s" begin="-1.4s" repeatCount="indefinite"><mpath href="#route-cross"/></animateMotion></circle>
 </g>
-<g class="sv-node sv-node-1" transform="translate(206 318)">
-<circle r="15"></circle><circle class="pulse" r="24"></circle>
-<text x="22" y="-8">AcAc</text>
-<text class="minor" x="22" y="10">ketone body</text>
+
+<!-- small orbiting dots -->
+<g class="sv-orbit-dots">
+  <circle class="od od1" cx="380" cy="60" r="5"/>
+  <circle class="od od2" cx="612" cy="306" r="5"/>
+  <circle class="od od3" cx="380" cy="552" r="5"/>
+  <circle class="od od4" cx="148" cy="306" r="5"/>
 </g>
-<g class="sv-node sv-node-2" transform="translate(516 244)">
-<circle r="14"></circle><circle class="pulse" r="23"></circle>
-<text text-anchor="end" x="-22" y="-10">ATP</text>
-<text class="minor" text-anchor="end" x="-22" y="8">energy flux</text>
+
+<!-- central β-HB -->
+<circle class="sv-rich-core-glow" cx="380" cy="306" r="148"/>
+<circle class="sv-rich-core-ring sv-rich-core-ring-outer" cx="380" cy="306" r="126"/>
+<circle class="sv-rich-core" cx="380" cy="306" r="108"/>
+<circle class="sv-rich-core-ring" cx="380" cy="306" r="116"/>
+<text class="sv-rich-beta" text-anchor="middle" x="380" y="300">β-HB</text>
+<line class="sv-rich-divider" x1="354" y1="320" x2="406" y2="320"/>
+<text class="sv-rich-sub" text-anchor="middle" x="380" y="352">KETONE METABOLISM</text>
+
+<!-- AMPK -->
+<g class="sv-rich-node node-ampk" transform="translate(190 174)">
+  <circle class="node-halo" r="52"/>
+  <circle class="node-shell" r="40"/>
+  <circle class="node-core" r="29"/>
+  <g class="node-icon node-icon-ampk">
+    <circle cx="-10" cy="-3" r="5"/>
+    <circle cx="10" cy="-3" r="5"/>
+    <circle cx="0" cy="11" r="5"/>
+    <path d="M-6 0 L-2 7 M6 0 L2 7 M-5 -4 L5 -4"/>
+  </g>
+  <text class="node-title" text-anchor="end" x="-58" y="-4">AMPK</text>
+  <text class="node-minor" text-anchor="end" x="-58" y="18">energy sensing</text>
 </g>
-<g class="sv-node sv-node-3" transform="translate(286 124)">
-<circle r="13"></circle><circle class="pulse" r="21"></circle>
-<text text-anchor="end" x="-18" y="-8">AMPK</text>
-<text class="minor" text-anchor="end" x="-18" y="10">signalling</text>
+
+<!-- NAD+ -->
+<g class="sv-rich-node node-nad" transform="translate(566 180)">
+  <circle class="node-halo" r="52"/>
+  <circle class="node-shell" r="40"/>
+  <circle class="node-core" r="29"/>
+  <g class="node-icon node-icon-nad">
+    <polygon points="0,-14 12,-7 12,7 0,14 -12,7 -12,-7"/>
+    <circle cx="7" cy="-8" r="4"/>
+  </g>
+  <text class="node-title" x="58" y="-4">NAD+</text>
+  <text class="node-minor" x="58" y="18">redox balance</text>
 </g>
-<g class="sv-node sv-node-4" transform="translate(470 156)">
-<circle r="12"></circle><circle class="pulse" r="20"></circle>
-<text x="18" y="-8">NAD+</text>
-<text class="minor" x="18" y="10">redox</text>
+
+<!-- ATP -->
+<g class="sv-rich-node node-atp" transform="translate(618 334)">
+  <circle class="node-halo" r="50"/>
+  <circle class="node-shell" r="38"/>
+  <circle class="node-core" r="28"/>
+  <path class="node-icon node-icon-atp" d="M4 -17 L-8 2 H1 L-5 18 L12 -5 H3 Z"/>
+  <text class="node-title" x="56" y="-2">ATP</text>
+  <text class="node-minor" x="56" y="20">cellular energy</text>
 </g>
-<g class="sv-node sv-node-5" transform="translate(380 326)">
-<circle r="11"></circle><circle class="pulse" r="18"></circle>
-<text x="16" y="18">mTOR</text>
+
+<!-- mTOR -->
+<g class="sv-rich-node node-mtor" transform="translate(520 446)">
+  <circle class="node-halo" r="50"/>
+  <circle class="node-shell" r="38"/>
+  <circle class="node-core" r="28"/>
+  <g class="node-icon node-icon-bars">
+    <rect x="-13" y="7" width="6" height="10" rx="1"/>
+    <rect x="-3" y="1" width="6" height="16" rx="1"/>
+    <rect x="7" y="-8" width="6" height="25" rx="1"/>
+  </g>
+  <text class="node-title" x="56" y="2">mTOR</text>
+  <text class="node-minor" x="56" y="24">growth &amp; translation</text>
 </g>
-<g class="sv-particle-group">
-<circle class="sv-particle p1" cx="205" cy="320" r="5"></circle>
-<circle class="sv-particle p2" cx="205" cy="205" r="4"></circle>
-<circle class="sv-particle p3" cx="275" cy="120" r="4"></circle>
+
+<!-- AcAc -->
+<g class="sv-rich-node node-acac" transform="translate(214 430)">
+  <circle class="node-halo" r="50"/>
+  <circle class="node-shell" r="38"/>
+  <circle class="node-core" r="28"/>
+  <g class="node-icon node-icon-acac">
+    <path d="M0 -15 C12 -6 15 8 0 17 C-15 8 -12 -6 0 -15 Z"/>
+    <path d="M0 -9 V13 M0 2 L8 -4"/>
+  </g>
+  <text class="node-title" x="56" y="1">AcAc</text>
+  <text class="node-minor" x="56" y="23">ketone body</text>
 </g>
-<g class="sv-caption">
-<text text-anchor="middle" x="360" y="486">METABOLIC NETWORK • CLINICAL TRANSLATION • EVIDENCE</text>
+
+<!-- peripheral scientific labels -->
+<g class="sv-rich-context">
+  <text x="92" y="270">INFLAMMATION</text><text x="92" y="288">MODULATION</text>
+  <text x="95" y="500">NEUROPROTECTION</text>
+  <text text-anchor="middle" x="380" y="82">METABOLIC HEALTH</text>
+  <text x="595" y="270">CELLULAR</text><text x="595" y="288">RESILIENCE</text>
+  <text x="575" y="506">IMMUNE</text><text x="575" y="524">REGULATION</text>
+  <text text-anchor="middle" x="380" y="580">CLINICAL TRANSLATION</text>
 </g>
 </svg>
 </div>
