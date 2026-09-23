@@ -1,25 +1,15 @@
 {
   "version": "metadata-recovery-v1",
-  "run_at": "2026-09-23T12:47:16+00:00",
+  "run_at": "2026-09-23T13:27:32+00:00",
   "offline": false,
-  "missing_year_instances_before": 171,
-  "recovered_instances": 1,
-  "resolved_unique_titles": 1,
+  "missing_year_instances_before": 170,
+  "recovered_instances": 0,
+  "resolved_unique_titles": 0,
   "remaining_missing_year_instances": 170,
   "remaining_unique_missing_titles": 165,
   "pubmed_title_searches_attempted": 165,
   "crossref_title_searches_attempted": 165,
-  "resolved": [
-    {
-      "source": "dated-library-match",
-      "title": "13. Immunomodulatory Effect of a Very-Low-Calorie Ketogenic Diet",
-      "matched_title": "537. Immunomodulatory effect of a very-low-calorie ketogenic diet compared with bariatric surgery and a low-calorie diet in patients with excessive body weight.",
-      "year": 2022,
-      "pmid": "35667273",
-      "doi": "10.1016/j.clnu.2022.05.007",
-      "score": 0.93
-    }
-  ],
+  "resolved": [],
   "unresolved_titles": [
     "12. Effects of One-Month Very-Low-Calorie Ketogenic Diet on 24h Energy Metabolism",
     "23. European Society for the Study of Obesity (EASO) Position Statement on Very Low-Calorie Ketogenic Diets",
