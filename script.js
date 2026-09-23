@@ -817,7 +817,70 @@ function initSite() {
 }
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initSite);
+  
+/* V97 — Library chronology and year labels */
+function normalizeLibraryChronology() {
+  document.querySelectorAll('details.library-folder .folder-curated').forEach(container => {
+    const cards = Array.from(container.querySelectorAll(':scope > article.folder-paper'));
+    if (!cards.length) return;
+
+    cards.sort((a, b) => {
+      const ya = /^\d{4}$/.test(a.dataset.year || '') ? Number(a.dataset.year) : null;
+      const yb = /^\d{4}$/.test(b.dataset.year || '') ? Number(b.dataset.year) : null;
+
+      if (ya == null && yb == null) return 0;
+      if (ya == null) return 1;
+      if (yb == null) return -1;
+      return yb - ya;
+    });
+
+    cards.forEach((card, index) => {
+      const year = /^\d{4}$/.test(card.dataset.year || '') ? card.dataset.year : '';
+
+      if (year) {
+        let badge = card.querySelector(':scope > .evidence-level');
+        if (!badge) {
+          badge = document.createElement('div');
+          badge.className = 'evidence-level';
+          card.insertBefore(badge, card.firstChild);
+        }
+
+        const appendYear = value => {
+          value = String(value || '')
+            .replace(/\s*[·•|–—-]\s*(18|19|20)\d{2}\s*$/, '')
+            .trim();
+
+          if (/^(18|19|20)\d{2}$/.test(value)) return year;
+          return value ? `${value} · ${year}` : year;
+        };
+
+        const baseVisible = badge.textContent.trim();
+        const en = appendYear(badge.dataset.en || baseVisible);
+        const it = appendYear(badge.dataset.it || badge.dataset.en || baseVisible);
+
+        badge.dataset.en = en;
+        badge.dataset.it = it;
+        badge.textContent = currentLang() === 'it' ? it : en;
+      }
+
+      const h4 = card.querySelector(':scope > h4');
+      if (h4) {
+        const stripNumber = value => String(value || '').replace(/^\s*\d+\.\s*/, '').trim();
+        const visible = stripNumber(h4.textContent);
+        const enTitle = stripNumber(h4.dataset.en || visible);
+        const itTitle = stripNumber(h4.dataset.it || h4.dataset.en || visible);
+
+        h4.dataset.en = `${index + 1}. ${enTitle}`;
+        h4.dataset.it = `${index + 1}. ${itTitle}`;
+        h4.textContent = currentLang() === 'it' ? h4.dataset.it : h4.dataset.en;
+      }
+
+      container.appendChild(card);
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initSite);
 } else {
   initSite();
 }
@@ -834,3 +897,15 @@ if (document.getElementById('alzheimers-disease')) {
   krAlzheimerMechanisms.defer = true;
   document.head.appendChild(krAlzheimerMechanisms);
 }
+
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', normalizeLibraryChronology);
+} else {
+  normalizeLibraryChronology();
+}
+
+
+document.querySelectorAll("[data-lang]").forEach(btn => {
+  btn.addEventListener("click", () => setTimeout(normalizeLibraryChronology, 60));
+});
