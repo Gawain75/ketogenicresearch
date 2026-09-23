@@ -26,7 +26,8 @@ CURATION_MAX_RECORDS = int(os.getenv("CURATION_MAX_RECORDS", "2000"))
 BASE = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 
 QUERY = r'''(
-"ketogenic diet"[Title/Abstract] OR "ketogenic diets"[Title/Abstract]
+"Diet, Ketogenic"[MeSH Terms]
+OR "ketogenic diet"[Title/Abstract] OR "ketogenic diets"[Title/Abstract]
 OR "ketogenic therapy"[Title/Abstract] OR "ketogenic metabolic therapy"[Title/Abstract]
 OR "nutritional ketosis"[Title/Abstract] OR "very low calorie ketogenic diet"[Title/Abstract]
 OR "very-low-calorie ketogenic diet"[Title/Abstract] OR "very low energy ketogenic therapy"[Title/Abstract]

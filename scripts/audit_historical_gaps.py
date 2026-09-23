@@ -14,7 +14,7 @@ STATE = ROOT / "historical-gap-audit-state.json"
 REPORT = ROOT / "historical-gap-audit.json"
 CANDIDATES = ROOT / "historical-gap-candidates.json"
 
-START_YEAR = int(os.getenv("HISTORICAL_AUDIT_START_YEAR", "2025"))
+START_YEAR = int(os.getenv("HISTORICAL_AUDIT_START_YEAR", str(dt.date.today().year)))
 END_YEAR = int(os.getenv("HISTORICAL_AUDIT_END_YEAR", "1921"))
 YEARS_PER_RUN = max(1, int(os.getenv("HISTORICAL_AUDIT_YEARS_PER_RUN", "10")))
 
