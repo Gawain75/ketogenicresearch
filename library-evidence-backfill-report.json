@@ -1,0 +1,28 @@
+{
+  "cards_total": 6019,
+  "candidates_processed": 1165,
+  "initial_missing_badges": 185,
+  "initial_generic_other_reviewed": 980,
+  "unique_candidate_pmids": 829,
+  "pubmed_records_retrieved": 829,
+  "pubmed_pmids_not_retrieved": [],
+  "classification_counts": {
+    "Case report / case series": 25,
+    "Clinical trial / intervention": 88,
+    "Guideline / consensus": 23,
+    "Historical / foundational evidence": 5,
+    "Human / clinical or translational evidence": 632,
+    "Observational human study": 134,
+    "Other": 102,
+    "Preclinical / mechanistic": 47,
+    "Randomized clinical trial": 13,
+    "Review": 76,
+    "Systematic review / meta-analysis": 20
+  },
+  "classification_sources": {
+    "Historical record": 5,
+    "Local conservative rules": 60,
+    "PubMed metadata": 1100
+  },
+  "cards_missing_badge_after_backfill": 0
+}
