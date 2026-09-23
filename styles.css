@@ -1491,7 +1491,7 @@ h4 {
 
 
   /* METRIC / OVERVIEW CARDS PIÙ COMPATTE */
-}
+  .
 
 /* V65_AREA_FILTER */
 #areaFilter {
@@ -2306,5 +2306,43 @@ svg.evidence-trends-svg {
   .home-latest-card .area-tag{
     margin-top:auto;
     padding-top:14px;
+  }
+}
+
+
+/* V74 — Research program rounded cards */
+.programs{
+  display:grid;
+  gap:16px;
+  border-top:0;
+  background:transparent;
+}
+
+.programs article{
+  padding:28px 24px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:#fff;
+  box-shadow:0 8px 24px rgba(19,63,69,.045);
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    border-color .18s ease;
+}
+
+.programs article:hover{
+  transform:translateY(-1px);
+  border-color:#c8d8e4;
+  box-shadow:0 12px 30px rgba(19,63,69,.065);
+}
+
+@media(max-width:850px){
+  .programs{
+    gap:12px;
+  }
+
+  .programs article{
+    padding:22px 18px;
+    border-radius:14px;
   }
 }
