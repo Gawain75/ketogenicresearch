@@ -1529,7 +1529,7 @@ h4 {
 
 
   /* METRIC / OVERVIEW CARDS PIÙ COMPATTE */
-  .
+}
 
 /* V65_AREA_FILTER */
 #areaFilter {
@@ -2346,3 +2346,5 @@ svg.evidence-trends-svg {
     padding-top:14px;
   }
 }
+
+/* V88 — close V72 mobile media block; restore desktop rules */
