@@ -824,8 +824,25 @@ function initSite() {
 }
 
 if (document.readyState === 'loading') {
-  
-/* V99 — Library chronology with separate year and evidence badges */
+  document.addEventListener('DOMContentLoaded', initSite);
+} else {
+  initSite();
+}
+
+window.addEventListener(
+  'hashchange',
+  openLibraryAreaFromHash
+);
+
+// Test reversibile: razionale meccanicistico Alzheimer
+if (document.getElementById('alzheimers-disease')) {
+  const krAlzheimerMechanisms = document.createElement('script');
+  krAlzheimerMechanisms.src = 'alzheimer-mechanisms.js?v=1';
+  krAlzheimerMechanisms.defer = true;
+  document.head.appendChild(krAlzheimerMechanisms);
+}
+
+/* V101 — Library chronology with separate year and evidence badges */
 function normalizeLibraryChronology() {
   document.querySelectorAll('details.library-folder .folder-curated').forEach(container => {
     const cards = Array.from(container.querySelectorAll(':scope > article.folder-paper'));
@@ -844,7 +861,6 @@ function normalizeLibraryChronology() {
     cards.forEach((card, index) => {
       const year = /^\d{4}$/.test(card.dataset.year || '') ? card.dataset.year : '';
 
-      // Remove any previously appended year from the evidence/category badge.
       const evidenceBadge = card.querySelector(':scope > .evidence-level');
       if (evidenceBadge) {
         const stripYear = value => String(value || '')
@@ -855,8 +871,6 @@ function normalizeLibraryChronology() {
         const enClean = stripYear(evidenceBadge.dataset.en || visible);
         const itClean = stripYear(evidenceBadge.dataset.it || evidenceBadge.dataset.en || visible);
 
-        // If this badge was created only to hold the year, remove it:
-        // the dedicated year badge below will replace it.
         const yearOnly =
           /^(18|19|20)\d{2}$/.test(visible) ||
           (!enClean && !itClean);
@@ -870,7 +884,6 @@ function normalizeLibraryChronology() {
         }
       }
 
-      // Dedicated year badge: always shown when data-year exists.
       let yearBadge = card.querySelector(':scope > .publication-year-badge');
 
       if (year) {
@@ -885,13 +898,13 @@ function normalizeLibraryChronology() {
             card.insertBefore(yearBadge, card.firstChild);
           }
         }
+
         yearBadge.textContent = year;
         yearBadge.setAttribute('aria-label', `Publication year ${year}`);
       } else if (yearBadge) {
         yearBadge.remove();
       }
 
-      // Sequential numbering after chronological sorting.
       const h4 = card.querySelector(':scope > h4');
       if (h4) {
         const stripNumber = value => String(value || '')
@@ -912,6 +925,15 @@ function normalizeLibraryChronology() {
   });
 }
 
-document.querySelectorAll("[data-lang]").forEach(btn => {
-  btn.addEventListener("click", () => setTimeout(normalizeLibraryChronology, 60));
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', normalizeLibraryChronology);
+} else {
+  normalizeLibraryChronology();
+}
+
+document.querySelectorAll('[data-lang]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    window.setTimeout(normalizeLibraryChronology, 60);
+  });
 });
+

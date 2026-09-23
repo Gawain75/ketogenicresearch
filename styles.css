@@ -2356,3 +2356,39 @@ svg.evidence-trends-svg {
   content:none !important;
   display:none !important;
 }
+
+
+/* V99 — separate publication year from evidence/category badge */
+.folder-paper > .publication-year-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:34px;
+  padding:6px 11px;
+  margin:0 8px 12px 0;
+  border:1px solid #c9d9e6;
+  border-radius:999px;
+  background:#f4f8fb;
+  color:var(--primary);
+  font-size:11px;
+  font-weight:700;
+  line-height:1;
+  letter-spacing:.02em;
+  vertical-align:middle;
+}
+
+.folder-paper > .evidence-level{
+  display:inline-flex;
+  align-items:center;
+  margin:0 0 12px 0;
+  vertical-align:middle;
+}
+
+@media(max-width:640px){
+  .folder-paper > .publication-year-badge{
+    min-height:32px;
+    padding:6px 10px;
+    margin-right:7px;
+    font-size:10px;
+  }
+}
