@@ -1,0 +1,247 @@
+name: Install Library chronology and year labels
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  install-library-chronology:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install parser
+        run: python -m pip install beautifulsoup4
+
+      - name: Install Library normalizer
+        shell: bash
+        run: |
+          cat > scripts/normalize_library_chronology.py <<'PY'
+          #!/usr/bin/env python3
+          from pathlib import Path
+          import re
+          from bs4 import BeautifulSoup
+
+          ROOT = Path(__file__).resolve().parents[1]
+          LIBRARY = ROOT / "library.html"
+
+          YEAR_RE = re.compile(r"^(18|19|20)\d{2}$")
+          NUMBER_RE = re.compile(r"^\s*\d+\.\s*")
+          YEAR_SUFFIX_RE = re.compile(r"\s*[·•|–—-]\s*(18|19|20)\d{2}\s*$")
+
+          def clean_number(value: str) -> str:
+              return NUMBER_RE.sub("", value or "").strip()
+
+          def year_of(card):
+              raw = str(card.get("data-year") or "").strip()
+              return int(raw) if YEAR_RE.fullmatch(raw) else None
+
+          def add_year_to_badge(soup, card, year):
+              if year is None:
+                  return
+
+              badge = card.find(class_="evidence-level", recursive=False)
+              if badge is None:
+                  badge = soup.new_tag("div")
+                  badge["class"] = ["evidence-level"]
+                  badge["data-en"] = str(year)
+                  badge["data-it"] = str(year)
+                  badge.string = str(year)
+                  card.insert(0, badge)
+                  return
+
+              visible = badge.get_text(" ", strip=True)
+              en = str(badge.get("data-en") or visible).strip()
+              it = str(badge.get("data-it") or en).strip()
+
+              def with_year(value):
+                  value = YEAR_SUFFIX_RE.sub("", value).strip()
+                  if re.fullmatch(r"(18|19|20)\d{2}", value):
+                      return str(year)
+                  return f"{value} · {year}" if value else str(year)
+
+              en_new = with_year(en)
+              it_new = with_year(it)
+
+              badge["data-en"] = en_new
+              badge["data-it"] = it_new
+              badge.string = en_new
+
+          def renumber_title(card, number):
+              h4 = card.find("h4", recursive=False)
+              if h4 is None:
+                  return
+
+              visible = clean_number(h4.get_text(" ", strip=True))
+              en = clean_number(str(h4.get("data-en") or visible))
+              it = clean_number(str(h4.get("data-it") or en))
+
+              h4["data-en"] = f"{number}. {en}"
+              h4["data-it"] = f"{number}. {it}"
+              h4.string = h4["data-en"]
+
+          def normalize_folder(soup, folder):
+              curated = folder.select_one(".folder-curated")
+              if curated is None:
+                  return 0
+
+              cards = curated.find_all("article", class_="folder-paper", recursive=False)
+              if not cards:
+                  return 0
+
+              indexed = list(enumerate(cards))
+
+              # Newest first; unknown years last. Stable order inside the same year.
+              indexed.sort(
+                  key=lambda item: (
+                      1 if year_of(item[1]) is None else 0,
+                      -(year_of(item[1]) or 0),
+                      item[0],
+                  )
+              )
+
+              for _, card in indexed:
+                  card.extract()
+
+              for number, (_, card) in enumerate(indexed, start=1):
+                  y = year_of(card)
+                  add_year_to_badge(soup, card, y)
+                  renumber_title(card, number)
+                  curated.append(card)
+
+              return len(indexed)
+
+          def main():
+              soup = BeautifulSoup(LIBRARY.read_text(encoding="utf-8"), "html.parser")
+
+              folders = 0
+              papers = 0
+              for folder in soup.select("details.library-folder"):
+                  n = normalize_folder(soup, folder)
+                  if n:
+                      folders += 1
+                      papers += n
+
+              LIBRARY.write_text(str(soup), encoding="utf-8")
+              print(f"Normalized {papers} publication cards across {folders} Library folders.")
+
+          if __name__ == "__main__":
+              main()
+          PY
+
+      - name: Normalize current Scientific Library
+        run: python scripts/normalize_library_chronology.py
+
+      - name: Wire normalization into Library workflows
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          STEP = """      - name: Normalize Library chronology and year labels
+                run: python scripts/normalize_library_chronology.py
+
+          """
+          STEP = STEP.replace("                run:", "        run:")
+
+          root = Path(".github/workflows")
+          changed = []
+
+          for path in sorted(root.glob("*.yml")):
+              text = path.read_text(encoding="utf-8")
+
+              writes_library = any(token in text for token in (
+                  "update_latest.py",
+                  "promote_auto.py",
+                  "promote_auto_v5.py",
+                  "recover_missing_metadata.py",
+                  "maintain_obesity_glp1_keto.py",
+                  "repair_missing_publication_years.py",
+                  "library.html",
+              ))
+              if not writes_library:
+                  continue
+
+              if "normalize_library_chronology.py" in text:
+                  continue
+
+              m = re.search(r"(?m)^      - name: Rebuild Evidence Trends", text)
+              if not m:
+                  m = re.search(r"(?m)^      - name: Rebuild evidence trends", text)
+              if not m:
+                  m = re.search(r"(?m)^      - name: Commit", text)
+
+              if not m:
+                  continue
+
+              text = text[:m.start()] + STEP + text[m.start():]
+              path.write_text(text, encoding="utf-8")
+              changed.append(str(path))
+
+          print("Workflows updated:")
+          for p in changed:
+              print(" -", p)
+          PY
+
+      - name: Rebuild Evidence Trends
+        run: |
+          if [ -f scripts/build_evidence_trends.py ]; then
+            python scripts/build_evidence_trends.py
+          fi
+
+      - name: Synchronize counters
+        run: |
+          if [ -f scripts/sync_publication_counters.py ]; then
+            python scripts/sync_publication_counters.py
+          fi
+
+      - name: Commit chronological Library
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Order Scientific Library chronologically and display publication years"
+            git fetch origin main
+            git rebase origin/main
+
+            for attempt in 1 2 3 4 5; do
+              echo "Push attempt $attempt/5..."
+              if git push origin HEAD:main; then
+                break
+              fi
+              if [ "$attempt" -eq 5 ]; then
+                exit 1
+              fi
+              sleep $((attempt * 10))
+            done
+          fi
+
+      - name: Deploy Scientific Library to Cloudflare
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run deploy-cloudflare-library.yml --ref main
