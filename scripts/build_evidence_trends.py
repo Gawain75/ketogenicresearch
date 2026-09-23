@@ -244,7 +244,7 @@ PAGE_HTML = r'''<!DOCTYPE html>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>Evidence Trends | Ketogenic Research</title>
 <meta content="Explore publication trends over time across the Ketogenic Research Scientific Library, globally and by clinical area." name="description"/>
-<link href="styles.css?v=89" rel="stylesheet"/>
+<link href="styles.css?v=90" rel="stylesheet"/>
 <link href="https://ketogenicresearch.org/evidence-trends.html" rel="canonical"/>
 <meta content="Evidence Trends | Ketogenic Research" name="kr-title-en"/>
 <meta content="Andamento delle evidenze | Ketogenic Research" name="kr-title-it"/>
@@ -324,8 +324,28 @@ svg.evidence-trends-svg {
 }
 
 </style>
+
+<style id="trends-header-parity-v90">
+@media (min-width:981px){
+  body.trends-page .header .nav{
+    display:grid !important;
+    grid-template-columns:190px minmax(0,1fr) auto !important;
+    column-gap:36px !important;
+    align-items:center !important;
+  }
+  body.trends-page .header .brand{
+    width:190px !important;
+    min-width:190px !important;
+  }
+  body.trends-page .header .site-nav{
+    min-width:0 !important;
+    justify-content:flex-start !important;
+  }
+}
+</style>
+
 </head>
-<body>
+<body class="trends-page">
 <header class="header">
 <div class="wrap nav">
 <a aria-label="Ketogenic Research Hub" class="brand" href="index.html">
@@ -365,17 +385,7 @@ svg.evidence-trends-svg {
 </div></section>
 <section class="section"><div class="wrap"><p class="kicker" data-en="AREAS AT A GLANCE" data-it="AREE IN SINTESI">AREAS AT A GLANCE</p><h2 data-en="Publication volume by clinical area" data-it="Volume delle pubblicazioni per area clinica">Publication volume by clinical area</h2><div style="overflow-x:auto"><table class="area-table"><thead><tr><th data-en="Area" data-it="Area">Area</th><th data-en="Total" data-it="Totale">Total</th><th id="tableCurrentHead"></th><th id="tablePreviousHead"></th></tr></thead><tbody id="areaTable"></tbody></table></div></div></section>
 </main>
-<footer>
-<div class="wrap footer">
-<span>KETOGENIC RESEARCH HUB</span>
-<nav class="footer-links" aria-label="Footer">
-<a href="privacy.html" data-en="Privacy" data-it="Privacy">Privacy</a>
-<a href="contact.html" data-en="Contact" data-it="Contatti">Contact</a>
-<a href="methodology.html" data-en="Methodology" data-it="Metodologia">Methodology</a>
-</nav>
-<span>© 2026 Ketogenic Research Hub</span>
-</div>
-</footer>
+<footer><div class="wrap footer"><span>KETOGENIC RESEARCH HUB</span><nav aria-label="Footer" class="footer-links"><a data-en="Privacy" data-it="Privacy" href="privacy.html">Privacy</a><a data-en="Contact" data-it="Contatti" href="contact.html">Contact</a><a data-en="Methodology" data-it="Metodologia" href="methodology.html">Methodology</a></nav><span>© 2026 Ketogenic Research Hub</span></div></footer>
 <script>
 let DATA=null; const $=s=>document.querySelector(s); const lang=()=>document.documentElement.lang==="it"?"it":"en";
 const n=v=>new Intl.NumberFormat(lang()==="it"?"it-IT":"en-US").format(v||0); const tf=o=>o?.[lang()]||o?.en||"";
