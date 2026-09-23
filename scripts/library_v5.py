@@ -260,6 +260,21 @@ def reconcile_existing_cards(soup: BeautifulSoup) -> int:
                 a.string = "Full text ↗"
                 links.append(a)
 
+                pdf_url = rec["pmc_url"].rstrip("/") + "/pdf/"
+                a = soup.new_tag(
+                    "a",
+                    href=pdf_url,
+                    target="_blank",
+                    rel="noopener",
+                )
+                a["data-en"] = "PDF ↓"
+                a["data-it"] = "PDF ↓"
+                a["data-source"] = "pmc"
+                a["data-link-kind"] = "pdf"
+                a["aria-label"] = "Open PDF"
+                a.string = "PDF ↓"
+                links.append(a)
+
         changed += 1
         print(f"Legacy reconcile: matched PMID {pmid}: {title[:90]}")
 

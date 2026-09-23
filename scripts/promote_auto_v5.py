@@ -193,6 +193,21 @@ def main() -> None:
                 a.string = "Full text ↗"
                 links.append(a)
 
+                pdf_url = record["pmc_url"].rstrip("/") + "/pdf/"
+                a = soup.new_tag(
+                    "a",
+                    href=pdf_url,
+                    target="_blank",
+                    rel="noopener",
+                )
+                a["data-en"] = "PDF ↓"
+                a["data-it"] = "PDF ↓"
+                a["data-source"] = "pmc"
+                a["data-link-kind"] = "pdf"
+                a["aria-label"] = "Open PDF"
+                a.string = "PDF ↓"
+                links.append(a)
+
             art.append(links)
             wrap.append(art)
             cards_added += 1

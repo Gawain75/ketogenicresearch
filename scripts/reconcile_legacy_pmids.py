@@ -388,6 +388,20 @@ def set_links(soup, card, rec):
         a.string = "Full text ↗"
         links.append(a)
 
+        a = soup.new_tag(
+            "a",
+            href=f"https://pmc.ncbi.nlm.nih.gov/articles/{rec['pmc']}/pdf/",
+            target="_blank",
+            rel="noopener",
+        )
+        a["data-en"] = "PDF ↓"
+        a["data-it"] = "PDF ↓"
+        a["data-source"] = "pmc"
+        a["data-link-kind"] = "pdf"
+        a["aria-label"] = "Open PDF"
+        a.string = "PDF ↓"
+        links.append(a)
+
 
 def main():
     soup = BeautifulSoup(LIBRARY.read_text(encoding="utf-8"), "html.parser")
