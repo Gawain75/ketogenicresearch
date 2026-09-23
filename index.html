@@ -96,8 +96,12 @@
 @media(max-width:640px){
   .hero-clean-grid>.science-visual-rich{width:108%;max-width:none;min-height:370px;margin-left:-4%}
   .sv-rich-context{display:none}
-  .sv-rich-node .node-minor{display:none}
-  .sv-rich-node .node-title{font-size:16px}
+  .sv-rich-node .node-title{font-size:15px}
+  .sv-rich-node .node-minor{
+    display:block;
+    font-size:9px;
+    opacity:.92;
+  }
 }
 </style>
 
@@ -190,6 +194,11 @@
 @keyframes heroRingPulse{0%,100%{transform:scale(.98);opacity:.40}50%{transform:scale(1.035);opacity:.72}}
 @keyframes heroNodeHalo{0%,100%{transform:scale(.94);opacity:.55}50%{transform:scale(1.10);opacity:.95}}
 
+@media (max-width:640px){
+  .sv-rich-node .node-title{font-size:15px!important}
+  .sv-rich-node .node-minor{display:block!important;font-size:9px!important;opacity:.92!important}
+  .sv-rich-context{display:none!important}
+}
 @media (prefers-reduced-motion:reduce){
   .sv-rich-routes use,.sv-orbit-dots,.sv-rich-core-glow,.sv-rich-core-ring,.sv-rich-node .node-halo{animation:none!important}
 }
