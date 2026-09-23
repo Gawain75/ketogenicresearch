@@ -55,8 +55,43 @@ jobs:
           NCBI_EMAIL: info@ketogenicresearch.org
           HISTORICAL_AUDIT_START_YEAR: "2026"
           HISTORICAL_AUDIT_END_YEAR: "1921"
-          HISTORICAL_AUDIT_YEARS_PER_RUN: "106"
-        run: python scripts/audit_historical_gaps.py
+          HISTORICAL_AUDIT_YEARS_PER_RUN: "10"
+        shell: bash
+        run: |
+          set -u
+          completed=0
+
+          for batch in $(seq 1 12); do
+            echo "=== PubMed audit batch ${batch}/12 ==="
+            success=0
+
+            for attempt in 1 2 3 4; do
+              if python scripts/audit_historical_gaps.py; then
+                success=1
+                break
+              fi
+
+              wait=$((attempt * 20))
+              echo "Audit batch failed; retry ${attempt}/4 in ${wait}s"
+              sleep "$wait"
+            done
+
+            if [ "$success" -ne 1 ]; then
+              echo "Audit failed after 4 batch-level attempts."
+              exit 1
+            fi
+
+            if python -c 'import json; from pathlib import Path; p=Path("historical-gap-audit-state.json"); state=json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}; raise SystemExit(0 if state.get("completed") else 1)'; then
+              completed=1
+              echo "Full PubMed audit completed."
+              break
+            fi
+          done
+
+          if [ "$completed" -ne 1 ]; then
+            echo "Audit did not complete the full requested year range."
+            exit 1
+          fi
 
       - name: Queue high-confidence missing publications
         run: python scripts/queue_historical_gap_candidates.py
