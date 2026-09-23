@@ -2,9 +2,9 @@
 
 <html lang="en">
 <head>
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
-<meta http-equiv="Pragma" content="no-cache"/>
-<meta http-equiv="Expires" content="0"/>
+<meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control"/>
+<meta content="no-cache" http-equiv="Pragma"/>
+<meta content="0" http-equiv="Expires"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>Ketogenic Research Hub | Clinical &amp; Translational research initiative</title>
@@ -104,7 +104,6 @@
   }
 }
 </style>
-
 </head>
 <body class="home-clean">
 <header class="header">
@@ -150,7 +149,7 @@
 </div>
 </div>
 <div aria-hidden="true" class="science-visual science-visual-rich">
-<svg aria-label="Animated metabolic research visualization" class="science-svg" role="img" viewBox="0 0 760 620">
+<svg aria-label="Animated metabolic research visualization" class="science-svg" role="img" viewbox="0 0 760 620">
 <style>
 .sv-rich-grid circle,.sv-rich-grid line{fill:none;stroke:#a9c7de;stroke-width:1.15;stroke-dasharray:4 13;opacity:.34}
 .sv-rich-grid line{stroke-dasharray:none;opacity:.12}
@@ -203,159 +202,146 @@
   .sv-rich-routes use,.sv-orbit-dots,.sv-rich-core-glow,.sv-rich-core-ring,.sv-rich-node .node-halo{animation:none!important}
 }
 </style>
-
 <defs>
-  <radialGradient id="heroCoreFill" cx="42%" cy="36%" r="72%">
-    <stop offset="0%" stop-color="#3b78ab"/>
-    <stop offset="58%" stop-color="#235986"/>
-    <stop offset="100%" stop-color="#153b61"/>
-  </radialGradient>
-  <radialGradient id="heroCoreGlow" cx="50%" cy="50%" r="50%">
-    <stop offset="0%" stop-color="#7fb7e3" stop-opacity=".58"/>
-    <stop offset="58%" stop-color="#8fc4eb" stop-opacity=".18"/>
-    <stop offset="100%" stop-color="#8fc4eb" stop-opacity="0"/>
-  </radialGradient>
-  <linearGradient id="heroRoute" x1="0%" y1="0%" x2="100%" y2="100%">
-    <stop offset="0%" stop-color="#3f83bd"/>
-    <stop offset="100%" stop-color="#1f5f98"/>
-  </linearGradient>
-  <filter id="heroSoftGlow" x="-60%" y="-60%" width="220%" height="220%">
-    <feGaussianBlur stdDeviation="5" result="blur"/>
-    <feMerge>
-      <feMergeNode in="blur"/>
-      <feMergeNode in="SourceGraphic"/>
-    </feMerge>
-  </filter>
-  <filter id="heroNodeShadow" x="-60%" y="-60%" width="220%" height="220%">
-    <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#477aa4" flood-opacity=".22"/>
-  </filter>
-
-  <path id="route-top" d="M190 178 C300 225 420 205 566 176"/>
-  <path id="route-mid" d="M182 365 C255 290 322 250 392 252 C490 255 536 318 603 333"/>
-  <path id="route-low" d="M222 427 C330 472 455 474 545 424"/>
-  <path id="route-cross" d="M251 220 C302 300 380 360 474 408"/>
+<radialgradient cx="42%" cy="36%" id="heroCoreFill" r="72%">
+<stop offset="0%" stop-color="#3b78ab"></stop>
+<stop offset="58%" stop-color="#235986"></stop>
+<stop offset="100%" stop-color="#153b61"></stop>
+</radialgradient>
+<radialgradient cx="50%" cy="50%" id="heroCoreGlow" r="50%">
+<stop offset="0%" stop-color="#7fb7e3" stop-opacity=".58"></stop>
+<stop offset="58%" stop-color="#8fc4eb" stop-opacity=".18"></stop>
+<stop offset="100%" stop-color="#8fc4eb" stop-opacity="0"></stop>
+</radialgradient>
+<lineargradient id="heroRoute" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#3f83bd"></stop>
+<stop offset="100%" stop-color="#1f5f98"></stop>
+</lineargradient>
+<filter height="220%" id="heroSoftGlow" width="220%" x="-60%" y="-60%">
+<fegaussianblur result="blur" stddeviation="5"></fegaussianblur>
+<femerge>
+<femergenode in="blur"></femergenode>
+<femergenode in="SourceGraphic"></femergenode>
+</femerge>
+</filter>
+<filter height="220%" id="heroNodeShadow" width="220%" x="-60%" y="-60%">
+<fedropshadow dx="0" dy="3" flood-color="#477aa4" flood-opacity=".22" stddeviation="4"></fedropshadow>
+</filter>
+<path d="M190 178 C300 225 420 205 566 176" id="route-top"></path>
+<path d="M182 365 C255 290 322 250 392 252 C490 255 536 318 603 333" id="route-mid"></path>
+<path d="M222 427 C330 472 455 474 545 424" id="route-low"></path>
+<path d="M251 220 C302 300 380 360 474 408" id="route-cross"></path>
 </defs>
-
 <!-- subtle scientific framework -->
 <g class="sv-rich-grid">
-  <circle cx="380" cy="306" r="246"/>
-  <circle cx="380" cy="306" r="191"/>
-  <circle cx="380" cy="306" r="138"/>
-  <line x1="82" y1="306" x2="678" y2="306"/>
-  <line x1="380" y1="52" x2="380" y2="560"/>
+<circle cx="380" cy="306" r="246"></circle>
+<circle cx="380" cy="306" r="191"></circle>
+<circle cx="380" cy="306" r="138"></circle>
+<line x1="82" x2="678" y1="306" y2="306"></line>
+<line x1="380" x2="380" y1="52" y2="560"></line>
 </g>
-
 <!-- animated routes -->
 <g class="sv-rich-routes">
-  <use href="#route-top"/>
-  <use href="#route-mid"/>
-  <use href="#route-low"/>
-  <use href="#route-cross"/>
+<use href="#route-top"></use>
+<use href="#route-mid"></use>
+<use href="#route-low"></use>
+<use href="#route-cross"></use>
 </g>
-
 <!-- moving particles: always visible -->
 <g class="sv-moving-particles">
-  <circle r="7" style="fill:#1f5f98!important;stroke:#e9f4fb!important;stroke-width:3!important"><animateMotion dur="7s" repeatCount="indefinite"><mpath href="#route-top"/></animateMotion></circle>
-  <circle r="6" style="fill:#1f5f98!important;stroke:#e9f4fb!important;stroke-width:3!important"><animateMotion dur="8.8s" begin="-2.2s" repeatCount="indefinite"><mpath href="#route-mid"/></animateMotion></circle>
-  <circle r="6" style="fill:#1f5f98!important;stroke:#e9f4fb!important;stroke-width:3!important"><animateMotion dur="10s" begin="-4.5s" repeatCount="indefinite"><mpath href="#route-low"/></animateMotion></circle>
-  <circle r="5" style="fill:#1f5f98!important;stroke:#e9f4fb!important;stroke-width:3!important"><animateMotion dur="9.4s" begin="-1.4s" repeatCount="indefinite"><mpath href="#route-cross"/></animateMotion></circle>
+<circle r="7" style="fill:#1f5f98!important;stroke:#e9f4fb!important;stroke-width:3!important"><animatemotion dur="7s" repeatcount="indefinite"><mpath href="#route-top"></mpath></animatemotion></circle>
+<circle r="6" style="fill:#1f5f98!important;stroke:#e9f4fb!important;stroke-width:3!important"><animatemotion begin="-2.2s" dur="8.8s" repeatcount="indefinite"><mpath href="#route-mid"></mpath></animatemotion></circle>
+<circle r="6" style="fill:#1f5f98!important;stroke:#e9f4fb!important;stroke-width:3!important"><animatemotion begin="-4.5s" dur="10s" repeatcount="indefinite"><mpath href="#route-low"></mpath></animatemotion></circle>
+<circle r="5" style="fill:#1f5f98!important;stroke:#e9f4fb!important;stroke-width:3!important"><animatemotion begin="-1.4s" dur="9.4s" repeatcount="indefinite"><mpath href="#route-cross"></mpath></animatemotion></circle>
 </g>
-
 <!-- small orbiting dots -->
 <g class="sv-orbit-dots">
-  <circle class="od od1" cx="380" cy="60" r="5" style="fill:#5f9dce!important;stroke:#eaf4fb!important;stroke-width:3!important"/>
-  <circle class="od od2" cx="612" cy="306" r="5" style="fill:#5f9dce!important;stroke:#eaf4fb!important;stroke-width:3!important"/>
-  <circle class="od od3" cx="380" cy="552" r="5" style="fill:#5f9dce!important;stroke:#eaf4fb!important;stroke-width:3!important"/>
-  <circle class="od od4" cx="148" cy="306" r="5" style="fill:#5f9dce!important;stroke:#eaf4fb!important;stroke-width:3!important"/>
+<circle class="od od1" cx="380" cy="60" r="5" style="fill:#5f9dce!important;stroke:#eaf4fb!important;stroke-width:3!important"></circle>
+<circle class="od od2" cx="612" cy="306" r="5" style="fill:#5f9dce!important;stroke:#eaf4fb!important;stroke-width:3!important"></circle>
+<circle class="od od3" cx="380" cy="552" r="5" style="fill:#5f9dce!important;stroke:#eaf4fb!important;stroke-width:3!important"></circle>
+<circle class="od od4" cx="148" cy="306" r="5" style="fill:#5f9dce!important;stroke:#eaf4fb!important;stroke-width:3!important"></circle>
 </g>
-
 <!-- central β-HB -->
-<circle class="sv-rich-core-glow" cx="380" cy="306" r="148" style="fill:url(#heroCoreGlow)!important;stroke:none!important"/>
-<circle class="sv-rich-core-ring sv-rich-core-ring-outer" cx="380" cy="306" r="126" style="fill:none!important;stroke:#78add4!important;stroke-width:1.4!important"/>
-<circle class="sv-rich-core" cx="380" cy="306" r="108" style="fill:#235986!important;stroke:#ffffff!important;stroke-width:1.5!important"/>
-<circle class="sv-rich-core-ring" cx="380" cy="306" r="116" style="fill:none!important;stroke:#78add4!important;stroke-width:1.4!important"/>
-<text class="sv-rich-beta" text-anchor="middle" x="380" y="300" style="fill:#ffffff!important;font-size:44px!important;font-weight:700!important">β-HB</text>
-<line class="sv-rich-divider" x1="354" y1="320" x2="406" y2="320"/>
-<text class="sv-rich-sub" text-anchor="middle" x="380" y="352" style="fill:#ffffff!important;font-size:9px!important;font-weight:700!important">KETONE METABOLISM</text>
-
+<circle class="sv-rich-core-glow" cx="380" cy="306" r="148" style="fill:url(#heroCoreGlow)!important;stroke:none!important"></circle>
+<circle class="sv-rich-core-ring sv-rich-core-ring-outer" cx="380" cy="306" r="126" style="fill:none!important;stroke:#78add4!important;stroke-width:1.4!important"></circle>
+<circle class="sv-rich-core" cx="380" cy="306" r="108" style="fill:#235986!important;stroke:#ffffff!important;stroke-width:1.5!important"></circle>
+<circle class="sv-rich-core-ring" cx="380" cy="306" r="116" style="fill:none!important;stroke:#78add4!important;stroke-width:1.4!important"></circle>
+<text class="sv-rich-beta" style="fill:#ffffff!important;font-size:44px!important;font-weight:700!important" text-anchor="middle" x="380" y="300">β-HB</text>
+<line class="sv-rich-divider" x1="354" x2="406" y1="320" y2="320"></line>
+<text class="sv-rich-sub" style="fill:#ffffff!important;font-size:9px!important;font-weight:700!important" text-anchor="middle" x="380" y="352">KETONE METABOLISM</text>
 <!-- AMPK -->
 <g class="sv-rich-node node-ampk" transform="translate(190 174)">
-  <circle class="node-halo" r="52" style="fill:#eaf4fb!important;fill-opacity:.18!important;stroke:#b8d3e7!important"/>
-  <circle class="node-shell" r="40" style="fill:#f2f8fc!important;stroke:#8eb9d8!important"/>
-  <circle class="node-core" r="29" style="fill:#245f93!important;stroke:#d8ebf8!important"/>
-  <g class="node-icon node-icon-ampk">
-    <circle cx="-10" cy="-3" r="5"/>
-    <circle cx="10" cy="-3" r="5"/>
-    <circle cx="0" cy="11" r="5"/>
-    <path d="M-6 0 L-2 7 M6 0 L2 7 M-5 -4 L5 -4"/>
-  </g>
-  <text class="node-title" style="fill:#153b61!important" text-anchor="end" x="-58" y="-4">AMPK</text>
-  <text class="node-minor" style="fill:#617a91!important" text-anchor="end" x="-58" y="18">energy sensing</text>
+<circle class="node-halo" r="52" style="fill:#eaf4fb!important;fill-opacity:.18!important;stroke:#b8d3e7!important"></circle>
+<circle class="node-shell" r="40" style="fill:#f2f8fc!important;stroke:#8eb9d8!important"></circle>
+<circle class="node-core" r="29" style="fill:#245f93!important;stroke:#d8ebf8!important"></circle>
+<g class="node-icon node-icon-ampk">
+<circle cx="-10" cy="-3" r="5"></circle>
+<circle cx="10" cy="-3" r="5"></circle>
+<circle cx="0" cy="11" r="5"></circle>
+<path d="M-6 0 L-2 7 M6 0 L2 7 M-5 -4 L5 -4"></path>
 </g>
-
+<text class="node-title" style="fill:#153b61!important" text-anchor="end" x="-58" y="-4">AMPK</text>
+<text class="node-minor" style="fill:#617a91!important" text-anchor="end" x="-58" y="18">energy sensing</text>
+</g>
 <!-- NAD+ -->
 <g class="sv-rich-node node-nad" transform="translate(566 180)">
-  <circle class="node-halo" r="52" style="fill:#eaf4fb!important;fill-opacity:.18!important;stroke:#b8d3e7!important"/>
-  <circle class="node-shell" r="40" style="fill:#f2f8fc!important;stroke:#8eb9d8!important"/>
-  <circle class="node-core" r="29" style="fill:#245f93!important;stroke:#d8ebf8!important"/>
-  <g class="node-icon node-icon-nad">
-    <polygon points="0,-14 12,-7 12,7 0,14 -12,7 -12,-7"/>
-    <circle cx="7" cy="-8" r="4"/>
-  </g>
-  <text class="node-title" style="fill:#153b61!important" x="58" y="-4">NAD+</text>
-  <text class="node-minor" style="fill:#617a91!important" x="58" y="18">redox balance</text>
+<circle class="node-halo" r="52" style="fill:#eaf4fb!important;fill-opacity:.18!important;stroke:#b8d3e7!important"></circle>
+<circle class="node-shell" r="40" style="fill:#f2f8fc!important;stroke:#8eb9d8!important"></circle>
+<circle class="node-core" r="29" style="fill:#245f93!important;stroke:#d8ebf8!important"></circle>
+<g class="node-icon node-icon-nad">
+<polygon points="0,-14 12,-7 12,7 0,14 -12,7 -12,-7"></polygon>
+<circle cx="7" cy="-8" r="4"></circle>
 </g>
-
+<text class="node-title" style="fill:#153b61!important" x="58" y="-4">NAD+</text>
+<text class="node-minor" style="fill:#617a91!important" x="58" y="18">redox balance</text>
+</g>
 <!-- ATP -->
 <g class="sv-rich-node node-atp" transform="translate(618 334)">
-  <circle class="node-halo" r="50" style="fill:#eaf4fb!important;fill-opacity:.18!important;stroke:#b8d3e7!important"/>
-  <circle class="node-shell" r="38" style="fill:#f2f8fc!important;stroke:#8eb9d8!important"/>
-  <circle class="node-core" r="28" style="fill:#245f93!important;stroke:#d8ebf8!important"/>
-  <path class="node-icon node-icon-atp" d="M4 -17 L-8 2 H1 L-5 18 L12 -5 H3 Z"/>
-  <text class="node-title" style="fill:#153b61!important" x="56" y="-2">ATP</text>
-  <text class="node-minor" style="fill:#617a91!important" x="56" y="20">cellular energy</text>
+<circle class="node-halo" r="50" style="fill:#eaf4fb!important;fill-opacity:.18!important;stroke:#b8d3e7!important"></circle>
+<circle class="node-shell" r="38" style="fill:#f2f8fc!important;stroke:#8eb9d8!important"></circle>
+<circle class="node-core" r="28" style="fill:#245f93!important;stroke:#d8ebf8!important"></circle>
+<path class="node-icon node-icon-atp" d="M4 -17 L-8 2 H1 L-5 18 L12 -5 H3 Z"></path>
+<text class="node-title" style="fill:#153b61!important" x="56" y="-2">ATP</text>
+<text class="node-minor" style="fill:#617a91!important" x="56" y="20">cellular energy</text>
 </g>
-
 <!-- mTOR -->
 <g class="sv-rich-node node-mtor" transform="translate(520 446)">
-  <circle class="node-halo" r="50" style="fill:#eaf4fb!important;fill-opacity:.18!important;stroke:#b8d3e7!important"/>
-  <circle class="node-shell" r="38" style="fill:#f2f8fc!important;stroke:#8eb9d8!important"/>
-  <circle class="node-core" r="28" style="fill:#245f93!important;stroke:#d8ebf8!important"/>
-  <g class="node-icon node-icon-bars">
-    <rect x="-13" y="7" width="6" height="10" rx="1"/>
-    <rect x="-3" y="1" width="6" height="16" rx="1"/>
-    <rect x="7" y="-8" width="6" height="25" rx="1"/>
-  </g>
-  <text class="node-title" style="fill:#153b61!important" x="56" y="2">mTOR</text>
-  <text class="node-minor" style="fill:#617a91!important" x="56" y="24">growth &amp; translation</text>
+<circle class="node-halo" r="50" style="fill:#eaf4fb!important;fill-opacity:.18!important;stroke:#b8d3e7!important"></circle>
+<circle class="node-shell" r="38" style="fill:#f2f8fc!important;stroke:#8eb9d8!important"></circle>
+<circle class="node-core" r="28" style="fill:#245f93!important;stroke:#d8ebf8!important"></circle>
+<g class="node-icon node-icon-bars">
+<rect height="10" rx="1" width="6" x="-13" y="7"></rect>
+<rect height="16" rx="1" width="6" x="-3" y="1"></rect>
+<rect height="25" rx="1" width="6" x="7" y="-8"></rect>
 </g>
-
+<text class="node-title" style="fill:#153b61!important" x="56" y="2">mTOR</text>
+<text class="node-minor" style="fill:#617a91!important" x="56" y="24">growth &amp; translation</text>
+</g>
 <!-- AcAc -->
 <g class="sv-rich-node node-acac" transform="translate(214 430)">
-  <circle class="node-halo" r="50" style="fill:#eaf4fb!important;fill-opacity:.18!important;stroke:#b8d3e7!important"/>
-  <circle class="node-shell" r="38" style="fill:#f2f8fc!important;stroke:#8eb9d8!important"/>
-  <circle class="node-core" r="28" style="fill:#245f93!important;stroke:#d8ebf8!important"/>
-  <g class="node-icon node-icon-acac">
-    <path d="M0 -15 C12 -6 15 8 0 17 C-15 8 -12 -6 0 -15 Z"/>
-    <path d="M0 -9 V13 M0 2 L8 -4"/>
-  </g>
-  <text class="node-title" style="fill:#153b61!important" x="56" y="1">AcAc</text>
-  <text class="node-minor" style="fill:#617a91!important" x="56" y="23">ketone body</text>
+<circle class="node-halo" r="50" style="fill:#eaf4fb!important;fill-opacity:.18!important;stroke:#b8d3e7!important"></circle>
+<circle class="node-shell" r="38" style="fill:#f2f8fc!important;stroke:#8eb9d8!important"></circle>
+<circle class="node-core" r="28" style="fill:#245f93!important;stroke:#d8ebf8!important"></circle>
+<g class="node-icon node-icon-acac">
+<path d="M0 -15 C12 -6 15 8 0 17 C-15 8 -12 -6 0 -15 Z"></path>
+<path d="M0 -9 V13 M0 2 L8 -4"></path>
 </g>
-
+<text class="node-title" style="fill:#153b61!important" x="56" y="1">AcAc</text>
+<text class="node-minor" style="fill:#617a91!important" x="56" y="23">ketone body</text>
+</g>
 <!-- peripheral scientific labels -->
 <g class="sv-rich-context">
-  <text x="92" y="270">INFLAMMATION</text><text x="92" y="288">MODULATION</text>
-  <text x="95" y="500">NEUROPROTECTION</text>
-  <text text-anchor="middle" x="380" y="82">METABOLIC HEALTH</text>
-  <text x="595" y="270">CELLULAR</text><text x="595" y="288">RESILIENCE</text>
-  <text x="575" y="506">IMMUNE</text><text x="575" y="524">REGULATION</text>
-  <text text-anchor="middle" x="380" y="580">CLINICAL TRANSLATION</text>
+<text x="92" y="270">INFLAMMATION</text><text x="92" y="288">MODULATION</text>
+<text x="95" y="500">NEUROPROTECTION</text>
+<text text-anchor="middle" x="380" y="82">METABOLIC HEALTH</text>
+<text x="595" y="270">CELLULAR</text><text x="595" y="288">RESILIENCE</text>
+<text x="575" y="506">IMMUNE</text><text x="575" y="524">REGULATION</text>
+<text text-anchor="middle" x="380" y="580">CLINICAL TRANSLATION</text>
 </g>
 </svg>
 </div>
 </div>
-</section><section aria-label="Scientific library metrics" class="home-metrics"><div class="home-metric"><strong data-clinical-area-count="">54</strong><span data-en="Clinical areas" data-it="Aree cliniche">Clinical areas</span></div><div class="home-metric"><strong data-publication-count="">4010</strong><span data-en="Curated publications" data-it="Pubblicazioni selezionate">Curated publications</span></div><div class="home-metric"><strong>2026</strong><span data-en="Current literature coverage" data-it="Copertura bibliografica aggiornata">Current literature coverage</span></div></section><section class="section whats-new">
+</section><section aria-label="Scientific library metrics" class="home-metrics"><div class="home-metric"><strong data-clinical-area-count="">54</strong><span data-en="Clinical areas" data-it="Aree cliniche">Clinical areas</span></div><div class="home-metric"><strong data-publication-count="">4202</strong><span data-en="Curated publications" data-it="Pubblicazioni selezionate">Curated publications</span></div><div class="home-metric"><strong>2026</strong><span data-en="Current literature coverage" data-it="Copertura bibliografica aggiornata">Current literature coverage</span></div></section><section class="section whats-new">
 <div class="wrap">
 <p class="kicker" data-en="CORE ACTIVITIES" data-it="ATTIVITÀ SCIENTIFICHE">CORE ACTIVITIES</p>
 <h2 data-en="Research, evidence surveillance and scientific interpretation." data-it="Ricerca, sorveglianza delle evidenze e interpretazione scientifica.">Research, evidence surveillance and scientific interpretation.</h2>
@@ -378,7 +364,7 @@
 </div>
 </div>
 </section>
-<section class="section whats-new"><div class="wrap"><p class="kicker" data-en="WHAT'S NEW" data-it="AGGIORNAMENTI">WHAT'S NEW</p><h2 data-en="Current evidence coverage" data-it="Aggiornamento delle evidenze">Current evidence coverage</h2><div class="update-grid"><a class="update-card" href="https://library.ketogenicresearch.org/library"><strong data-en="4010" data-it="4010">4010</strong><span data-en="Curated publications" data-it="Pubblicazioni curate">Curated publications</span><p data-en="Across 53 clinical areas in the Scientific Library." data-it="In 53 aree cliniche della Biblioteca Scientifica.">Across 53 clinical areas in the Scientific Library.</p></a><a class="update-card" href="latest.html"><strong data-en="90 days" data-it="90 giorni">90 days</strong><span data-en="Latest Evidence" data-it="Ultime pubblicazioni">Latest Evidence</span><p data-en="Rolling PubMed monitoring focused on directly relevant ketogenic research." data-it="Monitoraggio PubMed degli ultimi 90 giorni, focalizzato sulla letteratura direttamente pertinente alla ricerca chetogenica.">Rolling PubMed monitoring focused on directly relevant ketogenic research.</p></a><a class="update-card" href="methodology.html"><strong data-en="Method" data-it="Metodo">Method</strong><span data-en="Evidence assessment" data-it="Valutazione delle evidenze">Evidence assessment</span><p data-en="Selection criteria, study-design classification and bibliographic verification are documented in the scientific methodology." data-it="Criteri di selezione, classificazione del disegno degli studi e verifica bibliografica sono descritti nella metodologia scientifica.">Selection criteria, study-design classification and bibliographic verification are documented in the scientific methodology.</p></a></div></div></section>
+<section class="section whats-new"><div class="wrap"><p class="kicker" data-en="WHAT'S NEW" data-it="AGGIORNAMENTI">WHAT'S NEW</p><h2 data-en="Current evidence coverage" data-it="Aggiornamento delle evidenze">Current evidence coverage</h2><div class="update-grid"><a class="update-card" href="https://library.ketogenicresearch.org/library"><strong data-en="4202" data-it="4202">4202</strong><span data-en="Curated publications" data-it="Pubblicazioni curate">Curated publications</span><p data-en="Across 53 clinical areas in the Scientific Library." data-it="In 53 aree cliniche della Biblioteca Scientifica.">Across 53 clinical areas in the Scientific Library.</p></a><a class="update-card" href="latest.html"><strong data-en="90 days" data-it="90 giorni">90 days</strong><span data-en="Latest Evidence" data-it="Ultime pubblicazioni">Latest Evidence</span><p data-en="Rolling PubMed monitoring focused on directly relevant ketogenic research." data-it="Monitoraggio PubMed degli ultimi 90 giorni, focalizzato sulla letteratura direttamente pertinente alla ricerca chetogenica.">Rolling PubMed monitoring focused on directly relevant ketogenic research.</p></a><a class="update-card" href="methodology.html"><strong data-en="Method" data-it="Metodo">Method</strong><span data-en="Evidence assessment" data-it="Valutazione delle evidenze">Evidence assessment</span><p data-en="Selection criteria, study-design classification and bibliographic verification are documented in the scientific methodology." data-it="Criteri di selezione, classificazione del disegno degli studi e verifica bibliografica sono descritti nella metodologia scientifica.">Selection criteria, study-design classification and bibliographic verification are documented in the scientific methodology.</p></a></div></div></section>
 <section class="section scientific-activity" id="scientific-activity">
 <div class="wrap">
 <p class="kicker" data-en="SCIENTIFIC ACTIVITY" data-it="ATTIVITÀ SCIENTIFICA">SCIENTIFIC ACTIVITY</p>
