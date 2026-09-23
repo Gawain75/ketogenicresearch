@@ -2348,3 +2348,11 @@ svg.evidence-trends-svg {
 }
 
 /* V88 — close V72 mobile media block; restore desktop rules */
+
+
+/* V98 — remove redundant PDF source label from Library cards */
+.drive-paper::before,
+.drive-paper:before{
+  content:none !important;
+  display:none !important;
+}
