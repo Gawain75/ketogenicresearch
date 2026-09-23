@@ -2430,3 +2430,66 @@ svg.evidence-trends-svg {
   }
 }
 
+/* V104 — Library mobile overflow and title wrapping */
+html,
+body{
+  max-width:100%;
+  overflow-x:hidden;
+}
+
+.library-index,
+.library-index > .wrap,
+.library-group,
+.folder-list,
+details.library-folder,
+.folder-body,
+.folder-curated,
+article.folder-paper{
+  min-width:0;
+  max-width:100%;
+}
+
+.library-folder summary > span:nth-child(2){
+  min-width:0;
+}
+
+article.folder-paper h4,
+article.folder-paper p,
+.folder-rationale{
+  max-width:100%;
+  min-width:0;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+
+.paper-links{
+  min-width:0;
+  max-width:100%;
+}
+
+.folder-paper > .evidence-level{
+  max-width:100%;
+  white-space:normal;
+  overflow-wrap:anywhere;
+}
+
+@media(max-width:640px){
+  .folder-body{
+    padding-right:8px;
+    padding-left:8px;
+  }
+
+  article.folder-paper{
+    width:100%;
+    max-width:100%;
+    overflow:hidden;
+  }
+
+  article.folder-paper h4{
+    width:100%;
+    font-size:.95rem;
+    line-height:1.42;
+  }
+}
+
