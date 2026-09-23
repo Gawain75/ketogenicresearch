@@ -617,11 +617,18 @@ async function loadLatestEvidence() {
 
     const contentUpdated = document.getElementById('latestContentUpdated');
     if (contentUpdated) {
-      const stamp =
-        KR_LATEST_DATA.content_updated_at ||
-        KR_LATEST_DATA.generated_at;
-      contentUpdated.textContent = stamp
-        ? latestDateLabel(stamp.slice(0, 10))
+      const publicationDates = (KR_LATEST_DATA.publications || [])
+        .map(p => String(p.date || '').slice(0, 10))
+        .filter(value => /^\d{4}-\d{2}-\d{2}$/.test(value))
+        .sort();
+
+      const mostRecentPublicationDate =
+        publicationDates.length
+          ? publicationDates[publicationDates.length - 1]
+          : '';
+
+      contentUpdated.textContent = mostRecentPublicationDate
+        ? latestDateLabel(mostRecentPublicationDate)
         : '—';
     }
 
@@ -818,7 +825,7 @@ function initSite() {
 
 if (document.readyState === 'loading') {
   
-/* V97 — Library chronology and year labels */
+/* V99 — Library chronology with separate year and evidence badges */
 function normalizeLibraryChronology() {
   document.querySelectorAll('details.library-folder .folder-curated').forEach(container => {
     const cards = Array.from(container.querySelectorAll(':scope > article.folder-paper'));
@@ -837,38 +844,63 @@ function normalizeLibraryChronology() {
     cards.forEach((card, index) => {
       const year = /^\d{4}$/.test(card.dataset.year || '') ? card.dataset.year : '';
 
-      if (year) {
-        let badge = card.querySelector(':scope > .evidence-level');
-        if (!badge) {
-          badge = document.createElement('div');
-          badge.className = 'evidence-level';
-          card.insertBefore(badge, card.firstChild);
+      // Remove any previously appended year from the evidence/category badge.
+      const evidenceBadge = card.querySelector(':scope > .evidence-level');
+      if (evidenceBadge) {
+        const stripYear = value => String(value || '')
+          .replace(/\s*[·•|–—-]\s*(18|19|20)\d{2}\s*$/, '')
+          .trim();
+
+        const visible = evidenceBadge.textContent.trim();
+        const enClean = stripYear(evidenceBadge.dataset.en || visible);
+        const itClean = stripYear(evidenceBadge.dataset.it || evidenceBadge.dataset.en || visible);
+
+        // If this badge was created only to hold the year, remove it:
+        // the dedicated year badge below will replace it.
+        const yearOnly =
+          /^(18|19|20)\d{2}$/.test(visible) ||
+          (!enClean && !itClean);
+
+        if (yearOnly) {
+          evidenceBadge.remove();
+        } else {
+          evidenceBadge.dataset.en = enClean;
+          evidenceBadge.dataset.it = itClean;
+          evidenceBadge.textContent = currentLang() === 'it' ? itClean : enClean;
         }
-
-        const appendYear = value => {
-          value = String(value || '')
-            .replace(/\s*[·•|–—-]\s*(18|19|20)\d{2}\s*$/, '')
-            .trim();
-
-          if (/^(18|19|20)\d{2}$/.test(value)) return year;
-          return value ? `${value} · ${year}` : year;
-        };
-
-        const baseVisible = badge.textContent.trim();
-        const en = appendYear(badge.dataset.en || baseVisible);
-        const it = appendYear(badge.dataset.it || badge.dataset.en || baseVisible);
-
-        badge.dataset.en = en;
-        badge.dataset.it = it;
-        badge.textContent = currentLang() === 'it' ? it : en;
       }
 
+      // Dedicated year badge: always shown when data-year exists.
+      let yearBadge = card.querySelector(':scope > .publication-year-badge');
+
+      if (year) {
+        if (!yearBadge) {
+          yearBadge = document.createElement('span');
+          yearBadge.className = 'publication-year-badge';
+
+          const firstEvidence = card.querySelector(':scope > .evidence-level');
+          if (firstEvidence) {
+            card.insertBefore(yearBadge, firstEvidence);
+          } else {
+            card.insertBefore(yearBadge, card.firstChild);
+          }
+        }
+        yearBadge.textContent = year;
+        yearBadge.setAttribute('aria-label', `Publication year ${year}`);
+      } else if (yearBadge) {
+        yearBadge.remove();
+      }
+
+      // Sequential numbering after chronological sorting.
       const h4 = card.querySelector(':scope > h4');
       if (h4) {
-        const stripNumber = value => String(value || '').replace(/^\s*\d+\.\s*/, '').trim();
-        const visible = stripNumber(h4.textContent);
-        const enTitle = stripNumber(h4.dataset.en || visible);
-        const itTitle = stripNumber(h4.dataset.it || h4.dataset.en || visible);
+        const stripNumber = value => String(value || '')
+          .replace(/^\s*\d+\.\s*/, '')
+          .trim();
+
+        const visibleTitle = stripNumber(h4.textContent);
+        const enTitle = stripNumber(h4.dataset.en || visibleTitle);
+        const itTitle = stripNumber(h4.dataset.it || h4.dataset.en || visibleTitle);
 
         h4.dataset.en = `${index + 1}. ${enTitle}`;
         h4.dataset.it = `${index + 1}. ${itTitle}`;
@@ -879,32 +911,6 @@ function normalizeLibraryChronology() {
     });
   });
 }
-
-document.addEventListener('DOMContentLoaded', initSite);
-} else {
-  initSite();
-}
-
-window.addEventListener(
-  'hashchange',
-  openLibraryAreaFromHash
-);
-
-// Test reversibile: razionale meccanicistico Alzheimer
-if (document.getElementById('alzheimers-disease')) {
-  const krAlzheimerMechanisms = document.createElement('script');
-  krAlzheimerMechanisms.src = 'alzheimer-mechanisms.js?v=1';
-  krAlzheimerMechanisms.defer = true;
-  document.head.appendChild(krAlzheimerMechanisms);
-}
-
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', normalizeLibraryChronology);
-} else {
-  normalizeLibraryChronology();
-}
-
 
 document.querySelectorAll("[data-lang]").forEach(btn => {
   btn.addEventListener("click", () => setTimeout(normalizeLibraryChronology, 60));
