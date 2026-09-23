@@ -1,0 +1,70 @@
+name: Backfill Library evidence classification
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ketogenicresearch-content-write
+  cancel-in-progress: false
+
+jobs:
+  classify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out current main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install parser
+        run: python -m pip install beautifulsoup4
+
+      - name: Backfill evidence classifications
+        run: python scripts/backfill_library_evidence_classification.py
+
+      - name: Verify every Library card has a classification badge
+        run: |
+          python - <<'PY'
+          from bs4 import BeautifulSoup
+          from pathlib import Path
+          soup = BeautifulSoup(Path("library.html").read_text(encoding="utf-8"), "html.parser")
+          cards = soup.select("article.folder-paper")
+          missing = [c for c in cards if c.select_one(":scope > .evidence-level") is None]
+          print(f"Library cards: {len(cards)}")
+          print(f"Cards without classification badge: {len(missing)}")
+          if missing:
+              raise SystemExit(1)
+          PY
+
+      - name: Commit classification backfill
+        run: |
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add library.html library-evidence-backfill-report.json
+          if git diff --cached --quiet; then
+            echo "No evidence classification changes."
+            exit 0
+          fi
+          git commit -m "Backfill Scientific Library evidence classifications"
+          git pull --rebase origin main
+          git push origin main
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### Scientific Library evidence classification" >> "$GITHUB_STEP_SUMMARY"
+          if [ -f library-evidence-backfill-report.json ]; then
+            echo '```json' >> "$GITHUB_STEP_SUMMARY"
+            cat library-evidence-backfill-report.json >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          fi
