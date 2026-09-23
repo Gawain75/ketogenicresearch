@@ -1,0 +1,153 @@
+name: Update research-center and library positioning
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  update-copy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Update positioning copy
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          # ---------- HOME ----------
+          p = Path("index.html")
+          s = p.read_text(encoding="utf-8")
+
+          home_en = "Ketogenic Research Hub is a scientific research and development center focused on ketogenic and metabolic nutrition, clinical and translational research, and evidence synthesis."
+          home_it = "Ketogenic Research Hub è un centro di ricerca e sviluppo scientifico focalizzato sulla nutrizione chetogenica e metabolica, sulla ricerca clinica e traslazionale e sulla sintesi delle evidenze."
+
+          # Meta description
+          s = re.sub(
+              r'<meta content="[^"]*" name="description"/>',
+              f'<meta content="{home_en}" name="description"/>',
+              s,
+              count=1
+          )
+
+          # Open Graph / Twitter descriptions
+          s = re.sub(
+              r'<meta content="[^"]*" property="og:description"/>',
+              f'<meta content="{home_en}" property="og:description"/>',
+              s,
+              count=1
+          )
+          s = re.sub(
+              r'<meta content="[^"]*" name="twitter:description"/>',
+              f'<meta content="{home_en}" name="twitter:description"/>',
+              s,
+              count=1
+          )
+
+          # Hero lead
+          s = re.sub(
+              r'<p class="lead clean-lead"[^>]*>.*?</p>',
+              f'<p class="lead clean-lead" data-en="{home_en}" data-it="{home_it}">{home_en}</p>',
+              s,
+              count=1,
+              flags=re.S
+          )
+
+          p.write_text(s, encoding="utf-8")
+
+          # ---------- SCIENTIFIC LIBRARY ----------
+          p = Path("library.html")
+          s = p.read_text(encoding="utf-8")
+
+          lib_h1_en = "A comprehensive scientific database of ketogenic and metabolic research."
+          lib_h1_it = "Un ampio database scientifico della ricerca chetogenica e metabolica."
+
+          lib_p_en = "Continuously updated and organized by clinical area and study design, with verified bibliographic identifiers and direct links to source records."
+          lib_p_it = "Continuamente aggiornato e organizzato per area clinica e disegno dello studio, con identificatori bibliografici verificati e link diretti alle fonti."
+
+          lib_meta = "A comprehensive, continuously updated scientific database of ketogenic and metabolic research, organized by clinical area and study design."
+
+          s = re.sub(
+              r'<meta content="[^"]*" name="description"/>',
+              f'<meta content="{lib_meta}" name="description"/>',
+              s,
+              count=1
+          )
+          s = re.sub(
+              r'<meta content="[^"]*" property="og:description"/>',
+              f'<meta content="{lib_meta}" property="og:description"/>',
+              s,
+              count=1
+          )
+          s = re.sub(
+              r'<meta content="[^"]*" name="twitter:description"/>',
+              f'<meta content="{lib_meta}" name="twitter:description"/>',
+              s,
+              count=1
+          )
+
+          # Only the hero inside library-hero
+          m = re.search(
+              r'(<section class="page-hero library-hero">.*?<div class="wrap">)(.*?)(</div>\s*</section>)',
+              s,
+              flags=re.S
+          )
+          if not m:
+              raise RuntimeError("Library hero not found")
+
+          hero = m.group(2)
+          hero = re.sub(
+              r'<h1[^>]*>.*?</h1>',
+              f'<h1 data-en="{lib_h1_en}" data-it="{lib_h1_it}">{lib_h1_en}</h1>',
+              hero,
+              count=1,
+              flags=re.S
+          )
+          hero = re.sub(
+              r'<p(?! class="kicker")[^>]*>.*?</p>',
+              f'<p data-en="{lib_p_en}" data-it="{lib_p_it}">{lib_p_en}</p>',
+              hero,
+              count=1,
+              flags=re.S
+          )
+
+          s = s[:m.start(2)] + hero + s[m.end(2):]
+          p.write_text(s, encoding="utf-8")
+
+          print("Positioning copy updated.")
+          PY
+
+      - name: Commit and push
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add index.html library.html
+
+          if git diff --cached --quiet; then
+            echo "No copy changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Refine research center and Scientific Library positioning"
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
+
+      - name: Deploy Scientific Library to Cloudflare
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run deploy-cloudflare-library.yml --ref main
