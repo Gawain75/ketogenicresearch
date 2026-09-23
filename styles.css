@@ -2392,3 +2392,41 @@ svg.evidence-trends-svg {
     font-size:10px;
   }
 }
+
+/* V102 — Methodology link as secondary button */
+.library-method-strip a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:42px;
+  padding:0 16px;
+  border:1px solid #bfd0df;
+  border-radius:10px;
+  background:#fff;
+  color:var(--primary);
+  text-decoration:none;
+  font-weight:700;
+  line-height:1;
+  white-space:nowrap;
+  transition:background-color .18s ease,border-color .18s ease,transform .18s ease;
+}
+
+.library-method-strip a:hover{
+  background:#f1f6fa;
+  border-color:#9fb9cc;
+  text-decoration:none;
+}
+
+.library-method-strip a:focus-visible{
+  outline:2px solid var(--primary);
+  outline-offset:2px;
+}
+
+@media (max-width:760px){
+  .library-method-strip a{
+    min-height:40px;
+    padding:0 14px;
+    border-radius:10px;
+  }
+}
+
