@@ -2,7 +2,8 @@
 
 const KR_LIBRARY_STATS = {
   publications: 4102,
-  clinicalAreas: 53
+  clinicalAreas: 53,
+  thematicCollections: 1
 };
 
 let KR_LATEST_DATA = null;
@@ -248,22 +249,176 @@ function populateObesityGlp1Keto() {
   if (empty) empty.hidden = matches.length > 0;
 }
 
-function publicationIdentity(paper) {
-  // Prefer bibliographic identifiers. Title is only a fallback.
-  if (paper.dataset.pmid) return `pmid:${paper.dataset.pmid}`;
-  if (paper.dataset.doi) return `doi:${paper.dataset.doi.toLowerCase()}`;
+let KR_LIBRARY_CANONICAL_IDS = null;
 
+function normalizedPublicationTitle(paper) {
   const h4 = paper.querySelector('h4');
   const rawTitle = h4?.dataset?.en || h4?.textContent || '';
-  const title = rawTitle
+  return rawTitle
     .replace(/^\s*\d+\.\s*/, '')
     .normalize('NFKD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '');
+}
 
-  if (title) return `title:${title}`;
-  return `card:${paper.dataset.search || ''}`;
+function publicationPmid(paper) {
+  const direct = (paper.dataset.pmid || '').trim();
+  if (direct) return direct;
+
+  for (const link of paper.querySelectorAll('a[href]')) {
+    const match = (link.getAttribute('href') || '')
+      .match(/pubmed\.ncbi\.nlm\.nih\.gov\/(\d+)\/?/i);
+    if (match) return match[1];
+  }
+
+  const textMatch = (paper.textContent || '')
+    .match(/\bPMID\s*:?\s*(\d{6,9})\b/i);
+
+  return textMatch ? textMatch[1] : '';
+}
+
+function publicationDoi(paper) {
+  const clean = value => String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[.,;)]+$/, '');
+
+  const direct = clean(paper.dataset.doi);
+  if (direct) return direct;
+
+  for (const link of paper.querySelectorAll('a[href]')) {
+    let href = link.getAttribute('href') || '';
+    try {
+      href = decodeURIComponent(href);
+    } catch (error) {}
+
+    const match = href.match(
+      /(?:doi\.org\/|doi:\s*)(10\.\d{4,9}\/[^\s?#"'<>]+)/i
+    );
+    if (match) return clean(match[1]);
+  }
+
+  const textMatch = (paper.textContent || '')
+    .match(/\b10\.\d{4,9}\/[-._;()/:A-Z0-9]+\b/i);
+
+  return textMatch ? clean(textMatch[0]) : '';
+}
+
+function ensureLibraryCanonicalIds() {
+  if (KR_LIBRARY_CANONICAL_IDS) return KR_LIBRARY_CANONICAL_IDS;
+
+  const papers = Array.from(
+    document.querySelectorAll('details.library-folder article.folder-paper')
+  );
+
+  const records = papers.map(paper => ({
+    paper,
+    pmid: publicationPmid(paper),
+    doi: publicationDoi(paper),
+    title: normalizedPublicationTitle(paper)
+  }));
+
+  const parent = records.map((_, index) => index);
+
+  const find = index => {
+    let i = index;
+    while (parent[i] !== i) {
+      parent[i] = parent[parent[i]];
+      i = parent[i];
+    }
+    return i;
+  };
+
+  const union = (a, b) => {
+    const ra = find(a);
+    const rb = find(b);
+    if (ra !== rb) parent[rb] = ra;
+  };
+
+  const identifierOwner = new Map();
+
+  records.forEach((record, index) => {
+    const tokens = [];
+    if (record.pmid) tokens.push(`pmid:${record.pmid}`);
+    if (record.doi) tokens.push(`doi:${record.doi}`);
+
+    tokens.forEach(token => {
+      if (identifierOwner.has(token)) {
+        union(index, identifierOwner.get(token));
+      } else {
+        identifierOwner.set(token, index);
+      }
+    });
+  });
+
+  const byTitle = new Map();
+
+  records.forEach((record, index) => {
+    if (!record.title) return;
+    if (!byTitle.has(record.title)) byTitle.set(record.title, []);
+    byTitle.get(record.title).push(index);
+  });
+
+  byTitle.forEach(indices => {
+    const identifiedRoots = new Set(
+      indices
+        .filter(index => records[index].pmid || records[index].doi)
+        .map(index => find(index))
+    );
+
+    const withoutIdentifiers = indices.filter(
+      index => !records[index].pmid && !records[index].doi
+    );
+
+    if (identifiedRoots.size === 1 && withoutIdentifiers.length) {
+      const targetRoot = [...identifiedRoots][0];
+      const representative = indices.find(index => find(index) === targetRoot);
+      withoutIdentifiers.forEach(index => union(representative, index));
+    } else if (identifiedRoots.size === 0 && withoutIdentifiers.length > 1) {
+      withoutIdentifiers.slice(1).forEach(index => {
+        union(withoutIdentifiers[0], index);
+      });
+    }
+  });
+
+  const rootIds = new Map();
+  const paperIds = new WeakMap();
+  let nextId = 1;
+
+  records.forEach((record, index) => {
+    const root = find(index);
+    if (!rootIds.has(root)) rootIds.set(root, `publication-${nextId++}`);
+    paperIds.set(record.paper, rootIds.get(root));
+  });
+
+  KR_LIBRARY_CANONICAL_IDS = {
+    paperIds,
+    total: rootIds.size
+  };
+
+  return KR_LIBRARY_CANONICAL_IDS;
+}
+
+function publicationIdentity(paper) {
+  const canonical = ensureLibraryCanonicalIds().paperIds.get(paper);
+  if (canonical) return canonical;
+
+  const pmid = publicationPmid(paper);
+  if (pmid) return `pmid:${pmid}`;
+
+  const doi = publicationDoi(paper);
+  if (doi) return `doi:${doi}`;
+
+  const title = normalizedPublicationTitle(paper);
+  return title ? `title:${title}` : `card:${paper.dataset.search || ''}`;
+}
+
+function isThematicLibraryCollection(folder) {
+  return (
+    folder.dataset.libraryType === 'thematic' ||
+    folder.id === 'glp1-keto-metabolic-endocrine'
+  );
 }
 
 function applyLibraryFilters() {
@@ -286,8 +441,10 @@ function applyLibraryFilters() {
   const area = areaEl?.value || 'all';
 
   const visiblePublicationKeys = new Set();
-  let visiblePapers = 0;
-  let visibleFolders = 0;
+  let visibleClinicalAreas = 0;
+  let visibleThematicCollections = 0;
+
+  ensureLibraryCanonicalIds();
 
   folders.forEach(folder => {
     const extra = (
@@ -302,6 +459,7 @@ function applyLibraryFilters() {
     ).toLowerCase();
 
     let folderMatches = 0;
+    const areaOk = area === 'all' || folder.id === area;
 
     folder.querySelectorAll('article.folder-paper').forEach(paper => {
       const blob = (
@@ -327,22 +485,24 @@ function applyLibraryFilters() {
         }
       }
 
-      const show = qOk && evOk && topicOk && yrOk;
+      const show = areaOk && qOk && evOk && topicOk && yrOk;
       paper.hidden = !show;
 
       if (show) {
         folderMatches++;
-        visiblePapers++;
         visiblePublicationKeys.add(publicationIdentity(paper));
       }
     });
 
-    const areaOk = area === 'all' || folder.id === area;
-    const showFolder = folderMatches > 0 && areaOk;
+    const showFolder = folderMatches > 0;
     folder.hidden = !showFolder;
 
     if (showFolder) {
-      visibleFolders++;
+      if (isThematicLibraryCollection(folder)) {
+        visibleThematicCollections++;
+      } else {
+        visibleClinicalAreas++;
+      }
       if (q || ev !== 'all' || topic !== 'all' || yr !== 'all' || area !== 'all') {
         folder.open = true;
       }
@@ -359,9 +519,61 @@ function applyLibraryFilters() {
 
   const count = document.getElementById('libraryResultCount');
   if (count) {
-    count.textContent = currentLang() === 'it'
-      ? `${visiblePublicationKeys.size} pubblicazioni uniche in ${visibleFolders} aree`
-      : `${visiblePublicationKeys.size} unique publications across ${visibleFolders} areas`;
+    const noFilters =
+      !q &&
+      ev === 'all' &&
+      topic === 'all' &&
+      yr === 'all' &&
+      area === 'all';
+
+    const publicationCount = noFilters
+      ? KR_LIBRARY_STATS.publications
+      : visiblePublicationKeys.size;
+
+    const clinicalAreaCount = noFilters
+      ? KR_LIBRARY_STATS.clinicalAreas
+      : visibleClinicalAreas;
+
+    const thematicCollectionCount = noFilters
+      ? KR_LIBRARY_STATS.thematicCollections
+      : visibleThematicCollections;
+
+    const locale = currentLang() === 'it' ? 'it-IT' : 'en-US';
+    const formattedPublications = publicationCount.toLocaleString(locale);
+
+    if (currentLang() === 'it') {
+      const scopes = [];
+      if (clinicalAreaCount) {
+        scopes.push(
+          `${clinicalAreaCount} ${clinicalAreaCount === 1 ? 'area clinica' : 'aree cliniche'}`
+        );
+      }
+      if (thematicCollectionCount) {
+        scopes.push(
+          `${thematicCollectionCount} ${thematicCollectionCount === 1 ? 'raccolta tematica' : 'raccolte tematiche'}`
+        );
+      }
+
+      count.textContent = scopes.length
+        ? `${formattedPublications} pubblicazioni uniche indicizzate in ${scopes.join(' + ')}`
+        : `${formattedPublications} pubblicazioni uniche`;
+    } else {
+      const scopes = [];
+      if (clinicalAreaCount) {
+        scopes.push(
+          `${clinicalAreaCount} ${clinicalAreaCount === 1 ? 'clinical area' : 'clinical areas'}`
+        );
+      }
+      if (thematicCollectionCount) {
+        scopes.push(
+          `${thematicCollectionCount} ${thematicCollectionCount === 1 ? 'thematic collection' : 'thematic collections'}`
+        );
+      }
+
+      count.textContent = scopes.length
+        ? `${formattedPublications} unique publications indexed across ${scopes.join(' + ')}`
+        : `${formattedPublications} unique publications`;
+    }
   }
 }
 
