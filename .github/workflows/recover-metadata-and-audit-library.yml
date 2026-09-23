@@ -110,22 +110,20 @@ jobs:
         run: python scripts/sync_publication_counters.py
 
       - name: Commit recovered metadata and verified additions
+        shell: bash
         run: |
+          set -euo pipefail
+
           git config user.name "Ketogenic Research Bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add \
-            library.html \
-            index.html \
-            script.js \
-            review-queue.json \
-            publication-metadata-recovery.json \
-            historical-gap-audit-state.json \
-            historical-gap-audit.json \
-            historical-gap-candidates.json \
-            historical-gap-queue-report.json \
-            data/evidence-trends.json \
-            evidence-trends.html
+          echo "Git status before staging:"
+          git status --short
+
+          # The Actions runner starts from a clean checkout, so every non-ignored
+          # change here is produced by this workflow. Stage all generated updates
+          # to avoid leaving tracked files unstaged before the rebase.
+          git add -A
 
           if git diff --cached --quiet; then
             echo "No Scientific Library changes."
@@ -133,5 +131,12 @@ jobs:
           fi
 
           git commit -m "Recover bibliography metadata and close library gaps"
-          git pull --rebase origin main
-          git push origin main
+
+          echo "Git status after commit:"
+          git status --short
+
+          # Bring in any remote commits that may have landed while the audit was
+          # running, then push the recovered bibliography.
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
