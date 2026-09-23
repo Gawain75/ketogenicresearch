@@ -20,6 +20,8 @@ def norm_title(value):
     return re.sub(r"[^a-z0-9]+", "", value)
 
 def pmid_from(article):
+    direct = (article.get("data-pmid") or "").strip()
+    if direct: return direct
     for a in article.find_all("a", href=True):
         m = re.search(r"pubmed\.ncbi\.nlm\.nih\.gov/(\d+)/?", a["href"])
         if m: return m.group(1)
@@ -27,6 +29,8 @@ def pmid_from(article):
     return m.group(1) if m else None
 
 def doi_from(article):
+    direct = (article.get("data-doi") or "").strip().lower()
+    if direct: return direct.rstrip(".,;)")
     for a in article.find_all("a", href=True):
         href = unquote(a["href"])
         m = re.search(r"(?:doi\.org/|doi:\s*)(10\.\d{4,9}/[^\s?#\"'<>]+)", href, re.I)
@@ -81,52 +85,156 @@ def area_label(folder):
 
 def build_dataset():
     soup = BeautifulSoup(LIBRARY.read_text(encoding="utf-8"), "html.parser")
-    global_papers = {}
-    areas_raw = {}
+
+    thematic_slugs = {"glp1-keto-metabolic-endocrine"}
+    records = []
     labels = {}
+    folder_order = []
+
     for folder in soup.select("details.library-folder"):
-        slug = folder.get("id") or f"area-{len(areas_raw)+1}"
-        en,it = area_label(folder)
-        labels[slug] = {"en":en,"it":it}
-        areas_raw.setdefault(slug,{})
+        slug = folder.get("id") or f"area-{len(folder_order)+1}"
+        en, it = area_label(folder)
+        labels[slug] = {"en": en, "it": it}
+        folder_order.append(slug)
+
         for article in folder.select("article.folder-paper"):
-            key = paper_key(article)
-            if key == "title:": continue
-            year = paper_year(article)
-            if key not in global_papers or (global_papers[key] is None and year is not None):
-                global_papers[key] = year
-            if key not in areas_raw[slug] or (areas_raw[slug][key] is None and year is not None):
-                areas_raw[slug][key] = year
+            h = article.find("h4")
+            title = h.get("data-en") if h and h.has_attr("data-en") else (
+                h.get_text(" ", strip=True) if h else ""
+            )
+            records.append({
+                "folder": slug,
+                "title": norm_title(title),
+                "pmid": pmid_from(article),
+                "doi": doi_from(article),
+                "year": paper_year(article),
+            })
 
-    def counts(papers):
-        by = defaultdict(int); unknown = 0
-        for y in papers.values():
-            if y is None: unknown += 1
-            else: by[str(y)] += 1
-        return dict(sorted(by.items(), key=lambda x:int(x[0]))), unknown
+    class UnionFind:
+        def __init__(self, n):
+            self.parent = list(range(n))
+        def find(self, x):
+            while self.parent[x] != x:
+                self.parent[x] = self.parent[self.parent[x]]
+                x = self.parent[x]
+            return x
+        def union(self, a, b):
+            ra, rb = self.find(a), self.find(b)
+            if ra != rb:
+                self.parent[rb] = ra
 
-    gb, gu = counts(global_papers)
+    uf = UnionFind(len(records))
+    owner = {}
+
+    # Canonical bibliographic identity: PMID first, DOI second.
+    for i, rec in enumerate(records):
+        tokens = []
+        if rec["pmid"]:
+            tokens.append("pmid:" + rec["pmid"])
+        if rec["doi"]:
+            tokens.append("doi:" + rec["doi"])
+        for token in tokens:
+            if token in owner:
+                uf.union(i, owner[token])
+            else:
+                owner[token] = i
+
+    # Title is only a fallback for records without identifiers.
+    by_title = defaultdict(list)
+    for i, rec in enumerate(records):
+        if rec["title"]:
+            by_title[rec["title"]].append(i)
+
+    for indices in by_title.values():
+        identified_roots = {
+            uf.find(i) for i in indices
+            if records[i]["pmid"] or records[i]["doi"]
+        }
+        no_id = [
+            i for i in indices
+            if not records[i]["pmid"] and not records[i]["doi"]
+        ]
+
+        if len(identified_roots) == 1 and no_id:
+            representative = next(
+                i for i in indices if uf.find(i) in identified_roots
+            )
+            for i in no_id:
+                uf.union(representative, i)
+        elif not identified_roots and len(no_id) > 1:
+            for i in no_id[1:]:
+                uf.union(no_id[0], i)
+
+    components = {uf.find(i) for i in range(len(records))}
+    folder_components = defaultdict(set)
+    component_years = defaultdict(list)
+
+    for i, rec in enumerate(records):
+        root = uf.find(i)
+        folder_components[rec["folder"]].add(root)
+        if rec["year"] is not None:
+            component_years[root].append(rec["year"])
+
+    component_year = {}
+    for root in components:
+        years = component_years.get(root, [])
+        if not years:
+            component_year[root] = None
+            continue
+        freq = defaultdict(int)
+        for y in years:
+            freq[y] += 1
+        best = max(freq.values())
+        component_year[root] = min(y for y, n in freq.items() if n == best)
+
+    def counts(component_set):
+        by = defaultdict(int)
+        unknown = 0
+        for root in component_set:
+            y = component_year.get(root)
+            if y is None:
+                unknown += 1
+            else:
+                by[str(y)] += 1
+        return dict(sorted(by.items(), key=lambda x: int(x[0]))), unknown
+
+    gb, gu = counts(components)
+
     areas = []
-    for slug,papers in areas_raw.items():
-        by,u = counts(papers)
+    for slug in folder_order:
+        comps = folder_components.get(slug, set())
+        by, unknown = counts(comps)
         areas.append({
-            "slug":slug, "label":labels[slug], "total_unique":len(papers),
-            "known_year":len(papers)-u, "unknown_year":u, "by_year":by
+            "slug": slug,
+            "label": labels[slug],
+            "type": "thematic" if slug in thematic_slugs else "clinical",
+            "total_unique": len(comps),
+            "known_year": len(comps) - unknown,
+            "unknown_year": unknown,
+            "by_year": by,
         })
-    areas.sort(key=lambda a:a["label"]["en"].casefold())
+
+    areas.sort(key=lambda a: a["label"]["en"].casefold())
     years = sorted(map(int, gb.keys())) if gb else []
+
     return {
-        "generated_at":datetime.now().astimezone().isoformat(timespec="seconds"),
-        "current_year":CURRENT_YEAR, "previous_year":CURRENT_YEAR-1,
-        "scope_note":{
-            "en":"Counts refer to unique publications indexed in the Ketogenic Research Scientific Library, not to all publications worldwide.",
-            "it":"I conteggi si riferiscono alle pubblicazioni uniche indicizzate nella Biblioteca Scientifica di Ketogenic Research, non a tutte le pubblicazioni esistenti a livello mondiale."
+        "generated_at": datetime.now().astimezone().isoformat(timespec="seconds"),
+        "current_year": CURRENT_YEAR,
+        "previous_year": CURRENT_YEAR - 1,
+        "scope_note": {
+            "en": "Counts refer to unique publications indexed in the Ketogenic Research Scientific Library, not to all publications worldwide.",
+            "it": "I conteggi si riferiscono alle pubblicazioni uniche indicizzate nella Biblioteca Scientifica di Ketogenic Research, non a tutte le pubblicazioni esistenti a livello mondiale."
         },
-        "global":{
-            "total_unique":len(global_papers),"known_year":len(global_papers)-gu,
-            "unknown_year":gu,"first_year":years[0] if years else None,"by_year":gb
+        "global": {
+            "total_unique": len(components),
+            "known_year": len(components) - gu,
+            "unknown_year": gu,
+            "first_year": years[0] if years else None,
+            "by_year": gb
         },
-        "areas":areas
+        "clinical_area_count": sum(1 for a in areas if a["type"] == "clinical"),
+        "thematic_collection_count": sum(1 for a in areas if a["type"] == "thematic"),
+        "areas": areas
     }
 
 PAGE_HTML = r'''<!DOCTYPE html>
