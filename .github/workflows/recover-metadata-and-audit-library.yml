@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: ketogenicresearch-content-write
@@ -140,3 +141,15 @@ jobs:
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
+
+      - name: Deploy updated Scientific Library to Cloudflare
+        if: ${{ always() && !cancelled() && job.status == 'success' }}
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          echo "Starting Cloudflare Library deployment from current main..."
+          gh workflow run deploy-cloudflare-library.yml --ref main
+          echo "Cloudflare deployment workflow dispatched."
+
