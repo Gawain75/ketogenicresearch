@@ -1,5 +1,6 @@
 {
   "generated_pmids": [
+    "42700934",
     "42704249",
     "42709766",
     "42732658",
@@ -171,15 +172,27 @@
       "at": "2026-09-21T10:47:12.934597+00:00",
       "stage": "source_identity_manual_audit",
       "error": "Stored DOI/PMCID/full-text source did not belong to this PubMed record."
+    },
+    {
+      "pmid": "42739089",
+      "at": "2026-09-23T05:46:03.020843+00:00",
+      "stage": "verification",
+      "issues": [
+        "The draft includes a specific quantitative claim (“often <12 weeks”) that is not present in the source material.",
+        "The source does not provide a precise duration for clinical trials; only a general statement that intervention periods are short."
+      ],
+      "unsupported_claims": [
+        "\"small, uncontrolled or short‑term trials (often <12 weeks)\""
+      ]
     }
   ],
-  "updated_at": "2026-09-23T03:30:56.997846+00:00",
+  "updated_at": "2026-09-23T05:47:58.410168+00:00",
   "source_unavailable_pmids": [
     "42717355"
   ],
   "last_run": {
-    "attempted_candidates": 1,
-    "published_articles": 0,
-    "status": "no_article_published"
+    "attempted_candidates": 2,
+    "published_articles": 1,
+    "status": "published"
   }
 }
