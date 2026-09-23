@@ -728,8 +728,10 @@ async function syncLiteratureUpdateDate() {
     const label = new Intl.DateTimeFormat(
       currentLang() === 'it' ? 'it-IT' : 'en-GB',
       {
+        day: '2-digit',
         month: 'short',
-        year: 'numeric'
+        year: 'numeric',
+        timeZone: 'UTC'
       }
     ).format(date);
 
