@@ -894,22 +894,31 @@ def main() -> None:
     except ValueError:
         max_candidate_scan = 12
 
-    candidates = [
+    source_unavailable = set(
+        str(x) for x in idx.get("source_unavailable_pmids", [])
+    )
+
+    eligible = [
         p for p in latest.get("publications", [])
         if p.get("pmid")
         and str(p["pmid"]) not in done
-        and p.get("status") == "new"
-    ][:max_candidate_scan]
+        and str(p["pmid"]) not in source_unavailable
+        and p.get("status") in {"new", "indexed"}
+    ]
+
+    # Prefer genuinely new records. If none of them can produce a publishable
+    # article, fall back to still-unpublished indexed records from the same
+    # Latest Evidence pool so one abstract-less item cannot block the day.
+    new_candidates = [p for p in eligible if p.get("status") == "new"]
+    indexed_candidates = [p for p in eligible if p.get("status") == "indexed"]
+    candidates = (new_candidates + indexed_candidates)[:max_candidate_scan]
 
     if not candidates:
-        print("No new eligible record for the pilot.")
+        print("No eligible unpublished record available.")
         return
 
     published = 0
     attempted = 0
-    source_unavailable = set(
-        str(x) for x in idx.get("source_unavailable_pmids", [])
-    )
 
     for rec in candidates:
         if published >= MAX_ARTICLES:
@@ -918,7 +927,8 @@ def main() -> None:
         attempted += 1
         pmid = str(rec["pmid"])
         print(
-            f"Candidate {attempted}/{len(candidates)} — PMID {pmid}: "
+            f"Candidate {attempted}/{len(candidates)} "
+            f"[{rec.get('status', 'unknown')}] — PMID {pmid}: "
             f"{rec.get('title', '')[:100]}"
         )
 
