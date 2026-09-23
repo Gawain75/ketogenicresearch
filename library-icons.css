@@ -1,0 +1,251 @@
+/* V109 — Scientific Library premium clinical-area icon system */
+.folder-icon{
+  position:relative;
+  flex:0 0 auto;
+}
+.folder-icon > svg{
+  display:none !important;
+}
+.folder-icon::before{
+  content:"";
+  display:block;
+  width:26px;
+  height:26px;
+  background:currentColor;
+  -webkit-mask-image:var(--kr-folder-icon);
+  mask-image:var(--kr-folder-icon);
+  -webkit-mask-repeat:no-repeat;
+  mask-repeat:no-repeat;
+  -webkit-mask-position:center;
+  mask-position:center;
+  -webkit-mask-size:contain;
+  mask-size:contain;
+}
+@media(max-width:640px){
+  .folder-icon::before{width:23px;height:23px}
+}
+:root{
+  --kr-ico-body:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%224.8%22%20r%3D%221.8%22%2F%3E%3Cpath%20d%3D%22M8.7%208.8c.9-.8%202-1.2%203.3-1.2s2.4.4%203.3%201.2M8%2010.5v2.2c0%202-1%203.8-2.7%204.8M16%2010.5v2.2c0%202%201%203.8%202.7%204.8M8.8%2013.2c.9.8%202%201.2%203.2%201.2s2.3-.4%203.2-1.2%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-glp1:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M6%204v7m-2-4h4M5%204h2M5%2011h2l1%203%22%2F%3E%3Cpath%20d%3D%22M12%2016c0-3%203-5.5%203-8%200%202.5%203%205%203%208a3%203%200%200%201-6%200Z%22%2F%3E%3Cpath%20d%3D%22M9%2018h2m-1-3v6%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-glucose:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%203c3.2%204%205.3%206.8%205.3%2010a5.3%205.3%200%201%201-10.6%200C6.7%209.8%208.8%207%2012%203Z%22%2F%3E%3Cpath%20d%3D%22M9.5%2013h5M12%2010.5v5%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-liver:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M5%208c3-2%208-2%2013%200v4c-2%202-4.5%203-7.5%203H7c-1.5%200-2.5-1.2-2.5-2.7V9.2C4.5%208.7%204.7%208.3%205%208Z%22%2F%3E%3Cpath%20d%3D%22M12%208c-.2%202.5.6%204.8%202.6%206.1%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-lipid:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%228%22%20cy%3D%2212%22%20r%3D%223%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%228%22%20r%3D%222.4%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%222.4%22%2F%3E%3Cpath%20d%3D%22M10.5%2010.5%2013.7%209M10.5%2013.5l3.2%201.5%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-thyroid:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%2010c-1.8-3.2-4.4-4.8-6-3.4-1.8%201.5-.4%205.7%203.5%207.2M12%2010c1.8-3.2%204.4-4.8%206-3.4%201.8%201.5.4%205.7-3.5%207.2%22%2F%3E%3Cpath%20d%3D%22M9.5%2013.8c.5%202%201.3%203.2%202.5%203.2s2-1.2%202.5-3.2%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-endocrine:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%222.3%22%2F%3E%3Ccircle%20cx%3D%226%22%20cy%3D%226%22%20r%3D%221.5%22%2F%3E%3Ccircle%20cx%3D%2218%22%20cy%3D%226%22%20r%3D%221.5%22%2F%3E%3Ccircle%20cx%3D%226%22%20cy%3D%2218%22%20r%3D%221.5%22%2F%3E%3Ccircle%20cx%3D%2218%22%20cy%3D%2218%22%20r%3D%221.5%22%2F%3E%3Cpath%20d%3D%22m7.2%207.2%203.1%203.1m3.4%200%203.1-3.1m-9.6%209.6%203.1-3.1m3.4%200%203.1%203.1%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-brain:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M9.5%204.8A3.2%203.2%200%200%200%206.3%208c0%20.4.1.8.2%201.1A3.6%203.6%200%200%200%205.2%2016%203.2%203.2%200%200%200%208.4%2019H10V6.1a2.5%202.5%200%200%200-.5-1.3ZM14.5%204.8A3.2%203.2%200%200%201%2017.7%208c0%20.4-.1.8-.2%201.1A3.6%203.6%200%200%201%2018.8%2016a3.2%203.2%200%200%201-3.2%203H14V6.1c.1-.5.3-.9.5-1.3Z%22%2F%3E%3Cpath%20d%3D%22M7.5%2010H10m4%200h2.5M8%2015h2m4%200h2%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-neuron:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%222.3%22%2F%3E%3Cpath%20d%3D%22M10.3%2010.3%206%206m7.7%204.3L18%206m-7.7%207.7L6%2018m7.7-4.3L18%2018M12%209.7V5m0%209.3V19%22%2F%3E%3Ccircle%20cx%3D%226%22%20cy%3D%226%22%20r%3D%221%22%2F%3E%3Ccircle%20cx%3D%2218%22%20cy%3D%226%22%20r%3D%221%22%2F%3E%3Ccircle%20cx%3D%226%22%20cy%3D%2218%22%20r%3D%221%22%2F%3E%3Ccircle%20cx%3D%2218%22%20cy%3D%2218%22%20r%3D%221%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-boltbrain:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M9%205.2A3.2%203.2%200%200%200%206%208.5%203.5%203.5%200%200%200%207%2015a3%203%200%200%200%203%203h1V6.5C10.7%205.7%2010%205.2%209%205.2ZM15%205.2a3.2%203.2%200%200%201%203%203.3%203.5%203.5%200%200%201-1%206.5%203%203%200%200%201-3%203h-1V6.5c.3-.8%201-1.3%202-1.3Z%22%2F%3E%3Cpath%20d%3D%22m11%209-2%204h2l-1%203%204-5h-2l1-2%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-dna:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M7%204c6%203%204%2013%2010%2016M17%204C11%207%2013%2017%207%2020M8.5%207h7M7.5%2011h9M7.5%2015h9M8.5%2019h7%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-trauma:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M8%205h8v14H8z%22%2F%3E%3Cpath%20d%3D%22M12%208v8M8%2012h8%22%2F%3E%3Cpath%20d%3D%22M5%207v10m14-10v10%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-cognition:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M9.5%205A4%204%200%200%200%206%2011a4%204%200%200%200%202.5%207H10V6c-.1-.4-.3-.7-.5-1ZM14.5%205A4%204%200%200%201%2018%2011a4%204%200%200%201-2.5%207H14V6c.1-.4.3-.7.5-1Z%22%2F%3E%3Cpath%20d%3D%22M7.5%2012h2m5%200h2%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.3%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-migraine:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M6%2014c0-5%202.5-8%206-8s6%203%206%208%22%2F%3E%3Cpath%20d%3D%22M8%2017h8%22%2F%3E%3Cpath%20d%3D%22m13%208-3%205h3l-2%204%205-6h-3l2-3%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-immune:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%203%2019%206v5c0%204.7-2.7%208-7%2010-4.3-2-7-5.3-7-10V6l7-3Z%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2211%22%20r%3D%222%22%2F%3E%3Cpath%20d%3D%22M12%207v2m0%204v2m-4-4h2m4%200h2%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-psyche:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%227%22%2F%3E%3Cpath%20d%3D%22M9%2010h.01M15%2010h.01M9%2015c1.7%201.2%204.3%201.2%206%200%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-addiction:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M8%208a4%204%200%200%201%207-2l1%201%22%2F%3E%3Cpath%20d%3D%22M16%2016a4%204%200%200%201-7%202l-1-1%22%2F%3E%3Cpath%20d%3D%22m8%2012%208-4M8%2016l8-4%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-food:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M7%203v7M5%203v4c0%202%204%202%204%200V3M7%2010v11M15%203v18M15%203c3%202%204%205%204%208h-4%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-cancer:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%227%22%2F%3E%3Ccircle%20cx%3D%229%22%20cy%3D%2210%22%20r%3D%221.3%22%2F%3E%3Ccircle%20cx%3D%2215%22%20cy%3D%229%22%20r%3D%221.1%22%2F%3E%3Ccircle%20cx%3D%2214%22%20cy%3D%2215%22%20r%3D%221.5%22%2F%3E%3Cpath%20d%3D%22M5%2012H2m20%200h-3M12%205V2m0%2020v-3%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-heart:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%2020s-7-4.5-7-10a4%204%200%200%201%207-2.5A4%204%200%200%201%2019%2010c0%205.5-7%2010-7%2010Z%22%2F%3E%3Cpath%20d%3D%22M7.5%2012h2l1-2%202.2%205%201.3-3h2.5%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-kidney:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M9%205c-3%200-5%202.7-5%206s2%206%205%206c2%200%203-1.3%203-3V8c0-2-1-3-3-3ZM15%205c3%200%205%202.7%205%206s-2%206-5%206c-2%200-3-1.3-3-3V8c0-2%201-3%203-3Z%22%2F%3E%3Cpath%20d%3D%22M9%2017v3m6-3v3%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-bladder:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M8%205v4c0%202-2%203-2%206a6%206%200%200%200%2012%200c0-3-2-4-2-6V5%22%2F%3E%3Cpath%20d%3D%22M9%2015h6%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-muscle:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M6.5%2015c.8-2.6%202.4-4.7%204.8-6.2l1.7%201.5c1-.3%201.8-1%202.3-1.9l2%201.2c1.1.7%201.7%201.9%201.7%203.2A4.2%204.2%200%200%201%2014.8%2017H11a4.5%204.5%200%200%201-4.5-2Z%22%2F%3E%3Cpath%20d%3D%22m11.3%208.8-1.2-2.4M15.7%207.4l1-2.4%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-joint:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%229%22%20cy%3D%229%22%20r%3D%223%22%2F%3E%3Ccircle%20cx%3D%2215%22%20cy%3D%2215%22%20r%3D%223%22%2F%3E%3Cpath%20d%3D%22m11%2011%202%202M4%204l3%203m10%2010%203%203%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-pain:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M8%205c3%202%205%202%208%200M8%2019c3-2%205-2%208%200%22%2F%3E%3Cpath%20d%3D%22M7%208c2%201%203%202%205%204s3%203%205%204%22%2F%3E%3Cpath%20d%3D%22m11%208%202%203-2%202%202%203%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-skin:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%209c4-3%2012-3%2016%200M4%2013c4-3%2012-3%2016%200M4%2017c4-3%2012-3%2016%200%22%2F%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%228%22%20r%3D%221.2%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-lung:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M11%205v7c-2-3-4-4-5-2-1%202-1%206%200%208%201%202%205%201%205-2M13%205v7c2-3%204-4%205-2%201%202%201%206%200%208-1%202-5%201-5-2%22%2F%3E%3Cpath%20d%3D%22M12%203v5%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-uterus:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%209v10M12%209c-2-3-5-4-7-2M12%209c2-3%205-4%207-2%22%2F%3E%3Cpath%20d%3D%22M5%207c-1%202%200%204%202%205M19%207c1%202%200%204-2%205%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%229%22%20r%3D%222%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-adipose:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M5%2014c0-5%203-8%207-8s7%203%207%208%22%2F%3E%3Cpath%20d%3D%22M7%2014c1.5-1%203-1.5%205-1.5S15.5%2013%2017%2014M8%2018h8%22%2F%3E%3Ccircle%20cx%3D%229%22%20cy%3D%2210%22%20r%3D%221%22%2F%3E%3Ccircle%20cx%3D%2215%22%20cy%3D%2210%22%20r%3D%221%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-aging:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%227%22%2F%3E%3Cpath%20d%3D%22M12%208v4l3%202%22%2F%3E%3Cpath%20d%3D%22M7%205%205%203m12%202%202-2%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.5%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-circadian:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M15.5%204.5A7.5%207.5%200%201%200%2019.5%2016%206%206%200%200%201%2015.5%204.5Z%22%2F%3E%3Cpath%20d%3D%22M17%205v3m1.5-1.5h-3%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-microbe:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cellipse%20cx%3D%2212%22%20cy%3D%2212%22%20rx%3D%226%22%20ry%3D%224.5%22%2F%3E%3Cpath%20d%3D%22M7%208%205%206m2%2010-2%202m12-10%202-2m-2%2010%202%202%22%2F%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%2211%22%20r%3D%22.8%22%2F%3E%3Ccircle%20cx%3D%2214%22%20cy%3D%2213%22%20r%3D%22.8%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-fungus:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M6%2011c0-4%202.5-7%206-7s6%203%206%207H6Z%22%2F%3E%3Cpath%20d%3D%22M10%2011v7h4v-7%22%2F%3E%3Ccircle%20cx%3D%229%22%20cy%3D%228%22%20r%3D%22.8%22%2F%3E%3Ccircle%20cx%3D%2214%22%20cy%3D%227%22%20r%3D%22.8%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-ketone:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%203c3.2%204%205.2%206.8%205.2%2010a5.2%205.2%200%201%201-10.4%200C6.8%209.8%208.8%207%2012%203Z%22%2F%3E%3Cpath%20d%3D%22M9%2013h2l1-2%202%204%201-2h1%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-chain:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%226%22%20cy%3D%2212%22%20r%3D%222%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%228%22%20r%3D%222%22%2F%3E%3Ccircle%20cx%3D%2218%22%20cy%3D%2212%22%20r%3D%222%22%2F%3E%3Cpath%20d%3D%22m7.7%2010.9%202.6-1.8m3.4%200%202.6%201.8%22%2F%3E%3Cpath%20d%3D%22M8%2015h8%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-capsule:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M8%206a4%204%200%200%201%205.7%200l4.3%204.3a4%204%200%200%201-5.7%205.7L8%2011.7A4%204%200%200%201%208%206Z%22%2F%3E%3Cpath%20d%3D%22m10.8%208.8%204.4%204.4%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-exercise:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2010v4m3-6v8m10-8v8m3-6v4M7%2012h10%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%226%22%20r%3D%221.5%22%2F%3E%3Cpath%20d%3D%22M10%2018h4%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-eye:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%2012s3.5-5%209-5%209%205%209%205-3.5%205-9%205-9-5-9-5Z%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%222.5%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-chromosome:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M8%204c0%204%208%2012%208%2016M16%204C16%208%208%2016%208%2020M9%207h6m-5%204h4m-4%204h4m-5%202h6%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-bilirubin:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%203c3%204%205%206.8%205%2010a5%205%200%201%201-10%200c0-3.2%202-6%205-10Z%22%2F%3E%3Cpath%20d%3D%22M9%2014c2%201%204%201%206%200%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-virus:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%224%22%2F%3E%3Cpath%20d%3D%22M12%202v3m0%2014v3M2%2012h3m14%200h3M5%205l2%202m10%2010%202%202M19%205l-2%202M7%2017l-2%202%22%2F%3E%3Ccircle%20cx%3D%2210.5%22%20cy%3D%2211%22%20r%3D%22.6%22%2F%3E%3Ccircle%20cx%3D%2213.5%22%20cy%3D%2213%22%20r%3D%22.6%22%2F%3E%3C%2Fsvg%3E");
+  --kr-ico-aesthetic:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%225%22%20r%3D%221.8%22%2F%3E%3Cpath%20d%3D%22M8.5%209c1-.8%202.1-1.2%203.5-1.2S14.5%208.2%2015.5%209M8%2011v3c0%202-1%204-2.5%205M16%2011v3c0%202%201%204%202.5%205%22%2F%3E%3Cpath%20d%3D%22m18%204%20.6%201.4L20%206l-1.4.6L18%208l-.6-1.4L16%206l1.4-.6L18%204Z%22%2F%3E%3C%2Fsvg%3E");
+}
+
+details#obesity .folder-icon{
+  --kr-folder-icon:var(--kr-ico-body);
+}
+
+details#glp1-keto-metabolic-endocrine .folder-icon{
+  --kr-folder-icon:var(--kr-ico-glp1);
+}
+
+details#diabetes-glucose-metabolism .folder-icon{
+  --kr-folder-icon:var(--kr-ico-glucose);
+}
+
+details#masld-metabolic-liver-disease .folder-icon{
+  --kr-folder-icon:var(--kr-ico-liver);
+}
+
+details#dyslipidemia-lipid-metabolism .folder-icon,
+details#lipid-energy-model-lmhr .folder-icon{
+  --kr-folder-icon:var(--kr-ico-lipid);
+}
+
+details#thyroid-disorders .folder-icon{
+  --kr-folder-icon:var(--kr-ico-thyroid);
+}
+
+details#cushing-syndrome .folder-icon{
+  --kr-folder-icon:var(--kr-ico-endocrine);
+}
+
+details#polyendocrine-metabolic-ovarian-syndrome-pmos-formerly-pcos .folder-icon,
+details#endometriosis .folder-icon,
+details#reproduction-fertility .folder-icon{
+  --kr-folder-icon:var(--kr-ico-uterus);
+}
+
+details#epilepsy .folder-icon{
+  --kr-folder-icon:var(--kr-ico-boltbrain);
+}
+
+details#alzheimers-disease .folder-icon,
+details#parkinsons-disease .folder-icon,
+details#huntingtons-disease .folder-icon,
+details#neurodegenerative-disorders .folder-icon,
+details#multiple-sclerosis .folder-icon{
+  --kr-folder-icon:var(--kr-ico-neuron);
+}
+
+details#glut1-deficiency-syndrome .folder-icon,
+details#pyruvate-dehydrogenase-deficiency .folder-icon{
+  --kr-folder-icon:var(--kr-ico-dna);
+}
+
+details#brain-injury-neurotrauma .folder-icon{
+  --kr-folder-icon:var(--kr-ico-trauma);
+}
+
+details#cognitive-function .folder-icon,
+details#autism-spectrum-disorder .folder-icon{
+  --kr-folder-icon:var(--kr-ico-cognition);
+}
+
+details#headache-migraine .folder-icon{
+  --kr-folder-icon:var(--kr-ico-migraine);
+}
+
+details#psychiatry-mental-health .folder-icon{
+  --kr-folder-icon:var(--kr-ico-psyche);
+}
+
+details#substance-use-disorders .folder-icon{
+  --kr-folder-icon:var(--kr-ico-addiction);
+}
+
+details#eating-disorders .folder-icon{
+  --kr-folder-icon:var(--kr-ico-food);
+}
+
+details#oncology-cancer-metabolism .folder-icon{
+  --kr-folder-icon:var(--kr-ico-cancer);
+}
+
+details#cardiovascular-health .folder-icon{
+  --kr-folder-icon:var(--kr-ico-heart);
+}
+
+details#adpkd .folder-icon,
+details#chronic-kidney-disease .folder-icon{
+  --kr-folder-icon:var(--kr-ico-kidney);
+}
+
+details#urinary-incontinence .folder-icon{
+  --kr-folder-icon:var(--kr-ico-bladder);
+}
+
+details#sarcopenia-skeletal-muscle .folder-icon{
+  --kr-folder-icon:var(--kr-ico-muscle);
+}
+
+details#osteoarthritis .folder-icon,
+details#rheumatoid-arthritis .folder-icon{
+  --kr-folder-icon:var(--kr-ico-joint);
+}
+
+details#fibromyalgia .folder-icon{
+  --kr-folder-icon:var(--kr-ico-pain);
+}
+
+details#acne .folder-icon,
+details#psoriasis .folder-icon,
+details#keto-rash-prurigo-pigmentosa .folder-icon{
+  --kr-folder-icon:var(--kr-ico-skin);
+}
+
+details#asthma .folder-icon{
+  --kr-folder-icon:var(--kr-ico-lung);
+}
+
+details#inflammation-immunometabolism .folder-icon{
+  --kr-folder-icon:var(--kr-ico-immune);
+}
+
+details#lipedema .folder-icon{
+  --kr-folder-icon:var(--kr-ico-adipose);
+}
+
+details#longevity-healthy-aging .folder-icon{
+  --kr-folder-icon:var(--kr-ico-aging);
+}
+
+details#circadian-rhythms .folder-icon{
+  --kr-folder-icon:var(--kr-ico-circadian);
+}
+
+details#gut-microbiome .folder-icon{
+  --kr-folder-icon:var(--kr-ico-microbe);
+}
+
+details#candida-mycobiome .folder-icon{
+  --kr-folder-icon:var(--kr-ico-fungus);
+}
+
+details#exogenous-ketones .folder-icon{
+  --kr-folder-icon:var(--kr-ico-ketone);
+}
+
+details#medium-chain-triglycerides-mct .folder-icon{
+  --kr-folder-icon:var(--kr-ico-chain);
+}
+
+details#supplementation-nutraceuticals .folder-icon{
+  --kr-folder-icon:var(--kr-ico-capsule);
+}
+
+details#exercise-performance .folder-icon{
+  --kr-folder-icon:var(--kr-ico-exercise);
+}
+
+details#glaucoma .folder-icon{
+  --kr-folder-icon:var(--kr-ico-eye);
+}
+
+details#down-syndrome .folder-icon{
+  --kr-folder-icon:var(--kr-ico-chromosome);
+}
+
+details#gilbert-syndrome .folder-icon{
+  --kr-folder-icon:var(--kr-ico-bilirubin);
+}
+
+details#covid-19-metabolism .folder-icon{
+  --kr-folder-icon:var(--kr-ico-virus);
+}
+
+details#aesthetic-medicine-body-composition .folder-icon{
+  --kr-folder-icon:var(--kr-ico-aesthetic);
+}
+
+details.library-folder .folder-icon:not([data-icon]){
+  --kr-folder-icon:var(--kr-ico-neuron);
+}
