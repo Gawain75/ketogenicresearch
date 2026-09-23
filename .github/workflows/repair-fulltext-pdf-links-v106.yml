@@ -1,0 +1,60 @@
+name: Repair Full Text + PDF links
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "52 5 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ketogenicresearch-content-write
+  cancel-in-progress: false
+
+jobs:
+  repair-fulltext:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install parser
+        run: python -m pip install beautifulsoup4
+
+      - name: Verify Full Text and direct PDF links against PubMed/PMC
+        run: |
+          if [ -f scripts/repair_fulltext_links.py ]; then
+            python scripts/repair_fulltext_links.py
+          elif [ -f repair_fulltext_links.py ]; then
+            python repair_fulltext_links.py
+          else
+            echo "ERROR: repair_fulltext_links.py not found."
+            exit 2
+          fi
+
+      - name: Commit repaired links
+        run: |
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add library.html fulltext-link-audit.json
+
+          if git diff --cached --quiet; then
+            echo "No Full Text/PDF link changes."
+            exit 0
+          fi
+
+          git commit -m "Verify Full Text and direct PDF links"
+          git pull --rebase origin main
+          git push origin main
