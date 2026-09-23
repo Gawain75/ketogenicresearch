@@ -5,7 +5,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>Evidence Trends | Ketogenic Research</title>
 <meta content="Explore publication trends over time across the Ketogenic Research Scientific Library, globally and by clinical area." name="description"/>
-<link href="styles.css?v=70" rel="stylesheet"/>
+<link href="styles.css?v=89" rel="stylesheet"/>
 <link href="https://ketogenicresearch.org/evidence-trends.html" rel="canonical"/>
 <meta content="Evidence Trends | Ketogenic Research" name="kr-title-en"/>
 <meta content="Andamento delle evidenze | Ketogenic Research" name="kr-title-it"/>
@@ -87,11 +87,36 @@ svg.evidence-trends-svg {
 </style>
 </head>
 <body>
-<header class="header"><div class="wrap nav">
-<a aria-label="Ketogenic Research" class="brand" href="index.html"><img alt="Ketogenic Research" class="site-logo" src="logo-ketogenic-research.png"/></a>
-<nav><a href="index.html">Home</a><a data-en="Research" data-it="Ricerca" href="research.html">Research</a><a data-en="Scientific Library" data-it="Biblioteca Scientifica" href="https://library.ketogenicresearch.org/library">Scientific Library</a><a data-en="Latest Evidence" data-it="Ultime pubblicazioni" href="latest.html">Latest Evidence</a><a data-en="Evidence Trends" data-it="Andamento evidenze" href="evidence-trends.html">Evidence Trends</a><a data-en="Articles" data-it="Articoli" href="articles.html">Articles</a><a data-en="Methodology" data-it="Metodologia" href="methodology.html">Methodology</a><a data-en="Scientific Direction" data-it="Direzione scientifica" href="director.html">Scientific Direction</a><a data-en="Contact" data-it="Contatti" href="contact.html">Contact</a></nav>
-<div class="actions"><div class="lang"><button class="active" data-lang="en">EN</button><button data-lang="it">IT</button></div><button aria-label="Menu" class="menu">☰</button></div>
-</div></header>
+<header class="header">
+<div class="wrap nav">
+<a aria-label="Ketogenic Research Hub" class="brand" href="index.html">
+<img alt="Ketogenic Research Hub" class="site-logo" src="logo-ketogenic-research.png"/>
+</a>
+<nav aria-label="Primary navigation" class="site-nav">
+<a href="index.html">Home</a>
+<a data-en="Research" data-it="Ricerca" href="research.html">Research</a>
+<a data-en="Scientific Library" data-it="Biblioteca Scientifica" href="https://library.ketogenicresearch.org/library">Scientific Library</a>
+<a data-en="Latest Evidence" data-it="Ultime evidenze" href="latest.html">Latest Evidence</a>
+<a data-en="Evidence Trends" data-it="Andamento evidenze" href="evidence-trends.html">Evidence Trends</a>
+<a data-en="Articles" data-it="Articoli" href="articles.html">Articles</a>
+<a data-en="Scientific Direction" data-it="Direzione scientifica" href="director.html">Scientific Direction</a>
+<details class="nav-more">
+<summary>
+<span data-en="More" data-it="Altro">More</span>
+<span aria-hidden="true" class="nav-caret">▾</span>
+</summary>
+<div class="nav-submenu">
+<a data-en="Methodology" data-it="Metodologia" href="methodology.html">Methodology</a>
+<a data-en="Contact" data-it="Contatti" href="contact.html">Contact</a>
+</div>
+</details>
+</nav>
+<div class="actions">
+<div class="lang"><button class="active" data-lang="en">EN</button><button data-lang="it">IT</button></div>
+<button aria-label="Menu" class="menu">☰</button>
+</div>
+</div>
+</header>
 <main>
 <section class="page-hero"><div class="wrap"><p class="kicker" data-en="EVIDENCE TRENDS" data-it="ANDAMENTO DELLE EVIDENZE">EVIDENCE TRENDS</p><h1 data-en="How the scientific literature has evolved over time." data-it="Come si è evoluta la letteratura scientifica nel tempo.">How the scientific literature has evolved over time.</h1><p class="lead" data-en="Explore the annual number of unique publications indexed in the Scientific Library, globally or within a selected clinical area." data-it="Esplora il numero annuale di pubblicazioni uniche indicizzate nella Biblioteca Scientifica, globalmente o all’interno di una specifica area clinica.">Explore the annual number of unique publications indexed in the Scientific Library, globally or within a selected clinical area.</p></div></section>
 <section class="section"><div class="wrap">
@@ -101,7 +126,17 @@ svg.evidence-trends-svg {
 </div></section>
 <section class="section"><div class="wrap"><p class="kicker" data-en="AREAS AT A GLANCE" data-it="AREE IN SINTESI">AREAS AT A GLANCE</p><h2 data-en="Publication volume by clinical area" data-it="Volume delle pubblicazioni per area clinica">Publication volume by clinical area</h2><div style="overflow-x:auto"><table class="area-table"><thead><tr><th data-en="Area" data-it="Area">Area</th><th data-en="Total" data-it="Totale">Total</th><th id="tableCurrentHead"></th><th id="tablePreviousHead"></th></tr></thead><tbody id="areaTable"></tbody></table></div></div></section>
 </main>
-<footer class="footer"><div class="wrap"><strong>Ketogenic Research</strong></div></footer>
+<footer>
+<div class="wrap footer">
+<span>KETOGENIC RESEARCH HUB</span>
+<nav class="footer-links" aria-label="Footer">
+<a href="privacy.html" data-en="Privacy" data-it="Privacy">Privacy</a>
+<a href="contact.html" data-en="Contact" data-it="Contatti">Contact</a>
+<a href="methodology.html" data-en="Methodology" data-it="Metodologia">Methodology</a>
+</nav>
+<span>© 2026 Ketogenic Research Hub</span>
+</div>
+</footer>
 <script>
 let DATA=null; const $=s=>document.querySelector(s); const lang=()=>document.documentElement.lang==="it"?"it":"en";
 const n=v=>new Intl.NumberFormat(lang()==="it"?"it-IT":"en-US").format(v||0); const tf=o=>o?.[lang()]||o?.en||"";
