@@ -1,98 +1,29 @@
-/* Ketogenic Research Library icons — v121
-   Explicitly overrides legacy .library-folder .folder-icon svg rules in styles.css */
-.library-folder .folder-icon.kr-area-icon,
-.library-folder .folder-icon {
-  width: 58px;
-  height: 58px;
-  min-width: 58px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #1f4e79;
-  background: #f8fafc;
-  border: 1px solid #d5e0e8;
-  border-radius: 14px;
-  box-sizing: border-box;
-  flex: 0 0 auto;
+/* Ketogenic Research Library icons — v122 */
+.folder-icon.kr-area-icon, .folder-icon {
+  width: 58px !important;
+  height: 58px !important;
+  min-width: 58px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #1f4e79 !important;
+  background: #f8fafc !important;
+  border: 1px solid #d5e0e8 !important;
+  border-radius: 14px !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
 }
-
-/* Base sizing only; individual rendering modes below win over legacy CSS. */
-.library-folder .folder-icon .kr-icon-svg,
-.library-folder .folder-icon > svg {
-  width: 32px;
-  height: 32px;
-  display: block;
-  color: inherit;
+.folder-icon .kr-inline-img {
+  width: 34px !important;
+  height: 34px !important;
+  display: block !important;
+  object-fit: contain !important;
 }
-
-/* SOLID ICONS: undo old fill:none/stroke rules from styles.css */
-.library-folder .folder-icon svg.kr-icon-solid,
-.library-folder .folder-icon .kr-icon-solid,
-.library-folder .folder-icon svg.kr-icon-solid path,
-.library-folder .folder-icon .kr-icon-solid path {
-  fill: currentColor !important;
-  stroke: none !important;
-  stroke-width: 0 !important;
-  opacity: 1 !important;
-}
-
-/* OUTLINE / ANATOMICAL ICONS: keep a consistent strong medical line. */
-.library-folder .folder-icon svg.kr-icon-svg:not(.kr-icon-solid),
-.library-folder .folder-icon .kr-icon-svg:not(.kr-icon-solid) {
-  width: 34px;
-  height: 34px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2.15;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  opacity: 1;
-}
-.library-folder .folder-icon svg.kr-icon-svg:not(.kr-icon-solid) path,
-.library-folder .folder-icon svg.kr-icon-svg:not(.kr-icon-solid) line,
-.library-folder .folder-icon svg.kr-icon-svg:not(.kr-icon-solid) polyline,
-.library-folder .folder-icon svg.kr-icon-svg:not(.kr-icon-solid) polygon,
-.library-folder .folder-icon svg.kr-icon-svg:not(.kr-icon-solid) circle,
-.library-folder .folder-icon svg.kr-icon-svg:not(.kr-icon-solid) ellipse {
-  stroke: currentColor;
-  opacity: 1;
-}
-
-/* GLP-1 pen keeps its original outline geometry but uses the site colour. */
-.library-folder .folder-icon.glp1-keto-icon {
-  color: #1f6d86;
-  background: linear-gradient(145deg,#eef7fb,#f7fbfe);
-  border-color: #a9cadb;
-}
-.library-folder .folder-icon.glp1-keto-icon svg,
-.library-folder .folder-icon.glp1-keto-icon svg path {
-  fill: none !important;
-  stroke: currentColor !important;
-  stroke-width: 1.9 !important;
-  opacity: 1 !important;
-}
-
 details[open] > summary .folder-icon {
-  color: #2b6ca3;
-  background: #f2f8fc;
-  border-color: #b7d0df;
+  background: #f2f8fc !important;
+  border-color: #b7d0df !important;
 }
-
 @media (max-width: 720px) {
-  .library-folder .folder-icon.kr-area-icon,
-  .library-folder .folder-icon {
-    width: 58px;
-    height: 58px;
-    min-width: 58px;
-  }
-  .library-folder .folder-icon .kr-icon-svg,
-  .library-folder .folder-icon > svg {
-    width: 32px;
-    height: 32px;
-  }
-  .library-folder .folder-icon svg.kr-icon-svg:not(.kr-icon-solid),
-  .library-folder .folder-icon .kr-icon-svg:not(.kr-icon-solid) {
-    width: 34px;
-    height: 34px;
-  }
+  .folder-icon.kr-area-icon, .folder-icon { width: 58px !important; height: 58px !important; min-width: 58px !important; }
+  .folder-icon .kr-inline-img { width: 34px !important; height: 34px !important; }
 }
