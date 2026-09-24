@@ -2493,3 +2493,48 @@ article.folder-paper p,
   }
 }
 
+
+
+/* V77 — research icons aligned with Scientific Library */
+.program-icon{
+  width:48px;
+  height:48px;
+  border-radius:14px;
+}
+.program-icon .program-icon-img{
+  width:28px;
+  height:28px;
+  display:block;
+  object-fit:contain;
+}
+.program-links a{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 10px;
+  border:1px solid rgba(31,78,121,.12);
+  border-radius:999px;
+  background:#f8fbfd;
+  color:var(--ink);
+  text-decoration:none;
+}
+.program-links a:hover{
+  border-color:rgba(31,78,121,.24);
+  background:#f3f8fc;
+}
+.program-links .program-link-icon{
+  width:16px;
+  height:16px;
+  display:block;
+  object-fit:contain;
+  flex:0 0 16px;
+}
+.program-links .program-link-label{
+  display:inline-block;
+}
+@media (max-width:640px){
+  .program-icon{width:42px;height:42px;border-radius:12px;}
+  .program-icon .program-icon-img{width:24px;height:24px;}
+  .program-links a{padding:5px 9px;gap:7px;}
+  .program-links .program-link-icon{width:15px;height:15px;flex-basis:15px;}
+}
