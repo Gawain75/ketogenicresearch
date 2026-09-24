@@ -5,6 +5,7 @@ import time
 import urllib.parse
 import urllib.request
 from pathlib import Path
+import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -76,15 +77,19 @@ def fetch_verified_pmcids(pmids):
                 xml = r.read().decode("utf-8", errors="replace")
         except Exception:
             continue
-        bs = BeautifulSoup(xml, "xml")
-        for rec in bs.find_all("PubmedArticle"):
-            p = rec.find("PMID")
-            if not p: continue
-            pmid = p.get_text(strip=True)
+        try:
+            root = ET.fromstring(xml)
+        except ET.ParseError:
+            continue
+        for rec in root.findall(".//PubmedArticle"):
+            p = rec.find(".//MedlineCitation/PMID")
+            if p is None or not (p.text or "").strip():
+                continue
+            pmid = (p.text or "").strip()
             pmcid = None
-            for aid in rec.find_all("ArticleId"):
-                if aid.get("IdType") == "pmc":
-                    pmcid = aid.get_text(strip=True)
+            for aid in rec.findall(".//PubmedData/ArticleIdList/ArticleId"):
+                if aid.attrib.get("IdType") == "pmc" and (aid.text or "").strip():
+                    pmcid = (aid.text or "").strip()
                     break
             out[pmid] = pmcid
         time.sleep(0.35)
