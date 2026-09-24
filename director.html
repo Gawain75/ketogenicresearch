@@ -58,29 +58,71 @@
   />
 
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Marco Medeot",
-    "jobTitle": "Scientific Director",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Ketogenic Research Hub",
-      "url": "https://ketogenicresearch.org/"
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": "https://ketogenicresearch.org/director.html#profile",
+      "url": "https://ketogenicresearch.org/director.html",
+      "name": "Marco Medeot · Scientific Director · Ketogenic Research Hub",
+      "mainEntity": {
+        "@id": "https://ketogenicresearch.org/director.html#marco-medeot"
+      },
+      "isPartOf": {
+        "@id": "https://ketogenicresearch.org/#website"
+      },
+      "about": {
+        "@id": "https://ketogenicresearch.org/director.html#marco-medeot"
+      }
     },
-    "url": "https://ketogenicresearch.org/director.html",
-    "email": "marco.medeot@ketogenicresearch.org",
-    "knowsAbout": [
-      "Ketogenic nutritional therapy",
-      "Clinical nutrition",
-      "Obesity",
-      "Body composition",
-      "Lean mass preservation",
-      "Metabolic physiology",
-      "Neurological applications"
-    ]
-  }
-  </script>
+    {
+      "@type": "Person",
+      "@id": "https://ketogenicresearch.org/director.html#marco-medeot",
+      "name": "Marco Medeot",
+      "url": "https://ketogenicresearch.org/director.html",
+      "image": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Marco_Medeot_portrait.jpg",
+      "jobTitle": "Scientific Director",
+      "worksFor": {
+        "@id": "https://ketogenicresearch.org/#organization"
+      },
+      "sameAs": [
+        "https://www.wikidata.org/wiki/Q138637604",
+        "https://www.linkedin.com/in/marco-medeot-%E2%9C%85-ab3577196/",
+        "https://sifaformazione.it/team/marco-medeot/",
+        "https://www.corrieredellascienza.it/author/marcom/"
+      ],
+      "knowsAbout": [
+        "Ketogenic metabolic therapy",
+        "Ketogenic nutritional therapy",
+        "Clinical nutrition",
+        "Obesity",
+        "Body composition",
+        "Lean mass preservation",
+        "Protein requirements",
+        "Metabolic physiology",
+        "Neurological applications of ketogenic therapies"
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://ketogenicresearch.org/#organization",
+      "name": "Ketogenic Research Hub",
+      "url": "https://ketogenicresearch.org/",
+      "logo": "https://ketogenicresearch.org/logo-ketogenic-research.png"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://ketogenicresearch.org/#website",
+      "name": "Ketogenic Research Hub",
+      "url": "https://ketogenicresearch.org/",
+      "publisher": {
+        "@id": "https://ketogenicresearch.org/#organization"
+      }
+    }
+  ]
+}
+</script>
 
   <script type="application/ld+json">
   {
