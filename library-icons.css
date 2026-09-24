@@ -1,5 +1,6 @@
-/* Ketogenic Research Library icons v116
-   Health Icons embedded inline: no CDN / external JS dependency. */
+/* Ketogenic Research Library icons v117
+   Verified macro-category icon system: one intentional symbol per visible clinical macro-area.
+   SVGs are inline; no CDN or JavaScript dependency. */
 
 .library-folder > summary .folder-icon{
   width:36px !important;
@@ -14,33 +15,29 @@
   border-radius:10px !important;
   box-shadow:none !important;
 }
-
 .library-folder > summary .folder-icon .healthicon-inline{
-  width:27px !important;
-  height:27px !important;
+  width:26px !important;
+  height:26px !important;
   display:block !important;
   color:currentColor !important;
   overflow:visible;
 }
-
 .library-folder[open] > summary .folder-icon{
   color:var(--primary-2,#2b6ca3) !important;
   background:rgba(43,108,163,.07) !important;
   border-color:rgba(43,108,163,.28) !important;
 }
-
 .library-folder > summary .folder-icon.glp1-keto-icon svg{
-  width:27px !important;
-  height:27px !important;
+  width:26px !important;
+  height:26px !important;
   fill:none;
   stroke:currentColor;
   stroke-width:1.8;
   stroke-linecap:round;
   stroke-linejoin:round;
 }
-
 @media (max-width:640px){
   .library-folder > summary .folder-icon{width:34px !important;height:34px !important;flex-basis:34px !important;}
   .library-folder > summary .folder-icon .healthicon-inline,
-  .library-folder > summary .folder-icon.glp1-keto-icon svg{width:25px !important;height:25px !important;}
+  .library-folder > summary .folder-icon.glp1-keto-icon svg{width:24px !important;height:24px !important;}
 }
