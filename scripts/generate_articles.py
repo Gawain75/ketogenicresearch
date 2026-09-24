@@ -36,6 +36,7 @@ GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "").strip()
 GROQ_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-120b").strip()
 NCBI_EMAIL = os.environ.get("NCBI_EMAIL", "info@ketogenicresearch.org").strip()
 NCBI_API_KEY = os.environ.get("NCBI_API_KEY", "").strip()
+TARGET_PMID = os.environ.get("TARGET_PMID", "").strip()
 
 # Publish at most one VERIFIED article per run; the fallback loop may scan multiple records.
 MAX_ARTICLES = 1
@@ -880,7 +881,7 @@ date: {json.dumps(rec.get("date",""))}
 journal: {json.dumps(rec.get("journal",""), ensure_ascii=False)}
 article_type: {json.dumps(draft.get("article_type",""))}
 article_type_it: {json.dumps(draft.get("article_type_it",""))}
-generator_version: "4.4"
+generator_version: "4.5"
 source_identity: "PASS"
 source_identity_basis: "PubMed PMID/title/DOI/PMCID"
 full_text_source: {json.dumps(full_text_source)}
@@ -960,20 +961,46 @@ def main() -> None:
         str(x) for x in idx.get("source_unavailable_pmids", [])
     )
 
-    eligible = [
-        p for p in latest.get("publications", [])
-        if p.get("pmid")
-        and str(p["pmid"]) not in done
-        and str(p["pmid"]) not in source_unavailable
-        and p.get("status") in {"new", "indexed"}
-    ]
+    publications = latest.get("publications", [])
 
-    # Prefer genuinely new records. If none of them can produce a publishable
-    # article, fall back to still-unpublished indexed records from the same
-    # Latest Evidence pool so one abstract-less item cannot block the day.
-    new_candidates = [p for p in eligible if p.get("status") == "new"]
-    indexed_candidates = [p for p in eligible if p.get("status") == "indexed"]
-    candidates = (new_candidates + indexed_candidates)[:max_candidate_scan]
+    if TARGET_PMID:
+        if not re.fullmatch(r"\d{6,9}", TARGET_PMID):
+            raise SystemExit("TARGET_PMID must contain a valid numeric PMID.")
+
+        target = next(
+            (
+                p for p in publications
+                if str(p.get("pmid") or "") == TARGET_PMID
+            ),
+            None,
+        )
+
+        if target is None:
+            raise SystemExit(
+                f"TARGET_PMID {TARGET_PMID} is not present in latest-publications.json."
+            )
+
+        # Explicit regeneration takes precedence over the normal generated/
+        # unavailable guards. Only this PMID is eligible in this run.
+        done.discard(TARGET_PMID)
+        source_unavailable.discard(TARGET_PMID)
+        candidates = [target]
+        print(f"Forced regeneration target: PMID {TARGET_PMID}")
+
+    else:
+        eligible = [
+            p for p in publications
+            if p.get("pmid")
+            and str(p["pmid"]) not in done
+            and str(p["pmid"]) not in source_unavailable
+            and p.get("status") in {"new", "indexed"}
+        ]
+
+        # Prefer genuinely new records. If none of them can produce a
+        # publishable article, fall back to still-unpublished indexed records.
+        new_candidates = [p for p in eligible if p.get("status") == "new"]
+        indexed_candidates = [p for p in eligible if p.get("status") == "indexed"]
+        candidates = (new_candidates + indexed_candidates)[:max_candidate_scan]
 
     if not candidates:
         print("No eligible unpublished record available.")
