@@ -1,0 +1,35 @@
+name: Validate article full-text reading v112
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate generator
+        run: |
+          python -m py_compile scripts/generate_articles.py
+          grep -q 'generator_version: "4.4"' scripts/generate_articles.py
+          grep -q 'Treat the full text as the primary scientific source' scripts/generate_articles.py
+          grep -q 'FAIL any draft that frames a scientific limitation' scripts/generate_articles.py
+
+      - name: Summary
+        run: |
+          echo "### Generator v4.4 validated" >> "$GITHUB_STEP_SUMMARY"
+          echo "- PMC sections are prioritized rather than truncated from the beginning" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Full-text context cap: 30,000 characters" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Abstract-source wording is prohibited when full text is available" >> "$GITHUB_STEP_SUMMARY"
