@@ -1,24 +1,50 @@
-/* Ketogenic Research Library icons — v118
-   Inline SVG only: no CDN, no external icon runtime. */
+/* Ketogenic Research Library icons — v120 */
 .folder-icon.kr-area-icon, .folder-icon {
-  width: 58px; height: 58px; min-width: 58px;
-  display: inline-flex; align-items: center; justify-content: center;
+  width: 58px;
+  height: 58px;
+  min-width: 58px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: #1f4e79;
   background: #f8fafc;
   border: 1px solid #d5e0e8;
   border-radius: 14px;
   box-sizing: border-box;
 }
-.folder-icon .kr-icon-svg, .folder-icon > svg {
-  width: 32px; height: 32px;
-  display: block; overflow: visible;
-  color: inherit; fill: currentColor;
+.folder-icon .kr-icon-svg,
+.folder-icon > svg {
+  width: 31px;
+  height: 31px;
+  display: block;
+  color: inherit;
 }
-.folder-icon .kr-icon-svg path, .folder-icon .kr-icon-svg circle, .folder-icon .kr-icon-svg rect, .folder-icon .kr-icon-svg line, .folder-icon .kr-icon-svg polyline, .folder-icon .kr-icon-svg polygon {
-  vector-effect: non-scaling-stroke;
+.folder-icon .kr-icon-solid {
+  fill: currentColor;
+  stroke: none;
 }
-details[open] > summary .folder-icon { color:#2b6ca3; background:#f2f8fc; border-color:#b7d0df; }
+/* Anatomical Health Icons retained for liver/kidney and the GLP-1 pen */
+.folder-icon .kr-icon-svg:not(.kr-icon-solid) {
+  width: 34px;
+  height: 34px;
+}
+details[open] > summary .folder-icon {
+  color: #2b6ca3;
+  background: #f2f8fc;
+  border-color: #b7d0df;
+}
 @media (max-width: 720px) {
-  .folder-icon.kr-area-icon, .folder-icon { width:58px; height:58px; min-width:58px; }
-  .folder-icon .kr-icon-svg, .folder-icon > svg { width:31px; height:31px; }
+  .folder-icon.kr-area-icon, .folder-icon {
+    width: 58px;
+    height: 58px;
+    min-width: 58px;
+  }
+  .folder-icon .kr-icon-svg, .folder-icon > svg {
+    width: 31px;
+    height: 31px;
+  }
+  .folder-icon .kr-icon-svg:not(.kr-icon-solid) {
+    width: 34px;
+    height: 34px;
+  }
 }
