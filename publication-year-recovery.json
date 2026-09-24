@@ -1,181 +1,216 @@
 {
-  "missing_year_instances_before": 341,
-  "recovered_this_run": 9,
+  "missing_year_instances_before": 170,
+  "recovered_this_run": 0,
   "from_citation": 0,
   "from_duplicate_identifier": 0,
   "from_duplicate_title": 0,
   "from_cache": 0,
   "from_pmid_batch": 0,
   "from_doi_batch": 0,
-  "from_title_search": 9,
+  "from_title_search": 0,
   "title_searches_attempted": 40,
-  "title_searches_resolved_unique": 7,
-  "remaining_missing_year_instances": 332,
-  "remaining_unique_missing_titles": 300,
+  "title_searches_resolved_unique": 0,
+  "remaining_missing_year_instances": 170,
+  "remaining_unique_missing_titles": 165,
   "title_search_retry_days": 30,
   "unresolved_sample": [
     {
-      "title": "5. Effects of very low-carbohydrate ketogenic diet on lipid metabolism in patients with type 2 diabetes",
+      "title": "14. Effects of ketogenic diet on health",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "7. Ketogenic diet preserves muscle mass and strength in a mouse model of type 2 diabetes",
+      "title": "16. The Lipid Energy Model",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.352
+    },
+    {
+      "title": "18. Low-Density Lipoprotein Cholesterol Elevation in the Context of a Ketogenic Diet",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "8. BDH1-mediated β-hydroxybutyrate metabolism ameliorates diabetic kidney disease",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.6634
-    },
-    {
-      "title": "10. The Effects of Ketogenic Diet on Insulin Sensitivity and Weight Loss",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.7727
-    },
-    {
-      "title": "11. The Role of a Ketogenic Diet in the Treatment of Dementia in Type 2 Diabetes Mellitus",
+      "title": "2. Nutritional Intervention in Cushing’s Disease: The Potential Role of a Ketogenic Strategy",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "12. A ketogenic diet improves vascular hyperpermeability in type 2 diabetic mice",
+      "title": "7. Effects of Ketogenic Diet on Reproductive Hormones in PCOS",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.4977
+    },
+    {
+      "title": "8. Low-Calorie Ketogenic Diet: Potential Application in PCOS",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "13. Impaired ketogenesis is associated with metabolic-associated fatty liver disease in subjects with type 2 diabetes",
+      "title": "11. Effects of a ketogenic diet in overweight women with PCOS",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.5412
+    },
+    {
+      "title": "12. Effects of a Ketogenic Diet in Overweight and Obese Women with PCOS",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.5111
+    },
+    {
+      "title": "18. Effects of a Mixed Ketogenic Diet in Overweight and Obese Women with PCOS",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "14. Low carbohydrate ketogenic diets reduce cardiovascular risk factor levels in obese or overweight patients with T2DM",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.8273
-    },
-    {
-      "title": "17. Effect of Low-Carbohydrate Diets on Glycemic Control",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.4596
-    },
-    {
-      "title": "18. Greater Reduction in the Proinsulin-C-Peptide Ratio with a Ketogenic Nutritional Intervention",
+      "title": "6. Long-term effectiveness and tolerability of ketogenic diet therapy in patients with genetic epilepsy",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "19. Sustained Metabolic Improvements in a Remotely Delivered Ketogenic Nutrition Intervention",
+      "title": "8. Ketogenic diet for epilepsy control",
       "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.3506
+      "best_similarity": 0.6542
     },
     {
-      "title": "20. Impact of Very Low Carbohydrate Ketogenic Diets on Cardiovascular Risk Factors among Patients with Type 2 Diabetes: GRADE-Assessed Systematic Review and Meta-Analysis",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.0
-    },
-    {
-      "title": "23. Low-Carbohydrate Ketogenic Diets Reduce Cardiovascular Risk Factor Levels in Patients with Type 2 Diabetes",
+      "title": "16. The ketogenic diet increases Neuregulin 1 in an epilepsy model",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "24. Clinical Assessment of Intermittent Fasting with Ketogenic Diet in Glycemic Control and Weight Reduction in Type 2 Diabetes",
+      "title": "17. Treatment of refractory epilepsy: comparison of ketogenic dietary approaches",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "25. Very Low Carbohydrate Ketogenic Diets in Type 2 Diabetes: Review",
+      "title": "18. Seizure modulation by the gut microbiota and ketogenic diet",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.6429
+    },
+    {
+      "title": "19. The gut microbiome and the ketogenic diet in epilepsy",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.7573
+    },
+    {
+      "title": "20. The efficacy of non-fasting ketogenic diet protocols in epilepsy",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.5753
+    },
+    {
+      "title": "22. Stress biomarkers in adult patients with drug-resistant epilepsy during ketogenic diet therapy",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "30. Adherence to Low-Carbohydrate Diets in Patients with Type 2 Diabetes",
+      "title": "24. Fecal Transfers from Children on the Ketogenic Diet Mimic Key Metabolic Effects",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "31. Adapting Medication for Type 2 Diabetes to a Low-Carbohydrate Ketogenic Diet",
+      "title": "27. Intractable Seizures in Children With Type 1 Diabetes Treated With Ketogenic Dietary Therapy",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "32. The Ketogenic Diet Through a Metabolomic Lens",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.5556
-    },
-    {
-      "title": "6. Effect of a Ketogenic Diet on Metabolic Dysfunction-Associated Steatotic Liver Disease",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.7818
-    },
-    {
-      "title": "10. Ketogenic diet time-dependently prevents NAFLD",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.5444
-    },
-    {
-      "title": "11. Higher-Level Steatosis Is Associated with a Greater Decrease in Metabolic Dysfunction-Associated Steatotic Liver Disease after Eight Weeks of a Very Low-Calorie Ketogenic Diet",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.8657
-    },
-    {
-      "title": "13. Investigating the Link between Ketogenic Diet, NAFLD, Mitochondria, and Oxidative Stress",
+      "title": "28. Graph Theory-Based Electroencephalographic Connectivity During Ketogenic Diet Therapy",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "15. Current Evidence Concerning Effects of Ketogenic Diet and Intermittent Fasting in Patients with Nonalcoholic Fatty Liver Disease",
+      "title": "29. Prospective Controlled Study of Efficacy and Influencing Factors of Ketogenic Diet Therapy in Epilepsy",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.8532
+    },
+    {
+      "title": "31. Ketogenic Diet Therapy for Refractory Epilepsy",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "23. Treatment of NAFLD with Intermittent Calorie Restriction or Low-Carbohydrate Diet",
+      "title": "35. Analysis of Factors That May Affect the Effectiveness of Ketogenic Diet Therapy in Epilepsy",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "4. Low-density lipoprotein cholesterol elevation with carbohydrate-restricted diets",
+      "title": "3. Nutritional Ketosis in Parkinson’s Disease",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.4496
+    },
+    {
+      "title": "5. Dietary approaches to improve efficacy and management in Parkinson’s disease with ketogenic strategies",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "5. LDL Keto Trial",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.2523
-    },
-    {
-      "title": "6. Elevated LDL Cholesterol with a Carbohydrate-Restricted Diet: Evidence",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.7667
-    },
-    {
-      "title": "7. Thyroid markers and body composition predict LDL-cholesterol change in lean healthy women on a ketogenic diet",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.8195
-    },
-    {
-      "title": "9. Reduction of Cardio-Metabolic Risk and Body Weight through a ketogenic dietary intervention",
+      "title": "6. The role of diet and dietary patterns in Parkinson’s disease, including ketogenic approaches",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "10. Italian Ketogenic Mediterranean Diet in Overweight and Obese Adults",
+      "title": "13. Neuroprotection by the Ketogenic Diet",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.7327
+    },
+    {
+      "title": "2. Dietary Ketosis Improves Metabolic and Neurological Features in Experimental Huntington’s Disease",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "11. Effects of a two-meals-a-day ketogenic diet on metabolic markers",
+      "title": "16. The Implication of Physiological Ketosis on Cognitive Function",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "12. Is a Ketogenic Diet Superior to a Low-Fat Diet?",
+      "title": "5. Dietary and Metabolic Approaches for Treating Cognitive Impairment Comorbid with Epilepsy",
       "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.5375
+      "best_similarity": 0.6496
     },
     {
-      "title": "13. Efficacy and safety of very low calorie ketogenic diet (VLCKD) in patients with overweight and obesity",
+      "title": "5. Mediterranean Ketogenic Diet Accounts for Reduced Pain Frequency in Migraine",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "8. Ketogenic Diet and Low-Glycemic-Index Diet for Chronic and Episodic Migraine: A Real-Life Retrospective Study",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.8606
+    },
+    {
+      "title": "16. Pathophysiological Abnormalities in Migraine Ameliorated by Ketosis",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.8375
+    },
+    {
+      "title": "18. Migraine Prevention through Ketogenic Diet: More than Body Weight Reduction",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "13. Therapeutic Alternative of the Ketogenic Mediterranean Diet in Multiple Sclerosis",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "5. Ketogenic Diet: A Dietary Intervention via Gut Microbiota in Autism Spectrum Disorder",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.7326
+    },
+    {
+      "title": "8. Efficacy and Safety of Diet Therapies in Autism Spectrum Disorder including ketogenic interventions",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "10. Vocal Communication in Asocial BTBR Mice Is Modulated by a Ketogenic Diet",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "11. Ketogenic and Low-FODMAP Diet in the Therapeutic Management of a Young Autistic Patient with Epilepsy and Dysmetabolism",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.4216
+    },
+    {
+      "title": "1. Effect of 3 months of ketogenic diet on euthymia in bipolar II disorder",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     }

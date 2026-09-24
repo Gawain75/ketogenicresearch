@@ -1,78 +1,9 @@
 {
-  "generated_at": "2026-09-24T03:24:35+00:00",
+  "generated_at": "2026-09-24T03:26:39+00:00",
   "curation_window_days": 365,
-  "auto_approved_count": 2,
+  "auto_approved_count": 0,
   "excluded_count": 19,
   "records": [
-    {
-      "pmid": "42776386",
-      "title": "Ketone ester supplementation in aged mice produces sex-specific cognitive and metabolic effects.",
-      "authors": [
-        "Roslund KJ",
-        "Coates LC",
-        "Sattar Sultani S",
-        "Hayes D",
-        "Diaz S",
-        "Rutkowsky JM",
-        "Zhou Z",
-        "Ramsey JJ",
-        "Taha AY",
-        "Slupsky CM"
-      ],
-      "journal": "GeroScience",
-      "date": "2026-09-23",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1007/s11357-026-02546-8",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42776386/",
-      "doi_url": "https://doi.org/10.1007/s11357-026-02546-8",
-      "pmc_url": "",
-      "areas": [
-        "Supplementation & Nutraceuticals"
-      ],
-      "category_confidence": 12,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-24",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "42775478",
-      "title": "Ketogenic diet reverses obesity-associated hippocampal dysfunction and cognitive impairment in rats: a dietary comparison study.",
-      "authors": [
-        "Jawharji MT",
-        "Alshammari GM",
-        "Binobead MA",
-        "Saleh A",
-        "Al-Harbi LN",
-        "Yahya MA"
-      ],
-      "journal": "Nutritional neuroscience",
-      "date": "2026-09-23",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1080/1028415X.2026.2734187",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42775478/",
-      "doi_url": "https://doi.org/10.1080/1028415X.2026.2734187",
-      "pmc_url": "",
-      "areas": [
-        "Cognitive Function",
-        "Obesity"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-24",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
     {
       "pmid": "42582329",
       "title": "Ketogenic Diet Extinguishes Firing at the Synapses.",
