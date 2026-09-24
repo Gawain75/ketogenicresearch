@@ -2556,3 +2556,21 @@ article.folder-paper p,
 .nav-more[open] > .nav-submenu {
   display: block !important;
 }
+
+
+/* V125 — Desktop Latest Evidence cards: natural content height */
+@media (min-width: 981px){
+  .home-latest-grid{
+    align-items:start !important;
+  }
+  .home-latest-card{
+    min-height:0 !important;
+    height:auto !important;
+  }
+  .home-latest-card .home-latest-area,
+  .home-latest-card .latest-area,
+  .home-latest-card .area-tag{
+    margin-top:.65rem !important;
+    padding-top:0 !important;
+  }
+}
