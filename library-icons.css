@@ -1,117 +1,19 @@
-/* V113 — Macro-category clinical icon system
-   16 visual families + dedicated GLP-1 pen. */
-
-.folder-icon{position:relative;flex:0 0 auto;}
-.folder-icon > svg{display:none!important;}
-.library-folder .folder-icon{
-  width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;
-  border:1px solid rgba(30,105,108,.16);border-radius:10px;
-  background:#f4f9f9;color:#1f6f73;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
-  transition:background .18s ease,border-color .18s ease,color .18s ease,transform .18s ease;
+/* V114 — inline macro-category icon system. No SVG masks. */
+.folder-icon{
+  position:relative; flex:0 0 auto; width:36px; height:36px;
+  display:inline-flex; align-items:center; justify-content:center;
+  color:#1f6f73; background:transparent; border:0; border-radius:0; box-shadow:none;
+}
+.folder-icon > svg{
+  display:block!important; width:27px; height:27px; overflow:visible;
+  fill:none!important; stroke:currentColor!important; stroke-width:1.65;
+  stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke;
 }
 .library-folder > summary:hover .folder-icon,
-.library-folder[open] > summary .folder-icon{background:#edf6f5;border-color:rgba(30,105,108,.28);color:#175f63;}
-.library-folder > summary:hover .folder-icon{transform:translateY(-1px);}
-.folder-icon::before{
-  content:"";display:block;width:20px;height:20px;background:currentColor;
-  -webkit-mask-image:var(--kr-folder-icon,var(--kr-ico-fallback));
-  mask-image:var(--kr-folder-icon,var(--kr-ico-fallback));
-  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
-  -webkit-mask-position:center;mask-position:center;
-  -webkit-mask-size:contain;mask-size:contain;
+.library-folder[open] > summary .folder-icon{color:#175f63;}
+.library-folder > summary:hover .folder-icon{transform:none;}
+.folder-icon::before,.folder-icon::after{content:none!important;display:none!important;}
+@media(max-width:640px){
+  .folder-icon{width:32px;height:32px}
+  .folder-icon > svg{width:24px;height:24px}
 }
-@media(max-width:640px){.library-folder .folder-icon{width:30px;height:30px;border-radius:9px}.folder-icon::before{width:18px;height:18px}}
-
-:root{
-  --kr-ico-fallback:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%227%22%2F%3E%3Cpath%20d%3D%22M9%2012h6M12%209v6%22%2F%3E%3C%2Fsvg%3E");
-  --kr-ico-metabolic:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%227%22%2F%3E%3Cpath%20d%3D%22M12%205v3M12%2016v3M5%2012h3M16%2012h3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%222.2%22%2F%3E%3C%2Fsvg%3E");
-  --kr-ico-liver:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4.5%209.1c3.3-2.6%208.4-3%2015-.6v2.6c-2%202.8-5.5%204.3-9.4%204.3H7.2c-1.7%200-2.7-1.1-2.7-2.7Z%22%2F%3E%3Cpath%20d%3D%22M13%208.3c-.2%202.3.5%204.5%202.3%206%22%2F%3E%3C%2Fsvg%3E");
-  --kr-ico-brain:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M9.5%205.2A3%203%200%200%200%206.5%208a3.4%203.4%200%200%200%20.9%206.2A3%203%200%200%200%2010.2%2018H12V7c-.4-1.1-1.2-1.8-2.5-1.8Z%22%2F%3E%3Cpath%20d%3D%22M14.5%205.2A3%203%200%200%201%2017.5%208a3.4%203.4%200%200%201-.9%206.2A3%203%200%200%201%2013.8%2018H12V7c.4-1.1%201.2-1.8%202.5-1.8Z%22%2F%3E%3C%2Fsvg%3E");
-  --kr-ico-genetic:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M8%204c0%204.3%208%2011.7%208%2016M16%204c0%204.3-8%2011.7-8%2016%22%2F%3E%3Cpath%20d%3D%22M9.2%207h5.6M10.2%2011h3.6M10.2%2015h3.6M9.2%2018h5.6%22%2F%3E%3C%2Fsvg%3E");
-  --kr-ico-mind:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%204.5a7.5%207.5%200%201%200%200%2015%22%2F%3E%3Cpath%20d%3D%22M12%207.5c2.8%200%205%202%205%204.5s-2.2%204.5-5%204.5%22%2F%3E%3Cpath%20d%3D%22M12%209.5v5M14.5%2010.5l-5%203%22%2F%3E%3C%2Fsvg%3E");
-  --kr-ico-oncology:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%227%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%222%22%2F%3E%3Cpath%20d%3D%22M12%205v2M12%2017v2M5%2012h2M17%2012h2M7.2%207.2l1.5%201.5M15.3%2015.3l1.5%201.5M16.8%207.2l-1.5%201.5M8.7%2015.3l-1.5%201.5%22%2F%3E%3C%2Fsvg%3E");
-  --kr-ico-cardio:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%2019s-7-4.5-7-9.1A3.9%203.9%200%200%201%2012%207a3.9%203.9%200%200%201%207%202.9C19%2014.5%2012%2019%2012%2019Z%22%2F%3E%3Cpath%20d%3D%22M7.5%2012h2l1.1-2.2%202.1%204.4%201.2-2.2h2.6%22%2F%3E%3C%2Fsvg%3E");
-  --kr-ico-renal:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M8.6%206.3c-2%200-3.5%201.8-3.5%204.4%200%203%201.7%205.1%204%205.1%201.5%200%202.5-1.2%202.5-2.8V8.8c0-1.5-1.1-2.5-3-2.5Z%22%2F%3E%3Cpath%20d%3D%22M15.4%206.3c2%200%203.5%201.8%203.5%204.4%200%203-1.7%205.1-4%205.1-1.5%200-2.5-1.2-2.5-2.8V8.8c0-1.5%201.1-2.5%203-2.5Z%22%2F%3E%3C%2Fsvg%3E");
-  --kr-ico-musculoskeletal:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M8.2%206.8%206.5%205.1a1.7%201.7%200%201%200-2.4%202.4l1.7%201.7%209%209%201.7%201.7a1.7%201.7%200%201%200%202.4-2.4l-1.7-1.7Z%22%2F%3E%3Cpath%20d%3D%22M7.2%2016.8%2016.8%207.2%22%2F%3E%3C%2Fsvg%3E");
-  --kr-ico-skin:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%208.5c3-2%205.5%202%208.3%200s5.3-2%207.7%200%22%2F%3E%3Cpath%20d%3D%22M4%2012c3-2%205.5%202%208.3%200s5.3-2%207.7%200%22%2F%3E%3Cpath%20d%3D%22M4%2015.5c3-2%205.5%202%208.3%200s5.3-2%207.7%200%22%2F%3E%3C%2Fsvg%3E");
-  --kr-ico-immune:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%204%2018%206v5c0%204-2.4%207-6%209-3.6-2-6-5-6-9V6Z%22%2F%3E%3Cpath%20d%3D%22M9%2012h6M12%209v6%22%2F%3E%3C%2Fsvg%3E");
-  --kr-ico-reproductive:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%209v9%22%2F%3E%3Cpath%20d%3D%22M12%209c-2.3-3-5.2-4-7.2-1.8M12%209c2.3-3%205.2-4%207.2-1.8%22%2F%3E%3Cpath%20d%3D%22M4.8%207.2c-.7%202.4.4%204.3%202.6%205M19.2%207.2c.7%202.4-.4%204.3-2.6%205%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%229%22%20r%3D%221.6%22%2F%3E%3C%2Fsvg%3E");
-  --kr-ico-gut:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M8%205.5c-2.2%200-3%201.6-3%203.2%200%201.4.7%202.3%201.8%202.9C5.7%2012.2%205%2013%205%2014.3c0%202%201.5%204.2%204.4%204.2H15c2.4%200%204-1.6%204-3.7%200-1.6-.8-2.7-2-3.3%201.2-.6%202-1.7%202-3.2%200-1.8-1.3-2.8-3-2.8Z%22%2F%3E%3Cpath%20d%3D%22M9%208.2h5.5M8.5%2011.7h6M9.5%2015.2h5%22%2F%3E%3C%2Fsvg%3E");
-  --kr-ico-supplement:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M7.5%206.2a4%204%200%200%201%205.7%200l4.6%204.6a4%204%200%201%201-5.7%205.7L7.5%2012a4%204%200%200%201%200-5.8Z%22%2F%3E%3Cpath%20d%3D%22m10.3%209%204.7%204.7%22%2F%3E%3C%2Fsvg%3E");
-  --kr-ico-performance:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%225%22%20r%3D%221.6%22%2F%3E%3Cpath%20d%3D%22M8.8%209.2c1-.8%202.1-1.2%203.2-1.2s2.2.4%203.2%201.2M10%209.5l-2%204.2M14%209.5l2%204.2M9.5%2014l-1%205M14.5%2014l1%205%22%2F%3E%3Cpath%20d%3D%22M5%2017h2M17%2017h2%22%2F%3E%3C%2Fsvg%3E");
-  --kr-ico-eye:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%2012s3.5-5%209-5%209%205%209%205-3.5%205-9%205-9-5-9-5Z%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%222.4%22%2F%3E%3C%2Fsvg%3E");
-  --kr-ico-glp1:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M6.8%2018.5%2016.5%208.8%22%2F%3E%3Cpath%20d%3D%22m15.4%207.7%201.7-1.7%202.5%202.5-1.7%201.7%22%2F%3E%3Cpath%20d%3D%22m8.1%2017.2-1.8-1.8%207.9-7.9%201.8%201.8Z%22%2F%3E%3Cpath%20d%3D%22M5.6%2017.3%204.7%2018.2a2%202%200%200%200%202.8%202.8l.9-.9M18.4%205.6%2019.6%204.4%22%2F%3E%3C%2Fsvg%3E");
-}
-
-details#obesity .folder-icon,
-details#diabetes-glucose-metabolism .folder-icon,
-details#dyslipidemia-lipid-metabolism .folder-icon,
-details#lipid-energy-model-lmhr .folder-icon,
-details#thyroid-disorders .folder-icon,
-details#cushing-syndrome .folder-icon,
-details#polyendocrine-metabolic-ovarian-syndrome-pmos-formerly-pcos .folder-icon{--kr-folder-icon:var(--kr-ico-metabolic);}
-
-details#masld-metabolic-liver-disease .folder-icon,
-details#gilbert-syndrome .folder-icon{--kr-folder-icon:var(--kr-ico-liver);}
-
-details#epilepsy .folder-icon,
-details#alzheimers-disease .folder-icon,
-details#parkinsons-disease .folder-icon,
-details#huntingtons-disease .folder-icon,
-details#neurodegenerative-disorders .folder-icon,
-details#brain-injury-neurotrauma .folder-icon,
-details#cognitive-function .folder-icon,
-details#headache-migraine .folder-icon,
-details#multiple-sclerosis .folder-icon{--kr-folder-icon:var(--kr-ico-brain);}
-
-details#glut1-deficiency-syndrome .folder-icon,
-details#pyruvate-dehydrogenase-deficiency .folder-icon,
-details#down-syndrome .folder-icon{--kr-folder-icon:var(--kr-ico-genetic);}
-
-details#autism-spectrum-disorder .folder-icon,
-details#psychiatry-mental-health .folder-icon,
-details#substance-use-disorders .folder-icon,
-details#eating-disorders .folder-icon{--kr-folder-icon:var(--kr-ico-mind);}
-
-details#oncology-cancer-metabolism .folder-icon{--kr-folder-icon:var(--kr-ico-oncology);}
-
-details#cardiovascular-health .folder-icon{--kr-folder-icon:var(--kr-ico-cardio);}
-
-details#adpkd .folder-icon,
-details#chronic-kidney-disease .folder-icon,
-details#urinary-incontinence .folder-icon{--kr-folder-icon:var(--kr-ico-renal);}
-
-details#sarcopenia-skeletal-muscle .folder-icon,
-details#osteoarthritis .folder-icon,
-details#rheumatoid-arthritis .folder-icon,
-details#fibromyalgia .folder-icon{--kr-folder-icon:var(--kr-ico-musculoskeletal);}
-
-details#acne .folder-icon,
-details#psoriasis .folder-icon,
-details#keto-rash-prurigo-pigmentosa .folder-icon{--kr-folder-icon:var(--kr-ico-skin);}
-
-details#asthma .folder-icon,
-details#inflammation-immunometabolism .folder-icon,
-details#covid-19-metabolism .folder-icon{--kr-folder-icon:var(--kr-ico-immune);}
-
-details#endometriosis .folder-icon,
-details#reproduction-fertility .folder-icon,
-details#lipedema .folder-icon{--kr-folder-icon:var(--kr-ico-reproductive);}
-
-details#gut-microbiome .folder-icon,
-details#candida-mycobiome .folder-icon{--kr-folder-icon:var(--kr-ico-gut);}
-
-details#exogenous-ketones .folder-icon,
-details#medium-chain-triglycerides-mct .folder-icon,
-details#supplementation-nutraceuticals .folder-icon{--kr-folder-icon:var(--kr-ico-supplement);}
-
-details#exercise-performance .folder-icon,
-details#aesthetic-medicine-body-composition .folder-icon,
-details#longevity-healthy-aging .folder-icon,
-details#circadian-rhythms .folder-icon{--kr-folder-icon:var(--kr-ico-performance);}
-
-details#glaucoma .folder-icon{--kr-folder-icon:var(--kr-ico-eye);}
-
-details#glp1-keto-metabolic-endocrine .folder-icon{--kr-folder-icon:var(--kr-ico-glp1);}
-
