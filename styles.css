@@ -2538,3 +2538,21 @@ article.folder-paper p,
   .program-links a{padding:5px 9px;gap:7px;}
   .program-links .program-link-icon{width:15px;height:15px;flex-basis:15px;}
 }
+
+
+/* V124 — FIX native "More / Altro" menu
+   A previous generic .nav-submenu rule kept the details submenu invisible. */
+.nav-more .nav-submenu {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: none !important;
+}
+
+/* Keep the submenu hidden only while the native <details> element is closed. */
+.nav-more:not([open]) > .nav-submenu {
+  display: none !important;
+}
+.nav-more[open] > .nav-submenu {
+  display: block !important;
+}
