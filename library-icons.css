@@ -1,43 +1,24 @@
-/* Ketogenic Research Library icons v117
-   Verified macro-category icon system: one intentional symbol per visible clinical macro-area.
-   SVGs are inline; no CDN or JavaScript dependency. */
-
-.library-folder > summary .folder-icon{
-  width:36px !important;
-  height:36px !important;
-  flex:0 0 36px !important;
-  display:inline-flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  color:var(--primary,#1f4e79) !important;
-  background:rgba(31,78,121,.045) !important;
-  border:1px solid rgba(31,78,121,.18) !important;
-  border-radius:10px !important;
-  box-shadow:none !important;
+/* Ketogenic Research Library icons — v118
+   Inline SVG only: no CDN, no external icon runtime. */
+.folder-icon.kr-area-icon, .folder-icon {
+  width: 58px; height: 58px; min-width: 58px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #1f4e79;
+  background: #f8fafc;
+  border: 1px solid #d5e0e8;
+  border-radius: 14px;
+  box-sizing: border-box;
 }
-.library-folder > summary .folder-icon .healthicon-inline{
-  width:26px !important;
-  height:26px !important;
-  display:block !important;
-  color:currentColor !important;
-  overflow:visible;
+.folder-icon .kr-icon-svg, .folder-icon > svg {
+  width: 32px; height: 32px;
+  display: block; overflow: visible;
+  color: inherit; fill: currentColor;
 }
-.library-folder[open] > summary .folder-icon{
-  color:var(--primary-2,#2b6ca3) !important;
-  background:rgba(43,108,163,.07) !important;
-  border-color:rgba(43,108,163,.28) !important;
+.folder-icon .kr-icon-svg path, .folder-icon .kr-icon-svg circle, .folder-icon .kr-icon-svg rect, .folder-icon .kr-icon-svg line, .folder-icon .kr-icon-svg polyline, .folder-icon .kr-icon-svg polygon {
+  vector-effect: non-scaling-stroke;
 }
-.library-folder > summary .folder-icon.glp1-keto-icon svg{
-  width:26px !important;
-  height:26px !important;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:1.8;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-}
-@media (max-width:640px){
-  .library-folder > summary .folder-icon{width:34px !important;height:34px !important;flex-basis:34px !important;}
-  .library-folder > summary .folder-icon .healthicon-inline,
-  .library-folder > summary .folder-icon.glp1-keto-icon svg{width:24px !important;height:24px !important;}
+details[open] > summary .folder-icon { color:#2b6ca3; background:#f2f8fc; border-color:#b7d0df; }
+@media (max-width: 720px) {
+  .folder-icon.kr-area-icon, .folder-icon { width:58px; height:58px; min-width:58px; }
+  .folder-icon .kr-icon-svg, .folder-icon > svg { width:31px; height:31px; }
 }
