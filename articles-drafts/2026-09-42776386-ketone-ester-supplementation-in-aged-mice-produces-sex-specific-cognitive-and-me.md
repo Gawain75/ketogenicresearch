@@ -6,7 +6,7 @@ date: "2026-09-23"
 journal: "GeroScience"
 article_type: "Research Note"
 article_type_it: "Nota di ricerca"
-generator_version: "4.3"
+generator_version: "4.5"
 source_identity: "PASS"
 source_identity_basis: "PubMed PMID/title/DOI/PMCID"
 full_text_source: "PubMed abstract"
@@ -15,7 +15,7 @@ editorial_byline: "Ketogenic Research Hub Editorial"
 scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
-verified_at: "2026-09-24T03:26:18.419733+00:00"
+verified_at: "2026-09-24T05:30:12.890044+00:00"
 ---
 
 # Sex‑specific cognitive and metabolic responses to ketone monoester supplementation in aged mice
@@ -25,19 +25,19 @@ verified_at: "2026-09-24T03:26:18.419733+00:00"
 **Ketogenic Research Hub Editorial**  
 Scientific oversight: **Marco Medeot, Scientific Director**
 
-In 24‑month‑old C57BL/6 mice, short‑term feeding of a ketone monoester raised post‑prandial β‑hydroxybutyrate and lowered glucose. The intervention reduced body fat and increased relative lean mass in males, while females showed fewer errors in the Barnes maze and lower hippocampal IL‑1β. Tissue‑specific metabolite shifts accompanied these sex‑dependent outcomes.
+Short‑term feeding of a ketone monoester to 24‑month‑old male and female C57BL/6 mice raised post‑prandial β‑hydroxybutyrate and lowered glucose, but produced divergent effects on body composition, hippocampal inflammation and spatial memory that depended on sex.
 
 ## Study and findings
 
-The authors administered a diet containing the ketone monoester (R)-3‑hydroxybutyl (R)-3‑hydroxybutyrate to 24‑month‑old male and female C57BL/6 mice for a short period. Post‑prandial measurements confirmed that the supplement elevated circulating β‑hydroxybutyrate and reduced glucose relative to control diet. In male mice, body composition analysis revealed a modest reduction in fat mass and a relative increase in lean mass. Female mice did not show body‑composition changes but performed better in the Barnes maze, committing fewer primary errors, and displayed lower hippocampal interleukin‑1β (IL‑1β) mRNA levels. Metabolomic profiling indicated sex‑specific alterations in fasting metabolites across plasma, liver, and brain, and hippocampal oxylipin patterns were also modified.
+In a randomized short‑term intervention, 24‑month‑old male and female C57BL/6 mice received a diet containing the ketone monoester (R)-3‑hydroxybutyl (R)-3‑hydroxybutyrate. The supplement raised post‑prandial β‑hydroxybutyrate (β‑HB) concentrations and reduced post‑prandial glucose relative to control diet. Male mice showed a shift in body composition, with reduced fat mass and a higher proportion of lean mass. Female mice displayed improved performance in the Barnes maze, reflected by fewer primary errors, and exhibited lower hippocampal interleukin‑1β (IL‑1β) expression. Tissue‑specific fasting metabolite profiling revealed sex‑dependent alterations, and hippocampal oxylipin patterns were also modified.
 
 ## Clinical interpretation
 
-These results suggest that ketone monoester supplementation can engage distinct physiological pathways in aged males versus females. In males, the shift toward lower adiposity may reflect altered substrate utilization driven by sustained ketone availability. In females, the improvement in spatial learning and reduction in a pro‑inflammatory cytokine point to possible neuro‑protective signaling linked to ketone‑mediated modulation of hippocampal inflammation. The divergent metabolite signatures imply that sex hormones or sex‑linked metabolic networks could influence how older organisms respond to exogenous ketones. While the mouse model provides mechanistic insight, extrapolation to older adults must consider differences in diet, dosing, and the complexity of human cognition.
+The data indicate that ketone monoester supplementation can modulate systemic metabolism and brain‑related outcomes in aged rodents, but the direction of these effects is sex‑specific. In males, the primary benefit appears to be a favorable change in body composition, whereas in females the main observable advantage is a modest improvement in spatial learning and a reduction in a pro‑inflammatory cytokine within the hippocampus. These findings suggest that metabolic and neuroinflammatory pathways responsive to elevated β‑HB may be differentially regulated in male and female aging brains, a factor that could influence the design of ketone‑based interventions for older adults.
 
 ## Limitations and open questions
 
-The study relied on a single short‑term dosing regimen and did not assess long‑term safety or functional outcomes beyond the measured time points. Sample sizes were not disclosed, limiting assessment of statistical power. Only one mouse strain was used, so genetic background effects remain unknown. Importantly, the abstract does not report whether the observed cognitive benefit in females translates to other memory tasks or to male mice under different conditions. Future work should test dose‑response relationships, evaluate chronic administration, and explore the hormonal or molecular mechanisms that drive the sex‑specific responses observed here.
+The study is limited to a single short‑term dosing regimen in one mouse strain, and it does not assess long‑term safety, functional outcomes beyond the Barnes maze, or dose‑response relationships. Because only post‑prandial β‑HB and glucose were reported, the magnitude of chronic ketone exposure remains unclear. Translating these sex‑specific effects to humans will require controlled trials that consider hormonal status, age‑related metabolic changes, and potential interactions with diet. Moreover, the mechanisms linking ketone‑induced metabolic shifts to hippocampal oxylipin remodeling and IL‑1β suppression need further elucidation.
 
 ### Source
 
@@ -52,19 +52,19 @@ Roslund KJ, Coates LC, Sattar Sultani S, Hayes D, Diaz S, Rutkowsky JM, et al. K
 **Ketogenic Research Hub Editorial**  
 Supervisione scientifica: **Marco Medeot, Direttore Scientifico**
 
-In topi C57BL/6 di 24 mesi, una breve somministrazione di monoesteri di chetoni ha aumentato il β‑idrossibutirrato post‑prandiale e ridotto la glicemia. Nei maschi si è osservata una diminuzione del grasso corporeo e un aumento della massa magra relativa, mentre le femmine hanno commesso meno errori nel Barnes maze e hanno mostrato una minore espressione di IL‑1β nell’ippocampo. Cambiamenti metabolici specifici per tessuto hanno accompagnato questi effetti dipendenti dal sesso.
+L’alimentazione a breve termine con un monoester di chetone in topi C57BL/6 di 24 mesi ha aumentato il β‑idrossibutirrato post‑prandiale e ridotto la glicemia, ma ha generato effetti divergenti su composizione corporea, infiammazione ippocampale e memoria spaziale in base al sesso.
 
 ## Studio e risultati
 
-Gli autori hanno somministrato una dieta contenente il monoester di chetone (R)-3‑idrossibutile (R)-3‑idrossibutirrato a topi C57BL/6 maschi e femmine di 24 mesi per un breve periodo. Le misurazioni post‑prandiali hanno confermato che il supplemento ha aumentato il β‑idrossibutirrato circolante e ridotto la glicemia rispetto a una dieta di controllo. Nei maschi, l’analisi della composizione corporea ha mostrato una lieve diminuzione della massa grassa e un aumento relativo della massa magra. Le femmine non hanno evidenziato variazioni nella composizione corporea, ma hanno ottenuto migliori risultati nel Barnes maze, commettendo meno errori primari, e hanno mostrato livelli più bassi di interleuchina‑1β (IL‑1β) nell’ippocampo. La profilazione metabolomica ha indicato alterazioni specifiche per sesso nei metaboliti a digiuno in plasma, fegato e cervello, con modifiche anche negli ossilipidi ippocampali.
+In un intervento randomizzato a breve termine, topi C57BL/6 maschi e femmine di 24 mesi hanno ricevuto una dieta contenente il monoester di chetone (R)-3‑idrossibutil (R)-3‑idrossibutirrato. Il supplemento ha aumentato le concentrazioni post‑prandiali di β‑idrossibutirrato (β‑HB) e ridotto la glicemia post‑prandiale rispetto a una dieta di controllo. Nei maschi è stata osservata una modifica della composizione corporea, con diminuzione della massa grassa e aumento della percentuale di massa magra. Nelle femmine è stata riscontrata una migliore performance nel Barnes maze, evidenziata da un minor numero di errori primari, e una ridotta espressione di interleuchina‑1β (IL‑1β) nell’ippocampo. Il profilo metabolico a digiuno in diversi tessuti ha mostrato alterazioni dipendenti dal sesso, così come i pattern di ossilipidi ippocampali.
 
 ## Interpretazione clinica
 
-I dati suggeriscono che la supplementazione con monoesteri di chetoni possa attivare percorsi fisiologici differenti in topi anziani maschi e femmine. Nei maschi, la riduzione dell’adiposità potrebbe riflettere un cambiamento nell’utilizzo dei substrati indotto dalla disponibilità prolungata di chetoni. Nelle femmine, il miglioramento dell’apprendimento spaziale e la diminuzione di una citochina pro‑infiammatoria indicano un possibile effetto neuro‑protettivo mediato dalla modulazione dei chetoni sull’infiammazione dell’ippocampo. I profili metabolici divergenti implicano che ormoni sessuali o reti metaboliche legate al sesso influenzino la risposta agli chetoni esogeni. Sebbene il modello murino fornisca indicazioni meccanistiche, la traduzione a soggetti umani anziani richiede cautela a causa di differenze dietetiche, di dosaggio e della complessità cognitiva umana.
+I risultati suggeriscono che la supplementazione con monoesteri di chetoni può influenzare il metabolismo sistemico e gli esiti cerebrali in roditori anziani, ma la direzione di tali effetti varia in base al sesso. Nei maschi il beneficio principale sembra essere una composizione corporea più favorevole, mentre nelle femmine l’effetto osservato è un modesto miglioramento dell’apprendimento spaziale e una riduzione di una citochina pro‑infiammatoria nell’ippocampo. Ciò indica che le vie metaboliche e neuroinfiammatorie sensibili all’aumento di β‑HB potrebbero essere regolate diversamente nei cervelli maschili e femminili invecchiati, un aspetto da considerare nella progettazione di interventi basati su chetoni per gli adulti più anziani.
 
 ## Limiti e questioni aperte
 
-Lo studio ha utilizzato un unico regime di somministrazione a breve termine e non ha valutato la sicurezza a lungo termine né gli esiti funzionali oltre i punti di misura riportati. Le dimensioni del campione non sono state specificate, limitando la valutazione della potenza statistica. È stato impiegato un solo ceppo di topo, quindi gli effetti legati al background genetico rimangono sconosciuti. Inoltre, l’abstract non indica se il beneficio cognitivo osservato nelle femmine si estende ad altri compiti di memoria o se può emergere nei maschi con condizioni diverse. Ricerche future dovrebbero esplorare relazioni dose‑risposta, somministrazione cronica e i meccanismi ormonali o molecolari alla base delle differenze di sesso riscontrate.
+Lo studio è limitato a un unico regime di somministrazione a breve termine in una sola linea di topo e non valuta la sicurezza a lungo termine, esiti funzionali oltre il Barnes maze o relazioni dose‑risposta. Poiché sono stati riportati solo β‑HB e glucosio post‑prandiali, l’entità dell’esposizione cronica ai chetoni rimane incerta. La traduzione di questi effetti specifici per sesso negli esseri umani richiederà studi controllati che tengano conto dello stato ormonale, dei cambiamenti metabolici legati all’età e di possibili interazioni dietetiche. Inoltre, i meccanismi che collegano le variazioni metaboliche indotte dai chetoni alla rimodulazione degli ossilipidi ippocampali e alla soppressione di IL‑1β necessitano di ulteriori approfondimenti.
 
 ### Fonte
 
