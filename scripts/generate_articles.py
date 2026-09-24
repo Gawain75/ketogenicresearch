@@ -202,15 +202,63 @@ def pmc_full_text(pmcid: str) -> str:
     except Exception:
         return ""
 
-    chunks: list[str] = []
-    for tag in ("abstract", "sec"):
-        for node in root.findall(f".//{tag}"):
-            value = text_content(node)
-            if value and len(value) > 80:
-                chunks.append(value)
+    def section_title(sec: ET.Element) -> str:
+        title = sec.find("./title")
+        return text_content(title).strip() if title is not None else ""
 
-    # Keep prompt size moderate for free-tier use.
-    return "\n\n".join(dict.fromkeys(chunks))[:10000]
+    def classify_section(title: str) -> int:
+        t = title.lower()
+        if any(k in t for k in ("limitation", "strengths and limitations")):
+            return 0
+        if any(k in t for k in ("discussion", "interpretation")):
+            return 1
+        if any(k in t for k in ("result", "finding")):
+            return 2
+        if any(k in t for k in ("method", "materials", "experimental", "procedure")):
+            return 3
+        if any(k in t for k in ("conclusion", "summary")):
+            return 4
+        if any(k in t for k in ("introduction", "background")):
+            return 5
+        return 6
+
+    sections: list[tuple[int, str, str]] = []
+    seen: set[str] = set()
+
+    for sec in root.findall(".//body//sec"):
+        title = section_title(sec) or "Untitled section"
+        value = text_content(sec).strip()
+        if len(value) < 120:
+            continue
+
+        key = re.sub(r"\s+", " ", value).strip().lower()
+        if key in seen:
+            continue
+        seen.add(key)
+
+        sections.append((classify_section(title), title, value[:6500]))
+
+    sections.sort(key=lambda item: item[0])
+
+    selected: list[str] = []
+    total = 0
+    max_chars = 30000
+
+    for _, title, value in sections:
+        block = f"### {title}\n{value}".strip()
+        if total + len(block) > max_chars:
+            remaining = max_chars - total
+            if remaining >= 1200:
+                block = block[:remaining]
+            else:
+                continue
+
+        selected.append(block)
+        total += len(block) + 2
+        if total >= max_chars:
+            break
+
+    return "\n\n".join(selected).strip()
 
 def groq_json(
     messages: list[dict[str, str]],
@@ -424,7 +472,7 @@ def discover_full_text(
     if pmcid:
         text = pmc_full_text(pmcid)
         if len(text) >= 3000:
-            return text[:18000], "PMC full text", f"https://pmc.ncbi.nlm.nih.gov/articles/{pmcid}/"
+            return text[:30000], "PMC full text", f"https://pmc.ncbi.nlm.nih.gov/articles/{pmcid}/"
 
     # 2. Look for a legal OA copy registered by Unpaywall.
     doi = (rec.get("doi") or extra.get("doi_from_pubmed") or "").strip()
@@ -433,7 +481,7 @@ def discover_full_text(
         if len(text) >= 3000:
             version = location.get("version") or "open-access version"
             host = location.get("host_type") or "open-access host"
-            return text[:18000], f"Unpaywall OA ({host}, {version})", source_url
+            return text[:30000], f"Unpaywall OA ({host}, {version})", source_url
 
     # 3. Try the DOI landing page itself. This does not bypass paywalls:
     #    it only uses content that the publisher returns without authentication.
@@ -453,7 +501,7 @@ def discover_full_text(
             if raw[:4] == b"%PDF":
                 value = extract_pdf_text(raw)
                 if len(value) >= 6000:
-                    return value[:18000], "Publisher full text via DOI", doi_url
+                    return value[:30000], "Publisher full text via DOI", doi_url
             else:
                 decoded = raw.decode("utf-8", errors="replace")
                 parser = _ReadableHTML()
@@ -476,7 +524,7 @@ def discover_full_text(
                     )
                 )
                 if len(value) >= 9000 and section_hits >= 3:
-                    return value[:18000], "Publisher full text via DOI", doi_url
+                    return value[:30000], "Publisher full text via DOI", doi_url
 
         except Exception as exc:
             print(f"Publisher DOI full-text retrieval failed: {exc}")
@@ -517,6 +565,14 @@ PUBMED ABSTRACT
 
 FULL-TEXT MATERIAL USED FOR THIS NOTE
 {full_text or "[No full-text material was supplied; use the PubMed abstract only.]"}
+
+SOURCE-HIERARCHY RULE
+{("A usable full text is present. Treat the full text as the primary scientific source. "
+  "Use the PubMed abstract only as a concise cross-check; do not describe evidence gaps "
+  "in terms of what the abstract does or does not report.")
+ if full_text else
+ ("No usable full text was retrieved. The PubMed abstract is the only scientific content "
+  "available in this packet.")}
 """.strip()
 
 def writer_prompt(packet: str, has_full_text: bool) -> str:
@@ -569,11 +625,15 @@ EDITORIAL RULES FOR V4.1
   "findings from a randomized crossover trial", or equivalent neutral wording.
 - For randomized trials, do not turn one experiment into a general clinical claim.
 
-2. ABSTRACT-ONLY CAUTION
+2. SOURCE-HIERARCHY AND ABSTRACT CAUTION
 - Never state in the article body whether the note was based on an abstract, full text, PMC, publisher text, or any retrieval source.
 - Source-acquisition details are internal metadata only and must not appear in reader-facing prose.
 - Never mention AI, automation, workflow, model, generation process, or any technical production method in the published article.
-- Describe only the source limitations, not how the article was produced.
+- Describe only the scientific limitations of the study, not how the article was produced.
+- When usable full text is supplied, treat it as the PRIMARY source and the PubMed abstract only as a cross-check.
+- When usable full text is supplied, never write phrases such as "the abstract does not indicate", "the abstract does not report", "the abstract does not clarify", "dall'abstract non emerge", "l'abstract non indica", "l'abstract non riporta", or equivalent wording.
+- If an issue is genuinely unresolved after checking the supplied full text, phrase it as a STUDY limitation: e.g. "the study does not establish...", "the study does not clarify...", "it remains uncertain whether...", or the natural Italian equivalent.
+- Before stating that the study did not assess, report, clarify, or establish something, check the supplied Methods, Results, Discussion, Limitations and Conclusions material first.
 
 3. STRUCTURE
 For Research Notes, use exactly three sections.
@@ -751,6 +811,8 @@ EDITORIAL CHECKS
 - Do not repeat the same concept unnecessarily across sections.
 - The reader-facing article must not mention whether the source used was an abstract, full text, PMC text, publisher text, Unpaywall, or any retrieval workflow.
 - Source-acquisition details are internal metadata only.
+- If the SOURCE PACKET contains usable full text, FAIL any draft that frames a scientific limitation as "the abstract does not indicate/report/clarify/show" or any equivalent English/Italian wording.
+- When full text is available, limitations must be phrased as limitations or unresolved questions of the STUDY itself, after checking the supplied Methods, Results, Discussion, Limitations and Conclusions material.
 
 STRUCTURE CHECKS FOR RESEARCH NOTES
 For Research Notes, the English section headings must be exactly:
@@ -818,7 +880,7 @@ date: {json.dumps(rec.get("date",""))}
 journal: {json.dumps(rec.get("journal",""), ensure_ascii=False)}
 article_type: {json.dumps(draft.get("article_type",""))}
 article_type_it: {json.dumps(draft.get("article_type_it",""))}
-generator_version: "4.3"
+generator_version: "4.4"
 source_identity: "PASS"
 source_identity_basis: "PubMed PMID/title/DOI/PMCID"
 full_text_source: {json.dumps(full_text_source)}
