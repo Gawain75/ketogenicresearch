@@ -1,19 +1,45 @@
-/* V114 — inline macro-category icon system. No SVG masks. */
-.folder-icon{
-  position:relative; flex:0 0 auto; width:36px; height:36px;
-  display:inline-flex; align-items:center; justify-content:center;
-  color:#1f6f73; background:transparent; border:0; border-radius:0; box-shadow:none;
+/* Ketogenic Research Library icons v115
+   Primary source: Health Icons via Iconify.
+   Color is inherited from the site's primary brand palette. */
+
+.library-folder > summary .folder-icon{
+  width:34px;
+  height:34px;
+  flex:0 0 34px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--primary,#1f4e79);
+  background:transparent;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
 }
-.folder-icon > svg{
-  display:block!important; width:27px; height:27px; overflow:visible;
-  fill:none!important; stroke:currentColor!important; stroke-width:1.65;
-  stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke;
+
+.library-folder > summary .folder-icon .healthicon-svg{
+  width:30px;
+  height:30px;
+  display:block;
+  color:currentColor;
 }
-.library-folder > summary:hover .folder-icon,
-.library-folder[open] > summary .folder-icon{color:#175f63;}
-.library-folder > summary:hover .folder-icon{transform:none;}
-.folder-icon::before,.folder-icon::after{content:none!important;display:none!important;}
-@media(max-width:640px){
-  .folder-icon{width:32px;height:32px}
-  .folder-icon > svg{width:24px;height:24px}
+
+.library-folder[open] > summary .folder-icon{
+  color:var(--primary-2,#2b6ca3);
+}
+
+/* GLP-1 remains a bespoke injector pen, but uses the same site color. */
+.library-folder > summary .folder-icon.glp1-keto-icon svg{
+  width:28px;
+  height:28px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+@media (max-width:640px){
+  .library-folder > summary .folder-icon{width:31px;height:31px;flex-basis:31px;}
+  .library-folder > summary .folder-icon .healthicon-svg{width:27px;height:27px;}
+  .library-folder > summary .folder-icon.glp1-keto-icon svg{width:26px;height:26px;}
 }
