@@ -44,6 +44,22 @@ KETO_TERMS = (
 
 SUPPLEMENTAL_ARTICLES = [
     {
+        "title_en": "Nutrition Strategies for Next-Generation Incretin Therapies: A Systematic Scoping Review of the Current Evidence",
+        "title_it": "Strategie nutrizionali per le terapie incretiniche di nuova generazione: una scoping review sistematica delle evidenze attuali",
+        "authors": "Spreckley M, Ruggiero CF, Brown A",
+        "journal": "Obesity Reviews",
+        "citation": "Obes Rev. 2026;27(6):e70079. Epub 2026 Jan 7.",
+        "article_type_en": "Systematic scoping review",
+        "article_type_it": "Scoping review sistematica",
+        "evidence": "systematic-review",
+        "year": "2026",
+        "doi": "10.1111/obr.70079",
+        "pmid": "41500509",
+        "pmcid": "PMC13136787",
+        "article_url": "https://onlinelibrary.wiley.com/doi/10.1111/obr.70079",
+        "search": "nutrition strategies next-generation incretin therapies systematic scoping review semaglutide tirzepatide glp-1 glp-1ra ketogenic diet very-low-energy diet vlekt vlckd obesity nutrition 41500509 10.1111/obr.70079",
+    },
+    {
         "title_en": "Preserving Lean Mass During GLP-1RA-Induced Weight Loss: The Potential Role of Ketogenic Metabolic Therapy in Improving Weight-Loss Quality",
         "title_it": "Preservare la massa magra durante la perdita di peso indotta da GLP-1RA: il potenziale ruolo della terapia metabolica chetogenica nel migliorare la qualità del dimagrimento",
         "authors": "Marco Medeot",
@@ -51,6 +67,7 @@ SUPPLEMENTAL_ARTICLES = [
         "citation": "Biomed adv. 2026;3(3):89-91.",
         "article_type_en": "Opinion",
         "article_type_it": "Opinion",
+        "evidence": "opinion",
         "year": "2026",
         "doi": "10.34172/bma.74",
         "article_url": "https://biomedad.ae/Article/bma-74",
@@ -148,9 +165,13 @@ def make_supplemental_card(soup: BeautifulSoup, article: dict[str, str]):
     card = soup.new_tag("article")
     card["class"] = ["folder-paper", "drive-paper", "supplemental-paper"]
     card["data-doi"] = article["doi"]
-    card["data-evidence"] = "opinion"
+    card["data-evidence"] = article.get("evidence", "other")
     card["data-search"] = article["search"]
     card["data-year"] = article["year"]
+    if article.get("pmid"):
+        card["data-pmid"] = article["pmid"]
+    if article.get("pmcid"):
+        card["data-pmcid"] = article["pmcid"]
 
     badge = soup.new_tag("span")
     badge["class"] = ["evidence-level"]
@@ -176,13 +197,25 @@ def make_supplemental_card(soup: BeautifulSoup, article: dict[str, str]):
     links = soup.new_tag("div")
     links["class"] = ["paper-links"]
 
-    article_link = soup.new_tag("a", href=article["article_url"])
-    article_link["target"] = "_blank"
-    article_link["rel"] = "noopener"
-    article_link["data-en"] = "Article ↗"
-    article_link["data-it"] = "Articolo ↗"
-    article_link.string = "Article ↗"
-    links.append(article_link)
+    if article.get("pmid"):
+        pubmed_link = soup.new_tag(
+            "a", href=f'https://pubmed.ncbi.nlm.nih.gov/{article["pmid"]}/'
+        )
+        pubmed_link["target"] = "_blank"
+        pubmed_link["rel"] = "noopener"
+        pubmed_link["data-en"] = "PubMed ↗"
+        pubmed_link["data-it"] = "PubMed ↗"
+        pubmed_link.string = "PubMed ↗"
+        links.append(pubmed_link)
+
+    if article.get("article_url"):
+        article_link = soup.new_tag("a", href=article["article_url"])
+        article_link["target"] = "_blank"
+        article_link["rel"] = "noopener"
+        article_link["data-en"] = "Article ↗"
+        article_link["data-it"] = "Articolo ↗"
+        article_link.string = "Article ↗"
+        links.append(article_link)
 
     doi_link = soup.new_tag("a", href=f'https://doi.org/{article["doi"]}')
     doi_link["target"] = "_blank"
@@ -191,6 +224,32 @@ def make_supplemental_card(soup: BeautifulSoup, article: dict[str, str]):
     doi_link["data-it"] = "DOI ↗"
     doi_link.string = "DOI ↗"
     links.append(doi_link)
+
+    if article.get("pmcid"):
+        fulltext_link = soup.new_tag(
+            "a", href=f'https://pmc.ncbi.nlm.nih.gov/articles/{article["pmcid"]}/'
+        )
+        fulltext_link["target"] = "_blank"
+        fulltext_link["rel"] = "noopener"
+        fulltext_link["data-en"] = "Full text ↗"
+        fulltext_link["data-it"] = "Testo completo ↗"
+        fulltext_link["data-link-kind"] = "fulltext"
+        fulltext_link["data-source"] = "pmc"
+        fulltext_link.string = "Full text ↗"
+        links.append(fulltext_link)
+
+        pdf_link = soup.new_tag(
+            "a", href=f'https://pmc.ncbi.nlm.nih.gov/articles/{article["pmcid"]}/pdf/'
+        )
+        pdf_link["target"] = "_blank"
+        pdf_link["rel"] = "noopener"
+        pdf_link["data-en"] = "PDF ↓"
+        pdf_link["data-it"] = "PDF ↓"
+        pdf_link["data-link-kind"] = "pdf"
+        pdf_link["data-source"] = "pmc"
+        pdf_link["aria-label"] = "Open PDF"
+        pdf_link.string = "PDF ↓"
+        links.append(pdf_link)
 
     card.append(links)
     return card
@@ -386,6 +445,8 @@ def main():
         raise RuntimeError("Final GLP-1RA metabolic folder verification failed")
     if f'id="{OLD_ID}"' in check:
         raise RuntimeError("Old Obesity subsection still present")
+    if '10.1111/obr.70079' not in check:
+        raise RuntimeError("Obesity Reviews scoping review DOI 10.1111/obr.70079 missing")
     if '10.34172/bma.74' not in check:
         raise RuntimeError("Biomedicine Advances opinion DOI 10.34172/bma.74 missing")
 
