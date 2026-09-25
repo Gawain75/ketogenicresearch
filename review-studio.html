@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Review Studio | Ketogenic Research Hub</title>
+<meta name="robots" content="noindex,nofollow,noarchive"/>
+<link rel="stylesheet" href="styles.css?v=70"/>
+<link rel="stylesheet" href="review-studio.css?v=1"/>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+</head>
+<body>
+<header class="header"><div class="wrap nav"><a class="brand" href="index.html" aria-label="Ketogenic Research Hub"><img class="site-logo" src="logo-ketogenic-research.png" alt="Ketogenic Research Hub"/></a><nav class="site-nav" aria-label="Admin navigation"><a href="index.html">Public site</a><a href="library">Scientific Library</a><a href="review-studio" aria-current="page">Review Studio</a></nav></div></header>
+<main class="review-shell">
+<div class="wrap">
+<p class="kicker">ADMIN · EVIDENCE SYNTHESIS</p>
+<h1>Systematic Review & Meta-analysis Studio</h1>
+<p class="lead">Create an auditable review project from a scientific question. AI proposes the protocol; study inclusion, extracted data and statistical choices remain under human control.</p>
+<div class="notice"><strong>MVP scope.</strong> The statistical engine currently pools continuous outcomes as mean differences using fixed-effect and DerSimonian–Laird random-effects models. Do not combine studies with incompatible outcome definitions or units.</div>
+
+<div class="review-grid">
+<aside class="review-sidebar">
+<h2>Review workflow</h2>
+<div class="review-steps">
+<button class="review-step active" data-step="question">1. Question<small>Research question & project</small></button>
+<button class="review-step" data-step="protocol">2. Protocol<small>PICO, criteria, search</small></button>
+<button class="review-step" data-step="screening">3. Screening<small>PubMed candidates</small></button>
+<button class="review-step" data-step="extraction">4. Extraction<small>Validated quantitative data</small></button>
+<button class="review-step" data-step="analysis">5. Analysis<small>Meta-analysis & forest plot</small></button>
+<button class="review-step" data-step="draft">6. Manuscript<small>Draft from validated data</small></button>
+</div>
+<hr style="border:0;border-top:1px solid #e2e8ef;margin:16px 0"/>
+<div class="small">Projects are stored in this browser in the MVP. Export JSON regularly.</div>
+</aside>
+
+<section class="review-main">
+<div class="review-panel" id="panel-question">
+<h2>Start from a research question</h2><p class="sub">Write the question as you would ask it scientifically. The protocol generator will convert it into an editable PICO/PECO framework.</p>
+<div class="review-field"><label for="question">Research question</label><textarea id="question" placeholder="Example: In adults with obesity, do VLCKD/VLEKT interventions affect LDL-C differently from high-fat ketogenic diets or non-ketogenic comparators?"></textarea></div>
+<div class="form-grid" style="margin-top:14px"><div class="review-field"><label for="projectName">Project name</label><input id="projectName" placeholder="LDL response by ketogenic diet type"/></div><div class="review-field"><label for="projectLanguage">Protocol language</label><select id="projectLanguage"><option value="English">English</option><option value="Italian">Italian</option></select></div></div>
+<div class="review-actions"><button class="review-btn" id="generateProtocol">Generate protocol draft</button><button class="review-btn secondary" id="newProject">New project</button><button class="review-btn muted" id="exportJson">Export project JSON</button><label class="review-btn muted" style="cursor:pointer">Import JSON<input id="importJson" type="file" accept="application/json" hidden/></label></div>
+<div class="review-status" id="questionStatus">No project generated yet.</div>
+</div>
+
+<div class="review-panel" id="panel-protocol" hidden>
+<div class="project-row"><div><h2 style="margin-bottom:4px">Protocol</h2><p class="sub" style="margin:0">Edit every field before freezing the protocol.</p></div><span id="protocolLock" class="protocol-lock" hidden>✓ Protocol frozen</span></div>
+<div class="form-grid" style="margin-top:16px">
+<div class="review-field field-wide"><label>Review title</label><input id="pTitle"/></div>
+<div class="review-field"><label>Review type</label><select id="pType"><option>Systematic review with possible meta-analysis</option><option>Systematic review</option><option>Scoping review</option></select></div>
+<div class="review-field"><label>Primary outcome</label><input id="pPrimary"/></div>
+<div class="review-field"><label>Population (P)</label><textarea id="pPopulation"></textarea></div>
+<div class="review-field"><label>Intervention / exposure (I/E)</label><textarea id="pIntervention"></textarea></div>
+<div class="review-field"><label>Comparator (C)</label><textarea id="pComparator"></textarea></div>
+<div class="review-field"><label>Outcomes (O)</label><textarea id="pOutcomes"></textarea></div>
+<div class="review-field"><label>Eligible study designs</label><textarea id="pDesigns"></textarea></div>
+<div class="review-field"><label>Suggested subgroups</label><textarea id="pSubgroups"></textarea></div>
+<div class="review-field"><label>Inclusion criteria</label><textarea id="pInclude"></textarea></div>
+<div class="review-field"><label>Exclusion criteria</label><textarea id="pExclude"></textarea></div>
+<div class="review-field field-wide"><label>PubMed search query</label><textarea id="pQuery"></textarea></div>
+</div>
+<div class="review-actions"><button class="review-btn" id="freezeProtocol">Freeze protocol</button><button class="review-btn secondary" id="unfreezeProtocol">Unlock</button><button class="review-btn muted" id="saveProtocol">Save changes</button></div>
+<div class="review-status" id="protocolStatus">Protocol not frozen.</div>
+</div>
+
+<div class="review-panel" id="panel-screening" hidden>
+<h2>Study search & screening</h2><p class="sub">Search PubMed using the approved query. AI does not decide eligibility: inclusion remains an administrator decision.</p>
+<div class="review-actions"><button class="review-btn" id="searchPubmed">Search PubMed</button><button class="review-btn muted" id="clearCandidates">Clear candidates</button></div>
+<div class="metric-grid"><div class="metric"><strong id="mIdentified">0</strong><span>Identified</span></div><div class="metric"><strong id="mIncluded">0</strong><span>Included</span></div><div class="metric"><strong id="mExcluded">0</strong><span>Excluded</span></div><div class="metric"><strong id="mUncertain">0</strong><span>Uncertain</span></div></div>
+<div class="review-status" id="screenStatus">Freeze a protocol before searching.</div>
+<div class="study-list" id="studyList"><div class="empty">No candidate studies.</div></div>
+</div>
+
+<div class="review-panel table-panel" id="panel-extraction" hidden>
+<h2>Quantitative extraction</h2><p class="sub">Enter only values you have checked against the source. The current meta-analysis module requires the same continuous outcome and unit across studies.</p>
+<div class="review-field" style="max-width:360px;margin:12px 0"><label>Outcome used for pooling</label><input id="analysisOutcome" placeholder="LDL-C (mg/dL)"/></div>
+<table class="extraction-table"><thead><tr><th>Study</th><th>N intervention</th><th>Mean I</th><th>SD I</th><th>N control</th><th>Mean C</th><th>SD C</th><th>Source location</th><th>Verified</th></tr></thead><tbody id="extractionBody"></tbody></table>
+<div class="review-actions"><button class="review-btn" id="saveExtraction">Save extraction</button><button class="review-btn muted" id="exportCsv">Export extraction CSV</button></div>
+<div class="review-status" id="extractionStatus">Only included studies appear here.</div>
+</div>
+
+<div class="review-panel" id="panel-analysis" hidden>
+<h2>Meta-analysis</h2><p class="sub">The calculation is deterministic. AI is not used to calculate effect sizes.</p>
+<div class="review-actions"><button class="review-btn" id="runMeta">Run mean-difference meta-analysis</button></div>
+<div id="metaResult" class="meta-result"><div class="empty">No analysis yet.</div></div>
+<div id="forest" class="forest" hidden></div>
+</div>
+
+<div class="review-panel" id="panel-draft" hidden>
+<h2>Structured manuscript draft</h2><p class="sub">The draft is generated only from the frozen protocol, screened study metadata, validated extraction table and calculated meta-analysis results supplied by this project.</p>
+<div class="review-actions"><button class="review-btn" id="generateDraft">Generate review draft</button><button class="review-btn muted" id="copyDraft">Copy text</button></div>
+<div class="review-status" id="draftStatus">Generate only after validating the dataset.</div>
+<div id="draftOutput" class="draft-output" style="margin-top:12px">No draft generated.</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<footer><div class="wrap footer"><span>KETOGENIC RESEARCH HUB</span><span>Private Review Studio · MVP</span></div></footer>
+<script src="review-studio.js?v=1"></script>
+</body>
+</html>
