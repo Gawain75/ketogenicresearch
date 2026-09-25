@@ -56,7 +56,7 @@ jobs:
           git config user.name "Ketogenic Research Bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add articles-drafts/ articles/ articles.html
+          git add articles-drafts/ articles/ articles.html sitemap.xml
 
           if git diff --cached --quiet; then
             echo "No verified article changes."
