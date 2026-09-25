@@ -10,14 +10,17 @@ ARCHIVE.mkdir(exist_ok=True)
 
 # Workflow operativi da mantenere in GitHub Actions.
 KEEP = {
-    "update-literature-with-title-translation.yml": "01 · Daily literature update",
-    "generate-articles-auto-v3_7.yml": "02 · Generate research article",
+    "update-literature.yml": "01 · Daily literature update",
+    "generate-articles-auto-v112.yml": "02 · Generate research article",
     "expand-scientific-library-v5_1-doi-guard.yml": "03 · Weekly Scientific Library expansion",
     "maintain-obesity-glp1-keto.yml": "04 · Maintain GLP-1 + ketogenic folder",
     "build-evidence-trends.yml": "05 · Build evidence trends",
-    "repair-fulltext-links.yml": "06 · Repair full-text links",
+    "repair-fulltext-links.yml": "06 · Repair Full Text + PDF links",
     "synchronize-publication-counters.yml": "07 · Synchronize publication counters",
     "deploy-cloudflare-library.yml": "08 · Deploy Scientific Library to Cloudflare",
+    "backfill-publication-years.yml": "Maintenance · Backfill publication years",
+    "recover-metadata-and-audit-library.yml": "Maintenance · Recover metadata and audit Library",
+    "site-health-check.yml": "Maintenance · Site health check",
     "audit-all-article-sources.yml": "Maintenance · Audit published article sources",
     "workflow-cleanup.yml": "Maintenance · Workflow cleanup",
 }
