@@ -1,11 +1,11 @@
 {
-  "missing_year_instances_before": 163,
-  "recovered_this_run": 2,
+  "missing_year_instances_before": 161,
+  "recovered_this_run": 0,
   "from_citation": 0,
   "from_duplicate_identifier": 0,
   "from_duplicate_title": 0,
   "from_cache": 0,
-  "from_pmid_batch": 2,
+  "from_pmid_batch": 0,
   "from_doi_batch": 0,
   "from_title_search": 0,
   "title_searches_attempted": 40,
@@ -15,204 +15,204 @@
   "title_search_retry_days": 30,
   "unresolved_sample": [
     {
-      "title": "4. Ketogenic diet-derived faecal microbiota and schizophrenia",
+      "title": "3. Rheumatoid Arthritis and Dietary Interventions: Systematic Review",
       "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.5273
+      "best_similarity": 0.8707
     },
     {
-      "title": "7. Effects of a ketogenic diet on bipolar disorder",
+      "title": "2. Efficacy, Safety and Tolerability of VLCKD in Women with Obesity and Fibromyalgia",
       "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.8367
+      "best_similarity": 0.6507
     },
     {
-      "title": "9. Perspectives on the Ketogenic Diet as a Non-pharmacological Intervention in Mental Health",
+      "title": "4. The Ketogenic Diet and Dermatology",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.6869
+    },
+    {
+      "title": "5. Ketones, the ketogenic diet, and the skin: a review of where we are and where we should go",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "13. KETO-MOOD: Ketogenic Diet for Microbiome Optimization in Mood Disorders",
+      "title": "5. Impact of Fasting and Ketogenic Interventions on the NLRP3 Inflammasome",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.8535
+    },
+    {
+      "title": "7. Metabolic Effects of Ketogenic Diets: Whole-Body Metabolism, Adipose Tissue and Metabolic Organs",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.843
+    },
+    {
+      "title": "8. Persistent Inflammation, Immunosuppression, and Catabolism in Metabolic Disease",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "14. Ketogenic diets in clinical psychology",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.5891
-    },
-    {
-      "title": "18. Ketogenic diet has a positive association with mental and emotional health",
+      "title": "3. Beneficial Effects of the Very-Low-Calorie Ketogenic Diet on Reproductive and Metabolic Parameters",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "19. Evaluating the efficacy and mechanisms of a ketogenic diet as adjunctive treatment in serious mental illness",
+      "title": "4. Low-Carbohydrate Diets and Men’s Cortisol and Testosterone",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.3404
+    },
+    {
+      "title": "5. The Effect of Low Carbohydrate Diets on Fertility",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.5765
+    },
+    {
+      "title": "4. The Efficacy of Ketogenic Diets as a Potential Nutritional Intervention for Lipedema",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.7241
+    },
+    {
+      "title": "7. Dietary liposuction through ketogenic diet: a comparison of three approaches",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "20. Ketogenic Diet Intervention on Metabolic and Psychiatric Health in Bipolar Disorder and Schizophrenia",
+      "title": "7. Intermittent Fasting, Calorie Restriction, and a Ketogenic Diet Improve Healthspan",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "28. Ketosis and bipolar disorder",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.6076
-    },
-    {
-      "title": "29. The Ketogenic Diet for Refractory Mental Illness",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.6957
-    },
-    {
-      "title": "2. Providing Alternative Fuel for the Brain in Anorexia Nervosa",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.5882
-    },
-    {
-      "title": "4. Ketogenic Diet and Ketamine Infusion Treatment in Anorexia Nervosa",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.6377
-    },
-    {
-      "title": "5. Very-Low-Calorie Ketogenic Diet: A Potential Treatment for Binge-Eating Symptoms in Obesity",
+      "title": "8. Divergent Sex-Specific Effects of a Ketogenic Diet during Aging",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "8. Ketogenic diet suppresses colorectal cancer",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.699
-    },
-    {
-      "title": "9. Overcoming immunosuppression in cancer: how ketogenic diets may boost anti-tumor immunity",
+      "title": "9. Differential Effects of Short-Term Standard and Ketogenic Diets on the Aging Mouse Brain",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "13. Effects of ketogenic diet on oxidative stress and cancer",
+      "title": "1. Ketogenic Interventions Enhance Circadian and Metabolic Regulation",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "27. Ketogenic Diet in Cancer Prevention and Therapy: Molecular Mechanisms",
+      "title": "3. Can the Ketogenic Diet Improve Our Dreams? Effect of VLCKD on Sleep Quality",
       "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.5445
+      "best_similarity": 0.8222
     },
     {
-      "title": "28. Ketogenic Diet for Cancer: Critical Assessment",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.7563
-    },
-    {
-      "title": "31. β-Hydroxybutyrate and Malignant Neoplasms",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.4378
-    },
-    {
-      "title": "35. Ketogenic Diets Slow Melanoma Growth",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.5373
-    },
-    {
-      "title": "38. Ketogenic Diet and Chemotherapy Combine to Improve Antitumor Effects",
+      "title": "15. Ketogenic Diet and Microbiota",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "39. Ketogenesis Attenuates KLF5-Dependent Production of CXCL12 to Overcome Tumor-Promoting Signaling",
+      "title": "16. Ketogenic Diet, Gut Microbiome and Cancer Immunotherapy Outcomes",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.5842
+    },
+    {
+      "title": "17. Very Low-Energy Ketogenic Therapy and Trimethylamine N-Oxide in Women with Obesity",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "40. Dietary Interventions in Cancer Treatment and Response",
+      "title": "18. Parkinson’s Disease, Gut Microbiota and Ketogenic Diet",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.5119
+    },
+    {
+      "title": "20. Very-Low-Calorie Ketogenic Diets and Gut Microbiota in Obesity: Systematic Review and Meta-Analysis",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "6. The ketogenic diet has the potential to decrease atherosclerotic cardiovascular disease risk",
+      "title": "21. Ketogenic Diet, Gut Microbiota, Cognition and Mood",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "9. Ketone bodies in right ventricular failure",
+      "title": "22. A Multi-Omics Approach to Intestinal Permeability during a Very Low-Calorie Ketogenic Diet",
       "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.7179
+      "best_similarity": 0.7311
     },
     {
-      "title": "18. Ketogenic Diet and the Potential to Decrease Atherosclerotic Cardiovascular Disease Risk",
+      "title": "23. Ketogenic Diet, Epilepsy and the Brain-Gut Axis",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.4875
+    },
+    {
+      "title": "24. Fecal Microbiota Transfer from Children on a Ketogenic Diet",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.6351
+    },
+    {
+      "title": "25. Ketogenic Diet and Gut Microbiota in Neurological Disorders",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.6504
+    },
+    {
+      "title": "26. Modified Ketogenic Diet and Gut Microbiota in Obesity",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "20. Ketogenic Diet: Mental Health Benefits versus Cardiovascular Risk",
+      "title": "27. Influence of the Ketogenic Diet on Gut Microbiota",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "21. Ketogenic Diet and Myocardial Fatty Acid Oxidation in Humans",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.623
-    },
-    {
-      "title": "23. Ketone Bodies and Cardiometabolic Inflammation: Epigenetic Mechanisms",
+      "title": "28. Mitochondrial Epilepsy, Ketogenic Therapy and the Gut Microbiome",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "24. Ketone Bodies in Ischemic Heart Disease",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.3951
-    },
-    {
-      "title": "25. Heart Rate Variability during a Very Low-Calorie Ketogenic Diet",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.7342
-    },
-    {
-      "title": "2. Nutritional adequacy of ketogenic diets as a novel dietary intervention for people living with ADPKD",
+      "title": "29. Very Low-Calorie Ketogenic Diet and Microbiota in Obesity",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "6. Feasibility and impact of ketogenic dietary interventions in ADPKD",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.6839
-    },
-    {
-      "title": "7. A pilot study to evaluate tolerability and safety of a modified Atkins diet in autosomal dominant polycystic kidney disease",
+      "title": "31. Ketogenic Diet, Gut Microbiota and Neurodegenerative Disorders",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "8. GREASE II: randomized trial of ketogenic metabolic therapy in autosomal dominant polycystic kidney disease",
+      "title": "32. Very Low-Carbohydrate Ketogenic Diet, Gut Microbiota and Short-Chain Fatty Acids",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "2. Ketone Bodies in Kidney Diseases",
+      "title": "33. Ketogenic Diet Intervention via the Gut Microbiota in Autism Spectrum Disorder",
       "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.8101
+      "best_similarity": 0.6788
     },
     {
-      "title": "3. Ketogenic Diets and β-Hydroxybutyrate in Kidney Disease",
+      "title": "34. Very Low-Calorie, Ketogenic and Low-Carbohydrate Diets: Effects on the Gut Microbiota",
       "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.5859
+      "best_similarity": 0.6896
     },
     {
-      "title": "5. Risks of the Ketogenic Diet in Chronic Kidney Disease",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.6602
-    },
-    {
-      "title": "10. Incidence and Characteristics of Kidney Stones in Patients on Ketogenic Diets",
+      "title": "5. Impact of ketogenic diet and ketone diester supplementation on body composition and performance",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "3. Ketogenic Diet Ameliorates Inflammasome Activation in Experimental Osteoarthritis",
+      "title": "8. Exogenous ketone supplements in athletic contexts",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.8033
+    },
+    {
+      "title": "3. Ketogenic Effects of Multiple Doses of a Medium-Chain Triglyceride Supplement",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
+    },
+    {
+      "title": "5. Tricaprylin Alone Increases Plasma Ketone Concentrations",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.0
+    },
+    {
+      "title": "6. Ketosis After Intake of Coconut Oil",
+      "reason": "no_high_confidence_pubmed_match",
+      "best_similarity": 0.4487
     }
   ]
 }
