@@ -1,29 +1,50 @@
-/* Ketogenic Research Library icons — v122 */
-.folder-icon.kr-area-icon, .folder-icon {
-  width: 58px !important;
-  height: 58px !important;
-  min-width: 58px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  color: #1f4e79 !important;
-  background: #f8fafc !important;
-  border: 1px solid #d5e0e8 !important;
-  border-radius: 14px !important;
-  box-sizing: border-box !important;
-  overflow: hidden !important;
+/* Ketogenic Research Library icons — layout-safe patch
+   Keeps embedded area icons without overriding the Library grid geometry. */
+
+.library-folder .folder-icon.kr-area-icon {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  max-width: 34px;
+  flex: 0 0 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
 }
-.folder-icon .kr-inline-img {
-  width: 34px !important;
-  height: 34px !important;
-  display: block !important;
-  object-fit: contain !important;
+
+.library-folder .folder-icon.kr-area-icon .kr-inline-img {
+  width: 20px;
+  height: 20px;
+  max-width: 20px;
+  max-height: 20px;
+  display: block;
+  object-fit: contain;
+  flex: 0 0 auto;
 }
-details[open] > summary .folder-icon {
-  background: #f2f8fc !important;
-  border-color: #b7d0df !important;
+
+/* Preserve the existing open-state treatment without changing dimensions. */
+.library-folder[open] > summary .folder-icon.kr-area-icon {
+  background: #f2f8fc;
+  border-color: #b7d0df;
 }
-@media (max-width: 720px) {
-  .folder-icon.kr-area-icon, .folder-icon { width: 58px !important; height: 58px !important; min-width: 58px !important; }
-  .folder-icon .kr-inline-img { width: 34px !important; height: 34px !important; }
+
+/* The mobile Library grid reserves 34px for the icon column, so the icon
+   remains 30px wide and cannot overlap the title column. */
+@media (max-width: 640px) {
+  .library-folder .folder-icon.kr-area-icon {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    max-width: 30px;
+    flex-basis: 30px;
+  }
+
+  .library-folder .folder-icon.kr-area-icon .kr-inline-img {
+    width: 18px;
+    height: 18px;
+    max-width: 18px;
+    max-height: 18px;
+  }
 }
