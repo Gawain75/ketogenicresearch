@@ -56,7 +56,7 @@ jobs:
           git config user.name "Ketogenic Research Bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add articles-drafts/ articles/ articles.html sitemap.xml
+          git add -A
 
           if git diff --cached --quiet; then
             echo "No verified article changes."
@@ -64,6 +64,13 @@ jobs:
           fi
 
           git commit -m "Generate and publish verified research article"
+
+          # Rebase requires a completely clean working tree.
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Unexpected changes remained after commit:"
+            git status --short
+            exit 1
+          fi
 
           for attempt in 1 2 3; do
             echo "Push attempt ${attempt}/3"
