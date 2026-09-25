@@ -1,4 +1,4 @@
-name: Repair Full Text links
+name: Repair Full Text + PDF links
 
 on:
   workflow_dispatch:
@@ -44,38 +44,34 @@ jobs:
           fi
 
       - name: Commit repaired links
+        shell: bash
         run: |
-          set -e
-
+          set -euo pipefail
           git config user.name "Ketogenic Research Bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Stage every change produced by the repair job.
           git add -A
 
           if git diff --cached --quiet; then
-            echo "No Full Text link changes."
+            echo "No Full Text/PDF link changes."
             exit 0
           fi
 
-          git commit -m "Verify and repair Full Text links"
+          git commit -m "Verify Full Text and direct PDF links"
 
-          # Rebase requires a clean working tree.
           if [ -n "$(git status --porcelain)" ]; then
             echo "Unexpected changes remained after commit:"
             git status --short
             exit 1
           fi
 
-          # Another workflow may update main while this job is running.
           for attempt in 1 2 3; do
             echo "Push attempt ${attempt}/3"
-
             git fetch origin main
             git rebase origin/main
 
             if git push origin HEAD:main; then
-              echo "Full Text repairs published successfully."
+              echo "Push completed successfully."
               exit 0
             fi
 

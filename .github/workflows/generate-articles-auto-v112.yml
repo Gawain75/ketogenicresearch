@@ -12,7 +12,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: generate-research-article
+  group: ketogenicresearch-content-write
   cancel-in-progress: false
 
 jobs:
@@ -28,6 +28,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           ref: main
 
       - name: Set up Python
@@ -50,9 +51,9 @@ jobs:
         run: python scripts/render_articles.py
 
       - name: Commit verified article and public pages
+        shell: bash
         run: |
-          set -e
-
+          set -euo pipefail
           git config user.name "Ketogenic Research Bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
@@ -65,7 +66,6 @@ jobs:
 
           git commit -m "Generate and publish verified research article"
 
-          # Rebase requires a completely clean working tree.
           if [ -n "$(git status --porcelain)" ]; then
             echo "Unexpected changes remained after commit:"
             git status --short
@@ -74,12 +74,11 @@ jobs:
 
           for attempt in 1 2 3; do
             echo "Push attempt ${attempt}/3"
-
             git fetch origin main
             git rebase origin/main
 
             if git push origin HEAD:main; then
-              echo "Article published successfully."
+              echo "Push completed successfully."
               exit 0
             fi
 

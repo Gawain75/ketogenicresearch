@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: update-latest-literature
+  group: ketogenicresearch-content-write
   cancel-in-progress: false
 
 jobs:
@@ -20,6 +20,9 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -63,17 +66,40 @@ jobs:
         run: python scripts/build_evidence_trends.py
 
       - name: Commit changes
+        shell: bash
         run: |
+          set -euo pipefail
           git config user.name "Ketogenic Research Bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Stage every generated change so the working tree is clean before rebase.
           git add -A
 
           if git diff --cached --quiet; then
             echo "No literature changes."
-          else
-            git commit -m "Update literature, clinical rationales and evidence trends"
-            git pull --rebase origin main
-            git push origin main
+            exit 0
           fi
+
+          git commit -m "Update literature, clinical rationales and evidence trends"
+
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Unexpected changes remained after commit:"
+            git status --short
+            exit 1
+          fi
+
+          for attempt in 1 2 3; do
+            echo "Push attempt ${attempt}/3"
+            git fetch origin main
+            git rebase origin/main
+
+            if git push origin HEAD:main; then
+              echo "Push completed successfully."
+              exit 0
+            fi
+
+            echo "Remote main changed before push; retrying..."
+            sleep 5
+          done
+
+          echo "Push failed after 3 attempts."
+          exit 1
