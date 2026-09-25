@@ -40,12 +40,37 @@ jobs:
 
       - name: Commit verified article and public pages
         run: |
+          set -e
+
           git config user.name "Ketogenic Research Bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+
           git add articles-drafts/ articles/ articles.html
+
           if git diff --cached --quiet; then
             echo "No verified article changes."
-          else
-            git commit -m "Generate and publish verified research article"
-            git push
+            exit 0
           fi
+
+          git commit -m "Generate and publish verified research article"
+
+          # Other workflows may update main while this job is generating.
+          # Rebase on the latest remote main before pushing, and retry if
+          # main changes again between fetch/rebase and push.
+          for attempt in 1 2 3; do
+            echo "Push attempt ${attempt}/3"
+
+            git fetch origin main
+            git rebase origin/main
+
+            if git push origin HEAD:main; then
+              echo "Article published successfully."
+              exit 0
+            fi
+
+            echo "Remote main changed before push; retrying..."
+            sleep 5
+          done
+
+          echo "Push failed after 3 attempts."
+          exit 1
