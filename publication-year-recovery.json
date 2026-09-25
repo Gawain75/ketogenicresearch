@@ -8,46 +8,10 @@
   "from_pmid_batch": 0,
   "from_doi_batch": 0,
   "from_title_search": 0,
-  "title_searches_attempted": 7,
+  "title_searches_attempted": 0,
   "title_searches_resolved_unique": 0,
   "remaining_missing_year_instances": 161,
   "remaining_unique_missing_titles": 156,
   "title_search_retry_days": 30,
-  "unresolved_sample": [
-    {
-      "title": "9. Does a Low-Carbohydrate Diet Impede Endurance Sports Performance? The Case Against",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.0
-    },
-    {
-      "title": "10. Does a Low-Carbohydrate Diet Impede Endurance Sports Performance? The Case For",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.0
-    },
-    {
-      "title": "12. Impact of the Ketogenic Diet on Body Fat in Athletes",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.6857
-    },
-    {
-      "title": "17. Ketogenic Diet Combined with Moderate Aerobic Exercise",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.4557
-    },
-    {
-      "title": "20. Effects of 30 Days of Ketogenic Diet on Exercise Performance",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.5576
-    },
-    {
-      "title": "8. COVID-19: Proposing a Ketone-Based Metabolic Therapy",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.7034
-    },
-    {
-      "title": "10. Clinical efficacy of eucaloric ketogenic nutrition in COVID-19",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.5767
-    }
-  ]
+  "unresolved_sample": []
 }
