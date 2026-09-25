@@ -1,9 +1,7 @@
-name: Repair Full Text + PDF links
+name: LEGACY · Repair Full Text + PDF links v106 (manual)
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "52 5 * * *"
 
 permissions:
   contents: write
