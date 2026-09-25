@@ -8,211 +8,46 @@
   "from_pmid_batch": 0,
   "from_doi_batch": 0,
   "from_title_search": 0,
-  "title_searches_attempted": 40,
+  "title_searches_attempted": 7,
   "title_searches_resolved_unique": 0,
   "remaining_missing_year_instances": 161,
   "remaining_unique_missing_titles": 156,
   "title_search_retry_days": 30,
   "unresolved_sample": [
     {
-      "title": "3. Rheumatoid Arthritis and Dietary Interventions: Systematic Review",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.8707
-    },
-    {
-      "title": "2. Efficacy, Safety and Tolerability of VLCKD in Women with Obesity and Fibromyalgia",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.6507
-    },
-    {
-      "title": "4. The Ketogenic Diet and Dermatology",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.6869
-    },
-    {
-      "title": "5. Ketones, the ketogenic diet, and the skin: a review of where we are and where we should go",
+      "title": "9. Does a Low-Carbohydrate Diet Impede Endurance Sports Performance? The Case Against",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "5. Impact of Fasting and Ketogenic Interventions on the NLRP3 Inflammasome",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.8535
-    },
-    {
-      "title": "7. Metabolic Effects of Ketogenic Diets: Whole-Body Metabolism, Adipose Tissue and Metabolic Organs",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.843
-    },
-    {
-      "title": "8. Persistent Inflammation, Immunosuppression, and Catabolism in Metabolic Disease",
+      "title": "10. Does a Low-Carbohydrate Diet Impede Endurance Sports Performance? The Case For",
       "reason": "no_high_confidence_pubmed_match",
       "best_similarity": 0.0
     },
     {
-      "title": "3. Beneficial Effects of the Very-Low-Calorie Ketogenic Diet on Reproductive and Metabolic Parameters",
+      "title": "12. Impact of the Ketogenic Diet on Body Fat in Athletes",
       "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.0
+      "best_similarity": 0.6857
     },
     {
-      "title": "4. Low-Carbohydrate Diets and Men’s Cortisol and Testosterone",
+      "title": "17. Ketogenic Diet Combined with Moderate Aerobic Exercise",
       "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.3404
+      "best_similarity": 0.4557
     },
     {
-      "title": "5. The Effect of Low Carbohydrate Diets on Fertility",
+      "title": "20. Effects of 30 Days of Ketogenic Diet on Exercise Performance",
       "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.5765
+      "best_similarity": 0.5576
     },
     {
-      "title": "4. The Efficacy of Ketogenic Diets as a Potential Nutritional Intervention for Lipedema",
+      "title": "8. COVID-19: Proposing a Ketone-Based Metabolic Therapy",
       "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.7241
+      "best_similarity": 0.7034
     },
     {
-      "title": "7. Dietary liposuction through ketogenic diet: a comparison of three approaches",
+      "title": "10. Clinical efficacy of eucaloric ketogenic nutrition in COVID-19",
       "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.0
-    },
-    {
-      "title": "7. Intermittent Fasting, Calorie Restriction, and a Ketogenic Diet Improve Healthspan",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.0
-    },
-    {
-      "title": "8. Divergent Sex-Specific Effects of a Ketogenic Diet during Aging",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.0
-    },
-    {
-      "title": "9. Differential Effects of Short-Term Standard and Ketogenic Diets on the Aging Mouse Brain",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.0
-    },
-    {
-      "title": "1. Ketogenic Interventions Enhance Circadian and Metabolic Regulation",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.0
-    },
-    {
-      "title": "3. Can the Ketogenic Diet Improve Our Dreams? Effect of VLCKD on Sleep Quality",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.8222
-    },
-    {
-      "title": "15. Ketogenic Diet and Microbiota",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.0
-    },
-    {
-      "title": "16. Ketogenic Diet, Gut Microbiome and Cancer Immunotherapy Outcomes",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.5842
-    },
-    {
-      "title": "17. Very Low-Energy Ketogenic Therapy and Trimethylamine N-Oxide in Women with Obesity",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.0
-    },
-    {
-      "title": "18. Parkinson’s Disease, Gut Microbiota and Ketogenic Diet",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.5119
-    },
-    {
-      "title": "20. Very-Low-Calorie Ketogenic Diets and Gut Microbiota in Obesity: Systematic Review and Meta-Analysis",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.0
-    },
-    {
-      "title": "21. Ketogenic Diet, Gut Microbiota, Cognition and Mood",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.0
-    },
-    {
-      "title": "22. A Multi-Omics Approach to Intestinal Permeability during a Very Low-Calorie Ketogenic Diet",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.7311
-    },
-    {
-      "title": "23. Ketogenic Diet, Epilepsy and the Brain-Gut Axis",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.4875
-    },
-    {
-      "title": "24. Fecal Microbiota Transfer from Children on a Ketogenic Diet",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.6351
-    },
-    {
-      "title": "25. Ketogenic Diet and Gut Microbiota in Neurological Disorders",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.6504
-    },
-    {
-      "title": "26. Modified Ketogenic Diet and Gut Microbiota in Obesity",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.0
-    },
-    {
-      "title": "27. Influence of the Ketogenic Diet on Gut Microbiota",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.0
-    },
-    {
-      "title": "28. Mitochondrial Epilepsy, Ketogenic Therapy and the Gut Microbiome",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.0
-    },
-    {
-      "title": "29. Very Low-Calorie Ketogenic Diet and Microbiota in Obesity",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.0
-    },
-    {
-      "title": "31. Ketogenic Diet, Gut Microbiota and Neurodegenerative Disorders",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.0
-    },
-    {
-      "title": "32. Very Low-Carbohydrate Ketogenic Diet, Gut Microbiota and Short-Chain Fatty Acids",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.0
-    },
-    {
-      "title": "33. Ketogenic Diet Intervention via the Gut Microbiota in Autism Spectrum Disorder",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.6788
-    },
-    {
-      "title": "34. Very Low-Calorie, Ketogenic and Low-Carbohydrate Diets: Effects on the Gut Microbiota",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.6896
-    },
-    {
-      "title": "5. Impact of ketogenic diet and ketone diester supplementation on body composition and performance",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.0
-    },
-    {
-      "title": "8. Exogenous ketone supplements in athletic contexts",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.8033
-    },
-    {
-      "title": "3. Ketogenic Effects of Multiple Doses of a Medium-Chain Triglyceride Supplement",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.0
-    },
-    {
-      "title": "5. Tricaprylin Alone Increases Plasma Ketone Concentrations",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.0
-    },
-    {
-      "title": "6. Ketosis After Intake of Coconut Oil",
-      "reason": "no_high_confidence_pubmed_match",
-      "best_similarity": 0.4487
+      "best_similarity": 0.5767
     }
   ]
 }
