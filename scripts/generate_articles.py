@@ -51,7 +51,7 @@ Do not invent data.
 Use neutral scientific language.
 Distinguish findings from interpretation.
 Do not make unsupported clinical recommendations.
-For abstract-only records, explicitly disclose that the interpretation is based on the PubMed abstract.
+Do not expose internal source-acquisition details (abstract/full text/retrieval method) in the reader-facing article.
 """
 
 def http_request(
@@ -401,6 +401,177 @@ def unpaywall_locations(doi: str) -> list[dict[str, Any]]:
     return locations
 
 
+
+def openalex_locations(doi: str) -> list[dict[str, Any]]:
+    """Return public/OA locations reported by OpenAlex for a DOI.
+
+    This is a fallback after Unpaywall. It does not bypass authentication:
+    only URLs that OpenAlex exposes as public locations are tried.
+    """
+    doi = norm_doi(doi)
+    if not doi:
+        return []
+
+    url = (
+        "https://api.openalex.org/works/"
+        + urllib.parse.quote("https://doi.org/" + doi, safe="")
+    )
+    if NCBI_EMAIL:
+        url += "?mailto=" + urllib.parse.quote(NCBI_EMAIL)
+
+    try:
+        raw = http_request(
+            url,
+            headers={"User-Agent": "KetogenicResearch/FullTextDiscovery"},
+            timeout=45,
+        )
+        data = json.loads(raw)
+    except Exception as exc:
+        print(f"OpenAlex lookup unavailable for DOI {doi}: {exc}")
+        return []
+
+    locations: list[dict[str, Any]] = []
+    seen: set[tuple[str, str]] = set()
+
+    candidates = []
+    for key in ("best_oa_location", "primary_location"):
+        value = data.get(key)
+        if isinstance(value, dict):
+            candidates.append(value)
+    for value in data.get("locations") or []:
+        if isinstance(value, dict):
+            candidates.append(value)
+
+    for item in candidates:
+        pdf_url = str(item.get("pdf_url") or "").strip()
+        landing_url = str(item.get("landing_page_url") or "").strip()
+        key = (pdf_url, landing_url)
+        if not any(key) or key in seen:
+            continue
+        seen.add(key)
+        locations.append({
+            "url_for_pdf": pdf_url,
+            "url_for_landing_page": landing_url,
+            "url": landing_url or pdf_url,
+            "version": item.get("version") or "publishedVersion",
+            "host_type": (
+                (item.get("source") or {}).get("type")
+                if isinstance(item.get("source"), dict)
+                else "publisher"
+            ) or "publisher",
+        })
+
+    return locations
+
+
+def publisher_candidate_urls(doi: str) -> list[tuple[str, str]]:
+    """Known legal publisher URL patterns worth trying directly.
+
+    These are ordinary public publisher URLs, not paywall bypasses.
+    """
+    doi = norm_doi(doi)
+    if not doi:
+        return []
+
+    encoded = urllib.parse.quote(doi, safe="/().;:-_")
+    candidates: list[tuple[str, str]] = []
+
+    # Springer Nature / SpringerLink.
+    if doi.startswith("10.1007/"):
+        candidates.extend([
+            (
+                "https://link.springer.com/content/pdf/" + encoded + ".pdf",
+                "Springer publisher PDF",
+            ),
+            (
+                "https://link.springer.com/article/" + encoded,
+                "Springer publisher full text",
+            ),
+        ])
+
+    return candidates
+
+
+def fetch_public_full_text_url(
+    url: str,
+    *,
+    min_pdf_chars: int = 3000,
+    min_html_chars: int = 7000,
+) -> str:
+    """Fetch usable public article text from an ordinary publisher/OA URL."""
+    try:
+        raw = http_request(
+            url,
+            headers={
+                "User-Agent": "Mozilla/5.0 KetogenicResearch/FullTextDiscovery",
+                "Accept": "application/pdf,text/html,application/xhtml+xml,*/*;q=0.5",
+            },
+            timeout=75,
+        )
+    except Exception as exc:
+        print(f"Public full-text retrieval failed for {url}: {exc}")
+        return ""
+
+    if raw[:4] == b"%PDF":
+        value = extract_pdf_text(raw)
+        return value if len(value) >= min_pdf_chars else ""
+
+    decoded = raw.decode("utf-8", errors="replace")
+    parser = _ReadableHTML()
+    try:
+        parser.feed(decoded)
+    except Exception:
+        pass
+    value = parser.text()
+    lower = value.lower()
+    section_hits = sum(
+        marker in lower
+        for marker in (
+            "introduction",
+            "methods",
+            "materials and methods",
+            "results",
+            "discussion",
+            "conclusion",
+            "conclusions",
+            "references",
+        )
+    )
+    if len(value) >= min_html_chars and section_hits >= 2:
+        return value
+    return ""
+
+
+def draft_source_leak(draft: dict[str, Any]) -> str:
+    """Return a reader-facing source-acquisition phrase if one leaked into the draft."""
+    public_text = json.dumps(draft, ensure_ascii=False).lower()
+    patterns = (
+        "pubmed abstract",
+        "based on the abstract",
+        "the abstract does not",
+        "the abstract did not",
+        "the abstract reports",
+        "the abstract indicates",
+        "the abstract shows",
+        "dall'abstract",
+        "dall’abstract",
+        "l'abstract non",
+        "l’abstract non",
+        "secondo l'abstract",
+        "secondo l’abstract",
+        "testo completo non era disponibile",
+        "full text was not available",
+        "source used was an abstract",
+        "source material used",
+        "unpaywall",
+        "pmc full text",
+        "publisher full text",
+    )
+    for pattern in patterns:
+        if pattern in public_text:
+            return pattern
+    return ""
+
 def extract_pdf_text(raw: bytes) -> str:
     try:
         from pypdf import PdfReader
@@ -470,72 +641,52 @@ def discover_full_text(
     rec: dict[str, Any],
     extra: dict[str, Any],
 ) -> tuple[str, str, str]:
-    # 1. Prefer structured PMC/Europe-PMC-compatible full text when a PMCID exists.
+    # 1. Prefer structured PMC full text when a PMCID exists.
     pmcid = (extra.get("pmcid") or "").strip()
     if pmcid:
         text = pmc_full_text(pmcid)
         if len(text) >= 3000:
             return text[:30000], "PMC full text", f"https://pmc.ncbi.nlm.nih.gov/articles/{pmcid}/"
 
-    # 2. Look for a legal OA copy registered by Unpaywall.
-    doi = (rec.get("doi") or extra.get("doi_from_pubmed") or "").strip()
+    doi = norm_doi(rec.get("doi") or extra.get("doi_from_pubmed") or "")
+
+    # 2. Legal OA copies registered by Unpaywall.
     for location in unpaywall_locations(doi):
-        text, source_url = fetch_oa_location_text(location)
-        if len(text) >= 3000:
+        value, source_url = fetch_oa_location_text(location)
+        if len(value) >= 3000:
             version = location.get("version") or "open-access version"
             host = location.get("host_type") or "open-access host"
-            return text[:30000], f"Unpaywall OA ({host}, {version})", source_url
+            return value[:30000], f"Unpaywall OA ({host}, {version})", source_url
 
-    # 3. Try the DOI landing page itself. This does not bypass paywalls:
-    #    it only uses content that the publisher returns without authentication.
-    doi = (rec.get("doi") or extra.get("doi_from_pubmed") or "").strip()
+    # 3. Independent OA/public-location fallback from OpenAlex.
+    for location in openalex_locations(doi):
+        value, source_url = fetch_oa_location_text(location)
+        if len(value) >= 3000:
+            version = location.get("version") or "publishedVersion"
+            host = location.get("host_type") or "publisher"
+            return value[:30000], f"OpenAlex OA ({host}, {version})", source_url
+
+    # 4. Known public publisher URL patterns.
+    for publisher_url, source_label in publisher_candidate_urls(doi):
+        value = fetch_public_full_text_url(publisher_url)
+        if len(value) >= 3000:
+            return value[:30000], source_label, publisher_url
+
+    # 5. DOI landing page itself. This never bypasses a paywall; it only uses
+    # content returned publicly by the publisher.
     if doi:
         doi_url = "https://doi.org/" + urllib.parse.quote(doi, safe="/().;:-_")
-        try:
-            raw = http_request(
-                doi_url,
-                headers={
-                    "User-Agent": "Mozilla/5.0 KetogenicResearch/FullTextDiscovery",
-                    "Accept": "text/html,application/xhtml+xml,application/pdf,*/*;q=0.5",
-                },
-                timeout=75,
-            )
+        value = fetch_public_full_text_url(
+            doi_url,
+            min_pdf_chars=6000,
+            min_html_chars=9000,
+        )
+        if len(value) >= 6000:
+            return value[:30000], "Publisher full text via DOI", doi_url
 
-            if raw[:4] == b"%PDF":
-                value = extract_pdf_text(raw)
-                if len(value) >= 6000:
-                    return value[:30000], "Publisher full text via DOI", doi_url
-            else:
-                decoded = raw.decode("utf-8", errors="replace")
-                parser = _ReadableHTML()
-                parser.feed(decoded)
-                value = parser.text()
-
-                # Be conservative: require substantial article-like text and
-                # multiple scientific section signals before calling it full text.
-                lower = value.lower()
-                section_hits = sum(
-                    marker in lower
-                    for marker in (
-                        "introduction",
-                        "methods",
-                        "materials and methods",
-                        "results",
-                        "discussion",
-                        "conclusion",
-                        "references",
-                    )
-                )
-                if len(value) >= 9000 and section_hits >= 3:
-                    return value[:30000], "Publisher full text via DOI", doi_url
-
-        except Exception as exc:
-            print(f"Publisher DOI full-text retrieval failed: {exc}")
-
-    # 4. No usable full text was retrieved. This says nothing about whether
-    #    a full text exists elsewhere; the note simply uses the PubMed abstract.
+    # 6. No usable full text was retrieved. This does NOT assert that no full
+    # text exists online; it only records what this run could actually retrieve.
     return "", "PubMed abstract", ""
-
 
 def source_packet(
     rec: dict[str, Any],
@@ -883,7 +1034,7 @@ date: {json.dumps(rec.get("date",""))}
 journal: {json.dumps(rec.get("journal",""), ensure_ascii=False)}
 article_type: {json.dumps(draft.get("article_type",""))}
 article_type_it: {json.dumps(draft.get("article_type_it",""))}
-generator_version: "4.5"
+generator_version: "4.6"
 source_identity: "PASS"
 source_identity_basis: "PubMed PMID/title/DOI/PMCID"
 full_text_source: {json.dumps(full_text_source)}
@@ -1074,6 +1225,23 @@ def main() -> None:
 
             print("Waiting briefly before verification...")
             time.sleep(15)
+
+            leaked_source_phrase = draft_source_leak(draft)
+            if leaked_source_phrase:
+                idx.setdefault("failures", []).append({
+                    "pmid": pmid,
+                    "at": datetime.now(timezone.utc).isoformat(),
+                    "stage": "reader_facing_source_guard",
+                    "error": (
+                        "Draft exposed internal source-acquisition wording: "
+                        + leaked_source_phrase
+                    ),
+                })
+                print(
+                    f"Source-acquisition wording blocked for PMID {pmid}: "
+                    f"{leaked_source_phrase}. Trying next candidate."
+                )
+                continue
 
             print("Verifying draft against source...")
             check = groq_json(
