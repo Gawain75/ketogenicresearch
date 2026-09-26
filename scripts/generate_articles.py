@@ -265,7 +265,7 @@ def groq_json(
     messages: list[dict[str, str]],
     max_tokens: int,
     temperature: float,
-    attempts: int = 5
+    attempts: int = 3
 ) -> dict[str, Any]:
     if not GROQ_API_KEY:
         raise RuntimeError("GROQ_API_KEY is missing.")
@@ -292,7 +292,7 @@ def groq_json(
                     "Content-Type": "application/json",
                     "User-Agent": "KetogenicResearch/AI-Articles-Pilot-V2",
                 },
-                timeout=120,
+                timeout=60,
             )
 
             obj = json.loads(raw)
@@ -322,9 +322,11 @@ def groq_json(
 
             retry_after = exc.headers.get("Retry-After")
             if retry_after and retry_after.isdigit():
-                wait_seconds = max(30, int(retry_after))
+                # Never allow a single Groq response to park the GitHub job
+                # for several minutes. A later scheduled run can retry cleanly.
+                wait_seconds = min(60, max(15, int(retry_after)))
             else:
-                wait_seconds = 45 * attempt
+                wait_seconds = min(60, 20 * attempt)
 
             print(
                 f"Groq rate limit reached (429). "
@@ -1070,8 +1072,8 @@ def main() -> None:
                 temperature=0.1,
             )
 
-            print("Waiting before verification...")
-            time.sleep(75)
+            print("Waiting briefly before verification...")
+            time.sleep(15)
 
             print("Verifying draft against source...")
             check = groq_json(
