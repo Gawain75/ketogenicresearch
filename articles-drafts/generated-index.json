@@ -1,5 +1,6 @@
 {
   "generated_pmids": [
+    "42638043",
     "42642996",
     "42658808",
     "42661052",
@@ -442,14 +443,57 @@
       "at": "2026-09-25T07:05:27.838831+00:00",
       "stage": "generation",
       "error": "Groq HTTP 413: {\"error\":{\"message\":\"Request too large for model `openai/gpt-oss-120b` in organization `org_01m2v9fhzme29te5cqydhvxz4y` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 10098, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "pmid": "42781531",
+      "at": "2026-09-26T03:26:22.624869+00:00",
+      "stage": "generation",
+      "error": "Groq HTTP 413: {\"error\":{\"message\":\"Request too large for model `openai/gpt-oss-120b` in organization `org_01m2v9fhzme29te5cqydhvxz4y` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 10008, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "pmid": "42780737",
+      "at": "2026-09-26T03:26:23.609136+00:00",
+      "stage": "generation",
+      "error": "Groq HTTP 413: {\"error\":{\"message\":\"Request too large for model `openai/gpt-oss-120b` in organization `org_01m2v9fhzme29te5cqydhvxz4y` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 10280, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "pmid": "42761797",
+      "at": "2026-09-26T03:26:24.479566+00:00",
+      "stage": "generation",
+      "error": "Groq HTTP 413: {\"error\":{\"message\":\"Request too large for model `openai/gpt-oss-120b` in organization `org_01m2v9fhzme29te5cqydhvxz4y` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 9857, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "pmid": "42687165",
+      "at": "2026-09-26T03:26:25.491445+00:00",
+      "stage": "generation",
+      "error": "Groq HTTP 413: {\"error\":{\"message\":\"Request too large for model `openai/gpt-oss-120b` in organization `org_01m2v9fhzme29te5cqydhvxz4y` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 10233, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "pmid": "42723855",
+      "at": "2026-09-26T03:26:26.446657+00:00",
+      "stage": "generation",
+      "error": "Groq HTTP 413: {\"error\":{\"message\":\"Request too large for model `openai/gpt-oss-120b` in organization `org_01m2v9fhzme29te5cqydhvxz4y` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 11560, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "pmid": "42738960",
+      "at": "2026-09-26T03:26:27.330907+00:00",
+      "stage": "generation",
+      "error": "Groq HTTP 413: {\"error\":{\"message\":\"Request too large for model `openai/gpt-oss-120b` in organization `org_01m2v9fhzme29te5cqydhvxz4y` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 10724, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "pmid": "42642354",
+      "at": "2026-09-26T03:26:27.714764+00:00",
+      "stage": "source",
+      "error": "PubMed abstract unavailable"
     }
   ],
-  "updated_at": "2026-09-26T03:25:09.871004+00:00",
+  "updated_at": "2026-09-26T03:27:48.334928+00:00",
   "source_unavailable_pmids": [
+    "42642354",
     "42717355"
   ],
   "last_run": {
-    "attempted_candidates": 1,
+    "attempted_candidates": 8,
     "published_articles": 1,
     "status": "published"
   }
