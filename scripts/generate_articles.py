@@ -201,7 +201,7 @@ def pmc_full_text(pmcid: str) -> str:
         return ""
 
     chunks: list[str] = []
-    for tag in ("sec",):
+    for tag in ("abstract", "sec"):
         for node in root.findall(f".//{tag}"):
             value = text_content(node)
             if value and len(value) > 80:
@@ -508,22 +508,23 @@ Journal: {rec.get('journal','')}
 Publication date: {rec.get('date','')}
 Evidence type: {rec.get('evidence_type','')}
 Clinical areas: {areas}
-MeSH: {", ".join(extra.get("mesh") or [])}
-"""
+MeSH: {", ".join(extra.get("mesh") or [])}"""
 
+    # When usable full text is available, give the writer only that evidence
+    # body. Keeping the abstract beside it can make the model describe a
+    # full-text analysis as if it were based on the abstract.
     if full_text:
-        # IMPORTANT: when full text is available, do not also feed the PubMed
-        # abstract to the model. Mixing both sources can make the generated
-        # article incorrectly describe a full-text analysis as abstract-based.
-        evidence = f"""FULL-TEXT ARTICLE BODY
-{full_text}
-"""
-    else:
-        evidence = f"""PUBMED ABSTRACT (ONLY SOURCE TEXT AVAILABLE TO THIS RUN)
-{extra.get("abstract") or "[No abstract supplied by PubMed]"}
-"""
+        return f"""{metadata}
 
-    return (metadata + "\n" + evidence).strip()
+FULL TEXT
+{full_text}
+""".strip()
+
+    return f"""{metadata}
+
+PUBMED ABSTRACT (FULL TEXT NOT RETRIEVED)
+{extra.get("abstract") or "[No abstract supplied by PubMed]"}
+""".strip()
 
 def writer_prompt(packet: str, has_full_text: bool) -> str:
     article_type_en = "Research Analysis" if has_full_text else "Research Note"
@@ -538,12 +539,7 @@ Follow this policy exactly:
 
 Write one bilingual article based ONLY on the SOURCE PACKET.
 Do not add background facts that are not explicitly present in the source.
-
-SOURCE-MODE RULE (MANDATORY)
-- This run is a {article_type_en}.
-- If this is a Research Analysis, the supplied evidence is full-text article-body material: reason from that material and NEVER describe the evidence as an abstract, abstract-only record, single abstract, or limitation caused by abstract availability.
-- If this is a Research Note, do not tell the reader that the production pipeline used an abstract; discuss only limitations actually supported by the supplied scientific content.
-- Never infer that sample size, methods, outcomes, or clinical endpoints are absent from the STUDY merely because a supplied source excerpt does not contain them.
+If full text is supplied, use it as the evidence source for the entire article and never refer to the reader-facing evidence as "the abstract" or "l\'abstract".
 
 READER-FIRST EDITORIAL TRANSFORMATION — V4.1
 
