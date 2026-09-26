@@ -495,7 +495,7 @@ def source_packet(
     areas = ", ".join(rec.get("areas") or [])
     source_used = full_text_source or ("Full text" if full_text else "PubMed abstract")
 
-    metadata = f"""SOURCE MATERIAL USED: {source_used}
+    return f"""SOURCE MATERIAL USED: {source_used}
 SOURCE URL: {full_text_url or "[not applicable]"}
 
 PUBMED METADATA
@@ -508,22 +508,13 @@ Journal: {rec.get('journal','')}
 Publication date: {rec.get('date','')}
 Evidence type: {rec.get('evidence_type','')}
 Clinical areas: {areas}
-MeSH: {", ".join(extra.get("mesh") or [])}"""
+MeSH: {", ".join(extra.get("mesh") or [])}
 
-    # When usable full text is available, give the writer only that evidence
-    # body. Keeping the abstract beside it can make the model describe a
-    # full-text analysis as if it were based on the abstract.
-    if full_text:
-        return f"""{metadata}
-
-FULL TEXT
-{full_text}
-""".strip()
-
-    return f"""{metadata}
-
-PUBMED ABSTRACT (FULL TEXT NOT RETRIEVED)
+PUBMED ABSTRACT
 {extra.get("abstract") or "[No abstract supplied by PubMed]"}
+
+FULL-TEXT MATERIAL USED FOR THIS NOTE
+{full_text or "[No full-text material was supplied; use the PubMed abstract only.]"}
 """.strip()
 
 def writer_prompt(packet: str, has_full_text: bool) -> str:
@@ -539,7 +530,6 @@ Follow this policy exactly:
 
 Write one bilingual article based ONLY on the SOURCE PACKET.
 Do not add background facts that are not explicitly present in the source.
-If full text is supplied, use it as the evidence source for the entire article and never refer to the reader-facing evidence as "the abstract" or "l\'abstract".
 
 READER-FIRST EDITORIAL TRANSFORMATION — V4.1
 
@@ -1006,10 +996,12 @@ def main() -> None:
                     "issues": check.get("issues", []),
                     "unsupported_claims": check.get("unsupported_claims", []),
                 })
-                print(
-                    f"Verification FAILED for PMID {pmid}; "
-                    "trying next candidate."
-                )
+                issues = check.get("issues", [])
+                unsupported = check.get("unsupported_claims", [])
+                print(f"Verification FAILED for PMID {pmid}.")
+                print(f"Verifier issues: {json.dumps(issues, ensure_ascii=False)}")
+                print(f"Unsupported claims: {json.dumps(unsupported, ensure_ascii=False)}")
+                print("Trying next candidate.")
                 continue
 
             verified_at = datetime.now(timezone.utc).isoformat()
