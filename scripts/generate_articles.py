@@ -495,7 +495,7 @@ def source_packet(
     areas = ", ".join(rec.get("areas") or [])
     source_used = full_text_source or ("Full text" if full_text else "PubMed abstract")
 
-    return f"""SOURCE MATERIAL USED: {source_used}
+    metadata = f"""SOURCE MATERIAL USED: {source_used}
 SOURCE URL: {full_text_url or "[not applicable]"}
 
 PUBMED METADATA
@@ -508,13 +508,23 @@ Journal: {rec.get('journal','')}
 Publication date: {rec.get('date','')}
 Evidence type: {rec.get('evidence_type','')}
 Clinical areas: {areas}
-MeSH: {", ".join(extra.get("mesh") or [])}
+MeSH: {", ".join(extra.get("mesh") or [])}"""
 
-PUBMED ABSTRACT
+    # Full-text-first must be literal: when usable full text was retrieved, do not
+    # also feed the abstract to the writer/verifier. Otherwise the model can anchor
+    # on the abstract and incorrectly describe full-text omissions as "the abstract
+    # does not report...". PubMed metadata are retained only for identity/citation.
+    if full_text:
+        return f"""{metadata}
+
+FULL TEXT
+{full_text}
+""".strip()
+
+    return f"""{metadata}
+
+PUBMED ABSTRACT (FULL TEXT NOT RETRIEVED)
 {extra.get("abstract") or "[No abstract supplied by PubMed]"}
-
-FULL-TEXT MATERIAL USED FOR THIS NOTE
-{full_text or "[No full-text material was supplied; use the PubMed abstract only.]"}
 """.strip()
 
 def writer_prompt(packet: str, has_full_text: bool) -> str:
@@ -530,6 +540,8 @@ Follow this policy exactly:
 
 Write one bilingual article based ONLY on the SOURCE PACKET.
 Do not add background facts that are not explicitly present in the source.
+If this is a full-text Research Analysis, the SOURCE PACKET contains the full-text material and intentionally omits the PubMed abstract. Never refer to "the abstract" or "l\'abstract" in the reader-facing article.
+Never infer that a detail was absent from the published study merely because it is absent from the supplied excerpt; state an omission as a limitation only when the supplied source explicitly establishes that omission.
 
 READER-FIRST EDITORIAL TRANSFORMATION — V4.1
 
@@ -749,6 +761,8 @@ EDITORIAL CHECKS
 - Do not repeat the same concept unnecessarily across sections.
 - The reader-facing article must not mention whether the source used was an abstract, full text, PMC text, publisher text, Unpaywall, or any retrieval workflow.
 - Source-acquisition details are internal metadata only.
+- FAIL if any reader-facing summary or section refers to "the abstract", "l'abstract", or "l’abstract".
+- FAIL any claimed missing study detail unless the supplied source explicitly supports that the detail was not reported.
 
 STRUCTURE CHECKS FOR RESEARCH NOTES
 For Research Notes, the English section headings must be exactly:
