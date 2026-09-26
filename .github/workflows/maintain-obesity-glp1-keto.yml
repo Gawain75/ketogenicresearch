@@ -6,7 +6,7 @@ on:
     - cron: "25 5 * * *"
   workflow_run:
     workflows:
-      - "Expand Scientific Library V5"
+      - "Expand Scientific Library V5.1 DOI Guard"
     types:
       - completed
 

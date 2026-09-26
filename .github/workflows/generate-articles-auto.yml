@@ -1,11 +1,6 @@
-name: Generate research article
+name: LEGACY · Generate research article old (manual)
 
 on:
-  workflow_run:
-    workflows:
-      - "Update latest scientific literature"
-    types:
-      - completed
   workflow_dispatch:
 
 permissions:

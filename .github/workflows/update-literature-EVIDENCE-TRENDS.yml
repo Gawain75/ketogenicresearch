@@ -1,8 +1,6 @@
-name: Update latest scientific literature
+name: LEGACY · Update literature + evidence trends (manual)
 
 on:
-  schedule:
-    - cron: "17 3 * * *"
   workflow_dispatch:
 
 permissions:
