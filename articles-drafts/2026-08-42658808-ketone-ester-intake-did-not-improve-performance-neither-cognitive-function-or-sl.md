@@ -16,6 +16,7 @@ scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
 verified_at: "2026-09-25T05:22:53.122885+00:00"
+source_identity_checked_at: "2026-09-26T19:36:21.315175+00:00"
 ---
 
 # Ketone Ester Supplementation Did Not Enhance Performance, Cognition, or Sleep in an 8‑Day Simulated Cycling Race

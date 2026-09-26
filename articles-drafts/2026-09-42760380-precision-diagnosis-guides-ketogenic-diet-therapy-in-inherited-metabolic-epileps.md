@@ -1,6 +1,4 @@
 ---
-source_citation_checked_at: "2026-09-21T12:17:16.439939+00:00"
-source_citation_basis: "PubMed structured metadata"
 pmid: "42760380"
 doi: "10.1038/s41430-026-01821-3"
 pmcid: ""
@@ -13,38 +11,38 @@ source_identity: "PASS"
 source_identity_basis: "PubMed PMID/title/DOI/PMCID"
 full_text_source: "PubMed abstract"
 full_text_url: ""
-editorial_byline: "Ketogenic Research Hub Editorial"
+editorial_byline: "Ketogenic Research Editorial"
 scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
-verified_at: "2026-09-21T10:51:32.407964+00:00"
-source_identity_checked_at: "2026-09-21T12:17:17.478159+00:00"
+verified_at: "2026-09-26T19:36:19.410723+00:00"
+source_identity_checked_at: "2026-09-26T19:36:21.315175+00:00"
 ---
 
 # Classic ketogenic diet associated with seizure control and developmental gains in an infant with concurrent non‑ketotic hyperglycinemia and biotinidase deficiency
 
 **Research Note**
 
-**Ketogenic Research Hub Editorial**  
+**Ketogenic Research Editorial**  
 Scientific oversight: **Marco Medeot, Scientific Director**
 
-A single infant with genetically confirmed non‑ketotic hyperglycinemia and biotinidase deficiency received a classic 3:1 ketogenic diet at 18 months. Within two weeks seizures decreased, and over the following year seizure burden was eliminated, several anti‑seizure drugs were withdrawn, and neurodevelopmental milestones were achieved.
+A single infant with genetically confirmed non‑ketotic hyperglycinemia and biotinidase deficiency received a classic 3:1 ketogenic diet at 18 months. Within two weeks seizures improved, and over the following year seizure freedom, medication reduction, cessation of tube feeding, and new neurodevelopmental milestones were reported.
 
 ## Study and findings
 
-The authors describe a female infant diagnosed with autosomal recessive glycine encephalopathy (non‑ketotic hyperglycinemia) and biotinidase deficiency through whole‑exome sequencing and enzyme assay. The child presented with neonatal‑onset focal seizures refractory to five anti‑seizure medications. At 18 months, a classic ketogenic diet with a 3:1 fat‑to‑combined protein‑carbohydrate ratio was initiated in a pediatric intensive care unit under multidisciplinary supervision. Within two weeks of diet initiation the patient showed marked clinical improvement. Over the next twelve months seizures were controlled, three anti‑seizure drugs were discontinued, nasogastric feeding was stopped, and the child attained meaningful neurodevelopmental milestones.
+The authors describe a case report of a female infant who presented with neonatal‑onset focal seizures and progressive encephalopathy. Whole‑exome sequencing and enzyme assays identified autosomal‑recessive glycine encephalopathy (non‑ketotic hyperglycinemia) together with biotinidase deficiency. After failure of five anti‑seizure medications, a classic ketogenic diet with a 3:1 fat‑to‑carbohydrate‑plus‑protein ratio was initiated in the pediatric intensive care unit under multidisciplinary supervision at 18 months of age. Clinical observation recorded a marked improvement within two weeks. Over the next twelve months the patient remained seizure‑free, three anti‑seizure drugs were withdrawn, nasogastric tube feeding was stopped, and the child achieved meaningful neurodevelopmental milestones.
 
 ## Clinical interpretation
 
-In this case the ketogenic diet coincided with rapid seizure reduction and subsequent drug withdrawal, suggesting that ketosis may have mitigated the neurotoxic effects of accumulated glycine and the metabolic disturbance caused by biotinidase deficiency. The observed developmental gains imply that seizure control, together with improved metabolic stability, can translate into functional progress even in severe, drug‑resistant metabolic epilepsies. However, as a single‑patient observation, the report cannot establish causality; the improvement may also reflect natural disease evolution, concurrent supportive care, or other unmeasured factors.
+In this individual, the ketogenic diet coincided with rapid seizure reduction and longer‑term seizure control, allowing medication tapering and removal of tube feeding. The temporal relationship suggests that ketosis may have mitigated the neurotoxic effects of accumulated glycine and the metabolic disturbance caused by biotinidase deficiency, both of which are known to exacerbate epileptogenesis. While the report does not establish causality, the observed clinical trajectory supports the hypothesis that a ketogenic diet can serve as a unifying metabolic therapy when multiple inborn errors of metabolism contribute to refractory epilepsy.
 
 ## Limitations and open questions
 
-The evidence derives from a single case report without a control comparator, limiting generalizability to other patients with dual metabolic disorders. Details on dietary adherence, serum ketone levels, and quantitative seizure frequency are not provided, preventing assessment of dose‑response relationships. It remains unclear whether the ketogenic diet would be equally effective in patients with only one of the two disorders, or how timing of diet initiation influences outcomes. Prospective studies or registries collecting systematic data on ketogenic therapy in combined metabolic epilepsies are needed to clarify efficacy, optimal macronutrient ratios, and safety.
+The evidence derives from a single patient, limiting generalizability to other cases of combined metabolic epilepsies. No control or comparator condition was available, and spontaneous improvement or effects of other concurrent interventions cannot be excluded. Detailed metabolic parameters (e.g., plasma glycine, ketone levels) were not reported, preventing mechanistic confirmation. Future prospective studies or case series with systematic metabolic monitoring are needed to determine whether the ketogenic diet consistently benefits patients with co‑existing non‑ketotic hyperglycinemia and biotinidase deficiency, and to define optimal timing, ratio, and safety monitoring.
 
 ### Source
 
-Elbarky A, El Amrousy D, Mahmoud S, Lotfy A, Aboeisa M, Elballat KE, et al. Precision diagnosis guides ketogenic diet therapy in inherited metabolic epilepsies: Concurrent non-ketotic hyperglycinemia and biotinidase deficiency. Eur J Clin Nutr. 2026. doi: 10.1038/s41430-026-01821-3. PMID: 42760380.
+PMID: 42760380; DOI: 10.1038/s41430-026-01821-3.
 
 ---
 
@@ -52,23 +50,24 @@ Elbarky A, El Amrousy D, Mahmoud S, Lotfy A, Aboeisa M, Elballat KE, et al. Prec
 
 **Nota di ricerca**
 
-**Ketogenic Research Hub Editorial**  
+**Ketogenic Research Editorial**  
 Supervisione scientifica: **Marco Medeot, Direttore Scientifico**
 
-Un neonato con iperglicinemia non chetogenica e deficit di biotinidasi confermati geneticamente è stato trattato con una dieta chetogenica classica 3:1 a 18 mesi. Dopo due settimane le crisi sono diminuite e, nell’anno successivo, il carico convulsivo è stato eliminato, diversi farmaci antiepilettici sono stati sospesi e sono stati raggiunti traguardi dello sviluppo neurocognitivo.
+Un neonato con iperglicinemia non chetogenica e deficit di biotinidasi confermati geneticamente è stato trattato con una dieta chetogenica classica 3:1 a 18 mesi. Dopo due settimane si è osservato un miglioramento delle crisi, e nell’anno successivo sono stati riportati assenza di crisi, riduzione dei farmaci, interruzione dell’alimentazione nasogastrica e nuovi traguardi neuro‑sviluppamentali.
 
 ## Studio e risultati
 
-Gli autori descrivono una bambina con diagnosi di encefalopatia da glicina autosomica recessiva (iperglicinemia non chetogenica) e deficit di biotinidasi, confermata mediante sequenziamento dell’intero esoma e test enzimatico. Il quadro clinico era caratterizzato da crisi focali di esordio neonatale resistenti a cinque farmaci antiepilettici. A 18 mesi è stata avviata una dieta chetogenica classica con rapporto grassi:proteine+carboidrati di 3:1, in terapia intensiva pediatrica sotto supervisione multidisciplinare. Dopo due settimane si è osservato un miglioramento clinico marcato. Nell’anno successivo le crisi sono state controllate, tre farmaci antiepilettici sono stati sospesi, l’alimentazione nasogastrica è stata interrotta e la bambina ha raggiunto traguardi neuro‑sviluppativi significativi.
+Gli autori descrivono un caso clinico di una bambina che ha presentato crisi focali neonatali e encefalopatia progressiva. Sequenziamento dell’intero esoma e test enzimatici hanno identificato una encefalopatia da glicina autosomica recessiva (iperglicinemia non chetogenica) associata a deficit di biotinidasi. Dopo il fallimento di cinque farmaci anti‑crisi, è stata avviata una dieta chetogenica classica con rapporto 3:1 grassi su carboidrati + proteine, in terapia intensiva pediatrica sotto supervisione multidisciplinare a 18 mesi di età. Un miglioramento marcato è stato osservato entro due settimane. Nell’anno successivo il paziente è rimasto senza crisi, tre farmaci anti‑crisi sono stati sospesi, l’alimentazione nasogastrica è stata interrotta e la bambina ha raggiunto traguardi neuro‑sviluppamentali significativi.
 
 ## Interpretazione clinica
 
-In questo caso la dieta chetogenica è coincisa con una rapida riduzione delle crisi e con la successiva sospensione di farmaci, suggerendo che la chetosi possa aver attenuato gli effetti neurotossici dell’accumulo di glicina e la disfunzione metabolica dovuta al deficit di biotinidasi. I progressi nello sviluppo indicano che il controllo delle crisi, associato a una maggiore stabilità metabolica, può tradursi in miglioramenti funzionali anche in epilessie metaboliche severe e resistenti ai farmaci. Tuttavia, trattandosi di un’osservazione su un singolo paziente, non è possibile affermare una relazione causale; il miglioramento potrebbe anche riflettere l’evoluzione naturale della malattia, cure di supporto concomitanti o altri fattori non misurati.
+In questo caso, l’introduzione della dieta chetogenica è coincisa con una rapida riduzione delle crisi e un controllo a lungo termine, consentendo la riduzione della terapia farmacologica e l’interruzione dell’alimentazione per sondino. La correlazione temporale suggerisce che la chetosi possa aver attenuato gli effetti neurotossici dell’accumulo di glicina e la disfunzione metabolica dovuta al deficit di biotinidasi, entrambi noti per favorire l’epilessia. Sebbene il rapporto non dimostri causalità, il decorso clinico osservato supporta l’ipotesi che la dieta chetogenica possa fungere da terapia metabolica unificata quando più errori congeniti del metabolismo contribuiscono a epilessia refrattaria.
 
 ## Limiti e questioni aperte
 
-La prova proviene da un singolo caso senza gruppo di controllo, limitando la generalizzabilità a altri pazienti con disturbi metabolici combinati. Mancano dati sulla aderenza alla dieta, sui livelli sierici di chetoni e sulla frequenza quantitativa delle crisi, impedendo una valutazione della relazione dose‑risposta. Non è chiaro se la dieta chetogenica sarebbe altrettanto efficace in pazienti con solo uno dei due disturbi, né come il timing di inizio terapia influisca sugli esiti. Sono necessari studi prospettici o registri che raccolgano dati sistematici sull’uso della dieta chetogenica in epilessie metaboliche con comorbidità per definire efficacia, rapporti macronutrienti ottimali e sicurezza.
+La prova proviene da un unico caso, limitando la capacità di generalizzare a altre forme di epilessia metabolica combinata. Non è stato disponibile un gruppo di controllo o un comparatore, e non si può escludere un miglioramento spontaneo o l’influenza di altre terapie concomitanti. Non sono stati riportati parametri metabolici dettagliati (ad es. glicina plasmatica, livelli di chetoni), impedendo una conferma meccanistica. Sono necessari studi prospettici o serie di casi con monitoraggio metabolico sistematico per valutare se la dieta chetogenica apporta benefici costanti a pazienti con iperglicinemia non chetogenica e deficit di biotinidasi, e per definire tempi, rapporto macronutrizionale e protocolli di sicurezza ottimali.
 
 ### Fonte
 
-Elbarky A, El Amrousy D, Mahmoud S, Lotfy A, Aboeisa M, Elballat KE, et al. Precision diagnosis guides ketogenic diet therapy in inherited metabolic epilepsies: Concurrent non-ketotic hyperglycinemia and biotinidase deficiency. Eur J Clin Nutr. 2026. doi: 10.1038/s41430-026-01821-3. PMID: 42760380.
+PMID: 42760380; DOI: 10.1038/s41430-026-01821-3.
+

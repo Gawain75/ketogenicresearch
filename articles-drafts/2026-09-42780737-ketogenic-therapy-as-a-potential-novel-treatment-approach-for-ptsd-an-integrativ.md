@@ -16,6 +16,7 @@ scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
 verified_at: "2026-09-26T13:20:41.884589+00:00"
+source_identity_checked_at: "2026-09-26T19:36:21.315175+00:00"
 ---
 
 # Ketogenic therapy and PTSD: an integrative review of mechanistic evidence and early findings

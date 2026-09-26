@@ -1,0 +1,181 @@
+name: Regenerate article by PMID
+
+on:
+  workflow_dispatch:
+    inputs:
+      pmid:
+        description: "PMID dell'articolo da rigenerare"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: generate-research-article
+  cancel-in-progress: false
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out current main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install article dependencies
+        run: python -m pip install pypdf
+
+      - name: Validate PMID
+        env:
+          TARGET_PMID: ${{ inputs.pmid }}
+        run: |
+          python - <<'PY'
+          import os, re
+          pmid = os.environ["TARGET_PMID"].strip()
+          if not re.fullmatch(r"\d{6,9}", pmid):
+              raise SystemExit(f"Invalid PMID: {pmid!r}")
+          print(f"Regeneration target: PMID {pmid}")
+          PY
+
+      - name: Remove only the previous version of this article
+        env:
+          TARGET_PMID: ${{ inputs.pmid }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          pmid = os.environ["TARGET_PMID"].strip()
+          drafts = Path("articles-drafts")
+          public = Path("articles")
+          index_path = drafts / "generated-index.json"
+
+          removed_drafts = []
+          removed_public = []
+
+          if index_path.exists():
+              data = json.loads(index_path.read_text(encoding="utf-8"))
+
+              data["generated_pmids"] = [
+                  str(x) for x in data.get("generated_pmids", [])
+                  if str(x) != pmid
+              ]
+              data["source_unavailable_pmids"] = [
+                  str(x) for x in data.get("source_unavailable_pmids", [])
+                  if str(x) != pmid
+              ]
+
+              # Old failures for the same record must not describe the new run.
+              data["failures"] = [
+                  item for item in data.get("failures", [])
+                  if str(item.get("pmid", "")) != pmid
+              ]
+
+              index_path.write_text(
+                  json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+                  encoding="utf-8",
+              )
+
+          for md in drafts.glob(f"*-{pmid}-*.md"):
+              html = public / f"{md.stem}.html"
+              if html.exists():
+                  html.unlink()
+                  removed_public.append(str(html))
+              md.unlink()
+              removed_drafts.append(str(md))
+
+          print("Removed draft(s):", removed_drafts or "none")
+          print("Removed public page(s):", removed_public or "none")
+          PY
+
+      - name: Regenerate exactly this PMID
+        env:
+          TARGET_PMID: ${{ inputs.pmid }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GROQ_MODEL: openai/gpt-oss-120b
+          NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
+          NCBI_EMAIL: info@ketogenicresearch.org
+        run: python scripts/generate_articles.py
+
+      - name: Verify regenerated draft exists
+        env:
+          TARGET_PMID: ${{ inputs.pmid }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+
+          pmid = os.environ["TARGET_PMID"].strip()
+          matches = list(Path("articles-drafts").glob(f"*-{pmid}-*.md"))
+          if len(matches) != 1:
+              raise SystemExit(
+                  f"Expected exactly one regenerated draft for PMID {pmid}; "
+                  f"found {len(matches)}."
+              )
+
+          text = matches[0].read_text(encoding="utf-8")
+          if "verification: \"PASS\"" not in text and "verification: PASS" not in text:
+              raise SystemExit("Regenerated article is not marked PASS.")
+
+          print("Regenerated verified draft:", matches[0])
+          PY
+
+      - name: Render public article pages
+        run: python scripts/render_articles.py
+
+      - name: Verify public page exists
+        env:
+          TARGET_PMID: ${{ inputs.pmid }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+
+          pmid = os.environ["TARGET_PMID"].strip()
+          drafts = list(Path("articles-drafts").glob(f"*-{pmid}-*.md"))
+          page = Path("articles") / f"{drafts[0].stem}.html"
+
+          if not page.exists():
+              raise SystemExit(f"Rendered page missing: {page}")
+
+          print("Rendered page:", page)
+          PY
+
+      - name: Commit regenerated article
+        env:
+          TARGET_PMID: ${{ inputs.pmid }}
+        run: |
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add articles-drafts/ articles/ articles.html sitemap.xml
+
+          if git diff --cached --quiet; then
+            echo "No regenerated article changes."
+            exit 1
+          fi
+
+          git commit -m "Regenerate research article PMID ${TARGET_PMID}"
+          git pull --rebase origin main
+          git push origin main
+
+      - name: Summary
+        env:
+          TARGET_PMID: ${{ inputs.pmid }}
+        run: |
+          echo "### Article regenerated" >> "$GITHUB_STEP_SUMMARY"
+          echo "- PMID: ${TARGET_PMID}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Generator: v4.5 / full-text-first" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Previous draft removed before regeneration" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Public article index and sitemap re-rendered" >> "$GITHUB_STEP_SUMMARY"

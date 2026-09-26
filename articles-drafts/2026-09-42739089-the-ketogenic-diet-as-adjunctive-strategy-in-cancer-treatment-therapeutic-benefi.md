@@ -16,6 +16,7 @@ scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
 verified_at: "2026-09-25T04:58:00.324649+00:00"
+source_identity_checked_at: "2026-09-26T19:36:21.315175+00:00"
 ---
 
 # Ketogenic Diet as an Adjunct in Breast Cancer Therapy: Evidence Summary and Open Questions

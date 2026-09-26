@@ -16,6 +16,7 @@ scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
 verified_at: "2026-09-25T07:07:24.280675+00:00"
+source_identity_checked_at: "2026-09-26T19:36:21.315175+00:00"
 ---
 
 # Ketogenic diet in children with drug‑resistant epilepsy: clinical outcomes, health‑care utilization and direct medical costs

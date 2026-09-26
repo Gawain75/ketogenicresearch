@@ -1,0 +1,83 @@
+name: Audit all published article sources
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ketogenicresearch-content-write
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Audit all generated article sources against PubMed
+        env:
+          NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
+          NCBI_EMAIL: info@ketogenicresearch.org
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/audit_article_sources.py | tee /tmp/article-audit.log
+
+      - name: Rebuild public article pages
+        run: python scripts/render_articles.py
+
+      - name: Show audit result
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "===== ARTICLE SOURCE AUDIT ====="
+          cat /tmp/article-audit.log
+          echo
+          echo "Quarantined drafts:"
+          find articles-quarantine -maxdepth 1 -type f -name '*.md' -printf '%f\n' 2>/dev/null || true
+
+      - name: Commit audit results
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Never commit workflow changes from inside Actions.
+          git restore --source=HEAD --staged --worktree .github/workflows || true
+          git clean -fd .github/workflows || true
+
+          git add -A
+          git restore --staged .github/workflows || true
+
+          if git diff --cached --quiet; then
+            echo "Audit complete: no repository changes required."
+          else
+            git commit -m "Audit published article source identity"
+            git pull --rebase origin main
+            git push origin main
+          fi
+
+      - name: Final summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -q "QUARANTINED PMID" /tmp/article-audit.log; then
+            echo "One or more articles were quarantined."
+            grep "QUARANTINED PMID" /tmp/article-audit.log
+          else
+            echo "All published article drafts passed PubMed source-identity audit."
+          fi

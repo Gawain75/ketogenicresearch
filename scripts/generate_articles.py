@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Ketogenic Research Hub — AI article pilot V4.1
+Ketogenic Research — AI article pilot V4.1
 
 V3 editorial-quality pilot:
 - processes ONE article per run
@@ -26,7 +26,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from pubmed_citation import extract_citation_metadata, format_citation
 ROOT = Path(__file__).resolve().parents[1]
 LATEST = ROOT / "latest-publications.json"
 OUT = ROOT / "articles-drafts"
@@ -36,7 +35,6 @@ GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "").strip()
 GROQ_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-120b").strip()
 NCBI_EMAIL = os.environ.get("NCBI_EMAIL", "info@ketogenicresearch.org").strip()
 NCBI_API_KEY = os.environ.get("NCBI_API_KEY", "").strip()
-TARGET_PMID = os.environ.get("TARGET_PMID", "").strip()
 
 # Publish at most one VERIFIED article per run; the fallback loop may scan multiple records.
 MAX_ARTICLES = 1
@@ -51,7 +49,7 @@ Do not invent data.
 Use neutral scientific language.
 Distinguish findings from interpretation.
 Do not make unsupported clinical recommendations.
-Do not expose internal source-acquisition details (abstract/full text/retrieval method) in the reader-facing article.
+For abstract-only records, explicitly disclose that the interpretation is based on the PubMed abstract.
 """
 
 def http_request(
@@ -132,7 +130,6 @@ def extract_pubmed_source(root: ET.Element) -> dict[str, Any]:
         "pmcid": ids.get("pmc", ""),
         "doi_from_pubmed": norm_doi(ids.get("doi", "")),
         "mesh": mesh[:30],
-        "citation_meta": extract_citation_metadata(record),
     }
 
 def verify_source_identity(rec: dict[str, Any], extra: dict[str, Any]) -> dict[str, Any]:
@@ -203,69 +200,21 @@ def pmc_full_text(pmcid: str) -> str:
     except Exception:
         return ""
 
-    def section_title(sec: ET.Element) -> str:
-        title = sec.find("./title")
-        return text_content(title).strip() if title is not None else ""
+    chunks: list[str] = []
+    for tag in ("abstract", "sec"):
+        for node in root.findall(f".//{tag}"):
+            value = text_content(node)
+            if value and len(value) > 80:
+                chunks.append(value)
 
-    def classify_section(title: str) -> int:
-        t = title.lower()
-        if any(k in t for k in ("limitation", "strengths and limitations")):
-            return 0
-        if any(k in t for k in ("discussion", "interpretation")):
-            return 1
-        if any(k in t for k in ("result", "finding")):
-            return 2
-        if any(k in t for k in ("method", "materials", "experimental", "procedure")):
-            return 3
-        if any(k in t for k in ("conclusion", "summary")):
-            return 4
-        if any(k in t for k in ("introduction", "background")):
-            return 5
-        return 6
-
-    sections: list[tuple[int, str, str]] = []
-    seen: set[str] = set()
-
-    for sec in root.findall(".//body//sec"):
-        title = section_title(sec) or "Untitled section"
-        value = text_content(sec).strip()
-        if len(value) < 120:
-            continue
-
-        key = re.sub(r"\s+", " ", value).strip().lower()
-        if key in seen:
-            continue
-        seen.add(key)
-
-        sections.append((classify_section(title), title, value[:6500]))
-
-    sections.sort(key=lambda item: item[0])
-
-    selected: list[str] = []
-    total = 0
-    max_chars = 30000
-
-    for _, title, value in sections:
-        block = f"### {title}\n{value}".strip()
-        if total + len(block) > max_chars:
-            remaining = max_chars - total
-            if remaining >= 1200:
-                block = block[:remaining]
-            else:
-                continue
-
-        selected.append(block)
-        total += len(block) + 2
-        if total >= max_chars:
-            break
-
-    return "\n\n".join(selected).strip()
+    # Keep prompt size moderate for free-tier use.
+    return "\n\n".join(dict.fromkeys(chunks))[:10000]
 
 def groq_json(
     messages: list[dict[str, str]],
     max_tokens: int,
     temperature: float,
-    attempts: int = 3
+    attempts: int = 5
 ) -> dict[str, Any]:
     if not GROQ_API_KEY:
         raise RuntimeError("GROQ_API_KEY is missing.")
@@ -292,7 +241,7 @@ def groq_json(
                     "Content-Type": "application/json",
                     "User-Agent": "KetogenicResearch/AI-Articles-Pilot-V2",
                 },
-                timeout=60,
+                timeout=120,
             )
 
             obj = json.loads(raw)
@@ -322,11 +271,9 @@ def groq_json(
 
             retry_after = exc.headers.get("Retry-After")
             if retry_after and retry_after.isdigit():
-                # Never allow a single Groq response to park the GitHub job
-                # for several minutes. A later scheduled run can retry cleanly.
-                wait_seconds = min(60, max(15, int(retry_after)))
+                wait_seconds = max(30, int(retry_after))
             else:
-                wait_seconds = min(60, 20 * attempt)
+                wait_seconds = 45 * attempt
 
             print(
                 f"Groq rate limit reached (429). "
@@ -401,177 +348,6 @@ def unpaywall_locations(doi: str) -> list[dict[str, Any]]:
     return locations
 
 
-
-def openalex_locations(doi: str) -> list[dict[str, Any]]:
-    """Return public/OA locations reported by OpenAlex for a DOI.
-
-    This is a fallback after Unpaywall. It does not bypass authentication:
-    only URLs that OpenAlex exposes as public locations are tried.
-    """
-    doi = norm_doi(doi)
-    if not doi:
-        return []
-
-    url = (
-        "https://api.openalex.org/works/"
-        + urllib.parse.quote("https://doi.org/" + doi, safe="")
-    )
-    if NCBI_EMAIL:
-        url += "?mailto=" + urllib.parse.quote(NCBI_EMAIL)
-
-    try:
-        raw = http_request(
-            url,
-            headers={"User-Agent": "KetogenicResearch/FullTextDiscovery"},
-            timeout=45,
-        )
-        data = json.loads(raw)
-    except Exception as exc:
-        print(f"OpenAlex lookup unavailable for DOI {doi}: {exc}")
-        return []
-
-    locations: list[dict[str, Any]] = []
-    seen: set[tuple[str, str]] = set()
-
-    candidates = []
-    for key in ("best_oa_location", "primary_location"):
-        value = data.get(key)
-        if isinstance(value, dict):
-            candidates.append(value)
-    for value in data.get("locations") or []:
-        if isinstance(value, dict):
-            candidates.append(value)
-
-    for item in candidates:
-        pdf_url = str(item.get("pdf_url") or "").strip()
-        landing_url = str(item.get("landing_page_url") or "").strip()
-        key = (pdf_url, landing_url)
-        if not any(key) or key in seen:
-            continue
-        seen.add(key)
-        locations.append({
-            "url_for_pdf": pdf_url,
-            "url_for_landing_page": landing_url,
-            "url": landing_url or pdf_url,
-            "version": item.get("version") or "publishedVersion",
-            "host_type": (
-                (item.get("source") or {}).get("type")
-                if isinstance(item.get("source"), dict)
-                else "publisher"
-            ) or "publisher",
-        })
-
-    return locations
-
-
-def publisher_candidate_urls(doi: str) -> list[tuple[str, str]]:
-    """Known legal publisher URL patterns worth trying directly.
-
-    These are ordinary public publisher URLs, not paywall bypasses.
-    """
-    doi = norm_doi(doi)
-    if not doi:
-        return []
-
-    encoded = urllib.parse.quote(doi, safe="/().;:-_")
-    candidates: list[tuple[str, str]] = []
-
-    # Springer Nature / SpringerLink.
-    if doi.startswith("10.1007/"):
-        candidates.extend([
-            (
-                "https://link.springer.com/content/pdf/" + encoded + ".pdf",
-                "Springer publisher PDF",
-            ),
-            (
-                "https://link.springer.com/article/" + encoded,
-                "Springer publisher full text",
-            ),
-        ])
-
-    return candidates
-
-
-def fetch_public_full_text_url(
-    url: str,
-    *,
-    min_pdf_chars: int = 3000,
-    min_html_chars: int = 7000,
-) -> str:
-    """Fetch usable public article text from an ordinary publisher/OA URL."""
-    try:
-        raw = http_request(
-            url,
-            headers={
-                "User-Agent": "Mozilla/5.0 KetogenicResearch/FullTextDiscovery",
-                "Accept": "application/pdf,text/html,application/xhtml+xml,*/*;q=0.5",
-            },
-            timeout=75,
-        )
-    except Exception as exc:
-        print(f"Public full-text retrieval failed for {url}: {exc}")
-        return ""
-
-    if raw[:4] == b"%PDF":
-        value = extract_pdf_text(raw)
-        return value if len(value) >= min_pdf_chars else ""
-
-    decoded = raw.decode("utf-8", errors="replace")
-    parser = _ReadableHTML()
-    try:
-        parser.feed(decoded)
-    except Exception:
-        pass
-    value = parser.text()
-    lower = value.lower()
-    section_hits = sum(
-        marker in lower
-        for marker in (
-            "introduction",
-            "methods",
-            "materials and methods",
-            "results",
-            "discussion",
-            "conclusion",
-            "conclusions",
-            "references",
-        )
-    )
-    if len(value) >= min_html_chars and section_hits >= 2:
-        return value
-    return ""
-
-
-def draft_source_leak(draft: dict[str, Any]) -> str:
-    """Return a reader-facing source-acquisition phrase if one leaked into the draft."""
-    public_text = json.dumps(draft, ensure_ascii=False).lower()
-    patterns = (
-        "pubmed abstract",
-        "based on the abstract",
-        "the abstract does not",
-        "the abstract did not",
-        "the abstract reports",
-        "the abstract indicates",
-        "the abstract shows",
-        "dall'abstract",
-        "dall’abstract",
-        "l'abstract non",
-        "l’abstract non",
-        "secondo l'abstract",
-        "secondo l’abstract",
-        "testo completo non era disponibile",
-        "full text was not available",
-        "source used was an abstract",
-        "source material used",
-        "unpaywall",
-        "pmc full text",
-        "publisher full text",
-    )
-    for pattern in patterns:
-        if pattern in public_text:
-            return pattern
-    return ""
-
 def extract_pdf_text(raw: bytes) -> str:
     try:
         from pypdf import PdfReader
@@ -641,52 +417,72 @@ def discover_full_text(
     rec: dict[str, Any],
     extra: dict[str, Any],
 ) -> tuple[str, str, str]:
-    # 1. Prefer structured PMC full text when a PMCID exists.
+    # 1. Prefer structured PMC/Europe-PMC-compatible full text when a PMCID exists.
     pmcid = (extra.get("pmcid") or "").strip()
     if pmcid:
         text = pmc_full_text(pmcid)
         if len(text) >= 3000:
-            return text[:30000], "PMC full text", f"https://pmc.ncbi.nlm.nih.gov/articles/{pmcid}/"
+            return text[:18000], "PMC full text", f"https://pmc.ncbi.nlm.nih.gov/articles/{pmcid}/"
 
-    doi = norm_doi(rec.get("doi") or extra.get("doi_from_pubmed") or "")
-
-    # 2. Legal OA copies registered by Unpaywall.
+    # 2. Look for a legal OA copy registered by Unpaywall.
+    doi = (rec.get("doi") or extra.get("doi_from_pubmed") or "").strip()
     for location in unpaywall_locations(doi):
-        value, source_url = fetch_oa_location_text(location)
-        if len(value) >= 3000:
+        text, source_url = fetch_oa_location_text(location)
+        if len(text) >= 3000:
             version = location.get("version") or "open-access version"
             host = location.get("host_type") or "open-access host"
-            return value[:30000], f"Unpaywall OA ({host}, {version})", source_url
+            return text[:18000], f"Unpaywall OA ({host}, {version})", source_url
 
-    # 3. Independent OA/public-location fallback from OpenAlex.
-    for location in openalex_locations(doi):
-        value, source_url = fetch_oa_location_text(location)
-        if len(value) >= 3000:
-            version = location.get("version") or "publishedVersion"
-            host = location.get("host_type") or "publisher"
-            return value[:30000], f"OpenAlex OA ({host}, {version})", source_url
-
-    # 4. Known public publisher URL patterns.
-    for publisher_url, source_label in publisher_candidate_urls(doi):
-        value = fetch_public_full_text_url(publisher_url)
-        if len(value) >= 3000:
-            return value[:30000], source_label, publisher_url
-
-    # 5. DOI landing page itself. This never bypasses a paywall; it only uses
-    # content returned publicly by the publisher.
+    # 3. Try the DOI landing page itself. This does not bypass paywalls:
+    #    it only uses content that the publisher returns without authentication.
+    doi = (rec.get("doi") or extra.get("doi_from_pubmed") or "").strip()
     if doi:
         doi_url = "https://doi.org/" + urllib.parse.quote(doi, safe="/().;:-_")
-        value = fetch_public_full_text_url(
-            doi_url,
-            min_pdf_chars=6000,
-            min_html_chars=9000,
-        )
-        if len(value) >= 6000:
-            return value[:30000], "Publisher full text via DOI", doi_url
+        try:
+            raw = http_request(
+                doi_url,
+                headers={
+                    "User-Agent": "Mozilla/5.0 KetogenicResearch/FullTextDiscovery",
+                    "Accept": "text/html,application/xhtml+xml,application/pdf,*/*;q=0.5",
+                },
+                timeout=75,
+            )
 
-    # 6. No usable full text was retrieved. This does NOT assert that no full
-    # text exists online; it only records what this run could actually retrieve.
+            if raw[:4] == b"%PDF":
+                value = extract_pdf_text(raw)
+                if len(value) >= 6000:
+                    return value[:18000], "Publisher full text via DOI", doi_url
+            else:
+                decoded = raw.decode("utf-8", errors="replace")
+                parser = _ReadableHTML()
+                parser.feed(decoded)
+                value = parser.text()
+
+                # Be conservative: require substantial article-like text and
+                # multiple scientific section signals before calling it full text.
+                lower = value.lower()
+                section_hits = sum(
+                    marker in lower
+                    for marker in (
+                        "introduction",
+                        "methods",
+                        "materials and methods",
+                        "results",
+                        "discussion",
+                        "conclusion",
+                        "references",
+                    )
+                )
+                if len(value) >= 9000 and section_hits >= 3:
+                    return value[:18000], "Publisher full text via DOI", doi_url
+
+        except Exception as exc:
+            print(f"Publisher DOI full-text retrieval failed: {exc}")
+
+    # 4. No usable full text was retrieved. This says nothing about whether
+    #    a full text exists elsewhere; the note simply uses the PubMed abstract.
     return "", "PubMed abstract", ""
+
 
 def source_packet(
     rec: dict[str, Any],
@@ -719,21 +515,13 @@ PUBMED ABSTRACT
 
 FULL-TEXT MATERIAL USED FOR THIS NOTE
 {full_text or "[No full-text material was supplied; use the PubMed abstract only.]"}
-
-SOURCE-HIERARCHY RULE
-{("A usable full text is present. Treat the full text as the primary scientific source. "
-  "Use the PubMed abstract only as a concise cross-check; do not describe evidence gaps "
-  "in terms of what the abstract does or does not report.")
- if full_text else
- ("No usable full text was retrieved. The PubMed abstract is the only scientific content "
-  "available in this packet.")}
 """.strip()
 
 def writer_prompt(packet: str, has_full_text: bool) -> str:
     article_type_en = "Research Analysis" if has_full_text else "Research Note"
     article_type_it = "Analisi di ricerca" if has_full_text else "Nota di ricerca"
 
-    return f"""You are the scientific editorial writer for Ketogenic Research Hub.
+    return f"""You are the scientific editorial writer for Ketogenic Research.
 
 Follow this policy exactly:
 --- POLICY ---
@@ -779,15 +567,11 @@ EDITORIAL RULES FOR V4.1
   "findings from a randomized crossover trial", or equivalent neutral wording.
 - For randomized trials, do not turn one experiment into a general clinical claim.
 
-2. SOURCE-HIERARCHY AND ABSTRACT CAUTION
+2. ABSTRACT-ONLY CAUTION
 - Never state in the article body whether the note was based on an abstract, full text, PMC, publisher text, or any retrieval source.
 - Source-acquisition details are internal metadata only and must not appear in reader-facing prose.
 - Never mention AI, automation, workflow, model, generation process, or any technical production method in the published article.
-- Describe only the scientific limitations of the study, not how the article was produced.
-- When usable full text is supplied, treat it as the PRIMARY source and the PubMed abstract only as a cross-check.
-- When usable full text is supplied, never write phrases such as "the abstract does not indicate", "the abstract does not report", "the abstract does not clarify", "dall'abstract non emerge", "l'abstract non indica", "l'abstract non riporta", or equivalent wording.
-- If an issue is genuinely unresolved after checking the supplied full text, phrase it as a STUDY limitation: e.g. "the study does not establish...", "the study does not clarify...", "it remains uncertain whether...", or the natural Italian equivalent.
-- Before stating that the study did not assess, report, clarify, or establish something, check the supplied Methods, Results, Discussion, Limitations and Conclusions material first.
+- Describe only the source limitations, not how the article was produced.
 
 3. STRUCTURE
 For Research Notes, use exactly three sections.
@@ -965,8 +749,6 @@ EDITORIAL CHECKS
 - Do not repeat the same concept unnecessarily across sections.
 - The reader-facing article must not mention whether the source used was an abstract, full text, PMC text, publisher text, Unpaywall, or any retrieval workflow.
 - Source-acquisition details are internal metadata only.
-- If the SOURCE PACKET contains usable full text, FAIL any draft that frames a scientific limitation as "the abstract does not indicate/report/clarify/show" or any equivalent English/Italian wording.
-- When full text is available, limitations must be phrased as limitations or unresolved questions of the STUDY itself, after checking the supplied Methods, Results, Discussion, Limitations and Conclusions material.
 
 STRUCTURE CHECKS FOR RESEARCH NOTES
 For Research Notes, the English section headings must be exactly:
@@ -1023,9 +805,6 @@ def markdown(
     doi = rec.get("doi") or extra.get("doi_from_pubmed", "")
     pmcid = extra.get("pmcid", "")
 
-    source_citation = format_citation(extra.get("citation_meta") or {})
-    if not source_citation:
-        raise RuntimeError(f"Unable to build authoritative PubMed citation for PMID {pmid}")
     return f"""---
 pmid: {json.dumps(pmid)}
 doi: {json.dumps(doi)}
@@ -1034,12 +813,12 @@ date: {json.dumps(rec.get("date",""))}
 journal: {json.dumps(rec.get("journal",""), ensure_ascii=False)}
 article_type: {json.dumps(draft.get("article_type",""))}
 article_type_it: {json.dumps(draft.get("article_type_it",""))}
-generator_version: "4.6"
+generator_version: "4.2"
 source_identity: "PASS"
 source_identity_basis: "PubMed PMID/title/DOI/PMCID"
 full_text_source: {json.dumps(full_text_source)}
 full_text_url: {json.dumps(full_text_url)}
-editorial_byline: "Ketogenic Research Hub Editorial"
+editorial_byline: "Ketogenic Research Editorial"
 scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
@@ -1050,7 +829,7 @@ verified_at: {json.dumps(verified_at)}
 
 **{draft.get("article_type","Research Note")}**
 
-**Ketogenic Research Hub Editorial**  
+**Ketogenic Research Editorial**  
 Scientific oversight: **Marco Medeot, Scientific Director**
 
 {draft.get("summary_en","")}
@@ -1059,7 +838,7 @@ Scientific oversight: **Marco Medeot, Scientific Director**
 
 ### Source
 
-{source_citation}
+{draft.get("source_note_en","")}
 
 ---
 
@@ -1067,7 +846,7 @@ Scientific oversight: **Marco Medeot, Scientific Director**
 
 **{draft.get("article_type_it","Nota di ricerca")}**
 
-**Ketogenic Research Hub Editorial**  
+**Ketogenic Research Editorial**  
 Supervisione scientifica: **Marco Medeot, Direttore Scientifico**
 
 {draft.get("summary_it","")}
@@ -1076,7 +855,7 @@ Supervisione scientifica: **Marco Medeot, Direttore Scientifico**
 
 ### Fonte
 
-{source_citation}
+{draft.get("source_note_it","")}
 
 """
 
@@ -1110,57 +889,22 @@ def main() -> None:
     except ValueError:
         max_candidate_scan = 12
 
-    source_unavailable = set(
-        str(x) for x in idx.get("source_unavailable_pmids", [])
-    )
-
-    publications = latest.get("publications", [])
-
-    if TARGET_PMID:
-        if not re.fullmatch(r"\d{6,9}", TARGET_PMID):
-            raise SystemExit("TARGET_PMID must contain a valid numeric PMID.")
-
-        target = next(
-            (
-                p for p in publications
-                if str(p.get("pmid") or "") == TARGET_PMID
-            ),
-            None,
-        )
-
-        if target is None:
-            raise SystemExit(
-                f"TARGET_PMID {TARGET_PMID} is not present in latest-publications.json."
-            )
-
-        # Explicit regeneration takes precedence over the normal generated/
-        # unavailable guards. Only this PMID is eligible in this run.
-        done.discard(TARGET_PMID)
-        source_unavailable.discard(TARGET_PMID)
-        candidates = [target]
-        print(f"Forced regeneration target: PMID {TARGET_PMID}")
-
-    else:
-        eligible = [
-            p for p in publications
-            if p.get("pmid")
-            and str(p["pmid"]) not in done
-            and str(p["pmid"]) not in source_unavailable
-            and p.get("status") in {"new", "indexed"}
-        ]
-
-        # Prefer genuinely new records. If none of them can produce a
-        # publishable article, fall back to still-unpublished indexed records.
-        new_candidates = [p for p in eligible if p.get("status") == "new"]
-        indexed_candidates = [p for p in eligible if p.get("status") == "indexed"]
-        candidates = (new_candidates + indexed_candidates)[:max_candidate_scan]
+    candidates = [
+        p for p in latest.get("publications", [])
+        if p.get("pmid")
+        and str(p["pmid"]) not in done
+        and p.get("status") == "new"
+    ][:max_candidate_scan]
 
     if not candidates:
-        print("No eligible unpublished record available.")
+        print("No new eligible record for the pilot.")
         return
 
     published = 0
     attempted = 0
+    source_unavailable = set(
+        str(x) for x in idx.get("source_unavailable_pmids", [])
+    )
 
     for rec in candidates:
         if published >= MAX_ARTICLES:
@@ -1169,8 +913,7 @@ def main() -> None:
         attempted += 1
         pmid = str(rec["pmid"])
         print(
-            f"Candidate {attempted}/{len(candidates)} "
-            f"[{rec.get('status', 'unknown')}] — PMID {pmid}: "
+            f"Candidate {attempted}/{len(candidates)} — PMID {pmid}: "
             f"{rec.get('title', '')[:100]}"
         )
 
@@ -1223,25 +966,8 @@ def main() -> None:
                 temperature=0.1,
             )
 
-            print("Waiting briefly before verification...")
-            time.sleep(15)
-
-            leaked_source_phrase = draft_source_leak(draft)
-            if leaked_source_phrase:
-                idx.setdefault("failures", []).append({
-                    "pmid": pmid,
-                    "at": datetime.now(timezone.utc).isoformat(),
-                    "stage": "reader_facing_source_guard",
-                    "error": (
-                        "Draft exposed internal source-acquisition wording: "
-                        + leaked_source_phrase
-                    ),
-                })
-                print(
-                    f"Source-acquisition wording blocked for PMID {pmid}: "
-                    f"{leaked_source_phrase}. Trying next candidate."
-                )
-                continue
+            print("Waiting before verification...")
+            time.sleep(75)
 
             print("Verifying draft against source...")
             check = groq_json(

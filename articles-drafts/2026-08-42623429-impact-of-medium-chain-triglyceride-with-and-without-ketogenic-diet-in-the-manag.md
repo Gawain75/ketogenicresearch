@@ -16,6 +16,7 @@ scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
 verified_at: "2026-09-26T03:31:40.119104+00:00"
+source_identity_checked_at: "2026-09-26T19:36:21.315175+00:00"
 ---
 
 # Low‑certainty evidence on medium‑chain triglyceride ketogenic diet versus classical ketogenic diet in drug‑resistant epilepsy

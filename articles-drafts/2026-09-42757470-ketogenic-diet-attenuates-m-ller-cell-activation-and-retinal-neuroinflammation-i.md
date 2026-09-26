@@ -3,7 +3,7 @@ source_citation_checked_at: "2026-09-21T12:17:16.439939+00:00"
 source_citation_basis: "PubMed structured metadata"
 pmid: "42757470"
 doi: "10.3892/ijmm.2026.5992"
-pmcid: ""
+pmcid: "PMC13600331"
 date: "2026-09-18"
 journal: "International journal of molecular medicine"
 article_type: "Research Analysis"
@@ -15,7 +15,7 @@ scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
 verified_at: "2026-09-20T03:27:43.015102+00:00"
 source_identity: "PASS"
-source_identity_checked_at: "2026-09-21T12:17:17.478159+00:00"
+source_identity_checked_at: "2026-09-26T19:36:21.315175+00:00"
 ---
 
 # Ketogenic diet linked to reduced Müller cell activation and retinal neuroinflammation in experimental autoimmune glaucoma

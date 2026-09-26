@@ -1,0 +1,36 @@
+name: Site Health Check
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15 6 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run health checks
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
+        run: python scripts/site_health_check.py
+
+      - name: Upload health report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: health-report
+          path: health-report.txt
+          retention-days: 14

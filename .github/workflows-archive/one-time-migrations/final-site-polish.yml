@@ -1,0 +1,64 @@
+name: Final site polish
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ketogenicresearch-content-write
+  cancel-in-progress: false
+
+jobs:
+  polish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install beautifulsoup4
+
+      - name: Apply remaining consistency and SEO fixes
+        run: python scripts/final_site_polish.py
+
+      - name: Verify JavaScript syntax
+        run: node --check script.js
+
+      - name: Commit final site polish
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git restore --source=HEAD --staged --worktree .github/workflows || true
+          git clean -fd .github/workflows || true
+
+          git add -A
+          git restore --staged .github/workflows || true
+
+          if git diff --cached --quiet; then
+            echo "No remaining changes required."
+          else
+            git commit -m "Polish article semantics and site consistency"
+            git pull --rebase origin main
+            git push origin main
+          fi
+
+      - name: Summary
+        run: |
+          echo "Final site polish completed."
+          echo "Article ordering, filters, counters, canonical URLs and sitemap were rechecked."
+          echo "Article pages now use one bilingual H1 and complete social preview metadata."

@@ -6,7 +6,6 @@ import json
 import os
 import re
 import time
-import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -22,13 +21,12 @@ API_KEY = os.getenv("NCBI_API_KEY", "")
 WINDOW_DAYS = int(os.getenv("WINDOW_DAYS", "90"))
 CURATION_WINDOW_DAYS = int(os.getenv("CURATION_WINDOW_DAYS", "365"))
 MAX_RECORDS = int(os.getenv("MAX_RECORDS", "100"))
-CURATION_MAX_RECORDS = int(os.getenv("CURATION_MAX_RECORDS", "2000"))
+CURATION_MAX_RECORDS = int(os.getenv("CURATION_MAX_RECORDS", "500"))
 
 BASE = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 
 QUERY = r'''(
-"Diet, Ketogenic"[MeSH Terms]
-OR "ketogenic diet"[Title/Abstract] OR "ketogenic diets"[Title/Abstract]
+"ketogenic diet"[Title/Abstract] OR "ketogenic diets"[Title/Abstract]
 OR "ketogenic therapy"[Title/Abstract] OR "ketogenic metabolic therapy"[Title/Abstract]
 OR "nutritional ketosis"[Title/Abstract] OR "very low calorie ketogenic diet"[Title/Abstract]
 OR "very-low-calorie ketogenic diet"[Title/Abstract] OR "very low energy ketogenic therapy"[Title/Abstract]
@@ -130,8 +128,7 @@ MONTHS = {
 }
 
 
-def api(name, params, attempts=7):
-    """Call NCBI E-utilities with retry/backoff for transient gateway/rate errors."""
+def api(name, params):
     params = {**params, "tool": "ketogenicresearch-literature-monitor", "email": EMAIL}
     if API_KEY:
         params["api_key"] = API_KEY
@@ -145,51 +142,21 @@ def api(name, params, attempts=7):
             data=encoded,
             method="POST",
             headers={
-                "User-Agent": f"ketogenicresearch/2.2 ({EMAIL})",
+                "User-Agent": f"ketogenicresearch/2.1 ({EMAIL})",
                 "Content-Type": "application/x-www-form-urlencoded",
             },
         )
     else:
         req = urllib.request.Request(
             f"{endpoint}?{encoded.decode('utf-8')}",
-            headers={"User-Agent": f"ketogenicresearch/2.2 ({EMAIL})"},
+            headers={"User-Agent": f"ketogenicresearch/2.1 ({EMAIL})"},
         )
 
-    transient_http = {429, 500, 502, 503, 504}
-    last_error = None
+    with urllib.request.urlopen(req, timeout=60) as response:
+        data = response.read()
 
-    for attempt in range(1, attempts + 1):
-        try:
-            with urllib.request.urlopen(req, timeout=60) as response:
-                data = response.read()
-            time.sleep(0.12 if API_KEY else 0.36)
-            return data
-        except urllib.error.HTTPError as exc:
-            last_error = exc
-            if exc.code not in transient_http or attempt >= attempts:
-                raise
-            retry_after = exc.headers.get("Retry-After") if exc.headers else None
-            try:
-                wait = float(retry_after) if retry_after else min(30.0, 2.0 ** attempt)
-            except (TypeError, ValueError):
-                wait = min(30.0, 2.0 ** attempt)
-            print(
-                f"NCBI transient HTTP {exc.code} on {name}; "
-                f"retry {attempt}/{attempts} in {wait:.1f}s"
-            )
-            time.sleep(wait)
-        except (urllib.error.URLError, TimeoutError) as exc:
-            last_error = exc
-            if attempt >= attempts:
-                raise
-            wait = min(30.0, 2.0 ** attempt)
-            print(
-                f"NCBI network error on {name}: {exc}; "
-                f"retry {attempt}/{attempts} in {wait:.1f}s"
-            )
-            time.sleep(wait)
-
-    raise RuntimeError(f"NCBI request failed after {attempts} attempts: {last_error}")
+    time.sleep(0.12 if API_KEY else 0.36)
+    return data
 
 
 def text(node):
@@ -978,72 +945,11 @@ def main():
         .isoformat()
     )
 
-    # Keep two dates with different meanings:
-    # - verified_at: last successful evidence check (every successful run)
-    # - content_updated_at: last time the visible Latest Evidence dataset changed
-    previous_latest = {}
-    if LATEST_OUT.exists():
-        try:
-            previous_latest = json.loads(
-                LATEST_OUT.read_text(
-                    encoding="utf-8"
-                )
-            )
-        except (
-            OSError,
-            json.JSONDecodeError,
-        ):
-            previous_latest = {}
-
-    previous_publications = (
-        previous_latest.get(
-            "publications"
-        )
-        or []
-    )
-    content_changed = (
-        previous_publications
-        != latest
-        or int(
-            previous_latest.get(
-                "window_days",
-                WINDOW_DAYS,
-            )
-            or WINDOW_DAYS
-        )
-        != WINDOW_DAYS
-        or int(
-            previous_latest.get(
-                "max_records",
-                MAX_RECORDS,
-            )
-            or MAX_RECORDS
-        )
-        != MAX_RECORDS
-    )
-
-    if content_changed:
-        content_updated_at = generated
-    else:
-        content_updated_at = (
-            previous_latest.get(
-                "content_updated_at"
-            )
-            or previous_latest.get(
-                "generated_at"
-            )
-            or generated
-        )
-
     LATEST_OUT.write_text(
         json.dumps(
             {
                 "generated_at":
                     generated,
-                "verified_at":
-                    generated,
-                "content_updated_at":
-                    content_updated_at,
                 "window_days":
                     WINDOW_DAYS,
                 "max_records":
