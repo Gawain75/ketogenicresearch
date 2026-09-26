@@ -646,8 +646,13 @@ For full-text Research Analyses, a more detailed structure is allowed when justi
 - Competence should be conveyed through precision and interpretation, not ornate prose.
 
 7. SCIENTIFIC INTERPRETATION
+- First identify the source's actual publication/study type from the supplied material before describing its evidence.
 - Distinguish explicitly between experimental data, observational findings, clinical trials,
-  reviews/meta-analyses, expert consensus, and pathophysiological hypotheses.
+  reviews/meta-analyses, narrative or mechanistic discussions, expert consensus, and pathophysiological hypotheses.
+- Never invent a clinical-study design. Do not introduce participants, patients, treatment arms, interventions, comparators, follow-up, endpoints, trial procedures, or clinical outcomes unless they are explicitly reported in the SOURCE PACKET.
+- If the source is a review, perspective, commentary, hypothesis/mechanistic paper, or other non-trial publication, describe it as such and do not rewrite it as a clinical investigation.
+- Statements about ketogenic diets used alongside oncologic or other standard therapies are allowed only when that specific clinical use is explicitly documented in the supplied source.
+- Never refer to the publication or supplied material as an abstract in reader-facing prose. Discuss the paper, study, review, analysis, evidence, or authors' discussion according to the actual source type.
 - Do not infer causality from association.
 - Do not equate statistical significance with clinical relevance; consider effect size,
   study design, and population.
