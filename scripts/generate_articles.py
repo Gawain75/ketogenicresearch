@@ -510,10 +510,9 @@ Evidence type: {rec.get('evidence_type','')}
 Clinical areas: {areas}
 MeSH: {", ".join(extra.get("mesh") or [])}"""
 
-    # Full-text-first must be literal: when usable full text was retrieved, do not
-    # also feed the abstract to the writer/verifier. Otherwise the model can anchor
-    # on the abstract and incorrectly describe full-text omissions as "the abstract
-    # does not report...". PubMed metadata are retained only for identity/citation.
+    # When usable full text is available, give the writer only that evidence
+    # body. Keeping the abstract beside it can make the model describe a
+    # full-text analysis as if it were based on the abstract.
     if full_text:
         return f"""{metadata}
 
@@ -540,8 +539,7 @@ Follow this policy exactly:
 
 Write one bilingual article based ONLY on the SOURCE PACKET.
 Do not add background facts that are not explicitly present in the source.
-If this is a full-text Research Analysis, the SOURCE PACKET contains the full-text material and intentionally omits the PubMed abstract. Never refer to "the abstract" or "l\'abstract" in the reader-facing article.
-Never infer that a detail was absent from the published study merely because it is absent from the supplied excerpt; state an omission as a limitation only when the supplied source explicitly establishes that omission.
+If full text is supplied, use it as the evidence source for the entire article and never refer to the reader-facing evidence as "the abstract" or "l\'abstract".
 
 READER-FIRST EDITORIAL TRANSFORMATION — V4.1
 
@@ -761,8 +759,6 @@ EDITORIAL CHECKS
 - Do not repeat the same concept unnecessarily across sections.
 - The reader-facing article must not mention whether the source used was an abstract, full text, PMC text, publisher text, Unpaywall, or any retrieval workflow.
 - Source-acquisition details are internal metadata only.
-- FAIL if any reader-facing summary or section refers to "the abstract", "l'abstract", or "l’abstract".
-- FAIL any claimed missing study detail unless the supplied source explicitly supports that the detail was not reported.
 
 STRUCTURE CHECKS FOR RESEARCH NOTES
 For Research Notes, the English section headings must be exactly:
