@@ -1,6 +1,57 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+
+def infer_evidence_descriptors(meta: dict, source_text: str = "") -> tuple[str, str, str, str]:
+    """Return study/conclusion descriptors, using stored metadata first and a conservative
+    deterministic fallback for legacy drafts that predate these fields."""
+    st = str(meta.get("study_type", "")).strip()
+    sti = str(meta.get("study_type_it", "")).strip()
+    ct = str(meta.get("conclusion_type", "")).strip()
+    cti = str(meta.get("conclusion_type_it", "")).strip()
+    if st and sti and ct and cti:
+        return st, sti, ct, cti
+
+    t = (" ".join([
+        str(meta.get("title_en", "")),
+        str(meta.get("title_it", "")),
+        source_text or "",
+    ])).lower()
+
+    def has(*xs):
+        return any(x in t for x in xs)
+
+    if has("systematic review", "meta-analysis", "meta analysis", "revisione sistematica", "metanalisi"):
+        vals = ("Systematic review / meta-analysis", "Revisione sistematica / meta-analisi",
+                "Evidence synthesis", "Sintesi di evidenze")
+    elif has("narrative review", "integrative review", "scoping review", "review of ", "revisione narrativa",
+             "revisione integrativa", "research progress", "current evidence"):
+        vals = ("Review", "Revisione", "Evidence synthesis", "Sintesi di evidenze")
+    elif has("randomized", "randomised", "double-blind", "double blind", "placebo-controlled",
+             "placebo controlled", "trial", "randomizzato", "doppio cieco"):
+        vals = ("Randomized clinical trial", "Studio clinico randomizzato",
+                "Causal / intervention-supported", "Causale / supportata da intervento")
+    elif has("case report", "case series", "case study", "a child with", "a patient with",
+             "caso clinico", "serie di casi"):
+        vals = ("Case report / case series", "Caso clinico / serie di casi",
+                "Descriptive", "Descrittivo")
+    elif has("mouse", "mice", "murine", "rat ", "rats", "animal model", "cell line", "in vitro",
+             "preclinical", "mechanistic", "topi", "modello animale"):
+        vals = ("Preclinical / mechanistic study", "Studio preclinico / meccanicistico",
+                "Mechanistic / hypothesis-generating", "Meccanicistico / generatore di ipotesi")
+    elif has("cohort", "cross-sectional", "cross sectional", "retrospective", "prospective observational",
+             "observational", "coorte", "trasversale", "retrospettivo", "osservazionale"):
+        vals = ("Observational study", "Studio osservazionale", "Associative", "Associativo")
+    elif has("perspective", "commentary", "opinion", "hypothesis", "viewpoint", "prospettiva", "commento"):
+        vals = ("Perspective / commentary", "Prospettiva / commento",
+                "Expert interpretation / hypothesis", "Interpretazione esperta / ipotesi")
+    else:
+        # Do not invent a stronger design for legacy material when the text is not explicit.
+        vals = ("Research study", "Studio di ricerca", "Descriptive", "Descrittivo")
+
+    return (st or vals[0], sti or vals[1], ct or vals[2], cti or vals[3])
+
+
 import html
 import json
 import re
@@ -125,10 +176,7 @@ def article_page(meta, en_title, en_html, it_title, it_html, slug, description):
     doi = str(meta.get("doi", ""))
     article_type = str(meta.get("article_type", "Research Note"))
     article_type_it = str(meta.get("article_type_it", "Nota di ricerca"))
-    study_type = str(meta.get("study_type", "")).strip()
-    study_type_it = str(meta.get("study_type_it", "")).strip()
-    conclusion_type = str(meta.get("conclusion_type", "")).strip()
-    conclusion_type_it = str(meta.get("conclusion_type_it", "")).strip()
+    study_type, study_type_it, conclusion_type, conclusion_type_it = infer_evidence_descriptors(meta, text if "text" in locals() else "")
 
     meta_en = " · ".join(x for x in [pretty_date(date, "en"), journal] if x)
     meta_it = " · ".join(x for x in [pretty_date(date, "it"), journal] if x)
@@ -354,10 +402,7 @@ def main():
         en_meta = " · ".join(x for x in [pretty_date(date, "en"), journal] if x)
         it_meta = " · ".join(x for x in [pretty_date(date, "it"), journal] if x)
 
-        study_type = str(meta.get("study_type", "")).strip()
-        study_type_it = str(meta.get("study_type_it", "")).strip()
-        conclusion_type = str(meta.get("conclusion_type", "")).strip()
-        conclusion_type_it = str(meta.get("conclusion_type_it", "")).strip()
+        study_type, study_type_it, conclusion_type, conclusion_type_it = infer_evidence_descriptors(meta, text if "text" in locals() else "")
 
         card_details_en = ""
         if study_type or conclusion_type:
