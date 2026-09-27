@@ -6,68 +6,71 @@ date: "2026-08-25"
 journal: "Sheng wu gong cheng xue bao = Chinese journal of biotechnology"
 article_type: "Research Note"
 article_type_it: "Nota di ricerca"
-generator_version: "4.5"
+study_type: "Review"
+study_type_it: "Revisione"
+conclusion_type: "Evidence synthesis"
+conclusion_type_it: "Sintesi delle evidenze"
+generator_version: "4.3"
 source_identity: "PASS"
 source_identity_basis: "PubMed PMID/title/DOI/PMCID"
 full_text_source: "PubMed abstract"
 full_text_url: ""
-editorial_byline: "Ketogenic Research Hub Editorial"
+editorial_byline: "Ketogenic Research Editorial"
 scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
-verified_at: "2026-09-26T03:27:48.334635+00:00"
-source_identity_checked_at: "2026-09-26T19:36:21.315175+00:00"
+verified_at: "2026-09-27T09:09:17.598961+00:00"
 ---
 
-# Ketogenic diet and its reported influence on spermatogenesis and oogenesis: a review of current evidence
+# Ketogenic diet and gametogenesis: a review of reported mechanisms and research gaps
 
 **Research Note**
 
-**Ketogenic Research Hub Editorial**  
+**Ketogenic Research Editorial**  
 Scientific oversight: **Marco Medeot, Scientific Director**
 
-A recent review summarizes experimental and clinical observations linking ketogenic dietary patterns to multiple pathways that may affect gamete development, including oxidative stress, inflammation, hormonal milieu, cellular energy metabolism and autophagy. The authors note that protective signals are reported, but effects on apoptosis and inflammation appear limited and dependent on metabolic context.
+The authors summarise experimental and clinical reports linking ketogenic dietary patterns to the regulation of spermatogenesis and oogenesis. They highlight oxidative‑stress reduction, modulation of inflammatory pathways, hormone alterations, shifts in cellular energy metabolism and autophagy as the main mechanisms, while noting that evidence of direct protective effects remains inconsistent and dependent on metabolic context.
 
 ## Study and findings
 
-Zhang et al. (2026) compiled recent pre‑clinical and clinical reports that examined how a high‑fat, adequate‑protein, low‑carbohydrate regimen—commonly termed ketogenic diet (KD)—modulates gametogenesis in both sexes. The review highlights that KD can attenuate oxidative stress markers and activate autophagic pathways in germ cells, which are mechanisms theoretically supportive of gamete quality. Conversely, the authors point out that evidence for KD‑driven reductions in apoptosis or inflammatory cytokines is inconsistent, and that outcomes appear to vary with the subject’s baseline metabolic status and the precise macronutrient composition of the diet.
+This narrative review collates recent publications that examined how a high‑fat, low‑carbohydrate ketogenic diet (KD) influences gametogenic processes in both males and females. The authors describe evidence that KD can attenuate oxidative stress in germ cells, partly through increased ketone‑body utilization and up‑regulation of antioxidant enzymes. Inflammatory markers such as NF‑κB are reported to be down‑regulated in animal models, suggesting a potential anti‑inflammatory milieu. Hormonal effects are mixed: some studies show modest increases in testosterone or estradiol, while others find no change, indicating that endocrine responses may depend on baseline metabolic status. Energy‑metabolism pathways shift toward fatty‑acid oxidation and mitochondrial biogenesis, which could support the high ATP demand of meiosis. Autophagic activity is also reported to be enhanced, possibly contributing to the removal of damaged organelles during spermatogenesis and oogenesis. Across the surveyed literature, the protective impact of KD on germ‑cell apoptosis is limited and appears contingent on diet composition and the subject’s metabolic health.
 
 ## Clinical interpretation
 
-For clinicians considering KD in patients with reproductive concerns, the current literature suggests a plausible biochemical environment that could favor gamete preservation, chiefly through reduced reactive oxygen species and enhanced cellular recycling. However, the lack of robust human trials means that any therapeutic claim remains speculative. The reported variability—depending on factors such as insulin sensitivity, body weight, and diet formulation—implies that KD may benefit only a subset of individuals, and that unintended effects on hormonal balance cannot be excluded.
+The synthesis suggests that KD may create a metabolic environment conducive to germ‑cell health, chiefly by lowering reactive oxygen species and dampening inflammation. However, the heterogeneity of study designs—ranging from rodent experiments to small human cohorts—precludes a definitive statement that KD improves fertility outcomes. Clinicians should therefore view KD as a potential adjunct that could benefit patients with oxidative‑stress‑related reproductive dysfunction, but only after considering individual metabolic profiles and ensuring adequate protein and micronutrient intake. The review does not provide evidence that KD alone can correct hormonal imbalances or guarantee successful gametogenesis.
 
 ## Limitations and open questions
 
-The review is based largely on animal models and isolated cellular studies; direct evidence in humans is scarce. Moreover, the abstract does not specify study designs, sample sizes, or quantitative effect estimates, limiting assessment of clinical relevance. Key unanswered issues include whether KD can reliably improve fertilization outcomes, how long‑term adherence influences endocrine function, and what dietary thresholds (fat, protein, carbohydrate) are required to achieve the reported molecular effects without adverse metabolic consequences. Controlled clinical trials are needed to delineate these parameters.
+The authors acknowledge that most data derive from preclinical models, limiting direct extrapolation to humans. Human studies are few, often lack control groups, and vary in macronutrient ratios, making it difficult to isolate the effect of ketosis from caloric restriction or fat type. The impact of KD on long‑term reproductive success, embryo quality, and offspring health remains untested. Future research should employ well‑controlled randomized trials with standardized KD protocols, detailed hormonal and metabolic monitoring, and clinically relevant fertility endpoints.
 
 ### Source
 
-Zhang T, Cao C, Pang W. [Research progress on the role and mechanism of ketogenic diet in regulating gametogenesis]. Sheng Wu Gong Cheng Xue Bao. 2026;42(8):3391-3402. doi: 10.13345/j.cjb.250934. PMID: 42638043.
+Source: Zhang T, Cao C, Pang W. Research progress on the role and mechanism of ketogenic diet in regulating gametogenesis. Sheng wu gong cheng xue bao. 2026 Aug 25. PMID: 42638043.
 
 ---
 
-# Dieta chetogenica e il suo presunto influsso sulla spermatogenesi e oogenesi: revisione delle evidenze attuali
+# Dieta chetogenica e gametogenesi: revisione dei meccanismi riportati e delle lacune di ricerca
 
 **Nota di ricerca**
 
-**Ketogenic Research Hub Editorial**  
+**Ketogenic Research Editorial**  
 Supervisione scientifica: **Marco Medeot, Direttore Scientifico**
 
-Una recente revisione sintetizza osservazioni sperimentali e cliniche che collegano i regimi dietetici chetogenici a diverse vie potenzialmente coinvolte nello sviluppo dei gameti, tra cui stress ossidativo, infiammazione, assetto ormonale, metabolismo energetico cellulare e autofagia. Gli autori segnalano segnali protettivi, ma riferiscono che gli effetti su apoptosi e infiammazione sono limitati e dipendono dal contesto metabolico.
+Gli autori riassumono studi sperimentali e clinici che collegano le diete chetogeniche alla regolazione della spermatogenesi e oogenesi. Evidenziano la riduzione dello stress ossidativo, la modulazione delle vie infiammatorie, le variazioni ormonali, i cambiamenti nel metabolismo energetico cellulare e l’autofagia come meccanismi principali, sottolineando al contempo che le prove di effetti protettivi diretti sono discordanti e dipendono dallo stato metabolico di base.
 
 ## Studio e risultati
 
-Zhang et al. (2026) hanno raccolto recenti studi pre‑clinici e clinici che hanno valutato come un regime ad alto contenuto di grassi, proteine adeguate e basso contenuto di carboidrati—definito dieta chetogenica (KD)—influisca sulla gametogenesi nei due sessi. La revisione evidenzia che la KD può ridurre i marcatori di stress ossidativo e attivare vie autofagiche nei gameti, meccanismi teoricamente favorevoli alla qualità delle cellule germinali. Al contempo, gli autori segnalano che le prove di una diminuzione dell’apoptosi o delle citochine infiammatorie indotte dalla KD sono discordanti e che gli esiti variano in base allo stato metabolico di base e alla composizione precisa dei macronutrienti.
+Questa revisione narrativa raccoglie le pubblicazioni recenti che hanno valutato l’influenza di una dieta chetogenica (KD), caratterizzata da alto contenuto di grassi, proteine adeguate e basso contenuto di carboidrati, sui processi gametogenetici sia maschili che femminili. Gli autori descrivono prove secondo le quali la KD può attenuare lo stress ossidativo nelle cellule germinali, in parte grazie a un maggiore utilizzo dei corpi chetonici e all’induzione di enzimi antiossidanti. Nei modelli animali si osserva una riduzione dei marcatori infiammatori, come NF‑κB, suggerendo un possibile ambiente anti‑infiammatorio. Gli effetti ormonali sono eterogenei: alcuni studi riportano lievi aumenti di testosterone o estradiolo, altri nessuna variazione, indicando che la risposta endocrina dipende dallo stato metabolico di base. Le vie metaboliche si spostano verso l’ossidazione degli acidi grassi e la biogenesi mitocondriale, potenzialmente favorevoli all’alto fabbisogno di ATP della meiosi. L’attività autofagica risulta anch’essa aumentata, il che potrebbe favorire la rimozione di organelli danneggiati durante spermatogenesi e oogenesi. Complessivamente, l’effetto protettivo della KD sull’apoptosi delle cellule germinali appare limitato e dipendente dalla composizione della dieta e dallo stato metabolico del soggetto.
 
 ## Interpretazione clinica
 
-Per i clinici che valutano la KD in pazienti con problemi riproduttivi, la letteratura attuale suggerisce un ambiente biochimico potenzialmente favorevole alla conservazione dei gameti, soprattutto tramite riduzione delle specie reattive dell’ossigeno e potenziamento del riciclo cellulare. Tuttavia, l’assenza di studi clinici controllati solidi rende qualsiasi affermazione terapeutica ancora ipotetica. La variabilità riportata—legata a sensibilità insulinica, peso corporeo e composizione della dieta—indica che la KD potrebbe avvantaggiare solo una parte della popolazione e che effetti indesiderati sull’equilibrio ormonale non possono essere esclusi.
+La sintesi suggerisce che la KD possa creare un ambiente metabolico favorevole alla salute delle cellule germinali, principalmente riducendo le specie reattive dell’ossigeno e l’infiammazione. Tuttavia, l’eterogeneità dei disegni di studio – che spaziano da esperimenti su roditori a piccole coorti umane – impedisce di affermare con certezza che la KD migliori gli esiti di fertilità. I clinici dovrebbero quindi considerare la KD come un possibile coadiuvante per pazienti con disfunzioni riproduttive legate allo stress ossidativo, valutando però il profilo metabolico individuale e garantendo un adeguato apporto proteico e di micronutrienti. La revisione non fornisce evidenze che la KD possa correggere autonomamente gli squilibri ormonali o assicurare una gametogenesi efficace.
 
 ## Limiti e questioni aperte
 
-La revisione si basa prevalentemente su modelli animali e studi cellulari; le evidenze dirette sull’uomo sono scarse. Inoltre, l’abstract non fornisce dettagli su disegni di studio, dimensioni del campione o stime quantitative, limitando la valutazione della rilevanza clinica. Domande chiave rimangono: la KD può migliorare in modo affidabile gli esiti di fertilizzazione? Quali sono le conseguenze a lungo termine sulla funzione endocrina? Quali soglie di grassi, proteine e carboidrati sono necessarie per ottenere gli effetti molecolari descritti senza compromettere il metabolismo? Sono necessari studi clinici controllati per definire questi parametri.
+Gli autori sottolineano che la maggior parte dei dati proviene da modelli preclinici, limitando l’applicabilità diretta all’uomo. Gli studi umani sono pochi, spesso privi di gruppi di controllo e presentano variazioni nei rapporti macronutrienti, rendendo difficile separare l’effetto della chetosi dalla restrizione calorica o dal tipo di grasso. L’impatto della KD sul successo riproduttivo a lungo termine, sulla qualità dell’embrione e sulla salute della prole rimane inesplorato. Ricerche future dovrebbero prevedere trial randomizzati ben controllati con protocolli KD standardizzati, monitoraggio ormonale e metabolico dettagliato e endpoint di fertilità clinicamente rilevanti.
 
 ### Fonte
 
-Zhang T, Cao C, Pang W. [Research progress on the role and mechanism of ketogenic diet in regulating gametogenesis]. Sheng Wu Gong Cheng Xue Bao. 2026;42(8):3391-3402. doi: 10.13345/j.cjb.250934. PMID: 42638043.
+Fonte: Zhang T, Cao C, Pang W. Research progress on the role and mechanism of ketogenic diet in regulating gametogenesis. Sheng wu gong cheng xue bao. 2026 Aug 25. PMID: 42638043.
 
