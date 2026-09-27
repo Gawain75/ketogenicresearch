@@ -41,7 +41,9 @@ jobs:
           git config user.name "Ketogenic Research Bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add library.html
+          # Include every file changed by the restoration step so the
+          # working tree is clean before pull --rebase.
+          git add -A
 
           if git diff --cached --quiet; then
             echo "No Library detail changes."
