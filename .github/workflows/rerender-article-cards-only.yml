@@ -1,0 +1,44 @@
+name: Re-render article cards only
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rerender-article-cards-only
+  cancel-in-progress: false
+
+jobs:
+  rerender:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Re-render article cards
+        run: python scripts/render_articles.py
+
+      - name: Commit rendered cards
+        run: |
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No rendered files changed."
+            exit 0
+          fi
+          git commit -m "Re-render article cards with research details"
+          git pull --rebase origin main
+          git push origin main
