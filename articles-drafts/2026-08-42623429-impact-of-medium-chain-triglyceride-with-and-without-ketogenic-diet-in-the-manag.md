@@ -9,7 +9,7 @@ article_type_it: "Nota di ricerca"
 study_type: "Systematic review / meta-analysis"
 study_type_it: "Revisione sistematica / meta‑analisi"
 conclusion_type: "Descriptive"
-conclusion_type_it: "Descrittivo"
+conclusion_type_it: "Descrittiva"
 generator_version: "4.3"
 source_identity: "PASS"
 source_identity_basis: "PubMed PMID/title/DOI/PMCID"
@@ -19,29 +19,29 @@ editorial_byline: "Ketogenic Research Editorial"
 scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
-verified_at: "2026-09-27T09:06:25.864264+00:00"
+verified_at: "2026-09-27T09:23:53.155344+00:00"
 ---
 
-# Low‑certainty evidence on medium‑chain triglyceride interventions in drug‑resistant epilepsy
+# Medium-chain triglyceride interventions in drug‑resistant epilepsy: findings from a systematic review
 
 **Research Note**
 
 **Ketogenic Research Editorial**  
 Scientific oversight: **Marco Medeot, Scientific Director**
 
-A systematic review of twelve studies (three RCTs and nine observational) examined medium‑chain triglyceride (MCT) ketogenic diets and MCT supplementation in drug‑resistant epilepsy. The authors found low‑to‑very‑low certainty that MCT‑based regimens may achieve seizure control comparable to the classical ketogenic diet, but equivalence was not demonstrated; evidence for MCT without a strict ketogenic protocol is even more uncertain.
+A systematic review of twelve studies—including three randomized trials and nine observational cohorts—examined medium‑chain triglyceride (MCT)–based therapies, either as a ketogenic diet (MCT KD) or as supplemental MCT, for drug‑resistant epilepsy. Low‑certainty evidence suggests MCT KD may achieve seizure control comparable to the classical ketogenic diet, while data on MCT supplementation without a strict ketogenic regimen remain very uncertain.
 
 ## Study and findings
 
-The authors searched PubMed, Web of Science, Scopus and the Cochrane Library up to April 2025 and included randomized controlled trials and cohort studies enrolling patients with drug‑resistant epilepsy. Twelve reports met the criteria: three RCTs (one pediatric trial comparing MCT ketogenic diet with the classical ketogenic diet, a pediatric crossover trial using a C10‑enriched diet, and a small adult RCT testing MCT supplementation) and nine observational cohorts. The pediatric RCT showed no clear difference in seizure reduction between MCT KD and the classical ketogenic diet, although ketone levels were higher with the latter; the trial did not establish statistical equivalence. The crossover and adult RCT each suggested a possible therapeutic signal but were underpowered. Observational studies generally reported seizure improvement from baseline, yet methodological weaknesses limited confidence. Gastrointestinal side effects were frequent but manageable. Using GRADE, the certainty of the overall evidence was rated low to very low.
+The authors searched PubMed, Web of Science, Scopus and the Cochrane Library up to April 2025 and selected studies that reported seizure outcomes, tolerability, safety or adherence of MCT‑based interventions in patients with drug‑resistant epilepsy. Twelve reports met the inclusion criteria: three randomized controlled trials (RCTs) and nine observational studies. In a pediatric RCT comparing MCT KD with the classical ketogenic diet (CKD), seizure reduction did not differ clearly between groups, although ketone levels were higher with CKD; the trial did not establish equivalence. A small pediatric crossover trial using a C10‑enriched KD hinted at a possible benefit, and a small adult RCT reported a tentative therapeutic signal from MCT supplementation. Observational studies generally described seizure improvement from baseline, but methodological limitations (small samples, lack of control groups) reduced confidence. Gastrointestinal side effects were the most frequent adverse events, yet they were usually manageable. Using GRADE, the certainty of the overall evidence was rated low to very low.
 
 ## Clinical interpretation
 
-For clinicians considering non‑pharmacological options in drug‑resistant epilepsy, MCT‑based approaches appear to be a flexible alternative to the classical ketogenic diet, especially when strict fat‑to‑protein‑carbohydrate ratios are difficult to maintain. The available data do not confirm that MCT KD is equivalent to the classical regimen in seizure control, but they do not rule out comparable efficacy either. When MCT is added to a regular diet without a full ketogenic protocol, the evidence is too uncertain to support routine use. Gastrointestinal tolerability should be monitored, as adverse events were the most common reason for discontinuation.
+For clinicians considering dietary options in drug‑resistant epilepsy, MCT KD appears to be a flexible alternative that can be implemented with a lower proportion of long‑chain fats while still delivering comparable seizure outcomes to CKD, albeit without proof of statistical equivalence. The modest signals from the two small RCTs suggest that adding MCT to the diet, or using MCT as a supplement without a full ketogenic protocol, may confer some antiseizure benefit, but the evidence is insufficient to recommend it as a stand‑alone therapy. The frequent gastrointestinal complaints underline the need for careful titration and monitoring of tolerability.
 
 ## Limitations and open questions
 
-The primary limitation is the low certainty of the evidence, driven by small sample sizes, heterogeneity of interventions, and methodological flaws in the observational studies. No trial was powered to demonstrate equivalence, and the crossover design provides only preliminary signals. Future research should include adequately powered, multicenter RCTs that directly compare MCT KD with the classical ketogenic diet using standardized seizure outcome measures and predefined non‑inferiority margins. Additionally, systematic assessment of long‑term safety, adherence, and quality of life is needed to clarify the role of MCT supplementation without a strict ketogenic framework.
+The review’s conclusions are constrained by the low certainty of the underlying studies. Sample sizes were small, especially in the pediatric crossover and adult supplementation trials, limiting statistical power. Heterogeneity in diet composition, MCT dosage, and outcome measures precluded quantitative meta‑analysis. Observational reports lacked control groups, making it impossible to separate treatment effects from natural disease fluctuation. Future research should prioritize adequately powered, double‑blind RCTs that directly compare MCT KD with CKD and that evaluate isolated MCT supplementation with standardized dosing, while systematically recording adverse events and adherence.
 
 ### Source
 
@@ -49,26 +49,26 @@ Pellizzari M et al. Impact of medium-chain triglyceride with and without ketogen
 
 ---
 
-# Evidenza a bassa certezza sugli interventi a base di trigliceridi a catena media nell'epilessia resistente ai farmaci
+# Interventi a base di trigliceridi a catena media nell'epilessia farmacoresistente: risultati da una revisione sistematica
 
 **Nota di ricerca**
 
 **Ketogenic Research Editorial**  
 Supervisione scientifica: **Marco Medeot, Direttore Scientifico**
 
-Una revisione sistematica di dodici studi (tre RCT e nove osservazionali) ha valutato diete chetogeniche a base di trigliceridi a catena media (MCT) e integrazione di MCT nell'epilessia resistente ai farmaci. Gli autori hanno riscontrato una certezza bassa‑molto bassa che gli interventi a base di MCT possano produrre un controllo delle crisi simile a quello della dieta chetogenica classica, ma l'equivalenza non è stata provata; le evidenze per l'MCT senza una dieta chetogenica rigorosa sono ancora più incerte.
+Una revisione sistematica di dodici studi—tre trial randomizzati e nove coorti osservazionali—ha valutato le terapie a base di trigliceridi a catena media (MCT), sia come dieta chetogenica (MCT KD) sia come integrazione di MCT, per l'epilessia farmacoresistente. Le evidenze a bassa certezza indicano che la MCT KD potrebbe produrre un controllo delle crisi simile a quello della dieta chetogenica classica, mentre i dati sull'integrazione di MCT senza una dieta chetogenica rigorosa rimangono molto incerti.
 
 ## Studio e risultati
 
-Gli autori hanno interrogato PubMed, Web of Science, Scopus e la Cochrane Library fino ad aprile 2025, includendo studi controllati randomizzati e studi di coorte su pazienti con epilessia resistente ai farmaci. Dodici report hanno soddisfatto i criteri: tre RCT (un trial pediatrico che confrontava la dieta chetogenica a base di MCT con la dieta chetogenica classica, un crossover pediatrico con dieta arricchita di C10 e un piccolo RCT adulto che testava l'integrazione di MCT) e nove coorti osservazionali. L'RCT pediatrico non ha mostrato differenze chiare nella riduzione delle crisi tra MCT KD e la dieta chetogenica classica, sebbene i livelli di chetoni fossero più alti con quest'ultima; il trial non ha stabilito l'equivalenza statistica. Il crossover e l'RCT adulto hanno suggerito un possibile segnale terapeutico, ma erano poco potenziati. Gli studi osservazionali hanno generalmente riportato miglioramenti rispetto al basale, ma le debolezze metodologiche hanno limitato la fiducia. Gli effetti avversi gastrointestinali erano frequenti ma gestibili. Con lo strumento GRADE, la certezza complessiva delle evidenze è stata valutata come bassa‑molto bassa.
+Gli autori hanno interrogato PubMed, Web of Science, Scopus e la Cochrane Library fino ad aprile 2025, selezionando studi che riportavano esiti convulsivi, tollerabilità, sicurezza o aderenza a interventi a base di MCT in pazienti con epilessia farmacoresistente. Dodici pubblicazioni hanno soddisfatto i criteri: tre trial randomizzati controllati (RCT) e nove studi osservazionali. In un RCT pediatrico che confrontava la MCT KD con la dieta chetogenica classica (CKD), la riduzione delle crisi non differiva in modo chiaro tra i gruppi, sebbene i livelli di chetoni fossero più alti con la CKD; il trial non ha stabilito l’equivalenza. Un piccolo crossover pediatrico con una KD arricchita di C10 ha suggerito un possibile beneficio, e un piccolo RCT adulto ha riportato un segnale terapeutico preliminare dall’integrazione di MCT. Gli studi osservazionali hanno generalmente descritto un miglioramento rispetto al basale, ma limitazioni metodologiche (campioni ridotti, assenza di gruppi di controllo) hanno ridotto la fiducia nei risultati. Gli effetti avversi più frequenti erano gastrointestinali, spesso gestibili. Con lo strumento GRADE, la certezza dell’evidenza complessiva è stata valutata come bassa‑molto bassa.
 
 ## Interpretazione clinica
 
-Per i clinici che valutano opzioni non farmacologiche nell'epilessia resistente, gli approcci basati su MCT sembrano offrire una flessibilità maggiore rispetto alla dieta chetogenica classica, soprattutto quando è difficile mantenere rapporti rigidi di grassi‑proteine‑carboidrati. I dati disponibili non confermano l'equivalenza di MCT KD rispetto alla dieta classica nel controllo delle crisi, ma non escludono nemmeno un'efficacia comparabile. Quando gli MCT sono aggiunti a una dieta normale senza un protocollo chetogenico completo, l'evidenza è troppo incerta per raccomandarne l'uso di routine. Gli effetti gastrointestinali sono il motivo più comune di interruzione e richiedono monitoraggio.
+Per i clinici che valutano opzioni dietetiche nell’epilessia farmacoresistente, la MCT KD appare una alternativa flessibile che può essere implementata con una minore quota di grassi a catena lunga, mantenendo esiti convulsivi comparabili alla CKD, sebbene non sia stata dimostrata l’equivalenza statistica. I modesti segnali provenienti dai due piccoli RCT suggeriscono che l’aggiunta di MCT alla dieta, o l’uso di MCT come supplemento senza un protocollo chetogenico completo, possa offrire un certo beneficio antisepalico, ma le prove non sono sufficienti per raccomandarlo come terapia autonoma. Le frequenti lamentele gastrointestinali evidenziano la necessità di una titolazione attenta e di un monitoraggio della tollerabilità.
 
 ## Limiti e questioni aperte
 
-Il limite principale è la bassa certezza delle evidenze, dovuta a campioni ridotti, eterogeneità degli interventi e difetti metodologici negli studi osservazionali. Nessun trial è stato sufficientemente potenziato per dimostrare l'equivalenza, e il design crossover fornisce solo segnali preliminari. Ricerche future dovrebbero prevedere RCT multicentrici adeguatamente dimensionati, con confronto diretto tra MCT KD e dieta chetogenica classica, usando misure di esito standardizzate e margini di non‑inferiorità predefiniti. È inoltre necessario valutare sistematicamente la sicurezza a lungo termine, l'aderenza e la qualità della vita per chiarire il ruolo dell'integrazione di MCT senza un quadro chetogenico rigoroso.
+Le conclusioni della revisione sono limitate dalla bassa certezza degli studi sottostanti. Le dimensioni dei campioni erano ridotte, soprattutto nei trial pediatrici crossover e nell’intervento adulto con supplemento di MCT, limitando la potenza statistica. L’eterogeneità nella composizione della dieta, nella dose di MCT e nelle misure di esito ha impedito una meta‑analisi quantitativa. I report osservazionali mancavano di gruppi di controllo, rendendo impossibile distinguere gli effetti del trattamento dalla naturale fluttuazione della malattia. Ricerche future dovrebbero prevedere RCT ben alimentati, in doppio cieco, che confrontino direttamente MCT KD con CKD e che valutino l’integrazione isolata di MCT con dosaggi standardizzati, registrando sistematicamente gli eventi avversi e l’aderenza.
 
 ### Fonte
 

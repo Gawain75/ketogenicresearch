@@ -19,7 +19,7 @@ editorial_byline: "Ketogenic Research Editorial"
 scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
-verified_at: "2026-09-27T09:12:07.268821+00:00"
+verified_at: "2026-09-27T09:29:34.159433+00:00"
 ---
 
 # Feasibility of ketogenic diet therapy in pediatric epilepsy patients with ileostomies
@@ -29,19 +29,19 @@ verified_at: "2026-09-27T09:12:07.268821+00:00"
 **Ketogenic Research Editorial**  
 Scientific oversight: **Marco Medeot, Scientific Director**
 
-Two children with refractory epilepsy and ileostomies were managed on ketogenic diet therapy (KDT). Careful fluid, electrolyte and bicarbonate monitoring allowed maintenance of hydration, normal laboratory values, and seizure control, suggesting that KDT can be implemented in this population with individualized supervision.
+Two children with refractory epilepsy and ileostomies were managed on ketogenic diet therapy (KDT). Careful fluid, electrolyte, and bicarbonate monitoring allowed maintenance of hydration, normal laboratory values, and seizure control, suggesting that KDT can be implemented safely in this population with individualized supervision.
 
 ## Study and findings
 
-The authors describe two pediatric cases of medication‑resistant epilepsy who required ileostomies. In the first child, the ileostomy was created after KDT had already been initiated; fluid intake and electrolyte supplementation were increased, yet serum sodium remained within normal limits throughout. The second child had an ileostomy before starting KDT; early hyponatremia and metabolic acidosis were observed and corrected with targeted sodium and bicarbonate supplementation. Routine laboratory surveillance enabled normalization of electrolytes and acid‑base status in both patients. Fluid requirements did not differ from pre‑ileostomy estimates, and both children remained adequately hydrated. Importantly, seizure frequency did not worsen after ileostomy creation or during KDT.
+The authors reported two pediatric cases of medication‑resistant epilepsy who required an ileostomy. In the first child, the ileostomy was created while the patient was already on a classical ketogenic diet (high‑fat, low‑carbohydrate, adequate protein). Initial management included increasing fluid and electrolyte provision; serum sodium remained within normal limits throughout. The second child had an ileostomy before initiating the diet. Early in the diet, the patient developed hyponatremia and metabolic acidosis, which were corrected with targeted sodium and bicarbonate supplementation. Routine laboratory surveillance allowed both patients to achieve stable electrolyte and acid‑base status without altering overall fluid requirements. Seizure frequency did not increase after the surgical procedure or during diet therapy.
 
 ## Clinical interpretation
 
-These observations indicate that KDT can be continued safely in children with an ileostomy, provided that clinicians anticipate altered fluid and electrolyte losses. Sodium balance appears particularly vulnerable, as one patient experienced hyponatremia despite standard supplementation. The need for bicarbonate replacement in the second case underscores the risk of metabolic acidosis when intestinal losses are increased. Nevertheless, the lack of change in seizure control suggests that the therapeutic ketosis achieved was not compromised by the ostomy, and that individualized monitoring can preserve both metabolic and neurologic outcomes.
+These observations indicate that ketogenic diet therapy can be continued in children with an ileostomy, provided that clinicians anticipate the altered fluid and electrolyte losses inherent to the stoma. Sodium balance appears particularly vulnerable, as demonstrated by the transient hyponatremia in the second case, but can be managed with proactive supplementation. The lack of change in seizure control suggests that the metabolic state required for KDT efficacy is attainable despite the gastrointestinal alteration. Consequently, KDT should not be automatically contraindicated in patients who undergo ileostomy; instead, individualized monitoring protocols are warranted.
 
 ## Limitations and open questions
 
-The report is limited to two patients, so the findings cannot be generalized to all pediatric epilepsy patients with ileostomies. No systematic comparison of fluid or macronutrient intake before and after surgery is provided, and long‑term outcomes beyond the reported period are unknown. Future prospective studies with larger cohorts are needed to define optimal electrolyte replacement protocols, to assess whether specific KDT formulations (e.g., classical ketogenic diet versus very‑low‑calorie ketogenic diet) influence tolerance, and to determine the impact of ileostomy‑related losses on ketone levels and seizure control over time.
+The report is limited to two patients, precluding any inference about the frequency of electrolyte disturbances or the generalizability of the monitoring strategy. Neither long‑term growth outcomes nor potential impacts on nutrient absorption were addressed. Future prospective studies with larger cohorts are needed to define optimal fluid‑electrolyte replacement regimens, to assess whether specific stoma output volumes predict electrolyte shifts, and to determine if the findings extend to adult populations or to other types of intestinal diversion.
 
 ### Source
 
@@ -56,19 +56,19 @@ Baker BJ et al. Management of ketogenic diet therapy in patients with ileostomy:
 **Ketogenic Research Editorial**  
 Supervisione scientifica: **Marco Medeot, Direttore Scientifico**
 
-Due bambini con epilessia refrattaria e ileostomia sono stati trattati con terapia a dieta chetogenica (KDT). Un attento monitoraggio di fluidi, elettroliti e bicarbonato ha permesso di mantenere l’idratazione, valori di laboratorio nella norma e il controllo delle crisi, suggerendo che la KDT possa essere applicata in questi pazienti con supervisione personalizzata.
+Due bambini con epilessia refrattaria e ileostomia sono stati trattati con terapia a dieta chetogenica (KDT). Un attento monitoraggio di fluidi, elettroliti e bicarbonato ha permesso di mantenere l’idratazione, valori di laboratorio nella norma e il controllo delle crisi, suggerendo che la KDT possa essere applicata in sicurezza in questi pazienti con supervisione personalizzata.
 
 ## Studio e risultati
 
-Gli autori descrivono due casi pediatrici di epilessia resistente ai farmaci che hanno richiesto un’ileostomia. Nel primo bambino l’ileostomia è stata realizzata dopo l’avvio della KDT; l’assunzione di liquidi e la supplementazione elettrolitica sono state aumentate, ma i livelli sierici di sodio sono rimasti nella norma per tutta la durata. Nel secondo bambino l’ileostomia era presente prima dell’inizio della KDT; si sono verificati iponatriemia e acidosi metabolica precoci, corretti con supplementazione mirata di sodio e bicarbonato. Un monitoraggio di laboratorio regolare ha permesso di normalizzare elettroliti e stato acido‑base in entrambi i pazienti. Le esigenze di liquidi non sono cambiate rispetto alle stime pre‑ileostomia, e i due bambini sono rimasti adeguatamente idratati. Importante, la frequenza delle crisi non è peggiorata né dopo la creazione dell’ileostomia né durante la KDT.
+Gli autori hanno descritto due casi pediatrici di epilessia resistente ai farmaci che hanno richiesto un’ileostomia. Nel primo bambino l’ileostomia è stata realizzata mentre il paziente era già in terapia con dieta chetogenica classica (alta percentuale di grassi, basso contenuto di carboidrati, proteine adeguate). La gestione iniziale ha previsto un aumento di fluidi ed elettroliti; i livelli sierici di sodio sono rimasti nella norma per tutta la durata. Nel secondo bambino l’ileostomia era presente prima dell’avvio della dieta. All’inizio della terapia si sono verificati iponatriemia e acidosi metabolica, corretti con supplementazione mirata di sodio e bicarbonato. Un monitoraggio di laboratorio regolare ha consentito a entrambi i pazienti di stabilizzare elettroliti e stato acido‑base senza modificare il fabbisogno totale di fluidi. Il controllo delle crisi non è peggiorato né dopo l’intervento chirurgico né durante la dieta.
 
 ## Interpretazione clinica
 
-Queste osservazioni suggeriscono che la KDT può essere proseguita in sicurezza nei bambini con ileostomia, a patto che i clinici prevedano le perdite aumentate di liquidi ed elettroliti. L’equilibrio del sodio appare particolarmente vulnerabile, come evidenziato dal caso di iponatriemia nonostante la supplementazione standard. La necessità di bicarbonato nel secondo caso evidenzia il rischio di acidosi metabolica quando le perdite intestinali sono maggiori. Tuttavia, l’assenza di variazioni nel controllo delle crisi indica che la chetosi terapeutica non è stata compromessa dall’ostomia e che un monitoraggio personalizzato può preservare sia gli esiti metabolici sia quelli neurologici.
+Queste osservazioni suggeriscono che la terapia con dieta chetogenica può essere mantenuta nei bambini con ileostomia, a condizione che i medici prevedano le perdite di fluidi ed elettroliti tipiche dello stomaco. L’equilibrio del sodio appare particolarmente vulnerabile, come evidenziato dall’iponatriemia transitoria nel secondo caso, ma può essere gestito con supplementazione preventiva. L’assenza di variazioni nel controllo delle crisi indica che lo stato metabolico necessario all’efficacia della KDT è raggiungibile nonostante l’alterazione gastrointestinale. Pertanto, la KDT non dovrebbe essere considerata automaticamente controindicata nei pazienti con ileostomia; è invece necessario un protocollo di monitoraggio personalizzato.
 
 ## Limiti e questioni aperte
 
-Il rapporto è limitato a due pazienti, perciò i risultati non sono generalizzabili a tutti i bambini epilettici con ileostomia. Non è fornito un confronto sistematico dell’apporto di liquidi o della distribuzione dei macronutrienti prima e dopo l’intervento chirurgico, e gli esiti a lungo termine non sono noti. Sono necessari studi prospettici con coorti più ampie per definire protocolli ottimali di sostituzione elettrolitica, per valutare se specifiche formulazioni di KDT (ad es. dieta chetogenica classica versus VLCKD) influenzino la tollerabilità, e per determinare l’impatto delle perdite legate all’ileostomia sui livelli di chetoni e sul controllo delle crisi nel tempo.
+Il rapporto è limitato a due pazienti, il che impedisce di trarre conclusioni sulla frequenza delle alterazioni elettrolitiche o sulla generalizzabilità della strategia di monitoraggio. Non sono stati valutati gli esiti di crescita a lungo termine né l’eventuale impatto sull’assorbimento dei nutrienti. Sono necessari studi prospettici su coorti più ampie per definire regimi ottimali di sostituzione di fluidi ed elettroliti, per verificare se specifici volumi di output stomale prevedono variazioni elettrolitiche e per stabilire se i risultati si estendono a popolazioni adulte o ad altri tipi di diversioni intestinali.
 
 ### Fonte
 
