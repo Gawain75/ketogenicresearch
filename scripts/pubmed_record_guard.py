@@ -109,6 +109,9 @@ def fetch_pubmed_records(pmids: list[str]) -> dict[str, dict]:
 
             pmid = _text(citation.find("PMID"))
             title = _text(article.find("ArticleTitle"))
+            abstract = " ".join(
+                _text(n) for n in article.findall("Abstract/AbstractText") if _text(n)
+            ).strip()
             doi = ""
             pmcid = ""
 
@@ -125,6 +128,7 @@ def fetch_pubmed_records(pmids: list[str]) -> dict[str, dict]:
                 "pmid": pmid,
                 "title": title,
                 "title_norm": norm_title(title),
+                "abstract": abstract,
                 "doi": doi,
                 "pmcid": pmcid,
                 "pubmed_url": f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/",
@@ -164,6 +168,7 @@ def verified_record(queue_record: dict, pubmed_map: dict[str, dict]) -> dict | N
 
     rec = dict(queue_record)
     rec["pmid"] = pmid
+    rec["abstract"] = authoritative.get("abstract", "")
     rec["doi"] = authoritative["doi"]
     rec["pmc"] = authoritative["pmcid"]
     rec["pubmed_url"] = authoritative["pubmed_url"]

@@ -158,6 +158,29 @@ def main() -> None:
             meta.string = " · ".join(x for x in [authors, journal, date] if x)
             art.append(meta)
 
+            # Preserve source-grounded study details in the Library card.
+            # This is the original PubMed abstract, not an AI-generated summary.
+            abstract = (record.get("abstract") or "").strip()
+            if abstract:
+                study_details = soup.new_tag(
+                    "details", attrs={"class": "paper-study-details"}
+                )
+                summary = soup.new_tag("summary")
+                summary["data-en"] = "Research details"
+                summary["data-it"] = "Dettagli della ricerca"
+                summary.string = "Research details"
+                study_details.append(summary)
+
+                abstract_p = soup.new_tag("p")
+                abstract_p["class"] = "paper-source-abstract"
+                abstract_p["data-en"] = abstract
+                # Keep the authoritative source text unchanged in both modes;
+                # never fabricate a translation during deterministic promotion.
+                abstract_p["data-it"] = abstract
+                abstract_p.string = abstract
+                study_details.append(abstract_p)
+                art.append(study_details)
+
             links = soup.new_tag("div", attrs={"class": "paper-links"})
 
             a = soup.new_tag(
