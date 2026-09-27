@@ -597,9 +597,22 @@
       "at": "2026-09-27T07:51:49.202625+00:00",
       "stage": "source",
       "error": "PubMed abstract unavailable"
+    },
+    {
+      "pmid": "42781531",
+      "at": "2026-09-27T08:07:05.045738+00:00",
+      "stage": "verification",
+      "issues": [
+        "The Clinical interpretation section includes a speculative causal explanation (ketones attenuate exaggerated cardiovascular response by bypassing the glycolytic block) that is not directly supported by the source text.",
+        "The statement that ketones provide an acute performance advantage \"without apparent adverse effects\" goes beyond the data presented; the source does not report systematic assessment of adverse effects."
+      ],
+      "unsupported_claims": [
+        "Ketones attenuate the exaggerated cardiovascular response to exercise by supplying an alternative fuel that bypasses the phosphofructokinase block.",
+        "Ketones provide an acute performance advantage without apparent adverse effects."
+      ]
     }
   ],
-  "updated_at": "2026-09-27T07:53:09.306150+00:00",
+  "updated_at": "2026-09-27T08:07:05.045801+00:00",
   "source_unavailable_pmids": [
     "42642354",
     "42717355",
@@ -607,7 +620,7 @@
   ],
   "last_run": {
     "attempted_candidates": 2,
-    "published_articles": 1,
-    "status": "published"
+    "published_articles": 0,
+    "status": "no_article_published"
   }
 }
