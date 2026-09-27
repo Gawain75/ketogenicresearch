@@ -591,9 +591,25 @@ def main():
     )
 
     if not ids:
-        raise SystemExit(
-            "No PubMed records returned."
-        )
+        for attempt in range(1, 4):
+            wait_seconds = attempt * 5
+            print(f"PubMed returned no records; retry {attempt}/3 after {wait_seconds}s...")
+            time.sleep(wait_seconds)
+            retry_search = json.loads(api("esearch.fcgi", {
+                "db": "pubmed", "term": QUERY, "retmode": "json",
+                "retmax": str(CURATION_MAX_RECORDS), "sort": "pub date",
+                "datetype": "pdat",
+                "mindate": curation_cutoff.strftime("%Y/%m/%d"),
+                "maxdate": today.strftime("%Y/%m/%d"),
+            }).decode("utf-8"))
+            ids = retry_search.get("esearchresult", {}).get("idlist", [])
+            if ids:
+                print(f"PubMed recovered on retry {attempt}: {len(ids)} record(s) returned.")
+                break
+
+    if not ids:
+        print("WARNING: PubMed returned no records after 3 retries. Preserving previous Latest Evidence state and exiting cleanly.")
+        return
 
     root = ET.fromstring(
         api(
