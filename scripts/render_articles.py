@@ -125,9 +125,31 @@ def article_page(meta, en_title, en_html, it_title, it_html, slug, description):
     doi = str(meta.get("doi", ""))
     article_type = str(meta.get("article_type", "Research Note"))
     article_type_it = str(meta.get("article_type_it", "Nota di ricerca"))
+    study_type = str(meta.get("study_type", "")).strip()
+    study_type_it = str(meta.get("study_type_it", "")).strip()
+    conclusion_type = str(meta.get("conclusion_type", "")).strip()
+    conclusion_type_it = str(meta.get("conclusion_type_it", "")).strip()
 
     meta_en = " · ".join(x for x in [pretty_date(date, "en"), journal] if x)
     meta_it = " · ".join(x for x in [pretty_date(date, "it"), journal] if x)
+
+    details_en = ""
+    if study_type or conclusion_type:
+        parts = []
+        if study_type:
+            parts.append(f'<span><strong>Study type:</strong> {html.escape(study_type)}</span>')
+        if conclusion_type:
+            parts.append(f'<span><strong>Conclusion type:</strong> {html.escape(conclusion_type)}</span>')
+        details_en = '<div class="article-study-details">' + ''.join(parts) + '</div>'
+
+    details_it = ""
+    if study_type_it or conclusion_type_it:
+        parts = []
+        if study_type_it:
+            parts.append(f'<span><strong>Tipo di ricerca:</strong> {html.escape(study_type_it)}</span>')
+        if conclusion_type_it:
+            parts.append(f'<span><strong>Tipo di conclusione:</strong> {html.escape(conclusion_type_it)}</span>')
+        details_it = '<div class="article-study-details">' + ''.join(parts) + '</div>'
 
     links = []
     if pmid:
@@ -172,6 +194,7 @@ def article_page(meta, en_title, en_html, it_title, it_html, slug, description):
   <section class="article-language active" data-article-lang="en">
     <div class="article-kicker">{html.escape(article_type)}</div>
     <div class="article-meta">{html.escape(meta_en)}</div>
+    {details_en}
     <div class="article-content">{en_html}</div>
     <div class="article-byline article-byline-top">
       <strong>Ketogenic Research Editorial</strong>
@@ -182,6 +205,7 @@ def article_page(meta, en_title, en_html, it_title, it_html, slug, description):
   <section class="article-language" data-article-lang="it">
     <div class="article-kicker">{html.escape(article_type_it)}</div>
     <div class="article-meta">{html.escape(meta_it)}</div>
+    {details_it}
     <div class="article-content">{it_html}</div>
     <div class="article-byline article-byline-top">
       <strong>Ketogenic Research Editorial</strong>

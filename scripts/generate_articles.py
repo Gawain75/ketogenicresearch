@@ -701,9 +701,17 @@ Before returning the draft, verify:
 - no stereotyped AI-like phrasing;
 - source identifiers and citations are correct.
 
+Before returning the draft, classify two structured editorial descriptors strictly from the SOURCE PACKET:
+- study_type / study_type_it: the actual publication or study design (for example Systematic review / meta-analysis, Narrative review, Randomized clinical trial, Non-randomized clinical intervention, Observational study, Case report / case series, Preclinical / mechanistic study, Perspective / commentary). Do not infer a clinical design that is not explicitly supported.
+- conclusion_type / conclusion_type_it: the kind of conclusion the design can support. Use a concise evidence-calibrated label such as Causal / intervention-supported, Associative, Descriptive, Evidence synthesis, Mechanistic / hypothesis-generating, or Expert interpretation / hypothesis. The Italian value must be the faithful Italian equivalent. Do not upgrade certainty beyond the source design.
+
 Return JSON with exactly these top-level keys:
 article_type
 article_type_it
+study_type
+study_type_it
+conclusion_type
+conclusion_type_it
 title_en
 title_it
 summary_en
@@ -818,7 +826,11 @@ date: {json.dumps(rec.get("date",""))}
 journal: {json.dumps(rec.get("journal",""), ensure_ascii=False)}
 article_type: {json.dumps(draft.get("article_type",""))}
 article_type_it: {json.dumps(draft.get("article_type_it",""))}
-generator_version: "4.2"
+study_type: {json.dumps(draft.get("study_type",""), ensure_ascii=False)}
+study_type_it: {json.dumps(draft.get("study_type_it",""), ensure_ascii=False)}
+conclusion_type: {json.dumps(draft.get("conclusion_type",""), ensure_ascii=False)}
+conclusion_type_it: {json.dumps(draft.get("conclusion_type_it",""), ensure_ascii=False)}
+generator_version: "4.3"
 source_identity: "PASS"
 source_identity_basis: "PubMed PMID/title/DOI/PMCID"
 full_text_source: {json.dumps(full_text_source)}
