@@ -1,57 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-
-def infer_evidence_descriptors(meta: dict, source_text: str = "") -> tuple[str, str, str, str]:
-    """Return study/conclusion descriptors, using stored metadata first and a conservative
-    deterministic fallback for legacy drafts that predate these fields."""
-    st = str(meta.get("study_type", "")).strip()
-    sti = str(meta.get("study_type_it", "")).strip()
-    ct = str(meta.get("conclusion_type", "")).strip()
-    cti = str(meta.get("conclusion_type_it", "")).strip()
-    if st and sti and ct and cti:
-        return st, sti, ct, cti
-
-    t = (" ".join([
-        str(meta.get("title_en", "")),
-        str(meta.get("title_it", "")),
-        source_text or "",
-    ])).lower()
-
-    def has(*xs):
-        return any(x in t for x in xs)
-
-    if has("systematic review", "meta-analysis", "meta analysis", "revisione sistematica", "metanalisi"):
-        vals = ("Systematic review / meta-analysis", "Revisione sistematica / meta-analisi",
-                "Evidence synthesis", "Sintesi di evidenze")
-    elif has("narrative review", "integrative review", "scoping review", "review of ", "revisione narrativa",
-             "revisione integrativa", "research progress", "current evidence"):
-        vals = ("Review", "Revisione", "Evidence synthesis", "Sintesi di evidenze")
-    elif has("randomized", "randomised", "double-blind", "double blind", "placebo-controlled",
-             "placebo controlled", "trial", "randomizzato", "doppio cieco"):
-        vals = ("Randomized clinical trial", "Studio clinico randomizzato",
-                "Causal / intervention-supported", "Causale / supportata da intervento")
-    elif has("case report", "case series", "case study", "a child with", "a patient with",
-             "caso clinico", "serie di casi"):
-        vals = ("Case report / case series", "Caso clinico / serie di casi",
-                "Descriptive", "Descrittivo")
-    elif has("mouse", "mice", "murine", "rat ", "rats", "animal model", "cell line", "in vitro",
-             "preclinical", "mechanistic", "topi", "modello animale"):
-        vals = ("Preclinical / mechanistic study", "Studio preclinico / meccanicistico",
-                "Mechanistic / hypothesis-generating", "Meccanicistico / generatore di ipotesi")
-    elif has("cohort", "cross-sectional", "cross sectional", "retrospective", "prospective observational",
-             "observational", "coorte", "trasversale", "retrospettivo", "osservazionale"):
-        vals = ("Observational study", "Studio osservazionale", "Associative", "Associativo")
-    elif has("perspective", "commentary", "opinion", "hypothesis", "viewpoint", "prospettiva", "commento"):
-        vals = ("Perspective / commentary", "Prospettiva / commento",
-                "Expert interpretation / hypothesis", "Interpretazione esperta / ipotesi")
-    else:
-        # Do not invent a stronger design for legacy material when the text is not explicit.
-        vals = ("Research study", "Studio di ricerca", "Descriptive", "Descrittivo")
-
-    return (st or vals[0], sti or vals[1], ct or vals[2], cti or vals[3])
-
-
 import html
 import json
 import re
@@ -169,6 +118,44 @@ def date_sort_key(meta: dict) -> tuple:
     except Exception:
         return (datetime.min, str(meta.get("pmid") or ""))
 
+
+def research_details(meta: dict, en_md: str = "", it_md: str = ""):
+    st = str(meta.get("study_type", "")).strip()
+    sti = str(meta.get("study_type_it", "")).strip()
+    ct = str(meta.get("conclusion_type", "")).strip()
+    cti = str(meta.get("conclusion_type_it", "")).strip()
+    if st and sti and ct and cti:
+        return st, sti, ct, cti
+
+    text = " ".join([str(meta.get("title_en", "")), str(meta.get("title_it", "")), en_md, it_md]).lower()
+    def has(*terms): return any(term in text for term in terms)
+
+    if has("systematic review", "meta-analysis", "meta analysis", "revisione sistematica", "meta-analisi", "metanalisi"):
+        f = ("Systematic review / meta-analysis", "Revisione sistematica / meta-analisi", "Evidence synthesis", "Sintesi di evidenze")
+    elif has("review", "revisione", "state of the art", "current evidence"):
+        f = ("Review", "Revisione", "Evidence synthesis", "Sintesi di evidenze")
+    elif has("randomized", "randomised", "randomizzato", "placebo-controlled", "placebo controlled", "double-blind", "double blind"):
+        f = ("Randomized clinical trial", "Studio clinico randomizzato", "Intervention-supported", "Supportata da intervento")
+    elif has("case report", "case series", "caso clinico", "serie di casi", "single patient", "single-patient"):
+        f = ("Case report / case series", "Caso clinico / serie di casi", "Descriptive", "Descrittivo")
+    elif has("cohort", "cross-sectional", "cross sectional", "retrospective", "observational", "coorte", "trasversale", "retrospettivo", "osservazionale"):
+        f = ("Observational study", "Studio osservazionale", "Associative", "Associativo")
+    elif has("mouse", "mice", "murine", "animal model", "in vitro", "cell line", "preclinical", "mechanistic", "modello animale", "preclinico", "meccanicistico"):
+        f = ("Preclinical / mechanistic study", "Studio preclinico / meccanicistico", "Mechanistic / hypothesis-generating", "Meccanicistico / generatore di ipotesi")
+    elif has("perspective", "commentary", "viewpoint", "opinion", "prospettiva", "commento"):
+        f = ("Perspective / commentary", "Prospettiva / commento", "Interpretative", "Interpretativa")
+    elif has("trial", "intervention", "interventional", "intervento"):
+        f = ("Intervention study", "Studio di intervento", "Intervention-supported", "Supportata da intervento")
+    else:
+        f = ("Research study", "Studio di ricerca", "Descriptive", "Descrittivo")
+    return (st or f[0], sti or f[1], ct or f[2], cti or f[3])
+
+def card_research_details(meta: dict, en_md: str, it_md: str):
+    st, sti, ct, cti = research_details(meta, en_md, it_md)
+    en = f'<div class="article-card-evidence"><strong>Study type:</strong> {html.escape(st)} · <strong>Conclusion type:</strong> {html.escape(ct)}</div>'
+    it = f'<div class="article-card-evidence"><strong>Tipo di ricerca:</strong> {html.escape(sti)} · <strong>Tipo di conclusione:</strong> {html.escape(cti)}</div>'
+    return en, it
+
 def article_page(meta, en_title, en_html, it_title, it_html, slug, description):
     date = str(meta.get("date", ""))
     journal = str(meta.get("journal", ""))
@@ -176,7 +163,7 @@ def article_page(meta, en_title, en_html, it_title, it_html, slug, description):
     doi = str(meta.get("doi", ""))
     article_type = str(meta.get("article_type", "Research Note"))
     article_type_it = str(meta.get("article_type_it", "Nota di ricerca"))
-    study_type, study_type_it, conclusion_type, conclusion_type_it = infer_evidence_descriptors(meta, text if "text" in locals() else "")
+    study_type, study_type_it, conclusion_type, conclusion_type_it = research_details(meta)
 
     meta_en = " · ".join(x for x in [pretty_date(date, "en"), journal] if x)
     meta_it = " · ".join(x for x in [pretty_date(date, "it"), journal] if x)
@@ -401,39 +388,18 @@ def main():
         journal = str(meta.get("journal", ""))
         en_meta = " · ".join(x for x in [pretty_date(date, "en"), journal] if x)
         it_meta = " · ".join(x for x in [pretty_date(date, "it"), journal] if x)
-
-        study_type, study_type_it, conclusion_type, conclusion_type_it = infer_evidence_descriptors(meta, text if "text" in locals() else "")
-
-        card_details_en = ""
-        if study_type or conclusion_type:
-            bits = []
-            if study_type:
-                bits.append(f'<span><strong>Study type:</strong> {html.escape(study_type)}</span>')
-            if conclusion_type:
-                bits.append(f'<span><strong>Conclusion type:</strong> {html.escape(conclusion_type)}</span>')
-            card_details_en = '<div class="article-card-evidence">' + ' · '.join(bits) + '</div>'
-
-        card_details_it = ""
-        if study_type_it or conclusion_type_it:
-            bits = []
-            if study_type_it:
-                bits.append(f'<span><strong>Tipo di ricerca:</strong> {html.escape(study_type_it)}</span>')
-            if conclusion_type_it:
-                bits.append(f'<span><strong>Tipo di conclusione:</strong> {html.escape(conclusion_type_it)}</span>')
-            card_details_it = '<div class="article-card-evidence">' + ' · '.join(bits) + '</div>'
+        card_details_en, card_details_it = card_research_details(meta, en_md, it_md)
 
         cards.append(f'''
 <article class="article-card">
   <a href="articles/{slug}.html">
     <div class="article-card-language active" data-card-lang="en">
-      <span class="article-card-type">{html.escape(str(meta.get("article_type", "Research Note")))}</span>
-      {card_details_en}
+      <span class="article-card-type">{html.escape(str(meta.get("article_type", "Research Note")))}</span>\n      {card_details_en}
       <h2>{html.escape(en_title)}</h2>
       <p>{html.escape(en_meta)}</p>
     </div>
     <div class="article-card-language" data-card-lang="it">
-      <span class="article-card-type">{html.escape(str(meta.get("article_type_it", "Nota di ricerca")))}</span>
-      {card_details_it}
+      <span class="article-card-type">{html.escape(str(meta.get("article_type_it", "Nota di ricerca")))}</span>\n      {card_details_it}
       <h2>{html.escape(it_title or en_title)}</h2>
       <p>{html.escape(it_meta)}</p>
     </div>
