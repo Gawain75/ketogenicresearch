@@ -354,16 +354,41 @@ def main():
         en_meta = " · ".join(x for x in [pretty_date(date, "en"), journal] if x)
         it_meta = " · ".join(x for x in [pretty_date(date, "it"), journal] if x)
 
+        study_type = str(meta.get("study_type", "")).strip()
+        study_type_it = str(meta.get("study_type_it", "")).strip()
+        conclusion_type = str(meta.get("conclusion_type", "")).strip()
+        conclusion_type_it = str(meta.get("conclusion_type_it", "")).strip()
+
+        card_details_en = ""
+        if study_type or conclusion_type:
+            bits = []
+            if study_type:
+                bits.append(f'<span><strong>Study type:</strong> {html.escape(study_type)}</span>')
+            if conclusion_type:
+                bits.append(f'<span><strong>Conclusion type:</strong> {html.escape(conclusion_type)}</span>')
+            card_details_en = '<div class="article-card-evidence">' + ' · '.join(bits) + '</div>'
+
+        card_details_it = ""
+        if study_type_it or conclusion_type_it:
+            bits = []
+            if study_type_it:
+                bits.append(f'<span><strong>Tipo di ricerca:</strong> {html.escape(study_type_it)}</span>')
+            if conclusion_type_it:
+                bits.append(f'<span><strong>Tipo di conclusione:</strong> {html.escape(conclusion_type_it)}</span>')
+            card_details_it = '<div class="article-card-evidence">' + ' · '.join(bits) + '</div>'
+
         cards.append(f'''
 <article class="article-card">
   <a href="articles/{slug}.html">
     <div class="article-card-language active" data-card-lang="en">
       <span class="article-card-type">{html.escape(str(meta.get("article_type", "Research Note")))}</span>
+      {card_details_en}
       <h2>{html.escape(en_title)}</h2>
       <p>{html.escape(en_meta)}</p>
     </div>
     <div class="article-card-language" data-card-lang="it">
       <span class="article-card-type">{html.escape(str(meta.get("article_type_it", "Nota di ricerca")))}</span>
+      {card_details_it}
       <h2>{html.escape(it_title or en_title)}</h2>
       <p>{html.escape(it_meta)}</p>
     </div>
