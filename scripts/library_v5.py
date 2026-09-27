@@ -8,6 +8,8 @@ import os
 import re
 import sys
 import urllib.parse
+import urllib.error
+import time
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -65,12 +67,37 @@ def article_title(card) -> str:
     return re.sub(r"^\s*\d+\.\s*", "", value).strip()
 
 
+def pubmed_api(name, params, *, attempts: int = 4):
+    """Retry transient NCBI failures without weakening bibliographic matching."""
+    for attempt in range(1, attempts + 1):
+        try:
+            return U.api(name, params)
+        except urllib.error.HTTPError as exc:
+            if exc.code not in {429, 500, 502, 503, 504} or attempt >= attempts:
+                raise
+            wait = 5 * attempt
+            print(
+                f"PubMed transient HTTP {exc.code}; retry "
+                f"{attempt}/{attempts - 1} after {wait}s..."
+            )
+            time.sleep(wait)
+        except (urllib.error.URLError, TimeoutError) as exc:
+            if attempt >= attempts:
+                raise
+            wait = 5 * attempt
+            print(
+                f"PubMed temporary network error; retry "
+                f"{attempt}/{attempts - 1} after {wait}s: {exc}"
+            )
+            time.sleep(wait)
+
+
 def fetch_pubmed_records(ids: list[str]) -> list[ET.Element]:
     result = []
     for i in range(0, len(ids), FETCH_BATCH):
         batch = ids[i:i + FETCH_BATCH]
         root = ET.fromstring(
-            U.api(
+            pubmed_api(
                 "efetch.fcgi",
                 {
                     "db": "pubmed",
@@ -173,7 +200,7 @@ def exact_title_lookup(title: str) -> dict | None:
     # Use a title-field search, then accept ONLY an exact normalized title match.
     term = f'"{title}"[Title]'
     data = json.loads(
-        U.api(
+        pubmed_api(
             "esearch.fcgi",
             {
                 "db": "pubmed",
@@ -208,7 +235,14 @@ def reconcile_existing_cards(soup: BeautifulSoup) -> int:
         candidates.append((card, title))
 
     for card, title in candidates[:RECONCILE_MAX]:
-        rec = exact_title_lookup(title)
+        try:
+            rec = exact_title_lookup(title)
+        except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, ET.ParseError, json.JSONDecodeError) as exc:
+            print(
+                f"Legacy reconcile: PubMed lookup temporarily unavailable; "
+                f"skipping this card: {title[:90]} ({exc})"
+            )
+            continue
         if not rec:
             print(f"Legacy reconcile: no exact PubMed match: {title[:90]}")
             continue
@@ -305,7 +339,7 @@ def search_backfill_ids(start_year: int, end_year: int) -> tuple[list[str], int]
     }
 
     first = json.loads(
-        U.api(
+        pubmed_api(
             "esearch.fcgi",
             {**common, "retmax": "0"},
         ).decode("utf-8")
@@ -316,7 +350,7 @@ def search_backfill_ids(start_year: int, end_year: int) -> tuple[list[str], int]
     page = 500
     for retstart in range(0, min(count, BACKFILL_MAX_RECORDS), page):
         data = json.loads(
-            U.api(
+            pubmed_api(
                 "esearch.fcgi",
                 {
                     **common,
