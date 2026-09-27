@@ -1,9 +1,131 @@
 {
-  "generated_at": "2026-09-26T03:29:54+00:00",
+  "generated_at": "2026-09-27T07:51:19+00:00",
   "curation_window_days": 365,
-  "auto_approved_count": 0,
-  "excluded_count": 20,
+  "auto_approved_count": 2,
+  "excluded_count": 22,
   "records": [
+    {
+      "pmid": "42790707",
+      "title": "Letter to the Editor: Methodological considerations when determining the minimum amount of dietary carbohydrates that prevents nutritional ketosis.",
+      "authors": [
+        "Martins C"
+      ],
+      "journal": "The Journal of nutrition",
+      "date": "2026-09-25",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.tjnut.2026.101850",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42790707/",
+      "doi_url": "https://doi.org/10.1016/j.tjnut.2026.101850",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-27",
+      "status": "new",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "42800429",
+      "title": "Beyond the classic ketogenic diet: A systematic review of alternative and adjunctive therapies for GLUT1 deficiency syndrome.",
+      "authors": [
+        "Falsaperla R",
+        "Ben Amer S",
+        "Sortino V"
+      ],
+      "journal": "Epilepsy research",
+      "date": "2026-09-23",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.eplepsyres.2026.107926",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42800429/",
+      "doi_url": "https://doi.org/10.1016/j.eplepsyres.2026.107926",
+      "pmc_url": "",
+      "areas": [
+        "GLUT1 Deficiency Syndrome"
+      ],
+      "category_confidence": 7,
+      "evidence_type": "Systematic review / meta-analysis",
+      "evidence_type_it": "Revisione sistematica / meta-analisi",
+      "source": "PubMed",
+      "first_seen": "2026-09-27",
+      "status": "new",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "42799402",
+      "title": "Analysis of critical nutrients in ketogenic diets for adults based on optimized hypothetical meal plans.",
+      "authors": [
+        "Assmann M",
+        "Albrecht I",
+        "Fischer T"
+      ],
+      "journal": "Frontiers in nutrition",
+      "date": "2026-09-11",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3389/fnut.2026.1829975",
+      "pmc": "PMC13614011",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42799402/",
+      "doi_url": "https://doi.org/10.3389/fnut.2026.1829975",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13614011/",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-27",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "42796965",
+      "title": "A Food-Based Sequential KETOgenic Nutritional Protocol for Mediterranean Diet Non-Responders with COMPlicated Obesity: A Real-World Observational Study (KETOCOMP).",
+      "authors": [
+        "Romano M",
+        "Raoul PC",
+        "Ianiro G",
+        "Rondinella D",
+        "Ribaudi E",
+        "Galli FS",
+        "Cintoni M",
+        "Gasbarrini A",
+        "Capristo E",
+        "Mele MC",
+        "Rinninella E"
+      ],
+      "journal": "Nutrients",
+      "date": "2026-09-11",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3390/nu18182982",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42796965/",
+      "doi_url": "https://doi.org/10.3390/nu18182982",
+      "pmc_url": "",
+      "areas": [
+        "Obesity"
+      ],
+      "category_confidence": 9,
+      "evidence_type": "Clinical trial / intervention",
+      "evidence_type_it": "Trial clinico / intervento",
+      "source": "PubMed",
+      "first_seen": "2026-09-27",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
     {
       "pmid": "42780737",
       "title": "Ketogenic therapy as a potential novel treatment approach for PTSD: an integrative review and proposed mechanistic model.",
