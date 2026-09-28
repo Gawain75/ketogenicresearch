@@ -6,6 +6,7 @@ import shutil
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "cloudflare-dist"
 CF = ROOT / "cloudflare"
+CHUNKS = DIST / "library-chunks"
 
 FILES = [
     "script.js",
@@ -177,6 +178,64 @@ def inject_account_status(html: str) -> str:
         return html[:pos] + widget + "\n" + html[pos:]
     return html + widget
 
+def split_library_payload(html: str) -> str:
+    """Split heavy Library card payloads into Cloudflare-safe fragments."""
+    CHUNKS.mkdir(parents=True, exist_ok=True)
+    start_re = re.compile(r'<div\s+class=(["\\\'])folder-curated\1[^>]*>', re.I)
+    div_re = re.compile(r'<div\b[^>]*>|</div\s*>', re.I)
+    out, cursor, chunk_no = [], 0, 0
+    while True:
+        m = start_re.search(html, cursor)
+        if not m:
+            out.append(html[cursor:]); break
+        open_end, depth = m.end(), 1
+        close_start = close_end = None
+        for token in div_re.finditer(html, open_end):
+            raw = token.group(0).lower()
+            if raw.startswith('</div'):
+                depth -= 1
+                if depth == 0:
+                    close_start, close_end = token.start(), token.end(); break
+            else:
+                depth += 1
+        if close_start is None:
+            raise SystemExit('Unable to split Library: unmatched folder-curated div')
+        chunk_no += 1
+        rel = f'library-chunks/chunk-{chunk_no:04d}.html'
+        (DIST / rel).write_text(html[open_end:close_start], encoding='utf-8')
+        out.append(html[cursor:m.start()])
+        out.append(f'<div class="folder-curated" data-kr-library-chunk="{rel}"><div class="kr-library-loading" aria-hidden="true"></div></div>')
+        cursor = close_end
+    if chunk_no == 0:
+        raise SystemExit('Unable to split Library: no folder-curated containers found')
+    shell = ''.join(out)
+    script_re = re.compile(r'<script\s+src=(["\\\'])script\.js(?:\?[^"\\\']*)?\1\s*></script>', re.I)
+    loader = """<script>
+(async function(){
+  const nodes=Array.from(document.querySelectorAll('[data-kr-library-chunk]'));
+  try {
+    await Promise.all(nodes.map(async function(node){
+      const url=node.getAttribute('data-kr-library-chunk');
+      const response=await fetch(url,{cache:'default'});
+      if(!response.ok) throw new Error('Library chunk failed: '+url+' ('+response.status+')');
+      node.innerHTML=await response.text();
+      node.removeAttribute('data-kr-library-chunk');
+    }));
+    const script=document.createElement('script');
+    script.src='script.js?v=71';
+    document.body.appendChild(script);
+  } catch(error) {
+    console.error(error);
+    nodes.forEach(function(node){if(node.hasAttribute('data-kr-library-chunk')) node.innerHTML='<p class=\"folder-rationale\">Unable to load this Library section. Please reload the page.</p>';});
+  }
+})();
+</script>"""
+    shell, replaced = script_re.subn(loader, shell, count=1)
+    if replaced != 1:
+        raise SystemExit('Unable to split Library: script.js tag not found')
+    print(f'Library payload split into {chunk_no} fragments.')
+    return shell
+
 def main():
     if DIST.exists():
         shutil.rmtree(DIST)
@@ -188,6 +247,7 @@ def main():
 
     html = clean_library_html(library.read_text(encoding="utf-8"))
     html = inject_account_status(html)
+    html = split_library_payload(html)
     (DIST / "library.html").write_text(html, encoding="utf-8")
 
     for name in FILES:
@@ -203,7 +263,7 @@ def main():
         shutil.copy2(source, DIST / name)
 
     checks = {
-        "library.html": ["Scientific Library", "script.js", "styles.css"],
+        "library.html": ["Scientific Library", "script.js?v=71", "styles.css", "data-kr-library-chunk"],
         "library-access.html": ["forgotPassword", "Complete your Library profile"],
         "_worker.js": ["env.ASSETS.fetch(request)", "library_profiles", "/auth/me"],
     }
@@ -222,6 +282,12 @@ def main():
 
     if 'https://ketogenicresearch.org/' not in library_out:
         raise SystemExit("Main-site Home URL missing from protected Library")
+
+    max_pages_file = 25 * 1024 * 1024
+    oversized = [p for p in DIST.rglob("*") if p.is_file() and p.stat().st_size > max_pages_file]
+    if oversized:
+        details = ", ".join(f"{p.relative_to(DIST)} ({p.stat().st_size / 1024 / 1024:.1f} MiB)" for p in oversized)
+        raise SystemExit(f"Cloudflare Pages 25 MiB file limit exceeded: {details}")
 
     print("Cloudflare Library package built successfully.")
     print("Files:")
