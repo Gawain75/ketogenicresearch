@@ -613,15 +613,15 @@
       ]
     }
   ],
-  "updated_at": "2026-09-27T08:35:19.150974+00:00",
+  "updated_at": "2026-09-28T03:30:26.927848+00:00",
   "source_unavailable_pmids": [
     "42642354",
     "42717355",
     "42790707"
   ],
   "last_run": {
-    "attempted_candidates": 2,
-    "published_articles": 1,
-    "status": "published"
+    "attempted_candidates": 1,
+    "published_articles": 0,
+    "status": "no_article_published"
   }
 }
