@@ -57,6 +57,24 @@ def clean_library_html(html: str) -> str:
     )
     html = html.replace("kr-auth-pending", "")
 
+    # Library: show research type and conclusion type on separate lines.
+    library_details_css = """
+<style id="kr-library-details-multiline">
+.paper-study-details > span,
+.article-study-details > span,
+.library-study-details > span { display: block; }
+.paper-study-details > span + span,
+.article-study-details > span + span,
+.library-study-details > span + span { margin-top: 3px; }
+</style>
+"""
+    if "kr-library-details-multiline" not in html:
+        m = re.search(r"</head>", html, flags=re.I)
+        if m:
+            html = html[:m.start()] + library_details_css + "\n" + html[m.start():]
+        else:
+            html = library_details_css + html
+
     # The protected Library lives on library.ketogenicresearch.org, while the
     # rest of the website lives on ketogenicresearch.org. Convert the Library
     # navigation back to absolute main-site URLs so Home/Research/etc. never
