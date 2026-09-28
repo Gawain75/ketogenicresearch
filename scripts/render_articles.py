@@ -152,8 +152,18 @@ def research_details(meta: dict, en_md: str = "", it_md: str = ""):
 
 def card_research_details(meta: dict, en_md: str, it_md: str):
     st, sti, ct, cti = research_details(meta, en_md, it_md)
-    en = f'<div class="article-card-evidence"><strong>Study type:</strong> {html.escape(st)} · <strong>Conclusion type:</strong> {html.escape(ct)}</div>'
-    it = f'<div class="article-card-evidence"><strong>Tipo di ricerca:</strong> {html.escape(sti)} · <strong>Tipo di conclusione:</strong> {html.escape(cti)}</div>'
+    en = (
+        f'<div class="article-card-evidence">'
+        f'<div><strong>Study type:</strong> {html.escape(st)}</div>'
+        f'<div><strong>Conclusion type:</strong> {html.escape(ct)}</div>'
+        f'</div>'
+    )
+    it = (
+        f'<div class="article-card-evidence">'
+        f'<div><strong>Tipo di ricerca:</strong> {html.escape(sti)}</div>'
+        f'<div><strong>Tipo di conclusione:</strong> {html.escape(cti)}</div>'
+        f'</div>'
+    )
     return en, it
 
 def article_page(meta, en_title, en_html, it_title, it_html, slug, description):
