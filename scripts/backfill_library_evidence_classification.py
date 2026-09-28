@@ -82,24 +82,63 @@ def fetch(pmids):
 
 def classify(title, abstract="", types=None, mesh=None, historical=False):
     if historical: return "Historical / foundational evidence"
-    types_s=" | ".join(types or []).lower()
+
+    types_l=[clean(x).lower() for x in (types or []) if clean(x)]
+    types_s=" | ".join(types_l)
     mesh_s=" | ".join(mesh or []).lower()
-    body=f"{clean(title).lower()} {clean(abstract).lower()}"
+    title_s=clean(title).lower()
+    abstract_s=clean(abstract).lower()
+    body=f"{title_s} {abstract_s}"
+
     mesh_h="humans" in mesh_s
     mesh_a=("animals" in mesh_s) or any(x in mesh_s for x in ("mice","rats","zebrafish"))
-    pre=bool(ANIMAL_RE.search(body)) or any(x in body for x in ("animal model","animal study","preclinical","in vitro","cell line","cell culture","organoid")) or (mesh_a and not mesh_h)
+    pre=bool(ANIMAL_RE.search(body)) or any(
+        x in body for x in ("animal model","animal study","preclinical","in vitro","cell line","cell culture","organoid")
+    ) or (mesh_a and not mesh_h)
     human=mesh_h or bool(HUMAN_RE.search(body))
-    if any(x in types_s or x in body for x in ("meta-analysis","meta analysis","systematic review","scoping review","umbrella review")): return "Systematic review / meta-analysis"
-    if any(x in types_s or x in body for x in ("guideline","practice guideline","consensus","position statement")): return "Guideline / consensus"
-    if any(x in types_s or x in body for x in ("case reports","case report","case series")) and not pre: return "Case report / case series"
-    if pre and not (mesh_h and not mesh_a): return "Preclinical / mechanistic"
-    if any(x in types_s or x in body for x in ("randomized controlled trial","controlled clinical trial","randomized clinical trial","randomised clinical trial","randomised controlled trial")) or (re.search(r"\brandomi[sz]ed\b",body) and human): return "Randomized clinical trial"
-    if "clinical trial" in types_s or (INTERVENTION_RE.search(body) and human): return "Clinical trial / intervention"
-    if any(x in types_s for x in ("observational study","cohort studies","case-control studies","comparative study")) or (OBS_RE.search(body) and human): return "Observational human study"
-    if "review" in types_s or "review" in body or "mini-review" in body: return "Review"
-    if pre: return "Preclinical / mechanistic"
-    if human: return "Human / clinical or translational evidence"
-    if re.search(r"\b(weight loss|body composition|blood glucose|glycemic|glycaemic|insulin resistance|quality of life|seizure frequency|clinical outcomes|tolerability|adherence|efficacy|safety)\b",body,re.I): return "Human / clinical or translational evidence"
+
+    # PubMed PublicationType is the primary source for study design.
+    # This prevents reviews discussing trials/interventions from being
+    # misclassified as primary clinical trials.
+    if any(x in types_l for x in ("meta-analysis","systematic review")):
+        return "Systematic review / meta-analysis"
+    if any(x in types_l for x in ("guideline","practice guideline","consensus development conference","consensus development conference, nih")):
+        return "Guideline / consensus"
+    if "review" in types_l:
+        return "Review"
+    if any(x in types_l for x in ("randomized controlled trial","controlled clinical trial")):
+        return "Randomized clinical trial"
+    if any(x == "clinical trial" or x.startswith("clinical trial, phase ") for x in types_l):
+        return "Clinical trial / intervention"
+    if "case reports" in types_l and not pre:
+        return "Case report / case series"
+    if any(x in types_l for x in ("observational study","cohort studies","case-control studies","comparative study")):
+        return "Observational human study"
+
+    # Textual fallback, used when PublicationType does not resolve the design.
+    # Review-like language is evaluated before intervention keywords.
+    if any(x in title_s or x in abstract_s for x in ("meta-analysis","meta analysis","systematic review","scoping review","umbrella review")):
+        return "Systematic review / meta-analysis"
+    if any(x in title_s or x in abstract_s for x in ("guideline","practice guideline","consensus","position statement")):
+        return "Guideline / consensus"
+    if re.search(r"\b(review|mini-review)\b",title_s):
+        return "Review"
+    if any(x in body for x in ("case report","case series")) and not pre:
+        return "Case report / case series"
+    if pre and not (mesh_h and not mesh_a):
+        return "Preclinical / mechanistic"
+    if any(x in body for x in ("randomized controlled trial","randomized clinical trial","randomised clinical trial","randomised controlled trial")) or (re.search(r"\brandomi[sz]ed\b",body) and human):
+        return "Randomized clinical trial"
+    if INTERVENTION_RE.search(body) and human:
+        return "Clinical trial / intervention"
+    if OBS_RE.search(body) and human:
+        return "Observational human study"
+    if pre:
+        return "Preclinical / mechanistic"
+    if human:
+        return "Human / clinical or translational evidence"
+    if re.search(r"\b(weight loss|body composition|blood glucose|glycemic|glycaemic|insulin resistance|quality of life|seizure frequency|clinical outcomes|tolerability|adherence|efficacy|safety)\b",body,re.I):
+        return "Human / clinical or translational evidence"
     return "Other"
 
 def ensure_badge(soup,card,evidence):
@@ -116,15 +155,20 @@ def main():
     ap=argparse.ArgumentParser(); ap.add_argument("--offline",action="store_true"); args=ap.parse_args()
     soup=BeautifulSoup(LIBRARY.read_text(encoding="utf-8"),"html.parser")
     cards=soup.select("article.folder-paper")
-    candidates=[]; missing=0; generic=0
+    candidates=[]; missing=0; generic=0; recheck=0
     for c in cards:
         badge=c.select_one(":scope > .evidence-level")
         ev=clean(c.get("data-evidence")).lower()
         reviewed=clean(c.get("data-evidence-reviewed")).lower()=="true"
+        pmid=pmid_of(c)
         if badge is None:
             missing+=1; candidates.append(c)
         elif ev=="other" and not reviewed:
             generic+=1; candidates.append(c)
+        elif pmid and ev!="historical":
+            # Re-check existing PubMed-backed classifications so previously
+            # misclassified reviews/trials can be corrected deterministically.
+            recheck+=1; candidates.append(c)
 
     pmids=sorted({pmid_of(c) for c in candidates if pmid_of(c)},key=lambda x:int(x))
     records,failed=({},[]) if args.offline else fetch(pmids)
@@ -162,6 +206,7 @@ def main():
       "candidates_processed":len(candidates),
       "initial_missing_badges":missing,
       "initial_generic_other_reviewed":generic,
+      "existing_pubmed_cards_rechecked":recheck,
       "unique_candidate_pmids":len(pmids),
       "pubmed_records_retrieved":len(records),
       "pubmed_pmids_not_retrieved":failed,
