@@ -225,9 +225,33 @@ jobs:
           title_by_pmid = {}
           year_by_pmid = {}
 
-          for card in soup.select("article.folder-paper[data-pmid]"):
-              year = (card.get("data-year") or "").strip()
+          for card in soup.select("article.folder-paper"):
+              # PMID can be stored as data-pmid OR only inside the PubMed link.
               pmid = (card.get("data-pmid") or "").strip()
+              if not pmid.isdigit():
+                  pubmed_link = card.find(
+                      "a",
+                      href=re.compile(
+                          r"pubmed\.ncbi\.nlm\.nih\.gov/\d+/",
+                          re.I,
+                      ),
+                  )
+                  if pubmed_link:
+                      match = re.search(
+                          r"pubmed\.ncbi\.nlm\.nih\.gov/(\d+)/",
+                          pubmed_link.get("href", ""),
+                          re.I,
+                      )
+                      if match:
+                          pmid = match.group(1)
+
+              # Year can be stored as data-year or only as visible metadata.
+              year = (card.get("data-year") or "").strip()
+              if year not in YEARS:
+                  card_text = card.get_text(" ", strip=True)
+                  year_match = re.search(r"\b(2025|2026)\b", card_text)
+                  if year_match:
+                      year = year_match.group(1)
 
               if year not in YEARS or not pmid.isdigit():
                   continue
@@ -286,6 +310,38 @@ jobs:
                   card.decompose()
                   removed_cards += 1
 
+          # Final safety purge by title. This catches legacy cards that do not
+          # expose a PMID/year in the current HTML structure.
+          known_false_positive_fragments = (
+              "lipolysis-driven communication between adipose tissue and liver",
+              "hepatic stearoyl-coa desaturase 1 suppresses diet-induced hyperphagia",
+          )
+
+          forced_title_removals = []
+          for card in list(soup.select("article.folder-paper")):
+              h4 = card.find("h4")
+              if not h4:
+                  continue
+
+              title_value = (
+                  h4.get("data-en")
+                  or h4.get_text(" ", strip=True)
+                  or ""
+              )
+              normalized_title = re.sub(
+                  r"^\s*\d+\.\s*",
+                  "",
+                  title_value,
+              ).strip().lower()
+
+              if any(
+                  fragment in normalized_title
+                  for fragment in known_false_positive_fragments
+              ):
+                  forced_title_removals.append(normalized_title)
+                  card.decompose()
+                  removed_cards += 1
+
           # Renumber papers independently inside every clinical-area folder.
           for folder in soup.select("details.library-folder"):
               for number, card in enumerate(
@@ -317,6 +373,7 @@ jobs:
               "pubmed_records_fetched": len(fetched),
               "unique_pmids_removed": len(remove_pmids),
               "card_instances_removed": removed_cards,
+              "forced_title_removals": forced_title_removals,
               "removed": [
                   {
                       "pmid": pmid,
@@ -349,6 +406,7 @@ jobs:
               s.write(f"- PubMed records fetched: **{len(fetched)}**\n")
               s.write(f"- Unique PMIDs removed: **{len(remove_pmids)}**\n")
               s.write(f"- Library card instances removed: **{removed_cards}**\n")
+              s.write(f"- Forced legacy-title removals: **{len(forced_title_removals)}**\n")
               if remove_pmids:
                   s.write("\n### Removed records\n")
                   for pmid in remove_pmids[:100]:
