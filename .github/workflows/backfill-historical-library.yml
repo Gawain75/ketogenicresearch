@@ -22,12 +22,13 @@ concurrency:
 jobs:
   backfill:
     runs-on: ubuntu-latest
-    timeout-minutes: 180
+    timeout-minutes: 240
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
 
       - name: Set up Python
@@ -52,12 +53,13 @@ jobs:
           START="${{ inputs.start_year }}"
           END="${{ inputs.end_year }}"
           CURRENT="$(date -u +%Y)"
+
           [[ "$START" =~ ^[0-9]{4}$ ]] || { echo "Invalid start_year"; exit 1; }
           [[ "$END" =~ ^[0-9]{4}$ ]] || { echo "Invalid end_year"; exit 1; }
           (( START <= END )) || { echo "start_year must be <= end_year"; exit 1; }
           (( END <= CURRENT )) || { echo "end_year cannot be in the future"; exit 1; }
 
-      - name: Backfill Library year by year
+      - name: Backfill Library year by year with checkpoints
         env:
           NCBI_EMAIL: ${{ secrets.NCBI_EMAIL }}
           NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
@@ -65,55 +67,107 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+
           START="${{ inputs.start_year }}"
           END="${{ inputs.end_year }}"
+
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          retry() {
+            local attempts=0
+            local max_attempts=4
+            local delay=8
+
+            until "$@"; do
+              attempts=$((attempts + 1))
+              if (( attempts >= max_attempts )); then
+                echo "Command failed after ${max_attempts} attempts: $*"
+                return 1
+              fi
+
+              echo "Transient failure. Retry ${attempts}/${max_attempts} in ${delay}s..."
+              sleep "$delay"
+              delay=$((delay * 2))
+            done
+          }
 
           for YEAR in $(seq "$START" "$END"); do
             echo "===================================================="
             echo "Processing publication year $YEAR"
             echo "===================================================="
 
-            BACKFILL_YEAR="$YEAR" python scripts/update_latest.py
-            python scripts/promote_auto.py
+            retry env BACKFILL_YEAR="$YEAR" python scripts/update_latest.py
+            retry python scripts/promote_auto.py
 
-            if [[ -f scripts/repair_fulltext_links.py ]]; then
-              python scripts/repair_fulltext_links.py
+            git add -A
+
+            if ! git diff --cached --quiet; then
+              git commit -m "Backfill Scientific Library ${YEAR}"
+              retry git fetch origin main
+              retry git rebase origin/main
+              retry git push origin HEAD:main
+            else
+              echo "No new Library changes for ${YEAR}."
             fi
           done
+
+      - name: Refresh Full text and PDF links
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -u
+
+          if [[ ! -f scripts/repair_fulltext_links.py ]]; then
+            echo "repair_fulltext_links.py not present; skipping."
+            exit 0
+          fi
+
+          for attempt in 1 2 3 4; do
+            echo "Full-text enrichment attempt ${attempt}/4"
+
+            if python scripts/repair_fulltext_links.py; then
+              echo "Full-text enrichment completed."
+              exit 0
+            fi
+
+            echo "Full-text enrichment failed; waiting before retry..."
+            sleep $((attempt * 15))
+          done
+
+          echo "WARNING: Full-text enrichment failed after retries."
+          echo "Historical Library backfill remains valid and will continue."
+          exit 1
 
       - name: Rebuild derived Library data
         shell: bash
         run: |
           set -euo pipefail
-          for SCRIPT in             scripts/sync_publication_counters.py             scripts/build_evidence_trends.py
-          do
-            if [[ -f "$SCRIPT" ]]; then
-              echo "Running $SCRIPT"
-              python "$SCRIPT"
-            fi
-          done
 
-      - name: Commit historical backfill
+          if [[ -f scripts/sync_publication_counters.py ]]; then
+            python scripts/sync_publication_counters.py
+          fi
+
+          if [[ -f scripts/build_evidence_trends.py ]]; then
+            python scripts/build_evidence_trends.py
+          fi
+
+      - name: Commit final enrichment and trends
         shell: bash
         run: |
           set -euo pipefail
+
           git config user.name "Ketogenic Research Bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           git add -A
 
           if git diff --cached --quiet; then
-            echo "No changes produced by historical backfill."
+            echo "No final derived changes to commit."
             exit 0
           fi
 
-          git commit -m "Backfill Scientific Library ${{ inputs.start_year }}-${{ inputs.end_year }}"
-
-          if ! git diff --quiet || ! git diff --cached --quiet; then
-            echo "Unexpected uncommitted changes remain:"
-            git status --short
-            exit 1
-          fi
-
-          git pull --rebase origin main
+          git commit -m "Rebuild Scientific Library trends after historical backfill"
+          git fetch origin main
+          git rebase origin/main
           git push origin HEAD:main
