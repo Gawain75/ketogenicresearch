@@ -1,51 +1,24 @@
 {
-  "generated_at": "2026-09-29T13:56:21+00:00",
+  "generated_at": "2026-09-29T13:56:36+00:00",
   "curation_window_days": 365,
-  "backfill_year": 1952,
-  "auto_approved_count": 4,
-  "excluded_count": 6,
+  "backfill_year": 1953,
+  "auto_approved_count": 5,
+  "excluded_count": 8,
   "records": [
     {
-      "pmid": "13041468",
-      "title": "[Correlation between ketone bodies and carbohydrate metabolism; effect of intravenous standard dose of acetone on glycemic curve in liver diseases].",
+      "pmid": "13144617",
+      "title": "[Relation between cocarboxylase and ketone bodies].",
       "authors": [
-        "ALCOZER G"
+        "CAFFARENA G",
+        "CHIOSSI FM"
       ],
-      "journal": "Archivio \"E. Maragliano\" di patologia e clinica",
-      "date": "1952-11-01",
+      "journal": "Minerva pediatrica",
+      "date": "1953-12-31",
       "date_precision": "day",
-      "year": 1952,
+      "year": 1953,
       "doi": "",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13041468/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Diabetes & Glucose Metabolism",
-        "MASLD / Metabolic Liver Disease"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "13126607",
-      "title": "Factors involved in the formation and utilization of ketone bodies.",
-      "authors": [
-        "WEINHOUSE S"
-      ],
-      "journal": "Brookhaven symposia in biology",
-      "date": "1952-09-01",
-      "date_precision": "day",
-      "year": 1952,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13126607/",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13144617/",
       "doi_url": "",
       "pmc_url": "",
       "areas": [
@@ -61,162 +34,22 @@
       "curation_status": "excluded-low-confidence"
     },
     {
-      "pmid": "13017837",
-      "title": "[Ketogenesis from pyruvates in man].",
+      "pmid": "13127250",
+      "title": "[Degradation of beta-hydroxybutyrate by extracts of Clostridium saccharobutyricum].",
       "authors": [
-        "ADEZATI L",
-        "ALCOZER G"
-      ],
-      "journal": "Archivio \"E. Maragliano\" di patologia e clinica",
-      "date": "1952-09-01",
-      "date_precision": "day",
-      "year": 1952,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13017837/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "13017835",
-      "title": "[Effect of nicotinamide on ketogenesis from triolein].",
-      "authors": [
-        "ADEZATI L",
-        "GHIGLIOTTI G"
-      ],
-      "journal": "Archivio \"E. Maragliano\" di patologia e clinica",
-      "date": "1952-09-01",
-      "date_precision": "day",
-      "year": 1952,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13017835/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "13017136",
-      "title": "[Utilization in competition of sodium beta-hydroxybutyrate by Neisseria winogradskyi].",
-      "authors": [
-        "BLACHERE H",
-        "VILLECOURT P",
-        "JACOBELLI G"
-      ],
-      "journal": "Annales de l'Institut Pasteur",
-      "date": "1952-09-01",
-      "date_precision": "day",
-      "year": 1952,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13017136/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "13017128",
-      "title": "[Bacteriological study of Pseudomonas fluorescens of soil utilizing in competition sodium beta-hydroxybutyrate].",
-      "authors": [
-        "VILLECOURT P",
-        "BLACHERE H",
-        "JACOBELLI G"
-      ],
-      "journal": "Annales de l'Institut Pasteur",
-      "date": "1952-09-01",
-      "date_precision": "day",
-      "year": 1952,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13017128/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "13010343",
-      "title": "[Clinical and therapeutic interpretation of the presence of ketone bodies in urine; their role in vomiting, salicylic poisoning liver diseases and diabetes].",
-      "authors": [
-        "LESTRADET H"
-      ],
-      "journal": "France Medecine",
-      "date": "1952-09-01",
-      "date_precision": "day",
-      "year": 1952,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13010343/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Diabetes & Glucose Metabolism",
-        "MASLD / Metabolic Liver Disease"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "13208672",
-      "title": "[Studies on the mechanism of acetone and butyrate fermentation. IV. Reduction of acetoacetate to butyrate by molecular hydrogen].",
-      "authors": [
+        "NISMAN B",
         "COHEN GN",
-        "COHEN-BAZIRE G"
+        "WIESENDANGER S",
+        "SZULMAJSTER J"
       ],
-      "journal": "Biochimica et biophysica acta",
-      "date": "1952-04-01",
+      "journal": "Comptes rendus hebdomadaires des seances de l'Academie des sciences",
+      "date": "1953-12-21",
       "date_precision": "day",
-      "year": 1952,
-      "doi": "10.1016/0006-3002(52)90072-3",
+      "year": 1953,
+      "doi": "",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13208672/",
-      "doi_url": "https://doi.org/10.1016/0006-3002(52)90072-3",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13127250/",
+      "doi_url": "",
       "pmc_url": "",
       "areas": [
         "Dyslipidemia & Lipid Metabolism"
@@ -231,19 +64,18 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "14953188",
-      "title": "[The effect of work on the metabolism of ketone bodies in diabetics].",
+      "pmid": "13120758",
+      "title": "[Simultaneous bed-side determination of ketone bodies in blood and in urine].",
       "authors": [
-        "PASARGIKLIAN M",
-        "GHIRINGHELLI L"
+        "LESTRADET H"
       ],
-      "journal": "Arbeitsphysiologie; internationale Zeitschrift fur angewandte Physiologie",
-      "date": "1952-01-01",
+      "journal": "La Presse medicale",
+      "date": "1953-11-07",
       "date_precision": "day",
-      "year": 1952,
+      "year": 1953,
       "doi": "",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/14953188/",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13120758/",
       "doi_url": "",
       "pmc_url": "",
       "areas": [
@@ -259,19 +91,272 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "13007424",
-      "title": "Renal excretion of ketone bodies. II.",
+      "pmid": "13115428",
+      "title": "The enzymic oxidation of alpha- and 2-beta-hydroxybutyrate.",
       "authors": [
-        "WARMING-LARSEN A"
+        "LEHNINGER AL",
+        "GREVILLE GD"
       ],
-      "journal": "Acta medica Scandinavica",
-      "date": "1952-01-01",
+      "journal": "Biochimica et biophysica acta",
+      "date": "1953-09-01",
       "date_precision": "day",
-      "year": 1952,
-      "doi": "10.1111/j.0954-6820.1952.tb15684.x",
+      "year": 1953,
+      "doi": "10.1016/0006-3002(53)90138-3",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13007424/",
-      "doi_url": "https://doi.org/10.1111/j.0954-6820.1952.tb15684.x",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13115428/",
+      "doi_url": "https://doi.org/10.1016/0006-3002(53)90138-3",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "13069657",
+      "title": "Effect of ketone bodies and other metabolites on the survival and multiplication of staphylococci and tubercle bacilli.",
+      "authors": [
+        "DUBOS RJ"
+      ],
+      "journal": "The Journal of experimental medicine",
+      "date": "1953-08-01",
+      "date_precision": "day",
+      "year": 1953,
+      "doi": "10.1084/jem.98.2.145",
+      "pmc": "PMC2136286",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13069657/",
+      "doi_url": "https://doi.org/10.1084/jem.98.2.145",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2136286/",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "13115138",
+      "title": "[Mechanism of action of lipotropic factors. II. Metabolism of ketone bodies in the rat liver treated with lipocaic].",
+      "authors": [
+        "PITTONI A",
+        "ROSSI CR"
+      ],
+      "journal": "Archivio di scienze biologiche",
+      "date": "1953-07-01",
+      "date_precision": "day",
+      "year": 1953,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13115138/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "13115065",
+      "title": "[Relations between metabolism of ketone bodies and metabolism of carbohydrates. IV. Behavior of the glycemic curve after standard tolerance test of intravenous acetone in diabetics].",
+      "authors": [
+        "ALCOZER G"
+      ],
+      "journal": "Archivio \"E. Maragliano\" di patologia e clinica",
+      "date": "1953-07-01",
+      "date_precision": "day",
+      "year": 1953,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13115065/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 10,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "13094518",
+      "title": "[Electrolyte balance of renal insufficiency: the presence of ketone bodies in the blood; preliminary note].",
+      "authors": [
+        "DEROT",
+        "PIGNARD P",
+        "MIOCQUE M",
+        "LEGRAIN M",
+        "BERNIER JJ"
+      ],
+      "journal": "Bulletins et memoires de la Societe medicale des hopitaux de Paris",
+      "date": "1953-06-26",
+      "date_precision": "day",
+      "year": 1953,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13094518/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Chronic Kidney Disease"
+      ],
+      "category_confidence": 2,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "13210975",
+      "title": "Studies on the effect of aceto-acetate and beta-hydroxybutyrate on vitamin B1, both vivo and in vitro.",
+      "authors": [
+        "NATH MC",
+        "CHAKRABARTI CH"
+      ],
+      "journal": "The Indian journal of medical research",
+      "date": "1953-04-01",
+      "date_precision": "day",
+      "year": 1953,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13210975/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "13066237",
+      "title": "[On the mechanism of the action of the lipotropic factors. I. Metabolism of the ketone bodies in the liver of depancreatized animals treated or not with lipocaic].",
+      "authors": [
+        "PITTONI A",
+        "ROSSI CR"
+      ],
+      "journal": "Archivio di scienze biologiche",
+      "date": "1953-03-01",
+      "date_precision": "day",
+      "year": 1953,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13066237/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "13056951",
+      "title": "[Ketone bodies in the blood in atherosclerosis and their changes during iodine therapy].",
+      "authors": [
+        "PONOMAREVA EV"
+      ],
+      "journal": "Terapevticheskii arkhiv",
+      "date": "1953-03-01",
+      "date_precision": "day",
+      "year": 1953,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13056951/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Cardiovascular Health"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "13113988",
+      "title": "[Biochemistry of preserved blood. I. Micro-molecular ketone bodies].",
+      "authors": [
+        "ZAKRZEWSKI K",
+        "MAY Z"
+      ],
+      "journal": "Acta physiologica Polonica",
+      "date": "1953-01-01",
+      "date_precision": "day",
+      "year": 1953,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13113988/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "13037782",
+      "title": "Effect of acetoacetate and beta-hydroxy butyrate on riboflavin and nicotinic acid.",
+      "authors": [
+        "NATH MC",
+        "CHAKRABARTI CH"
+      ],
+      "journal": "Proceedings of the Society for Experimental Biology and Medicine. Society for Experimental Biology and Medicine (New York, N.Y.)",
+      "date": "1953-01-01",
+      "date_precision": "day",
+      "year": 1953,
+      "doi": "10.3181/00379727-82-20003",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13037782/",
+      "doi_url": "https://doi.org/10.3181/00379727-82-20003",
       "pmc_url": "",
       "areas": [
         "Other / General"
