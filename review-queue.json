@@ -1,63 +1,37 @@
 {
-  "generated_at": "2026-09-29T14:06:55+00:00",
+  "generated_at": "2026-09-29T14:07:13+00:00",
   "curation_window_days": 365,
-  "backfill_year": 1989,
-  "auto_approved_count": 41,
-  "excluded_count": 29,
+  "backfill_year": 1990,
+  "auto_approved_count": 42,
+  "excluded_count": 27,
   "records": [
     {
-      "pmid": "2513232",
-      "title": "Augmented production of platelet-activating factor in human polymorphonuclear leukocytes by ketone bodies.",
+      "pmid": "2284887",
+      "title": "Lack of effects of hyperglycemia on the disposal of 3-hydroxybutyrate in insulin-dependent diabetic patients.",
       "authors": [
-        "Sugiura T",
-        "Ojima-Uchiyama A",
-        "Masuzawa Y",
-        "Waku K"
+        "Møller N",
+        "Jørgensen JO",
+        "Møller J",
+        "Orskov L",
+        "Pørksen N",
+        "Alberti KG",
+        "Schmitz O"
       ],
-      "journal": "FEBS letters",
-      "date": "1989-12-04",
+      "journal": "Acta endocrinologica",
+      "date": "1990-12-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1016/0014-5793(89)81691-6",
+      "year": 1990,
+      "doi": "10.1530/acta.0.1230629",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2513232/",
-      "doi_url": "https://doi.org/10.1016/0014-5793(89)81691-6",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2284887/",
+      "doi_url": "https://doi.org/10.1530/acta.0.1230629",
       "pmc_url": "",
       "areas": [
-        "Other / General"
+        "Diabetes & Glucose Metabolism"
       ],
-      "category_confidence": 0,
+      "category_confidence": 5,
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "2636309",
-      "title": "[Rett's syndrome--differential diagnosis of autism in a case report].",
-      "authors": [
-        "Bujas-Petković Z",
-        "Matijasić R",
-        "Divcić B"
-      ],
-      "journal": "Lijecnicki vjesnik",
-      "date": "1989-12-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2636309/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Autism Spectrum Disorder"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Case report / case series",
-      "evidence_type_it": "Case report / case series",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed",
@@ -65,90 +39,34 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "2628443",
-      "title": "Metabolic responses of lactating goats to feed restriction and dietary 1,3-butanediol.",
+      "pmid": "2279514",
+      "title": "The fasting test in paediatrics: application to the diagnosis of pathological hypo- and hyperketotic states.",
       "authors": [
-        "Drackley JK",
-        "Kim YK",
-        "Strang BD",
-        "Young JW"
+        "Bonnefont JP",
+        "Specola NB",
+        "Vassault A",
+        "Lombes A",
+        "Ogier H",
+        "de Klerk JB",
+        "Munnich A",
+        "Coude M",
+        "Paturneau-Jouas M",
+        "Saudubray JM"
       ],
-      "journal": "Journal of dairy science",
-      "date": "1989-12-01",
+      "journal": "European journal of pediatrics",
+      "date": "1990-12-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.3168/jds.S0022-0302(89)79479-0",
+      "year": 1990,
+      "doi": "10.1007/BF02072043",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2628443/",
-      "doi_url": "https://doi.org/10.3168/jds.S0022-0302(89)79479-0",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2279514/",
+      "doi_url": "https://doi.org/10.1007/BF02072043",
       "pmc_url": "",
       "areas": [
         "Diabetes & Glucose Metabolism",
-        "Dyslipidemia & Lipid Metabolism",
-        "MASLD / Metabolic Liver Disease"
+        "Dyslipidemia & Lipid Metabolism"
       ],
-      "category_confidence": 2,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "2596425",
-      "title": "Metabolic effects of a single administration of growth hormone on lipid and carbohydrate metabolism in normal-weight and obese subjects.",
-      "authors": [
-        "Seng G",
-        "Galgoti C",
-        "Louisy P",
-        "Toussain P",
-        "Drouin P",
-        "Debry G"
-      ],
-      "journal": "The American journal of clinical nutrition",
-      "date": "1989-12-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1093/ajcn/50.6.1348",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2596425/",
-      "doi_url": "https://doi.org/10.1093/ajcn/50.6.1348",
-      "pmc_url": "",
-      "areas": [
-        "Dyslipidemia & Lipid Metabolism",
-        "Obesity"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Randomized clinical trial",
-      "evidence_type_it": "Trial clinico randomizzato",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "2556622",
-      "title": "Effects of sodium bicarbonate on nitrogen metabolism and ketone bodies during very low energy protein diets in obese subjects.",
-      "authors": [
-        "Gougeon-Reyburn R",
-        "Marliss EB"
-      ],
-      "journal": "Metabolism: clinical and experimental",
-      "date": "1989-12-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1016/0026-0495(89)90163-7",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2556622/",
-      "doi_url": "https://doi.org/10.1016/0026-0495(89)90163-7",
-      "pmc_url": "",
-      "areas": [
-        "Obesity"
-      ],
-      "category_confidence": 8,
+      "category_confidence": 3,
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
@@ -158,153 +76,30 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "2557835",
-      "title": "Induction of ketogenesis and fatty acid oxidation by glucagon and cyclic AMP in cultured hepatocytes from rabbit fetuses. Evidence for a decreased sensitivity of carnitine palmitoyltransferase I to malonyl-CoA inhibition after glucagon or cyclic AMP treatment.",
+      "pmid": "2086925",
+      "title": "[Urine levels of ketone bodies and its clinical significance].",
       "authors": [
-        "Pégorier JP",
-        "Garcia-Garcia MV",
-        "Prip-Buus C",
-        "Duée PH",
-        "Kohl C",
-        "Girard J"
+        "Harano Y",
+        "Komatsu R",
+        "Kawamura M",
+        "Fujita S",
+        "Katayama Y",
+        "Kojima H",
+        "Hidaka H"
       ],
-      "journal": "The Biochemical journal",
-      "date": "1989-11-15",
+      "journal": "Nihon rinsho. Japanese journal of clinical medicine",
+      "date": "1990-12-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1042/bj2640093",
-      "pmc": "PMC1133551",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2557835/",
-      "doi_url": "https://doi.org/10.1042/bj2640093",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1133551/",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "2682134",
-      "title": "Effects of free fatty acids and ketone bodies on in vivo non-insulin-mediated glucose utilization and production in humans.",
-      "authors": [
-        "Baron AD",
-        "Brechtel G",
-        "Edelman SV"
-      ],
-      "journal": "Metabolism: clinical and experimental",
-      "date": "1989-11-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1016/0026-0495(89)90040-1",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2682134/",
-      "doi_url": "https://doi.org/10.1016/0026-0495(89)90040-1",
-      "pmc_url": "",
-      "areas": [
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "2559637",
-      "title": "[Respiratory chain diseases in infancy. Clinical presentation and diagnosis].",
-      "authors": [
-        "García Silva MT",
-        "Bonnefont JP",
-        "Rotig A",
-        "Romero N",
-        "Vassault A",
-        "Colonna M",
-        "Coude M",
-        "Rabier D",
-        "Munnich A",
-        "Fardeau M"
-      ],
-      "journal": "Anales espanoles de pediatria",
-      "date": "1989-11-01",
-      "date_precision": "day",
-      "year": 1989,
+      "year": 1990,
       "doi": "",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2559637/",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2086925/",
       "doi_url": "",
       "pmc_url": "",
       "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 1,
-      "evidence_type": "Case report / case series",
-      "evidence_type_it": "Case report / case series",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "2510120",
-      "title": "Utilization of D-beta-hydroxybutyrate and oleate as alternate energy fuels in brain cell cultures of newborn mice after hypoxia at different glucose concentrations.",
-      "authors": [
-        "Bossi E",
-        "Kohler E",
-        "Herschkowitz N"
-      ],
-      "journal": "Pediatric research",
-      "date": "1989-11-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1203/00006450-198911000-00023",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2510120/",
-      "doi_url": "https://doi.org/10.1203/00006450-198911000-00023",
-      "pmc_url": "",
-      "areas": [
         "Diabetes & Glucose Metabolism"
       ],
-      "category_confidence": 6,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "2509663",
-      "title": "Plasma carnitine concentration and lipid metabolism in infants receiving parenteral nutrition.",
-      "authors": [
-        "Christensen ML",
-        "Helms RA",
-        "Mauer EC",
-        "Storm MC"
-      ],
-      "journal": "The Journal of pediatrics",
-      "date": "1989-11-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1016/s0022-3476(89)80664-x",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2509663/",
-      "doi_url": "https://doi.org/10.1016/s0022-3476(89)80664-x",
-      "pmc_url": "",
-      "areas": [
-        "Dyslipidemia & Lipid Metabolism"
-      ],
-      "category_confidence": 7,
+      "category_confidence": 4,
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
@@ -314,21 +109,20 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "2806552",
-      "title": "Developmental regulation of D-beta-hydroxybutyrate dehydrogenase in rat liver and brain.",
+      "pmid": "2278030",
+      "title": "Biochemical basis for D,L,-beta-hydroxybutyrate-induced teratogenesis.",
       "authors": [
-        "Zhang WW",
-        "Churchill S",
-        "Churchill P"
+        "Shum L",
+        "Sadler TW"
       ],
-      "journal": "FEBS letters",
-      "date": "1989-10-09",
+      "journal": "Teratology",
+      "date": "1990-11-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1016/0014-5793(89)81720-x",
+      "year": 1990,
+      "doi": "10.1002/tera.1420420512",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2806552/",
-      "doi_url": "https://doi.org/10.1016/0014-5793(89)81720-x",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2278030/",
+      "doi_url": "https://doi.org/10.1002/tera.1420420512",
       "pmc_url": "",
       "areas": [
         "Other / General"
@@ -343,114 +137,20 @@
       "curation_status": "excluded-low-confidence"
     },
     {
-      "pmid": "2806250",
-      "title": "Octanoate metabolism in isolated hepatocytes and mitochondria from fetal, newborn and adult rabbit. Evidence for a high capacity for octanoate esterification in term fetal liver.",
-      "authors": [
-        "Pégorier JP",
-        "Duée PH",
-        "Clouet P",
-        "Kohl C",
-        "Herbin C",
-        "Girard J"
-      ],
-      "journal": "European journal of biochemistry",
-      "date": "1989-10-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1111/j.1432-1033.1989.tb15067.x",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2806250/",
-      "doi_url": "https://doi.org/10.1111/j.1432-1033.1989.tb15067.x",
-      "pmc_url": "",
-      "areas": [
-        "Dyslipidemia & Lipid Metabolism"
-      ],
-      "category_confidence": 2,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "2679038",
-      "title": "Competitive effects of long-chain-triglyceride emulsion on the metabolism of medium-chain-triglyceride emulsions.",
-      "authors": [
-        "Cotter R",
-        "Johnson RC",
-        "Young SK",
-        "Lin LI",
-        "Rowe WB"
-      ],
-      "journal": "The American journal of clinical nutrition",
-      "date": "1989-10-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1093/ajcn/50.4.794",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2679038/",
-      "doi_url": "https://doi.org/10.1093/ajcn/50.4.794",
-      "pmc_url": "",
-      "areas": [
-        "Dyslipidemia & Lipid Metabolism"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "2575906",
-      "title": "Ketone body utilization in duodenum. Differential effect of fasting on lipogenesis from acetoacetate and 3-hydroxybutyrate.",
-      "authors": [
-        "Caamaño GJ",
-        "Sánchez-del-Castillo MA",
-        "Iglesias J",
-        "García-Peregrín E",
-        "Linares A"
-      ],
-      "journal": "Biochemistry international",
-      "date": "1989-10-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2575906/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Dyslipidemia & Lipid Metabolism"
-      ],
-      "category_confidence": 2,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "2552844",
-      "title": "An explanation for decreased ketogenesis in the liver of the obese Zucker rat.",
+      "pmid": "2272602",
+      "title": "Ketone body utilization for lipogenesis in the perfused liver of the obese Zucker rat.",
       "authors": [
         "Azain MJ",
         "Ontko JA"
       ],
-      "journal": "The American journal of physiology",
-      "date": "1989-10-01",
+      "journal": "Hormone and metabolic research = Hormon- und Stoffwechselforschung = Hormones et metabolisme",
+      "date": "1990-11-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1152/ajpregu.1989.257.4.R822",
+      "year": 1990,
+      "doi": "10.1055/s-2007-1004973",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2552844/",
-      "doi_url": "https://doi.org/10.1152/ajpregu.1989.257.4.R822",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2272602/",
+      "doi_url": "https://doi.org/10.1055/s-2007-1004973",
       "pmc_url": "",
       "areas": [
         "Obesity"
@@ -465,27 +165,29 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "2670936",
-      "title": "Poly-beta-hydroxybutyrate (PHB) biosynthesis in Alcaligenes eutrophus H16. Identification and characterization of the PHB polymerase gene (phbC).",
+      "pmid": "2233276",
+      "title": "Altered ketone body metabolism during gram-negative sepsis in the rat.",
       "authors": [
-        "Peoples OP",
-        "Sinskey AJ"
+        "Lanza-Jacoby S",
+        "Rosato E",
+        "Braccia G",
+        "Tabares A"
       ],
-      "journal": "The Journal of biological chemistry",
-      "date": "1989-09-15",
+      "journal": "Metabolism: clinical and experimental",
+      "date": "1990-11-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "",
+      "year": 1990,
+      "doi": "10.1016/0026-0495(90)90087-s",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2670936/",
-      "doi_url": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2233276/",
+      "doi_url": "https://doi.org/10.1016/0026-0495(90)90087-s",
       "pmc_url": "",
       "areas": [
         "Other / General"
       ],
-      "category_confidence": 0,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
+      "category_confidence": 1,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed",
@@ -493,27 +195,29 @@
       "curation_status": "excluded-low-confidence"
     },
     {
-      "pmid": "2670935",
-      "title": "Poly-beta-hydroxybutyrate biosynthesis in Alcaligenes eutrophus H16. Characterization of the genes encoding beta-ketothiolase and acetoacetyl-CoA reductase.",
+      "pmid": "2268417",
+      "title": "Comparison of D-beta-hydroxybutyrate dehydrogenase from rat liver and brain mitochondria.",
       "authors": [
-        "Peoples OP",
-        "Sinskey AJ"
+        "Zhang WW",
+        "Redman K",
+        "Churchill S",
+        "Churchill P"
       ],
-      "journal": "The Journal of biological chemistry",
-      "date": "1989-09-15",
+      "journal": "Biochemistry and cell biology = Biochimie et biologie cellulaire",
+      "date": "1990-10-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "",
+      "year": 1990,
+      "doi": "10.1139/o90-182",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2670935/",
-      "doi_url": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2268417/",
+      "doi_url": "https://doi.org/10.1139/o90-182",
       "pmc_url": "",
       "areas": [
         "Other / General"
       ],
-      "category_confidence": 0,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
+      "category_confidence": 1,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed",
@@ -521,23 +225,52 @@
       "curation_status": "excluded-low-confidence"
     },
     {
-      "pmid": "2775310",
-      "title": "The characterization of perfluorosuccinate as an inhibitor of gluconeogenesis in isolated rat hepatocytes.",
+      "pmid": "2245780",
+      "title": "[The diagnostic and prognostic significance of ketonuria in fertility disorders of cattle].",
       "authors": [
-        "Gregory RB",
-        "Berry MN"
+        "Haraszti J"
       ],
-      "journal": "Biochemical pharmacology",
-      "date": "1989-09-01",
+      "journal": "DTW. Deutsche tierarztliche Wochenschrift",
+      "date": "1990-10-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1016/0006-2952(89)90443-7",
+      "year": 1990,
+      "doi": "",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2775310/",
-      "doi_url": "https://doi.org/10.1016/0006-2952(89)90443-7",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2245780/",
+      "doi_url": "",
       "pmc_url": "",
       "areas": [
-        "Substance Use Disorders"
+        "Reproduction & Fertility"
+      ],
+      "category_confidence": 9,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "2221051",
+      "title": "Altered hepatic mitochondrial fatty acid oxidation and ketogenesis in endotoxic rats.",
+      "authors": [
+        "Takeyama N",
+        "Itoh Y",
+        "Kitazawa Y",
+        "Tanaka T"
+      ],
+      "journal": "The American journal of physiology",
+      "date": "1990-10-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1152/ajpendo.1990.259.4.E498",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2221051/",
+      "doi_url": "https://doi.org/10.1152/ajpendo.1990.259.4.E498",
+      "pmc_url": "",
+      "areas": [
+        "Dyslipidemia & Lipid Metabolism"
       ],
       "category_confidence": 2,
       "evidence_type": "Preclinical / mechanistic",
@@ -549,20 +282,108 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "2772983",
-      "title": "Hypoxia-induced increases in hypoxic tolerance augmented by beta-hydroxybutyrate in mice.",
+      "pmid": "2215251",
+      "title": "Metabolism of ketone bodies by skeletal muscle in starvation and uncontrolled diabetes.",
       "authors": [
-        "Rising CL",
-        "D'Alecy LG"
+        "Bailey JW",
+        "Haymond MW",
+        "Miles JM"
       ],
-      "journal": "Stroke",
-      "date": "1989-09-01",
+      "journal": "Metabolism: clinical and experimental",
+      "date": "1990-10-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1161/01.str.20.9.1219",
+      "year": 1990,
+      "doi": "10.1016/0026-0495(90)90163-7",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2772983/",
-      "doi_url": "https://doi.org/10.1161/01.str.20.9.1219",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2215251/",
+      "doi_url": "https://doi.org/10.1016/0026-0495(90)90163-7",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism",
+        "Sarcopenia & Skeletal Muscle"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "2080169",
+      "title": "Ketone bodies as substrates.",
+      "authors": [
+        "Rich AJ"
+      ],
+      "journal": "The Proceedings of the Nutrition Society",
+      "date": "1990-10-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1079/pns19900042",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2080169/",
+      "doi_url": "https://doi.org/10.1079/pns19900042",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "2276080",
+      "title": "Influence of exogenous fatty acids and ketone bodies on rates of lipolysis in isolated ventricular myocytes from normal and diabetic rats.",
+      "authors": [
+        "Larsen TS",
+        "Severson DL"
+      ],
+      "journal": "Canadian journal of physiology and pharmacology",
+      "date": "1990-09-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1139/y90-176",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2276080/",
+      "doi_url": "https://doi.org/10.1139/y90-176",
+      "pmc_url": "",
+      "areas": [
+        "Cardiovascular Health",
+        "Diabetes & Glucose Metabolism",
+        "Dyslipidemia & Lipid Metabolism"
+      ],
+      "category_confidence": 4,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "2270626",
+      "title": "[The role of ketone bodies in energy supply in cold-blooded animals during winter starvation].",
+      "authors": [
+        "Zhidenko AA",
+        "Grubinko VV",
+        "Iavonenko AF"
+      ],
+      "journal": "Ukrainskii biokhimicheskii zhurnal (1978)",
+      "date": "1990-09-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2270626/",
+      "doi_url": "",
       "pmc_url": "",
       "areas": [
         "Diabetes & Glucose Metabolism"
@@ -577,19 +398,176 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "2771963",
-      "title": "Poly-beta-hydroxybutyrate/calcium polyphosphate complexes in eukaryotic membranes.",
+      "pmid": "2202887",
+      "title": "Metabolic responses of forearm and adipose tissues to acute ethanol ingestion.",
       "authors": [
-        "Reusch RN"
+        "Frayn KN",
+        "Coppack SW",
+        "Walsh PE",
+        "Butterworth HC",
+        "Humphreys SM",
+        "Pedrosa HC"
       ],
-      "journal": "Proceedings of the Society for Experimental Biology and Medicine. Society for Experimental Biology and Medicine (New York, N.Y.)",
-      "date": "1989-09-01",
+      "journal": "Metabolism: clinical and experimental",
+      "date": "1990-09-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.3181/00379727-191-42936",
+      "year": 1990,
+      "doi": "10.1016/0026-0495(90)90308-y",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2771963/",
-      "doi_url": "https://doi.org/10.3181/00379727-191-42936",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2202887/",
+      "doi_url": "https://doi.org/10.1016/0026-0495(90)90308-y",
+      "pmc_url": "",
+      "areas": [
+        "Substance Use Disorders",
+        "Dyslipidemia & Lipid Metabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "2122029",
+      "title": "Use of parenteral medium-chain triglyceride emulsion for maintaining seizure control in a 5-year-old girl with intractable diarrhea.",
+      "authors": [
+        "Rosenthal E",
+        "Weissman B",
+        "Kyllonen K"
+      ],
+      "journal": "JPEN. Journal of parenteral and enteral nutrition",
+      "date": "1990-09-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1177/0148607190014005543",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2122029/",
+      "doi_url": "https://doi.org/10.1177/0148607190014005543",
+      "pmc_url": "",
+      "areas": [
+        "Dyslipidemia & Lipid Metabolism",
+        "Epilepsy",
+        "Medium-Chain Triglycerides (MCT)"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Case report / case series",
+      "evidence_type_it": "Case report / case series",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "2100739",
+      "title": "Effect of lactate and beta-hydroxybutyrate infusions on brain metabolism in the fetal sheep.",
+      "authors": [
+        "Harding JE",
+        "Charlton VE"
+      ],
+      "journal": "Journal of developmental physiology",
+      "date": "1990-09-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2100739/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 2,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "1983140",
+      "title": "Plasma gastrin and somatostatin levels in infants during the first four postnatal days.",
+      "authors": [
+        "Marchini G",
+        "Persson B",
+        "Uvnäs-Moberg K"
+      ],
+      "journal": "Journal of developmental physiology",
+      "date": "1990-09-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/1983140/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism",
+        "Obesity"
+      ],
+      "category_confidence": 2,
+      "evidence_type": "Observational human study",
+      "evidence_type_it": "Studio osservazionale umano",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "1975988",
+      "title": "Systemic pH modifies ketone body production rates and lipolysis in humans.",
+      "authors": [
+        "Hood VL",
+        "Keller U",
+        "Haymond MW",
+        "Küry D"
+      ],
+      "journal": "The American journal of physiology",
+      "date": "1990-09-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1152/ajpendo.1990.259.3.E327",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/1975988/",
+      "doi_url": "https://doi.org/10.1152/ajpendo.1990.259.3.E327",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "2116767",
+      "title": "Roles of pituitary hormones in the regulation of hepatic cytochrome P450IIE1 in rats and mice.",
+      "authors": [
+        "Hong JY",
+        "Ning SM",
+        "Ma BL",
+        "Lee MJ",
+        "Pan JM",
+        "Yang CS"
+      ],
+      "journal": "Archives of biochemistry and biophysics",
+      "date": "1990-08-15",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1016/0003-9861(90)90422-u",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2116767/",
+      "doi_url": "https://doi.org/10.1016/0003-9861(90)90422-u",
       "pmc_url": "",
       "areas": [
         "Other / General"
@@ -604,21 +582,56 @@
       "curation_status": "excluded-low-confidence"
     },
     {
-      "pmid": "2753323",
-      "title": "Isolated colonocyte metabolism of glucose, glutamine, n-butyrate, and beta-hydroxybutyrate in malnutrition.",
+      "pmid": "2288229",
+      "title": "The effects of salicylate on ketogenesis, gluconeogenesis and urea production in rat liver perfusion.",
       "authors": [
-        "Firmansyah A",
-        "Penn D",
-        "Lebenthal E"
+        "Terada N",
+        "Kizaki Z",
+        "Inoue F",
+        "Kodo N",
+        "Ochi M",
+        "Furukawa N",
+        "Kinugasa A",
+        "Sawada T"
       ],
-      "journal": "Gastroenterology",
-      "date": "1989-09-01",
+      "journal": "Acta paediatrica Japonica : Overseas edition",
+      "date": "1990-08-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1016/0016-5085(89)90633-1",
+      "year": 1990,
+      "doi": "10.1111/j.1442-200x.1990.tb00860.x",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2753323/",
-      "doi_url": "https://doi.org/10.1016/0016-5085(89)90633-1",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2288229/",
+      "doi_url": "https://doi.org/10.1111/j.1442-200x.1990.tb00860.x",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 2,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "2205608",
+      "title": "Effects of isoenergetic infusions of propionate and glucose on portal-drained visceral nutrient flux and concentrations of hormones in lambs maintained by total intragastric infusion.",
+      "authors": [
+        "Gross KL",
+        "Harmon DL",
+        "Minton JE",
+        "Avery TB"
+      ],
+      "journal": "Journal of animal science",
+      "date": "1990-08-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.2527/1990.6882566x",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2205608/",
+      "doi_url": "https://doi.org/10.2527/1990.6882566x",
       "pmc_url": "",
       "areas": [
         "Diabetes & Glucose Metabolism"
@@ -633,21 +646,89 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "2692615",
-      "title": "Modulation of the sympathetic nerve action on carbohydrate and ketone body metabolism by fatty acids, glucagon und insulin in perfused rat liver.",
+      "pmid": "1974025",
+      "title": "Effects of ketone bodies on carbohydrate metabolism in non-insulin-dependent (type II) diabetes mellitus.",
       "authors": [
-        "Küster J",
-        "Beuers U",
-        "Jungermann K"
+        "Henry RR",
+        "Brechtel G",
+        "Lim KH"
       ],
-      "journal": "Biological chemistry Hoppe-Seyler",
-      "date": "1989-09-01",
+      "journal": "Metabolism: clinical and experimental",
+      "date": "1990-08-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1515/bchm3.1989.370.2.1035",
+      "year": 1990,
+      "doi": "10.1016/0026-0495(90)90132-v",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2692615/",
-      "doi_url": "https://doi.org/10.1515/bchm3.1989.370.2.1035",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/1974025/",
+      "doi_url": "https://doi.org/10.1016/0026-0495(90)90132-v",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "2206224",
+      "title": "Evaluation of the liver graft before procurement. Significance of arterial ketone body ratio in brain-dead patients.",
+      "authors": [
+        "Yamaoka Y",
+        "Taki Y",
+        "Gubernatis G",
+        "Nakatani T",
+        "Okamoto R",
+        "Yamamoto Y",
+        "Ishikawa Y",
+        "Ringe B",
+        "Bunzendahl H",
+        "Oellerich M"
+      ],
+      "journal": "Transplant international : official journal of the European Society for Organ Transplantation",
+      "date": "1990-07-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2206224/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Case report / case series",
+      "evidence_type_it": "Case report / case series",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "2196821",
+      "title": "Ketone bodies and islet function: 86Rb handling and metabolic data.",
+      "authors": [
+        "Malaisse WJ",
+        "Lebrun P",
+        "Rasschaert J",
+        "Blachier F",
+        "Yilmaz T",
+        "Sener A"
+      ],
+      "journal": "The American journal of physiology",
+      "date": "1990-07-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1152/ajpendo.1990.259.1.E123",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2196821/",
+      "doi_url": "https://doi.org/10.1152/ajpendo.1990.259.1.E123",
       "pmc_url": "",
       "areas": [
         "Diabetes & Glucose Metabolism"
@@ -662,59 +743,29 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "2684144",
-      "title": "Ketone bodies maintain normal cardiac function and myocardial high energy phosphates during insulin-induced hypoglycemia in vivo.",
+      "pmid": "2196820",
+      "title": "Ketone bodies and islet function: 45Ca handling, insulin synthesis, and release.",
       "authors": [
-        "Bruer J",
-        "Chung KJ",
-        "Pesonen E",
-        "Haas RH",
-        "Guth BD",
-        "Sahn DJ",
-        "Hesselink JR"
+        "Malaisse WJ",
+        "Lebrun P",
+        "Yaylali B",
+        "Camara J",
+        "Valverde I",
+        "Sener A"
       ],
-      "journal": "Basic research in cardiology",
-      "date": "1989-09-01",
+      "journal": "The American journal of physiology",
+      "date": "1990-07-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1007/BF01908203",
+      "year": 1990,
+      "doi": "10.1152/ajpendo.1990.259.1.E117",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2684144/",
-      "doi_url": "https://doi.org/10.1007/BF01908203",
-      "pmc_url": "",
-      "areas": [
-        "Cardiovascular Health"
-      ],
-      "category_confidence": 14,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "2595599",
-      "title": "Morphological and physiological effects of beta-hydroxybutyrate on rat embryos grown in vitro at different stages.",
-      "authors": [
-        "Moore DC",
-        "Stanisstreet M",
-        "Clarke CA"
-      ],
-      "journal": "Teratology",
-      "date": "1989-09-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1002/tera.1420400305",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2595599/",
-      "doi_url": "https://doi.org/10.1002/tera.1420400305",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2196820/",
+      "doi_url": "https://doi.org/10.1152/ajpendo.1990.259.1.E117",
       "pmc_url": "",
       "areas": [
         "Diabetes & Glucose Metabolism"
       ],
-      "category_confidence": 4,
+      "category_confidence": 2,
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
@@ -724,23 +775,81 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "2764993",
-      "title": "Effect of caffeine on urea biosynthesis and some related processes, ketone bodies, ATP and liver amino acids.",
+      "pmid": "2120061",
+      "title": "Recurrent, familial Reye-like syndrome with a new complex amino and organic aciduria.",
       "authors": [
-        "Jordá A",
-        "Portolés M",
-        "Guasch R",
-        "Bernal D",
-        "Saez GT"
+        "Elpeleg ON",
+        "Christensen E",
+        "Hurvitz H",
+        "Branski D"
       ],
-      "journal": "Biochemical pharmacology",
-      "date": "1989-08-15",
+      "journal": "European journal of pediatrics",
+      "date": "1990-07-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1016/0006-2952(89)90560-1",
+      "year": 1990,
+      "doi": "10.1007/BF01959528",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2764993/",
-      "doi_url": "https://doi.org/10.1016/0006-2952(89)90560-1",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2120061/",
+      "doi_url": "https://doi.org/10.1007/BF01959528",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "2397101",
+      "title": "Purification of D-beta-hydroxybutyrate dehydrogenase from rat brain.",
+      "authors": [
+        "Zhang WW",
+        "Churchill P"
+      ],
+      "journal": "Biochemistry and cell biology = Biochimie et biologie cellulaire",
+      "date": "1990-06-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1139/o90-144",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2397101/",
+      "doi_url": "https://doi.org/10.1139/o90-144",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "2373226",
+      "title": "Influence of methylmalonate on the uptake of ketone bodies in vitro by the brain of young rats.",
+      "authors": [
+        "Dutra JC",
+        "Wajner M",
+        "Dutra-Filho CS",
+        "Mannmacher CF",
+        "Wannmacher CM"
+      ],
+      "journal": "Biochemical Society transactions",
+      "date": "1990-06-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1042/bst0180421",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2373226/",
+      "doi_url": "https://doi.org/10.1042/bst0180421",
       "pmc_url": "",
       "areas": [
         "Other / General"
@@ -755,25 +864,28 @@
       "curation_status": "excluded-low-confidence"
     },
     {
-      "pmid": "2775564",
-      "title": "The regulation of fatty acid and branched-chain amino acid oxidation in cancer cachectic rats: a proposed role for a cytokine, eicosanoid, and hormone trilogy.",
+      "pmid": "2253592",
+      "title": "Enhanced ketone body uptake by perfused skeletal muscle in trained rats.",
       "authors": [
-        "Siddiqui RA",
-        "Williams JF"
+        "Ohmori H",
+        "Kawai K",
+        "Yamashita K"
       ],
-      "journal": "Biochemical medicine and metabolic biology",
-      "date": "1989-08-01",
+      "journal": "Endocrinologia japonica",
+      "date": "1990-06-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1016/0885-4505(89)90043-1",
+      "year": 1990,
+      "doi": "10.1507/endocrj1954.37.421",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2775564/",
-      "doi_url": "https://doi.org/10.1016/0885-4505(89)90043-1",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2253592/",
+      "doi_url": "https://doi.org/10.1507/endocrj1954.37.421",
       "pmc_url": "",
       "areas": [
-        "Oncology & Cancer Metabolism"
+        "Sarcopenia & Skeletal Muscle",
+        "Diabetes & Glucose Metabolism",
+        "Exercise & Performance"
       ],
-      "category_confidence": 10,
+      "category_confidence": 6,
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
@@ -783,22 +895,423 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "2677071",
-      "title": "Metabolic effects of intraruminal administration of 1,3-butanediol or tributyrin in lactating goats.",
+      "pmid": "2165890",
+      "title": "Ketone body metabolism in lean male adults during short-term starvation, with particular reference to forearm muscle metabolism.",
       "authors": [
-        "Drackley JK",
-        "Zhang Y",
-        "Amaral DM",
-        "Young JW"
+        "Elia M",
+        "Wood S",
+        "Khan K",
+        "Pullicino E"
+      ],
+      "journal": "Clinical science (London, England : 1979)",
+      "date": "1990-06-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1042/cs0780579",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2165890/",
+      "doi_url": "https://doi.org/10.1042/cs0780579",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Randomized clinical trial",
+      "evidence_type_it": "Trial clinico randomizzato",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "2383617",
+      "title": "XPS and SSIMS analysis of the surface chemical structure of poly(caprolactone) and poly(beta-hydroxybutyrate-beta-hydroxyvalerate) copolymers.",
+      "authors": [
+        "Davies MC",
+        "Khan MA",
+        "Short RD",
+        "Akhtar S",
+        "Pouton C",
+        "Watts JF"
+      ],
+      "journal": "Biomaterials",
+      "date": "1990-05-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1016/0142-9612(90)90002-8",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2383617/",
+      "doi_url": "https://doi.org/10.1016/0142-9612(90)90002-8",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "2369476",
+      "title": "Effect of cyclosporin A, azathioprine, and prednisolone on carbohydrate metabolism of rat hepatocytes.",
+      "authors": [
+        "Riegel W",
+        "Stephan E",
+        "Ballé C",
+        "Heidland A",
+        "Hörl WH"
+      ],
+      "journal": "Transplant international : official journal of the European Society for Organ Transplantation",
+      "date": "1990-05-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1007/BF00333193",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2369476/",
+      "doi_url": "https://doi.org/10.1007/BF00333193",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 2,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "2332408",
+      "title": "Occurrence of poly-beta-hydroxybutyrate in Spirulina species.",
+      "authors": [
+        "Vincenzini M",
+        "Sili C",
+        "de Philippis R",
+        "Ena A",
+        "Materassi R"
+      ],
+      "journal": "Journal of bacteriology",
+      "date": "1990-05-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1128/jb.172.5.2791-2792.1990",
+      "pmc": "PMC208930",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2332408/",
+      "doi_url": "https://doi.org/10.1128/jb.172.5.2791-2792.1990",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC208930/",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "2195078",
+      "title": "Responses of dairy cows in early lactation to bovine somatotropin and ruminally inert fat.",
+      "authors": [
+        "Schneider PL",
+        "Sklan D",
+        "Kronfeld DS",
+        "Chalupa W"
       ],
       "journal": "Journal of dairy science",
-      "date": "1989-08-01",
+      "date": "1990-05-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.3168/jds.S0022-0302(89)79322-X",
+      "year": 1990,
+      "doi": "10.3168/jds.S0022-0302(90)78791-7",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2677071/",
-      "doi_url": "https://doi.org/10.3168/jds.S0022-0302(89)79322-X",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2195078/",
+      "doi_url": "https://doi.org/10.3168/jds.S0022-0302(90)78791-7",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "2185666",
+      "title": "Validation of two-pool model for in vivo ketone body kinetics.",
+      "authors": [
+        "Bailey JW",
+        "Haymond MW",
+        "Miles JM"
+      ],
+      "journal": "The American journal of physiology",
+      "date": "1990-05-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1152/ajpendo.1990.258.5.E850",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2185666/",
+      "doi_url": "https://doi.org/10.1152/ajpendo.1990.258.5.E850",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 2,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "2119819",
+      "title": "Variations of specific mRNA and polypeptide contents of rat liver D-beta-hydroxybutyrate dehydrogenase during an experimental diabetes mellitus.",
+      "authors": [
+        "Bailly A",
+        "Lone YC",
+        "Latruffe N"
+      ],
+      "journal": "Biochimie",
+      "date": "1990-05-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1016/0300-9084(90)90031-b",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2119819/",
+      "doi_url": "https://doi.org/10.1016/0300-9084(90)90031-b",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "2116490",
+      "title": "Metabolism of 15-hydroxyeicosatetraenoic acid by Caco-2 cells.",
+      "authors": [
+        "Riehl TE",
+        "Bass NM",
+        "Stenson WF"
+      ],
+      "journal": "Journal of lipid research",
+      "date": "1990-05-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2116490/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Oncology & Cancer Metabolism",
+        "Inflammation & Immunometabolism",
+        "Dyslipidemia & Lipid Metabolism"
+      ],
+      "category_confidence": 4,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "2112636",
+      "title": "Feeding the rat intravenously with ketone bodies following colon anastomosis.",
+      "authors": [
+        "Nagayama M",
+        "Thomford NR",
+        "Birkhahn RH"
+      ],
+      "journal": "JPEN. Journal of parenteral and enteral nutrition",
+      "date": "1990-05-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1177/0148607190014003245",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2112636/",
+      "doi_url": "https://doi.org/10.1177/0148607190014003245",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism",
+        "Obesity"
+      ],
+      "category_confidence": 2,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "1970848",
+      "title": "Thyroid hormone action on lipid metabolism in humans: a role for endogenous insulin.",
+      "authors": [
+        "Müller MJ",
+        "Acheson KJ",
+        "Jequier E",
+        "Burger AG"
+      ],
+      "journal": "Metabolism: clinical and experimental",
+      "date": "1990-05-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1016/0026-0495(90)90006-x",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/1970848/",
+      "doi_url": "https://doi.org/10.1016/0026-0495(90)90006-x",
+      "pmc_url": "",
+      "areas": [
+        "Thyroid Disorders",
+        "Dyslipidemia & Lipid Metabolism"
+      ],
+      "category_confidence": 10,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "2180759",
+      "title": "Effects of insulin on hemodynamics and metabolism in human forearm.",
+      "authors": [
+        "Natali A",
+        "Buzzigoli G",
+        "Taddei S",
+        "Santoro D",
+        "Cerri M",
+        "Pedrinelli R",
+        "Ferrannini E"
+      ],
+      "journal": "Diabetes",
+      "date": "1990-04-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.2337/diab.39.4.490",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2180759/",
+      "doi_url": "https://doi.org/10.2337/diab.39.4.490",
+      "pmc_url": "",
+      "areas": [
+        "Cardiovascular Health",
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "2171922",
+      "title": "Glucagon-like peptide-1(7-37) does not stimulate either hepatic glycogenolysis or ketogenesis.",
+      "authors": [
+        "Murayama Y",
+        "Kawai K",
+        "Suzuki S",
+        "Ohashi S",
+        "Yamashita K"
+      ],
+      "journal": "Endocrinologia japonica",
+      "date": "1990-04-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1507/endocrj1954.37.293",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2171922/",
+      "doi_url": "https://doi.org/10.1507/endocrj1954.37.293",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 2,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "2159203",
+      "title": "D-(-)-beta-hydroxybutyrate inhibits catecholamine-stimulated lipolysis and decreases beta-adrenoceptors' affinity in human fat cells but not in lymphomonocytes.",
+      "authors": [
+        "De Pergola G",
+        "Cignarelli M",
+        "Corso M",
+        "Garruti G",
+        "Di Paolo S",
+        "Giorgino R"
+      ],
+      "journal": "Acta endocrinologica",
+      "date": "1990-04-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1530/acta.0.1220450",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2159203/",
+      "doi_url": "https://doi.org/10.1530/acta.0.1220450",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "2317505",
+      "title": "Metabolic control of the expression of mitochondrial D-beta-hydroxybutyrate dehydrogenase, a ketone body converting enzyme.",
+      "authors": [
+        "Kante A",
+        "Cherkaoui Malki M",
+        "Coquard C",
+        "Latruffe N"
+      ],
+      "journal": "Biochimica et biophysica acta",
+      "date": "1990-03-26",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1016/0304-4165(90)90136-k",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2317505/",
+      "doi_url": "https://doi.org/10.1016/0304-4165(90)90136-k",
       "pmc_url": "",
       "areas": [
         "Diabetes & Glucose Metabolism",
@@ -814,178 +1327,21 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "2568818",
-      "title": "Induction of ketone body enzymes in glial cells.",
+      "pmid": "2341643",
+      "title": "Gluconeogenic dependence on ketogenesis in isolated sheep hepatocytes.",
       "authors": [
-        "Poduslo SE"
+        "Chow JC",
+        "Planck-Meyer C",
+        "Jesse BW"
       ],
-      "journal": "Archives of biochemistry and biophysics",
-      "date": "1989-08-01",
+      "journal": "Journal of dairy science",
+      "date": "1990-03-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1016/0003-9861(89)90225-7",
+      "year": 1990,
+      "doi": "10.3168/jds.S0022-0302(90)78720-6",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2568818/",
-      "doi_url": "https://doi.org/10.1016/0003-9861(89)90225-7",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 1,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "2768784",
-      "title": "Deficiency of carnitine palmitoyltransferase I.",
-      "authors": [
-        "Bonnefont JP",
-        "Haas R",
-        "Wolff J",
-        "Thuy LP",
-        "Buchta R",
-        "Carroll JE",
-        "Saudubray JM",
-        "Demaugre F",
-        "Nyhan WL"
-      ],
-      "journal": "Journal of child neurology",
-      "date": "1989-07-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1177/088307388900400310",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2768784/",
-      "doi_url": "https://doi.org/10.1177/088307388900400310",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 1,
-      "evidence_type": "Case report / case series",
-      "evidence_type_it": "Case report / case series",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "2758601",
-      "title": "Multipoint kinetic method for simultaneously measuring the combined concentrations of acetoacetate-beta-hydroxybutyrate and lactate-pyruvate.",
-      "authors": [
-        "Nuwayhid NF",
-        "Johnson GF",
-        "Feld RD"
-      ],
-      "journal": "Clinical chemistry",
-      "date": "1989-07-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2758601/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "2732753",
-      "title": "Lipid synthesis by rat brain microvessel endothelial cells in tissue culture.",
-      "authors": [
-        "Roux FS",
-        "Mokni R",
-        "Hughes CC",
-        "Clouet PM",
-        "Lefauconnier JM",
-        "Bourre JM"
-      ],
-      "journal": "Journal of neuropathology and experimental neurology",
-      "date": "1989-07-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1097/00005072-198907000-00005",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2732753/",
-      "doi_url": "https://doi.org/10.1097/00005072-198907000-00005",
-      "pmc_url": "",
-      "areas": [
-        "Dyslipidemia & Lipid Metabolism"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "2732225",
-      "title": "Free acetate production by rat hepatocytes during peroxisomal fatty acid and dicarboxylic acid oxidation.",
-      "authors": [
-        "Leighton F",
-        "Bergseth S",
-        "Rørtveit T",
-        "Christiansen EN",
-        "Bremer J"
-      ],
-      "journal": "The Journal of biological chemistry",
-      "date": "1989-06-25",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2732225/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "2499356",
-      "title": "Effects of exogenous phospholipase enzymes, arachidonic acid and 1-oleoyl-2-acetyl-sn-glycerol on ketogenesis in isolated rat hepatocytes.",
-      "authors": [
-        "Chihara M",
-        "Nomura T",
-        "Tachibana M",
-        "Nomura H",
-        "Nomura Y",
-        "Hagino Y"
-      ],
-      "journal": "Biochimica et biophysica acta",
-      "date": "1989-06-15",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1016/0167-4889(89)90003-7",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2499356/",
-      "doi_url": "https://doi.org/10.1016/0167-4889(89)90003-7",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2341643/",
+      "doi_url": "https://doi.org/10.3168/jds.S0022-0302(90)78720-6",
       "pmc_url": "",
       "areas": [
         "Diabetes & Glucose Metabolism"
@@ -1000,19 +1356,21 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "2730893",
-      "title": "Metabolism of octanoyl- and palmitoylcarnitine by intact rat hepatocytes.",
+      "pmid": "2341642",
+      "title": "In vitro production of beta-hydroxybutyrate from 1,3-butanediol by bovine liver, rumen mucosa, and kidney.",
       "authors": [
-        "Brass EP"
+        "Drackley JK",
+        "Richard MJ",
+        "Young JW"
       ],
-      "journal": "Biochimica et biophysica acta",
-      "date": "1989-06-08",
+      "journal": "Journal of dairy science",
+      "date": "1990-03-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1016/0005-2760(89)90258-0",
+      "year": 1990,
+      "doi": "10.3168/jds.s0022-0302(90)78719-x",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2730893/",
-      "doi_url": "https://doi.org/10.1016/0005-2760(89)90258-0",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2341642/",
+      "doi_url": "https://doi.org/10.3168/jds.s0022-0302(90)78719-x",
       "pmc_url": "",
       "areas": [
         "Other / General"
@@ -1027,158 +1385,35 @@
       "curation_status": "excluded-low-confidence"
     },
     {
-      "pmid": "2786677",
-      "title": "Generalized decrease in brain glucose metabolism during fasting in humans studied by PET.",
+      "pmid": "2316645",
+      "title": "Pseudoketogenesis in hepatectomized dogs.",
       "authors": [
-        "Redies C",
-        "Hoffer LJ",
-        "Beil C",
-        "Marliss EB",
-        "Evans AC",
-        "Lariviere F",
-        "Marrett S",
-        "Meyer E",
-        "Diksic M",
-        "Gjedde A"
+        "Des Rosiers C",
+        "Montgomery JA",
+        "Garneau M",
+        "David F",
+        "Mamer OA",
+        "Daloze P",
+        "Toffolo G",
+        "Cobelli C",
+        "Landau BR",
+        "Brunengraber H"
       ],
       "journal": "The American journal of physiology",
-      "date": "1989-06-01",
+      "date": "1990-03-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1152/ajpendo.1989.256.6.E805",
+      "year": 1990,
+      "doi": "10.1152/ajpendo.1990.258.3.E519",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2786677/",
-      "doi_url": "https://doi.org/10.1152/ajpendo.1989.256.6.E805",
-      "pmc_url": "",
-      "areas": [
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "2731352",
-      "title": "Kinetic measurement of ketone bodies.",
-      "authors": [
-        "de Bruyne JJ",
-        "Meijer GW"
-      ],
-      "journal": "Clinical chemistry",
-      "date": "1989-06-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2731352/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "2669693",
-      "title": "The effects of PGI2 analog (OP-41483) on perfused porcine liver.",
-      "authors": [
-        "Kimoto M",
-        "Shimahara Y",
-        "Ikai I",
-        "Wakashiro S",
-        "Ozaki N",
-        "Tatsumi Y",
-        "Tanaka A",
-        "Kamiyama Y",
-        "Yamaoka Y",
-        "Ozawa K"
-      ],
-      "journal": "Artificial organs",
-      "date": "1989-06-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1111/j.1525-1594.1989.tb02864.x",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2669693/",
-      "doi_url": "https://doi.org/10.1111/j.1525-1594.1989.tb02864.x",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "2662383",
-      "title": "Metabolic effect of islet B-cell function in insulin-treated diabetes.",
-      "authors": [
-        "Gjessing HJ",
-        "Matzen LE",
-        "Iversen S",
-        "Faber OK",
-        "Frøland A"
-      ],
-      "journal": "Scandinavian journal of clinical and laboratory investigation",
-      "date": "1989-06-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.3109/00365518909089106",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2662383/",
-      "doi_url": "https://doi.org/10.3109/00365518909089106",
-      "pmc_url": "",
-      "areas": [
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "2656159",
-      "title": "Renal and hepatic aspects of ketoacidosis: a quantitative analysis based on energy turnover.",
-      "authors": [
-        "Halperin ML",
-        "Cheema-Dhadli S"
-      ],
-      "journal": "Diabetes/metabolism reviews",
-      "date": "1989-06-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1002/dmr.5610050402",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2656159/",
-      "doi_url": "https://doi.org/10.1002/dmr.5610050402",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2316645/",
+      "doi_url": "https://doi.org/10.1152/ajpendo.1990.258.3.E519",
       "pmc_url": "",
       "areas": [
         "Other / General"
       ],
       "category_confidence": 1,
-      "evidence_type": "Review",
-      "evidence_type_it": "Revisione",
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed",
@@ -1186,292 +1421,34 @@
       "curation_status": "excluded-low-confidence"
     },
     {
-      "pmid": "2566546",
-      "title": "Exercise-induced rise in glucagon and ketogenesis during prolonged muscular work.",
+      "pmid": "2307295",
+      "title": "Operation of Randle's cycle in patients with NIDDM.",
       "authors": [
-        "Wasserman DH",
-        "Spalding JA",
-        "Bracy D",
-        "Lacy DB",
-        "Cherrington AD"
+        "Bevilacqua S",
+        "Buzzigoli G",
+        "Bonadonna R",
+        "Brandi LS",
+        "Oleggini M",
+        "Boni C",
+        "Geloni M",
+        "Ferrannini E"
       ],
       "journal": "Diabetes",
-      "date": "1989-06-01",
+      "date": "1990-03-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.2337/diab.38.6.799",
+      "year": 1990,
+      "doi": "10.2337/diab.39.3.383",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2566546/",
-      "doi_url": "https://doi.org/10.2337/diab.38.6.799",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2307295/",
+      "doi_url": "https://doi.org/10.2337/diab.39.3.383",
       "pmc_url": "",
       "areas": [
-        "Exercise & Performance",
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "2552743",
-      "title": "Improvement of modern treatment and outcome in childhood epilepsy in Asia.",
-      "authors": [
-        "Chi CS"
-      ],
-      "journal": "Acta paediatrica Japonica : Overseas edition",
-      "date": "1989-06-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1111/j.1442-200x.1989.tb01303.x",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2552743/",
-      "doi_url": "https://doi.org/10.1111/j.1442-200x.1989.tb01303.x",
-      "pmc_url": "",
-      "areas": [
-        "Epilepsy"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Review",
-      "evidence_type_it": "Revisione",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "16347925",
-      "title": "Hyperproduction of Poly-beta-Hydroxybutyrate during Exponential Growth of Azotobacter vinelandii UWD.",
-      "authors": [
-        "Page WJ",
-        "Knosp O"
-      ],
-      "journal": "Applied and environmental microbiology",
-      "date": "1989-06-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1128/aem.55.6.1334-1339.1989",
-      "pmc": "PMC202867",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/16347925/",
-      "doi_url": "https://doi.org/10.1128/aem.55.6.1334-1339.1989",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC202867/",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 1,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "2736199",
-      "title": "Effect of insulin on weight loss and tumour growth in a cachexia model.",
-      "authors": [
-        "Beck SA",
-        "Tisdale MJ"
-      ],
-      "journal": "British journal of cancer",
-      "date": "1989-05-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1038/bjc.1989.140",
-      "pmc": "PMC2247211",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2736199/",
-      "doi_url": "https://doi.org/10.1038/bjc.1989.140",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2247211/",
-      "areas": [
-        "Oncology & Cancer Metabolism"
-      ],
-      "category_confidence": 11,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "2732662",
-      "title": "Oxidative properties of carp red and white muscle.",
-      "authors": [
-        "Moyes CD",
-        "Buck LT",
-        "Hochachka PW",
-        "Suarez RK"
-      ],
-      "journal": "The Journal of experimental biology",
-      "date": "1989-05-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1242/jeb.143.1.321",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2732662/",
-      "doi_url": "https://doi.org/10.1242/jeb.143.1.321",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "2717257",
-      "title": "Placental transfer and fetal effects of maternal sodium beta-hydroxybutyrate infusion in the baboon.",
-      "authors": [
-        "Paton JB",
-        "Levitsky LL",
-        "Fisher DE"
-      ],
-      "journal": "Pediatric research",
-      "date": "1989-05-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1203/00006450-198905000-00002",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2717257/",
-      "doi_url": "https://doi.org/10.1203/00006450-198905000-00002",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 1,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "2706630",
-      "title": "Regulation of D-beta-hydroxybutyrate dehydrogenase in rat hepatoma cell lines.",
-      "authors": [
-        "Zhang WW",
-        "Churchill S",
-        "Lindahl R",
-        "Churchill P"
-      ],
-      "journal": "Cancer research",
-      "date": "1989-05-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2706630/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Oncology & Cancer Metabolism"
-      ],
-      "category_confidence": 4,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "2691123",
-      "title": "Use of combined oral contraceptive preparations alters the insulin sensitivity of fatty acid and ketone metabolism.",
-      "authors": [
-        "Singh BM",
-        "Nattrass M"
-      ],
-      "journal": "Clinical endocrinology",
-      "date": "1989-05-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1111/j.1365-2265.1989.tb01428.x",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2691123/",
-      "doi_url": "https://doi.org/10.1111/j.1365-2265.1989.tb01428.x",
-      "pmc_url": "",
-      "areas": [
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 3,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "2658613",
-      "title": "Alloxan-induced diabetes mellitus in the pregnant ewe: metabolic and cardiovascular effects on the mother and her fetus.",
-      "authors": [
-        "Miodovnik M",
-        "Mimouni F",
-        "Berk M",
-        "Clark KE"
-      ],
-      "journal": "American journal of obstetrics and gynecology",
-      "date": "1989-05-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1016/0002-9378(89)90203-2",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2658613/",
-      "doi_url": "https://doi.org/10.1016/0002-9378(89)90203-2",
-      "pmc_url": "",
-      "areas": [
-        "Cardiovascular Health"
-      ],
-      "category_confidence": 12,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "2656157",
-      "title": "Human ketone body production and utilization studied using tracer techniques: regulation by free fatty acids, insulin, catecholamines, and thyroid hormones.",
-      "authors": [
-        "Keller U",
-        "Lustenberger M",
-        "Müller-Brand J",
-        "Gerber PP",
-        "Stauffacher W"
-      ],
-      "journal": "Diabetes/metabolism reviews",
-      "date": "1989-05-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1002/dmr.5610050306",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2656157/",
-      "doi_url": "https://doi.org/10.1002/dmr.5610050306",
-      "pmc_url": "",
-      "areas": [
-        "Thyroid Disorders"
+        "Diabetes & Glucose Metabolism",
+        "Dyslipidemia & Lipid Metabolism"
       ],
       "category_confidence": 7,
-      "evidence_type": "Review",
-      "evidence_type_it": "Revisione",
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed",
@@ -1479,83 +1456,25 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "2656156",
-      "title": "Regulation of ketogenesis and the renaissance of carnitine palmitoyltransferase.",
+      "pmid": "2306279",
+      "title": "Interactions between plasticizers and fatty acid metabolism in the perfused rat liver and in vivo. Inhibition of ketogenesis by 2-ethylhexanol.",
       "authors": [
-        "McGarry JD",
-        "Woeltje KF",
-        "Kuwajima M",
-        "Foster DW"
+        "Badr MZ",
+        "Handler JA",
+        "Whittaker M",
+        "Kauffman FC",
+        "Thurman RG"
       ],
-      "journal": "Diabetes/metabolism reviews",
-      "date": "1989-05-01",
+      "journal": "Biochemical pharmacology",
+      "date": "1990-02-15",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1002/dmr.5610050305",
+      "year": 1990,
+      "doi": "10.1016/0006-2952(90)90150-j",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2656156/",
-      "doi_url": "https://doi.org/10.1002/dmr.5610050305",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2306279/",
+      "doi_url": "https://doi.org/10.1016/0006-2952(90)90150-j",
       "pmc_url": "",
       "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Review",
-      "evidence_type_it": "Revisione",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "2702752",
-      "title": "Proton nuclear magnetic resonance studies of plasma to determine metabolic status of patients with adult respiratory distress syndrome.",
-      "authors": [
-        "Kuo CD",
-        "Wu WG",
-        "Wang JH",
-        "Chen SM",
-        "Chiang BN"
-      ],
-      "journal": "Clinical chemistry",
-      "date": "1989-04-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2702752/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 1,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "2668728",
-      "title": "[Influences of endotoxin on oxidation of fatty acid in rabbits: a comparison between medium chain- and long chain-fatty acids].",
-      "authors": [
-        "Hioki T"
-      ],
-      "journal": "Nihon Geka Gakkai zasshi",
-      "date": "1989-04-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2668728/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Medium-Chain Triglycerides (MCT)",
         "Dyslipidemia & Lipid Metabolism"
       ],
       "category_confidence": 3,
@@ -1568,279 +1487,22 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "2494879",
-      "title": "L-carnitine: effect of intravenous administration on fuel homeostasis in normal subjects and home-parenteral-nutrition patients with low plasma carnitine concentrations.",
+      "pmid": "2316307",
+      "title": "Metabolic fuel and amino acid transport into the brain in experimental hypothyroidism.",
       "authors": [
-        "Bowyer BA",
-        "Fleming CR",
-        "Haymond MW",
-        "Miles JM"
+        "Mooradian AD"
       ],
-      "journal": "The American journal of clinical nutrition",
-      "date": "1989-04-01",
+      "journal": "Acta endocrinologica",
+      "date": "1990-02-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1093/ajcn/49.4.618",
+      "year": 1990,
+      "doi": "10.1530/acta.0.1220156",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2494879/",
-      "doi_url": "https://doi.org/10.1093/ajcn/49.4.618",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2316307/",
+      "doi_url": "https://doi.org/10.1530/acta.0.1220156",
       "pmc_url": "",
-      "areas": [
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 2,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "16347889",
-      "title": "Floc Formation by Azospirillum lipoferum Grown on Beta-Hydroxybutyrate.",
-      "authors": [],
-      "journal": "Applied and environmental microbiology",
-      "date": "1989-04-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1128/aem.55.4.1047-1047.1989",
-      "pmc": "PMC184247",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/16347889/",
-      "doi_url": "https://doi.org/10.1128/aem.55.4.1047-1047.1989",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC184247/",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "2524728",
-      "title": "[Effect of carnitine deficiency on ketogenesis].",
-      "authors": [
-        "Odièvre M",
-        "Labrune P"
-      ],
-      "journal": "Presse medicale (Paris, France : 1983)",
-      "date": "1989-03-25",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2524728/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Review",
-      "evidence_type_it": "Revisione",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "2539126",
-      "title": "Synergistic inhibition of hepatic ketogenesis in the presence of insulin and a cAMP antagonist.",
-      "authors": [
-        "Olivieri MC",
-        "Botelho LH"
-      ],
-      "journal": "Biochemical and biophysical research communications",
-      "date": "1989-03-15",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1016/0006-291x(89)90057-0",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2539126/",
-      "doi_url": "https://doi.org/10.1016/0006-291x(89)90057-0",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "2920182",
-      "title": "Glucose, glutamine and ketone body utilisation by resting and concanavalin A activated rat splenic lymphocytes.",
-      "authors": [
-        "O'Rourke AM",
-        "Rider CC"
-      ],
-      "journal": "Biochimica et biophysica acta",
-      "date": "1989-03-06",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1016/0167-4889(89)90059-1",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2920182/",
-      "doi_url": "https://doi.org/10.1016/0167-4889(89)90059-1",
-      "pmc_url": "",
-      "areas": [
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "2650682",
-      "title": "Regulation of fatty acid and carbohydrate metabolism by insulin, growth hormone and tri-iodothyronine in hepatocyte cultures from normal and hypophysectomized rats.",
-      "authors": [
-        "Betley S",
-        "Alberti KG",
-        "Agius L"
-      ],
-      "journal": "The Biochemical journal",
-      "date": "1989-03-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1042/bj2580547",
-      "pmc": "PMC1138396",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2650682/",
-      "doi_url": "https://doi.org/10.1042/bj2580547",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1138396/",
       "areas": [
         "Thyroid Disorders"
-      ],
-      "category_confidence": 2,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "2522856",
-      "title": "Ketone bodies do not give falsely positive alcohol tests.",
-      "authors": [
-        "Slama G",
-        "Bruzzo F",
-        "Dupeyron JP",
-        "Lassechere M",
-        "Dauchy F"
-      ],
-      "journal": "Diabetic medicine : a journal of the British Diabetic Association",
-      "date": "1989-03-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1111/j.1464-5491.1989.tb02102.x",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2522856/",
-      "doi_url": "https://doi.org/10.1111/j.1464-5491.1989.tb02102.x",
-      "pmc_url": "",
-      "areas": [
-        "Substance Use Disorders"
-      ],
-      "category_confidence": 2,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "2492534",
-      "title": "The poly-beta-hydroxybutyrate granule in vivo. A new insight based on NMR spectroscopy of whole cells.",
-      "authors": [
-        "Barnard GN",
-        "Sanders JK"
-      ],
-      "journal": "The Journal of biological chemistry",
-      "date": "1989-02-25",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2492534/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "2930501",
-      "title": "Quantitative analysis of intermediary metabolism in rat hepatocytes incubated in the presence and absence of ethanol with a substrate mixture including ketoleucine.",
-      "authors": [
-        "Baranyai JM",
-        "Blum JJ"
-      ],
-      "journal": "The Biochemical journal",
-      "date": "1989-02-15",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1042/bj2580121",
-      "pmc": "PMC1138332",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2930501/",
-      "doi_url": "https://doi.org/10.1042/bj2580121",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1138332/",
-      "areas": [
-        "Substance Use Disorders"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "2475087",
-      "title": "Metabolic response to short term starvation in non-pregnant and late pregnant cafeteria-obese rats.",
-      "authors": [
-        "Roca P",
-        "Gianotti M",
-        "Palou A"
-      ],
-      "journal": "Archives internationales de physiologie et de biochimie",
-      "date": "1989-02-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.3109/13813458909075044",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2475087/",
-      "doi_url": "https://doi.org/10.3109/13813458909075044",
-      "pmc_url": "",
-      "areas": [
-        "Obesity"
       ],
       "category_confidence": 8,
       "evidence_type": "Preclinical / mechanistic",
@@ -1852,23 +1514,24 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "2767090",
-      "title": "Effects of partial deprivation of portal blood on arterial blood ketone body ratio in rabbits.",
+      "pmid": "2311201",
+      "title": "Unmeasured anion during severe sepsis with metabolic acidosis.",
       "authors": [
-        "Yamamoto S",
-        "Nitta N",
-        "Kamiyama Y",
-        "Yamaoka Y",
-        "Ozawa K"
+        "Rackow EC",
+        "Mecher C",
+        "Astiz ME",
+        "Goldstein C",
+        "McKee D",
+        "Weil MH"
       ],
-      "journal": "European surgical research. Europaische chirurgische Forschung. Recherches chirurgicales europeennes",
-      "date": "1989-01-01",
+      "journal": "Circulatory shock",
+      "date": "1990-02-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1159/000129009",
+      "year": 1990,
+      "doi": "",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2767090/",
-      "doi_url": "https://doi.org/10.1159/000129009",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2311201/",
+      "doi_url": "",
       "pmc_url": "",
       "areas": [
         "Other / General"
@@ -1883,27 +1546,31 @@
       "curation_status": "excluded-low-confidence"
     },
     {
-      "pmid": "2741441",
-      "title": "[Metabolic ketoacidosis in obese subjects resulting from dietetic and exercise regimens to reduce excess body weight].",
+      "pmid": "2309996",
+      "title": "[Pharmacokinetic studies of a new 20% fat emulsion containing 70% medium-chain triglycerides].",
       "authors": [
-        "Orbetsova V",
-        "Tsanev A",
-        "Khlebarova M",
-        "Kirchev I"
+        "Puchstein C",
+        "Pfisterer M",
+        "Lessire H",
+        "Mertes N",
+        "Zander J",
+        "Kleine R",
+        "Winde G"
       ],
-      "journal": "Vutreshni bolesti",
-      "date": "1989-01-01",
+      "journal": "Anasthesie, Intensivtherapie, Notfallmedizin",
+      "date": "1990-02-01",
       "date_precision": "day",
-      "year": 1989,
+      "year": 1990,
       "doi": "",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2741441/",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2309996/",
       "doi_url": "",
       "pmc_url": "",
       "areas": [
-        "Obesity"
+        "Dyslipidemia & Lipid Metabolism",
+        "Medium-Chain Triglycerides (MCT)"
       ],
-      "category_confidence": 14,
+      "category_confidence": 10,
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
@@ -1913,20 +1580,293 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "2669881",
-      "title": "The effects of injury and sepsis on fuel utilization.",
+      "pmid": "2306264",
+      "title": "Effects of thiamine deficiency on hepatic cytochromes P450 and drug-metabolizing enzyme activities.",
       "authors": [
-        "Goldstein SA",
-        "Elwyn DH"
+        "Yoo JS",
+        "Park HS",
+        "Ning SM",
+        "Lee MJ",
+        "Yang CS"
       ],
-      "journal": "Annual review of nutrition",
-      "date": "1989-01-01",
+      "journal": "Biochemical pharmacology",
+      "date": "1990-02-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1146/annurev.nu.09.070189.002305",
+      "year": 1990,
+      "doi": "10.1016/0006-2952(90)90059-t",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2669881/",
-      "doi_url": "https://doi.org/10.1146/annurev.nu.09.070189.002305",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2306264/",
+      "doi_url": "https://doi.org/10.1016/0006-2952(90)90059-t",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "2178446",
+      "title": "Cerebrovascular and metabolic responses to hypoxia during hypoglycemia in dogs.",
+      "authors": [
+        "Derrer SA",
+        "Sieber FE",
+        "Saudek CD",
+        "Koehler RC",
+        "Traystman RJ"
+      ],
+      "journal": "The American journal of physiology",
+      "date": "1990-02-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1152/ajpheart.1990.258.2.H400",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2178446/",
+      "doi_url": "https://doi.org/10.1152/ajpheart.1990.258.2.H400",
+      "pmc_url": "",
+      "areas": [
+        "Cardiovascular Health",
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "2295640",
+      "title": "NADH-linked substrate dependence of peroxide-induced respiratory inhibition and calcium efflux in isolated renal mitochondria.",
+      "authors": [
+        "Vlessis AA"
+      ],
+      "journal": "The Journal of biological chemistry",
+      "date": "1990-01-25",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2295640/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Pyruvate Dehydrogenase Deficiency"
+      ],
+      "category_confidence": 2,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "2403622",
+      "title": "Nutrition and somatomedin. XXI. Insulin-like growth factor-I and somatomedin inhibitor in streptozotocin-diabetic rats: relation to ketogenesis and gluconeogenesis.",
+      "authors": [
+        "Gagliardi AR",
+        "Goldstein S",
+        "Phillips LS"
+      ],
+      "journal": "Metabolism: clinical and experimental",
+      "date": "1990-01-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1016/0026-0495(90)90151-2",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2403622/",
+      "doi_url": "https://doi.org/10.1016/0026-0495(90)90151-2",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 3,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "2364670",
+      "title": "Beta-hydroxybutyrate and response to hypoxia in the ground squirrel, Spermophilus tridecimlineatus.",
+      "authors": [
+        "D'Alecy LG",
+        "Lundy EF",
+        "Kluger MJ",
+        "Harker CT",
+        "LeMay DR",
+        "Shlafer M"
+      ],
+      "journal": "Comparative biochemistry and physiology. B, Comparative biochemistry",
+      "date": "1990-01-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1016/0305-0491(90)90361-v",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2364670/",
+      "doi_url": "https://doi.org/10.1016/0305-0491(90)90361-v",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "2332105",
+      "title": "The effect of ketone bodies on protein turnover in isolated skeletal muscle from the fed and fasted chick.",
+      "authors": [
+        "Wu G",
+        "Thompson JR"
+      ],
+      "journal": "The International journal of biochemistry",
+      "date": "1990-01-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1016/0020-711x(90)90338-4",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2332105/",
+      "doi_url": "https://doi.org/10.1016/0020-711x(90)90338-4",
+      "pmc_url": "",
+      "areas": [
+        "Sarcopenia & Skeletal Muscle"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "2297915",
+      "title": "Improvement in the head-space gas-chromatographic method for determination of three ketone bodies in plasma.",
+      "authors": [
+        "Kimura M",
+        "Ogasahara N",
+        "Kobayashi K",
+        "Hitoi A",
+        "Matsuoka A",
+        "Kimura Y"
+      ],
+      "journal": "Clinical chemistry",
+      "date": "1990-01-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2297915/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "2296182",
+      "title": "Biological significance of enhanced mitochondrial ketogenesis during the early stages after 70% hepatectomy in rats.",
+      "authors": [
+        "Taki Y",
+        "Morimoto T",
+        "Tanaka A",
+        "Noguchi M",
+        "Wang WY",
+        "Nishihira T",
+        "Nishikawa K",
+        "Mori K",
+        "Ozawa K"
+      ],
+      "journal": "The Journal of surgical research",
+      "date": "1990-01-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1016/0022-4804(90)90146-s",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2296182/",
+      "doi_url": "https://doi.org/10.1016/0022-4804(90)90146-s",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "2279051",
+      "title": "An explanation for ketogenesis by the intestine of the suckling rat: the presence of an active hydroxymethylglutaryl-coenzyme A pathway.",
+      "authors": [
+        "Békési A",
+        "Williamson DH"
+      ],
+      "journal": "Biology of the neonate",
+      "date": "1990-01-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1159/000243256",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2279051/",
+      "doi_url": "https://doi.org/10.1159/000243256",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "2265217",
+      "title": "Metabolic adaptations to change of nutrition at birth.",
+      "authors": [
+        "Girard J"
+      ],
+      "journal": "Biology of the neonate",
+      "date": "1990-01-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1159/000243294",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2265217/",
+      "doi_url": "https://doi.org/10.1159/000243294",
       "pmc_url": "",
       "areas": [
         "Other / General"
@@ -1941,29 +1881,27 @@
       "curation_status": "excluded-low-confidence"
     },
     {
-      "pmid": "2596385",
-      "title": "Thyroxine in blood plasma related to plasma levels of acetoacetate and glucose in ketotic and healthy cows.",
+      "pmid": "2265215",
+      "title": "Neonatal hypoglycemia.",
       "authors": [
-        "Ropstad E",
-        "Halse K",
-        "Refsdal AO"
+        "Sann L"
       ],
-      "journal": "Acta veterinaria Scandinavica",
-      "date": "1989-01-01",
+      "journal": "Biology of the neonate",
+      "date": "1990-01-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1186/BF03548054",
-      "pmc": "PMC8142201",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2596385/",
-      "doi_url": "https://doi.org/10.1186/BF03548054",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8142201/",
+      "year": 1990,
+      "doi": "10.1159/000243296",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2265215/",
+      "doi_url": "https://doi.org/10.1159/000243296",
+      "pmc_url": "",
       "areas": [
-        "Thyroid Disorders",
+        "Dyslipidemia & Lipid Metabolism",
         "Diabetes & Glucose Metabolism"
       ],
-      "category_confidence": 7,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
+      "category_confidence": 3,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed",
@@ -1971,59 +1909,31 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "2573547",
-      "title": "Formation of ketone bodies by resting lymphocytes.",
+      "pmid": "2240459",
+      "title": "Glucose, free fatty acid and ketone body metabolism in Duchenne muscular dystrophy.",
       "authors": [
-        "Curi R",
-        "Williams JF",
-        "Newsholme EA"
+        "Nishio H",
+        "Wada H",
+        "Matsuo T",
+        "Horikawa H",
+        "Takahashi K",
+        "Nakajima T",
+        "Matsuo M",
+        "Nakamura H"
       ],
-      "journal": "The International journal of biochemistry",
-      "date": "1989-01-01",
+      "journal": "Brain & development",
+      "date": "1990-01-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1016/0020-711x(89)90055-4",
+      "year": 1990,
+      "doi": "10.1016/s0387-7604(12)80071-4",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2573547/",
-      "doi_url": "https://doi.org/10.1016/0020-711x(89)90055-4",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2240459/",
+      "doi_url": "https://doi.org/10.1016/s0387-7604(12)80071-4",
       "pmc_url": "",
       "areas": [
-        "Other / General"
+        "Diabetes & Glucose Metabolism"
       ],
-      "category_confidence": 1,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "2553418",
-      "title": "Analysis of hemodynamics and blood gas in relation to blood ketone body ratio in partially hepatectomized patients.",
-      "authors": [
-        "Nakatani T",
-        "Shimahara Y",
-        "Mori K",
-        "Kobayashi N",
-        "Yamaoka Y",
-        "Kobayashi K",
-        "Ozawa K"
-      ],
-      "journal": "European surgical research. Europaische chirurgische Forschung. Recherches chirurgicales europeennes",
-      "date": "1989-01-01",
-      "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1159/000129025",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2553418/",
-      "doi_url": "https://doi.org/10.1159/000129025",
-      "pmc_url": "",
-      "areas": [
-        "Oncology & Cancer Metabolism"
-      ],
-      "category_confidence": 4,
+      "category_confidence": 6,
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
@@ -2033,29 +1943,27 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "2522371",
-      "title": "The effect of glucose and insulin infusion on the fall of ketone bodies during treatment of diabetic ketoacidosis.",
+      "pmid": "2185062",
+      "title": "Effect of diabetes and time after in vivo insulin administration on ketogenesis and gluconeogenesis in isolated rat hepatocytes.",
       "authors": [
-        "Krentz AJ",
-        "Hale PJ",
-        "Singh BM",
-        "Nattrass M"
+        "Kaloyianni M",
+        "Freedland RA"
       ],
-      "journal": "Diabetic medicine : a journal of the British Diabetic Association",
-      "date": "1989-01-01",
+      "journal": "The International journal of biochemistry",
+      "date": "1990-01-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1111/j.1464-5491.1989.tb01135.x",
+      "year": 1990,
+      "doi": "10.1016/0020-711x(90)90178-6",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2522371/",
-      "doi_url": "https://doi.org/10.1111/j.1464-5491.1989.tb01135.x",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2185062/",
+      "doi_url": "https://doi.org/10.1016/0020-711x(90)90178-6",
       "pmc_url": "",
       "areas": [
         "Diabetes & Glucose Metabolism"
       ],
       "category_confidence": 6,
-      "evidence_type": "Randomized clinical trial",
-      "evidence_type_it": "Trial clinico randomizzato",
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed",
@@ -2063,23 +1971,53 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "2521428",
-      "title": "Altered hepatic fatty acid metabolism in endotoxicosis: effect of L-carnitine on survival.",
+      "pmid": "2135747",
+      "title": "The effect of tricaprylin emulsion on protein turnover in scald burn rats.",
       "authors": [
-        "Takeyama N",
-        "Takagi D",
-        "Matsuo N",
-        "Kitazawa Y",
-        "Tanaka T"
+        "Iwasa Y",
+        "Ogoshi S",
+        "Iwasa M",
+        "Tamiya T"
       ],
-      "journal": "The American journal of physiology",
-      "date": "1989-01-01",
+      "journal": "Nutrition (Burbank, Los Angeles County, Calif.)",
+      "date": "1990-01-01",
       "date_precision": "day",
-      "year": 1989,
-      "doi": "10.1152/ajpendo.1989.256.1.E31",
+      "year": 1990,
+      "doi": "",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2521428/",
-      "doi_url": "https://doi.org/10.1152/ajpendo.1989.256.1.E31",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2135747/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Medium-Chain Triglycerides (MCT)"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "2101085",
+      "title": "Saturated fatty acids with different chain lengths as ketogenic substrates in the rat liver.",
+      "authors": [
+        "Constantin J",
+        "Kelmer-Bracht AM",
+        "Ishii-Iwamoto EL",
+        "Ferraresi-Filho O",
+        "Bracht A"
+      ],
+      "journal": "Brazilian journal of medical and biological research = Revista brasileira de pesquisas medicas e biologicas",
+      "date": "1990-01-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2101085/",
+      "doi_url": "",
       "pmc_url": "",
       "areas": [
         "Other / General"
@@ -2092,6 +2030,91 @@
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "2099620",
+      "title": "Ketosis treatment and milk yield in dairy cows related to milk acetoacetate levels.",
+      "authors": [
+        "Simensen E",
+        "Halse K",
+        "Gillund P",
+        "Lutnaes B"
+      ],
+      "journal": "Acta veterinaria Scandinavica",
+      "date": "1990-01-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1186/BF03547525",
+      "pmc": "PMC8133185",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2099620/",
+      "doi_url": "https://doi.org/10.1186/BF03547525",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8133185/",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "2094217",
+      "title": "[Characterization of surface fluorescence signals of isolated perfused rat kidney].",
+      "authors": [
+        "Krinelke L",
+        "Kunz WS"
+      ],
+      "journal": "Biomedica biochimica acta",
+      "date": "1990-01-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2094217/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "2076025",
+      "title": "Diurnal variation of blood ketone bodies in insulin-dependent diabetes mellitus and noninsulin-dependent diabetes mellitus patients: the relationship to serum C-peptide immunoreactivity and free insulin.",
+      "authors": [
+        "Ubukata E"
+      ],
+      "journal": "Annals of nutrition & metabolism",
+      "date": "1990-01-01",
+      "date_precision": "day",
+      "year": 1990,
+      "doi": "10.1159/000177607",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/2076025/",
+      "doi_url": "https://doi.org/10.1159/000177607",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
     }
   ]
 }
