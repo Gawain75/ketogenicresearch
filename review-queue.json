@@ -1,51 +1,24 @@
 {
-  "generated_at": "2026-09-29T13:55:38+00:00",
+  "generated_at": "2026-09-29T13:55:53+00:00",
   "curation_window_days": 365,
-  "backfill_year": 1949,
-  "auto_approved_count": 1,
-  "excluded_count": 2,
+  "backfill_year": 1950,
+  "auto_approved_count": 6,
+  "excluded_count": 9,
   "records": [
     {
-      "pmid": "18149999",
-      "title": "[About the Behavior Of Liver Glycogen And Ketone Bodies In Diabetes Mellitus].",
+      "pmid": "14912464",
+      "title": "[Adrenal cortex and ketone bodies. I. Influence in normal man of adrenal incretion on the metabolism of ketone bodies].",
       "authors": [
-        "BERINGER A"
+        "MERLO P",
+        "ERCOLI G"
       ],
-      "journal": "Schweizerische medizinische Wochenschrift",
-      "date": "1949-04-02",
+      "journal": "Rassegna di fisiopatologia clinica e terapeutica",
+      "date": "1950-12-01",
       "date_precision": "day",
-      "year": 1949,
+      "year": 1950,
       "doi": "",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/18149999/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "18118680",
-      "title": "[Blood content of ketone bodies and cholesterin in hypertonia].",
-      "authors": [
-        "ZUKERSTEIN EI",
-        "EGOROVA MN"
-      ],
-      "journal": "Klinicheskaia meditsina",
-      "date": "1949-03-01",
-      "date_precision": "day",
-      "year": 1949,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/18118680/",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/14912464/",
       "doi_url": "",
       "pmc_url": "",
       "areas": [
@@ -61,18 +34,381 @@
       "curation_status": "excluded-low-confidence"
     },
     {
-      "pmid": "18111511",
-      "title": "[The influence of insulin on the metabolism of ketone bodies].",
+      "pmid": "14839659",
+      "title": "[Polarographic determination of ketone bodies].",
       "authors": [
-        "PASARGIKLIAN M"
+        "JAVUREK V",
+        "NOVAKOVA E"
       ],
-      "journal": "Archivio di fisiologia",
-      "date": "1949-01-20",
+      "journal": "Casopis ceskeho lekarnictva",
+      "date": "1950-12-01",
       "date_precision": "day",
-      "year": 1949,
+      "year": 1950,
       "doi": "",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/18111511/",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/14839659/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "14811668",
+      "title": "[Investigations on ketogenesis of amino acids; effect of endovenous administration of methionine in normal subjects, diabetic and hepatic patients on the behavior of ketonemia (and glycemia)].",
+      "authors": [
+        "GIAMPALMO V",
+        "CERRUTI L"
+      ],
+      "journal": "Archivio \"E. Maragliano\" di patologia e clinica",
+      "date": "1950-11-01",
+      "date_precision": "day",
+      "year": 1950,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/14811668/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 4,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "14809165",
+      "title": "[Production of ketone bodies from prehypophyseal extracts in normal and hepatectomized animals].",
+      "authors": [
+        "PITTONI A",
+        "ROSSI CR"
+      ],
+      "journal": "Rivista di biologia",
+      "date": "1950-10-01",
+      "date_precision": "day",
+      "year": 1950,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/14809165/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "14778828",
+      "title": "Effect of hormones upon the production of ketone bodies by rat liver slices.",
+      "authors": [
+        "BONDY PK",
+        "WILHELMI AE"
+      ],
+      "journal": "The Journal of biological chemistry",
+      "date": "1950-09-01",
+      "date_precision": "day",
+      "year": 1950,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/14778828/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "15436482",
+      "title": "The formation of ketone bodies from isovaleric acid.",
+      "authors": [
+        "ZABIN I",
+        "BLOCH K"
+      ],
+      "journal": "The Journal of biological chemistry",
+      "date": "1950-07-01",
+      "date_precision": "day",
+      "year": 1950,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/15436482/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "15436667",
+      "title": "Studies of diabetes mellitus: the relation of stressful life situations to the concentration of ketone bodies in the blood of diabetic and non-diabetic humans.",
+      "authors": [
+        "HINKLE LE",
+        "CONGER GB",
+        "WOLF S"
+      ],
+      "journal": "The Journal of clinical investigation",
+      "date": "1950-06-01",
+      "date_precision": "day",
+      "year": 1950,
+      "doi": "10.1172/JCI102313",
+      "pmc": "PMC436114",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/15436667/",
+      "doi_url": "https://doi.org/10.1172/JCI102313",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC436114/",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "15425950",
+      "title": "[Study of the mechanism of the acetono-butylic fermentation; formation of butyrate from beta-hydroxybutyrate and acetylacetate].",
+      "authors": [
+        "COHEN-BAZIRE G",
+        "COHEN GN"
+      ],
+      "journal": "Annales de l'Institut Pasteur",
+      "date": "1950-05-01",
+      "date_precision": "day",
+      "year": 1950,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/15425950/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "15433760",
+      "title": "[Correlations between uric acid metabolism and ketone bodies metabolism. IV. Behavior of uricemia and uricosuria after administration of beta-hydroxybutyric acid in patients with liver disease].",
+      "authors": [
+        "MORGANO G"
+      ],
+      "journal": "Archivio \"E. Maragliano\" di patologia e clinica",
+      "date": "1950-03-01",
+      "date_precision": "day",
+      "year": 1950,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/15433760/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "MASLD / Metabolic Liver Disease"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "15443651",
+      "title": "[Formation of ketone bodies from amino acids; behavior of the so-called ketogenous amino acids of the myocardium].",
+      "authors": [
+        "HEINSEN HA"
+      ],
+      "journal": "Zeitschrift fur die gesamte experimentelle Medizin",
+      "date": "1950-01-01",
+      "date_precision": "day",
+      "year": 1950,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/15443651/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Cardiovascular Health"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "15419994",
+      "title": "[Correlations between the metabolism of uric acid and the metabolism of ketone bodies: Note III--Behavior of uricemia and of uricuria after injection of beta-hydroxybutyric acid in diabetics, in basal conditions and after glucide supply].",
+      "authors": [
+        "MORGANO G"
+      ],
+      "journal": "Archivio \"E. Maragliano\" di patologia e clinica",
+      "date": "1950-01-01",
+      "date_precision": "day",
+      "year": 1950,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/15419994/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 2,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "15419993",
+      "title": "[Correlations between the metabolism of uric acid and the metabolism of ketone bodies: Note II--Behavior of uricemia and uricuria after injection of acetone in normal subjects].",
+      "authors": [
+        "MORGANO G",
+        "ALCOZER G"
+      ],
+      "journal": "Archivio \"E. Maragliano\" di patologia e clinica",
+      "date": "1950-01-01",
+      "date_precision": "day",
+      "year": 1950,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/15419993/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "15419992",
+      "title": "[Ketogenesis of amino acids. Note four--Behavior of ketonemia and glycemia after intravenous injection of glycochol and of alph-alanine in liver disease].",
+      "authors": [
+        "CERRUTI L",
+        "GIAMPALMO V"
+      ],
+      "journal": "Archivio \"E. Maragliano\" di patologia e clinica",
+      "date": "1950-01-01",
+      "date_precision": "day",
+      "year": 1950,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/15419992/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "MASLD / Metabolic Liver Disease",
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "14782939",
+      "title": "Renal excretion of ketone bodies.",
+      "authors": [
+        "WARMING-LARSEN A"
+      ],
+      "journal": "Acta medica Scandinavica. Supplementum",
+      "date": "1950-01-01",
+      "date_precision": "day",
+      "year": 1950,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/14782939/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "14772023",
+      "title": "[Metabolism of ketone bodies in glycogenosis in children].",
+      "authors": [
+        "ORSINI M",
+        "STEGAGNO G"
+      ],
+      "journal": "Archivio italiano di pediatria e puericoltura",
+      "date": "1950-01-01",
+      "date_precision": "day",
+      "year": 1950,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/14772023/",
       "doi_url": "",
       "pmc_url": "",
       "areas": [
