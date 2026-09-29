@@ -15,6 +15,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: historical-library-backfill
+  cancel-in-progress: false
+
 jobs:
   backfill:
     runs-on: ubuntu-latest
@@ -30,6 +34,16 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install beautifulsoup4
+
+      - name: Verify backfill-aware updater
+        run: |
+          grep -q "BACKFILL_YEAR" scripts/update_latest.py || {
+            echo "ERROR: scripts/update_latest.py is not the backfill-aware version."
+            exit 1
+          }
 
       - name: Validate year range
         shell: bash
@@ -71,8 +85,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-
-          for SCRIPT in             scripts/update_library_counts.py             scripts/rebuild_library_counts.py             scripts/build_evidence_trends.py             scripts/update_evidence_trends.py             scripts/rebuild_evidence_trends.py
+          for SCRIPT in             scripts/sync_publication_counters.py             scripts/build_evidence_trends.py
           do
             if [[ -f "$SCRIPT" ]]; then
               echo "Running $SCRIPT"
@@ -84,8 +97,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
           git add -A
 
@@ -96,6 +109,11 @@ jobs:
 
           git commit -m "Backfill Scientific Library ${{ inputs.start_year }}-${{ inputs.end_year }}"
 
-          BRANCH="${GITHUB_REF_NAME}"
-          git pull --rebase origin "$BRANCH"
-          git push origin "HEAD:$BRANCH"
+          if ! git diff --quiet || ! git diff --cached --quiet; then
+            echo "Unexpected uncommitted changes remain:"
+            git status --short
+            exit 1
+          fi
+
+          git pull --rebase origin main
+          git push origin HEAD:main
