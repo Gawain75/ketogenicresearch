@@ -20,118 +20,33 @@ EMAIL = os.getenv("NCBI_EMAIL", "info@ketogenicresearch.org")
 API_KEY = os.getenv("NCBI_API_KEY", "")
 WINDOW_DAYS = int(os.getenv("WINDOW_DAYS", "90"))
 CURATION_WINDOW_DAYS = int(os.getenv("CURATION_WINDOW_DAYS", "365"))
-MAX_RECORDS = int(os.getenv("MAX_RECORDS", "1000"))
-CURATION_MAX_RECORDS = int(os.getenv("CURATION_MAX_RECORDS", "5000"))
+MAX_RECORDS = int(os.getenv("MAX_RECORDS", "100"))
+CURATION_MAX_RECORDS = int(os.getenv("CURATION_MAX_RECORDS", "500"))
 
 BASE = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 
 QUERY = r'''(
-"ketogenic"[Title/Abstract]
-OR "ketogenesis"[Title/Abstract]
-OR "ketotic"[Title/Abstract]
-OR "keto diet"[Title/Abstract]
-OR "ketogenic diet"[Title/Abstract]
-OR "ketogenic diets"[Title/Abstract]
-OR "ketogenic dietary therapy"[Title/Abstract]
-OR "ketogenic dietary therapies"[Title/Abstract]
-OR "ketogenic diet therapy"[Title/Abstract]
-OR "classic ketogenic diet"[Title/Abstract]
-OR "classical ketogenic diet"[Title/Abstract]
-OR "MCT ketogenic diet"[Title/Abstract]
-OR "low-carbohydrate ketogenic diet"[Title/Abstract]
-OR "low carbohydrate ketogenic diet"[Title/Abstract]
-OR "ketogenic nutritional protocol"[Title/Abstract]
-OR "ketogenic therapy"[Title/Abstract]
-OR "ketogenic metabolic therapy"[Title/Abstract]
-OR "nutritional ketosis"[Title/Abstract]
-OR "very low calorie ketogenic diet"[Title/Abstract]
-OR "very-low-calorie ketogenic diet"[Title/Abstract]
-OR "very low energy ketogenic therapy"[Title/Abstract]
-OR "modified Atkins diet"[Title/Abstract]
-OR VLCKD[Title/Abstract]
-OR VLEKT[Title/Abstract]
-OR "exogenous ketone"[Title/Abstract]
-OR "exogenous ketones"[Title/Abstract]
-OR "ketone ester"[Title/Abstract]
-OR "ketone esters"[Title/Abstract]
-OR "ketone salt"[Title/Abstract]
-OR "ketone salts"[Title/Abstract]
-OR "beta-hydroxybutyrate"[Title/Abstract]
-OR "β-hydroxybutyrate"[Title/Abstract]
-OR "ketone bodies"[Title/Abstract]
-OR "Diet, Ketogenic"[Mesh]
-OR "Ketosis"[Mesh]
+"ketogenic diet"[Title/Abstract] OR "ketogenic diets"[Title/Abstract]
+OR "ketogenic therapy"[Title/Abstract] OR "ketogenic metabolic therapy"[Title/Abstract]
+OR "nutritional ketosis"[Title/Abstract] OR "very low calorie ketogenic diet"[Title/Abstract]
+OR "very-low-calorie ketogenic diet"[Title/Abstract] OR "very low energy ketogenic therapy"[Title/Abstract]
+OR "modified Atkins diet"[Title/Abstract] OR VLCKD[Title/Abstract] OR VLEKT[Title/Abstract]
+OR "exogenous ketone"[Title/Abstract] OR "exogenous ketones"[Title/Abstract]
+OR "ketone ester"[Title/Abstract] OR "ketone esters"[Title/Abstract]
+OR "ketone salt"[Title/Abstract] OR "ketone salts"[Title/Abstract]
+OR (("beta-hydroxybutyrate"[Title/Abstract] OR "ketone bodies"[Title/Abstract])
+AND (ketogenic[Title/Abstract] OR "nutritional ketosis"[Title/Abstract] OR "ketogenic therapy"[Title/Abstract]))
 )'''
 
-DIRECT_KETO_TERMS = (
-    "ketogenic diet",
-    "ketogenic diets",
-    "ketogenic dietary therapy",
-    "ketogenic dietary therapies",
-    "ketogenic diet therapy",
-    "classic ketogenic diet",
-    "classical ketogenic diet",
-    "mct ketogenic diet",
-    "low-carbohydrate ketogenic diet",
-    "low carbohydrate ketogenic diet",
-    "ketogenic nutritional protocol",
-    "ketogenic intervention",
-    "ketogenic interventions",
-    "ketogenic therapy",
-    "ketogenic metabolic therapy",
-    "nutritional ketosis",
-    "modified atkins diet",
-    "modified atkins",
-    "vlckd",
-    "vlekt",
-    "keto diet",
+CORE = (
+    "ketogenic", "nutritional ketosis", "modified atkins", "vlckd", "vlekt",
+    "exogenous ketone", "ketone ester", "ketone salt",
 )
-
-MECHANISTIC_PRIMARY_TERMS = (
-    "ketogenesis",
-    "ketogenic pathway",
-    "ketone body metabolism",
-    "ketone metabolism",
-    "ketone bodies",
-    "beta-hydroxybutyrate",
-    "β-hydroxybutyrate",
-    "b-hydroxybutyrate",
-    "acetoacetate",
+SECONDARY = ("beta-hydroxybutyrate", "ketone bodies")
+CONTEXT = (
+    "ketogenic diet", "ketogenic diets", "ketogenic therapy",
+    "ketogenic metabolic therapy", "nutritional ketosis",
 )
-
-MECHANISTIC_FOCUS_CUES = (
-    "mechanism",
-    "mechanisms",
-    "metabolism",
-    "metabolic",
-    "signaling",
-    "signalling",
-    "biosynthesis",
-    "production",
-    "oxidation",
-    "transport",
-    "utilization",
-    "utilisation",
-    "regulation",
-    "regulatory",
-    "epigenetic",
-    "histone",
-    "hdac",
-    "nuclear receptor",
-    "ketolysis",
-)
-
-INCIDENTAL_CONTEXT_TERMS = (
-    "through",
-    "via",
-    "associated with",
-    "accompanied by",
-    "alongside",
-    "and ketone",
-    "ketone body signaling",
-    "ketone body signalling",
-)
-
 
 AREA_RULES = {
     "Obesity": ["obesity", "obese", "weight loss", "body weight", "bariatric"],
@@ -227,14 +142,14 @@ def api(name, params):
             data=encoded,
             method="POST",
             headers={
-                "User-Agent": f"ketogenicresearch/2.2 ({EMAIL})",
+                "User-Agent": f"ketogenicresearch/2.1 ({EMAIL})",
                 "Content-Type": "application/x-www-form-urlencoded",
             },
         )
     else:
         req = urllib.request.Request(
             f"{endpoint}?{encoded.decode('utf-8')}",
-            headers={"User-Agent": f"ketogenicresearch/2.2 ({EMAIL})"},
+            headers={"User-Agent": f"ketogenicresearch/2.1 ({EMAIL})"},
         )
 
     with urllib.request.urlopen(req, timeout=60) as response:
@@ -318,154 +233,27 @@ def previous_queue():
         return {}
 
 
-def relevant(article, citation):
-    """Return True only when ketogenic/ketone biology is a central topic.
+def relevant(article):
+    title = text(
+        article.find("ArticleTitle")
+    ).lower()
 
-    The PubMed query is intentionally broad for sensitivity. This second-stage
-    filter removes papers where ketones/ketogenesis are merely incidental.
-    """
-    title = text(article.find("ArticleTitle")).lower()
-
-    abstract_parts = [
-        text(n).lower()
-        for n in article.findall("Abstract/AbstractText")
-        if text(n)
-    ]
-    abstract = " ".join(abstract_parts)
-
-    mesh_terms = [
-        text(n).lower()
-        for n in citation.findall(".//MeshHeading/DescriptorName")
-        if text(n)
-    ]
-    mesh = " ".join(mesh_terms)
-
-    body = f"{title} {abstract} {mesh}"
-
-    # 1) Direct ketogenic-diet / ketogenic-therapy relevance.
-    direct_phrases = (
-        "ketogenic diet",
-        "ketogenic diets",
-        "ketogenic dietary therapy",
-        "ketogenic dietary therapies",
-        "ketogenic diet therapy",
-        "ketogenic intervention",
-        "ketogenic interventions",
-        "ketogenic protocol",
-        "ketogenic protocols",
-        "ketogenic nutritional protocol",
-        "ketogenic therapy",
-        "ketogenic metabolic therapy",
-        "classic ketogenic diet",
-        "classical ketogenic diet",
-        "mct ketogenic diet",
-        "low-carbohydrate ketogenic diet",
-        "low carbohydrate ketogenic diet",
-        "very low calorie ketogenic diet",
-        "very-low-calorie ketogenic diet",
-        "very low energy ketogenic therapy",
-        "modified atkins diet",
-        "nutritional ketosis",
-        "vlckd",
-        "vlekt",
-        "keto diet",
-    )
-
-    if any(p in title for p in direct_phrases):
-        return True
-
-    if "diet, ketogenic" in mesh:
-        return True
-
-    # Direct diet/therapy wording in the abstract is also sufficient.
-    if any(p in abstract for p in direct_phrases):
-        return True
-
-    # 2) Exogenous ketones are intrinsically in scope when they are central.
-    exogenous_phrases = (
-        "exogenous ketone",
-        "exogenous ketones",
-        "ketone ester",
-        "ketone esters",
-        "ketone salt",
-        "ketone salts",
-    )
-    if any(p in title for p in exogenous_phrases):
-        return True
-    if any(p in abstract for p in exogenous_phrases):
-        # Require repeated/central mention when not present in the title.
-        if sum(abstract.count(p) for p in exogenous_phrases) >= 2:
-            return True
-
-    # 3) Mechanistic ketogenesis / ketone-body biology.
-    # Accept when ketogenesis/ketones are clearly the study focus, not a
-    # secondary pathway mentioned in passing.
-    mechanism_terms = (
-        "ketogenesis",
-        "ketogenic metabolism",
-        "ketone metabolism",
-        "ketone body metabolism",
-        "ketone bodies",
-        "beta-hydroxybutyrate",
-        "β-hydroxybutyrate",
-        "b-hydroxybutyrate",
-        "acetoacetate",
-    )
-
-    # Strongest signal: mechanistic term appears in the title.
-    title_mechanism_hits = sum(1 for t in mechanism_terms if t in title)
-    if title_mechanism_hits:
-        # Reject titles where ketones are explicitly framed only as one
-        # downstream branch/pathway of another primary mechanism.
-        incidental_title_patterns = (
-            r"\bthrough\b.{0,80}\bketone bod(?:y|ies)\b",
-            r"\bvia\b.{0,80}\bketone bod(?:y|ies)\b",
-            r"\band ketone body signaling\b",
-            r"\bwith ketone body signaling\b",
-            r"\bassociated with ketogenesis\b",
+    abstract = " ".join(
+        text(n)
+        for n in article.findall(
+            "Abstract/AbstractText"
         )
-        if any(re.search(p, title) for p in incidental_title_patterns):
-            primary_focus_terms = (
-                "ketogenesis as",
-                "ketogenesis in",
-                "ketogenesis and",
-                "ketone bodies as",
-                "ketone bodies in",
-                "ketone metabolism",
-                "beta-hydroxybutyrate",
-                "β-hydroxybutyrate",
-            )
-            if not any(p in title for p in primary_focus_terms):
-                return False
-        return True
+    ).lower()
 
-    # If the mechanism is only in the abstract, require stronger evidence of
-    # centrality: repeated mentions plus explicit objective/conclusion framing.
-    mech_mentions = sum(abstract.count(t) for t in mechanism_terms)
-    if mech_mentions >= 3:
-        centrality_markers = (
-            "we investigated",
-            "we examined",
-            "we evaluated",
-            "we studied",
-            "we review",
-            "this review",
-            "the aim",
-            "the objective",
-            "focuses on",
-            "focused on",
-            "role of ketogenesis",
-            "role of ketone",
-            "ketone metabolism",
-            "ketogenic metabolism",
+    body = title + " " + abstract
+
+    return (
+        any(x in title for x in CORE)
+        or (
+            any(x in title for x in SECONDARY)
+            and any(x in body for x in CONTEXT)
         )
-        if any(m in abstract for m in centrality_markers):
-            return True
-
-    # 4) Generic MeSH "Ketosis" or a single ketone/BHB mention is not enough.
-    # This deliberately excludes papers whose actual focus is lipolysis,
-    # hepatic lipid accumulation, PPAR-alpha signalling, etc.
-    return False
+    )
 
 
 def classify(title, abstract, mesh):
@@ -836,8 +624,6 @@ def main():
 
     latest = []
     queue = []
-    fetched_count = len(ids)
-    relevant_count = 0
 
     for item in root.findall(
         ".//PubmedArticle"
@@ -855,11 +641,9 @@ def main():
         if (
             citation is None
             or article is None
-            or not relevant(article, citation)
+            or not relevant(article)
         ):
             continue
-
-        relevant_count += 1
 
         pmid = text(
             citation.find(
@@ -1186,12 +970,6 @@ def main():
                     WINDOW_DAYS,
                 "max_records":
                     MAX_RECORDS,
-                "pubmed_records_fetched":
-                    fetched_count,
-                "relevant_records_after_filter":
-                    relevant_count,
-                "truncated":
-                    len(latest) >= MAX_RECORDS,
                 "source":
                     "PubMed / NCBI E-utilities",
                 "count":
@@ -1244,20 +1022,9 @@ def main():
     )
 
     print(
-        f"PubMed fetched {fetched_count} candidate record(s); "
-        f"{relevant_count} passed the ketogenic relevance filter."
-    )
-
-    print(
         f"Wrote {len(latest)} recent records "
         f"to {LATEST_OUT.name}"
     )
-
-    if len(latest) >= MAX_RECORDS:
-        print(
-            f"WARNING: Latest Evidence reached MAX_RECORDS={MAX_RECORDS}. "
-            "Increase MAX_RECORDS to avoid truncation."
-        )
 
     print(
         f"Wrote {len(queue)} non-curated candidates "
