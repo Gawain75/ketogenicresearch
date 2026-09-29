@@ -1,38 +1,204 @@
 {
-  "generated_at": "2026-09-29T13:55:09+00:00",
+  "generated_at": "2026-09-29T13:55:23+00:00",
   "curation_window_days": 365,
-  "backfill_year": 1947,
+  "backfill_year": 1948,
   "auto_approved_count": 1,
-  "excluded_count": 0,
+  "excluded_count": 6,
   "records": [
     {
-      "pmid": "18921782",
-      "title": "Effect on cardiac glycogen of intravenously administered sodium acetoacetate, sodium beta-hydroxybutyrate and sodium butyrate.",
+      "pmid": "18886419",
+      "title": "Fermentation of pyruvate, beta-hydroxybutyrate and of C4-dicarboxylic acids by some butyric acid-forming organisms.",
       "authors": [
-        "LACKEY RW",
-        "BUNDE CA",
-        "HARRIS LC"
+        "COHEN GN",
+        "COHEN-BAZIRE G"
       ],
-      "journal": "Proceedings of the Society for Experimental Biology and Medicine. Society for Experimental Biology and Medicine (New York, N.Y.)",
-      "date": "1947-11-01",
+      "journal": "Nature",
+      "date": "1948-10-09",
       "date_precision": "day",
-      "year": 1947,
-      "doi": "10.3181/00379727-66-16115",
+      "year": 1948,
+      "doi": "10.1038/162578a0",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/18921782/",
-      "doi_url": "https://doi.org/10.3181/00379727-66-16115",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/18886419/",
+      "doi_url": "https://doi.org/10.1038/162578a0",
       "pmc_url": "",
       "areas": [
-        "Cardiovascular Health"
+        "Other / General"
       ],
-      "category_confidence": 8,
+      "category_confidence": 0,
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "18102662",
+      "title": "Effects of the pituitary growth and adrenocorticotropic hormones on the urinary glucose, nitrogen and ketone bodies of diabetic rats maintained on a carbohydrate-free diet.",
+      "authors": [
+        "BENNETT LL",
+        "LAUNDRIE B"
+      ],
+      "journal": "The American journal of physiology",
+      "date": "1948-10-01",
+      "date_precision": "day",
+      "year": 1948,
+      "doi": "10.1152/ajplegacy.1948.155.1.18",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/18102662/",
+      "doi_url": "https://doi.org/10.1152/ajplegacy.1948.155.1.18",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
       "auto_eligible": true,
       "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "18883361",
+      "title": "[Quantitative determination of the ketone bodies in 0.2 cc blood].",
+      "authors": [
+        "SEIFERT P"
+      ],
+      "journal": "Klinische Wochenschrift",
+      "date": "1948-08-01",
+      "date_precision": "day",
+      "year": 1948,
+      "doi": "10.1007/BF01480972",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/18883361/",
+      "doi_url": "https://doi.org/10.1007/BF01480972",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "18871250",
+      "title": "The determination of acetone and ketone bodies.",
+      "authors": [
+        "LESTER D",
+        "GREENBERG LA"
+      ],
+      "journal": "The Journal of biological chemistry",
+      "date": "1948-07-01",
+      "date_precision": "day",
+      "year": 1948,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/18871250/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "18103970",
+      "title": "[Studies on the metabolism of the ketone bodies of infancy; early research on an intravenous acetone load test in a healthy child].",
+      "authors": [
+        "TOLENTINO P",
+        "COTELLESSA G",
+        "CAFFARENA G"
+      ],
+      "journal": "Policlinico infantile",
+      "date": "1948-07-01",
+      "date_precision": "day",
+      "year": 1948,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/18103970/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "18868945",
+      "title": "[The permeability of the blood-brain barrier to ketone bodies].",
+      "authors": [
+        "NOVELLI E",
+        "CERRUTI L"
+      ],
+      "journal": "Archivio \"E. Maragliano\" di patologia e clinica",
+      "date": "1948-01-01",
+      "date_precision": "day",
+      "year": 1948,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/18868945/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "18867384",
+      "title": "[Behavior of total fats, lipoid phosphorus, and ketone bodies in the blood of the human body subjected to prolonged anoxia].",
+      "authors": [
+        "SILLANI LS"
+      ],
+      "journal": "Rivista di medicina aeronautica",
+      "date": "1948-01-01",
+      "date_precision": "day",
+      "year": 1948,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/18867384/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
     }
   ]
 }
