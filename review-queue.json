@@ -1,29 +1,172 @@
 {
-  "generated_at": "2026-09-29T13:57:22+00:00",
+  "generated_at": "2026-09-29T13:57:37+00:00",
   "curation_window_days": 365,
-  "backfill_year": 1956,
-  "auto_approved_count": 4,
-  "excluded_count": 5,
+  "backfill_year": 1957,
+  "auto_approved_count": 6,
+  "excluded_count": 6,
   "records": [
     {
-      "pmid": "13414994",
-      "title": "[On the blood ketone bodies in carcinoma patients].",
+      "pmid": "13489414",
+      "title": "[Meaning of ketone bodies in the urine of children].",
       "authors": [
-        "OKUMURA A",
-        "MATSUDA K",
-        "KOHSAKI G"
+        "POUPINET S"
       ],
-      "journal": "Gan",
-      "date": "1956-12-01",
+      "journal": "Bulletin medical",
+      "date": "1957-10-01",
       "date_precision": "day",
-      "year": 1956,
+      "year": 1957,
       "doi": "",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13414994/",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13489414/",
       "doi_url": "",
       "pmc_url": "",
       "areas": [
-        "Oncology & Cancer Metabolism"
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "13481168",
+      "title": "Some observations on glucose, ketone bodies and volatile fatty acids in the blood of dairy cattle.",
+      "authors": [
+        "HORROCKS D",
+        "PATERSON JY"
+      ],
+      "journal": "Journal of comparative pathology",
+      "date": "1957-10-01",
+      "date_precision": "day",
+      "year": 1957,
+      "doi": "10.1016/s0368-1742(57)80032-0",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13481168/",
+      "doi_url": "https://doi.org/10.1016/s0368-1742(57)80032-0",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "13473140",
+      "title": "Determination of ketone bodies in blood and urine by means of vanillin in alkaline medium.",
+      "authors": [
+        "LEVINE VE",
+        "TATERKA M"
+      ],
+      "journal": "Clinical chemistry",
+      "date": "1957-10-01",
+      "date_precision": "day",
+      "year": 1957,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13473140/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "13553524",
+      "title": "[Ketone body metabolism in the aged in relation to surgical intervention].",
+      "authors": [
+        "OCCHIPINTI S",
+        "RAMOINO L",
+        "PODESTA A"
+      ],
+      "journal": "Pathologica",
+      "date": "1957-09-01",
+      "date_precision": "day",
+      "year": 1957,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13553524/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Clinical trial / intervention",
+      "evidence_type_it": "Trial clinico / intervento",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "13471503",
+      "title": "The determination of ketone bodies.",
+      "authors": [
+        "MAYES PA",
+        "ROBSON W"
+      ],
+      "journal": "The Biochemical journal",
+      "date": "1957-09-01",
+      "date_precision": "day",
+      "year": 1957,
+      "doi": "10.1042/bj0670011",
+      "pmc": "PMC1200100",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13471503/",
+      "doi_url": "https://doi.org/10.1042/bj0670011",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1200100/",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "13464631",
+      "title": "[Changes of certain metabolic aspects (pyruvic acid, lactic acid, ketone bodies, lipids) in diabetics treated with hypoglycemic sulfonamides].",
+      "authors": [
+        "CATTANEO R",
+        "PELOCCHINO AM",
+        "PRINOTTI C",
+        "BOERO P",
+        "SAN LORENZO G"
+      ],
+      "journal": "Minerva medica",
+      "date": "1957-07-07",
+      "date_precision": "day",
+      "year": 1957,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13464631/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism",
+        "Dyslipidemia & Lipid Metabolism"
       ],
       "category_confidence": 8,
       "evidence_type": "Other",
@@ -35,19 +178,19 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "13346182",
-      "title": "A mechanism for diminished ketogenesis in experimental liver injury. II.",
+      "pmid": "13458894",
+      "title": "[Determination of ketone bodies in blood by microdiffusion].",
       "authors": [
-        "FISCHER GL",
-        "RECANT L"
+        "SAVEL J",
+        "CARIOU J"
       ],
-      "journal": "The Journal of laboratory and clinical medicine",
-      "date": "1956-08-01",
+      "journal": "Annales de biologie clinique",
+      "date": "1957-07-01",
       "date_precision": "day",
-      "year": 1956,
+      "year": 1957,
       "doi": "",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13346182/",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13458894/",
       "doi_url": "",
       "pmc_url": "",
       "areas": [
@@ -63,76 +206,128 @@
       "curation_status": "excluded-low-confidence"
     },
     {
-      "pmid": "13346181",
-      "title": "Diminished ketogenesis in liver injury. I.",
+      "pmid": "13444206",
+      "title": "The influence of the endocrine glands on fatty acid and ketone body metabolism.",
       "authors": [
-        "RECANT L"
+        "ENGEL FL"
       ],
-      "journal": "The Journal of laboratory and clinical medicine",
-      "date": "1956-08-01",
+      "journal": "The American journal of clinical nutrition",
+      "date": "1957-07-01",
       "date_precision": "day",
-      "year": 1956,
-      "doi": "",
+      "year": 1957,
+      "doi": "10.1093/ajcn/5.4.417",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13346181/",
-      "doi_url": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13444206/",
+      "doi_url": "https://doi.org/10.1093/ajcn/5.4.417",
       "pmc_url": "",
       "areas": [
-        "Other / General"
+        "Dyslipidemia & Lipid Metabolism"
       ],
-      "category_confidence": 0,
+      "category_confidence": 2,
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
     },
     {
-      "pmid": "13313741",
-      "title": "Ketone body metabolism in ascorbic acid deficiency; in vitro formation of ketone bodies by liver slices.",
+      "pmid": "13434505",
+      "title": "The influence of the endocrine glands on fatty acid and ketone body metabolism.",
       "authors": [
-        "DEBONS AF",
-        "WALLACE JW",
-        "BACCHUS H"
+        "ENGEL FL"
       ],
-      "journal": "The American journal of physiology",
-      "date": "1956-04-01",
+      "journal": "A.M.A. archives of internal medicine",
+      "date": "1957-07-01",
       "date_precision": "day",
-      "year": 1956,
-      "doi": "10.1152/ajplegacy.1956.185.1.31",
+      "year": 1957,
+      "doi": "10.1001/archinte.1957.00260070032003",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13313741/",
-      "doi_url": "https://doi.org/10.1152/ajplegacy.1956.185.1.31",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13434505/",
+      "doi_url": "https://doi.org/10.1001/archinte.1957.00260070032003",
       "pmc_url": "",
       "areas": [
-        "Other / General"
+        "Dyslipidemia & Lipid Metabolism"
       ],
-      "category_confidence": 0,
+      "category_confidence": 2,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "13471439",
+      "title": "The effects on blood sugar and ketone bodies of butyrate, acetate and beta-OH butyrate infused into sheep.",
+      "authors": [
+        "KRONFELD DS"
+      ],
+      "journal": "The Australian journal of experimental biology and medical science",
+      "date": "1957-06-01",
+      "date_precision": "day",
+      "year": 1957,
+      "doi": "10.1038/icb.1957.28",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13471439/",
+      "doi_url": "https://doi.org/10.1038/icb.1957.28",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 2,
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "13428732",
+      "title": "The oxidation of ketone bodies by mitochondria from liver and peripheral tissues.",
+      "authors": [
+        "MCCANN WP"
+      ],
+      "journal": "The Journal of biological chemistry",
+      "date": "1957-05-01",
+      "date_precision": "day",
+      "year": 1957,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13428732/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
     },
     {
-      "pmid": "13315329",
-      "title": "Enzymic activities of tumour mitochondria as evidenced by their inhibitory effect on the oxidation of DL-, D- and L-beta-hydroxybutyrate by liver mitochondria.",
+      "pmid": "13437967",
+      "title": "Fatty acid oxidation in normal and neoplastic tissues; the oxidation of beta-hydroxybutyrate and pyruvate by tumour mitochondria.",
       "authors": [
         "EMMELOT P",
         "BOS CJ"
       ],
-      "journal": "Biochimica et biophysica acta",
-      "date": "1956-03-01",
+      "journal": "Enzymologia",
+      "date": "1957-04-30",
       "date_precision": "day",
-      "year": 1956,
-      "doi": "10.1016/0006-3002(56)90492-9",
+      "year": 1957,
+      "doi": "",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13315329/",
-      "doi_url": "https://doi.org/10.1016/0006-3002(56)90492-9",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13437967/",
+      "doi_url": "",
       "pmc_url": "",
       "areas": [
         "Oncology & Cancer Metabolism"
@@ -145,118 +340,6 @@
       "status": "indexed",
       "auto_eligible": true,
       "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "13295304",
-      "title": "Oxidative phosphorylation by an enzyme complex from extracts of mitochondria. II. The span beta-hydroxybutyrate to cytochrome c.",
-      "authors": [
-        "DEVLIN TM",
-        "LEHNINGER AL"
-      ],
-      "journal": "The Journal of biological chemistry",
-      "date": "1956-03-01",
-      "date_precision": "day",
-      "year": 1956,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13295304/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Dyslipidemia & Lipid Metabolism"
-      ],
-      "category_confidence": 2,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "13295303",
-      "title": "Oxidative phosphorylation by an enzyme complex from extracts of mitochondria. I. The span beta-hydroxybutyrate to oxygen.",
-      "authors": [
-        "COOPER C",
-        "LEHNINGER AL"
-      ],
-      "journal": "The Journal of biological chemistry",
-      "date": "1956-03-01",
-      "date_precision": "day",
-      "year": 1956,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13295303/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Dyslipidemia & Lipid Metabolism"
-      ],
-      "category_confidence": 2,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "13388909",
-      "title": "[Method of quantitative determination of ketone bodies in urine applicable in clinical practice].",
-      "authors": [
-        "CHLEBOWSKI J",
-        "WIECHOWSKI W"
-      ],
-      "journal": "Polskie Archiwum Medycyny Wewnetrznej",
-      "date": "1956-01-01",
-      "date_precision": "day",
-      "year": 1956,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13388909/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "13277323",
-      "title": "On the mechanism of ketogenesis in ruminants.",
-      "authors": [
-        "ADLER JH",
-        "DYE JA"
-      ],
-      "journal": "The Cornell veterinarian",
-      "date": "1956-01-01",
-      "date_precision": "day",
-      "year": 1956,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13277323/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
     }
   ]
 }
