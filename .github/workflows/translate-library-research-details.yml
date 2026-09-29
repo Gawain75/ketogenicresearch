@@ -39,8 +39,8 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GROQ_MODEL: openai/gpt-oss-120b
-          DETAIL_TRANSLATION_BATCH_MAX: "60"
-          DETAIL_TRANSLATION_MAX_CHARS: "22000"
+          DETAIL_TRANSLATION_BATCH_MAX: "20"
+          DETAIL_TRANSLATION_MAX_CHARS: "9000"
           ROUNDS: ${{ inputs.rounds }}
         shell: bash
         run: |
