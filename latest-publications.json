@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-09-29T09:04:37+00:00",
+  "generated_at": "2026-09-29T09:21:38+00:00",
   "window_days": 90,
   "max_records": 100,
   "pubmed_records_fetched": 2000,
-  "relevant_records_after_filter": 1218,
+  "relevant_records_after_filter": 1044,
   "truncated": true,
   "source": "PubMed / NCBI E-utilities",
   "count": 100,
@@ -94,65 +94,6 @@
       "status": "new"
     },
     {
-      "pmid": "42785681",
-      "title": "Lipolysis-Driven Communication Between Adipose Tissue and Liver: A Key Axis in Metabolic Regulation.",
-      "authors": [
-        "Zhang S",
-        "Cedillo L",
-        "Villanueva CJ"
-      ],
-      "journal": "Journal of lipid research",
-      "date": "2026-09-24",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.jlr.2026.101150",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42785681/",
-      "doi_url": "https://doi.org/10.1016/j.jlr.2026.101150",
-      "pmc_url": "",
-      "areas": [
-        "Dyslipidemia & Lipid Metabolism",
-        "MASLD / Metabolic Liver Disease"
-      ],
-      "category_confidence": 3,
-      "evidence_type": "Review",
-      "evidence_type_it": "Revisione",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "new"
-    },
-    {
-      "pmid": "42779476",
-      "title": "Ketone monoester intake affects the ventilatory response to O2 and CO2 in healthy individuals at high altitude.",
-      "authors": [
-        "Stalmans M",
-        "Tominec D",
-        "Narang BJ",
-        "Manferdelli G",
-        "Millet GP",
-        "Debevec T",
-        "Poffé C"
-      ],
-      "journal": "American journal of physiology. Regulatory, integrative and comparative physiology",
-      "date": "2026-09-24",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1152/ajpregu.00073.2026",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42779476/",
-      "doi_url": "https://doi.org/10.1152/ajpregu.00073.2026",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 1,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "new"
-    },
-    {
       "pmid": "42800429",
       "title": "Beyond the classic ketogenic diet: A systematic review of alternative and adjunctive therapies for GLUT1 deficiency syndrome.",
       "authors": [
@@ -206,37 +147,6 @@
       "category_confidence": 6,
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "new"
-    },
-    {
-      "pmid": "42777857",
-      "title": "A ketogenic enzyme HMGCS2 drives malignant progression in HER2-negative breast cancer via RAB23-mediated β-catenin/TCF signaling and mediates Apatinib resistance.",
-      "authors": [
-        "Wu J",
-        "Liu M",
-        "Li W",
-        "Zhang N",
-        "Liu Y",
-        "Zhao Y",
-        "Zeng X"
-      ],
-      "journal": "Life sciences",
-      "date": "2026-09-23",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.lfs.2026.124710",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42777857/",
-      "doi_url": "https://doi.org/10.1016/j.lfs.2026.124710",
-      "pmc_url": "",
-      "areas": [
-        "Oncology & Cancer Metabolism"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "new"
@@ -518,6 +428,35 @@
       "status": "new"
     },
     {
+      "pmid": "42767539",
+      "title": "Ketone metabolism in heart failure with preserved ejection fraction: Fuel, signaling, and therapeutic opportunities.",
+      "authors": [
+        "Yao Y",
+        "Gu Z",
+        "Hu J",
+        "Zhu W",
+        "Lin Q"
+      ],
+      "journal": "Pharmacological research",
+      "date": "2026-09-21",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.phrs.2026.108466",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42767539/",
+      "doi_url": "https://doi.org/10.1016/j.phrs.2026.108466",
+      "pmc_url": "",
+      "areas": [
+        "Cardiovascular Health"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "new"
+    },
+    {
       "pmid": "42766067",
       "title": "Comparative effects of ketogenic diets and mediterranean diets on obesity and metabolic outcomes: a systematic review and meta-analysis.",
       "authors": [
@@ -698,37 +637,6 @@
       "status": "new"
     },
     {
-      "pmid": "42759692",
-      "title": "Perioperative management of SGLT2 inhibitors: balancing euglycaemic ketoacidosis risk and cardiorenal benefits.",
-      "authors": [
-        "Ji K",
-        "Zhang D",
-        "Zhao Y",
-        "Zeng Z",
-        "Jiang M",
-        "Zhang J"
-      ],
-      "journal": "Diabetes & metabolism",
-      "date": "2026-09-18",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.diabet.2026.101793",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42759692/",
-      "doi_url": "https://doi.org/10.1016/j.diabet.2026.101793",
-      "pmc_url": "",
-      "areas": [
-        "Diabetes & Glucose Metabolism",
-        "Cardiovascular Health"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Review",
-      "evidence_type_it": "Revisione",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "new"
-    },
-    {
       "pmid": "42758370",
       "title": "Metabolic modulation of glioblastoma by dietary intervention: a systematic review.",
       "authors": [
@@ -875,40 +783,6 @@
       "status": "new"
     },
     {
-      "pmid": "42752091",
-      "title": "Anticipatory metabolic regulation drives the distinct and improved metabolic state of caloric restriction compared to Fasting-Refeeding cycles.",
-      "authors": [
-        "Velingkaar N",
-        "Astafev AA",
-        "Prabahar A",
-        "Maravillas MA",
-        "Trokhimenko E",
-        "Rom JB",
-        "Asi GJ",
-        "Piontkivska H",
-        "Jiang P",
-        "Kondratov RV"
-      ],
-      "journal": "Cell reports",
-      "date": "2026-09-17",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.celrep.2026.118022",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42752091/",
-      "doi_url": "https://doi.org/10.1016/j.celrep.2026.118022",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 1,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "new"
-    },
-    {
       "pmid": "42746937",
       "title": "To eat, or not to eat… dietary patterns and the clinical recognition of insulinoma: a case report.",
       "authors": [
@@ -975,38 +849,6 @@
       "category_confidence": 6,
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "new"
-    },
-    {
-      "pmid": "42744797",
-      "title": "MIC13-linked cristae disruption causes metabolic failure and early fibrotic remodelling in mitochondrial liver disease.",
-      "authors": [
-        "Becker A",
-        "Eichmann TO",
-        "Vasiliev V",
-        "Mey KA",
-        "Petzsch P",
-        "Rossi A",
-        "Distelmaier F",
-        "Anand R"
-      ],
-      "journal": "Cell death & disease",
-      "date": "2026-09-15",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1038/s41419-026-09283-y",
-      "pmc": "PMC13578304",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42744797/",
-      "doi_url": "https://doi.org/10.1038/s41419-026-09283-y",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13578304/",
-      "areas": [
-        "MASLD / Metabolic Liver Disease"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "new"
@@ -1085,41 +927,6 @@
       "status": "new"
     },
     {
-      "pmid": "42774780",
-      "title": "Distinct metabolomic signatures of SGLT2 inhibitor vs. sulfonylurea in a paired human liver biopsy study.",
-      "authors": [
-        "Takeshita Y",
-        "Oo HK",
-        "Nakano Y",
-        "Ueno A",
-        "Oishi M",
-        "Tsujiguchi H",
-        "Soga T",
-        "Yamashita T",
-        "Honda M",
-        "Takamura T"
-      ],
-      "journal": "Biochemistry and biophysics reports",
-      "date": "2026-09-14",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.bbrep.2026.102784",
-      "pmc": "PMC13594538",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42774780/",
-      "doi_url": "https://doi.org/10.1016/j.bbrep.2026.102784",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13594538/",
-      "areas": [
-        "MASLD / Metabolic Liver Disease",
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 3,
-      "evidence_type": "Randomized clinical trial",
-      "evidence_type_it": "Trial clinico randomizzato",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
       "pmid": "42753449",
       "title": "Effects of ketogenic diet on cognitive impairment in older adults: a systematic review and meta-analysis.",
       "authors": [
@@ -1176,38 +983,6 @@
       "evidence_type_it": "Altro",
       "source": "PubMed",
       "first_seen": "2026-09-27",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42798428",
-      "title": "Higher visceral fat area is inversely associated with ketosis in Chinese patients with type 2 diabetes mellitus: a cross-sectional study.",
-      "authors": [
-        "Wang JW",
-        "Jiang L",
-        "Ren J",
-        "Gao LL",
-        "Qiao YN",
-        "Liu SW"
-      ],
-      "journal": "Frontiers in endocrinology",
-      "date": "2026-09-11",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3389/fendo.2026.1948929",
-      "pmc": "PMC13612281",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42798428/",
-      "doi_url": "https://doi.org/10.3389/fendo.2026.1948929",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13612281/",
-      "areas": [
-        "Diabetes & Glucose Metabolism",
-        "Aesthetic Medicine & Body Composition",
-        "Obesity"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Observational human study",
-      "evidence_type_it": "Studio osservazionale umano",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
       "status": "indexed"
     },
     {
@@ -1373,67 +1148,6 @@
       "status": "indexed"
     },
     {
-      "pmid": "42729904",
-      "title": "Euglycemic ketoacidosis in a nondiabetic patient receiving dapagliflozin for heart failure.",
-      "authors": [
-        "Silveira G",
-        "Kvasha Y",
-        "Shah P",
-        "Shah H",
-        "Gogineni J"
-      ],
-      "journal": "JCEM case reports",
-      "date": "2026-09-11",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1210/jcemcr/luag275",
-      "pmc": "PMC13563184",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42729904/",
-      "doi_url": "https://doi.org/10.1210/jcemcr/luag275",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13563184/",
-      "areas": [
-        "Cardiovascular Health",
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Case report / case series",
-      "evidence_type_it": "Case report / case series",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42792984",
-      "title": "The Association Between Hyperketonemia and Reduced Circulating Hydrogen Sulfide in Children with Type 1 Diabetes, and Ketone Inhibition of Cystathionine-γ-Lyase mRNA Expression in Cultured Hepatocytes.",
-      "authors": [
-        "Jain SK",
-        "Parsanathan R",
-        "Justin Margret J",
-        "Gungor N",
-        "Vanchiere JA",
-        "Mhanna MJ",
-        "McVie R"
-      ],
-      "journal": "Genes",
-      "date": "2026-09-10",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/genes17091090",
-      "pmc": "PMC13606490",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42792984/",
-      "doi_url": "https://doi.org/10.3390/genes17091090",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13606490/",
-      "areas": [
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
       "pmid": "42787718",
       "title": "The gut microbiota-short-chain fatty acid-inflammation axis in Parkinson's disease motor dysfunction: mechanisms and future of dietary interventions.",
       "authors": [
@@ -1561,62 +1275,6 @@
       "status": "indexed"
     },
     {
-      "pmid": "42716296",
-      "title": "Skeletal muscle transcriptome alterations associated with ketosis in postpartum dairy cows.",
-      "authors": [
-        "Avila-Granados LM",
-        "Casey TM",
-        "Thimmapuram J",
-        "Taechachokevivat N",
-        "Neves RC"
-      ],
-      "journal": "Journal of dairy science",
-      "date": "2026-09-09",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3168/jds.2026-29086",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42716296/",
-      "doi_url": "https://doi.org/10.3168/jds.2026-29086",
-      "pmc_url": "",
-      "areas": [
-        "Sarcopenia & Skeletal Muscle"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42625953",
-      "title": "Glycogen storage disease type XIV in the Middle East and North Africa region: A case report.",
-      "authors": [
-        "Al Dojan KA",
-        "Sulaiman SA",
-        "Alaarag A"
-      ],
-      "journal": "World journal of clinical pediatrics",
-      "date": "2026-09-09",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.5409/wjcp.v15.i3.117375",
-      "pmc": "PMC13491041",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42625953/",
-      "doi_url": "https://doi.org/10.5409/wjcp.v15.i3.117375",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13491041/",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 1,
-      "evidence_type": "Case report / case series",
-      "evidence_type_it": "Case report / case series",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
       "pmid": "42783783",
       "title": "Ketogenesis as a Metabolic Checkpoint in MASLD: Implications for Disease Progression and Therapy.",
       "authors": [
@@ -1735,37 +1393,6 @@
       "category_confidence": 1,
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42709151",
-      "title": "Intermittent exogenous ketosis does not reduce acute mountain sickness during early terrestrial high-altitude acclimatization.",
-      "authors": [
-        "Tominec D",
-        "Stalmans M",
-        "Narang BJ",
-        "Pialoux V",
-        "Millet GP",
-        "Poffé C",
-        "Debevec T"
-      ],
-      "journal": "European journal of applied physiology",
-      "date": "2026-09-08",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1007/s00421-026-06426-z",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42709151/",
-      "doi_url": "https://doi.org/10.1007/s00421-026-06426-z",
-      "pmc_url": "",
-      "areas": [
-        "Cardiovascular Health"
-      ],
-      "category_confidence": 4,
-      "evidence_type": "Randomized clinical trial",
-      "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed"
@@ -1939,38 +1566,6 @@
       "status": "indexed"
     },
     {
-      "pmid": "42739079",
-      "title": "Improving the Outcome of Brain-Injured Patients by Non-Continuous Feeding to Prevent Dysbiosis.",
-      "authors": [
-        "Corriero A",
-        "Soloperto R",
-        "Giglio M",
-        "Taccone FS",
-        "Puntillo F",
-        "Preiser JC"
-      ],
-      "journal": "Nutrients",
-      "date": "2026-09-04",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/nu18172907",
-      "pmc": "PMC13566997",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42739079/",
-      "doi_url": "https://doi.org/10.3390/nu18172907",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13566997/",
-      "areas": [
-        "Inflammation & Immunometabolism",
-        "Brain Injury & Neurotrauma",
-        "Gut Microbiome"
-      ],
-      "category_confidence": 3,
-      "evidence_type": "Randomized clinical trial",
-      "evidence_type_it": "Trial clinico randomizzato",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
       "pmid": "42783645",
       "title": "Differences Between Habitual Low and Normal Carbohydrate Intake in Body Composition and Maximal Isometric Strength in Resistance-Trained Men.",
       "authors": [
@@ -1999,6 +1594,35 @@
       "category_confidence": 7,
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42755769",
+      "title": "Maternal diabetes-associated neural tube defects: evidence for β-hydroxybutyrate-related HDAC1/3-H3K27ac-MEST-LRP6 dysregulation.",
+      "authors": [
+        "Ma W",
+        "Wang Y",
+        "Li Z",
+        "Liu Z",
+        "Fang A"
+      ],
+      "journal": "Frontiers in physiology",
+      "date": "2026-09-03",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3389/fphys.2026.1881715",
+      "pmc": "PMC13581897",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42755769/",
+      "doi_url": "https://doi.org/10.3389/fphys.2026.1881715",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13581897/",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed"
@@ -2033,50 +1657,6 @@
       "category_confidence": 6,
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42692359",
-      "title": "Interleukin13 Ameliorates Hepatocellular Steatosis via Interleukin13Rα1-c-Jun N-Terminal Kinase-FOS-Like Antigen 2 Signaling Pathway.",
-      "authors": [
-        "von Bülow V",
-        "Felske DA",
-        "Riebeling SB",
-        "Schmidt FP",
-        "Stettler F",
-        "Schmid A",
-        "Karrasch T",
-        "Eder K",
-        "Most E",
-        "Morlock G",
-        "Haase A",
-        "Bier J",
-        "Hermanns HM",
-        "Geier A",
-        "Tuffs C",
-        "Pons-Kühnemann J",
-        "Roderfeld M",
-        "Roeb E"
-      ],
-      "journal": "Cellular and molecular gastroenterology and hepatology",
-      "date": "2026-09-03",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.jcmgh.2026.101879",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42692359/",
-      "doi_url": "https://doi.org/10.1016/j.jcmgh.2026.101879",
-      "pmc_url": "",
-      "areas": [
-        "Obesity",
-        "Dyslipidemia & Lipid Metabolism",
-        "MASLD / Metabolic Liver Disease"
-      ],
-      "category_confidence": 3,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed"
@@ -2154,42 +1734,6 @@
       "status": "indexed"
     },
     {
-      "pmid": "42737360",
-      "title": "Lipidomic Profiling of Milk Enables Identification of Novel Biomarkers for Subclinical Ketosis in Dairy Cows.",
-      "authors": [
-        "Liu Z",
-        "Ezernieks V",
-        "Hemsworth JE",
-        "Reich CM",
-        "Bath CR",
-        "Berkhout MJ",
-        "Tahir MS",
-        "Marett LC",
-        "Chamberlain AJ",
-        "Goddard ME",
-        "Xiang R",
-        "Rochfort SJ"
-      ],
-      "journal": "Foods (Basel, Switzerland)",
-      "date": "2026-09-02",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/foods15173117",
-      "pmc": "PMC13564533",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42737360/",
-      "doi_url": "https://doi.org/10.3390/foods15173117",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13564533/",
-      "areas": [
-        "Dyslipidemia & Lipid Metabolism"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
       "pmid": "42687165",
       "title": "Comparison of clinical efficacy and gut microbiota characteristics in children with ASD treated with fecal microbiota transplantation and ketogenic diet.",
       "authors": [
@@ -2225,38 +1769,61 @@
       "status": "indexed"
     },
     {
-      "pmid": "42738886",
-      "title": "Transcriptomic Architecture of Metabolic Dysfunction-Associated Steatotic Liver Disease (MASLD) Risk in Mexican Americans.",
+      "pmid": "42685074",
+      "title": "Transforming neural activity to operate without glucose metabolism using brain-derived ketone bodies.",
       "authors": [
-        "Kumar S",
-        "Aceves M",
-        "Guerra L",
-        "Granados J",
-        "Novilla E",
-        "Juarez F",
-        "Oluwadairo T",
-        "Leandro AC",
-        "Leandro M",
-        "Peralta J",
-        "Williams-Blangero S",
-        "Blangero J",
-        "Curran JE"
+        "Yaseen H",
+        "Cisneros K",
+        "Wright R",
+        "Bueschke N",
+        "Santin JM"
       ],
-      "journal": "Cells",
+      "journal": "Proceedings of the National Academy of Sciences of the United States of America",
+      "date": "2026-09-02",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1073/pnas.2613981123",
+      "pmc": "PMC13552681",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42685074/",
+      "doi_url": "https://doi.org/10.1073/pnas.2613981123",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13552681/",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42746146",
+      "title": "Regulatory mechanisms and interactions of mitophagy and ketone body metabolism in cardiac metabolism.",
+      "authors": [
+        "Ding S",
+        "Hu Y",
+        "Zhang Q",
+        "Liu X",
+        "Zhao X",
+        "Zhao Y",
+        "Zhang W"
+      ],
+      "journal": "Frontiers in cardiovascular medicine",
       "date": "2026-09-01",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.3390/cells15171592",
-      "pmc": "PMC13565466",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42738886/",
-      "doi_url": "https://doi.org/10.3390/cells15171592",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13565466/",
+      "doi": "10.3389/fcvm.2026.1925684",
+      "pmc": "PMC13575348",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42746146/",
+      "doi_url": "https://doi.org/10.3389/fcvm.2026.1925684",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13575348/",
       "areas": [
-        "MASLD / Metabolic Liver Disease"
+        "Cardiovascular Health"
       ],
-      "category_confidence": 21,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
+      "category_confidence": 9,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed"
@@ -2322,6 +1889,46 @@
       "status": "indexed"
     },
     {
+      "pmid": "42671454",
+      "title": "Continuously elevated plasma ketone bodies are linked to adverse outcomes in patients with heart failure.",
+      "authors": [
+        "Palm CL",
+        "Scholte NTB",
+        "Lu L",
+        "Kamar SA",
+        "Bakker BM",
+        "Voorrips SN",
+        "Mahmoud B",
+        "Connelly MA",
+        "Suthahar N",
+        "de Boer RA",
+        "Umans VA",
+        "Akkerhuis KM",
+        "Hillege H",
+        "Boersma E",
+        "Kardys I",
+        "Westenbrink BD"
+      ],
+      "journal": "Clinical research in cardiology : official journal of the German Cardiac Society",
+      "date": "2026-08-31",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1007/s00392-026-02992-6",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42671454/",
+      "doi_url": "https://doi.org/10.1007/s00392-026-02992-6",
+      "pmc_url": "",
+      "areas": [
+        "Cardiovascular Health"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
       "pmid": "42665778",
       "title": "Potential Role of Mitochondria-Associated Endoplasmic Reticulum Membranes (MAMs) Abnormalities in Epileptogenesis: Multimodal Mechanisms and Therapeutic Targets.",
       "authors": [
@@ -2350,31 +1957,35 @@
       "status": "indexed"
     },
     {
-      "pmid": "42737629",
-      "title": "Mitochondrial Distress Signals at the Heart-Liver Interface: Molecular Links Between MASLD and Heart Failure.",
+      "pmid": "42663784",
+      "title": "Correction: Unveiling the role of CB2 receptor in beta-hydroxybutyrate mediated modulation of microglial anti-inflammatory phenotype.",
       "authors": [
-        "Yang X",
-        "Cheng K",
-        "Chen C",
-        "Zhang Y",
-        "Wang DW"
+        "Iešmantaitė M",
+        "Usonis L",
+        "Čeika K",
+        "Šimoliūnas E",
+        "Liudvinaitis M",
+        "Soto-Arroyo N",
+        "Moreno-Indias I",
+        "Tinahones FJ",
+        "Baltriukienė D",
+        "Mela V"
       ],
-      "journal": "International journal of molecular sciences",
+      "journal": "Journal of physiology and biochemistry",
       "date": "2026-08-28",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.3390/ijms27177734",
-      "pmc": "PMC13566728",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42737629/",
-      "doi_url": "https://doi.org/10.3390/ijms27177734",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13566728/",
+      "doi": "10.1007/s13105-026-01222-x",
+      "pmc": "PMC13525054",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42663784/",
+      "doi_url": "https://doi.org/10.1007/s13105-026-01222-x",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13525054/",
       "areas": [
-        "MASLD / Metabolic Liver Disease",
-        "Cardiovascular Health"
+        "Inflammation & Immunometabolism"
       ],
-      "category_confidence": 11,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
+      "category_confidence": 6,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed"
@@ -2562,40 +2173,6 @@
       "status": "indexed"
     },
     {
-      "pmid": "42660124",
-      "title": "Effect of diet macronutrient content on the cardiometabolic response to weight loss: A randomized clinical trial.",
-      "authors": [
-        "Petersen MC",
-        "Smith GI",
-        "Farabi SS",
-        "Palacios HH",
-        "Shankaran M",
-        "Hellerstein MK",
-        "Patterson BW",
-        "Klein S"
-      ],
-      "journal": "Cell metabolism",
-      "date": "2026-08-27",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.cmet.2026.07.020",
-      "pmc": "PMC13551625",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42660124/",
-      "doi_url": "https://doi.org/10.1016/j.cmet.2026.07.020",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13551625/",
-      "areas": [
-        "Obesity",
-        "Dyslipidemia & Lipid Metabolism",
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
       "pmid": "42658808",
       "title": "Ketone Ester Intake Did Not Improve Performance, Neither Cognitive Function or Sleep, During an 8-Day Simulated Cycling Race.",
       "authors": [
@@ -2630,34 +2207,6 @@
       "status": "indexed"
     },
     {
-      "pmid": "42783021",
-      "title": "A Structured Narrative Review of Contemporary Dietary Strategies Following Acute Coronary Syndromes.",
-      "authors": [
-        "Cheung YL",
-        "Hamilton-Craig C",
-        "Layland J"
-      ],
-      "journal": "Journal of cardiovascular development and disease",
-      "date": "2026-08-26",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/jcdd13090414",
-      "pmc": "PMC13607391",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42783021/",
-      "doi_url": "https://doi.org/10.3390/jcdd13090414",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13607391/",
-      "areas": [
-        "Cardiovascular Health",
-        "Dyslipidemia & Lipid Metabolism"
-      ],
-      "category_confidence": 3,
-      "evidence_type": "Randomized clinical trial",
-      "evidence_type_it": "Trial clinico randomizzato",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
       "pmid": "42738960",
       "title": "Do Children with Drug-Resistant Epilepsy Exhibit the Same Eating Habits and Feeding Difficulties as Their Healthy Peers? A Multifaceted Assessment of Eating Habits, Feeding Behaviors, and Nutritional Status in Pediatric Patients with Drug-Resistant Epilepsy on a Ketogenic Diet Compared with Healthy Children in Lower Silesia.",
       "authors": [
@@ -2686,56 +2235,32 @@
       "status": "indexed"
     },
     {
-      "pmid": "42669023",
-      "title": "Online-Sourced Retatrutide Complicating Impending Diabetic Ketoacidosis in a Patient With Type 1 Diabetes and Concurrent Shigella Gastroenteritis.",
+      "pmid": "42647426",
+      "title": "NAD+ or β-hydroxybutyrate each protects against tachypacing-induced metabolic remodeling through regulation of mitophagy in HL-1 cardiomyocytes.",
       "authors": [
-        "Branine N"
+        "Qi X",
+        "Hu L",
+        "Rinsum AV",
+        "Koopman WJH",
+        "Keijer J",
+        "Zhang D"
       ],
-      "journal": "Cureus",
+      "journal": "American journal of physiology. Cell physiology",
       "date": "2026-08-26",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.7759/cureus.115260",
-      "pmc": "PMC13525912",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42669023/",
-      "doi_url": "https://doi.org/10.7759/cureus.115260",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13525912/",
-      "areas": [
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Case report / case series",
-      "evidence_type_it": "Case report / case series",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42648038",
-      "title": "Determination of 10 nitrosamines in stinky mandarin fish and cumulative health risk assessment across four dietary patterns.",
-      "authors": [
-        "Sang C",
-        "Wang D",
-        "Zhao Y",
-        "Niu Y",
-        "Zhang J",
-        "Shao B"
-      ],
-      "journal": "Ecotoxicology and environmental safety",
-      "date": "2026-08-26",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.ecoenv.2026.120690",
+      "doi": "10.1152/ajpcell.00253.2026",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42648038/",
-      "doi_url": "https://doi.org/10.1016/j.ecoenv.2026.120690",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42647426/",
+      "doi_url": "https://doi.org/10.1152/ajpcell.00253.2026",
       "pmc_url": "",
       "areas": [
-        "Other / General"
+        "Cardiovascular Health",
+        "Inflammation & Immunometabolism"
       ],
-      "category_confidence": 1,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
+      "category_confidence": 4,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed"
@@ -2816,6 +2341,35 @@
         "Oncology & Cancer Metabolism"
       ],
       "category_confidence": 6,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42641875",
+      "title": "Associating milk β-hydroxybutyrate dynamics in early lactation with milk production of dairy cows.",
+      "authors": [
+        "Chanchaidechachai T",
+        "van den Borne BHP",
+        "Klaas IC",
+        "Christensen JM",
+        "Hogeveen H"
+      ],
+      "journal": "Journal of dairy science",
+      "date": "2026-08-25",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3168/jds.2026-28665",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42641875/",
+      "doi_url": "https://doi.org/10.3168/jds.2026-28665",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
@@ -2952,6 +2506,36 @@
       "status": "indexed"
     },
     {
+      "pmid": "42632558",
+      "title": "Ketone bodies in the developing brain: Sex-specific metabolic pathways during the neonatal period.",
+      "authors": [
+        "Campos KF",
+        "Machado DN",
+        "Vizuete AFK",
+        "de Fraga LS",
+        "Netto CA",
+        "Durán-Carabali LE"
+      ],
+      "journal": "Life sciences",
+      "date": "2026-08-22",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.lfs.2026.124641",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42632558/",
+      "doi_url": "https://doi.org/10.1016/j.lfs.2026.124641",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
       "pmid": "42632233",
       "title": "Epigenetic ageing is accelerated in drug-resistant epilepsy and dynamically modulated during ketogenic diet therapy.",
       "authors": [
@@ -2977,34 +2561,6 @@
       "category_confidence": 13,
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42629533",
-      "title": "Impact of Menopause and Menopausal Hormone Therapy on Liver-Kidney-Metabolic Health.",
-      "authors": [
-        "Jamalinia M",
-        "Lonardo A",
-        "Weiskirchen R"
-      ],
-      "journal": "Advances in therapy",
-      "date": "2026-08-22",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1007/s12325-026-03758-2",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42629533/",
-      "doi_url": "https://doi.org/10.1007/s12325-026-03758-2",
-      "pmc_url": "",
-      "areas": [
-        "MASLD / Metabolic Liver Disease",
-        "Chronic Kidney Disease"
-      ],
-      "category_confidence": 3,
-      "evidence_type": "Review",
-      "evidence_type_it": "Revisione",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed"
@@ -3045,34 +2601,6 @@
       "category_confidence": 1,
       "evidence_type": "Review",
       "evidence_type_it": "Revisione",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42636552",
-      "title": "Research trends and evidence landscape of metabolomics and machine learning in the diagnosis of subclinical ketosis in dairy cows: a systematic review and bibliometric analysis.",
-      "authors": [
-        "Dang HD",
-        "Phetcharaburanin J",
-        "Sukon P",
-        "Thamrongyoswittayakul C"
-      ],
-      "journal": "Research in veterinary science",
-      "date": "2026-08-20",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.rvsc.2026.106368",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42636552/",
-      "doi_url": "https://doi.org/10.1016/j.rvsc.2026.106368",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Systematic review / meta-analysis",
-      "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed"
@@ -3206,8 +2734,479 @@
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed"
+    },
+    {
+      "pmid": "42617797",
+      "title": "Ketogenic diet attenuates seizures by promoting lipid droplet formation via peroxisome proliferator-activated receptor gamma signaling pathway.",
+      "authors": [
+        "Xi Z",
+        "Zhang W",
+        "Liu Q",
+        "Wang Q",
+        "Qi Y"
+      ],
+      "journal": "Life sciences",
+      "date": "2026-08-19",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.lfs.2026.124638",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42617797/",
+      "doi_url": "https://doi.org/10.1016/j.lfs.2026.124638",
+      "pmc_url": "",
+      "areas": [
+        "Epilepsy",
+        "Dyslipidemia & Lipid Metabolism"
+      ],
+      "category_confidence": 10,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42617287",
+      "title": "A direct comparison of butyrate, 4-phenylbutyrate, and β-hydroxybutyrate in an in vitro tumor therapy model.",
+      "authors": [
+        "Katsika H",
+        "Purps D",
+        "Montag C",
+        "Ludwig F",
+        "Marx C",
+        "Schwenkschuster I",
+        "Glei M",
+        "Meyer FB",
+        "Thierbach R"
+      ],
+      "journal": "Cancer treatment and research communications",
+      "date": "2026-08-19",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.ctarc.2026.101366",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42617287/",
+      "doi_url": "https://doi.org/10.1016/j.ctarc.2026.101366",
+      "pmc_url": "",
+      "areas": [
+        "Oncology & Cancer Metabolism"
+      ],
+      "category_confidence": 7,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42608724",
+      "title": "Clinical and neurophysiology study of 17 children with epileptic negative myoclonus.",
+      "authors": [
+        "Zhang L",
+        "Xu T",
+        "Jing M",
+        "Ma J",
+        "Sun M",
+        "Hua Y",
+        "Tang H",
+        "Wang Y"
+      ],
+      "journal": "Acta epileptologica",
+      "date": "2026-08-18",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1186/s42494-026-00273-3",
+      "pmc": "PMC13483403",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42608724/",
+      "doi_url": "https://doi.org/10.1186/s42494-026-00273-3",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13483403/",
+      "areas": [
+        "Epilepsy"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Case report / case series",
+      "evidence_type_it": "Case report / case series",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42750926",
+      "title": "Dietary Patterns and Nutritional Factors in Multiple Sclerosis: A Narrative Review.",
+      "authors": [
+        "Mufti A",
+        "Almarhabi RZ",
+        "Bajandouh W",
+        "Alhasani RM",
+        "Kambiji G",
+        "Althubiani TM",
+        "Almahmudi RJ",
+        "Alshaddadi F",
+        "Nasif WA",
+        "Ali AS"
+      ],
+      "journal": "Cureus",
+      "date": "2026-08-17",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.7759/cureus.114634",
+      "pmc": "PMC13579122",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42750926/",
+      "doi_url": "https://doi.org/10.7759/cureus.114634",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13579122/",
+      "areas": [
+        "Multiple Sclerosis",
+        "Inflammation & Immunometabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42709008",
+      "title": "Fenofibrate Protects Against Antipsychotic-Induced Hyperglycemia Through Weight Loss and FGF21 Dependent Mechanisms.",
+      "authors": [
+        "Akcan M",
+        "Jeromson S",
+        "Baranowski BJ",
+        "Bellucci A",
+        "Trang S",
+        "Eisner K",
+        "Babicki-Moore A",
+        "Alfares H",
+        "Arbeau M",
+        "Medak K",
+        "Hahn M",
+        "Wright DC"
+      ],
+      "journal": "FASEB journal : official publication of the Federation of American Societies for Experimental Biology",
+      "date": "2026-08-17",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1096/fj.202602558R",
+      "pmc": "PMC13552386",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42709008/",
+      "doi_url": "https://doi.org/10.1096/fj.202602558R",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13552386/",
+      "areas": [
+        "Obesity",
+        "Diabetes & Glucose Metabolism",
+        "Dyslipidemia & Lipid Metabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42654261",
+      "title": "Effects of the Mediterranean Diet, Ketogenic Diet, and Intermittent Fasting on Iron Metabolism and Iron Deficiency Risk in Adults with Obesity: A Systematic Literature Review.",
+      "authors": [
+        "La Vignera S",
+        "Condorelli R"
+      ],
+      "journal": "Nutrients",
+      "date": "2026-08-17",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3390/nu18162681",
+      "pmc": "PMC13517051",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42654261/",
+      "doi_url": "https://doi.org/10.3390/nu18162681",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13517051/",
+      "areas": [
+        "Obesity"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Systematic review / meta-analysis",
+      "evidence_type_it": "Revisione sistematica / meta-analisi",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42614443",
+      "title": "Ketosis as a Treatment for Severe Mental Illness: A Critical Review of Preclinical and Clinical Data.",
+      "authors": [
+        "Oduguwa IO",
+        "Smith DJ",
+        "Mudra Rakshasa-Loots A"
+      ],
+      "journal": "Current treatment options in psychiatry",
+      "date": "2026-08-17",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1007/s40501-026-00394-z",
+      "pmc": "PMC13481580",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42614443/",
+      "doi_url": "https://doi.org/10.1007/s40501-026-00394-z",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13481580/",
+      "areas": [
+        "Psychiatry & Mental Health"
+      ],
+      "category_confidence": 5,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42609476",
+      "title": "Rehmannia glutinosa Extracts Enhances Ketone Bodies Expression and Alleviates Ulcerative Colitis as A Novel Ketogenic Functional Food.",
+      "authors": [
+        "Gao Y",
+        "Wang S",
+        "Yang Y",
+        "Tang W",
+        "Zhen J",
+        "Song X"
+      ],
+      "journal": "Food science & nutrition",
+      "date": "2026-08-16",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1002/fsn3.72263",
+      "pmc": "PMC13478377",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42609476/",
+      "doi_url": "https://doi.org/10.1002/fsn3.72263",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13478377/",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42603220",
+      "title": "β-hydroxybutyrate as an early predictive biomarker of diabetes remission following intensive dietary intervention.",
+      "authors": [
+        "Moh MC",
+        "Lim BK",
+        "Pandian B",
+        "Kosnan DB",
+        "Seow VV",
+        "Pang KR",
+        "Phoon SM",
+        "Luah YM",
+        "Han J",
+        "Lee TY",
+        "Mahadi MB",
+        "Lam BCC",
+        "Low S",
+        "Tang WE",
+        "Subramaniam T",
+        "Sum CF",
+        "Lim SC"
+      ],
+      "journal": "Endocrine",
+      "date": "2026-08-15",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1007/s12020-026-04749-7",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42603220/",
+      "doi_url": "https://doi.org/10.1007/s12020-026-04749-7",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 9,
+      "evidence_type": "Clinical trial / intervention",
+      "evidence_type_it": "Trial clinico / intervento",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42666203",
+      "title": "Five-year patient-reported outcomes of individualized nutrition therapy supporting nutritional ketosis in adults with type 2 diabetes.",
+      "authors": [
+        "Adams RN",
+        "Athinarayanan SJ",
+        "Phinney SD",
+        "Volek JS",
+        "McKenzie AL"
+      ],
+      "journal": "Frontiers in nutrition",
+      "date": "2026-08-14",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3389/fnut.2026.1855196",
+      "pmc": "PMC13521770",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42666203/",
+      "doi_url": "https://doi.org/10.3389/fnut.2026.1855196",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13521770/",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Randomized clinical trial",
+      "evidence_type_it": "Trial clinico randomizzato",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42650855",
+      "title": "Systems Bioengineering of Septic Shock Metabolism: Citrulline, β-Hydroxybutyrate and Plasma Biomarker-Based Phenotyping.",
+      "authors": [
+        "Azamfirei L",
+        "Cehan VD",
+        "Cehan AR",
+        "Pui MC",
+        "Lazar A"
+      ],
+      "journal": "Biomolecules",
+      "date": "2026-08-14",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3390/biom16081189",
+      "pmc": "PMC13511653",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42650855/",
+      "doi_url": "https://doi.org/10.3390/biom16081189",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13511653/",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Observational human study",
+      "evidence_type_it": "Studio osservazionale umano",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42617503",
+      "title": "Real-world experience with GLP-1 receptor agonists in adults with epilepsy following a modified atkins diet.",
+      "authors": [
+        "El Zibaoui R",
+        "McDonald TJW",
+        "Henry-Barron BJ",
+        "Vizthum D",
+        "Cervenka MC"
+      ],
+      "journal": "Epilepsy research",
+      "date": "2026-08-14",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.eplepsyres.2026.107896",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42617503/",
+      "doi_url": "https://doi.org/10.1016/j.eplepsyres.2026.107896",
+      "pmc_url": "",
+      "areas": [
+        "Epilepsy"
+      ],
+      "category_confidence": 7,
+      "evidence_type": "Observational human study",
+      "evidence_type_it": "Studio osservazionale umano",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42600679",
+      "title": "Serum β-hydroxybutyrate and diagnostic interpretability of cardiac 18F-fluorodeoxyglucose positron emission tomography in suspected cardiac sarcoidosis.",
+      "authors": [
+        "Hart H",
+        "Chen M",
+        "Vohra S",
+        "Ippolito P",
+        "Bimal T",
+        "Patel KK",
+        "Agarwal V"
+      ],
+      "journal": "Journal of nuclear cardiology : official publication of the American Society of Nuclear Cardiology",
+      "date": "2026-08-14",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.nuclcard.2026.102945",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42600679/",
+      "doi_url": "https://doi.org/10.1016/j.nuclcard.2026.102945",
+      "pmc_url": "",
+      "areas": [
+        "Cardiovascular Health",
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42598866",
+      "title": "Serum Beta-Hydroxybutyrate as a Biomarker for Predicting Major Adverse Cardiovascular Events After Type a Aortic Dissection Surgery.",
+      "authors": [
+        "Zhou J",
+        "Xu L",
+        "Yang T",
+        "He M",
+        "Wang R",
+        "Ke B",
+        "Li X"
+      ],
+      "journal": "World journal of surgery",
+      "date": "2026-08-14",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1002/wjs.70520",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42598866/",
+      "doi_url": "https://doi.org/10.1002/wjs.70520",
+      "pmc_url": "",
+      "areas": [
+        "Cardiovascular Health"
+      ],
+      "category_confidence": 14,
+      "evidence_type": "Observational human study",
+      "evidence_type_it": "Studio osservazionale umano",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42656321",
+      "title": "β-Hydroxybutyrate induces microglial M2 polarization by inhibiting the NF-κB/NLRP3 pathway to ameliorate cerebral ischemia-reperfusion injury.",
+      "authors": [
+        "Chen Q",
+        "Cheng S",
+        "Huang C",
+        "Xiang R"
+      ],
+      "journal": "Frontiers in neurology",
+      "date": "2026-08-12",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3389/fneur.2026.1847958",
+      "pmc": "PMC13506300",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42656321/",
+      "doi_url": "https://doi.org/10.3389/fneur.2026.1847958",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13506300/",
+      "areas": [
+        "Inflammation & Immunometabolism",
+        "Obesity"
+      ],
+      "category_confidence": 7,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
     }
   ],
-  "verified_at": "2026-09-29T09:04:37+00:00",
-  "content_updated_at": "2026-09-29T08:33:24+00:00"
+  "verified_at": "2026-09-29T09:21:38+00:00",
+  "content_updated_at": "2026-09-29T09:21:38+00:00"
 }
