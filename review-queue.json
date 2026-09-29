@@ -1,36 +1,8 @@
 {
-  "generated_at": "2026-09-29T13:52:33+00:00",
+  "generated_at": "2026-09-29T13:52:40+00:00",
   "curation_window_days": 365,
-  "backfill_year": 1938,
+  "backfill_year": 1939,
   "auto_approved_count": 0,
-  "excluded_count": 1,
-  "records": [
-    {
-      "pmid": "17756346",
-      "title": "INFLUENCE OF ADRENALECTOMY ON ANTERIOR PITUITARY KETOGENESIS IN RATS.",
-      "authors": [
-        "Mirsky IA"
-      ],
-      "journal": "Science (New York, N.Y.)",
-      "date": "1938-10-07",
-      "date_precision": "day",
-      "year": 1938,
-      "doi": "10.1126/science.88.2284.332",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/17756346/",
-      "doi_url": "https://doi.org/10.1126/science.88.2284.332",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    }
-  ]
+  "excluded_count": 0,
+  "records": []
 }
