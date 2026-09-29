@@ -31,6 +31,7 @@
     "42781531",
     "42785681",
     "42789141",
+    "42800218",
     "42800429",
     "42800643"
   ],
@@ -614,16 +615,23 @@
         "Ketones attenuate the exaggerated cardiovascular response to exercise by supplying an alternative fuel that bypasses the phosphofructokinase block.",
         "Ketones provide an acute performance advantage without apparent adverse effects."
       ]
+    },
+    {
+      "pmid": "42777120",
+      "at": "2026-09-29T09:26:30.557031+00:00",
+      "stage": "source",
+      "error": "PubMed abstract unavailable"
     }
   ],
-  "updated_at": "2026-09-29T09:15:00.116542+00:00",
+  "updated_at": "2026-09-29T09:27:52.464292+00:00",
   "source_unavailable_pmids": [
     "42642354",
     "42717355",
+    "42777120",
     "42790707"
   ],
   "last_run": {
-    "attempted_candidates": 2,
+    "attempted_candidates": 3,
     "published_articles": 1,
     "status": "published"
   }
