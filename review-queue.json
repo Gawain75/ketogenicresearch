@@ -1,8 +1,38 @@
 {
-  "generated_at": "2026-09-29T13:55:00+00:00",
+  "generated_at": "2026-09-29T13:55:09+00:00",
   "curation_window_days": 365,
-  "backfill_year": 1946,
-  "auto_approved_count": 0,
+  "backfill_year": 1947,
+  "auto_approved_count": 1,
   "excluded_count": 0,
-  "records": []
+  "records": [
+    {
+      "pmid": "18921782",
+      "title": "Effect on cardiac glycogen of intravenously administered sodium acetoacetate, sodium beta-hydroxybutyrate and sodium butyrate.",
+      "authors": [
+        "LACKEY RW",
+        "BUNDE CA",
+        "HARRIS LC"
+      ],
+      "journal": "Proceedings of the Society for Experimental Biology and Medicine. Society for Experimental Biology and Medicine (New York, N.Y.)",
+      "date": "1947-11-01",
+      "date_precision": "day",
+      "year": 1947,
+      "doi": "10.3181/00379727-66-16115",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/18921782/",
+      "doi_url": "https://doi.org/10.3181/00379727-66-16115",
+      "pmc_url": "",
+      "areas": [
+        "Cardiovascular Health"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    }
+  ]
 }
