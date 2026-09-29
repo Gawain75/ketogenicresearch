@@ -20,33 +20,123 @@ EMAIL = os.getenv("NCBI_EMAIL", "info@ketogenicresearch.org")
 API_KEY = os.getenv("NCBI_API_KEY", "")
 WINDOW_DAYS = int(os.getenv("WINDOW_DAYS", "90"))
 CURATION_WINDOW_DAYS = int(os.getenv("CURATION_WINDOW_DAYS", "365"))
-MAX_RECORDS = int(os.getenv("MAX_RECORDS", "100"))
-CURATION_MAX_RECORDS = int(os.getenv("CURATION_MAX_RECORDS", "500"))
+MAX_RECORDS = int(os.getenv("MAX_RECORDS", "1000"))
+CURATION_MAX_RECORDS = int(os.getenv("CURATION_MAX_RECORDS", "5000"))
+
+# Optional historical backfill mode. Normal scheduled runs are unchanged.
+BACKFILL_YEAR = os.getenv("BACKFILL_YEAR", "").strip()
+BACKFILL_MODE = BACKFILL_YEAR.isdigit()
+BACKFILL_YEAR_INT = int(BACKFILL_YEAR) if BACKFILL_MODE else None
 
 BASE = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 
 QUERY = r'''(
-"ketogenic diet"[Title/Abstract] OR "ketogenic diets"[Title/Abstract]
-OR "ketogenic therapy"[Title/Abstract] OR "ketogenic metabolic therapy"[Title/Abstract]
-OR "nutritional ketosis"[Title/Abstract] OR "very low calorie ketogenic diet"[Title/Abstract]
-OR "very-low-calorie ketogenic diet"[Title/Abstract] OR "very low energy ketogenic therapy"[Title/Abstract]
-OR "modified Atkins diet"[Title/Abstract] OR VLCKD[Title/Abstract] OR VLEKT[Title/Abstract]
-OR "exogenous ketone"[Title/Abstract] OR "exogenous ketones"[Title/Abstract]
-OR "ketone ester"[Title/Abstract] OR "ketone esters"[Title/Abstract]
-OR "ketone salt"[Title/Abstract] OR "ketone salts"[Title/Abstract]
-OR (("beta-hydroxybutyrate"[Title/Abstract] OR "ketone bodies"[Title/Abstract])
-AND (ketogenic[Title/Abstract] OR "nutritional ketosis"[Title/Abstract] OR "ketogenic therapy"[Title/Abstract]))
+"ketogenic"[Title/Abstract]
+OR "ketogenesis"[Title/Abstract]
+OR "ketotic"[Title/Abstract]
+OR "keto diet"[Title/Abstract]
+OR "ketogenic diet"[Title/Abstract]
+OR "ketogenic diets"[Title/Abstract]
+OR "ketogenic dietary therapy"[Title/Abstract]
+OR "ketogenic dietary therapies"[Title/Abstract]
+OR "ketogenic diet therapy"[Title/Abstract]
+OR "classic ketogenic diet"[Title/Abstract]
+OR "classical ketogenic diet"[Title/Abstract]
+OR "MCT ketogenic diet"[Title/Abstract]
+OR "low-carbohydrate ketogenic diet"[Title/Abstract]
+OR "low carbohydrate ketogenic diet"[Title/Abstract]
+OR "ketogenic nutritional protocol"[Title/Abstract]
+OR "ketogenic therapy"[Title/Abstract]
+OR "ketogenic metabolic therapy"[Title/Abstract]
+OR "nutritional ketosis"[Title/Abstract]
+OR "very low calorie ketogenic diet"[Title/Abstract]
+OR "very-low-calorie ketogenic diet"[Title/Abstract]
+OR "very low energy ketogenic therapy"[Title/Abstract]
+OR "modified Atkins diet"[Title/Abstract]
+OR VLCKD[Title/Abstract]
+OR VLEKT[Title/Abstract]
+OR "exogenous ketone"[Title/Abstract]
+OR "exogenous ketones"[Title/Abstract]
+OR "ketone ester"[Title/Abstract]
+OR "ketone esters"[Title/Abstract]
+OR "ketone salt"[Title/Abstract]
+OR "ketone salts"[Title/Abstract]
+OR "beta-hydroxybutyrate"[Title/Abstract]
+OR "β-hydroxybutyrate"[Title/Abstract]
+OR "ketone bodies"[Title/Abstract]
+OR "Diet, Ketogenic"[Mesh]
+OR "Ketosis"[Mesh]
 )'''
 
-CORE = (
-    "ketogenic", "nutritional ketosis", "modified atkins", "vlckd", "vlekt",
-    "exogenous ketone", "ketone ester", "ketone salt",
+DIRECT_KETO_TERMS = (
+    "ketogenic diet",
+    "ketogenic diets",
+    "ketogenic dietary therapy",
+    "ketogenic dietary therapies",
+    "ketogenic diet therapy",
+    "classic ketogenic diet",
+    "classical ketogenic diet",
+    "mct ketogenic diet",
+    "low-carbohydrate ketogenic diet",
+    "low carbohydrate ketogenic diet",
+    "ketogenic nutritional protocol",
+    "ketogenic intervention",
+    "ketogenic interventions",
+    "ketogenic therapy",
+    "ketogenic metabolic therapy",
+    "nutritional ketosis",
+    "modified atkins diet",
+    "modified atkins",
+    "vlckd",
+    "vlekt",
+    "keto diet",
 )
-SECONDARY = ("beta-hydroxybutyrate", "ketone bodies")
-CONTEXT = (
-    "ketogenic diet", "ketogenic diets", "ketogenic therapy",
-    "ketogenic metabolic therapy", "nutritional ketosis",
+
+MECHANISTIC_PRIMARY_TERMS = (
+    "ketogenesis",
+    "ketogenic pathway",
+    "ketone body metabolism",
+    "ketone metabolism",
+    "ketone bodies",
+    "beta-hydroxybutyrate",
+    "β-hydroxybutyrate",
+    "b-hydroxybutyrate",
+    "acetoacetate",
 )
+
+MECHANISTIC_FOCUS_CUES = (
+    "mechanism",
+    "mechanisms",
+    "metabolism",
+    "metabolic",
+    "signaling",
+    "signalling",
+    "biosynthesis",
+    "production",
+    "oxidation",
+    "transport",
+    "utilization",
+    "utilisation",
+    "regulation",
+    "regulatory",
+    "epigenetic",
+    "histone",
+    "hdac",
+    "nuclear receptor",
+    "ketolysis",
+)
+
+INCIDENTAL_CONTEXT_TERMS = (
+    "through",
+    "via",
+    "associated with",
+    "accompanied by",
+    "alongside",
+    "and ketone",
+    "ketone body signaling",
+    "ketone body signalling",
+)
+
 
 AREA_RULES = {
     "Obesity": ["obesity", "obese", "weight loss", "body weight", "bariatric"],
@@ -233,27 +323,92 @@ def previous_queue():
         return {}
 
 
-def relevant(article):
-    title = text(
-        article.find("ArticleTitle")
-    ).lower()
+def relevant(article, citation):
+    """Return True only when ketogenic content is central, not incidental.
+
+    Inclusion paths:
+    1) direct ketogenic-diet / ketogenic-therapy terminology anywhere in
+       title, abstract, or MeSH;
+    2) mechanistic ketogenesis / ketone biology when the concept is a primary
+       focus of the title, or clearly framed as a main mechanistic subject in
+       the abstract.
+
+    Mere mentions such as "...through PPARα activation and ketone body
+    signaling" are not sufficient by themselves.
+    """
+    title = text(article.find("ArticleTitle")).lower().strip()
 
     abstract = " ".join(
         text(n)
-        for n in article.findall(
-            "Abstract/AbstractText"
-        )
-    ).lower()
+        for n in article.findall("Abstract/AbstractText")
+    ).lower().strip()
 
-    body = title + " " + abstract
+    mesh_terms = [
+        text(n).lower().strip()
+        for n in citation.findall(".//MeshHeading/DescriptorName")
+        if text(n).strip()
+    ]
+    mesh = " ".join(mesh_terms)
 
-    return (
-        any(x in title for x in CORE)
-        or (
-            any(x in title for x in SECONDARY)
-            and any(x in body for x in CONTEXT)
+    body = f"{title} {abstract} {mesh}"
+
+    # Path 1: explicit ketogenic dietary/therapeutic focus.
+    if any(term in body for term in DIRECT_KETO_TERMS):
+        return True
+
+    # PubMed's specific ketogenic-diet MeSH is strong direct evidence.
+    if "diet, ketogenic" in mesh_terms:
+        return True
+
+    # Path 2: mechanistic ketogenesis / ketone biology.
+    # A mechanistic term in the TITLE is treated as central unless it appears
+    # only as an obvious subordinate tail/casual mechanism.
+    title_mech_hits = [term for term in MECHANISTIC_PRIMARY_TERMS if term in title]
+
+    if title_mech_hits:
+        # Penalize titles where the ketone phrase is explicitly subordinate,
+        # e.g. "... through PPARα activation and ketone body signaling".
+        subordinate_patterns = (
+            r"\bthrough\b.{0,100}\bketone bod(?:y|ies)\b",
+            r"\bvia\b.{0,100}\bketone bod(?:y|ies)\b",
+            r"\band\b.{0,80}\bketone bod(?:y|ies)\s+signa(?:l|ll)ing\b",
         )
-    )
+        if not any(re.search(p, title) for p in subordinate_patterns):
+            return True
+
+        # Even with subordinate wording, keep the paper if ketone biology is
+        # also explicitly framed as a principal subject elsewhere in the title.
+        strong_title_focus = (
+            title.startswith("ketogenesis")
+            or title.startswith("ketone")
+            or title.startswith("beta-hydroxybutyrate")
+            or title.startswith("β-hydroxybutyrate")
+            or re.search(
+                r"\b(role|effects?|mechanisms?|metabolism|regulation|signaling|signalling)\s+of\s+"
+                r"(ketogenesis|ketone bod(?:y|ies)|beta-hydroxybutyrate|β-hydroxybutyrate)\b",
+                title,
+            )
+        )
+        if strong_title_focus:
+            return True
+
+    # Abstract-only mechanistic inclusion requires stronger evidence of
+    # centrality: repeated ketone/ketogenesis mentions plus mechanistic framing.
+    mech_count = sum(body.count(term) for term in MECHANISTIC_PRIMARY_TERMS)
+    abstract_mech_count = sum(abstract.count(term) for term in MECHANISTIC_PRIMARY_TERMS)
+    cue_count = sum(abstract.count(cue) for cue in MECHANISTIC_FOCUS_CUES)
+
+    if abstract_mech_count >= 2 and cue_count >= 1:
+        # Exclude cases where the only mechanistic mention is clearly incidental
+        # to another dominant pathway and not repeated as a study focus.
+        if not (
+            abstract_mech_count <= 2
+            and any(phrase in abstract for phrase in INCIDENTAL_CONTEXT_TERMS)
+        ):
+            return True
+
+    # Generic Ketosis MeSH alone is intentionally NOT sufficient.
+    return False
 
 
 def classify(title, abstract, mesh):
@@ -542,12 +697,26 @@ def main():
         )
     )
 
-    curation_cutoff = (
-        today
-        - dt.timedelta(
-            days=CURATION_WINDOW_DAYS
+    if BACKFILL_MODE:
+        search_start = dt.date(BACKFILL_YEAR_INT, 1, 1)
+        search_end = min(dt.date(BACKFILL_YEAR_INT, 12, 31), today)
+        if search_start > today:
+            print(f"BACKFILL_YEAR={BACKFILL_YEAR_INT} is in the future; nothing to do.")
+            return
+        curation_cutoff = search_start
+        print(
+            f"Historical backfill mode active: {search_start.isoformat()} "
+            f"through {search_end.isoformat()}"
         )
-    )
+    else:
+        curation_cutoff = (
+            today
+            - dt.timedelta(
+                days=CURATION_WINDOW_DAYS
+            )
+        )
+        search_start = curation_cutoff
+        search_end = today
 
     existing = existing_ids()
     old_queue = previous_queue()
@@ -565,11 +734,11 @@ def main():
                 "sort": "pub date",
                 "datetype": "pdat",
                 "mindate":
-                    curation_cutoff.strftime(
+                    search_start.strftime(
                         "%Y/%m/%d"
                     ),
                 "maxdate":
-                    today.strftime(
+                    search_end.strftime(
                         "%Y/%m/%d"
                     ),
             },
@@ -599,8 +768,8 @@ def main():
                 "db": "pubmed", "term": QUERY, "retmode": "json",
                 "retmax": str(CURATION_MAX_RECORDS), "sort": "pub date",
                 "datetype": "pdat",
-                "mindate": curation_cutoff.strftime("%Y/%m/%d"),
-                "maxdate": today.strftime("%Y/%m/%d"),
+                "mindate": search_start.strftime("%Y/%m/%d"),
+                "maxdate": search_end.strftime("%Y/%m/%d"),
             }).decode("utf-8"))
             ids = retry_search.get("esearchresult", {}).get("idlist", [])
             if ids:
@@ -624,6 +793,8 @@ def main():
 
     latest = []
     queue = []
+    fetched_count = len(ids)
+    relevant_count = 0
 
     for item in root.findall(
         ".//PubmedArticle"
@@ -641,9 +812,11 @@ def main():
         if (
             citation is None
             or article is None
-            or not relevant(article)
+            or not relevant(article, citation)
         ):
             continue
+
+        relevant_count += 1
 
         pmid = text(
             citation.find(
@@ -677,9 +850,9 @@ def main():
         if (
             not date_value
             or not (
-                curation_cutoff
+                search_start
                 <= date_value
-                <= today
+                <= search_end
             )
         ):
             continue
@@ -961,28 +1134,35 @@ def main():
         .isoformat()
     )
 
-    LATEST_OUT.write_text(
-        json.dumps(
-            {
-                "generated_at":
-                    generated,
-                "window_days":
-                    WINDOW_DAYS,
-                "max_records":
-                    MAX_RECORDS,
-                "source":
-                    "PubMed / NCBI E-utilities",
-                "count":
-                    len(latest),
-                "publications":
-                    latest,
-            },
-            ensure_ascii=False,
-            indent=2,
+    if not BACKFILL_MODE:
+        LATEST_OUT.write_text(
+            json.dumps(
+                {
+                    "generated_at":
+                        generated,
+                    "window_days":
+                        WINDOW_DAYS,
+                    "max_records":
+                        MAX_RECORDS,
+                    "pubmed_records_fetched":
+                        fetched_count,
+                    "relevant_records_after_filter":
+                        relevant_count,
+                    "truncated":
+                        len(latest) >= MAX_RECORDS,
+                    "source":
+                        "PubMed / NCBI E-utilities",
+                    "count":
+                        len(latest),
+                    "publications":
+                        latest,
+                },
+                ensure_ascii=False,
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
         )
-        + "\n",
-        encoding="utf-8",
-    )
 
     QUEUE_OUT.write_text(
         json.dumps(
@@ -991,6 +1171,8 @@ def main():
                     generated,
                 "curation_window_days":
                     CURATION_WINDOW_DAYS,
+                "backfill_year":
+                    BACKFILL_YEAR_INT if BACKFILL_MODE else None,
                 "auto_approved_count":
                     sum(
                         bool(
@@ -1022,14 +1204,31 @@ def main():
     )
 
     print(
-        f"Wrote {len(latest)} recent records "
-        f"to {LATEST_OUT.name}"
+        f"PubMed fetched {fetched_count} candidate record(s); "
+        f"{relevant_count} passed the ketogenic relevance filter."
     )
 
-    print(
-        f"Wrote {len(queue)} non-curated candidates "
-        f"to {QUEUE_OUT.name}"
-    )
+    if BACKFILL_MODE:
+        print(
+            f"Backfill {BACKFILL_YEAR_INT}: wrote {len(queue)} candidate record(s) "
+            f"to {QUEUE_OUT.name}; Latest Evidence was left untouched."
+        )
+    else:
+        print(
+            f"Wrote {len(latest)} recent records "
+            f"to {LATEST_OUT.name}"
+        )
+
+        if len(latest) >= MAX_RECORDS:
+            print(
+                f"WARNING: Latest Evidence reached MAX_RECORDS={MAX_RECORDS}. "
+                "Increase MAX_RECORDS to avoid truncation."
+            )
+
+        print(
+            f"Wrote {len(queue)} non-curated candidates "
+            f"to {QUEUE_OUT.name}"
+        )
 
 
 if __name__ == "__main__":
