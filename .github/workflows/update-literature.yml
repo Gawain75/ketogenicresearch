@@ -51,6 +51,9 @@ jobs:
       - name: Auto-promote eligible publications
         run: python scripts/promote_auto.py
 
+      - name: Enrich Full text and PDF links
+        run: python scripts/repair_fulltext_links.py
+
       - name: Apply clinical-area rationales
         run: python scripts/apply_clinical_rationales.py
 
