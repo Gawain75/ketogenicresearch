@@ -1,30 +1,31 @@
 {
-  "generated_at": "2026-09-29T13:56:51+00:00",
+  "generated_at": "2026-09-29T13:57:07+00:00",
   "curation_window_days": 365,
-  "backfill_year": 1954,
-  "auto_approved_count": 5,
-  "excluded_count": 10,
+  "backfill_year": 1955,
+  "auto_approved_count": 6,
+  "excluded_count": 6,
   "records": [
     {
-      "pmid": "14353355",
-      "title": "[The significance of determination of blood ketone bodies and of alkali reserve for treatment of diabetes in children].",
+      "pmid": "13285327",
+      "title": "[Value of rapid determination of ketone bodies in blood and urine in diabetic acidosis and coma].",
       "authors": [
-        "BARTA L",
-        "GATHY B"
+        "CABARROU A",
+        "CAINO HV",
+        "PINTADO OA"
       ],
-      "journal": "Gyermekgyogyaszat : az Orvosegeszsegugyi Szakszervezet Gyermekorvos Szakcsoportjanak folyoirata = Pediatriia",
-      "date": "1954-11-01",
+      "journal": "El Dia medico",
+      "date": "1955-11-21",
       "date_precision": "day",
-      "year": 1954,
+      "year": 1955,
       "doi": "",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/14353355/",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13285327/",
       "doi_url": "",
       "pmc_url": "",
       "areas": [
         "Diabetes & Glucose Metabolism"
       ],
-      "category_confidence": 6,
+      "category_confidence": 2,
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
@@ -34,24 +35,194 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "13218168",
-      "title": "Carbohydrate and ketone body metabolism in the sodium fluoroacetate-poisoned rat; \"SFA diabetes\".",
+      "pmid": "13268687",
+      "title": "Comparison of urinary excretion of ketone bodies, non-protein nitrogen, citric acid and glucose in alloxan diabetic and depancreatized rats.",
       "authors": [
-        "ENGEL FL",
-        "HEWSON K",
-        "COLE BT"
+        "BEATTY CH",
+        "PETERSON RD"
       ],
       "journal": "The American journal of physiology",
-      "date": "1954-11-01",
+      "date": "1955-11-01",
       "date_precision": "day",
-      "year": 1954,
-      "doi": "10.1152/ajplegacy.1954.179.2.325",
+      "year": 1955,
+      "doi": "10.1152/ajplegacy.1955.183.2.325",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13218168/",
-      "doi_url": "https://doi.org/10.1152/ajplegacy.1954.179.2.325",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13268687/",
+      "doi_url": "https://doi.org/10.1152/ajplegacy.1955.183.2.325",
       "pmc_url": "",
       "areas": [
         "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "13276375",
+      "title": "Factors influencing the oxidation of di-beta-hydroxybutyrate by tumour mitochondria.",
+      "authors": [
+        "EMMELOT P",
+        "BOS CJ"
+      ],
+      "journal": "Biochimica et biophysica acta",
+      "date": "1955-10-01",
+      "date_precision": "day",
+      "year": 1955,
+      "doi": "10.1016/0006-3002(55)90068-8",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13276375/",
+      "doi_url": "https://doi.org/10.1016/0006-3002(55)90068-8",
+      "pmc_url": "",
+      "areas": [
+        "Oncology & Cancer Metabolism"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "13258801",
+      "title": "Further aspects of the endocrine regulation of ketogenesis.",
+      "authors": [
+        "PETERSEN VP",
+        "LOTSPEICH WD"
+      ],
+      "journal": "The American journal of physiology",
+      "date": "1955-08-01",
+      "date_precision": "day",
+      "year": 1955,
+      "doi": "10.1152/ajplegacy.1955.182.2.273",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13258801/",
+      "doi_url": "https://doi.org/10.1152/ajplegacy.1955.182.2.273",
+      "pmc_url": "",
+      "areas": [
+        "Thyroid Disorders"
+      ],
+      "category_confidence": 2,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "13242658",
+      "title": "Studies on ketone metabolism in man. I. A method for the quantitative estimation of splanchnic ketone production.",
+      "authors": [
+        "WERK EE",
+        "McPHERSON HT",
+        "HAMRICK LW",
+        "MYERS JD",
+        "ENGEL FL"
+      ],
+      "journal": "The Journal of clinical investigation",
+      "date": "1955-08-01",
+      "date_precision": "day",
+      "year": 1955,
+      "doi": "10.1172/JCI103172",
+      "pmc": "PMC438693",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13242658/",
+      "doi_url": "https://doi.org/10.1172/JCI103172",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC438693/",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "13242553",
+      "title": "Phosphorylation coupled to reduction of cytochrome c by beta-hydroxybutyrate.",
+      "authors": [
+        "BORGSTROM B",
+        "SUDDUTH HC",
+        "LEHNING AL"
+      ],
+      "journal": "The Journal of biological chemistry",
+      "date": "1955-08-01",
+      "date_precision": "day",
+      "year": 1955,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13242553/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "13260021",
+      "title": "[Effect of protein and fat diets on glucose and ketone bodies in urine in experimental alloxan diabetes].",
+      "authors": [
+        "SERGEEVA AF"
+      ],
+      "journal": "Arkhiv patologii",
+      "date": "1955-07-01",
+      "date_precision": "day",
+      "year": 1955,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13260021/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 12,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "13259843",
+      "title": "[Comparative research on the metabolism of ketone bodies, variations of ATP in vivo, and electrocardiographic behavior of the rat heart in arsenite inhibition].",
+      "authors": [
+        "PETRUCCI D",
+        "BOGGIO GILOT G"
+      ],
+      "journal": "Archivio di fisiologia",
+      "date": "1955-06-30",
+      "date_precision": "day",
+      "year": 1955,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13259843/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Cardiovascular Health"
       ],
       "category_confidence": 6,
       "evidence_type": "Preclinical / mechanistic",
@@ -63,18 +234,74 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "13203363",
-      "title": "[Liver protective substances and ketone metabolism; clinico-experimental study].",
+      "pmid": "13241952",
+      "title": "[Renal clearance of ketone bodies].",
       "authors": [
+        "LESTRADET H"
+      ],
+      "journal": "Helvetica paediatrica acta",
+      "date": "1955-05-01",
+      "date_precision": "day",
+      "year": 1955,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13241952/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "14376532",
+      "title": "Ketogenesis in rats on high carbohydrate and high fat diets.",
+      "authors": [
+        "TEPPERMAN HM",
+        "TEPPERMAN J"
+      ],
+      "journal": "The American journal of physiology",
+      "date": "1955-03-01",
+      "date_precision": "day",
+      "year": 1955,
+      "doi": "10.1152/ajplegacy.1955.180.3.511",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/14376532/",
+      "doi_url": "https://doi.org/10.1152/ajplegacy.1955.180.3.511",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "14356012",
+      "title": "[Physiopathology of ketone bodies in children; clinico-experimental study].",
+      "authors": [
+        "EGIDI E",
         "MALASPINA M"
       ],
       "journal": "Minerva pediatrica",
-      "date": "1954-09-15",
+      "date": "1955-02-10",
       "date_precision": "day",
-      "year": 1954,
+      "year": 1955,
       "doi": "",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13203363/",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/14356012/",
       "doi_url": "",
       "pmc_url": "",
       "areas": [
@@ -90,324 +317,18 @@
       "curation_status": "excluded-low-confidence"
     },
     {
-      "pmid": "13184242",
-      "title": "The interfering effects of p-amino hippurate and similar compounds on the estimation of ketone bodies by the 2,4-dinitrophenylhydrazone technique.",
+      "pmid": "13310320",
+      "title": "[Micromethod of determination of ketone bodies in the blood].",
       "authors": [
-        "BONDY PK",
-        "MARABEL C"
+        "JANUSZKIEWICZ M"
       ],
-      "journal": "The Journal of laboratory and clinical medicine",
-      "date": "1954-08-01",
+      "journal": "Polskie Archiwum Medycyny Wewnetrznej",
+      "date": "1955-01-01",
       "date_precision": "day",
-      "year": 1954,
+      "year": 1955,
       "doi": "",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13184242/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "13181857",
-      "title": "The effect of ketone bodies on the carbohydrate metabolism of rat diaphragm.",
-      "authors": [
-        "CHARI A",
-        "WERTHEIMER E"
-      ],
-      "journal": "The Biochemical journal",
-      "date": "1954-07-01",
-      "date_precision": "day",
-      "year": 1954,
-      "doi": "10.1042/bj0570443",
-      "pmc": "PMC1269779",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13181857/",
-      "doi_url": "https://doi.org/10.1042/bj0570443",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1269779/",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "14351338",
-      "title": "[Pancreatic extracts and urinary elimination of ketone bodies].",
-      "authors": [
-        "ARRIGO L"
-      ],
-      "journal": "Bollettino della Societa italiana di biologia sperimentale",
-      "date": "1954-06-01",
-      "date_precision": "day",
-      "year": 1954,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/14351338/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "13210942",
-      "title": "Studies on Plasmodium berghei Vincke and Lips, 1948. XVI. Effect of ketogenic diet on the course of blood-induced infection in rats.",
-      "authors": [
-        "RAMAKRISHNAN SP"
-      ],
-      "journal": "Indian journal of malariology",
-      "date": "1954-06-01",
-      "date_precision": "day",
-      "year": 1954,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13210942/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "13148345",
-      "title": "Possible relationship of ketone bodies to the alactacid oxygen debt.",
-      "authors": [
-        "GROLLMAN S",
-        "PHILLIPS NE"
-      ],
-      "journal": "The American journal of physiology",
-      "date": "1954-04-01",
-      "date_precision": "day",
-      "year": 1954,
-      "doi": "10.1152/ajplegacy.1954.177.1.73",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13148345/",
-      "doi_url": "https://doi.org/10.1152/ajplegacy.1954.177.1.73",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "13165256",
-      "title": "[Effect of cocarboxylase on metabolism of ketone bodies].",
-      "authors": [
-        "CAFFARENA G",
-        "CHIOSSI FM"
-      ],
-      "journal": "Minerva medica",
-      "date": "1954-03-31",
-      "date_precision": "day",
-      "year": 1954,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13165256/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "13224212",
-      "title": "[Determination of ketone bodies; causes of error].",
-      "authors": [
-        "DE NEGRI L"
-      ],
-      "journal": "Pathologica",
-      "date": "1954-03-01",
-      "date_precision": "day",
-      "year": 1954,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13224212/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "13118497",
-      "title": "The effect of intravenously administered fructose on the ketone bodies of the depancreatized dog.",
-      "authors": [
-        "WHITTLESEY P",
-        "ZUBROD CG"
-      ],
-      "journal": "The Journal of pharmacology and experimental therapeutics",
-      "date": "1954-02-01",
-      "date_precision": "day",
-      "year": 1954,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13118497/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 2,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "13227132",
-      "title": "[Effect of ketone bodies on inhibition of growth of tubercle bacilli by tuberculostatics. I..].",
-      "authors": [
-        "WILDE W"
-      ],
-      "journal": "Zeitschrift fur Hygiene und Infektionskrankheiten; medizinische Mikrobiologie, Immunologie und Virologie",
-      "date": "1954-01-01",
-      "date_precision": "day",
-      "year": 1954,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13227132/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "13227076",
-      "title": "[Metabolism of ketone bodies in fasting and in chronic dystrophy].",
-      "authors": [
-        "MULLER F"
-      ],
-      "journal": "Zeitschrift fur die gesamte experimentelle Medizin",
-      "date": "1954-01-01",
-      "date_precision": "day",
-      "year": 1954,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13227076/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Eating Disorders"
-      ],
-      "category_confidence": 2,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "13221272",
-      "title": "Determination of stationary concentrations of intermediate substances. II. Origin of ketone bodies and their relation to glycolysis.",
-      "authors": [
-        "HELMREICH E",
-        "HOLZER H",
-        "LAMPRECHT W",
-        "GOLDSCHMIDT S"
-      ],
-      "journal": "Hoppe-Seyler's Zeitschrift fur physiologische Chemie",
-      "date": "1954-01-01",
-      "date_precision": "day",
-      "year": 1954,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13221272/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 2,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "13149376",
-      "title": "[Insulin and ketone bodies].",
-      "authors": [
-        "GAMBASSI G",
-        "MAGGI V"
-      ],
-      "journal": "Archivio di patologia e clinica medica",
-      "date": "1954-01-01",
-      "date_precision": "day",
-      "year": 1954,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13149376/",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13310320/",
       "doi_url": "",
       "pmc_url": "",
       "areas": [
