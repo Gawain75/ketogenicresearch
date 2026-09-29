@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-29T09:26:05+00:00",
+  "generated_at": "2026-09-29T10:06:09+00:00",
   "current_year": 2026,
   "previous_year": 2025,
   "scope_note": {
@@ -7,8 +7,8 @@
     "it": "I conteggi si riferiscono alle pubblicazioni uniche indicizzate nella Biblioteca Scientifica di Ketogenic Research, non a tutte le pubblicazioni esistenti a livello mondiale."
   },
   "global": {
-    "total_unique": 4699,
-    "known_year": 4543,
+    "total_unique": 4488,
+    "known_year": 4332,
     "unknown_year": 156,
     "first_year": 1921,
     "by_year": {
@@ -79,8 +79,8 @@
       "2022": 304,
       "2023": 323,
       "2024": 373,
-      "2025": 548,
-      "2026": 816
+      "2025": 492,
+      "2026": 661
     }
   },
   "areas": [
@@ -126,8 +126,8 @@
         "en": "Aesthetic Medicine & Body Composition",
         "it": "Medicina estetica e composizione corporea"
       },
-      "total_unique": 70,
-      "known_year": 70,
+      "total_unique": 69,
+      "known_year": 69,
       "unknown_year": 0,
       "by_year": {
         "1965": 1,
@@ -144,7 +144,7 @@
         "2023": 1,
         "2024": 5,
         "2025": 8,
-        "2026": 16
+        "2026": 15
       }
     },
     {
@@ -153,8 +153,8 @@
         "en": "Alzheimer’s Disease",
         "it": "Malattia di Alzheimer"
       },
-      "total_unique": 106,
-      "known_year": 106,
+      "total_unique": 100,
+      "known_year": 100,
       "unknown_year": 0,
       "by_year": {
         "2005": 1,
@@ -174,8 +174,8 @@
         "2022": 7,
         "2023": 9,
         "2024": 10,
-        "2025": 9,
-        "2026": 24
+        "2025": 7,
+        "2026": 20
       }
     },
     {
@@ -225,8 +225,8 @@
         "en": "Brain Injury & Neurotrauma",
         "it": "Danno cerebrale e neurotrauma"
       },
-      "total_unique": 40,
-      "known_year": 40,
+      "total_unique": 39,
+      "known_year": 39,
       "unknown_year": 0,
       "by_year": {
         "2006": 1,
@@ -242,7 +242,7 @@
         "2023": 2,
         "2024": 2,
         "2025": 2,
-        "2026": 8
+        "2026": 7
       }
     },
     {
@@ -268,8 +268,8 @@
         "en": "Cardiovascular Health",
         "it": "Salute cardiovascolare"
       },
-      "total_unique": 250,
-      "known_year": 241,
+      "total_unique": 231,
+      "known_year": 222,
       "unknown_year": 9,
       "by_year": {
         "2000": 1,
@@ -294,8 +294,8 @@
         "2022": 15,
         "2023": 16,
         "2024": 30,
-        "2025": 32,
-        "2026": 65
+        "2025": 24,
+        "2026": 54
       }
     },
     {
@@ -304,8 +304,8 @@
         "en": "Chronic Kidney Disease",
         "it": "Malattia renale cronica"
       },
-      "total_unique": 42,
-      "known_year": 37,
+      "total_unique": 36,
+      "known_year": 31,
       "unknown_year": 5,
       "by_year": {
         "2020": 2,
@@ -313,8 +313,8 @@
         "2022": 4,
         "2023": 4,
         "2024": 3,
-        "2025": 9,
-        "2026": 13
+        "2025": 8,
+        "2026": 8
       }
     },
     {
@@ -323,8 +323,8 @@
         "en": "Circadian Rhythms",
         "it": "Ritmi circadiani"
       },
-      "total_unique": 61,
-      "known_year": 59,
+      "total_unique": 58,
+      "known_year": 56,
       "unknown_year": 2,
       "by_year": {
         "1998": 1,
@@ -340,8 +340,8 @@
         "2022": 4,
         "2023": 8,
         "2024": 7,
-        "2025": 4,
-        "2026": 18
+        "2025": 3,
+        "2026": 16
       }
     },
     {
@@ -350,8 +350,8 @@
         "en": "Cognitive Function",
         "it": "Funzione cognitiva"
       },
-      "total_unique": 179,
-      "known_year": 178,
+      "total_unique": 175,
+      "known_year": 174,
       "unknown_year": 1,
       "by_year": {
         "1995": 1,
@@ -372,8 +372,8 @@
         "2022": 17,
         "2023": 10,
         "2024": 14,
-        "2025": 20,
-        "2026": 58
+        "2025": 19,
+        "2026": 55
       }
     },
     {
@@ -382,8 +382,8 @@
         "en": "COVID-19 & Metabolism",
         "it": "COVID-19 e metabolismo"
       },
-      "total_unique": 29,
-      "known_year": 27,
+      "total_unique": 27,
+      "known_year": 25,
       "unknown_year": 2,
       "by_year": {
         "2020": 4,
@@ -392,7 +392,7 @@
         "2023": 3,
         "2024": 1,
         "2025": 2,
-        "2026": 5
+        "2026": 3
       }
     },
     {
@@ -416,8 +416,8 @@
         "en": "Diabetes & Glucose Metabolism",
         "it": "Diabete e metabolismo glucidico"
       },
-      "total_unique": 680,
-      "known_year": 669,
+      "total_unique": 583,
+      "known_year": 572,
       "unknown_year": 11,
       "by_year": {
         "1971": 1,
@@ -459,8 +459,8 @@
         "2022": 31,
         "2023": 35,
         "2024": 39,
-        "2025": 66,
-        "2026": 188
+        "2025": 42,
+        "2026": 115
       }
     },
     {
@@ -482,8 +482,8 @@
         "en": "Dyslipidemia & Lipid Metabolism",
         "it": "Dislipidemie e metabolismo lipidico"
       },
-      "total_unique": 404,
-      "known_year": 394,
+      "total_unique": 377,
+      "known_year": 367,
       "unknown_year": 10,
       "by_year": {
         "1964": 1,
@@ -526,8 +526,8 @@
         "2022": 22,
         "2023": 36,
         "2024": 23,
-        "2025": 36,
-        "2026": 92
+        "2025": 28,
+        "2026": 73
       }
     },
     {
@@ -569,8 +569,8 @@
         "en": "Epilepsy",
         "it": "Epilessia"
       },
-      "total_unique": 1643,
-      "known_year": 1629,
+      "total_unique": 1637,
+      "known_year": 1623,
       "unknown_year": 14,
       "by_year": {
         "1921": 2,
@@ -635,8 +635,8 @@
         "2022": 76,
         "2023": 74,
         "2024": 93,
-        "2025": 131,
-        "2026": 165
+        "2025": 129,
+        "2026": 161
       }
     },
     {
@@ -645,8 +645,8 @@
         "en": "Exercise & Performance",
         "it": "Sport, esercizio e performance"
       },
-      "total_unique": 257,
-      "known_year": 252,
+      "total_unique": 248,
+      "known_year": 243,
       "unknown_year": 5,
       "by_year": {
         "1980": 1,
@@ -668,8 +668,8 @@
         "2022": 13,
         "2023": 24,
         "2024": 13,
-        "2025": 27,
-        "2026": 56
+        "2025": 25,
+        "2026": 49
       }
     },
     {
@@ -803,8 +803,8 @@
         "en": "Gut Microbiome",
         "it": "Microbiota intestinale"
       },
-      "total_unique": 202,
-      "known_year": 184,
+      "total_unique": 188,
+      "known_year": 170,
       "unknown_year": 18,
       "by_year": {
         "2016": 2,
@@ -816,8 +816,8 @@
         "2022": 15,
         "2023": 17,
         "2024": 16,
-        "2025": 38,
-        "2026": 63
+        "2025": 33,
+        "2026": 54
       }
     },
     {
@@ -826,8 +826,8 @@
         "en": "Headache & Migraine",
         "it": "Cefalea ed emicrania"
       },
-      "total_unique": 50,
-      "known_year": 46,
+      "total_unique": 48,
+      "known_year": 44,
       "unknown_year": 4,
       "by_year": {
         "2010": 1,
@@ -842,7 +842,7 @@
         "2022": 2,
         "2023": 8,
         "2024": 8,
-        "2025": 9,
+        "2025": 7,
         "2026": 1
       }
     },
@@ -866,8 +866,8 @@
         "en": "Inflammation & Immunometabolism",
         "it": "Infiammazione e immunometabolismo"
       },
-      "total_unique": 251,
-      "known_year": 248,
+      "total_unique": 238,
+      "known_year": 235,
       "unknown_year": 3,
       "by_year": {
         "2009": 1,
@@ -884,8 +884,8 @@
         "2022": 18,
         "2023": 21,
         "2024": 26,
-        "2025": 45,
-        "2026": 100
+        "2025": 42,
+        "2026": 90
       }
     },
     {
@@ -894,8 +894,8 @@
         "en": "Keto Rash / Prurigo Pigmentosa",
         "it": "Keto rash / Prurigo pigmentosa"
       },
-      "total_unique": 26,
-      "known_year": 26,
+      "total_unique": 25,
+      "known_year": 25,
       "unknown_year": 0,
       "by_year": {
         "2013": 1,
@@ -906,7 +906,7 @@
         "2023": 2,
         "2024": 1,
         "2025": 7,
-        "2026": 6
+        "2026": 5
       }
     },
     {
@@ -915,8 +915,8 @@
         "en": "Lipedema",
         "it": "Lipedema"
       },
-      "total_unique": 17,
-      "known_year": 15,
+      "total_unique": 16,
+      "known_year": 14,
       "unknown_year": 2,
       "by_year": {
         "2021": 2,
@@ -924,7 +924,7 @@
         "2023": 2,
         "2024": 1,
         "2025": 5,
-        "2026": 4
+        "2026": 3
       }
     },
     {
@@ -950,8 +950,8 @@
         "en": "Longevity & Healthy Aging",
         "it": "Longevità e invecchiamento sano"
       },
-      "total_unique": 82,
-      "known_year": 79,
+      "total_unique": 77,
+      "known_year": 74,
       "unknown_year": 3,
       "by_year": {
         "2007": 1,
@@ -969,8 +969,8 @@
         "2022": 1,
         "2023": 2,
         "2024": 4,
-        "2025": 13,
-        "2026": 35
+        "2025": 10,
+        "2026": 33
       }
     },
     {
@@ -979,8 +979,8 @@
         "en": "MASLD / Metabolic Liver Disease",
         "it": "MASLD / Malattia epatica metabolica"
       },
-      "total_unique": 103,
-      "known_year": 100,
+      "total_unique": 90,
+      "known_year": 87,
       "unknown_year": 3,
       "by_year": {
         "1998": 1,
@@ -999,7 +999,7 @@
         "2023": 7,
         "2024": 13,
         "2025": 14,
-        "2026": 38
+        "2026": 25
       }
     },
     {
@@ -1008,8 +1008,8 @@
         "en": "Medium-Chain Triglycerides (MCT)",
         "it": "Trigliceridi a catena media (MCT)"
       },
-      "total_unique": 104,
-      "known_year": 101,
+      "total_unique": 102,
+      "known_year": 99,
       "unknown_year": 3,
       "by_year": {
         "1973": 1,
@@ -1037,7 +1037,7 @@
         "2023": 9,
         "2024": 6,
         "2025": 8,
-        "2026": 16
+        "2026": 14
       }
     },
     {
@@ -1046,8 +1046,8 @@
         "en": "Multiple Sclerosis",
         "it": "Sclerosi multipla"
       },
-      "total_unique": 44,
-      "known_year": 43,
+      "total_unique": 42,
+      "known_year": 41,
       "unknown_year": 1,
       "by_year": {
         "2012": 1,
@@ -1060,7 +1060,7 @@
         "2023": 6,
         "2024": 1,
         "2025": 10,
-        "2026": 8
+        "2026": 6
       }
     },
     {
@@ -1069,8 +1069,8 @@
         "en": "Neurodegenerative Disorders",
         "it": "Malattie neurodegenerative"
       },
-      "total_unique": 52,
-      "known_year": 50,
+      "total_unique": 51,
+      "known_year": 49,
       "unknown_year": 2,
       "by_year": {
         "2006": 3,
@@ -1086,7 +1086,7 @@
         "2023": 5,
         "2024": 4,
         "2025": 6,
-        "2026": 8
+        "2026": 7
       }
     },
     {
@@ -1095,8 +1095,8 @@
         "en": "Obesity",
         "it": "Obesità"
       },
-      "total_unique": 582,
-      "known_year": 572,
+      "total_unique": 564,
+      "known_year": 554,
       "unknown_year": 10,
       "by_year": {
         "1965": 1,
@@ -1134,8 +1134,8 @@
         "2022": 57,
         "2023": 44,
         "2024": 52,
-        "2025": 68,
-        "2026": 98
+        "2025": 65,
+        "2026": 83
       }
     },
     {
@@ -1144,8 +1144,8 @@
         "en": "Oncology & Cancer Metabolism",
         "it": "Oncologia e metabolismo tumorale"
       },
-      "total_unique": 419,
-      "known_year": 409,
+      "total_unique": 410,
+      "known_year": 400,
       "unknown_year": 10,
       "by_year": {
         "1995": 2,
@@ -1169,8 +1169,8 @@
         "2022": 31,
         "2023": 28,
         "2024": 25,
-        "2025": 57,
-        "2026": 81
+        "2025": 56,
+        "2026": 73
       }
     },
     {
@@ -1194,8 +1194,8 @@
         "en": "Parkinson’s Disease",
         "it": "Malattia di Parkinson"
       },
-      "total_unique": 41,
-      "known_year": 37,
+      "total_unique": 40,
+      "known_year": 36,
       "unknown_year": 4,
       "by_year": {
         "2009": 1,
@@ -1209,7 +1209,7 @@
         "2023": 3,
         "2024": 2,
         "2025": 5,
-        "2026": 10
+        "2026": 9
       }
     },
     {
@@ -1218,8 +1218,8 @@
         "en": "Polyendocrine Metabolic Ovarian Syndrome (PMOS, formerly PCOS)",
         "it": "Sindrome ovarica metabolica poliendocrina (PMOS, precedentemente PCOS)"
       },
-      "total_unique": 56,
-      "known_year": 51,
+      "total_unique": 53,
+      "known_year": 48,
       "unknown_year": 5,
       "by_year": {
         "2005": 1,
@@ -1230,8 +1230,8 @@
         "2022": 5,
         "2023": 13,
         "2024": 6,
-        "2025": 8,
-        "2026": 13
+        "2025": 7,
+        "2026": 11
       }
     },
     {
@@ -1240,8 +1240,8 @@
         "en": "Psoriasis",
         "it": "Psoriasi"
       },
-      "total_unique": 15,
-      "known_year": 15,
+      "total_unique": 14,
+      "known_year": 14,
       "unknown_year": 0,
       "by_year": {
         "2015": 1,
@@ -1250,7 +1250,7 @@
         "2022": 1,
         "2023": 1,
         "2024": 2,
-        "2025": 2,
+        "2025": 1,
         "2026": 3
       }
     },
@@ -1260,8 +1260,8 @@
         "en": "Psychiatry & Mental Health",
         "it": "Psichiatria e salute mentale"
       },
-      "total_unique": 168,
-      "known_year": 157,
+      "total_unique": 161,
+      "known_year": 150,
       "unknown_year": 11,
       "by_year": {
         "1965": 1,
@@ -1282,8 +1282,8 @@
         "2022": 7,
         "2023": 9,
         "2024": 18,
-        "2025": 37,
-        "2026": 44
+        "2025": 32,
+        "2026": 42
       }
     },
     {
@@ -1292,8 +1292,8 @@
         "en": "Pyruvate Dehydrogenase Deficiency",
         "it": "Deficit di piruvato deidrogenasi"
       },
-      "total_unique": 24,
-      "known_year": 24,
+      "total_unique": 23,
+      "known_year": 23,
       "unknown_year": 0,
       "by_year": {
         "1992": 1,
@@ -1310,7 +1310,7 @@
         "2021": 2,
         "2023": 1,
         "2024": 2,
-        "2025": 4,
+        "2025": 3,
         "2026": 3
       }
     },
@@ -1320,8 +1320,8 @@
         "en": "Reproduction & Fertility",
         "it": "Riproduzione e fertilità"
       },
-      "total_unique": 29,
-      "known_year": 26,
+      "total_unique": 27,
+      "known_year": 24,
       "unknown_year": 3,
       "by_year": {
         "2005": 1,
@@ -1333,7 +1333,7 @@
         "2023": 4,
         "2024": 4,
         "2025": 2,
-        "2026": 6
+        "2026": 4
       }
     },
     {
@@ -1357,8 +1357,8 @@
         "en": "Sarcopenia & Skeletal Muscle",
         "it": "Sarcopenia e muscolo scheletrico"
       },
-      "total_unique": 51,
-      "known_year": 50,
+      "total_unique": 46,
+      "known_year": 45,
       "unknown_year": 1,
       "by_year": {
         "2004": 1,
@@ -1371,8 +1371,8 @@
         "2022": 5,
         "2023": 2,
         "2024": 6,
-        "2025": 9,
-        "2026": 13
+        "2025": 8,
+        "2026": 9
       }
     },
     {
@@ -1381,8 +1381,8 @@
         "en": "Substance Use Disorders",
         "it": "Disturbi da uso di sostanze"
       },
-      "total_unique": 34,
-      "known_year": 34,
+      "total_unique": 32,
+      "known_year": 32,
       "unknown_year": 0,
       "by_year": {
         "1996": 1,
@@ -1395,7 +1395,7 @@
         "2023": 5,
         "2024": 6,
         "2025": 3,
-        "2026": 7
+        "2026": 5
       }
     },
     {
@@ -1404,8 +1404,8 @@
         "en": "Supplementation & Nutraceuticals",
         "it": "Supplementazione e nutraceutica"
       },
-      "total_unique": 239,
-      "known_year": 239,
+      "total_unique": 233,
+      "known_year": 233,
       "unknown_year": 0,
       "by_year": {
         "1980": 1,
@@ -1425,8 +1425,8 @@
         "2022": 17,
         "2023": 17,
         "2024": 25,
-        "2025": 27,
-        "2026": 54
+        "2025": 26,
+        "2026": 49
       }
     },
     {
@@ -1435,8 +1435,8 @@
         "en": "Thyroid Disorders",
         "it": "Patologie tiroidee"
       },
-      "total_unique": 24,
-      "known_year": 24,
+      "total_unique": 22,
+      "known_year": 22,
       "unknown_year": 0,
       "by_year": {
         "1981": 1,
@@ -1448,8 +1448,8 @@
         "2022": 1,
         "2023": 4,
         "2024": 2,
-        "2025": 4,
-        "2026": 6
+        "2025": 3,
+        "2026": 5
       }
     },
     {
