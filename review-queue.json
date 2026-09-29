@@ -1,82 +1,26 @@
 {
-  "generated_at": "2026-09-29T13:57:07+00:00",
+  "generated_at": "2026-09-29T13:57:22+00:00",
   "curation_window_days": 365,
-  "backfill_year": 1955,
-  "auto_approved_count": 6,
-  "excluded_count": 6,
+  "backfill_year": 1956,
+  "auto_approved_count": 4,
+  "excluded_count": 5,
   "records": [
     {
-      "pmid": "13285327",
-      "title": "[Value of rapid determination of ketone bodies in blood and urine in diabetic acidosis and coma].",
+      "pmid": "13414994",
+      "title": "[On the blood ketone bodies in carcinoma patients].",
       "authors": [
-        "CABARROU A",
-        "CAINO HV",
-        "PINTADO OA"
+        "OKUMURA A",
+        "MATSUDA K",
+        "KOHSAKI G"
       ],
-      "journal": "El Dia medico",
-      "date": "1955-11-21",
+      "journal": "Gan",
+      "date": "1956-12-01",
       "date_precision": "day",
-      "year": 1955,
+      "year": 1956,
       "doi": "",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13285327/",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13414994/",
       "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 2,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "13268687",
-      "title": "Comparison of urinary excretion of ketone bodies, non-protein nitrogen, citric acid and glucose in alloxan diabetic and depancreatized rats.",
-      "authors": [
-        "BEATTY CH",
-        "PETERSON RD"
-      ],
-      "journal": "The American journal of physiology",
-      "date": "1955-11-01",
-      "date_precision": "day",
-      "year": 1955,
-      "doi": "10.1152/ajplegacy.1955.183.2.325",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13268687/",
-      "doi_url": "https://doi.org/10.1152/ajplegacy.1955.183.2.325",
-      "pmc_url": "",
-      "areas": [
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "13276375",
-      "title": "Factors influencing the oxidation of di-beta-hydroxybutyrate by tumour mitochondria.",
-      "authors": [
-        "EMMELOT P",
-        "BOS CJ"
-      ],
-      "journal": "Biochimica et biophysica acta",
-      "date": "1955-10-01",
-      "date_precision": "day",
-      "year": 1955,
-      "doi": "10.1016/0006-3002(55)90068-8",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13276375/",
-      "doi_url": "https://doi.org/10.1016/0006-3002(55)90068-8",
       "pmc_url": "",
       "areas": [
         "Oncology & Cancer Metabolism"
@@ -91,23 +35,135 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "13258801",
-      "title": "Further aspects of the endocrine regulation of ketogenesis.",
+      "pmid": "13346182",
+      "title": "A mechanism for diminished ketogenesis in experimental liver injury. II.",
       "authors": [
-        "PETERSEN VP",
-        "LOTSPEICH WD"
+        "FISCHER GL",
+        "RECANT L"
       ],
-      "journal": "The American journal of physiology",
-      "date": "1955-08-01",
+      "journal": "The Journal of laboratory and clinical medicine",
+      "date": "1956-08-01",
       "date_precision": "day",
-      "year": 1955,
-      "doi": "10.1152/ajplegacy.1955.182.2.273",
+      "year": 1956,
+      "doi": "",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13258801/",
-      "doi_url": "https://doi.org/10.1152/ajplegacy.1955.182.2.273",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13346182/",
+      "doi_url": "",
       "pmc_url": "",
       "areas": [
-        "Thyroid Disorders"
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "13346181",
+      "title": "Diminished ketogenesis in liver injury. I.",
+      "authors": [
+        "RECANT L"
+      ],
+      "journal": "The Journal of laboratory and clinical medicine",
+      "date": "1956-08-01",
+      "date_precision": "day",
+      "year": 1956,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13346181/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "13313741",
+      "title": "Ketone body metabolism in ascorbic acid deficiency; in vitro formation of ketone bodies by liver slices.",
+      "authors": [
+        "DEBONS AF",
+        "WALLACE JW",
+        "BACCHUS H"
+      ],
+      "journal": "The American journal of physiology",
+      "date": "1956-04-01",
+      "date_precision": "day",
+      "year": 1956,
+      "doi": "10.1152/ajplegacy.1956.185.1.31",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13313741/",
+      "doi_url": "https://doi.org/10.1152/ajplegacy.1956.185.1.31",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "13315329",
+      "title": "Enzymic activities of tumour mitochondria as evidenced by their inhibitory effect on the oxidation of DL-, D- and L-beta-hydroxybutyrate by liver mitochondria.",
+      "authors": [
+        "EMMELOT P",
+        "BOS CJ"
+      ],
+      "journal": "Biochimica et biophysica acta",
+      "date": "1956-03-01",
+      "date_precision": "day",
+      "year": 1956,
+      "doi": "10.1016/0006-3002(56)90492-9",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13315329/",
+      "doi_url": "https://doi.org/10.1016/0006-3002(56)90492-9",
+      "pmc_url": "",
+      "areas": [
+        "Oncology & Cancer Metabolism"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "13295304",
+      "title": "Oxidative phosphorylation by an enzyme complex from extracts of mitochondria. II. The span beta-hydroxybutyrate to cytochrome c.",
+      "authors": [
+        "DEVLIN TM",
+        "LEHNINGER AL"
+      ],
+      "journal": "The Journal of biological chemistry",
+      "date": "1956-03-01",
+      "date_precision": "day",
+      "year": 1956,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13295304/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Dyslipidemia & Lipid Metabolism"
       ],
       "category_confidence": 2,
       "evidence_type": "Other",
@@ -119,86 +175,27 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "13242658",
-      "title": "Studies on ketone metabolism in man. I. A method for the quantitative estimation of splanchnic ketone production.",
+      "pmid": "13295303",
+      "title": "Oxidative phosphorylation by an enzyme complex from extracts of mitochondria. I. The span beta-hydroxybutyrate to oxygen.",
       "authors": [
-        "WERK EE",
-        "McPHERSON HT",
-        "HAMRICK LW",
-        "MYERS JD",
-        "ENGEL FL"
-      ],
-      "journal": "The Journal of clinical investigation",
-      "date": "1955-08-01",
-      "date_precision": "day",
-      "year": 1955,
-      "doi": "10.1172/JCI103172",
-      "pmc": "PMC438693",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13242658/",
-      "doi_url": "https://doi.org/10.1172/JCI103172",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC438693/",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "13242553",
-      "title": "Phosphorylation coupled to reduction of cytochrome c by beta-hydroxybutyrate.",
-      "authors": [
-        "BORGSTROM B",
-        "SUDDUTH HC",
-        "LEHNING AL"
+        "COOPER C",
+        "LEHNINGER AL"
       ],
       "journal": "The Journal of biological chemistry",
-      "date": "1955-08-01",
+      "date": "1956-03-01",
       "date_precision": "day",
-      "year": 1955,
+      "year": 1956,
       "doi": "",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13242553/",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13295303/",
       "doi_url": "",
       "pmc_url": "",
       "areas": [
-        "Other / General"
+        "Dyslipidemia & Lipid Metabolism"
       ],
-      "category_confidence": 0,
+      "category_confidence": 2,
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "13260021",
-      "title": "[Effect of protein and fat diets on glucose and ketone bodies in urine in experimental alloxan diabetes].",
-      "authors": [
-        "SERGEEVA AF"
-      ],
-      "journal": "Arkhiv patologii",
-      "date": "1955-07-01",
-      "date_precision": "day",
-      "year": 1955,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13260021/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 12,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed",
@@ -206,129 +203,19 @@
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "13259843",
-      "title": "[Comparative research on the metabolism of ketone bodies, variations of ATP in vivo, and electrocardiographic behavior of the rat heart in arsenite inhibition].",
+      "pmid": "13388909",
+      "title": "[Method of quantitative determination of ketone bodies in urine applicable in clinical practice].",
       "authors": [
-        "PETRUCCI D",
-        "BOGGIO GILOT G"
-      ],
-      "journal": "Archivio di fisiologia",
-      "date": "1955-06-30",
-      "date_precision": "day",
-      "year": 1955,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13259843/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Cardiovascular Health"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "13241952",
-      "title": "[Renal clearance of ketone bodies].",
-      "authors": [
-        "LESTRADET H"
-      ],
-      "journal": "Helvetica paediatrica acta",
-      "date": "1955-05-01",
-      "date_precision": "day",
-      "year": 1955,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13241952/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "14376532",
-      "title": "Ketogenesis in rats on high carbohydrate and high fat diets.",
-      "authors": [
-        "TEPPERMAN HM",
-        "TEPPERMAN J"
-      ],
-      "journal": "The American journal of physiology",
-      "date": "1955-03-01",
-      "date_precision": "day",
-      "year": 1955,
-      "doi": "10.1152/ajplegacy.1955.180.3.511",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/14376532/",
-      "doi_url": "https://doi.org/10.1152/ajplegacy.1955.180.3.511",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "14356012",
-      "title": "[Physiopathology of ketone bodies in children; clinico-experimental study].",
-      "authors": [
-        "EGIDI E",
-        "MALASPINA M"
-      ],
-      "journal": "Minerva pediatrica",
-      "date": "1955-02-10",
-      "date_precision": "day",
-      "year": 1955,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/14356012/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "13310320",
-      "title": "[Micromethod of determination of ketone bodies in the blood].",
-      "authors": [
-        "JANUSZKIEWICZ M"
+        "CHLEBOWSKI J",
+        "WIECHOWSKI W"
       ],
       "journal": "Polskie Archiwum Medycyny Wewnetrznej",
-      "date": "1955-01-01",
+      "date": "1956-01-01",
       "date_precision": "day",
-      "year": 1955,
+      "year": 1956,
       "doi": "",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13310320/",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13388909/",
       "doi_url": "",
       "pmc_url": "",
       "areas": [
@@ -337,6 +224,34 @@
       "category_confidence": 0,
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "13277323",
+      "title": "On the mechanism of ketogenesis in ruminants.",
+      "authors": [
+        "ADLER JH",
+        "DYE JA"
+      ],
+      "journal": "The Cornell veterinarian",
+      "date": "1956-01-01",
+      "date_precision": "day",
+      "year": 1956,
+      "doi": "",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/13277323/",
+      "doi_url": "",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed",
