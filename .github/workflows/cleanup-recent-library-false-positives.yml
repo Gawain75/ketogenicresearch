@@ -455,15 +455,26 @@ jobs:
           git config user.name "Ketogenic Research Bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add library.html evidence-trends.html cleanup-recent-library-report.json
-          git add index.html latest.html 2>/dev/null || true
+          # Stage every file modified by cleanup, counters and trend rebuild.
+          # This prevents rebase from failing because of leftover unstaged files.
+          git add -A
 
           if git diff --cached --quiet; then
             echo "No false-positive records required removal."
             exit 0
           fi
 
+          echo "Files staged for cleanup:"
+          git diff --cached --name-status
+
           git commit -m "Clean recent ketogenic Library false positives"
+
+          # Safety check: there must be no local modifications before rebase.
+          if ! git diff --quiet || ! git diff --cached --quiet; then
+            echo "Unexpected uncommitted changes remain after cleanup commit:"
+            git status --short
+            exit 1
+          fi
 
           for attempt in 1 2 3; do
             git fetch origin main
