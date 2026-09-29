@@ -15,15 +15,16 @@
 <meta name="twitter:title" content="Alternative and adjunctive therapies for GLUT1 deficiency syndrome: findings from a systematic review">
 <meta name="twitter:description" content="A systematic review of 22 heterogeneous studies (n=290) examined non‑ketogenic and adjunctive interventions for paediatric GLUT1‑DS. Modified Atkins diet…">
 <link href="../favicon.svg" rel="icon">
-<link href="../styles.css?v=70" rel="stylesheet">
+<link href="../styles.css?v=115" rel="stylesheet">
 <link href="../articles.css?v=1" rel="stylesheet">
 </head>
 <body class="article-page">
-<header class="article-topbar">
-  <a href="/index.html" class="article-brand" aria-label="Ketogenic Research">
-    <img src="../logo-ketogenic-research.png" alt="Ketogenic Research" class="article-logo">
-  </a>
-  <nav aria-label="Primary navigation" class="site-nav">
+<header class="header">
+<div class="wrap nav">
+<a aria-label="Ketogenic Research Hub" class="brand" href="/index.html">
+<img alt="Ketogenic Research Hub" class="site-logo" src="/logo-ketogenic-research.png"/>
+</a>
+<nav aria-label="Primary navigation" class="site-nav">
 <a href="/index.html">Home</a>
 <a data-en="Research" data-it="Ricerca" href="/research.html">Research</a>
 <a data-en="Scientific Library" data-it="Biblioteca Scientifica" href="https://library.ketogenicresearch.org/library">Scientific Library</a>
@@ -42,10 +43,11 @@
 </div>
 </details>
 </nav>
-  <div class="article-lang">
-    <button type="button" class="active" data-lang="en">EN</button>
-    <button type="button" data-lang="it">IT</button>
-  </div>
+<div class="actions">
+<div class="lang"><button class="active" data-lang="en">EN</button><button data-lang="it">IT</button></div>
+<button aria-label="Menu" class="menu">☰</button>
+</div>
+</div>
 </header>
 
 <main class="article-shell">
@@ -100,17 +102,39 @@
 
 <script>
 (function(){
-  const buttons=[...document.querySelectorAll('[data-lang]')];
+  const buttons=[...document.querySelectorAll('.lang button[data-lang]')];
   const sections=[...document.querySelectorAll('[data-article-lang]')];
   const back=document.querySelector('[data-label-en]');
+  const menu=document.querySelector('.header .menu');
+  const nav=document.querySelector('.header .site-nav');
+
   function setLang(lang){
     document.documentElement.lang=lang;
     buttons.forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
     sections.forEach(s=>s.classList.toggle('active',s.dataset.articleLang===lang));
+    document.querySelectorAll('[data-en]').forEach(el=>{
+      const v=lang==='it'?el.dataset.it:el.dataset.en;
+      if(v!==undefined) el.textContent=v;
+    });
     if(back) back.textContent=lang==='it'?back.dataset.labelIt:back.dataset.labelEn;
     try{localStorage.setItem('kr-lang',lang)}catch(e){}
   }
+
   buttons.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+
+  if(menu && nav){
+    menu.setAttribute('aria-expanded','false');
+    menu.addEventListener('click',e=>{
+      e.preventDefault();
+      const open=nav.classList.toggle('open');
+      menu.setAttribute('aria-expanded',open?'true':'false');
+    });
+    nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+      nav.classList.remove('open');
+      menu.setAttribute('aria-expanded','false');
+    }));
+  }
+
   let initial='en';
   try{if(localStorage.getItem('kr-lang')==='it') initial='it'}catch(e){}
   setLang(initial);

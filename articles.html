@@ -12,15 +12,16 @@
 <meta property="og:description" content="Research notes and scientific analyses based on recent peer-reviewed ketogenic literature.">
 <meta property="og:url" content="https://ketogenicresearch.org/articles.html">
 <link href="favicon.svg" rel="icon">
-<link href="styles.css?v=70" rel="stylesheet">
+<link href="styles.css?v=115" rel="stylesheet">
 <link href="articles.css?v=1" rel="stylesheet">
 </head>
 <body class="article-index-page">
-<header class="article-topbar">
-  <a href="/index.html" class="article-brand" aria-label="Ketogenic Research">
-    <img src="logo-ketogenic-research.png" alt="Ketogenic Research" class="article-logo">
-  </a>
-  <nav aria-label="Primary navigation" class="site-nav">
+<header class="header">
+<div class="wrap nav">
+<a aria-label="Ketogenic Research Hub" class="brand" href="/index.html">
+<img alt="Ketogenic Research Hub" class="site-logo" src="/logo-ketogenic-research.png"/>
+</a>
+<nav aria-label="Primary navigation" class="site-nav">
 <a href="/index.html">Home</a>
 <a data-en="Research" data-it="Ricerca" href="/research.html">Research</a>
 <a data-en="Scientific Library" data-it="Biblioteca Scientifica" href="https://library.ketogenicresearch.org/library">Scientific Library</a>
@@ -39,10 +40,11 @@
 </div>
 </details>
 </nav>
-  <div class="article-lang">
-    <button type="button" class="active" data-lang="en">EN</button>
-    <button type="button" data-lang="it">IT</button>
-  </div>
+<div class="actions">
+<div class="lang"><button class="active" data-lang="en">EN</button><button data-lang="it">IT</button></div>
+<button aria-label="Menu" class="menu">☰</button>
+</div>
+</div>
 </header>
 
 <main class="article-shell">
@@ -212,6 +214,22 @@
       <div class="article-card-evidence"><div><strong>Tipo di ricerca:</strong> Revisione narrativa</div><div><strong>Tipo di conclusione:</strong> Sintesi di evidenze</div></div>
       <h2>Diete anti‑invecchiamento ed esercizio collegati a risultati muscoloscheletrici tramite il microbiota intestinale</h2>
       <p>22 settembre 2026 · Annals of medicine</p>
+    </div>
+  </a>
+</article>
+<article class="article-card">
+  <a href="articles/2026-09-42771559-a-high-fat-high-protein-carbohydrate-restricted-dietary-interventions-in-pompe-d.html">
+    <div class="article-card-language active" data-card-lang="en">
+      <span class="article-card-type">Research Note</span>
+      <div class="article-card-evidence"><div><strong>Study type:</strong> Case series</div><div><strong>Conclusion type:</strong> Descriptive</div></div>
+      <h2>High-Fat, High-Protein, Carbohydrate-Restricted Diets in Pompe Disease: Findings from a Case Series</h2>
+      <p>September 22, 2026 · Annals of nutrition &amp; metabolism</p>
+    </div>
+    <div class="article-card-language" data-card-lang="it">
+      <span class="article-card-type">Nota di ricerca</span>
+      <div class="article-card-evidence"><div><strong>Tipo di ricerca:</strong> Serie di casi</div><div><strong>Tipo di conclusione:</strong> Descrittivo</div></div>
+      <h2>Diete ad alto contenuto di grassi e proteine, a basso contenuto di carboidrati nella malattia di Pompe: risultati da una serie di casi</h2>
+      <p>22 settembre 2026 · Annals of nutrition &amp; metabolism</p>
     </div>
   </a>
 </article>
@@ -619,7 +637,10 @@
 
 <script>
 (function(){
-  const buttons=[...document.querySelectorAll('[data-lang]')];
+  const buttons=[...document.querySelectorAll('.lang button[data-lang]')];
+  const menu=document.querySelector('.header .menu');
+  const nav=document.querySelector('.header .site-nav');
+
   function setLang(lang){
     document.documentElement.lang=lang;
     buttons.forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
@@ -632,7 +653,22 @@
     });
     try{localStorage.setItem('kr-lang',lang)}catch(e){}
   }
+
   buttons.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+
+  if(menu && nav){
+    menu.setAttribute('aria-expanded','false');
+    menu.addEventListener('click',e=>{
+      e.preventDefault();
+      const open=nav.classList.toggle('open');
+      menu.setAttribute('aria-expanded',open?'true':'false');
+    });
+    nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+      nav.classList.remove('open');
+      menu.setAttribute('aria-expanded','false');
+    }));
+  }
+
   let initial='en';
   try{if(localStorage.getItem('kr-lang')==='it') initial='it'}catch(e){}
   setLang(initial);
