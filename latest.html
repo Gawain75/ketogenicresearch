@@ -191,7 +191,7 @@
 </section>
 </main>
 <footer><div class="wrap footer"><span>KETOGENIC RESEARCH HUB</span><nav class="footer-links" aria-label="Footer"><a href="privacy.html" data-en="Privacy" data-it="Privacy">Privacy</a><a href="contact.html" data-en="Contact" data-it="Contatti">Contact</a><a href="methodology.html" data-en="Methodology" data-it="Metodologia">Methodology</a></nav><span>© 2026 Ketogenic Research Hub</span></div></footer>
-<script src="script.js?v=114"></script>
+<script src="script.js?v=116"></script>
 
 
 <script>
@@ -212,7 +212,7 @@
     if (!verified && !recent) return;
 
     try {
-      const response = await fetch('latest-publications.json?v=114', {
+      const response = await fetch('latest-publications.json?v=116', {
         cache: 'no-store'
       });
       if (!response.ok) throw new Error('HTTP ' + response.status);
@@ -226,13 +226,15 @@
       }
 
       if (recent) {
+        const publicationDates = (data.publications || [])
+          .map(p => String(p.date || '').slice(0, 10))
+          .filter(value => /^\d{4}-\d{2}-\d{2}$/.test(value))
+          .sort();
+
         const latest =
-          data.content_updated_at ||
-          (data.publications || [])
-            .map(p => p.date || '')
-            .filter(Boolean)
-            .sort()
-            .at(-1);
+          publicationDates.length
+            ? publicationDates[publicationDates.length - 1]
+            : '';
 
         recent.textContent = latest
           ? formatLatestDate(latest)
