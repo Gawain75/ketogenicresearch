@@ -20,6 +20,8 @@ def norm_title(value):
     return re.sub(r"[^a-z0-9]+", "", value)
 
 def pmid_from(article):
+    direct = (article.get("data-pmid") or "").strip()
+    if direct: return direct
     for a in article.find_all("a", href=True):
         m = re.search(r"pubmed\.ncbi\.nlm\.nih\.gov/(\d+)/?", a["href"])
         if m: return m.group(1)
@@ -27,6 +29,8 @@ def pmid_from(article):
     return m.group(1) if m else None
 
 def doi_from(article):
+    direct = (article.get("data-doi") or "").strip().lower()
+    if direct: return direct.rstrip(".,;)")
     for a in article.find_all("a", href=True):
         href = unquote(a["href"])
         m = re.search(r"(?:doi\.org/|doi:\s*)(10\.\d{4,9}/[^\s?#\"'<>]+)", href, re.I)
@@ -48,12 +52,25 @@ def paper_key(article):
 
 def paper_year(article):
     raw = (article.get("data-year") or "").strip()
-    if re.fullmatch(r"(19|20)\d{2}", raw):
+    if re.fullmatch(r"(18|19|20)\d{2}", raw):
         y = int(raw)
-        if 1900 <= y <= CURRENT_YEAR: return y
-    text = article.get_text(" ", strip=True)
-    m = re.search(r"\b(?:Year|Published|Publication year)\s*:?\s*((?:19|20)\d{2})\b", text, re.I)
-    return int(m.group(1)) if m else None
+        if 1800 <= y <= CURRENT_YEAR:
+            return y
+
+    # Conservative fallback: inspect bibliographic paragraphs only.
+    # Never infer a publication year from the paper title.
+    for p in article.find_all("p", recursive=False):
+        text = p.get_text(" ", strip=True)
+        for pattern in (
+            r"\b(?:Year|Published|Publication date|Publication year)\s*:?\s*((?:18|19|20)\d{2})\b",
+            r"(?:^|[·.;,(]\s*)((?:18|19|20)\d{2})(?:[-/]\d{1,2}(?:[-/]\d{1,2})?)?(?=\s|[;:.,)])",
+        ):
+            m = re.search(pattern, text, re.I)
+            if m:
+                y = int(m.group(1))
+                if 1800 <= y <= CURRENT_YEAR:
+                    return y
+    return None
 
 def area_label(folder):
     s = folder.find("summary")
@@ -68,52 +85,156 @@ def area_label(folder):
 
 def build_dataset():
     soup = BeautifulSoup(LIBRARY.read_text(encoding="utf-8"), "html.parser")
-    global_papers = {}
-    areas_raw = {}
+
+    thematic_slugs = {"glp1-keto-metabolic-endocrine"}
+    records = []
     labels = {}
+    folder_order = []
+
     for folder in soup.select("details.library-folder"):
-        slug = folder.get("id") or f"area-{len(areas_raw)+1}"
-        en,it = area_label(folder)
-        labels[slug] = {"en":en,"it":it}
-        areas_raw.setdefault(slug,{})
+        slug = folder.get("id") or f"area-{len(folder_order)+1}"
+        en, it = area_label(folder)
+        labels[slug] = {"en": en, "it": it}
+        folder_order.append(slug)
+
         for article in folder.select("article.folder-paper"):
-            key = paper_key(article)
-            if key == "title:": continue
-            year = paper_year(article)
-            if key not in global_papers or (global_papers[key] is None and year is not None):
-                global_papers[key] = year
-            if key not in areas_raw[slug] or (areas_raw[slug][key] is None and year is not None):
-                areas_raw[slug][key] = year
+            h = article.find("h4")
+            title = h.get("data-en") if h and h.has_attr("data-en") else (
+                h.get_text(" ", strip=True) if h else ""
+            )
+            records.append({
+                "folder": slug,
+                "title": norm_title(title),
+                "pmid": pmid_from(article),
+                "doi": doi_from(article),
+                "year": paper_year(article),
+            })
 
-    def counts(papers):
-        by = defaultdict(int); unknown = 0
-        for y in papers.values():
-            if y is None: unknown += 1
-            else: by[str(y)] += 1
-        return dict(sorted(by.items(), key=lambda x:int(x[0]))), unknown
+    class UnionFind:
+        def __init__(self, n):
+            self.parent = list(range(n))
+        def find(self, x):
+            while self.parent[x] != x:
+                self.parent[x] = self.parent[self.parent[x]]
+                x = self.parent[x]
+            return x
+        def union(self, a, b):
+            ra, rb = self.find(a), self.find(b)
+            if ra != rb:
+                self.parent[rb] = ra
 
-    gb, gu = counts(global_papers)
+    uf = UnionFind(len(records))
+    owner = {}
+
+    # Canonical bibliographic identity: PMID first, DOI second.
+    for i, rec in enumerate(records):
+        tokens = []
+        if rec["pmid"]:
+            tokens.append("pmid:" + rec["pmid"])
+        if rec["doi"]:
+            tokens.append("doi:" + rec["doi"])
+        for token in tokens:
+            if token in owner:
+                uf.union(i, owner[token])
+            else:
+                owner[token] = i
+
+    # Title is only a fallback for records without identifiers.
+    by_title = defaultdict(list)
+    for i, rec in enumerate(records):
+        if rec["title"]:
+            by_title[rec["title"]].append(i)
+
+    for indices in by_title.values():
+        identified_roots = {
+            uf.find(i) for i in indices
+            if records[i]["pmid"] or records[i]["doi"]
+        }
+        no_id = [
+            i for i in indices
+            if not records[i]["pmid"] and not records[i]["doi"]
+        ]
+
+        if len(identified_roots) == 1 and no_id:
+            representative = next(
+                i for i in indices if uf.find(i) in identified_roots
+            )
+            for i in no_id:
+                uf.union(representative, i)
+        elif not identified_roots and len(no_id) > 1:
+            for i in no_id[1:]:
+                uf.union(no_id[0], i)
+
+    components = {uf.find(i) for i in range(len(records))}
+    folder_components = defaultdict(set)
+    component_years = defaultdict(list)
+
+    for i, rec in enumerate(records):
+        root = uf.find(i)
+        folder_components[rec["folder"]].add(root)
+        if rec["year"] is not None:
+            component_years[root].append(rec["year"])
+
+    component_year = {}
+    for root in components:
+        years = component_years.get(root, [])
+        if not years:
+            component_year[root] = None
+            continue
+        freq = defaultdict(int)
+        for y in years:
+            freq[y] += 1
+        best = max(freq.values())
+        component_year[root] = min(y for y, n in freq.items() if n == best)
+
+    def counts(component_set):
+        by = defaultdict(int)
+        unknown = 0
+        for root in component_set:
+            y = component_year.get(root)
+            if y is None:
+                unknown += 1
+            else:
+                by[str(y)] += 1
+        return dict(sorted(by.items(), key=lambda x: int(x[0]))), unknown
+
+    gb, gu = counts(components)
+
     areas = []
-    for slug,papers in areas_raw.items():
-        by,u = counts(papers)
+    for slug in folder_order:
+        comps = folder_components.get(slug, set())
+        by, unknown = counts(comps)
         areas.append({
-            "slug":slug, "label":labels[slug], "total_unique":len(papers),
-            "known_year":len(papers)-u, "unknown_year":u, "by_year":by
+            "slug": slug,
+            "label": labels[slug],
+            "type": "thematic" if slug in thematic_slugs else "clinical",
+            "total_unique": len(comps),
+            "known_year": len(comps) - unknown,
+            "unknown_year": unknown,
+            "by_year": by,
         })
-    areas.sort(key=lambda a:a["label"]["en"].casefold())
+
+    areas.sort(key=lambda a: a["label"]["en"].casefold())
     years = sorted(map(int, gb.keys())) if gb else []
+
     return {
-        "generated_at":datetime.now().astimezone().isoformat(timespec="seconds"),
-        "current_year":CURRENT_YEAR, "previous_year":CURRENT_YEAR-1,
-        "scope_note":{
-            "en":"Counts refer to unique publications indexed in the Ketogenic Research Scientific Library, not to all publications worldwide.",
-            "it":"I conteggi si riferiscono alle pubblicazioni uniche indicizzate nella Biblioteca Scientifica di Ketogenic Research, non a tutte le pubblicazioni esistenti a livello mondiale."
+        "generated_at": datetime.now().astimezone().isoformat(timespec="seconds"),
+        "current_year": CURRENT_YEAR,
+        "previous_year": CURRENT_YEAR - 1,
+        "scope_note": {
+            "en": "Counts refer to unique publications indexed in the Ketogenic Research Scientific Library, not to all publications worldwide.",
+            "it": "I conteggi si riferiscono alle pubblicazioni uniche indicizzate nella Biblioteca Scientifica di Ketogenic Research, non a tutte le pubblicazioni esistenti a livello mondiale."
         },
-        "global":{
-            "total_unique":len(global_papers),"known_year":len(global_papers)-gu,
-            "unknown_year":gu,"first_year":years[0] if years else None,"by_year":gb
+        "global": {
+            "total_unique": len(components),
+            "known_year": len(components) - gu,
+            "unknown_year": gu,
+            "first_year": years[0] if years else None,
+            "by_year": gb
         },
-        "areas":areas
+        "clinical_area_count": sum(1 for a in areas if a["type"] == "clinical"),
+        "thematic_collection_count": sum(1 for a in areas if a["type"] == "thematic"),
+        "areas": areas
     }
 
 PAGE_HTML = r'''<!DOCTYPE html>
@@ -123,7 +244,7 @@ PAGE_HTML = r'''<!DOCTYPE html>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>Evidence Trends | Ketogenic Research</title>
 <meta content="Explore publication trends over time across the Ketogenic Research Scientific Library, globally and by clinical area." name="description"/>
-<link href="styles.css?v=70" rel="stylesheet"/>
+<link href="styles.css?v=117" rel="stylesheet"/>
 <link href="https://ketogenicresearch.org/evidence-trends.html" rel="canonical"/>
 <meta content="Evidence Trends | Ketogenic Research" name="kr-title-en"/>
 <meta content="Andamento delle evidenze | Ketogenic Research" name="kr-title-it"/>
@@ -203,13 +324,58 @@ svg.evidence-trends-svg {
 }
 
 </style>
+
+<style id="trends-header-parity-v90">
+@media (min-width:981px){
+  body.trends-page .header .nav{
+    display:grid !important;
+    grid-template-columns:190px minmax(0,1fr) auto !important;
+    column-gap:36px !important;
+    align-items:center !important;
+  }
+  body.trends-page .header .brand{
+    width:190px !important;
+    min-width:190px !important;
+  }
+  body.trends-page .header .site-nav{
+    min-width:0 !important;
+    justify-content:flex-start !important;
+  }
+}
+</style>
+
 </head>
-<body>
-<header class="header"><div class="wrap nav">
-<a aria-label="Ketogenic Research" class="brand" href="index.html"><img alt="Ketogenic Research" class="site-logo" src="logo-ketogenic-research.png"/></a>
-<nav><a href="index.html">Home</a><a data-en="Research" data-it="Ricerca" href="research.html">Research</a><a data-en="Scientific Library" data-it="Biblioteca Scientifica" href="library.html">Scientific Library</a><a data-en="Latest Evidence" data-it="Ultime pubblicazioni" href="latest.html">Latest Evidence</a><a data-en="Evidence Trends" data-it="Andamento evidenze" href="evidence-trends.html">Evidence Trends</a><a data-en="Articles" data-it="Articoli" href="articles.html">Articles</a><a data-en="Methodology" data-it="Metodologia" href="methodology.html">Methodology</a><a data-en="Scientific Direction" data-it="Direzione scientifica" href="director.html">Scientific Direction</a><a data-en="Contact" data-it="Contatti" href="contact.html">Contact</a></nav>
-<div class="actions"><div class="lang"><button class="active" data-lang="en">EN</button><button data-lang="it">IT</button></div><button aria-label="Menu" class="menu">☰</button></div>
-</div></header>
+<body class="trends-page">
+<header class="header">
+<div class="wrap nav">
+<a aria-label="Ketogenic Research Hub" class="brand" href="index.html">
+<img alt="Ketogenic Research Hub" class="site-logo" src="logo-ketogenic-research.png"/>
+</a>
+<nav aria-label="Primary navigation" class="site-nav">
+<a href="index.html">Home</a>
+<a data-en="Research" data-it="Ricerca" href="research.html">Research</a>
+<a data-en="Scientific Library" data-it="Biblioteca Scientifica" href="https://library.ketogenicresearch.org/library">Scientific Library</a>
+<a data-en="Latest Evidence" data-it="Ultime evidenze" href="latest.html">Latest Evidence</a>
+<a data-en="Evidence Trends" data-it="Andamento evidenze" href="evidence-trends.html">Evidence Trends</a>
+<a data-en="Articles" data-it="Articoli" href="articles.html">Articles</a>
+<a data-en="Scientific Direction" data-it="Direzione scientifica" href="director.html">Scientific Direction</a>
+<details class="nav-more">
+<summary>
+<span data-en="More" data-it="Altro">More</span>
+<span aria-hidden="true" class="nav-caret">▾</span>
+</summary>
+<div class="nav-submenu">
+<a data-en="Methodology" data-it="Metodologia" href="methodology.html">Methodology</a>
+<a data-en="Contact" data-it="Contatti" href="contact.html">Contact</a>
+</div>
+</details>
+</nav>
+<div class="actions">
+<div class="lang"><button class="active" data-lang="en">EN</button><button data-lang="it">IT</button></div>
+<button aria-label="Menu" class="menu">☰</button>
+</div>
+</div>
+</header>
 <main>
 <section class="page-hero"><div class="wrap"><p class="kicker" data-en="EVIDENCE TRENDS" data-it="ANDAMENTO DELLE EVIDENZE">EVIDENCE TRENDS</p><h1 data-en="How the scientific literature has evolved over time." data-it="Come si è evoluta la letteratura scientifica nel tempo.">How the scientific literature has evolved over time.</h1><p class="lead" data-en="Explore the annual number of unique publications indexed in the Scientific Library, globally or within a selected clinical area." data-it="Esplora il numero annuale di pubblicazioni uniche indicizzate nella Biblioteca Scientifica, globalmente o all’interno di una specifica area clinica.">Explore the annual number of unique publications indexed in the Scientific Library, globally or within a selected clinical area.</p></div></section>
 <section class="section"><div class="wrap">
@@ -219,7 +385,7 @@ svg.evidence-trends-svg {
 </div></section>
 <section class="section"><div class="wrap"><p class="kicker" data-en="AREAS AT A GLANCE" data-it="AREE IN SINTESI">AREAS AT A GLANCE</p><h2 data-en="Publication volume by clinical area" data-it="Volume delle pubblicazioni per area clinica">Publication volume by clinical area</h2><div style="overflow-x:auto"><table class="area-table"><thead><tr><th data-en="Area" data-it="Area">Area</th><th data-en="Total" data-it="Totale">Total</th><th id="tableCurrentHead"></th><th id="tablePreviousHead"></th></tr></thead><tbody id="areaTable"></tbody></table></div></div></section>
 </main>
-<footer class="footer"><div class="wrap"><strong>Ketogenic Research</strong></div></footer>
+<footer><div class="wrap footer"><span>KETOGENIC RESEARCH HUB</span><nav aria-label="Footer" class="footer-links"><a data-en="Privacy" data-it="Privacy" href="privacy.html">Privacy</a><a data-en="Contact" data-it="Contatti" href="contact.html">Contact</a><a data-en="Methodology" data-it="Metodologia" href="methodology.html">Methodology</a></nav><span>© 2026 Ketogenic Research Hub</span></div></footer>
 <script>
 let DATA=null; const $=s=>document.querySelector(s); const lang=()=>document.documentElement.lang==="it"?"it":"en";
 const n=v=>new Intl.NumberFormat(lang()==="it"?"it-IT":"en-US").format(v||0); const tf=o=>o?.[lang()]||o?.en||"";
@@ -227,7 +393,7 @@ function setLanguage(l){document.documentElement.lang=l;document.querySelectorAl
 document.querySelectorAll("[data-lang]").forEach(b=>b.addEventListener("click",()=>setLanguage(b.dataset.lang)));document.querySelector(".menu")?.addEventListener("click",()=>document.querySelector(".header nav")?.classList.toggle("open"));
 function scope(){return $("#areaSelect").value==="global"?DATA.global:(DATA.areas.find(a=>a.slug===$("#areaSelect").value)||DATA.global)}
 function populateAreas(){const v=$("#areaSelect").value||"global";$("#areaSelect").innerHTML=`<option value="global">${lang()==="it"?"Globale — tutte le aree":"Global — all areas"}</option>`;DATA.areas.forEach(a=>{let o=document.createElement("option");o.value=a.slug;o.textContent=tf(a.label);$("#areaSelect").appendChild(o)});$("#areaSelect").value=[...$("#areaSelect").options].some(o=>o.value===v)?v:"global"}
-function populateYears(){const ys=Object.keys(DATA.global.by_year).map(Number).sort((a,b)=>a-b);for(const id of ["fromYear","toYear"]){$("#"+id).innerHTML="";ys.forEach(y=>{let o=document.createElement("option");o.value=y;o.textContent=y;$("#"+id).appendChild(o)})}if(ys.length){const startYear=ys.includes(1997)?1997:(ys.find(y=>y>=1997)??ys[0]);$("#fromYear").value=startYear;$("#toYear").value=ys.at(-1)}}
+function populateYears(){const ys=Object.keys(DATA.global.by_year).map(Number).sort((a,b)=>a-b);for(const id of ["fromYear","toYear"]){$("#"+id).innerHTML="";ys.forEach(y=>{let o=document.createElement("option");o.value=y;o.textContent=y;$("#"+id).appendChild(o)})}if(ys.length){const defaultFrom=1997;$("#fromYear").value=ys.includes(defaultFrom)?defaultFrom:ys[0];$("#toYear").value=ys.at(-1)}}
 function draw(by,from,to){const svg=$("#trendChart"),ys=[];for(let y=from;y<=to;y++)ys.push(y);const vals=ys.map(y=>+by[y]||0),W=Math.max(760,ys.length*42+90),H=430,p={l:58,r:22,t:24,b:62},pw=W-p.l-p.r,ph=H-p.t-p.b,m=Math.max(1,...vals),ns="http://www.w3.org/2000/svg";svg.setAttribute("viewBox",`0 0 ${W} ${H}`);svg.style.minWidth=W+"px";svg.innerHTML="";const add=(t,a,x)=>{let e=document.createElementNS(ns,t);Object.entries(a||{}).forEach(([k,v])=>e.setAttribute(k,v));if(x!=null)e.textContent=x;svg.appendChild(e);return e};for(let i=0;i<=5;i++){let val=Math.round(m*i/5),y=p.t+ph-ph*i/5;add("line",{x1:p.l,y1:y,x2:W-p.r,y2:y,stroke:"#e6edf3"});add("text",{x:p.l-10,y:y+4,"text-anchor":"end",fill:"#667889","font-size":"11"},val)}const band=pw/ys.length,bw=Math.max(8,Math.min(28,band*.64));ys.forEach((yr,i)=>{let v=vals[i],h=v/m*ph,x=p.l+i*band+(band-bw)/2,y=p.t+ph-h,b=add("rect",{x,y,width:bw,height:h,rx:3,fill:"#1f6f8b"}),tt=document.createElementNS(ns,"title");tt.textContent=`${yr}: ${v}`;b.appendChild(tt);if(ys.length<=18||i%Math.ceil(ys.length/14)===0||i===ys.length-1)add("text",{x:x+bw/2,y:H-28,"text-anchor":"middle",fill:"#536779","font-size":"11"},yr)});add("line",{x1:p.l,y1:p.t+ph,x2:W-p.r,y2:p.t+ph,stroke:"#93a5b5"})}
 function table(){let tb=$("#areaTable");tb.innerHTML="";let cy=DATA.current_year,py=DATA.previous_year;$("#tableCurrentHead").textContent=`${cy}${lang()==="it"?" (in corso)":" (to date)"}`;$("#tablePreviousHead").textContent=py;[...DATA.areas].sort((a,b)=>b.total_unique-a.total_unique).forEach(a=>{let tr=document.createElement("tr");tr.innerHTML=`<td>${tf(a.label)}</td><td>${n(a.total_unique)}</td><td>${n(a.by_year[cy]||0)}</td><td>${n(a.by_year[py]||0)}</td>`;tr.onclick=()=>{$("#areaSelect").value=a.slug;render();window.scrollTo({top:0,behavior:"smooth"})};tb.appendChild(tr)})}
 function render(){let s=scope(),cy=DATA.current_year,py=DATA.previous_year,from=+$("#fromYear").value,to=+$("#toYear").value;$("#kpiTotal").textContent=n(s.total_unique);$("#kpiCurrent").textContent=n(s.by_year[cy]||0);$("#kpiPrevious").textContent=n(s.by_year[py]||0);$("#kpiCurrentLabel").textContent=lang()==="it"?`${cy} · anno in corso`:`${cy} · year to date`;$("#kpiPreviousLabel").textContent=py;draw(s.by_year,Math.min(from,to),Math.max(from,to));table()}
