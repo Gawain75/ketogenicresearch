@@ -1,72 +1,76 @@
 ---
 pmid: "42789141"
 doi: "10.1007/s12032-026-03425-0"
-pmcid: ""
+pmcid: "PMC13615095"
 date: "2026-09-25"
 journal: "Medical oncology (Northwood, London, England)"
-article_type: "Research Note"
-article_type_it: "Nota di ricerca"
-generator_version: "4.2"
+article_type: "Research Analysis"
+article_type_it: "Analisi di ricerca"
+study_type: "Narrative review"
+study_type_it: "Revisione narrativa"
+conclusion_type: "Evidence synthesis"
+conclusion_type_it: "Sintesi di evidenza"
+generator_version: "4.6"
 source_identity: "PASS"
 source_identity_basis: "PubMed PMID/title/DOI/PMCID"
-full_text_source: "PubMed abstract"
-full_text_url: ""
+full_text_source: "PMC full text"
+full_text_url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC13615095/"
 editorial_byline: "Ketogenic Research Editorial"
 scientific_oversight_en: "Marco Medeot, Scientific Director"
 scientific_oversight_it: "Marco Medeot, Direttore Scientifico"
 verification: "PASS"
-verified_at: "2026-09-26T21:01:22.155858+00:00"
+verified_at: "2026-09-29T07:12:01.871115+00:00"
 ---
 
-# Ketogenic diet investigated as a systems-level immunometabolic sensitization strategy in cancer therapy
+# Ketogenic diet as a systems‑level immunometabolic sensitization strategy in cancer therapy
 
-**Research Note**
+**Research Analysis**
 
 **Ketogenic Research Editorial**  
 Scientific oversight: **Marco Medeot, Scientific Director**
 
-The authors propose that a high‑fat, low‑carbohydrate ketogenic diet may act as a sensitizing platform for conventional cancer treatments by modulating tumor metabolism, immune cell function, gut microbiota, and epigenetic pathways. The abstract reports these mechanistic hypotheses but provides no direct clinical outcome data.
+The authors review mechanistic and early clinical evidence that a high‑fat, low‑carbohydrate ketogenic diet may act as an adjunct to conventional cancer treatments by modulating tumor metabolism, immune function, the gut microbiome, and epigenetic pathways. They highlight practical challenges, heterogeneity of protocols, and the need for rigorously designed trials to define efficacy and safety.
 
 ## Study and findings
 
-The paper describes a clinical‑trial‑type intervention in which patients with cancer were placed on a ketogenic diet (KD) alongside standard therapies such as chemotherapy, targeted agents, radiotherapy, or immunotherapy. KD is defined as a high‑fat, low‑carbohydrate regimen that raises circulating β‑hydroxybutyrate and reduces glucose availability. The authors outline four interrelated mechanisms by which KD could sensitize tumors: (1) reduction of glycolytic flux in cancer cells, (2) provision of ketones as oxidative substrates for immune cells, (3) remodeling of the gastrointestinal microbiome, and (4) inhibition of histone deacetylases leading to epigenetic changes. No quantitative efficacy endpoints (e.g., response rates, survival) are reported in the abstract.
+The paper synthesises pre‑clinical and early clinical literature on ketogenic diet (KD) as a metabolic adjunct in oncology. It describes how carbohydrate restriction lowers systemic glucose and raises circulating β‑hydroxybutyrate, thereby reducing tumor glycolysis, lactate production, and hypoxia‑inducible factor‑1α‑driven immunosuppression. Ketone bodies are presented as alternative fuels for oxidative immune cells and as signalling molecules that inhibit NF‑κB/NLRP3 inflammation and act as class I histone deacetylase inhibitors. The authors also discuss KD‑induced shifts in the gut microbiota, notably increased Akkermansia and short‑chain‑fatty‑acid producers, which may further support T‑cell differentiation. At the tumor‑cell level, KD is reported to suppress insulin/IGF‑1 and mTORC1 signaling, deplete nucleotide and NADPH pools, and increase mitochondrial reactive oxygen species, potentially enhancing the cytotoxicity of chemotherapy, radiotherapy, and targeted inhibitors. The authors conclude that KD may function as a systems‑level sensitization strategy rather than a standalone anticancer therapy.
 
 ## Clinical interpretation
 
-If the proposed mechanisms operate in patients, KD might augment the metabolic stress imposed by conventional therapies and improve immune cell fitness, potentially translating into better therapeutic responsiveness. However, because the abstract presents only a conceptual framework and does not provide outcome data, the clinical relevance remains speculative. Clinicians should view KD as an adjunctive strategy that requires rigorous testing before integration into standard oncology protocols.
+If the mechanistic links described translate into patients, KD could create a metabolic milieu that makes cancer cells more vulnerable to standard treatments while preserving or even boosting immune effector function. The dual role of β‑hydroxybutyrate—as an energy substrate for immune cells and as an epigenetic regulator—offers a plausible pathway for improved treatment response. However, the evidence remains indirect; most data derive from cell‑culture, animal models, or small, heterogeneous clinical reports. Consequently, the current literature supports the hypothesis that KD may augment therapeutic responsiveness, but it does not establish a causal benefit in any specific tumor type or treatment regimen.
 
 ## Limitations and open questions
 
-The evidence is limited to a narrative description; no randomized comparison, safety profile, or patient‑level results are supplied. Heterogeneity in tumor types, treatment modalities, and dietary adherence further complicates interpretation. Critical unanswered questions include which cancer subtypes benefit most, the optimal macronutrient ratios and caloric targets, the duration of KD needed for effect, and long‑term safety, especially in the context of cachexia. Well‑designed prospective trials with defined endpoints are needed to move beyond hypothesis to evidence.
+The review highlights several practical and biological constraints: variable patient adherence due to treatment‑related anorexia, nausea, or taste changes; risk of unintended weight loss and nutrient deficiencies; and the absence of standardized KD protocols regarding macronutrient ratios, caloric targets, and duration. Tumor heterogeneity may allow some cancers to bypass glucose restriction by up‑regulating fatty‑acid or glutamine metabolism, limiting KD efficacy. Because the cited studies differ widely in design, the authors call for prospective, controlled trials that report dietary composition, ketosis biomarkers, and predefined metabolic endpoints to determine which patients, tumor subtypes, and therapeutic combinations might benefit most.
 
 ### Source
 
-PMID: 42789141; DOI: 10.1007/s12032-026-03425-0.
+Mannan MS et al. Ketogenic diet as a systems-level immunometabolic sensitization strategy in cancer therapy. Medical Oncology. 2026.
 
 ---
 
-# Dieta chetogenica studiata come strategia di sensibilizzazione immunometabolica a livello di sistema nella terapia oncologica
+# Dieta chetogenica come strategia di sensibilizzazione immunometabolica a livello di sistema nella terapia oncologica
 
-**Nota di ricerca**
+**Analisi di ricerca**
 
 **Ketogenic Research Editorial**  
 Supervisione scientifica: **Marco Medeot, Direttore Scientifico**
 
-Gli autori suggeriscono che una dieta chetogenica, ricca di grassi e povera di carboidrati, possa fungere da piattaforma di sensibilizzazione per le terapie oncologiche tradizionali, modulando il metabolismo tumorale, la funzione immunitaria, il microbiota intestinale e i meccanismi epigenetici. L'abstract espone queste ipotesi meccanistiche senza presentare dati clinici diretti.
+Gli autori esaminano le evidenze meccanicistiche e preliminari che una dieta chetogenica, ad alto contenuto di grassi e basso contenuto di carboidrati, possa fungere da coadiuvante alle terapie oncologiche tradizionali mediante la modulazione del metabolismo tumorale, della risposta immunitaria, del microbioma intestinale e dei percorsi epigenetici. Vengono evidenziate le difficoltà pratiche, l’eterogeneità dei protocolli e la necessità di studi clinici ben progettati per definire efficacia e sicurezza.
 
 ## Studio e risultati
 
-Il lavoro descrive un intervento di tipo sperimentale in cui pazienti oncologici hanno seguito una dieta chetogenica (KD) in aggiunta alle terapie standard (chemioterapia, farmaci mirati, radioterapia o immunoterapia). La KD è definita come una dieta ad alto contenuto di grassi e basso contenuto di carboidrati, capace di aumentare i livelli plasmatici di β‑idrossibutirrato e di ridurre la disponibilità di glucosio. Gli autori delineano quattro meccanismi interconnessi attraverso i quali la KD potrebbe sensibilizzare i tumori: (1) diminuzione del flusso glicolitico nelle cellule tumorali, (2) utilizzo dei chetoni da parte delle cellule immunitarie per sostenere la funzione mitocondriale, (3) rimodellamento del microbioma intestinale e (4) inibizione delle deacetilasi istoniche con conseguenti modifiche epigenetiche. L'abstract non riporta dati quantitativi di efficacia (ad es. tassi di risposta o sopravvivenza).
+L’articolo sintetizza la letteratura preclinica e i primi dati clinici sull’uso della dieta chetogenica (KD) come coadiuvante metabolico in oncologia. Viene spiegato come la restrizione di carboidrati riduca la glicemia sistemica e aumenti i livelli di β‑idrossibutirrato, diminuendo la glicolisi tumorale, la produzione di lattato e l’immunosoppressione mediata da HIF‑1α. I corpi chetonici sono presentati come carburanti alternativi per le cellule immunitarie ossidative e come molecole di segnalazione che inibiscono l’infiammazione NF‑κB/NLRP3 e agiscono come inibitori delle deacetilasi istone di classe I. Vengono inoltre discussi i cambiamenti indotti dalla KD sul microbioma intestinale, in particolare l’aumento di Akkermansia e di produttori di acidi grassi a catena corta, che potrebbero favorire la differenziazione dei linfociti T. A livello tumorale, la KD è descritta come capace di sopprimere le vie insulin/IGF‑1 e mTORC1, esaurire i pool di nucleotidi e NADPH e aumentare le specie reattive dell’ossigeno mitocondriali, potenzialmente potenziando la citotossicità di chemioterapia, radioterapia e inibitori mirati. Gli autori concludono che la KD potrebbe funzionare come strategia di sensibilizzazione a livello di sistema, piuttosto che come terapia anticancro autonoma.
 
 ## Interpretazione clinica
 
-Qualora i meccanismi proposti si verificassero in vivo, la KD potrebbe aumentare lo stress metabolico indotto dalle terapie convenzionali e migliorare la funzionalità delle cellule immunitarie, con la possibilità di una risposta terapeutica più efficace. Tuttavia, poiché l'abstract fornisce solo un quadro concettuale senza dati clinici, la rilevanza pratica rimane ipotetica. I clinici dovrebbero considerare la KD come una strategia aggiuntiva da valutare solo all'interno di studi clinici rigorosi prima di adottarla nella pratica standard.
+Qualora i meccanismi descritti si tradurrebbero in pazienti, la KD potrebbe creare un ambiente metabolico che rende le cellule tumorali più sensibili ai trattamenti standard, preservando o potenziando la funzione degli effetti immunitari. Il ruolo duplice del β‑idrossibutirrato—come substrato energetico per le cellule immunitarie e come regolatore epigenetico—offre una via plausibile per una risposta terapeutica migliorata. Tuttavia, le evidenze sono per lo più indirette, provenienti da modelli in vitro, animali o piccoli studi clinici eterogenei. Pertanto, la letteratura attuale supporta l’ipotesi che la KD possa aumentare la risposta al trattamento, ma non stabilisce un beneficio causale in alcun tipo di tumore o regime terapeutico specifico.
 
 ## Limiti e questioni aperte
 
-Le evidenze si limitano a una descrizione narrativa; non sono disponibili confronti randomizzati, profili di sicurezza né risultati a livello di paziente. L'eterogeneità dei tipi tumorali, delle terapie concomitanti e dell'aderenza dietetica complica ulteriormente l'interpretazione. Domande critiche ancora senza risposta includono: quali sottotipi di cancro trarrebbero beneficio, quali sono le proporzioni ottimali di macronutrienti e l'apporto calorico, per quanto tempo è necessario mantenere la KD e quali sono gli effetti a lungo termine, soprattutto in presenza di caquexia. Sono necessari studi prospettici ben progettati con endpoint definiti per passare dall'ipotesi alla prova.
+La revisione evidenzia diversi vincoli pratici e biologici: aderenza variabile a causa di anoressia, nausea o alterazioni del gusto legate al trattamento; rischio di perdita di peso non intenzionale e carenze nutrizionali; e mancanza di protocolli KD standardizzati per rapporto grassi‑carboidrati, apporto calorico e durata. L’eterogeneità tumorale può consentire a certi tumori di aggirare la restrizione glucidica aumentando l’ossidazione di acidi grassi o glutammina, limitando l’efficacia della KD. Poiché gli studi citati differiscono notevolmente per disegno, gli autori sollecitano trial prospettici controllati che riportino composizione dietetica, biomarcatori di chetosi e obiettivi metabolici predefiniti, per identificare quali pazienti, sottotipi tumorali e combinazioni terapeutiche possano trarre beneficio.
 
 ### Fonte
 
-PMID: 42789141; DOI: 10.1007/s12032-026-03425-0.
+Mannan MS et al. Ketogenic diet as a systems-level immunometabolic sensitization strategy in cancer therapy. Medical Oncology. 2026.
 
