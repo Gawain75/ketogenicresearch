@@ -1,0 +1,944 @@
+{
+  "legacy_cards_targeted": 496,
+  "resolved": 310,
+  "unresolved": 186,
+  "source_counts": {
+    "existing-pmid": 278,
+    "doi-pubmed": 22,
+    "title-pubmed": 0,
+    "doi-crossref": 3,
+    "title-crossref": 7
+  },
+  "unresolved_records": [
+    {
+      "title": "Effects of One-Month Very-Low-Calorie Ketogenic Diet on 24h Energy Metabolism",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "European Society for the Study of Obesity (EASO) Position Statement on Very Low-Calorie Ketogenic Diets",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "VLCKD in Combination with Physical Exercise Preserves Skeletal Muscle in Obesity",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Effects of One-Month Very-Low-Calorie Ketogenic Diet on 24-h Energy Expenditure",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Epigenetic Aging Acceleration in Obesity Is Slowed Down by Nutritional Ketosis Following VLCKD",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "An 8-Week Very Low-Calorie Ketogenic Diet Alters Obese-Derived Small Extracellular Vesicles and Hepatic Cell Phenotypes",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet Combined with Moderate Aerobic Exercise in Obesity",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Comparison of a Pre-Bariatric Surgery VLCKD and Mediterranean Diet on Weight Loss, Metabolic Parameters, and Liver Size Reduction",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Impact of a VLCKD on Handgrip Strength in Women with Obesity",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Reduction of Cardio-Metabolic Risk and Body Weight through Ketogenic Nutritional Intervention",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Sustained metabolic improvements in a remotely delivered ketogenic nutrition intervention in type 2 diabetes",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Effects of very low-carbohydrate ketogenic diet on lipid metabolism in patients with type 2 diabetes",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "BDH1-mediated β-hydroxybutyrate metabolism ameliorates diabetic kidney disease",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Effect of Low-Carbohydrate Diets on Glycemic Control",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Greater Reduction in the Proinsulin-C-Peptide Ratio with a Ketogenic Nutritional Intervention",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Sustained Metabolic Improvements in a Remotely Delivered Ketogenic Nutrition Intervention",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Low-Carbohydrate Ketogenic Diets Reduce Cardiovascular Risk Factor Levels in Patients with Type 2 Diabetes",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Clinical Assessment of Intermittent Fasting with Ketogenic Diet in Glycemic Control and Weight Reduction in Type 2 Diabetes",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Very Low Carbohydrate Ketogenic Diets in Type 2 Diabetes: Review",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Adherence to Low-Carbohydrate Diets in Patients with Type 2 Diabetes",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "The Ketogenic Diet Through a Metabolomic Lens",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic diet time-dependently prevents NAFLD",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Higher-Level Steatosis Is Associated with a Greater Decrease in Metabolic Dysfunction-Associated Steatotic Liver Disease after Eight Weeks of a Very Low-Calorie Ketogenic Diet",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "The Impact of Dietary Interventions on Liver Health Biomarkers in Individuals with Metabolic Dysfunction-Associated Steatotic Liver Disease",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet Time-Dependently Prevents NAFLD through Metabolic Remodeling",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Higher-Level Steatosis Is Associated with a Greater Decrease in MASLD after Eight Weeks of a Very Low-Calorie Ketogenic Diet in Subjects with Overweight or Obesity",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Treatment of NAFLD with Intermittent Calorie Restriction or Low-Carbohydrate Diet",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Low-density lipoprotein cholesterol elevation with carbohydrate-restricted diets",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "LDL Keto Trial",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Reduction of Cardio-Metabolic Risk and Body Weight through a ketogenic dietary intervention",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Italian Ketogenic Mediterranean Diet in Overweight and Obese Adults",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Effects of a two-meals-a-day ketogenic diet on metabolic markers",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Is a Ketogenic Diet Superior to a Low-Fat Diet?",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Effects of ketogenic diet on health",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "The Lipid Energy Model",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Reduction of Cardio-Metabolic Risk and Body Weight through Ketogenic Nutritional Intervention",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Low-Density Lipoprotein Cholesterol Elevation in the Context of a Ketogenic Diet",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet and Thyroid Function",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Nutritional Intervention in Cushing’s Disease: The Potential Role of a Ketogenic Strategy",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Effects of Ketogenic Diet on Reproductive Hormones in PCOS",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Low-Calorie Ketogenic Diet: Potential Application in PCOS",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Effects of a ketogenic diet in overweight women with PCOS",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Effects of a Ketogenic Diet in Overweight and Obese Women with PCOS",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Low-Calorie Ketogenic Diet: Potential Application in Polycystic Ovary Syndrome",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Effects of a Mixed Ketogenic Diet in Overweight and Obese Women with PCOS",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Long-term effectiveness and tolerability of ketogenic diet therapy in patients with genetic epilepsy",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic diet for epilepsy control",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "The ketogenic diet increases Neuregulin 1 in an epilepsy model",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Treatment of refractory epilepsy: comparison of ketogenic dietary approaches",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Seizure modulation by the gut microbiota and ketogenic diet",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "The gut microbiome and the ketogenic diet in epilepsy",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "The efficacy of non-fasting ketogenic diet protocols in epilepsy",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Stress biomarkers in adult patients with drug-resistant epilepsy during ketogenic diet therapy",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Fecal Transfers from Children on the Ketogenic Diet Mimic Key Metabolic Effects",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Intractable Seizures in Children With Type 1 Diabetes Treated With Ketogenic Dietary Therapy",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Graph Theory-Based Electroencephalographic Connectivity During Ketogenic Diet Therapy",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Prospective Controlled Study of Efficacy and Influencing Factors of Ketogenic Diet Therapy in Epilepsy",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet Therapy for Refractory Epilepsy",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Analysis of Factors That May Affect the Effectiveness of Ketogenic Diet Therapy in Epilepsy",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "The Effect of Simultaneous Application of a Plant-Rich Ketogenic Diet in Alzheimer’s Disease",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet and β-Hydroxybutyrate Rescue Long-Term Potentiation in an Alzheimer’s Mouse Model and Stimulate Synaptic Plasticity Pathways",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Nutritional Ketosis in Parkinson’s Disease",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Dietary approaches to improve efficacy and management in Parkinson’s disease with ketogenic strategies",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "The role of diet and dietary patterns in Parkinson’s disease, including ketogenic approaches",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Neuroprotection by the Ketogenic Diet",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Dietary Ketosis Improves Metabolic and Neurological Features in Experimental Huntington’s Disease",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Exploring the Neurological Impacts of the Ketogenic Diet",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Neuroprotection by the ketogenic diet",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "The Implication of Physiological Ketosis on Cognitive Function",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Association Between Ketogenic Diet and Cognitive Function",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Dietary and Metabolic Approaches for Treating Cognitive Impairment Comorbid with Epilepsy",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "The Long-Term Treatment of Drug-Resistant Migraine with a Ketogenic Diet",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Mediterranean Ketogenic Diet Accounts for Reduced Pain Frequency in Migraine",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet and Low-Glycemic-Index Diet for Chronic and Episodic Migraine: A Real-Life Retrospective Study",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "The Long-Term Treatment of Drug-Resistant Migraine with Ketogenic Dietary Therapy",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Pathophysiological Abnormalities in Migraine Ameliorated by Ketosis",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Migraine Prevention through Ketogenic Diet: More than Body Weight Reduction",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Exploring the Neurological Impacts of the Ketogenic Diet",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "The Role of Nutrition and Physical Activity in Multiple Sclerosis",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Therapeutic Alternative of the Ketogenic Mediterranean Diet in Multiple Sclerosis",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet: A Dietary Intervention via Gut Microbiota in Autism Spectrum Disorder",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Efficacy and Safety of Diet Therapies in Autism Spectrum Disorder including ketogenic interventions",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Vocal Communication in Asocial BTBR Mice Is Modulated by a Ketogenic Diet",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Effect of 3 months of ketogenic diet on euthymia in bipolar II disorder",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic diet-derived faecal microbiota and schizophrenia",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Effects of a ketogenic diet on bipolar disorder",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Perspectives on the Ketogenic Diet as a Non-pharmacological Intervention in Mental Health",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "KETO-MOOD: Ketogenic Diet for Microbiome Optimization in Mood Disorders",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic diets in clinical psychology",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic diet has a positive association with mental and emotional health",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Evaluating the efficacy and mechanisms of a ketogenic diet as adjunctive treatment in serious mental illness",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet Intervention on Metabolic and Psychiatric Health in Bipolar Disorder and Schizophrenia",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketosis and bipolar disorder",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "The Ketogenic Diet for Refractory Mental Illness",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Providing Alternative Fuel for the Brain in Anorexia Nervosa",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet and Ketamine Infusion Treatment in Anorexia Nervosa",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Very-Low-Calorie Ketogenic Diet: A Potential Treatment for Binge-Eating Symptoms in Obesity",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Very low-carbohydrate ketogenic diet in treatment-naïve women with endometrial cancer",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "The Role of the Ketogenic Diet in Lung Cancer",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet Alleviates Colorectal Cancer by Attenuating Macrophage M2 Polarisation",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic diet suppresses colorectal cancer",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Overcoming immunosuppression in cancer: how ketogenic diets may boost anti-tumor immunity",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Effects of ketogenic diet on oxidative stress and cancer",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet in Cancer Prevention and Therapy: Molecular Mechanisms",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet for Cancer: Critical Assessment",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "β-Hydroxybutyrate and Malignant Neoplasms",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diets Slow Melanoma Growth",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet and Chemotherapy Combine to Improve Antitumor Effects",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenesis Attenuates KLF5-Dependent Production of CXCL12 to Overcome Tumor-Promoting Signaling",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Dietary Interventions in Cancer Treatment and Response",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "LDL Keto Trial",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "The ketogenic diet has the potential to decrease atherosclerotic cardiovascular disease risk",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "A ketogenic diet lowers myocardial fatty acid oxidation but does not affect oxygen consumption",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketone bodies in right ventricular failure",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet and the Potential to Decrease Atherosclerotic Cardiovascular Disease Risk",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet: Mental Health Benefits versus Cardiovascular Risk",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet and Myocardial Fatty Acid Oxidation in Humans",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketone Bodies and Cardiometabolic Inflammation: Epigenetic Mechanisms",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketone Bodies in Ischemic Heart Disease",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Heart Rate Variability during a Very Low-Calorie Ketogenic Diet",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Nutritional adequacy of ketogenic diets as a novel dietary intervention for people living with ADPKD",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Feasibility and impact of ketogenic dietary interventions in ADPKD",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "A pilot study to evaluate tolerability and safety of a modified Atkins diet in autosomal dominant polycystic kidney disease",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "GREASE II: randomized trial of ketogenic metabolic therapy in autosomal dominant polycystic kidney disease",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketone Bodies in Kidney Diseases",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diets and β-Hydroxybutyrate in Kidney Disease",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Risks of the Ketogenic Diet in Chronic Kidney Disease",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "BDH1-Mediated β-Hydroxybutyrate Metabolism Ameliorates Diabetic Kidney Disease",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Incidence and Characteristics of Kidney Stones in Patients on Ketogenic Diets",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "VLCKD in Combination with Physical Exercise Preserves Skeletal Muscle in Obesity",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "VLCKD combined with physical interval training",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet Ameliorates Inflammasome Activation in Experimental Osteoarthritis",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Rheumatoid Arthritis and Dietary Interventions: Systematic Review",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Efficacy, Safety and Tolerability of VLCKD in Women with Obesity and Fibromyalgia",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "The Ketogenic Diet and Dermatology",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketones, the ketogenic diet, and the skin: a review of where we are and where we should go",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "A Multimodal Approach to Managing Severe Psoriasis Vulgaris",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Prurigo Pigmentosa: Review of the Literature",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Impact of Fasting and Ketogenic Interventions on the NLRP3 Inflammasome",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Metabolic Effects of Ketogenic Diets: Whole-Body Metabolism, Adipose Tissue and Metabolic Organs",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Persistent Inflammation, Immunosuppression, and Catabolism in Metabolic Disease",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Beneficial Effects of the Very-Low-Calorie Ketogenic Diet on Reproductive and Metabolic Parameters",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Low-Carbohydrate Diets and Men’s Cortisol and Testosterone",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "The Effect of Low Carbohydrate Diets on Fertility",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Management of lipedema with a biphasic ketogenic/low-carbohydrate diet",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Therapeutic Applications of Ketogenic Diets in Lipedema",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "The Efficacy of Ketogenic Diets as a Potential Nutritional Intervention for Lipedema",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Dietary liposuction through ketogenic diet: a comparison of three approaches",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Intermittent Fasting, Calorie Restriction, and a Ketogenic Diet Improve Healthspan",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Divergent Sex-Specific Effects of a Ketogenic Diet during Aging",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Differential Effects of Short-Term Standard and Ketogenic Diets on the Aging Mouse Brain",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Interventions Enhance Circadian and Metabolic Regulation",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Can the Ketogenic Diet Improve Our Dreams? Effect of VLCKD on Sleep Quality",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet and Microbiota",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet, Gut Microbiome and Cancer Immunotherapy Outcomes",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Very Low-Energy Ketogenic Therapy and Trimethylamine N-Oxide in Women with Obesity",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Parkinson’s Disease, Gut Microbiota and Ketogenic Diet",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Very-Low-Calorie Ketogenic Diets and Gut Microbiota in Obesity: Systematic Review and Meta-Analysis",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet, Gut Microbiota, Cognition and Mood",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "A Multi-Omics Approach to Intestinal Permeability during a Very Low-Calorie Ketogenic Diet",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet, Epilepsy and the Brain-Gut Axis",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Fecal Microbiota Transfer from Children on a Ketogenic Diet",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet and Gut Microbiota in Neurological Disorders",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Modified Ketogenic Diet and Gut Microbiota in Obesity",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Influence of the Ketogenic Diet on Gut Microbiota",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Mitochondrial Epilepsy, Ketogenic Therapy and the Gut Microbiome",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Very Low-Calorie Ketogenic Diet and Microbiota in Obesity",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet, Gut Microbiota and Neurodegenerative Disorders",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Very Low-Carbohydrate Ketogenic Diet, Gut Microbiota and Short-Chain Fatty Acids",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet Intervention via the Gut Microbiota in Autism Spectrum Disorder",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Very Low-Calorie, Ketogenic and Low-Carbohydrate Diets: Effects on the Gut Microbiota",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "The science of ketogenic supplements for athletes",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Impact of ketogenic diet and ketone diester supplementation on body composition and performance",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Exogenous ketone supplements in athletic contexts",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Effects of Multiple Doses of a Medium-Chain Triglyceride Supplement",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Tricaprylin Alone Increases Plasma Ketone Concentrations",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketosis After Intake of Coconut Oil",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "The Science of Ketogenic Supplements for Athletes",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Does a Low-Carbohydrate Diet Impede Endurance Sports Performance? The Case Against",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Impact of the Ketogenic Diet on Body Fat in Athletes",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "VLCKD Combined with Physical Interval Training",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Ketogenic Diet Combined with Moderate Aerobic Exercise",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Effects of 30 Days of Ketogenic Diet on Exercise Performance",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Clinically Meaningful Improvements in Long COVID With a Ketogenic Metabolic Intervention",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "COVID-19: Proposing a Ketone-Based Metabolic Therapy",
+      "pmid": "",
+      "doi": ""
+    },
+    {
+      "title": "Clinical efficacy of eucaloric ketogenic nutrition in COVID-19",
+      "pmid": "",
+      "doi": ""
+    }
+  ]
+}

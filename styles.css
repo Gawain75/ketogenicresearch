@@ -2574,3 +2574,21 @@ article.folder-paper p,
     padding-top:0 !important;
   }
 }
+
+/* Legacy Library research-details single-line fix */
+.paper-study-details > summary{
+  display:inline-flex;
+  align-items:center;
+  width:max-content;
+  max-width:100%;
+  white-space:nowrap;
+  font-size:.88rem;
+  line-height:1.2;
+  font-weight:700;
+  color:var(--primary);
+  cursor:pointer;
+  margin:8px 0 10px;
+}
+.paper-study-details > summary::-webkit-details-marker{
+  display:none;
+}
