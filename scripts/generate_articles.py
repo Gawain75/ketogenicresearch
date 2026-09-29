@@ -180,6 +180,11 @@ def verify_source_identity(rec: dict[str, Any], extra: dict[str, Any]) -> dict[s
     return corrected
 
 def pmc_full_text(pmcid: str) -> str:
+    """Return body sections only, prioritised for scientific interpretation.
+
+    The abstract is deliberately excluded when a PMC full text is available.
+    This prevents the editorial model from anchoring on abstract-only wording.
+    """
     if not pmcid:
         return ""
 
@@ -200,15 +205,41 @@ def pmc_full_text(pmcid: str) -> str:
     except Exception:
         return ""
 
-    chunks: list[str] = []
-    for tag in ("abstract", "sec"):
-        for node in root.findall(f".//{tag}"):
-            value = text_content(node)
-            if value and len(value) > 80:
-                chunks.append(value)
+    ranked: list[tuple[int, str]] = []
+    seen: set[str] = set()
 
-    # Keep prompt size moderate for free-tier use.
-    return "\n\n".join(dict.fromkeys(chunks))[:10000]
+    def priority(title: str) -> int:
+        value = title.lower()
+        if "limitation" in value:
+            return 0
+        if any(x in value for x in ("discussion", "interpretation")):
+            return 1
+        if any(x in value for x in ("result", "finding")):
+            return 2
+        if any(x in value for x in ("method", "material", "experimental", "procedure")):
+            return 3
+        if any(x in value for x in ("conclusion", "summary")):
+            return 4
+        if any(x in value for x in ("introduction", "background")):
+            return 5
+        return 6
+
+    for node in root.findall(".//body//sec"):
+        title = text_content(node.find("title"))
+        value = text_content(node)
+        if not value or len(value) < 120:
+            continue
+
+        key = re.sub(r"\s+", " ", value).strip()
+        if key in seen:
+            continue
+        seen.add(key)
+
+        label = f"[SECTION: {title}]\n" if title else ""
+        ranked.append((priority(title), (label + value)[:6500]))
+
+    ranked.sort(key=lambda item: item[0])
+    return "\n\n".join(value for _, value in ranked)[:30000]
 
 def groq_json(
     messages: list[dict[str, str]],
@@ -495,6 +526,13 @@ def source_packet(
     areas = ", ".join(rec.get("areas") or [])
     source_used = full_text_source or ("Full text" if full_text else "PubMed abstract")
 
+    if full_text:
+        evidence_material = f"""FULL-TEXT MATERIAL
+{full_text}"""
+    else:
+        evidence_material = f"""SOURCE TEXT
+{extra.get("abstract") or "[No source text supplied]"}"""
+
     return f"""SOURCE MATERIAL USED: {source_used}
 SOURCE URL: {full_text_url or "[not applicable]"}
 
@@ -510,11 +548,13 @@ Evidence type: {rec.get('evidence_type','')}
 Clinical areas: {areas}
 MeSH: {", ".join(extra.get("mesh") or [])}
 
-PUBMED ABSTRACT
-{extra.get("abstract") or "[No abstract supplied by PubMed]"}
+SOURCE-HIERARCHY RULE
+- If FULL-TEXT MATERIAL is present, it is the primary and controlling evidence source.
+- Do not describe evidence gaps by referring to the abstract or to any retrieval source.
+- Discuss only the paper, study, review, analysis, methods, results, discussion, limitations, and conclusions as appropriate to the publication type.
+- Retrieval/source-acquisition language is internal metadata and is forbidden in reader-facing prose.
 
-FULL-TEXT MATERIAL USED FOR THIS NOTE
-{full_text or "[No full-text material was supplied; use the PubMed abstract only.]"}
+{evidence_material}
 """.strip()
 
 def writer_prompt(packet: str, has_full_text: bool) -> str:
@@ -531,7 +571,7 @@ Follow this policy exactly:
 Write one bilingual article based ONLY on the SOURCE PACKET.
 Do not add background facts that are not explicitly present in the source.
 
-READER-FIRST EDITORIAL TRANSFORMATION — V4.1
+READER-FIRST EDITORIAL TRANSFORMATION — V4.6
 
 The published article must NOT read like a translated, expanded, or reordered abstract.
 
@@ -556,7 +596,7 @@ Treat the source as evidence to interpret, not as prose to reproduce.
 - Do not make "Limitations and open questions" a generic checklist. Include only limitations that materially affect confidence, applicability, or causality.
 - End on the unresolved scientific question, not on a formulaic conclusion.
 
-EDITORIAL RULES FOR V4.1
+EDITORIAL RULES FOR V4.6
 
 1. TITLE CAUTION
 - Do not use causal or definitive verbs such as "improves", "enhances", "prevents",
@@ -570,6 +610,9 @@ EDITORIAL RULES FOR V4.1
 2. ABSTRACT-ONLY CAUTION
 - Never state in the article body whether the note was based on an abstract, full text, PMC, publisher text, or any retrieval source.
 - Source-acquisition details are internal metadata only and must not appear in reader-facing prose.
+- The literal word "abstract" is FORBIDDEN anywhere in reader-facing output, in both English and Italian, including summaries, headings, sections, source notes and titles.
+- Also forbid equivalent retrieval-oriented phrases such as "based on the abstract", "the abstract reports", "the abstract does not report", "l'abstract", "dall'abstract", "secondo l'abstract", "PubMed text", "PMC text", "full-text retrieval", or "source retrieval".
+- When evidence is limited, state the scientific limitation directly (for example: "the paper does not report..." or "no quantitative clinical outcomes are reported"), without referring to where the information was retrieved.
 - Never mention AI, automation, workflow, model, generation process, or any technical production method in the published article.
 - Describe only the source limitations, not how the article was produced.
 
@@ -761,6 +804,9 @@ EDITORIAL CHECKS
 - Conclusions must be proportional to study design and evidence quality.
 - Do not repeat the same concept unnecessarily across sections.
 - The reader-facing article must not mention whether the source used was an abstract, full text, PMC text, publisher text, Unpaywall, or any retrieval workflow.
+- FAIL if the literal word "abstract" appears anywhere in reader-facing output, in English or Italian.
+- FAIL equivalent phrases such as "l'abstract", "dall'abstract", "secondo l'abstract", "based on the abstract", "the abstract reports", "the abstract does not report", "PubMed text", "PMC text", or "full-text retrieval".
+- If information is absent, the draft must describe the scientific limitation directly ("the paper does not report...", "no quantitative outcomes are reported") rather than referring to a retrieval source.
 - Source-acquisition details are internal metadata only.
 
 STRUCTURE CHECKS FOR RESEARCH NOTES
@@ -797,6 +843,55 @@ DRAFT:
 {json.dumps(draft, ensure_ascii=False)}
 """
 
+def reader_facing_text(draft: dict[str, Any]) -> str:
+    """Flatten only fields that can appear on the public article page."""
+    parts: list[str] = []
+
+    for key in (
+        "title_en", "title_it",
+        "summary_en", "summary_it",
+        "article_type", "article_type_it",
+        "study_type", "study_type_it",
+        "conclusion_type", "conclusion_type_it",
+        "source_note_en", "source_note_it",
+    ):
+        value = draft.get(key)
+        if value:
+            parts.append(str(value))
+
+    for key in ("sections_en", "sections_it"):
+        for item in draft.get(key) or []:
+            if isinstance(item, dict):
+                parts.append(str(item.get("heading", "")))
+                parts.append(str(item.get("text", "")))
+
+    return "\n".join(parts)
+
+
+FORBIDDEN_READER_SOURCE_PATTERNS = (
+    r"\babstracts?\b",
+    r"\bl['’]abstract\b",
+    r"\bdall['’]abstract\b",
+    r"\bsecondo\s+l['’]abstract\b",
+    r"\bpubmed\s+(?:text|abstract)\b",
+    r"\bpmc\s+(?:text|abstract)\b",
+    r"\bfull[- ]text\s+retrieval\b",
+    r"\bsource\s+retrieval\b",
+)
+
+
+def reader_source_language_violations(draft: dict[str, Any]) -> list[str]:
+    """Deterministic publication gate for forbidden retrieval/source wording."""
+    content = reader_facing_text(draft)
+    violations: list[str] = []
+
+    for pattern in FORBIDDEN_READER_SOURCE_PATTERNS:
+        if re.search(pattern, content, flags=re.IGNORECASE):
+            violations.append(pattern)
+
+    return violations
+
+
 def markdown(
     rec: dict[str, Any],
     extra: dict[str, Any],
@@ -830,7 +925,7 @@ study_type: {json.dumps(draft.get("study_type",""), ensure_ascii=False)}
 study_type_it: {json.dumps(draft.get("study_type_it",""), ensure_ascii=False)}
 conclusion_type: {json.dumps(draft.get("conclusion_type",""), ensure_ascii=False)}
 conclusion_type_it: {json.dumps(draft.get("conclusion_type_it",""), ensure_ascii=False)}
-generator_version: "4.3"
+generator_version: "4.6"
 source_identity: "PASS"
 source_identity_basis: "PubMed PMID/title/DOI/PMCID"
 full_text_source: {json.dumps(full_text_source)}
@@ -983,6 +1078,24 @@ def main() -> None:
                 temperature=0.1,
             )
 
+            forbidden = reader_source_language_violations(draft)
+            if forbidden:
+                idx.setdefault("failures", []).append({
+                    "pmid": pmid,
+                    "at": datetime.now(timezone.utc).isoformat(),
+                    "stage": "deterministic_reader_source_gate",
+                    "issues": [
+                        "Reader-facing draft contains forbidden source/retrieval language."
+                    ],
+                    "matched_patterns": forbidden,
+                })
+                print(
+                    f"Deterministic publication gate FAILED for PMID {pmid}: "
+                    f"forbidden reader-facing source language {forbidden}"
+                )
+                print("Article will not be published. Trying next candidate.")
+                continue
+
             print("Waiting before verification...")
             time.sleep(75)
 
@@ -1019,6 +1132,24 @@ def main() -> None:
                 print(f"Verifier issues: {json.dumps(issues, ensure_ascii=False)}")
                 print(f"Unsupported claims: {json.dumps(unsupported, ensure_ascii=False)}")
                 print("Trying next candidate.")
+                continue
+
+            forbidden_after_verification = reader_source_language_violations(draft)
+            if forbidden_after_verification:
+                idx.setdefault("failures", []).append({
+                    "pmid": pmid,
+                    "at": datetime.now(timezone.utc).isoformat(),
+                    "stage": "final_publication_gate",
+                    "issues": [
+                        "Draft passed model verification but failed deterministic source-language gate."
+                    ],
+                    "matched_patterns": forbidden_after_verification,
+                })
+                print(
+                    f"FINAL PUBLICATION GATE FAILED for PMID {pmid}: "
+                    f"{forbidden_after_verification}"
+                )
+                print("Article will not be written or published.")
                 continue
 
             verified_at = datetime.now(timezone.utc).isoformat()
