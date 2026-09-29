@@ -1,25 +1,26 @@
 {
-  "generated_at": "2026-09-29T13:51:34+00:00",
+  "generated_at": "2026-09-29T13:51:42+00:00",
   "curation_window_days": 365,
-  "backfill_year": 1935,
-  "auto_approved_count": 0,
-  "excluded_count": 2,
+  "backfill_year": 1936,
+  "auto_approved_count": 1,
+  "excluded_count": 3,
   "records": [
     {
-      "pmid": "16745934",
-      "title": "Ketogenesis-antiketogenesis: Ketogenesis from amino-acids.",
+      "pmid": "16746295",
+      "title": "Ketogenesis-antiketogenesis: Metabolism of ketone bodies.",
       "authors": [
-        "Edson NL"
+        "Edson NL",
+        "Leloir LF"
       ],
       "journal": "The Biochemical journal",
-      "date": "1935-11-01",
+      "date": "1936-12-01",
       "date_precision": "day",
-      "year": 1935,
-      "doi": "10.1042/bj0292498",
-      "pmc": "PMC1266790",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/16745934/",
-      "doi_url": "https://doi.org/10.1042/bj0292498",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1266790/",
+      "year": 1936,
+      "doi": "10.1042/bj0302319",
+      "pmc": "PMC1263341",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/16746295/",
+      "doi_url": "https://doi.org/10.1042/bj0302319",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1263341/",
       "areas": [
         "Other / General"
       ],
@@ -33,20 +34,20 @@
       "curation_status": "excluded-low-confidence"
     },
     {
-      "pmid": "16745882",
-      "title": "Ketogenesis-antiketogenesis: The influence of ammonium chloride on ketone-body formation in liver.",
+      "pmid": "16746234",
+      "title": "Ketogenesis-antiketogenesis: Substrate competition in liver.",
       "authors": [
         "Edson NL"
       ],
       "journal": "The Biochemical journal",
-      "date": "1935-09-01",
+      "date": "1936-10-01",
       "date_precision": "day",
-      "year": 1935,
-      "doi": "10.1042/bj0292082",
-      "pmc": "PMC1266730",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/16745882/",
-      "doi_url": "https://doi.org/10.1042/bj0292082",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1266730/",
+      "year": 1936,
+      "doi": "10.1042/bj0301862",
+      "pmc": "PMC1263272",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/16746234/",
+      "doi_url": "https://doi.org/10.1042/bj0301862",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1263272/",
       "areas": [
         "Other / General"
       ],
@@ -58,6 +59,62 @@
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "16746233",
+      "title": "Ketogenesis-antiketogenesis: Metabolism of aldehydes and dicarboxylic acids.",
+      "authors": [
+        "Edson NL"
+      ],
+      "journal": "The Biochemical journal",
+      "date": "1936-10-01",
+      "date_precision": "day",
+      "year": 1936,
+      "doi": "10.1042/bj0301855",
+      "pmc": "PMC1263271",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/16746233/",
+      "doi_url": "https://doi.org/10.1042/bj0301855",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1263271/",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "16746204",
+      "title": "Respiration and ketogenesis in the \"cholesterol\" fatty liver.",
+      "authors": [
+        "Cook RP",
+        "Edson NL"
+      ],
+      "journal": "The Biochemical journal",
+      "date": "1936-09-01",
+      "date_precision": "day",
+      "year": 1936,
+      "doi": "10.1042/bj0301637",
+      "pmc": "PMC1263235",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/16746204/",
+      "doi_url": "https://doi.org/10.1042/bj0301637",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1263235/",
+      "areas": [
+        "Dyslipidemia & Lipid Metabolism",
+        "MASLD / Metabolic Liver Disease"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
     }
   ]
 }
