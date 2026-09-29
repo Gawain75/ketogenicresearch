@@ -467,11 +467,30 @@ async function loadLatestEvidence() {
       );
     }
 
-    const updated = document.getElementById('latestUpdated');
-    if (updated) {
-      const stamp = KR_LATEST_DATA.generated_at;
-      updated.textContent = stamp
+    const verified = document.getElementById('latestVerified');
+    if (verified) {
+      const stamp =
+        KR_LATEST_DATA.verified_at ||
+        KR_LATEST_DATA.generated_at;
+      verified.textContent = stamp
         ? latestDateLabel(stamp.slice(0, 10))
+        : '—';
+    }
+
+    const contentUpdated = document.getElementById('latestContentUpdated');
+    if (contentUpdated) {
+      const publicationDates = (KR_LATEST_DATA.publications || [])
+        .map(p => String(p.date || '').slice(0, 10))
+        .filter(value => /^\d{4}-\d{2}-\d{2}$/.test(value))
+        .sort();
+
+      const mostRecentPublicationDate =
+        publicationDates.length
+          ? publicationDates[publicationDates.length - 1]
+          : '';
+
+      contentUpdated.textContent = mostRecentPublicationDate
+        ? latestDateLabel(mostRecentPublicationDate)
         : '—';
     }
 
