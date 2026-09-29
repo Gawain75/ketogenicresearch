@@ -1,0 +1,424 @@
+name: Clean recent Library false positives
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ketogenicresearch-content-write
+  cancel-in-progress: false
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependency
+        run: python -m pip install beautifulsoup4
+
+      - name: Remove 2025-2026 false positives
+        env:
+          NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
+          NCBI_EMAIL: info@ketogenicresearch.org
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import re
+          import time
+          import urllib.parse
+          import urllib.request
+          import xml.etree.ElementTree as ET
+          from pathlib import Path
+
+          from bs4 import BeautifulSoup
+
+          LIBRARY = Path("library.html")
+          REPORT = Path("cleanup-recent-library-report.json")
+          BASE = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
+          EMAIL = os.getenv("NCBI_EMAIL", "info@ketogenicresearch.org")
+          API_KEY = os.getenv("NCBI_API_KEY", "")
+          YEARS = {"2025", "2026"}
+
+          DIRECT_PHRASES = (
+              "ketogenic diet",
+              "ketogenic diets",
+              "ketogenic dietary therapy",
+              "ketogenic dietary therapies",
+              "ketogenic diet therapy",
+              "ketogenic intervention",
+              "ketogenic interventions",
+              "ketogenic protocol",
+              "ketogenic protocols",
+              "ketogenic nutritional protocol",
+              "ketogenic therapy",
+              "ketogenic metabolic therapy",
+              "classic ketogenic diet",
+              "classical ketogenic diet",
+              "mct ketogenic diet",
+              "low-carbohydrate ketogenic diet",
+              "low carbohydrate ketogenic diet",
+              "very low calorie ketogenic diet",
+              "very-low-calorie ketogenic diet",
+              "very low energy ketogenic therapy",
+              "modified atkins diet",
+              "nutritional ketosis",
+              "vlckd",
+              "vlekt",
+              "keto diet",
+          )
+
+          EXOGENOUS_PHRASES = (
+              "exogenous ketone",
+              "exogenous ketones",
+              "ketone ester",
+              "ketone esters",
+              "ketone salt",
+              "ketone salts",
+          )
+
+          MECHANISM_TERMS = (
+              "ketogenesis",
+              "ketogenic metabolism",
+              "ketone metabolism",
+              "ketone body metabolism",
+              "ketone bodies",
+              "beta-hydroxybutyrate",
+              "β-hydroxybutyrate",
+              "b-hydroxybutyrate",
+              "acetoacetate",
+          )
+
+          CENTRALITY_MARKERS = (
+              "we investigated",
+              "we examined",
+              "we evaluated",
+              "we studied",
+              "we review",
+              "this review",
+              "the aim",
+              "the objective",
+              "focuses on",
+              "focused on",
+              "role of ketogenesis",
+              "role of ketone",
+              "ketone metabolism",
+              "ketogenic metabolism",
+          )
+
+          INCIDENTAL_TITLE_PATTERNS = (
+              r"\bthrough\b.{0,80}\bketone bod(?:y|ies)\b",
+              r"\bvia\b.{0,80}\bketone bod(?:y|ies)\b",
+              r"\band ketone body signaling\b",
+              r"\bwith ketone body signaling\b",
+              r"\bassociated with ketogenesis\b",
+          )
+
+          PRIMARY_MECHANISM_TITLE = (
+              "ketogenesis as",
+              "ketogenesis in",
+              "ketogenesis and",
+              "ketone bodies as",
+              "ketone bodies in",
+              "ketone metabolism",
+              "beta-hydroxybutyrate",
+              "β-hydroxybutyrate",
+          )
+
+          def api_fetch(pmids):
+              params = {
+                  "db": "pubmed",
+                  "id": ",".join(pmids),
+                  "retmode": "xml",
+                  "tool": "ketogenicresearch-library-cleanup",
+                  "email": EMAIL,
+              }
+              if API_KEY:
+                  params["api_key"] = API_KEY
+
+              encoded = urllib.parse.urlencode(params).encode("utf-8")
+              req = urllib.request.Request(
+                  f"{BASE}/efetch.fcgi",
+                  data=encoded,
+                  method="POST",
+                  headers={
+                      "User-Agent": f"ketogenicresearch-library-cleanup/1.0 ({EMAIL})",
+                      "Content-Type": "application/x-www-form-urlencoded",
+                  },
+              )
+              with urllib.request.urlopen(req, timeout=90) as response:
+                  data = response.read()
+              time.sleep(0.12 if API_KEY else 0.36)
+              return ET.fromstring(data)
+
+          def node_text(node):
+              return "" if node is None else "".join(node.itertext()).strip()
+
+          def relevant(article, citation):
+              title = node_text(article.find("ArticleTitle")).lower()
+              abstract = " ".join(
+                  node_text(n)
+                  for n in article.findall("Abstract/AbstractText")
+                  if node_text(n)
+              ).lower()
+              mesh = " ".join(
+                  node_text(n)
+                  for n in citation.findall(".//MeshHeading/DescriptorName")
+                  if node_text(n)
+              ).lower()
+
+              # Direct dietary/therapeutic ketogenic relevance.
+              if any(p in title for p in DIRECT_PHRASES):
+                  return True, "direct-title"
+              if "diet, ketogenic" in mesh:
+                  return True, "mesh-diet-ketogenic"
+              if any(p in abstract for p in DIRECT_PHRASES):
+                  return True, "direct-abstract"
+
+              # Exogenous ketones: central in title, or repeatedly discussed.
+              if any(p in title for p in EXOGENOUS_PHRASES):
+                  return True, "exogenous-title"
+              if sum(abstract.count(p) for p in EXOGENOUS_PHRASES) >= 2:
+                  return True, "exogenous-central-abstract"
+
+              # Mechanistic ketogenesis/ketone biology.
+              if any(t in title for t in MECHANISM_TERMS):
+                  incidental = any(
+                      re.search(pattern, title)
+                      for pattern in INCIDENTAL_TITLE_PATTERNS
+                  )
+                  if incidental and not any(
+                      p in title for p in PRIMARY_MECHANISM_TITLE
+                  ):
+                      return False, "incidental-title-mention"
+                  return True, "mechanistic-title"
+
+              mech_mentions = sum(abstract.count(t) for t in MECHANISM_TERMS)
+              if (
+                  mech_mentions >= 3
+                  and any(m in abstract for m in CENTRALITY_MARKERS)
+              ):
+                  return True, "mechanistic-central-abstract"
+
+              return False, "no-central-ketogenic-focus"
+
+          if not LIBRARY.exists():
+              raise SystemExit("library.html not found")
+
+          soup = BeautifulSoup(LIBRARY.read_text(encoding="utf-8"), "html.parser")
+
+          cards_by_pmid = {}
+          title_by_pmid = {}
+          year_by_pmid = {}
+
+          for card in soup.select("article.folder-paper[data-pmid]"):
+              year = (card.get("data-year") or "").strip()
+              pmid = (card.get("data-pmid") or "").strip()
+
+              if year not in YEARS or not pmid.isdigit():
+                  continue
+
+              cards_by_pmid.setdefault(pmid, []).append(card)
+              year_by_pmid[pmid] = year
+
+              h4 = card.find("h4")
+              if h4:
+                  title_by_pmid[pmid] = re.sub(
+                      r"^\s*\d+\.\s*",
+                      "",
+                      h4.get("data-en") or h4.get_text(" ", strip=True),
+                  ).strip()
+
+          pmids = sorted(cards_by_pmid, key=int)
+          print(f"Unique 2025-2026 PubMed records to audit: {len(pmids)}")
+
+          fetched = {}
+          BATCH = 150
+
+          for start in range(0, len(pmids), BATCH):
+              batch = pmids[start:start+BATCH]
+              root = api_fetch(batch)
+
+              for item in root.findall(".//PubmedArticle"):
+                  citation = item.find("MedlineCitation")
+                  article = citation.find("Article") if citation is not None else None
+                  if citation is None or article is None:
+                      continue
+
+                  pmid = node_text(citation.find("PMID"))
+                  if not pmid:
+                      continue
+
+                  keep, reason = relevant(article, citation)
+                  fetched[pmid] = {
+                      "keep": keep,
+                      "reason": reason,
+                      "title": node_text(article.find("ArticleTitle")),
+                  }
+
+          # Safety rule: records PubMed failed to return are never removed.
+          remove_pmids = sorted(
+              [
+                  pmid
+                  for pmid, result in fetched.items()
+                  if not result["keep"]
+              ],
+              key=int,
+          )
+
+          removed_cards = 0
+          for pmid in remove_pmids:
+              for card in cards_by_pmid.get(pmid, []):
+                  card.decompose()
+                  removed_cards += 1
+
+          # Renumber papers independently inside every clinical-area folder.
+          for folder in soup.select("details.library-folder"):
+              for number, card in enumerate(
+                  folder.select("article.folder-paper"),
+                  start=1,
+              ):
+                  h4 = card.find("h4")
+                  if not h4:
+                      continue
+
+                  for attr in ("data-en", "data-it"):
+                      value = h4.get(attr)
+                      if value:
+                          h4[attr] = re.sub(
+                              r"^\s*\d+\.\s*",
+                              f"{number}. ",
+                              value,
+                          )
+
+                  visible = h4.get_text(" ", strip=True)
+                  clean_visible = re.sub(r"^\s*\d+\.\s*", "", visible)
+                  h4.string = f"{number}. {clean_visible}"
+
+          LIBRARY.write_text(str(soup), encoding="utf-8")
+
+          report = {
+              "years_audited": sorted(YEARS),
+              "unique_pmids_audited": len(pmids),
+              "pubmed_records_fetched": len(fetched),
+              "unique_pmids_removed": len(remove_pmids),
+              "card_instances_removed": removed_cards,
+              "removed": [
+                  {
+                      "pmid": pmid,
+                      "year": year_by_pmid.get(pmid),
+                      "title": fetched.get(pmid, {}).get("title")
+                          or title_by_pmid.get(pmid, ""),
+                      "reason": fetched.get(pmid, {}).get("reason"),
+                  }
+                  for pmid in remove_pmids
+              ],
+              "not_removed_because_pubmed_not_returned": sorted(
+                  set(pmids) - set(fetched),
+                  key=int,
+              ),
+          }
+          REPORT.write_text(
+              json.dumps(report, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8",
+          )
+
+          print(
+              f"Removed {len(remove_pmids)} unique false-positive PMID(s) "
+              f"across {removed_cards} Library card instance(s)."
+          )
+          print(f"Audit report written to {REPORT}")
+
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as s:
+              s.write("## Recent Library cleanup\n\n")
+              s.write(f"- Unique 2025-2026 PMIDs audited: **{len(pmids)}**\n")
+              s.write(f"- PubMed records fetched: **{len(fetched)}**\n")
+              s.write(f"- Unique PMIDs removed: **{len(remove_pmids)}**\n")
+              s.write(f"- Library card instances removed: **{removed_cards}**\n")
+              if remove_pmids:
+                  s.write("\n### Removed records\n")
+                  for pmid in remove_pmids[:100]:
+                      title = (
+                          fetched.get(pmid, {}).get("title")
+                          or title_by_pmid.get(pmid, "")
+                      )
+                      s.write(f"- PMID {pmid}: {title}\n")
+                  if len(remove_pmids) > 100:
+                      s.write(
+                          f"- …and {len(remove_pmids)-100} additional records "
+                          "listed in cleanup-recent-library-report.json\n"
+                      )
+          PY
+
+      - name: Synchronize publication counters
+        run: python scripts/sync_publication_counters.py
+
+      - name: Rebuild Evidence Trends
+        run: python scripts/build_evidence_trends.py
+
+      - name: Validate removed examples
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          html = Path("library.html").read_text(encoding="utf-8").lower()
+
+          false_positive_titles = [
+              "lipolysis-driven communication between adipose tissue and liver",
+              "hepatic stearoyl-coa desaturase 1 suppresses diet-induced hyperphagia",
+          ]
+
+          for title in false_positive_titles:
+              if title in html:
+                  raise SystemExit(
+                      f"Known false positive is still present after cleanup: {title}"
+                  )
+
+          print("Known false-positive examples are absent.")
+          PY
+
+      - name: Commit cleanup
+        run: |
+          set -euo pipefail
+
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add library.html evidence-trends.html cleanup-recent-library-report.json
+          git add index.html latest.html 2>/dev/null || true
+
+          if git diff --cached --quiet; then
+            echo "No false-positive records required removal."
+            exit 0
+          fi
+
+          git commit -m "Clean recent ketogenic Library false positives"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main
+
+            if git push origin HEAD:main; then
+              echo "Cleanup pushed successfully."
+              exit 0
+            fi
+
+            echo "Push race detected; retrying..."
+            sleep 5
+          done
+
+          echo "Push failed after 3 attempts."
+          exit 1
