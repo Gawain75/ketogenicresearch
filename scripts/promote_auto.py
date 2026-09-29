@@ -150,6 +150,36 @@ def main() -> None:
             meta.string = " · ".join(x for x in [authors, journal, date] if x)
             art.append(meta)
 
+            # Standard Research details block for every newly promoted record.
+            abstract = (record.get("abstract") or "").strip()
+            study_details = soup.new_tag(
+                "details", attrs={"class": "paper-study-details"}
+            )
+            summary = soup.new_tag("summary")
+            summary["data-en"] = "Research details"
+            summary["data-it"] = "Dettagli della ricerca"
+            summary.string = "Research details"
+            study_details.append(summary)
+
+            detail_p = soup.new_tag("p")
+            detail_p["class"] = "paper-source-abstract"
+            if abstract:
+                study_details["data-detail-source"] = "pubmed-abstract"
+                detail_p["data-en"] = abstract
+                detail_p["data-it"] = abstract
+                detail_p.string = abstract
+            else:
+                study_details["data-detail-source"] = "no-indexed-abstract"
+                notice = (
+                    "No abstract is available from the indexed bibliographic sources for this record. "
+                    "Use the PubMed, DOI, full-text or PDF links below when available."
+                )
+                detail_p["data-en"] = notice
+                detail_p["data-it"] = notice
+                detail_p.string = notice
+            study_details.append(detail_p)
+            art.append(study_details)
+
             links = soup.new_tag("div", attrs={"class": "paper-links"})
 
             a = soup.new_tag(
