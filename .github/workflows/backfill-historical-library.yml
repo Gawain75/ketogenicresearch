@@ -1,0 +1,101 @@
+name: Backfill historical Scientific Library
+
+on:
+  workflow_dispatch:
+    inputs:
+      start_year:
+        description: "First publication year to process"
+        required: true
+        default: "1997"
+      end_year:
+        description: "Last publication year to process"
+        required: true
+        default: "2026"
+
+permissions:
+  contents: write
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate year range
+        shell: bash
+        run: |
+          set -euo pipefail
+          START="${{ inputs.start_year }}"
+          END="${{ inputs.end_year }}"
+          CURRENT="$(date -u +%Y)"
+          [[ "$START" =~ ^[0-9]{4}$ ]] || { echo "Invalid start_year"; exit 1; }
+          [[ "$END" =~ ^[0-9]{4}$ ]] || { echo "Invalid end_year"; exit 1; }
+          (( START <= END )) || { echo "start_year must be <= end_year"; exit 1; }
+          (( END <= CURRENT )) || { echo "end_year cannot be in the future"; exit 1; }
+
+      - name: Backfill Library year by year
+        env:
+          NCBI_EMAIL: ${{ secrets.NCBI_EMAIL }}
+          NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
+          CURATION_MAX_RECORDS: "10000"
+        shell: bash
+        run: |
+          set -euo pipefail
+          START="${{ inputs.start_year }}"
+          END="${{ inputs.end_year }}"
+
+          for YEAR in $(seq "$START" "$END"); do
+            echo "===================================================="
+            echo "Processing publication year $YEAR"
+            echo "===================================================="
+
+            BACKFILL_YEAR="$YEAR" python scripts/update_latest.py
+            python scripts/promote_auto.py
+
+            if [[ -f scripts/repair_fulltext_links.py ]]; then
+              python scripts/repair_fulltext_links.py
+            fi
+          done
+
+      - name: Rebuild derived Library data
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          for SCRIPT in             scripts/update_library_counts.py             scripts/rebuild_library_counts.py             scripts/build_evidence_trends.py             scripts/update_evidence_trends.py             scripts/rebuild_evidence_trends.py
+          do
+            if [[ -f "$SCRIPT" ]]; then
+              echo "Running $SCRIPT"
+              python "$SCRIPT"
+            fi
+          done
+
+      - name: Commit historical backfill
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "No changes produced by historical backfill."
+            exit 0
+          fi
+
+          git commit -m "Backfill Scientific Library ${{ inputs.start_year }}-${{ inputs.end_year }}"
+
+          BRANCH="${GITHUB_REF_NAME}"
+          git pull --rebase origin "$BRANCH"
+          git push origin "HEAD:$BRANCH"
