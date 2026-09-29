@@ -1,10 +1,43 @@
 {
-  "generated_at": "2026-09-29T03:29:20+00:00",
+  "generated_at": "2026-09-29T08:33:24+00:00",
   "window_days": 90,
   "max_records": 100,
+  "pubmed_records_fetched": 2000,
+  "relevant_records_after_filter": 1218,
+  "truncated": true,
   "source": "PubMed / NCBI E-utilities",
   "count": 100,
   "publications": [
+    {
+      "pmid": "42800643",
+      "title": "Neuroenergetic Flexibility in the Aging Brain: Cellular Mechanisms and Diet-Induced Metabolic Switching.",
+      "authors": [
+        "Balaji P",
+        "Elias JM",
+        "Kumudhaveni B",
+        "Senthilraj R",
+        "Gobinathan G",
+        "Thirumal M"
+      ],
+      "journal": "Ageing research reviews",
+      "date": "2026-09-26",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.arr.2026.103385",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42800643/",
+      "doi_url": "https://doi.org/10.1016/j.arr.2026.103385",
+      "pmc_url": "",
+      "areas": [
+        "Longevity & Healthy Aging"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "new"
+    },
     {
       "pmid": "42790707",
       "title": "Letter to the Editor: Methodological considerations when determining the minimum amount of dietary carbohydrates that prevents nutritional ketosis.",
@@ -56,6 +89,65 @@
       "category_confidence": 11,
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "new"
+    },
+    {
+      "pmid": "42785681",
+      "title": "Lipolysis-Driven Communication Between Adipose Tissue and Liver: A Key Axis in Metabolic Regulation.",
+      "authors": [
+        "Zhang S",
+        "Cedillo L",
+        "Villanueva CJ"
+      ],
+      "journal": "Journal of lipid research",
+      "date": "2026-09-24",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.jlr.2026.101150",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42785681/",
+      "doi_url": "https://doi.org/10.1016/j.jlr.2026.101150",
+      "pmc_url": "",
+      "areas": [
+        "Dyslipidemia & Lipid Metabolism",
+        "MASLD / Metabolic Liver Disease"
+      ],
+      "category_confidence": 3,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "new"
+    },
+    {
+      "pmid": "42779476",
+      "title": "Ketone monoester intake affects the ventilatory response to O2 and CO2 in healthy individuals at high altitude.",
+      "authors": [
+        "Stalmans M",
+        "Tominec D",
+        "Narang BJ",
+        "Manferdelli G",
+        "Millet GP",
+        "Debevec T",
+        "Poffé C"
+      ],
+      "journal": "American journal of physiology. Regulatory, integrative and comparative physiology",
+      "date": "2026-09-24",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1152/ajpregu.00073.2026",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42779476/",
+      "doi_url": "https://doi.org/10.1152/ajpregu.00073.2026",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "new"
@@ -114,6 +206,63 @@
       "category_confidence": 6,
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "new"
+    },
+    {
+      "pmid": "42777857",
+      "title": "A ketogenic enzyme HMGCS2 drives malignant progression in HER2-negative breast cancer via RAB23-mediated β-catenin/TCF signaling and mediates Apatinib resistance.",
+      "authors": [
+        "Wu J",
+        "Liu M",
+        "Li W",
+        "Zhang N",
+        "Liu Y",
+        "Zhao Y",
+        "Zeng X"
+      ],
+      "journal": "Life sciences",
+      "date": "2026-09-23",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.lfs.2026.124710",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42777857/",
+      "doi_url": "https://doi.org/10.1016/j.lfs.2026.124710",
+      "pmc_url": "",
+      "areas": [
+        "Oncology & Cancer Metabolism"
+      ],
+      "category_confidence": 7,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "new"
+    },
+    {
+      "pmid": "42777120",
+      "title": "A curious case of hepatic ketogenesis regulating voluntary exercise behavior and the skeletal muscle metabolic proteome.",
+      "authors": [
+        "Lark DS"
+      ],
+      "journal": "Function (Oxford, England)",
+      "date": "2026-09-23",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1152/function.90009.2026",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42777120/",
+      "doi_url": "https://doi.org/10.1152/function.90009.2026",
+      "pmc_url": "",
+      "areas": [
+        "Exercise & Performance",
+        "Sarcopenia & Skeletal Muscle"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "new"
@@ -184,6 +333,191 @@
       "status": "new"
     },
     {
+      "pmid": "42800218",
+      "title": "Access to ketogenic dietary therapies for drug-resistant epilepsy in Italy: Insights from a LICE national survey.",
+      "authors": [
+        "Messana T",
+        "Battistella N",
+        "Biagioli V",
+        "Darra F",
+        "Dianin A",
+        "Di Tella B",
+        "Domenica E",
+        "Masnada S",
+        "Matricardi S",
+        "Operto F",
+        "Orlando I",
+        "Pietrafusa N",
+        "Ragona F",
+        "Russo E",
+        "Veggiotti P",
+        "Volpi L",
+        "De Giorgis V"
+      ],
+      "journal": "Epilepsy & behavior : E&B",
+      "date": "2026-09-22",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.yebeh.2026.111304",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42800218/",
+      "doi_url": "https://doi.org/10.1016/j.yebeh.2026.111304",
+      "pmc_url": "",
+      "areas": [
+        "Epilepsy"
+      ],
+      "category_confidence": 12,
+      "evidence_type": "Observational human study",
+      "evidence_type_it": "Studio osservazionale umano",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "new"
+    },
+    {
+      "pmid": "42773801",
+      "title": "Effects of anti-aging diets and exercise on age-related musculoskeletal diseases via gut microbiota modulation.",
+      "authors": [
+        "Yu M",
+        "Guo P",
+        "Liu Q",
+        "Zhang XA"
+      ],
+      "journal": "Annals of medicine",
+      "date": "2026-09-22",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1080/07853890.2026.2726635",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42773801/",
+      "doi_url": "https://doi.org/10.1080/07853890.2026.2726635",
+      "pmc_url": "",
+      "areas": [
+        "Gut Microbiome",
+        "Longevity & Healthy Aging",
+        "Exercise & Performance"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "new"
+    },
+    {
+      "pmid": "42771559",
+      "title": "A High-Fat, High-Protein, Carbohydrate-Restricted Dietary Interventions in Pompe Disease: A Case Series with Long-Term Follow-Up.",
+      "authors": [
+        "Teke Kisa P",
+        "Dogan BB",
+        "Zubarioglu T",
+        "Apaydin I",
+        "Er E",
+        "Balci MC",
+        "Uzun Dincturk D",
+        "Bilen M",
+        "Demirdoken ED",
+        "Akisin Z",
+        "Uygur E",
+        "Erkmen S",
+        "Hacioglu I",
+        "Topuz HS",
+        "Cubukcu D",
+        "Guzel O",
+        "Kiykim E",
+        "Zeybek ACA",
+        "Gokcay G",
+        "Önal H",
+        "Arslan N"
+      ],
+      "journal": "Annals of nutrition & metabolism",
+      "date": "2026-09-22",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1159/anm/abmag008",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42771559/",
+      "doi_url": "https://doi.org/10.1159/anm/abmag008",
+      "pmc_url": "",
+      "areas": [
+        "Sarcopenia & Skeletal Muscle"
+      ],
+      "category_confidence": 2,
+      "evidence_type": "Case report / case series",
+      "evidence_type_it": "Case report / case series",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "new"
+    },
+    {
+      "pmid": "42665093",
+      "title": "Hepatic stearoyl-CoA desaturase 1 suppresses diet-induced hyperphagia and hepatic lipid accumulation through PPARα activation and ketone body signaling.",
+      "authors": [
+        "Jia K",
+        "Liu Y",
+        "Zhang Y",
+        "Bai L",
+        "Zhang L",
+        "Xie F",
+        "Yan X",
+        "Xu J",
+        "Liao K"
+      ],
+      "journal": "The Journal of biological chemistry",
+      "date": "2026-09-22",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.jbc.2026.113515",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42665093/",
+      "doi_url": "https://doi.org/10.1016/j.jbc.2026.113515",
+      "pmc_url": "",
+      "areas": [
+        "Dyslipidemia & Lipid Metabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "new"
+    },
+    {
+      "pmid": "42799463",
+      "title": "Detrimental and Beneficial Diets Regulate Acute Pancreatitis Through Convergent Gut Microbiota Pathways.",
+      "authors": [
+        "Wu J",
+        "Bai R",
+        "Zhong Z",
+        "Zhang C",
+        "Liu T",
+        "Lu T",
+        "Song Y",
+        "Miao Z",
+        "Zhang D",
+        "Wang Z",
+        "Li G",
+        "Sun B"
+      ],
+      "journal": "Journal of inflammation research",
+      "date": "2026-09-21",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.2147/JIR.S626690",
+      "pmc": "PMC13614318",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42799463/",
+      "doi_url": "https://doi.org/10.2147/JIR.S626690",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13614318/",
+      "areas": [
+        "Gut Microbiome"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "new"
+    },
+    {
       "pmid": "42766067",
       "title": "Comparative effects of ketogenic diets and mediterranean diets on obesity and metabolic outcomes: a systematic review and meta-analysis.",
       "authors": [
@@ -208,6 +542,93 @@
       "category_confidence": 8,
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "new"
+    },
+    {
+      "pmid": "42765672",
+      "title": "Female-specific alterations in insulin dynamics are associated with glucose tolerance in a Glut1DS mouse model.",
+      "authors": [
+        "Furuse T",
+        "Kushida T",
+        "Shinogi A",
+        "Ozaki M",
+        "Yanagisawa R",
+        "Tamura M"
+      ],
+      "journal": "Disease models & mechanisms",
+      "date": "2026-09-21",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1242/dmm.052836",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42765672/",
+      "doi_url": "https://doi.org/10.1242/dmm.052836",
+      "pmc_url": "",
+      "areas": [
+        "GLUT1 Deficiency Syndrome",
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "new"
+    },
+    {
+      "pmid": "42764013",
+      "title": "Dietary Interventions and Vitamin D3 Replacement in Pituitary Tumors: a Systematic Review.",
+      "authors": [
+        "Te Nijenhuis-Noort LC",
+        "van de Groef R",
+        "Refardt J",
+        "Pelsma ICM",
+        "Biermasz NR",
+        "Berk KA",
+        "Neggers SJCMM"
+      ],
+      "journal": "European journal of endocrinology",
+      "date": "2026-09-20",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1093/ejendo/lvag182",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42764013/",
+      "doi_url": "https://doi.org/10.1093/ejendo/lvag182",
+      "pmc_url": "",
+      "areas": [
+        "Oncology & Cancer Metabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Systematic review / meta-analysis",
+      "evidence_type_it": "Revisione sistematica / meta-analisi",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "new"
+    },
+    {
+      "pmid": "42762175",
+      "title": "Epilepsy with myoclonic-atonic seizures: a comprehensive review with emphasis on current and emerging pharmacotherapies.",
+      "authors": [
+        "Samanta D"
+      ],
+      "journal": "Expert review of neurotherapeutics",
+      "date": "2026-09-19",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1080/14737175.2026.2735961",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42762175/",
+      "doi_url": "https://doi.org/10.1080/14737175.2026.2735961",
+      "pmc_url": "",
+      "areas": [
+        "Epilepsy"
+      ],
+      "category_confidence": 13,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "new"
@@ -277,6 +698,68 @@
       "status": "new"
     },
     {
+      "pmid": "42759692",
+      "title": "Perioperative management of SGLT2 inhibitors: balancing euglycaemic ketoacidosis risk and cardiorenal benefits.",
+      "authors": [
+        "Ji K",
+        "Zhang D",
+        "Zhao Y",
+        "Zeng Z",
+        "Jiang M",
+        "Zhang J"
+      ],
+      "journal": "Diabetes & metabolism",
+      "date": "2026-09-18",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.diabet.2026.101793",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42759692/",
+      "doi_url": "https://doi.org/10.1016/j.diabet.2026.101793",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism",
+        "Cardiovascular Health"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "new"
+    },
+    {
+      "pmid": "42758370",
+      "title": "Metabolic modulation of glioblastoma by dietary intervention: a systematic review.",
+      "authors": [
+        "Ghoche MT",
+        "Miki K",
+        "Yuan F",
+        "Mantica M",
+        "Agnihotri S",
+        "McBrayer SK",
+        "Abdullah KG"
+      ],
+      "journal": "Journal of neuro-oncology",
+      "date": "2026-09-18",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1007/s11060-026-05779-x",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42758370/",
+      "doi_url": "https://doi.org/10.1007/s11060-026-05779-x",
+      "pmc_url": "",
+      "areas": [
+        "Oncology & Cancer Metabolism"
+      ],
+      "category_confidence": 10,
+      "evidence_type": "Systematic review / meta-analysis",
+      "evidence_type_it": "Revisione sistematica / meta-analisi",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "new"
+    },
+    {
       "pmid": "42757470",
       "title": "Ketogenic diet attenuates Müller cell activation and retinal neuroinflammation in autoimmune glaucoma through acetylation‑mediated FOXO signalling.",
       "authors": [
@@ -310,6 +793,37 @@
         "Inflammation & Immunometabolism"
       ],
       "category_confidence": 14,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "new"
+    },
+    {
+      "pmid": "42753853",
+      "title": "β-hydroxybutyrate in depression: Neuropharmacological mechanisms and therapeutic potential.",
+      "authors": [
+        "Liu W",
+        "Cao X",
+        "Ling Y",
+        "Li J",
+        "Gao Y",
+        "Nie L",
+        "Xia Q"
+      ],
+      "journal": "Progress in neuro-psychopharmacology & biological psychiatry",
+      "date": "2026-09-17",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.pnpbp.2026.111937",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42753853/",
+      "doi_url": "https://doi.org/10.1016/j.pnpbp.2026.111937",
+      "pmc_url": "",
+      "areas": [
+        "Psychiatry & Mental Health"
+      ],
+      "category_confidence": 6,
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
@@ -361,6 +875,179 @@
       "status": "new"
     },
     {
+      "pmid": "42752091",
+      "title": "Anticipatory metabolic regulation drives the distinct and improved metabolic state of caloric restriction compared to Fasting-Refeeding cycles.",
+      "authors": [
+        "Velingkaar N",
+        "Astafev AA",
+        "Prabahar A",
+        "Maravillas MA",
+        "Trokhimenko E",
+        "Rom JB",
+        "Asi GJ",
+        "Piontkivska H",
+        "Jiang P",
+        "Kondratov RV"
+      ],
+      "journal": "Cell reports",
+      "date": "2026-09-17",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.celrep.2026.118022",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42752091/",
+      "doi_url": "https://doi.org/10.1016/j.celrep.2026.118022",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "new"
+    },
+    {
+      "pmid": "42746937",
+      "title": "To eat, or not to eat… dietary patterns and the clinical recognition of insulinoma: a case report.",
+      "authors": [
+        "Timpani L",
+        "De Rosa L",
+        "Arcopinto M",
+        "Cudemo G",
+        "De Fortuna U",
+        "De Luca M",
+        "De Vito L",
+        "Lombardi A",
+        "Lucci R",
+        "Salzano A",
+        "Alsergani A",
+        "Napoli R",
+        "Guardasole V",
+        "Cittadini A"
+      ],
+      "journal": "Journal of basic and clinical physiology and pharmacology",
+      "date": "2026-09-17",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1515/jbcpp-2026-0193",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42746937/",
+      "doi_url": "https://doi.org/10.1515/jbcpp-2026-0193",
+      "pmc_url": "",
+      "areas": [
+        "Cognitive Function",
+        "Diabetes & Glucose Metabolism",
+        "Oncology & Cancer Metabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Case report / case series",
+      "evidence_type_it": "Case report / case series",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "new"
+    },
+    {
+      "pmid": "42797008",
+      "title": "Dietary Patterns, Micronutrient Adequacy, and Metabolic Vulnerability in Alzheimer's Disease: A Critical Narrative Review.",
+      "authors": [
+        "Sierralta I",
+        "Pinilla M",
+        "Servili E",
+        "Ormazabal P",
+        "Bastías-Pérez M",
+        "Cisternas P",
+        "Inestrosa NC"
+      ],
+      "journal": "Nutrients",
+      "date": "2026-09-16",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3390/nu18183025",
+      "pmc": "PMC13610028",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42797008/",
+      "doi_url": "https://doi.org/10.3390/nu18183025",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13610028/",
+      "areas": [
+        "Alzheimer’s Disease"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Systematic review / meta-analysis",
+      "evidence_type_it": "Revisione sistematica / meta-analisi",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "new"
+    },
+    {
+      "pmid": "42744797",
+      "title": "MIC13-linked cristae disruption causes metabolic failure and early fibrotic remodelling in mitochondrial liver disease.",
+      "authors": [
+        "Becker A",
+        "Eichmann TO",
+        "Vasiliev V",
+        "Mey KA",
+        "Petzsch P",
+        "Rossi A",
+        "Distelmaier F",
+        "Anand R"
+      ],
+      "journal": "Cell death & disease",
+      "date": "2026-09-15",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1038/s41419-026-09283-y",
+      "pmc": "PMC13578304",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42744797/",
+      "doi_url": "https://doi.org/10.1038/s41419-026-09283-y",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13578304/",
+      "areas": [
+        "MASLD / Metabolic Liver Disease"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "new"
+    },
+    {
+      "pmid": "42743019",
+      "title": "Celastrol alleviates SGLT2 inhibitor-induced diabetic hyperketonemia by inhibiting hepatic ketogenesis.",
+      "authors": [
+        "Zhu Y",
+        "Wang Y",
+        "Zhang M",
+        "Liu L",
+        "Tian Y",
+        "Guo Z",
+        "Zhang R",
+        "Zhang J",
+        "Ma Z",
+        "Fang F",
+        "Yan L",
+        "Liu X"
+      ],
+      "journal": "Acta biochimica et biophysica Sinica",
+      "date": "2026-09-15",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3724/abbs.2026117",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42743019/",
+      "doi_url": "https://doi.org/10.3724/abbs.2026117",
+      "pmc_url": "",
+      "areas": [
+        "Obesity"
+      ],
+      "category_confidence": 2,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "new"
+    },
+    {
       "pmid": "42742013",
       "title": "[Effectiveness and tolerability of ketogenic diet therapy in children with genetic developmental and epileptic encephalopathy onset within 2 years of age].",
       "authors": [
@@ -396,6 +1083,41 @@
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "new"
+    },
+    {
+      "pmid": "42774780",
+      "title": "Distinct metabolomic signatures of SGLT2 inhibitor vs. sulfonylurea in a paired human liver biopsy study.",
+      "authors": [
+        "Takeshita Y",
+        "Oo HK",
+        "Nakano Y",
+        "Ueno A",
+        "Oishi M",
+        "Tsujiguchi H",
+        "Soga T",
+        "Yamashita T",
+        "Honda M",
+        "Takamura T"
+      ],
+      "journal": "Biochemistry and biophysics reports",
+      "date": "2026-09-14",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.bbrep.2026.102784",
+      "pmc": "PMC13594538",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42774780/",
+      "doi_url": "https://doi.org/10.1016/j.bbrep.2026.102784",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13594538/",
+      "areas": [
+        "MASLD / Metabolic Liver Disease",
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 3,
+      "evidence_type": "Randomized clinical trial",
+      "evidence_type_it": "Trial clinico randomizzato",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
     },
     {
       "pmid": "42753449",
@@ -457,6 +1179,38 @@
       "status": "indexed"
     },
     {
+      "pmid": "42798428",
+      "title": "Higher visceral fat area is inversely associated with ketosis in Chinese patients with type 2 diabetes mellitus: a cross-sectional study.",
+      "authors": [
+        "Wang JW",
+        "Jiang L",
+        "Ren J",
+        "Gao LL",
+        "Qiao YN",
+        "Liu SW"
+      ],
+      "journal": "Frontiers in endocrinology",
+      "date": "2026-09-11",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3389/fendo.2026.1948929",
+      "pmc": "PMC13612281",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42798428/",
+      "doi_url": "https://doi.org/10.3389/fendo.2026.1948929",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13612281/",
+      "areas": [
+        "Diabetes & Glucose Metabolism",
+        "Aesthetic Medicine & Body Composition",
+        "Obesity"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Observational human study",
+      "evidence_type_it": "Studio osservazionale umano",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
       "pmid": "42796965",
       "title": "A Food-Based Sequential KETOgenic Nutritional Protocol for Mediterranean Diet Non-Responders with COMPlicated Obesity: A Real-World Observational Study (KETOCOMP).",
       "authors": [
@@ -487,6 +1241,40 @@
       "category_confidence": 9,
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42793152",
+      "title": "Research Progress on Bidirectional Regulation of the Microbiota-Gut-Brain Axis in Autism Spectrum Disorder Based on the Immune-Metabolic-Endocrine Interactive Network.",
+      "authors": [
+        "Kong W",
+        "Qiu H",
+        "Jiang Y",
+        "Ge H",
+        "Wu W",
+        "Huang L",
+        "Chu L",
+        "Ge L"
+      ],
+      "journal": "Biomolecules",
+      "date": "2026-09-11",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3390/biom16091321",
+      "pmc": "PMC13604580",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42793152/",
+      "doi_url": "https://doi.org/10.3390/biom16091321",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13604580/",
+      "areas": [
+        "Gut Microbiome",
+        "Inflammation & Immunometabolism",
+        "Autism Spectrum Disorder"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed"
@@ -585,6 +1373,124 @@
       "status": "indexed"
     },
     {
+      "pmid": "42729904",
+      "title": "Euglycemic ketoacidosis in a nondiabetic patient receiving dapagliflozin for heart failure.",
+      "authors": [
+        "Silveira G",
+        "Kvasha Y",
+        "Shah P",
+        "Shah H",
+        "Gogineni J"
+      ],
+      "journal": "JCEM case reports",
+      "date": "2026-09-11",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1210/jcemcr/luag275",
+      "pmc": "PMC13563184",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42729904/",
+      "doi_url": "https://doi.org/10.1210/jcemcr/luag275",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13563184/",
+      "areas": [
+        "Cardiovascular Health",
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Case report / case series",
+      "evidence_type_it": "Case report / case series",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42792984",
+      "title": "The Association Between Hyperketonemia and Reduced Circulating Hydrogen Sulfide in Children with Type 1 Diabetes, and Ketone Inhibition of Cystathionine-γ-Lyase mRNA Expression in Cultured Hepatocytes.",
+      "authors": [
+        "Jain SK",
+        "Parsanathan R",
+        "Justin Margret J",
+        "Gungor N",
+        "Vanchiere JA",
+        "Mhanna MJ",
+        "McVie R"
+      ],
+      "journal": "Genes",
+      "date": "2026-09-10",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3390/genes17091090",
+      "pmc": "PMC13606490",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42792984/",
+      "doi_url": "https://doi.org/10.3390/genes17091090",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13606490/",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 7,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42787718",
+      "title": "The gut microbiota-short-chain fatty acid-inflammation axis in Parkinson's disease motor dysfunction: mechanisms and future of dietary interventions.",
+      "authors": [
+        "Wang W",
+        "Sun W",
+        "Ma L",
+        "Xu M",
+        "Dong X"
+      ],
+      "journal": "Frontiers in neurology",
+      "date": "2026-09-10",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3389/fneur.2026.1889517",
+      "pmc": "PMC13602950",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42787718/",
+      "doi_url": "https://doi.org/10.3389/fneur.2026.1889517",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13602950/",
+      "areas": [
+        "Gut Microbiome",
+        "Inflammation & Immunometabolism",
+        "Parkinson’s Disease"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42722219",
+      "title": "Dietary Patterns for Obesity in CKD: Mediterranean, Low-Carbohydrate, and Plant-Forward Approaches-What Fits Best?",
+      "authors": [
+        "Zhang F",
+        "Huang L"
+      ],
+      "journal": "Journal of renal nutrition : the official journal of the Council on Renal Nutrition of the National Kidney Foundation",
+      "date": "2026-09-10",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1053/j.jrn.2026.08.011",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42722219/",
+      "doi_url": "https://doi.org/10.1053/j.jrn.2026.08.011",
+      "pmc_url": "",
+      "areas": [
+        "Obesity"
+      ],
+      "category_confidence": 7,
+      "evidence_type": "Randomized clinical trial",
+      "evidence_type_it": "Trial clinico randomizzato",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
       "pmid": "42780737",
       "title": "Ketogenic therapy as a potential novel treatment approach for PTSD: an integrative review and proposed mechanistic model.",
       "authors": [
@@ -655,6 +1561,152 @@
       "status": "indexed"
     },
     {
+      "pmid": "42716296",
+      "title": "Skeletal muscle transcriptome alterations associated with ketosis in postpartum dairy cows.",
+      "authors": [
+        "Avila-Granados LM",
+        "Casey TM",
+        "Thimmapuram J",
+        "Taechachokevivat N",
+        "Neves RC"
+      ],
+      "journal": "Journal of dairy science",
+      "date": "2026-09-09",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3168/jds.2026-29086",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42716296/",
+      "doi_url": "https://doi.org/10.3168/jds.2026-29086",
+      "pmc_url": "",
+      "areas": [
+        "Sarcopenia & Skeletal Muscle"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42625953",
+      "title": "Glycogen storage disease type XIV in the Middle East and North Africa region: A case report.",
+      "authors": [
+        "Al Dojan KA",
+        "Sulaiman SA",
+        "Alaarag A"
+      ],
+      "journal": "World journal of clinical pediatrics",
+      "date": "2026-09-09",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.5409/wjcp.v15.i3.117375",
+      "pmc": "PMC13491041",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42625953/",
+      "doi_url": "https://doi.org/10.5409/wjcp.v15.i3.117375",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13491041/",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Case report / case series",
+      "evidence_type_it": "Case report / case series",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42783783",
+      "title": "Ketogenesis as a Metabolic Checkpoint in MASLD: Implications for Disease Progression and Therapy.",
+      "authors": [
+        "Babu AF"
+      ],
+      "journal": "Metabolites",
+      "date": "2026-09-08",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3390/metabo16090659",
+      "pmc": "PMC13608895",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42783783/",
+      "doi_url": "https://doi.org/10.3390/metabo16090659",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13608895/",
+      "areas": [
+        "MASLD / Metabolic Liver Disease"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42719481",
+      "title": "Research Progress on Dietary Intervention in Radiation Protection.",
+      "authors": [
+        "Du J",
+        "Ding X",
+        "Song B",
+        "Lu L"
+      ],
+      "journal": "Dose-response : a publication of International Hormesis Society",
+      "date": "2026-09-08",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1177/15593258261487097",
+      "pmc": "PMC13554611",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42719481/",
+      "doi_url": "https://doi.org/10.1177/15593258261487097",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13554611/",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42710673",
+      "title": "Postnatal Ketone Deficiency Impairs Adult Oocyte Quality via Enhancing Histone Acetylation in Malnourished Mice.",
+      "authors": [
+        "Zhang XG",
+        "Li MZ",
+        "Sha H",
+        "Tao SY",
+        "Qiao Y",
+        "Yang QW",
+        "Wang LR",
+        "Zhang XQ",
+        "Chong DY",
+        "Hu ZB",
+        "Lin Y",
+        "Ling XF",
+        "Li CJ"
+      ],
+      "journal": "The Journal of biological chemistry",
+      "date": "2026-09-08",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.jbc.2026.113535",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42710673/",
+      "doi_url": "https://doi.org/10.1016/j.jbc.2026.113535",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
       "pmid": "42709766",
       "title": "Ketogenic diet-induced changes in hepatic drug metabolism with potential implications for ozanimod pharmacokinetics in mice.",
       "authors": [
@@ -683,6 +1735,37 @@
       "category_confidence": 1,
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42709151",
+      "title": "Intermittent exogenous ketosis does not reduce acute mountain sickness during early terrestrial high-altitude acclimatization.",
+      "authors": [
+        "Tominec D",
+        "Stalmans M",
+        "Narang BJ",
+        "Pialoux V",
+        "Millet GP",
+        "Poffé C",
+        "Debevec T"
+      ],
+      "journal": "European journal of applied physiology",
+      "date": "2026-09-08",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1007/s00421-026-06426-z",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42709151/",
+      "doi_url": "https://doi.org/10.1007/s00421-026-06426-z",
+      "pmc_url": "",
+      "areas": [
+        "Cardiovascular Health"
+      ],
+      "category_confidence": 4,
+      "evidence_type": "Randomized clinical trial",
+      "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed"
@@ -856,6 +1939,190 @@
       "status": "indexed"
     },
     {
+      "pmid": "42739079",
+      "title": "Improving the Outcome of Brain-Injured Patients by Non-Continuous Feeding to Prevent Dysbiosis.",
+      "authors": [
+        "Corriero A",
+        "Soloperto R",
+        "Giglio M",
+        "Taccone FS",
+        "Puntillo F",
+        "Preiser JC"
+      ],
+      "journal": "Nutrients",
+      "date": "2026-09-04",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3390/nu18172907",
+      "pmc": "PMC13566997",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42739079/",
+      "doi_url": "https://doi.org/10.3390/nu18172907",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13566997/",
+      "areas": [
+        "Inflammation & Immunometabolism",
+        "Brain Injury & Neurotrauma",
+        "Gut Microbiome"
+      ],
+      "category_confidence": 3,
+      "evidence_type": "Randomized clinical trial",
+      "evidence_type_it": "Trial clinico randomizzato",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42783645",
+      "title": "Differences Between Habitual Low and Normal Carbohydrate Intake in Body Composition and Maximal Isometric Strength in Resistance-Trained Men.",
+      "authors": [
+        "Añasco Saca S",
+        "Soifer Velásquez L",
+        "Iman Torres AJ",
+        "Lozada-Urbano M",
+        "Huaita Acha DM",
+        "Castillo-Paredes A",
+        "Pino Arango JA",
+        "Narrea Vargas JJ"
+      ],
+      "journal": "Journal of functional morphology and kinesiology",
+      "date": "2026-09-03",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3390/jfmk11030351",
+      "pmc": "PMC13608179",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42783645/",
+      "doi_url": "https://doi.org/10.3390/jfmk11030351",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13608179/",
+      "areas": [
+        "Aesthetic Medicine & Body Composition",
+        "Sarcopenia & Skeletal Muscle"
+      ],
+      "category_confidence": 7,
+      "evidence_type": "Clinical trial / intervention",
+      "evidence_type_it": "Trial clinico / intervento",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42693052",
+      "title": "[Danggui Shaoyao San promotes ketone body production and utilization to improve brain energy metabolism and prevent Alzheimer's disease].",
+      "authors": [
+        "Yu YZ",
+        "Zhu YH",
+        "Yang XK",
+        "Wang SS",
+        "Sun JQ",
+        "Qiu Y",
+        "Zhao W",
+        "Yao LM",
+        "Li WR"
+      ],
+      "journal": "Zhongguo Zhong yao za zhi = Zhongguo zhongyao zazhi = China journal of Chinese materia medica",
+      "date": "2026-09-03",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.19540/j.cnki.cjcmm.20260505.801",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42693052/",
+      "doi_url": "https://doi.org/10.19540/j.cnki.cjcmm.20260505.801",
+      "pmc_url": "",
+      "areas": [
+        "Alzheimer’s Disease",
+        "Cognitive Function"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42692359",
+      "title": "Interleukin13 Ameliorates Hepatocellular Steatosis via Interleukin13Rα1-c-Jun N-Terminal Kinase-FOS-Like Antigen 2 Signaling Pathway.",
+      "authors": [
+        "von Bülow V",
+        "Felske DA",
+        "Riebeling SB",
+        "Schmidt FP",
+        "Stettler F",
+        "Schmid A",
+        "Karrasch T",
+        "Eder K",
+        "Most E",
+        "Morlock G",
+        "Haase A",
+        "Bier J",
+        "Hermanns HM",
+        "Geier A",
+        "Tuffs C",
+        "Pons-Kühnemann J",
+        "Roderfeld M",
+        "Roeb E"
+      ],
+      "journal": "Cellular and molecular gastroenterology and hepatology",
+      "date": "2026-09-03",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.jcmgh.2026.101879",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42692359/",
+      "doi_url": "https://doi.org/10.1016/j.jcmgh.2026.101879",
+      "pmc_url": "",
+      "areas": [
+        "Obesity",
+        "Dyslipidemia & Lipid Metabolism",
+        "MASLD / Metabolic Liver Disease"
+      ],
+      "category_confidence": 3,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42690152",
+      "title": "Sex- and Ketogenesis-Dependent Effects of Intermittent Fasting on Diet-Induced Fatty Liver Disease.",
+      "authors": [
+        "Aslani T",
+        "Asif S",
+        "Oh Y",
+        "Lee H",
+        "Stocker C",
+        "Pan J",
+        "Kwon S",
+        "Dababneh S",
+        "Zhao X",
+        "Taylor L",
+        "Mullick AE",
+        "Tibbits GF",
+        "Kim RY",
+        "Fullerton MD",
+        "Mulvihill EE",
+        "Son JE",
+        "Kim KH"
+      ],
+      "journal": "Diabetes",
+      "date": "2026-09-03",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.2337/db25-1070",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42690152/",
+      "doi_url": "https://doi.org/10.2337/db25-1070",
+      "pmc_url": "",
+      "areas": [
+        "MASLD / Metabolic Liver Disease"
+      ],
+      "category_confidence": 12,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
       "pmid": "42751354",
       "title": "Ketogenic diet combined with probiotics for polyendocrine metabolic ovarian syndrome: research progress from the perspective of the gut microbiota-host metabolic axis.",
       "authors": [
@@ -882,6 +2149,42 @@
       "category_confidence": 6,
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42737360",
+      "title": "Lipidomic Profiling of Milk Enables Identification of Novel Biomarkers for Subclinical Ketosis in Dairy Cows.",
+      "authors": [
+        "Liu Z",
+        "Ezernieks V",
+        "Hemsworth JE",
+        "Reich CM",
+        "Bath CR",
+        "Berkhout MJ",
+        "Tahir MS",
+        "Marett LC",
+        "Chamberlain AJ",
+        "Goddard ME",
+        "Xiang R",
+        "Rochfort SJ"
+      ],
+      "journal": "Foods (Basel, Switzerland)",
+      "date": "2026-09-02",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3390/foods15173117",
+      "pmc": "PMC13564533",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42737360/",
+      "doi_url": "https://doi.org/10.3390/foods15173117",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13564533/",
+      "areas": [
+        "Dyslipidemia & Lipid Metabolism"
+      ],
+      "category_confidence": 7,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed"
@@ -917,6 +2220,43 @@
       "category_confidence": 8,
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42738886",
+      "title": "Transcriptomic Architecture of Metabolic Dysfunction-Associated Steatotic Liver Disease (MASLD) Risk in Mexican Americans.",
+      "authors": [
+        "Kumar S",
+        "Aceves M",
+        "Guerra L",
+        "Granados J",
+        "Novilla E",
+        "Juarez F",
+        "Oluwadairo T",
+        "Leandro AC",
+        "Leandro M",
+        "Peralta J",
+        "Williams-Blangero S",
+        "Blangero J",
+        "Curran JE"
+      ],
+      "journal": "Cells",
+      "date": "2026-09-01",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3390/cells15171592",
+      "pmc": "PMC13565466",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42738886/",
+      "doi_url": "https://doi.org/10.3390/cells15171592",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13565466/",
+      "areas": [
+        "MASLD / Metabolic Liver Disease"
+      ],
+      "category_confidence": 21,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed"
@@ -982,6 +2322,159 @@
       "status": "indexed"
     },
     {
+      "pmid": "42665778",
+      "title": "Potential Role of Mitochondria-Associated Endoplasmic Reticulum Membranes (MAMs) Abnormalities in Epileptogenesis: Multimodal Mechanisms and Therapeutic Targets.",
+      "authors": [
+        "Fu R",
+        "Liu J",
+        "Fang L",
+        "Guo J"
+      ],
+      "journal": "Molecular neurobiology",
+      "date": "2026-08-29",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1007/s12035-026-06141-y",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42665778/",
+      "doi_url": "https://doi.org/10.1007/s12035-026-06141-y",
+      "pmc_url": "",
+      "areas": [
+        "Epilepsy"
+      ],
+      "category_confidence": 3,
+      "evidence_type": "Clinical trial / intervention",
+      "evidence_type_it": "Trial clinico / intervento",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42737629",
+      "title": "Mitochondrial Distress Signals at the Heart-Liver Interface: Molecular Links Between MASLD and Heart Failure.",
+      "authors": [
+        "Yang X",
+        "Cheng K",
+        "Chen C",
+        "Zhang Y",
+        "Wang DW"
+      ],
+      "journal": "International journal of molecular sciences",
+      "date": "2026-08-28",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3390/ijms27177734",
+      "pmc": "PMC13566728",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42737629/",
+      "doi_url": "https://doi.org/10.3390/ijms27177734",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13566728/",
+      "areas": [
+        "MASLD / Metabolic Liver Disease",
+        "Cardiovascular Health"
+      ],
+      "category_confidence": 11,
+      "evidence_type": "Clinical trial / intervention",
+      "evidence_type_it": "Trial clinico / intervento",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42797405",
+      "title": "Ketone Supplementation Decreased Lipopolysaccharide-Generated Anxiety-like Behavior in Female WAG/Rij Rats.",
+      "authors": [
+        "Rauch E",
+        "Ari C",
+        "D'Agostino DP",
+        "Kovács Z"
+      ],
+      "journal": "Pharmaceuticals (Basel, Switzerland)",
+      "date": "2026-08-27",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3390/ph19091359",
+      "pmc": "PMC13610922",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42797405/",
+      "doi_url": "https://doi.org/10.3390/ph19091359",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13610922/",
+      "areas": [
+        "Supplementation & Nutraceuticals",
+        "Psychiatry & Mental Health"
+      ],
+      "category_confidence": 9,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42753320",
+      "title": "Use of Purified Cannabidiol in Treatment-Resistant Pediatric Epilepsy: Beyond Lennox-Gastaut Syndrome, Dravet Syndrome, and Tuberous Sclerosis Complex.",
+      "authors": [
+        "Kahan MD",
+        "Lin T",
+        "Joshi SM",
+        "Hagopian E",
+        "Vu MH",
+        "Van Hirtum-Das M",
+        "Agurs LD",
+        "Holder DL"
+      ],
+      "journal": "Pediatric neurology",
+      "date": "2026-08-27",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.pediatrneurol.2026.08.012",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42753320/",
+      "doi_url": "https://doi.org/10.1016/j.pediatrneurol.2026.08.012",
+      "pmc_url": "",
+      "areas": [
+        "Epilepsy"
+      ],
+      "category_confidence": 7,
+      "evidence_type": "Observational human study",
+      "evidence_type_it": "Studio osservazionale umano",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42724302",
+      "title": "β-Hydroxybutyrate-induced mitochondrial dysfunction and oxidative stress in BMSCs are ameliorated by mitophagy activation.",
+      "authors": [
+        "Tang T",
+        "Zhou J",
+        "Jia X",
+        "Shao J",
+        "Wang M",
+        "Xia S",
+        "Chen S",
+        "Sun W",
+        "Wang J",
+        "Lai S"
+      ],
+      "journal": "Frontiers in cell and developmental biology",
+      "date": "2026-08-27",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3389/fcell.2026.1926968",
+      "pmc": "PMC13558407",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42724302/",
+      "doi_url": "https://doi.org/10.3389/fcell.2026.1926968",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13558407/",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
       "pmid": "42723855",
       "title": "Effects of switching from a high-fat diet to a ketogenic diet on oxidative stress, nitrosative damage, and protein glycation in rat skin.",
       "authors": [
@@ -1011,6 +2504,36 @@
       "status": "indexed"
     },
     {
+      "pmid": "42661216",
+      "title": "Interventions targeting challenges experienced by individuals with Pitt Hopkins syndrome: a scoping review.",
+      "authors": [
+        "Dolik-Michno M",
+        "Starbrink M",
+        "Wandin H",
+        "Grönlund AJ",
+        "Gustavsson M",
+        "Johnels L"
+      ],
+      "journal": "Orphanet journal of rare diseases",
+      "date": "2026-08-27",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1186/s13023-026-04561-6",
+      "pmc": "PMC13523344",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42661216/",
+      "doi_url": "https://doi.org/10.1186/s13023-026-04561-6",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13523344/",
+      "areas": [
+        "Epilepsy"
+      ],
+      "category_confidence": 3,
+      "evidence_type": "Case report / case series",
+      "evidence_type_it": "Case report / case series",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
       "pmid": "42661052",
       "title": "Influence of baseline nutritional status on ketogenic diet efficacy in children with drug-resistant epilepsy.",
       "authors": [
@@ -1032,6 +2555,40 @@
         "Epilepsy"
       ],
       "category_confidence": 13,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42660124",
+      "title": "Effect of diet macronutrient content on the cardiometabolic response to weight loss: A randomized clinical trial.",
+      "authors": [
+        "Petersen MC",
+        "Smith GI",
+        "Farabi SS",
+        "Palacios HH",
+        "Shankaran M",
+        "Hellerstein MK",
+        "Patterson BW",
+        "Klein S"
+      ],
+      "journal": "Cell metabolism",
+      "date": "2026-08-27",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.cmet.2026.07.020",
+      "pmc": "PMC13551625",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42660124/",
+      "doi_url": "https://doi.org/10.1016/j.cmet.2026.07.020",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13551625/",
+      "areas": [
+        "Obesity",
+        "Dyslipidemia & Lipid Metabolism",
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 7,
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
@@ -1073,6 +2630,34 @@
       "status": "indexed"
     },
     {
+      "pmid": "42783021",
+      "title": "A Structured Narrative Review of Contemporary Dietary Strategies Following Acute Coronary Syndromes.",
+      "authors": [
+        "Cheung YL",
+        "Hamilton-Craig C",
+        "Layland J"
+      ],
+      "journal": "Journal of cardiovascular development and disease",
+      "date": "2026-08-26",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3390/jcdd13090414",
+      "pmc": "PMC13607391",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42783021/",
+      "doi_url": "https://doi.org/10.3390/jcdd13090414",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13607391/",
+      "areas": [
+        "Cardiovascular Health",
+        "Dyslipidemia & Lipid Metabolism"
+      ],
+      "category_confidence": 3,
+      "evidence_type": "Randomized clinical trial",
+      "evidence_type_it": "Trial clinico randomizzato",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
       "pmid": "42738960",
       "title": "Do Children with Drug-Resistant Epilepsy Exhibit the Same Eating Habits and Feeding Difficulties as Their Healthy Peers? A Multifaceted Assessment of Eating Habits, Feeding Behaviors, and Nutritional Status in Pediatric Patients with Drug-Resistant Epilepsy on a Ketogenic Diet Compared with Healthy Children in Lower Silesia.",
       "authors": [
@@ -1096,6 +2681,89 @@
       "category_confidence": 12,
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42669023",
+      "title": "Online-Sourced Retatrutide Complicating Impending Diabetic Ketoacidosis in a Patient With Type 1 Diabetes and Concurrent Shigella Gastroenteritis.",
+      "authors": [
+        "Branine N"
+      ],
+      "journal": "Cureus",
+      "date": "2026-08-26",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.7759/cureus.115260",
+      "pmc": "PMC13525912",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42669023/",
+      "doi_url": "https://doi.org/10.7759/cureus.115260",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13525912/",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Case report / case series",
+      "evidence_type_it": "Case report / case series",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42648038",
+      "title": "Determination of 10 nitrosamines in stinky mandarin fish and cumulative health risk assessment across four dietary patterns.",
+      "authors": [
+        "Sang C",
+        "Wang D",
+        "Zhao Y",
+        "Niu Y",
+        "Zhang J",
+        "Shao B"
+      ],
+      "journal": "Ecotoxicology and environmental safety",
+      "date": "2026-08-26",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.ecoenv.2026.120690",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42648038/",
+      "doi_url": "https://doi.org/10.1016/j.ecoenv.2026.120690",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42661181",
+      "title": "Nutritional modulation of neuroinflammation in Alzheimer's disease and mild cognitive impairment: a systematic review of clinical and preclinical evidence.",
+      "authors": [
+        "Sayed MA",
+        "Said A",
+        "Meselhy M"
+      ],
+      "journal": "BMC geriatrics",
+      "date": "2026-08-25",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1186/s12877-026-08126-x",
+      "pmc": "PMC13520152",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42661181/",
+      "doi_url": "https://doi.org/10.1186/s12877-026-08126-x",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13520152/",
+      "areas": [
+        "Alzheimer’s Disease",
+        "Inflammation & Immunometabolism"
+      ],
+      "category_confidence": 12,
+      "evidence_type": "Systematic review / meta-analysis",
+      "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed"
@@ -1150,6 +2818,39 @@
       "category_confidence": 6,
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42641258",
+      "title": "Total glucosides of paeony ameliorate cognitive impairment by promoting ketogenesis and modulating Glu-AMPAR signaling.",
+      "authors": [
+        "Hu G",
+        "Gong S",
+        "Yan S",
+        "Rong L",
+        "Zhang H",
+        "Wu H",
+        "Yao L",
+        "Li W"
+      ],
+      "journal": "Biomedicine & pharmacotherapy = Biomedecine & pharmacotherapie",
+      "date": "2026-08-25",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.biopha.2026.119851",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42641258/",
+      "doi_url": "https://doi.org/10.1016/j.biopha.2026.119851",
+      "pmc_url": "",
+      "areas": [
+        "Cognitive Function",
+        "Oncology & Cancer Metabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed"
@@ -1213,6 +2914,44 @@
       "status": "indexed"
     },
     {
+      "pmid": "42638834",
+      "title": "Glucose Transporter Deficiency Syndrome Type 1 (Glut1-DS): New Insights From a Brazilian Cohort of Patients.",
+      "authors": [
+        "Sobrinho LMF",
+        "Fontana JC",
+        "Lorea CF",
+        "van der Linden Júnior H",
+        "Leite ACS",
+        "Maia RE",
+        "Farret L",
+        "Moura de Souza CF",
+        "Poloni S",
+        "Poswar FO",
+        "Schwartz IVD",
+        "Sperb-Ludwig F"
+      ],
+      "journal": "JIMD reports",
+      "date": "2026-08-23",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1002/jmd2.70113",
+      "pmc": "PMC13500214",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42638834/",
+      "doi_url": "https://doi.org/10.1002/jmd2.70113",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13500214/",
+      "areas": [
+        "Diabetes & Glucose Metabolism",
+        "GLUT1 Deficiency Syndrome",
+        "Epilepsy"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
       "pmid": "42632233",
       "title": "Epigenetic ageing is accelerated in drug-resistant epilepsy and dynamically modulated during ketogenic diet therapy.",
       "authors": [
@@ -1238,6 +2977,102 @@
       "category_confidence": 13,
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42629533",
+      "title": "Impact of Menopause and Menopausal Hormone Therapy on Liver-Kidney-Metabolic Health.",
+      "authors": [
+        "Jamalinia M",
+        "Lonardo A",
+        "Weiskirchen R"
+      ],
+      "journal": "Advances in therapy",
+      "date": "2026-08-22",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1007/s12325-026-03758-2",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42629533/",
+      "doi_url": "https://doi.org/10.1007/s12325-026-03758-2",
+      "pmc_url": "",
+      "areas": [
+        "MASLD / Metabolic Liver Disease",
+        "Chronic Kidney Disease"
+      ],
+      "category_confidence": 3,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42628914",
+      "title": "Time-restricted eating, immunomodulation and ketone metabolism in humans.",
+      "authors": [
+        "Macheret NA",
+        "Thota GP",
+        "Hengist A",
+        "Courville A",
+        "Chen KY",
+        "Brychta RJ",
+        "Klein RJ",
+        "Malandrino N",
+        "Puchalska P",
+        "Crawford PA",
+        "Duan D",
+        "Huang A",
+        "Recupero TC",
+        "Sullivan BS",
+        "Sack MN",
+        "Chung ST"
+      ],
+      "journal": "Metabolism: clinical and experimental",
+      "date": "2026-08-21",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.metabol.2026.156753",
+      "pmc": "PMC13585283",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42628914/",
+      "doi_url": "https://doi.org/10.1016/j.metabol.2026.156753",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13585283/",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42636552",
+      "title": "Research trends and evidence landscape of metabolomics and machine learning in the diagnosis of subclinical ketosis in dairy cows: a systematic review and bibliometric analysis.",
+      "authors": [
+        "Dang HD",
+        "Phetcharaburanin J",
+        "Sukon P",
+        "Thamrongyoswittayakul C"
+      ],
+      "journal": "Research in veterinary science",
+      "date": "2026-08-20",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.rvsc.2026.106368",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42636552/",
+      "doi_url": "https://doi.org/10.1016/j.rvsc.2026.106368",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Systematic review / meta-analysis",
+      "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed"
@@ -1271,6 +3106,35 @@
       "category_confidence": 13,
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
+      "source": "PubMed",
+      "first_seen": "2026-09-29",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42689126",
+      "title": "Glycosylation disorders in pediatric epilepsy: pathophysiology, imaging and precision therapy.",
+      "authors": [
+        "Fan L",
+        "Shen Y",
+        "Wang J",
+        "Gan J"
+      ],
+      "journal": "Frontiers in neurology",
+      "date": "2026-08-19",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3389/fneur.2026.1878916",
+      "pmc": "PMC13536898",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42689126/",
+      "doi_url": "https://doi.org/10.3389/fneur.2026.1878916",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13536898/",
+      "areas": [
+        "Epilepsy",
+        "Longevity & Healthy Aging"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Clinical trial / intervention",
+      "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed"
@@ -1342,1777 +3206,8 @@
       "source": "PubMed",
       "first_seen": "2026-09-29",
       "status": "indexed"
-    },
-    {
-      "pmid": "42617797",
-      "title": "Ketogenic diet attenuates seizures by promoting lipid droplet formation via peroxisome proliferator-activated receptor gamma signaling pathway.",
-      "authors": [
-        "Xi Z",
-        "Zhang W",
-        "Liu Q",
-        "Wang Q",
-        "Qi Y"
-      ],
-      "journal": "Life sciences",
-      "date": "2026-08-19",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.lfs.2026.124638",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42617797/",
-      "doi_url": "https://doi.org/10.1016/j.lfs.2026.124638",
-      "pmc_url": "",
-      "areas": [
-        "Epilepsy",
-        "Dyslipidemia & Lipid Metabolism"
-      ],
-      "category_confidence": 10,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42654261",
-      "title": "Effects of the Mediterranean Diet, Ketogenic Diet, and Intermittent Fasting on Iron Metabolism and Iron Deficiency Risk in Adults with Obesity: A Systematic Literature Review.",
-      "authors": [
-        "La Vignera S",
-        "Condorelli R"
-      ],
-      "journal": "Nutrients",
-      "date": "2026-08-17",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/nu18162681",
-      "pmc": "PMC13517051",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42654261/",
-      "doi_url": "https://doi.org/10.3390/nu18162681",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13517051/",
-      "areas": [
-        "Obesity"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Systematic review / meta-analysis",
-      "evidence_type_it": "Revisione sistematica / meta-analisi",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42609476",
-      "title": "Rehmannia glutinosa Extracts Enhances Ketone Bodies Expression and Alleviates Ulcerative Colitis as A Novel Ketogenic Functional Food.",
-      "authors": [
-        "Gao Y",
-        "Wang S",
-        "Yang Y",
-        "Tang W",
-        "Zhen J",
-        "Song X"
-      ],
-      "journal": "Food science & nutrition",
-      "date": "2026-08-16",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1002/fsn3.72263",
-      "pmc": "PMC13478377",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42609476/",
-      "doi_url": "https://doi.org/10.1002/fsn3.72263",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13478377/",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42666203",
-      "title": "Five-year patient-reported outcomes of individualized nutrition therapy supporting nutritional ketosis in adults with type 2 diabetes.",
-      "authors": [
-        "Adams RN",
-        "Athinarayanan SJ",
-        "Phinney SD",
-        "Volek JS",
-        "McKenzie AL"
-      ],
-      "journal": "Frontiers in nutrition",
-      "date": "2026-08-14",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3389/fnut.2026.1855196",
-      "pmc": "PMC13521770",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42666203/",
-      "doi_url": "https://doi.org/10.3389/fnut.2026.1855196",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13521770/",
-      "areas": [
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Randomized clinical trial",
-      "evidence_type_it": "Trial clinico randomizzato",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42617503",
-      "title": "Real-world experience with GLP-1 receptor agonists in adults with epilepsy following a modified atkins diet.",
-      "authors": [
-        "El Zibaoui R",
-        "McDonald TJW",
-        "Henry-Barron BJ",
-        "Vizthum D",
-        "Cervenka MC"
-      ],
-      "journal": "Epilepsy research",
-      "date": "2026-08-14",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.eplepsyres.2026.107896",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42617503/",
-      "doi_url": "https://doi.org/10.1016/j.eplepsyres.2026.107896",
-      "pmc_url": "",
-      "areas": [
-        "Epilepsy"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Observational human study",
-      "evidence_type_it": "Studio osservazionale umano",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42649914",
-      "title": "Ketogenic Diet as an Adjuvant in Epithelial Cancers: Mechanisms, Model Systems, and Translational Opportunities.",
-      "authors": [
-        "Ylikomi T",
-        "Nees M"
-      ],
-      "journal": "Cancers",
-      "date": "2026-08-12",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/cancers18162600",
-      "pmc": "PMC13511420",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42649914/",
-      "doi_url": "https://doi.org/10.3390/cancers18162600",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13511420/",
-      "areas": [
-        "Oncology & Cancer Metabolism"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42582329",
-      "title": "Ketogenic Diet Extinguishes Firing at the Synapses.",
-      "authors": [
-        "Gu B"
-      ],
-      "journal": "Epilepsy currents",
-      "date": "2026-08-10",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1177/15357597261468567",
-      "pmc": "PMC13457408",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42582329/",
-      "doi_url": "https://doi.org/10.1177/15357597261468567",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13457408/",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-18",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42574433",
-      "title": "Ketogenic effects of milk protein-coated medium-chain triglycerides in healthy men: A randomized, double-blind, crossover study.",
-      "authors": [
-        "Ito K",
-        "Kawasaki Y",
-        "Tamura K",
-        "Nakamura K",
-        "Kawai Y",
-        "Watanabe T"
-      ],
-      "journal": "PloS one",
-      "date": "2026-08-10",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1371/journal.pone.0355475",
-      "pmc": "PMC13456251",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42574433/",
-      "doi_url": "https://doi.org/10.1371/journal.pone.0355475",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13456251/",
-      "areas": [
-        "Medium-Chain Triglycerides (MCT)",
-        "Dyslipidemia & Lipid Metabolism"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Randomized clinical trial",
-      "evidence_type_it": "Trial clinico randomizzato",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42572719",
-      "title": "Early-Onset Euglycemic Diabetic Ketoacidosis Following Empagliflozin Initiation Triggered by Acute Influenza and a Ketogenic Diet.",
-      "authors": [
-        "Meyer MS",
-        "Ramesh S",
-        "Rammouni Y",
-        "Lasry S",
-        "Sawan H",
-        "Zakaria K"
-      ],
-      "journal": "Cureus",
-      "date": "2026-08-09",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.7759/cureus.114227",
-      "pmc": "PMC13453335",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42572719/",
-      "doi_url": "https://doi.org/10.7759/cureus.114227",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13453335/",
-      "areas": [
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 9,
-      "evidence_type": "Case report / case series",
-      "evidence_type_it": "Case report / case series",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42572291",
-      "title": "[Ketogenic diet reintroduction in an adult patient with glucose transporter type 1 deficiency syndrome].",
-      "authors": [
-        "Kusakabe S",
-        "Osakada Y",
-        "Morihara R",
-        "Dohi Y",
-        "Shimono K",
-        "Ishiura H"
-      ],
-      "journal": "Rinsho shinkeigaku = Clinical neurology",
-      "date": "2026-08-07",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.5692/clinicalneurol.cn-002255",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42572291/",
-      "doi_url": "https://doi.org/10.5692/clinicalneurol.cn-002255",
-      "pmc_url": "",
-      "areas": [
-        "Diabetes & Glucose Metabolism",
-        "GLUT1 Deficiency Syndrome"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Case report / case series",
-      "evidence_type_it": "Case report / case series",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42625708",
-      "title": "Participant food tracking in psychiatric ketogenic metabolic therapy: an unresolved clinical, psychosocial, and implementation question.",
-      "authors": [
-        "Laurent N"
-      ],
-      "journal": "Frontiers in nutrition",
-      "date": "2026-08-06",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3389/fnut.2026.1879746",
-      "pmc": "PMC13489925",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42625708/",
-      "doi_url": "https://doi.org/10.3389/fnut.2026.1879746",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13489925/",
-      "areas": [
-        "Psychiatry & Mental Health"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42621104",
-      "title": "Ketogenic diet and Parkinson's disease.",
-      "authors": [
-        "Ye Y",
-        "Li S",
-        "Chen T"
-      ],
-      "journal": "Frontiers in molecular neuroscience",
-      "date": "2026-08-05",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3389/fnmol.2026.1914756",
-      "pmc": "PMC13486180",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42621104/",
-      "doi_url": "https://doi.org/10.3389/fnmol.2026.1914756",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13486180/",
-      "areas": [
-        "Parkinson’s Disease"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Review",
-      "evidence_type_it": "Revisione",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42591798",
-      "title": "The ketogenic diet ameliorates behavioral abnormalities in a PTZ-induced zebrafish larvae model via modulating neurotransmitter balance.",
-      "authors": [
-        "Yang X",
-        "Lin J",
-        "Zhang Q",
-        "Xia Y",
-        "Zhou S",
-        "Wang Y",
-        "Li Q",
-        "Yu L"
-      ],
-      "journal": "IBRO neuroscience reports",
-      "date": "2026-08-04",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.ibneur.2026.08.001",
-      "pmc": "PMC13463253",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42591798/",
-      "doi_url": "https://doi.org/10.1016/j.ibneur.2026.08.001",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13463253/",
-      "areas": [
-        "Epilepsy"
-      ],
-      "category_confidence": 4,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42588148",
-      "title": "Do Ketogenic Diets Produce Greater Weight Loss than Higher-Carbohydrate Diets Under Comparable Prescribed Energy Conditions? A Systematic Review and Meta-Analysis of Randomized Controlled Trials.",
-      "authors": [
-        "Żurawski T",
-        "Bartosiewicz A"
-      ],
-      "journal": "Nutrients",
-      "date": "2026-08-04",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/nu18152525",
-      "pmc": "PMC13468603",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42588148/",
-      "doi_url": "https://doi.org/10.3390/nu18152525",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13468603/",
-      "areas": [
-        "Obesity"
-      ],
-      "category_confidence": 9,
-      "evidence_type": "Systematic review / meta-analysis",
-      "evidence_type_it": "Revisione sistematica / meta-analisi",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42588121",
-      "title": "Metabolic Therapy in Glioblastoma-Mapping the Evidence for Ketogenic Diet as an Adjunctive Strategy.",
-      "authors": [
-        "Wiśniewska D",
-        "Winiarska M",
-        "Krupa-Nurcek S"
-      ],
-      "journal": "Nutrients",
-      "date": "2026-08-03",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/nu18152498",
-      "pmc": "PMC13467616",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42588121/",
-      "doi_url": "https://doi.org/10.3390/nu18152498",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13467616/",
-      "areas": [
-        "Oncology & Cancer Metabolism"
-      ],
-      "category_confidence": 10,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42546573",
-      "title": "Corrigendum to \"The efficacy and safety of ketogenic diet therapy among adolescents and adults with drug resistant epilepsy: A systematic review and meta-analysis\" [Seizure: European Journal of Epilepsy volume 140 (2026) p39-51].",
-      "authors": [
-        "Farrar T",
-        "D'Silva A",
-        "Cardamone M",
-        "Palacios-Derflingher L",
-        "Farrar MA"
-      ],
-      "journal": "Seizure",
-      "date": "2026-08-03",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.seizure.2026.07.026",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42546573/",
-      "doi_url": "https://doi.org/10.1016/j.seizure.2026.07.026",
-      "pmc_url": "",
-      "areas": [
-        "Epilepsy"
-      ],
-      "category_confidence": 12,
-      "evidence_type": "Systematic review / meta-analysis",
-      "evidence_type_it": "Revisione sistematica / meta-analisi",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42455758",
-      "title": "Ketogenic β-hydroxybutyrate-regulated β-hydroxybutyrylation of HSPE1 alleviates neuronal apoptosis in MPTP/MPP+ induced Parkinson's disease models.",
-      "authors": [
-        "Liu Y",
-        "Wang M",
-        "Shi S",
-        "Zhang J",
-        "Wang W",
-        "Xiang J"
-      ],
-      "journal": "Food & function",
-      "date": "2026-08-03",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1039/d6fo01372d",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42455758/",
-      "doi_url": "https://doi.org/10.1039/d6fo01372d",
-      "pmc_url": "",
-      "areas": [
-        "Parkinson’s Disease"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42652111",
-      "title": "The Ketogenic Diet in the Prevention and Treatment of Hypertension (HTN).",
-      "authors": [
-        "Rodzeń Ł",
-        "Dyńka D",
-        "Rodzeń M",
-        "Karakuła-Juchnowicz H",
-        "Łojko D",
-        "Kraszewski S",
-        "Grzywacz Ż",
-        "Bikman B",
-        "Unwin J",
-        "Unwin D",
-        "Fazio S"
-      ],
-      "journal": "Biomedicines",
-      "date": "2026-07-31",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/biomedicines14081728",
-      "pmc": "PMC13510086",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42652111/",
-      "doi_url": "https://doi.org/10.3390/biomedicines14081728",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13510086/",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 1,
-      "evidence_type": "Randomized clinical trial",
-      "evidence_type_it": "Trial clinico randomizzato",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42535782",
-      "title": "Correction to \"Metabolism-Based Molecular Subtyping Endows Effective Ketogenic Therapy in p53-Mutant Colon Cancer\".",
-      "authors": [],
-      "journal": "Advanced science (Weinheim, Baden-Wurttemberg, Germany)",
-      "date": "2026-07-31",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1002/advs.76845",
-      "pmc": "PMC13426091",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42535782/",
-      "doi_url": "https://doi.org/10.1002/advs.76845",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13426091/",
-      "areas": [
-        "Oncology & Cancer Metabolism"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42530689",
-      "title": "Effect of long-term use of very low-carbohydrate Ketogenic diet on the thyroid gland and adipose tissue of adult male albino rats (biochemical and histological study).",
-      "authors": [
-        "Ibrahim RA",
-        "Elwaddah NM",
-        "Aziz NM",
-        "Yousef JE",
-        "Abd El-Aleem SAE",
-        "Saber EA"
-      ],
-      "journal": "Journal of molecular histology",
-      "date": "2026-07-30",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1007/s10735-026-10907-y",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42530689/",
-      "doi_url": "https://doi.org/10.1007/s10735-026-10907-y",
-      "pmc_url": "",
-      "areas": [
-        "Thyroid Disorders",
-        "Obesity"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42530544",
-      "title": "Continuing Ketogenic Diet Therapy in Setting of Hypercalcemia.",
-      "authors": [
-        "Sarabia L",
-        "Wetzel A",
-        "Sawyer J",
-        "Giannini S",
-        "Imel E",
-        "Delima SI"
-      ],
-      "journal": "Journal of child neurology",
-      "date": "2026-07-30",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1177/08830738261464415",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42530544/",
-      "doi_url": "https://doi.org/10.1177/08830738261464415",
-      "pmc_url": "",
-      "areas": [
-        "Epilepsy"
-      ],
-      "category_confidence": 2,
-      "evidence_type": "Observational human study",
-      "evidence_type_it": "Studio osservazionale umano",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42525374",
-      "title": "Ckmm-Cre transgenic mice maintain phenotypic and cardiac mitochondrial homeostasis during ketogenic feeding.",
-      "authors": [
-        "Dogan SA"
-      ],
-      "journal": "Molecular and cellular biochemistry",
-      "date": "2026-07-29",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1007/s11010-026-05672-1",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42525374/",
-      "doi_url": "https://doi.org/10.1007/s11010-026-05672-1",
-      "pmc_url": "",
-      "areas": [
-        "Cardiovascular Health"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42521800",
-      "title": "Ketogenic diet for pediatric drug-resistant epilepsy: sleep, children's psychosocial functioning, and maternal mental health.",
-      "authors": [
-        "Nassar MF",
-        "El-Rashidy OF",
-        "Shata MO",
-        "ElHagaar MA",
-        "Abdelmageed RI"
-      ],
-      "journal": "Pediatric research",
-      "date": "2026-07-28",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1038/s41390-026-05330-8",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42521800/",
-      "doi_url": "https://doi.org/10.1038/s41390-026-05330-8",
-      "pmc_url": "",
-      "areas": [
-        "Epilepsy"
-      ],
-      "category_confidence": 13,
-      "evidence_type": "Observational human study",
-      "evidence_type_it": "Studio osservazionale umano",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42589338",
-      "title": "Effect of Ketogenic Diet Versus Vegan Diet on Obesity-Induced Testicular Dysfunction and Mediating Role of Gut Microbiota.",
-      "authors": [
-        "Salama SA",
-        "Hassan NH",
-        "Abdelhadi AA",
-        "Soliman EK",
-        "Soliman AHM",
-        "Malek MM",
-        "Atia RRA",
-        "Mohamed SRA",
-        "Wahid IM",
-        "Salem IM",
-        "Aldisi D",
-        "Abulmeaty MMA",
-        "Abdal-Hay A",
-        "Wahid RM"
-      ],
-      "journal": "International journal of molecular sciences",
-      "date": "2026-07-27",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/ijms27156681",
-      "pmc": "PMC13466703",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42589338/",
-      "doi_url": "https://doi.org/10.3390/ijms27156681",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13466703/",
-      "areas": [
-        "Gut Microbiome",
-        "Obesity",
-        "Reproduction & Fertility"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42588040",
-      "title": "Dietary Interventions and Testosterone Levels in Obese Men: A Systematic Review Comparing the Mediterranean Diet, Ketogenic Diet, and Intermittent Fasting.",
-      "authors": [
-        "La Vignera S",
-        "Condorelli RA"
-      ],
-      "journal": "Nutrients",
-      "date": "2026-07-24",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/nu18152417",
-      "pmc": "PMC13467967",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42588040/",
-      "doi_url": "https://doi.org/10.3390/nu18152417",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13467967/",
-      "areas": [
-        "Obesity",
-        "Reproduction & Fertility"
-      ],
-      "category_confidence": 9,
-      "evidence_type": "Systematic review / meta-analysis",
-      "evidence_type_it": "Revisione sistematica / meta-analisi",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42497811",
-      "title": "The effect of simultaneous application of plant-rich ketogenic diet and intermittent fasting on early-to-mid-stage Alzheimer's disease: a randomised controlled trial.",
-      "authors": [
-        "Tağraf B",
-        "Kaygusuz D",
-        "Yerlikaya D",
-        "Oğul ÖE",
-        "Hanoğlu L"
-      ],
-      "journal": "The journal of nutrition, health & aging",
-      "date": "2026-07-24",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.jnha.2026.100930",
-      "pmc": "PMC13420710",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42497811/",
-      "doi_url": "https://doi.org/10.1016/j.jnha.2026.100930",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13420710/",
-      "areas": [
-        "Alzheimer’s Disease",
-        "Cognitive Function"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Randomized clinical trial",
-      "evidence_type_it": "Trial clinico randomizzato",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42490714",
-      "title": "[Impact of a 3-Month Ketogenic Diet on Euthymia in Bipolar II Disorder: A Case Report].",
-      "authors": [
-        "Rioux C",
-        "Cholette-Tétrault S",
-        "Dumas V",
-        "Cunnane S",
-        "Zemmour K"
-      ],
-      "journal": "Sante mentale au Quebec",
-      "date": "2026-07-23",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42490714/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Psychiatry & Mental Health"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Case report / case series",
-      "evidence_type_it": "Case report / case series",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42558188",
-      "title": "A 6-week ketogenic diet in treatment-resistant depression: a prospective single-arm feasibility pilot trial.",
-      "authors": [
-        "Cukaci C",
-        "Rabl U",
-        "Frey R"
-      ],
-      "journal": "Frontiers in nutrition",
-      "date": "2026-07-22",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3389/fnut.2026.1870412",
-      "pmc": "PMC13437400",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42558188/",
-      "doi_url": "https://doi.org/10.3389/fnut.2026.1870412",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13437400/",
-      "areas": [
-        "Psychiatry & Mental Health"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42514457",
-      "title": "Acute 1,3-Butanediol Co-Ingestion with Carbohydrate Does Not Improve Endurance Performance in Chronically Ketogenic Male Athletes.",
-      "authors": [
-        "Carpenter M",
-        "Brouner J",
-        "Spendiff O"
-      ],
-      "journal": "Nutrients",
-      "date": "2026-07-22",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/nu18142388",
-      "pmc": "PMC13415439",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42514457/",
-      "doi_url": "https://doi.org/10.3390/nu18142388",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13415439/",
-      "areas": [
-        "Exercise & Performance"
-      ],
-      "category_confidence": 21,
-      "evidence_type": "Randomized clinical trial",
-      "evidence_type_it": "Trial clinico randomizzato",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42509863",
-      "title": "Integrative Multi-Omics Reveal Metabolic Reprogramming by Ketogenic Diet in Melanoma Xenografts.",
-      "authors": [
-        "Dnyansagar R",
-        "Bordag N",
-        "Poupardin R",
-        "Tevini J",
-        "Stefan VE",
-        "Derdak S",
-        "Bilban M",
-        "Fortelny N",
-        "Kofler B",
-        "Lang R",
-        "Weber DD"
-      ],
-      "journal": "Biomolecules",
-      "date": "2026-07-22",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/biom16071071",
-      "pmc": "PMC13407059",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42509863/",
-      "doi_url": "https://doi.org/10.3390/biom16071071",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13407059/",
-      "areas": [
-        "Oncology & Cancer Metabolism"
-      ],
-      "category_confidence": 9,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42531745",
-      "title": "Inconsistency Between the Definition of \"Real-World Exposure\" and the Predefined Inclusion Criteria in a Systematic Review on the Ketogenic Diet for Polycystic Ovary Syndrome.",
-      "authors": [
-        "Zhu H",
-        "Lu C",
-        "Shen L"
-      ],
-      "journal": "Clinical nutrition (Edinburgh, Scotland)",
-      "date": "2026-07-20",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.clnu.2026.106732",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42531745/",
-      "doi_url": "https://doi.org/10.1016/j.clnu.2026.106732",
-      "pmc_url": "",
-      "areas": [
-        "Polyendocrine Metabolic Ovarian Syndrome (PMOS, formerly PCOS)"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Systematic review / meta-analysis",
-      "evidence_type_it": "Revisione sistematica / meta-analisi",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42472478",
-      "title": "Effects of aging in combination with high-fat or ketogenic diet on skeletal muscle hypertrophy after functional overloading in C57BL/6J mice.",
-      "authors": [
-        "Dirmontas M",
-        "Minderis P",
-        "Ratkevicius A"
-      ],
-      "journal": "Growth factors (Chur, Switzerland)",
-      "date": "2026-07-19",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1080/08977194.2026.2704554",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42472478/",
-      "doi_url": "https://doi.org/10.1080/08977194.2026.2704554",
-      "pmc_url": "",
-      "areas": [
-        "Longevity & Healthy Aging",
-        "Sarcopenia & Skeletal Muscle"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42539589",
-      "title": "Effects of ketogenic diet therapy in outpatient anti epileptic drug cost reduction and parental satisfaction among children with intractable epilepsy.",
-      "authors": [
-        "Rafli A",
-        "Handryastuti S",
-        "Soebadi A",
-        "Santoso DN",
-        "Rahmawati I",
-        "Pramana R",
-        "Ramadhan R",
-        "Anthony CP",
-        "Mangunatmadja I"
-      ],
-      "journal": "Frontiers in neurology",
-      "date": "2026-07-17",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3389/fneur.2026.1872749",
-      "pmc": "PMC13423960",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42539589/",
-      "doi_url": "https://doi.org/10.3389/fneur.2026.1872749",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13423960/",
-      "areas": [
-        "Epilepsy"
-      ],
-      "category_confidence": 13,
-      "evidence_type": "Observational human study",
-      "evidence_type_it": "Studio osservazionale umano",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42514416",
-      "title": "Metabolomic Profiling of Plasma in Children with Drug-Resistant Epilepsy: The Effect of the Ketogenic Diet on Energy and Amino Acid Pathways.",
-      "authors": [
-        "Cieślak M",
-        "Gątarek P",
-        "Safiński P",
-        "Przyslo L",
-        "Kałużna-Czaplińska J"
-      ],
-      "journal": "Nutrients",
-      "date": "2026-07-17",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/nu18142347",
-      "pmc": "PMC13415213",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42514416/",
-      "doi_url": "https://doi.org/10.3390/nu18142347",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13415213/",
-      "areas": [
-        "Epilepsy"
-      ],
-      "category_confidence": 12,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42475802",
-      "title": "Integrated UPLC-MS/MS with interpretable artificial intelligence-enhanced Raman and near-infrared spectroscopy for multi-objective monitoring of ginkgo ketone ester tablets column purification.",
-      "authors": [
-        "Zhou Q",
-        "Jiang M",
-        "Wang D",
-        "Wang J",
-        "Tao Y"
-      ],
-      "journal": "Journal of pharmaceutical and biomedical analysis",
-      "date": "2026-07-17",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.jpba.2026.117664",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42475802/",
-      "doi_url": "https://doi.org/10.1016/j.jpba.2026.117664",
-      "pmc_url": "",
-      "areas": [
-        "Exogenous Ketones",
-        "Supplementation & Nutraceuticals"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42535090",
-      "title": "Hypomanic symptoms and first manic episode during ketogenic diet treatment in a patient taking venlafaxine: a case report with longitudinal glucose-ketone index and clinical monitoring.",
-      "authors": [
-        "Pou-Álvarez M",
-        "Casanovas F",
-        "Córcoles D",
-        "León-Caballero J",
-        "Sabaté A",
-        "González-Fresnedo AM",
-        "Samos P",
-        "Perez-Sola V",
-        "Martín LM"
-      ],
-      "journal": "Frontiers in nutrition",
-      "date": "2026-07-16",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3389/fnut.2026.1873930",
-      "pmc": "PMC13422547",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42535090/",
-      "doi_url": "https://doi.org/10.3389/fnut.2026.1873930",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13422547/",
-      "areas": [
-        "Diabetes & Glucose Metabolism",
-        "Psychiatry & Mental Health"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Case report / case series",
-      "evidence_type_it": "Case report / case series",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42457955",
-      "title": "Ketogenic diet mediates intestinal tumorigenesis through lipids not ketones.",
-      "authors": [
-        "Shay JES",
-        "Chi F",
-        "Tzouanas CN",
-        "Han S",
-        "Zhang X",
-        "Ten Hoeve J",
-        "Williams KJ",
-        "Neptun S",
-        "Sever T",
-        "Fuentes I",
-        "Bhatia SN",
-        "Calibasi-Kocal G",
-        "Vander Heiden MG",
-        "Shalek AK",
-        "Yilmaz ÖH"
-      ],
-      "journal": "Nature",
-      "date": "2026-07-15",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1038/s41586-026-10779-y",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42457955/",
-      "doi_url": "https://doi.org/10.1038/s41586-026-10779-y",
-      "pmc_url": "",
-      "areas": [
-        "Oncology & Cancer Metabolism",
-        "Dyslipidemia & Lipid Metabolism"
-      ],
-      "category_confidence": 10,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42456869",
-      "title": "Ketogenic diet in rheumatoid arthritis, psoriatic arthritis and psoriasis: A scoping review of clinical and mechanistic evidence.",
-      "authors": [
-        "Conforti A",
-        "Russo V",
-        "Lucchetti L",
-        "Fiorino E",
-        "Messina F",
-        "Francomano D",
-        "Merendino N",
-        "Marchetti M"
-      ],
-      "journal": "Autoimmunity reviews",
-      "date": "2026-07-15",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.autrev.2026.104137",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42456869/",
-      "doi_url": "https://doi.org/10.1016/j.autrev.2026.104137",
-      "pmc_url": "",
-      "areas": [
-        "Psoriasis"
-      ],
-      "category_confidence": 12,
-      "evidence_type": "Randomized clinical trial",
-      "evidence_type_it": "Trial clinico randomizzato",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42529640",
-      "title": "International advocacy for ketogenic diet research in schizophrenia: insights from a public petition.",
-      "authors": [
-        "Murray SL",
-        "Roche DJO",
-        "Palmer CM",
-        "Chen S",
-        "Lee H",
-        "Vyas G",
-        "Adams HA",
-        "Harrington V",
-        "Kelly DL"
-      ],
-      "journal": "Frontiers in public health",
-      "date": "2026-07-14",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3389/fpubh.2026.1854868",
-      "pmc": "PMC13418445",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42529640/",
-      "doi_url": "https://doi.org/10.3389/fpubh.2026.1854868",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13418445/",
-      "areas": [
-        "Psychiatry & Mental Health"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Guideline / consensus",
-      "evidence_type_it": "Linea guida / consensus",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42466787",
-      "title": "Ketogenic diet in adult obesity: safety, limitations, and evidence from various clinical applications.",
-      "authors": [
-        "Kacprzak U",
-        "Adamaszek N",
-        "Buczkowska A",
-        "Sochowska J",
-        "Flejszman M",
-        "Danieluk J",
-        "Wójcik J",
-        "Stochaj L",
-        "Gliński M",
-        "Dołęga-Mostowska D"
-      ],
-      "journal": "Roczniki Panstwowego Zakladu Higieny",
-      "date": "2026-07-14",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.32394/rpzh/225527",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42466787/",
-      "doi_url": "https://doi.org/10.32394/rpzh/225527",
-      "pmc_url": "",
-      "areas": [
-        "Obesity"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Systematic review / meta-analysis",
-      "evidence_type_it": "Revisione sistematica / meta-analisi",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42449121",
-      "title": "Defining a ketone threshold for weight loss: evidence from 14 day daily β-hydroxybutyrate monitoring in 217 subjects on a ketogenic diet.",
-      "authors": [
-        "Paoli A",
-        "Cerullo G",
-        "Paoli S",
-        "Charrier D",
-        "Givralli J",
-        "Bianco A",
-        "Boccuzzo G",
-        "Belloni P",
-        "Cenci L",
-        "Moro T"
-      ],
-      "journal": "Nutrition & diabetes",
-      "date": "2026-07-14",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1038/s41387-026-00454-6",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42449121/",
-      "doi_url": "https://doi.org/10.1038/s41387-026-00454-6",
-      "pmc_url": "",
-      "areas": [
-        "Obesity"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42468066",
-      "title": "Incidence and risk factors of ketogenic diet-associated nephrolithiasis in children with drug-resistant epilepsy: A tertiary care center experience.",
-      "authors": [
-        "Amer F",
-        "Alotaibi W",
-        "Bashir S",
-        "AlBaradie R",
-        "Al Hany E",
-        "Ali M",
-        "Alamri A",
-        "Mir A"
-      ],
-      "journal": "Epilepsy research",
-      "date": "2026-07-13",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.eplepsyres.2026.107871",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42468066/",
-      "doi_url": "https://doi.org/10.1016/j.eplepsyres.2026.107871",
-      "pmc_url": "",
-      "areas": [
-        "Epilepsy"
-      ],
-      "category_confidence": 13,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42439786",
-      "title": "Plant-based ketogenic nutritional intervention in a young woman with autosomal dominant polycystic kidney disease: A case report.",
-      "authors": [
-        "Alvarado-Pelayo PA",
-        "García-Rodríguez XN",
-        "Gómez-García EF",
-        "Cisneros-Hernández A"
-      ],
-      "journal": "Nutrition in clinical practice : official publication of the American Society for Parenteral and Enteral Nutrition",
-      "date": "2026-07-13",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1002/ncp.70150",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42439786/",
-      "doi_url": "https://doi.org/10.1002/ncp.70150",
-      "pmc_url": "",
-      "areas": [
-        "ADPKD",
-        "Chronic Kidney Disease"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Case report / case series",
-      "evidence_type_it": "Case report / case series",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42439310",
-      "title": "Reviewer Comment on Sharma et al. \"Effect of Concurrent Anti-Seizure Medications on the Efficacy of the Ketogenic Diet in Children with Epilepsy\".",
-      "authors": [
-        "Datta AN"
-      ],
-      "journal": "The Canadian journal of neurological sciences. Le journal canadien des sciences neurologiques",
-      "date": "2026-07-13",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1017/cjn.2026.10621",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42439310/",
-      "doi_url": "https://doi.org/10.1017/cjn.2026.10621",
-      "pmc_url": "",
-      "areas": [
-        "Epilepsy"
-      ],
-      "category_confidence": 12,
-      "evidence_type": "Review",
-      "evidence_type_it": "Revisione",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42492456",
-      "title": "Predicting the efficacy of classic ketogenic diet therapy in children with refractory epilepsy using dynamic changes in the glucose-ketone index (GKI).",
-      "authors": [
-        "Li J",
-        "Wang T",
-        "Yu L",
-        "Ni Y",
-        "Li Y",
-        "Zhang Y",
-        "Zhou S",
-        "Wang Y"
-      ],
-      "journal": "Seizure",
-      "date": "2026-07-12",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.seizure.2026.07.011",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42492456/",
-      "doi_url": "https://doi.org/10.1016/j.seizure.2026.07.011",
-      "pmc_url": "",
-      "areas": [
-        "Epilepsy"
-      ],
-      "category_confidence": 13,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42621621",
-      "title": "Ketogenic Diet-Mediated Immunomodulation for Prevention of Epilepsia Partialis Continua in Rasmussen's Encephalitis: Review and Case Study.",
-      "authors": [
-        "Salgado Rueda SA",
-        "Moreno Guerra N",
-        "Vargas Rojas JL"
-      ],
-      "journal": "Case reports in neurology",
-      "date": "2026-07-10",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1159/000552503",
-      "pmc": "PMC13489614",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42621621/",
-      "doi_url": "https://doi.org/10.1159/000552503",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13489614/",
-      "areas": [
-        "Epilepsy"
-      ],
-      "category_confidence": 3,
-      "evidence_type": "Case report / case series",
-      "evidence_type_it": "Case report / case series",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42500249",
-      "title": "Short-term ketogenic diet induces systemic lipidomic remodeling associated with metabolic adaptation in humans.",
-      "authors": [
-        "Park M",
-        "Yu JS",
-        "Jeon JY",
-        "Oh HA",
-        "Lee YH",
-        "Lee SG",
-        "Lee G"
-      ],
-      "journal": "Frontiers in nutrition",
-      "date": "2026-07-10",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3389/fnut.2026.1884256",
-      "pmc": "PMC13395721",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42500249/",
-      "doi_url": "https://doi.org/10.3389/fnut.2026.1884256",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13395721/",
-      "areas": [
-        "Dyslipidemia & Lipid Metabolism"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42431072",
-      "title": "Ketogenic diet enhances cardiac autonomic stability in pediatric drug-resistant epilepsy: A longitudinal heart rate variability study.",
-      "authors": [
-        "Karaca NB",
-        "Kavgacı A",
-        "Terlemez S",
-        "Aktaş E",
-        "Serdaroğlu E",
-        "Hirfanoğlu T",
-        "Serdaroğlu A",
-        "Demir E",
-        "Arhan E"
-      ],
-      "journal": "Epilepsy research",
-      "date": "2026-07-10",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.eplepsyres.2026.107872",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42431072/",
-      "doi_url": "https://doi.org/10.1016/j.eplepsyres.2026.107872",
-      "pmc_url": "",
-      "areas": [
-        "Cardiovascular Health",
-        "Epilepsy"
-      ],
-      "category_confidence": 14,
-      "evidence_type": "Observational human study",
-      "evidence_type_it": "Studio osservazionale umano",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "41240389",
-      "title": "The Ketogenic Diet: A Possible Intervention for Improving Hippocampal Function in Neurological Disorders.",
-      "authors": [
-        "Jahanmehr D",
-        "Ahmadi A",
-        "Fadaei M",
-        "Sangi Nasab Lahijan A",
-        "Shafiee Sabet M",
-        "Kalantari Dehaghi H",
-        "Asadi-Golshan R"
-      ],
-      "journal": "Nutrition reviews",
-      "date": "2026-07-10",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1093/nutrit/nuaf210",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41240389/",
-      "doi_url": "https://doi.org/10.1093/nutrit/nuaf210",
-      "pmc_url": "",
-      "areas": [
-        "Alzheimer’s Disease",
-        "Epilepsy"
-      ],
-      "category_confidence": 2,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "41206623",
-      "title": "The Effect of a Ketogenic Diet on Liver Health: A Systematic Review and Meta-Analysis.",
-      "authors": [
-        "Qu Y",
-        "Sohouli MH",
-        "Rohani P",
-        "Cerqueira HS",
-        "Gomes GK",
-        "Santos HO"
-      ],
-      "journal": "Nutrition reviews",
-      "date": "2026-07-10",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1093/nutrit/nuaf197",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41206623/",
-      "doi_url": "https://doi.org/10.1093/nutrit/nuaf197",
-      "pmc_url": "",
-      "areas": [
-        "MASLD / Metabolic Liver Disease"
-      ],
-      "category_confidence": 2,
-      "evidence_type": "Systematic review / meta-analysis",
-      "evidence_type_it": "Revisione sistematica / meta-analisi",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42423617",
-      "title": "Modified Atkins diet therapy in adult drug-resistant epilepsy: Quality of life and mental health outcomes.",
-      "authors": [
-        "Carneiro RAVD",
-        "Cardoso RM",
-        "Lunardi MDS",
-        "Lima MC",
-        "Anzani S",
-        "Darella AX",
-        "Salvador MT",
-        "de Paula Moraes T",
-        "Sostizzo NC",
-        "Venske DK",
-        "Moreira JD",
-        "Ribeiro LC",
-        "Borgatto AF",
-        "Lin K"
-      ],
-      "journal": "Epilepsia",
-      "date": "2026-07-09",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1002/epi.70372",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42423617/",
-      "doi_url": "https://doi.org/10.1002/epi.70372",
-      "pmc_url": "",
-      "areas": [
-        "Epilepsy"
-      ],
-      "category_confidence": 13,
-      "evidence_type": "Observational human study",
-      "evidence_type_it": "Studio osservazionale umano",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42526162",
-      "title": "Neurodevelopmental Risk Factors and Comparative Efficacy of Ketogenic Diet in Children With Spike-Wave Activation in Sleep: A Cohort Study.",
-      "authors": [
-        "Ma J",
-        "Wang J",
-        "Song X",
-        "Xie L",
-        "Li X",
-        "Hu Y",
-        "Hong S",
-        "Jiang L",
-        "Li T"
-      ],
-      "journal": "Pediatric neurology",
-      "date": "2026-07-08",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.pediatrneurol.2026.07.010",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42526162/",
-      "doi_url": "https://doi.org/10.1016/j.pediatrneurol.2026.07.010",
-      "pmc_url": "",
-      "areas": [
-        "Circadian Rhythms",
-        "Epilepsy"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Observational human study",
-      "evidence_type_it": "Studio osservazionale umano",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42414899",
-      "title": "Ketogenic diets and cardiovascular health balancing metabolic benefits against lipid-related risk.",
-      "authors": [
-        "Liu H",
-        "Wu W",
-        "He N",
-        "Wang X",
-        "Pan S",
-        "Zhu L",
-        "Ma S",
-        "Zhang Y",
-        "Liu Z"
-      ],
-      "journal": "BMC cardiovascular disorders",
-      "date": "2026-07-07",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1186/s12872-026-06189-7",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42414899/",
-      "doi_url": "https://doi.org/10.1186/s12872-026-06189-7",
-      "pmc_url": "",
-      "areas": [
-        "Cardiovascular Health",
-        "Dyslipidemia & Lipid Metabolism"
-      ],
-      "category_confidence": 14,
-      "evidence_type": "Systematic review / meta-analysis",
-      "evidence_type_it": "Revisione sistematica / meta-analisi",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42416120",
-      "title": "Telehealth-Based Ketogenic Metabolic Therapy With Lifestyle Interventions for Post-viral Illness: A Research Brief of Patients' Experiences.",
-      "authors": [
-        "Colgan DD",
-        "Stadler DD",
-        "Grow T",
-        "Ruddick M",
-        "Weimbs T",
-        "Davenport TE",
-        "Zwickey H"
-      ],
-      "journal": "Journal of patient experience",
-      "date": "2026-07-05",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1177/23743735261459218",
-      "pmc": "PMC13338534",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42416120/",
-      "doi_url": "https://doi.org/10.1177/23743735261459218",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13338534/",
-      "areas": [
-        "COVID-19 & Metabolism"
-      ],
-      "category_confidence": 2,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42510575",
-      "title": "Very-Low-Energy Ketogenic Therapy Modulates the Metabolic-Antioxidant Axis in Patients with Obesity and Type 2 Diabetes: A Non-Randomized Clinical Trial.",
-      "authors": [
-        "Tini S",
-        "Celano S",
-        "Pigni S",
-        "De Palma E",
-        "Ozdemir HI",
-        "Raiteri T",
-        "Antonioli A",
-        "Baima J",
-        "Antoniotti V",
-        "Caputo M",
-        "Marzullo P",
-        "Prodam F"
-      ],
-      "journal": "Antioxidants (Basel, Switzerland)",
-      "date": "2026-07-04",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/antiox15070844",
-      "pmc": "PMC13404200",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42510575/",
-      "doi_url": "https://doi.org/10.3390/antiox15070844",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13404200/",
-      "areas": [
-        "Diabetes & Glucose Metabolism",
-        "Obesity"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Randomized clinical trial",
-      "evidence_type_it": "Trial clinico randomizzato",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42451166",
-      "title": "Ketogenic Diet in the Treatment of Malignant Gliomas: A Systematic Review.",
-      "authors": [
-        "Persiani M",
-        "Dallolio L",
-        "Masini A",
-        "Longobucco Y",
-        "Bertoli S",
-        "Guberti E",
-        "Pellizzari M",
-        "Petroni ML",
-        "Valeriani F",
-        "Gallè F",
-        "Sacchetti R"
-      ],
-      "journal": "Nutrients",
-      "date": "2026-07-03",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/nu18132166",
-      "pmc": "PMC13363701",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42451166/",
-      "doi_url": "https://doi.org/10.3390/nu18132166",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13363701/",
-      "areas": [
-        "Oncology & Cancer Metabolism"
-      ],
-      "category_confidence": 9,
-      "evidence_type": "Systematic review / meta-analysis",
-      "evidence_type_it": "Revisione sistematica / meta-analisi",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42395849",
-      "title": "Ketogenic diet, cardiometabolic diseases and aging.",
-      "authors": [
-        "Cioffi G",
-        "Cuomo G",
-        "Carluccio R",
-        "Testa C",
-        "Lorenzo AD",
-        "Vito L",
-        "Parisi V",
-        "Conte M",
-        "Leosco D",
-        "Giallauria F"
-      ],
-      "journal": "Journal of geriatric cardiology : JGC",
-      "date": "2026-07-03",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.26599/1671-5411.2026.05.005",
-      "pmc": "PMC13324333",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42395849/",
-      "doi_url": "https://doi.org/10.26599/1671-5411.2026.05.005",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13324333/",
-      "areas": [
-        "Longevity & Healthy Aging",
-        "Cardiovascular Health",
-        "Dyslipidemia & Lipid Metabolism"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Review",
-      "evidence_type_it": "Revisione",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42391224",
-      "title": "Ketogenic diet therapies for the treatment of drug-resistant epilepsy in children and adults: A systematic review.",
-      "authors": [
-        "Vaccarezza MM",
-        "Sanguine VL",
-        "Balaciano G"
-      ],
-      "journal": "PloS one",
-      "date": "2026-07-02",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1371/journal.pone.0333334",
-      "pmc": "PMC13327284",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42391224/",
-      "doi_url": "https://doi.org/10.1371/journal.pone.0333334",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13327284/",
-      "areas": [
-        "Epilepsy"
-      ],
-      "category_confidence": 13,
-      "evidence_type": "Systematic review / meta-analysis",
-      "evidence_type_it": "Revisione sistematica / meta-analisi",
-      "source": "PubMed",
-      "first_seen": "2026-09-29",
-      "status": "indexed"
     }
   ],
-  "verified_at": "2026-09-29T03:29:20+00:00",
-  "content_updated_at": "2026-09-29T03:29:20+00:00"
+  "verified_at": "2026-09-29T08:33:24+00:00",
+  "content_updated_at": "2026-09-29T08:33:24+00:00"
 }
