@@ -1,0 +1,497 @@
+name: Repair legacy Library metadata
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: repair-legacy-library-metadata
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependency
+        run: python -m pip install beautifulsoup4
+
+      - name: Backfill legacy bibliographic metadata
+        env:
+          NCBI_EMAIL: ${{ secrets.NCBI_EMAIL }}
+          NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import re
+          import time
+          import urllib.parse
+          import urllib.request
+          import xml.etree.ElementTree as ET
+          from difflib import SequenceMatcher
+          from pathlib import Path
+
+          from bs4 import BeautifulSoup
+
+          LIBRARY = Path("library.html")
+          REPORT = Path("legacy-library-metadata-report.json")
+          EUTILS = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
+          EMAIL = os.getenv("NCBI_EMAIL") or "info@ketogenicresearch.org"
+          API_KEY = os.getenv("NCBI_API_KEY", "")
+          UA = f"ketogenicresearch-legacy-metadata/1.0 ({EMAIL})"
+
+          GENERIC_EN = "Bibliographic record reviewed for inclusion in the curated Scientific Library."
+          GENERIC_IT = "Riferimento bibliografico revisionato per l’inclusione nella Biblioteca Scientifica curata."
+
+          MONTHS = {
+              "jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
+              "jul": 7, "aug": 8, "sep": 9, "sept": 9, "oct": 10,
+              "nov": 11, "dec": 12,
+          }
+
+          def norm(value):
+              value = (value or "").lower()
+              value = value.replace("’", "'").replace("–", "-").replace("—", "-")
+              value = re.sub(r"^\s*\d+\.\s*", "", value)
+              return re.sub(r"[^a-z0-9]+", " ", value).strip()
+
+          def norm_doi(value):
+              value = (value or "").strip().lower()
+              value = re.sub(r"^https?://(?:dx\.)?doi\.org/", "", value)
+              return value.rstrip(" .")
+
+          def req(url, data=None, accept="application/json", timeout=60):
+              headers = {"User-Agent": UA, "Accept": accept}
+              if data is not None:
+                  headers["Content-Type"] = "application/x-www-form-urlencoded"
+              request = urllib.request.Request(url, data=data, headers=headers)
+              last = None
+              for attempt in range(4):
+                  try:
+                      with urllib.request.urlopen(request, timeout=timeout) as r:
+                          return r.read()
+                  except Exception as exc:
+                      last = exc
+                      if attempt == 3:
+                          raise
+                      time.sleep((2 ** attempt) * 2)
+              raise last
+
+          def eutils(name, params):
+              params = {**params, "tool": "ketogenicresearch-legacy-metadata", "email": EMAIL}
+              if API_KEY:
+                  params["api_key"] = API_KEY
+              encoded = urllib.parse.urlencode(params).encode("utf-8")
+              endpoint = f"{EUTILS}/{name}"
+              if name == "efetch.fcgi" or len(encoded) > 1800:
+                  data = req(endpoint, data=encoded, accept="application/xml")
+              else:
+                  data = req(f"{endpoint}?{encoded.decode('utf-8')}")
+              time.sleep(0.12 if API_KEY else 0.36)
+              return data
+
+          def txt(node):
+              return "" if node is None else "".join(node.itertext()).strip()
+
+          def pubdate(item):
+              nodes = (
+                  item.findall(".//Article/ArticleDate")
+                  + item.findall(".//PubmedData/History/PubMedPubDate")
+                  + item.findall(".//Article/Journal/JournalIssue/PubDate")
+              )
+              for node in nodes:
+                  y = txt(node.find("Year"))
+                  m = txt(node.find("Month"))
+                  d = txt(node.find("Day"))
+                  if not y.isdigit():
+                      continue
+                  month = int(m) if m.isdigit() else MONTHS.get(m[:4].lower()) or MONTHS.get(m[:3].lower())
+                  if month and d.isdigit():
+                      try:
+                          return f"{int(y):04d}-{month:02d}-{int(d):02d}"
+                      except ValueError:
+                          pass
+                  if month:
+                      return f"{int(y):04d}-{month:02d}"
+                  return y
+              return ""
+
+          def parse_pubmed_item(item):
+              citation = item.find("MedlineCitation")
+              article = citation.find("Article") if citation is not None else None
+              if citation is None or article is None:
+                  return None
+
+              pmid = txt(citation.find("PMID"))
+              title = txt(article.find("ArticleTitle"))
+              authors = []
+              for author in article.findall("AuthorList/Author"):
+                  collective = txt(author.find("CollectiveName"))
+                  if collective:
+                      authors.append(collective)
+                      continue
+                  last = txt(author.find("LastName"))
+                  initials = txt(author.find("Initials"))
+                  name = " ".join(x for x in (last, initials) if x)
+                  if name:
+                      authors.append(name)
+
+              journal = txt(article.find("Journal/ISOAbbreviation")) or txt(article.find("Journal/Title"))
+              doi = ""
+              for aid in item.findall("./PubmedData/ArticleIdList/ArticleId"):
+                  if (aid.attrib.get("IdType") or "").lower() == "doi":
+                      doi = txt(aid)
+                      break
+
+              return {
+                  "pmid": pmid,
+                  "doi": doi,
+                  "title": title,
+                  "authors": authors,
+                  "journal": journal,
+                  "date": pubdate(item),
+              }
+
+          def fetch_pmids(pmids):
+              records = {}
+              pmids = [p for p in pmids if p and p.isdigit()]
+              for start in range(0, len(pmids), 120):
+                  batch = pmids[start:start+120]
+                  root = ET.fromstring(eutils("efetch.fcgi", {
+                      "db": "pubmed",
+                      "id": ",".join(batch),
+                      "retmode": "xml",
+                  }))
+                  for item in root.findall(".//PubmedArticle"):
+                      rec = parse_pubmed_item(item)
+                      if rec and rec["pmid"]:
+                          records[rec["pmid"]] = rec
+              return records
+
+          def search_pubmed(term):
+              data = json.loads(eutils("esearch.fcgi", {
+                  "db": "pubmed",
+                  "term": term,
+                  "retmode": "json",
+                  "retmax": "5",
+              }).decode("utf-8"))
+              return data.get("esearchresult", {}).get("idlist", [])
+
+          def pubmed_by_doi(doi):
+              ids = search_pubmed(f'"{doi}"[AID]')
+              if not ids:
+                  return None
+              recs = fetch_pmids(ids[:3])
+              target = norm_doi(doi)
+              for rec in recs.values():
+                  if norm_doi(rec.get("doi")) == target:
+                      return rec
+              return next(iter(recs.values()), None)
+
+          def pubmed_by_title(title):
+              safe = title.replace('"', "")
+              ids = search_pubmed(f'"{safe}"[Title]')
+              if not ids:
+                  return None
+              recs = fetch_pmids(ids[:5])
+              nt = norm(title)
+              best = None
+              best_score = 0.0
+              for rec in recs.values():
+                  score = SequenceMatcher(None, nt, norm(rec["title"])).ratio()
+                  if score > best_score:
+                      best = rec
+                      best_score = score
+              return best if best_score >= 0.93 else None
+
+          def crossref_lookup(title=None, doi=None):
+              if doi:
+                  url = "https://api.crossref.org/works/" + urllib.parse.quote(doi, safe="") + "?mailto=" + urllib.parse.quote(EMAIL)
+              else:
+                  url = (
+                      "https://api.crossref.org/works?rows=3&select="
+                      "DOI,title,author,container-title,published-print,published-online,created"
+                      "&query.title=" + urllib.parse.quote(title or "")
+                      + "&mailto=" + urllib.parse.quote(EMAIL)
+                  )
+              try:
+                  data = json.loads(req(url).decode("utf-8"))
+              except Exception:
+                  return None
+
+              message = data.get("message") or {}
+              candidates = [message] if doi else (message.get("items") or [])
+              nt = norm(title or "")
+              best = None
+              best_score = 0.0
+
+              for item in candidates:
+                  title_list = item.get("title") or []
+                  candidate_title = title_list[0] if title_list else ""
+                  if title:
+                      score = SequenceMatcher(None, nt, norm(candidate_title)).ratio()
+                      if score < 0.92:
+                          continue
+                  else:
+                      score = 1.0
+
+                  authors = []
+                  for author in item.get("author") or []:
+                      family = (author.get("family") or "").strip()
+                      given = (author.get("given") or "").strip()
+                      initials = "".join(part[:1] for part in re.split(r"[\s.-]+", given) if part)
+                      name = " ".join(x for x in (family, initials) if x)
+                      if name:
+                          authors.append(name)
+
+                  journals = item.get("container-title") or []
+                  journal = journals[0] if journals else ""
+
+                  date = ""
+                  for key in ("published-print", "published-online", "created"):
+                      values = ((item.get(key) or {}).get("date-parts", [[]]) or [[]])[0]
+                      if values:
+                          date = "-".join([f"{values[0]:04d}"] + [f"{v:02d}" for v in values[1:3]])
+                          break
+
+                  rec = {
+                      "pmid": "",
+                      "doi": item.get("DOI") or doi or "",
+                      "title": candidate_title,
+                      "authors": authors,
+                      "journal": journal,
+                      "date": date,
+                  }
+
+                  if score > best_score:
+                      best = rec
+                      best_score = score
+
+              return best
+
+          def metadata_line(rec):
+              bits = []
+              if rec.get("authors"):
+                  bits.append(", ".join(rec["authors"]))
+              if rec.get("journal"):
+                  bits.append(rec["journal"])
+              if rec.get("date"):
+                  bits.append(rec["date"])
+              return " · ".join(bits)
+
+          if not LIBRARY.exists():
+              raise SystemExit("library.html not found")
+
+          soup = BeautifulSoup(LIBRARY.read_text(encoding="utf-8"), "html.parser")
+          targets = []
+
+          for card in soup.select("article.folder-paper.drive-paper"):
+              p = card.find("p", recursive=False)
+              if not p:
+                  continue
+              current = p.get_text(" ", strip=True)
+              if current == GENERIC_EN or current == GENERIC_IT or "Bibliographic record reviewed for inclusion" in current or "Riferimento bibliografico revisionato" in current:
+                  h4 = card.find("h4")
+                  title = ""
+                  if h4:
+                      title = h4.get("data-en") or h4.get_text(" ", strip=True)
+                      title = re.sub(r"^\s*\d+\.\s*", "", title).strip()
+                  targets.append({
+                      "card": card,
+                      "p": p,
+                      "title": title,
+                      "pmid": (card.get("data-pmid") or "").strip(),
+                      "doi": norm_doi(card.get("data-doi") or ""),
+                  })
+
+          print(f"Legacy cards requiring metadata repair: {len(targets)}")
+
+          known_pmids = sorted({x["pmid"] for x in targets if x["pmid"].isdigit()}, key=int)
+          pubmed_cache = fetch_pmids(known_pmids)
+
+          resolved = 0
+          unresolved = []
+          source_counts = {
+              "existing-pmid": 0,
+              "doi-pubmed": 0,
+              "title-pubmed": 0,
+              "doi-crossref": 0,
+              "title-crossref": 0,
+          }
+          doi_cache = {}
+          title_cache = {}
+
+          for idx, item in enumerate(targets, start=1):
+              rec = None
+              source = None
+
+              if item["pmid"] and item["pmid"] in pubmed_cache:
+                  rec = pubmed_cache[item["pmid"]]
+                  source = "existing-pmid"
+
+              if rec is None and item["doi"]:
+                  if item["doi"] not in doi_cache:
+                      doi_cache[item["doi"]] = pubmed_by_doi(item["doi"])
+                  rec = doi_cache[item["doi"]]
+                  if rec:
+                      source = "doi-pubmed"
+
+              if rec is None and item["title"]:
+                  key = norm(item["title"])
+                  if key not in title_cache:
+                      title_cache[key] = pubmed_by_title(item["title"])
+                  rec = title_cache[key]
+                  if rec:
+                      source = "title-pubmed"
+
+              if rec is None and item["doi"]:
+                  key = "crossref-doi:" + item["doi"]
+                  if key not in doi_cache:
+                      doi_cache[key] = crossref_lookup(doi=item["doi"])
+                  rec = doi_cache[key]
+                  if rec:
+                      source = "doi-crossref"
+
+              if rec is None and item["title"]:
+                  key = "crossref-title:" + norm(item["title"])
+                  if key not in title_cache:
+                      title_cache[key] = crossref_lookup(title=item["title"])
+                  rec = title_cache[key]
+                  if rec:
+                      source = "title-crossref"
+
+              line = metadata_line(rec or {})
+              if not line:
+                  unresolved.append({
+                      "title": item["title"],
+                      "pmid": item["pmid"],
+                      "doi": item["doi"],
+                  })
+                  continue
+
+              item["p"].attrs = {}
+              item["p"].string = line
+
+              if rec.get("pmid"):
+                  item["card"]["data-pmid"] = rec["pmid"]
+              if rec.get("doi"):
+                  item["card"]["data-doi"] = norm_doi(rec["doi"])
+              if rec.get("date") and re.match(r"^\d{4}", rec["date"]):
+                  item["card"]["data-year"] = rec["date"][:4]
+
+              resolved += 1
+              source_counts[source] += 1
+
+              if idx % 25 == 0:
+                  print(f"Processed {idx}/{len(targets)} legacy cards...")
+
+          LIBRARY.write_text(str(soup), encoding="utf-8")
+
+          report = {
+              "legacy_cards_targeted": len(targets),
+              "resolved": resolved,
+              "unresolved": len(unresolved),
+              "source_counts": source_counts,
+              "unresolved_records": unresolved,
+          }
+          REPORT.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          print(json.dumps(report, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Keep Research details on one line
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path("styles.css")
+          css = path.read_text(encoding="utf-8")
+
+          marker = "/* Legacy Library research-details single-line fix */"
+          block = '''
+          /* Legacy Library research-details single-line fix */
+          .paper-study-details > summary{
+            display:inline-flex;
+            align-items:center;
+            width:max-content;
+            max-width:100%;
+            white-space:nowrap;
+            font-size:.88rem;
+            line-height:1.2;
+            font-weight:700;
+            color:var(--primary);
+            cursor:pointer;
+            margin:8px 0 10px;
+          }
+          .paper-study-details > summary::-webkit-details-marker{
+            display:none;
+          }
+          '''
+
+          if marker not in css:
+              css = css.rstrip() + "\n\n" + block.strip() + "\n"
+              path.write_text(css, encoding="utf-8")
+              print("styles.css patched.")
+          else:
+              print("CSS fix already present.")
+          PY
+
+      - name: Validate repair
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from bs4 import BeautifulSoup
+
+          soup = BeautifulSoup(Path("library.html").read_text(encoding="utf-8"), "html.parser")
+
+          remaining = []
+          for card in soup.select("article.folder-paper.drive-paper"):
+              p = card.find("p", recursive=False)
+              if not p:
+                  continue
+              text = p.get_text(" ", strip=True)
+              if "Bibliographic record reviewed for inclusion" in text or "Riferimento bibliografico revisionato" in text:
+                  h4 = card.find("h4")
+                  remaining.append(h4.get_text(" ", strip=True) if h4 else "(untitled)")
+
+          report = json.loads(Path("legacy-library-metadata-report.json").read_text(encoding="utf-8"))
+          print(f"Resolved {report['resolved']} of {report['legacy_cards_targeted']} legacy cards.")
+          print(f"Generic legacy sentences still present: {len(remaining)}")
+
+          if report["legacy_cards_targeted"] and report["resolved"] == 0:
+              raise SystemExit("Metadata repair resolved zero legacy cards.")
+          PY
+
+      - name: Commit repair
+        run: |
+          set -euo pipefail
+
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add library.html styles.css legacy-library-metadata-report.json
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Backfill legacy Library bibliographic metadata"
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
