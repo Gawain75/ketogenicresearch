@@ -63,21 +63,73 @@ OR "Diet, Ketogenic"[Mesh]
 OR "Ketosis"[Mesh]
 )'''
 
-CORE = (
-    "ketogenic", "ketogenesis", "ketotic", "keto diet",
-    "nutritional ketosis", "modified atkins", "vlckd", "vlekt",
-    "exogenous ketone", "ketone ester", "ketone salt",
+DIRECT_KETO_TERMS = (
+    "ketogenic diet",
+    "ketogenic diets",
+    "ketogenic dietary therapy",
+    "ketogenic dietary therapies",
+    "ketogenic diet therapy",
+    "classic ketogenic diet",
+    "classical ketogenic diet",
+    "mct ketogenic diet",
+    "low-carbohydrate ketogenic diet",
+    "low carbohydrate ketogenic diet",
+    "ketogenic nutritional protocol",
+    "ketogenic intervention",
+    "ketogenic interventions",
+    "ketogenic therapy",
+    "ketogenic metabolic therapy",
+    "nutritional ketosis",
+    "modified atkins diet",
+    "modified atkins",
+    "vlckd",
+    "vlekt",
+    "keto diet",
 )
 
-SECONDARY = (
-    "beta-hydroxybutyrate", "β-hydroxybutyrate", "b-hydroxybutyrate",
+MECHANISTIC_PRIMARY_TERMS = (
+    "ketogenesis",
+    "ketogenic pathway",
+    "ketone body metabolism",
+    "ketone metabolism",
     "ketone bodies",
+    "beta-hydroxybutyrate",
+    "β-hydroxybutyrate",
+    "b-hydroxybutyrate",
+    "acetoacetate",
 )
 
-CONTEXT = (
-    "ketogenic", "ketogenesis", "ketotic", "keto diet",
-    "nutritional ketosis", "modified atkins", "vlckd", "vlekt",
-    "diet, ketogenic", "ketosis",
+MECHANISTIC_FOCUS_CUES = (
+    "mechanism",
+    "mechanisms",
+    "metabolism",
+    "metabolic",
+    "signaling",
+    "signalling",
+    "biosynthesis",
+    "production",
+    "oxidation",
+    "transport",
+    "utilization",
+    "utilisation",
+    "regulation",
+    "regulatory",
+    "epigenetic",
+    "histone",
+    "hdac",
+    "nuclear receptor",
+    "ketolysis",
+)
+
+INCIDENTAL_CONTEXT_TERMS = (
+    "through",
+    "via",
+    "associated with",
+    "accompanied by",
+    "alongside",
+    "and ketone",
+    "ketone body signaling",
+    "ketone body signalling",
 )
 
 
@@ -175,14 +227,14 @@ def api(name, params):
             data=encoded,
             method="POST",
             headers={
-                "User-Agent": f"ketogenicresearch/2.1 ({EMAIL})",
+                "User-Agent": f"ketogenicresearch/2.2 ({EMAIL})",
                 "Content-Type": "application/x-www-form-urlencoded",
             },
         )
     else:
         req = urllib.request.Request(
             f"{endpoint}?{encoded.decode('utf-8')}",
-            headers={"User-Agent": f"ketogenicresearch/2.1 ({EMAIL})"},
+            headers={"User-Agent": f"ketogenicresearch/2.2 ({EMAIL})"},
         )
 
     with urllib.request.urlopen(req, timeout=60) as response:
@@ -267,34 +319,152 @@ def previous_queue():
 
 
 def relevant(article, citation):
-    """Broad but controlled ketogenic relevance filter."""
+    """Return True only when ketogenic/ketone biology is a central topic.
+
+    The PubMed query is intentionally broad for sensitivity. This second-stage
+    filter removes papers where ketones/ketogenesis are merely incidental.
+    """
     title = text(article.find("ArticleTitle")).lower()
 
-    abstract = " ".join(
-        text(n)
+    abstract_parts = [
+        text(n).lower()
         for n in article.findall("Abstract/AbstractText")
-    ).lower()
+        if text(n)
+    ]
+    abstract = " ".join(abstract_parts)
 
-    mesh = " ".join(
-        text(n)
+    mesh_terms = [
+        text(n).lower()
         for n in citation.findall(".//MeshHeading/DescriptorName")
         if text(n)
-    ).lower()
+    ]
+    mesh = " ".join(mesh_terms)
 
     body = f"{title} {abstract} {mesh}"
 
-    if any(x in body for x in CORE):
+    # 1) Direct ketogenic-diet / ketogenic-therapy relevance.
+    direct_phrases = (
+        "ketogenic diet",
+        "ketogenic diets",
+        "ketogenic dietary therapy",
+        "ketogenic dietary therapies",
+        "ketogenic diet therapy",
+        "ketogenic intervention",
+        "ketogenic interventions",
+        "ketogenic protocol",
+        "ketogenic protocols",
+        "ketogenic nutritional protocol",
+        "ketogenic therapy",
+        "ketogenic metabolic therapy",
+        "classic ketogenic diet",
+        "classical ketogenic diet",
+        "mct ketogenic diet",
+        "low-carbohydrate ketogenic diet",
+        "low carbohydrate ketogenic diet",
+        "very low calorie ketogenic diet",
+        "very-low-calorie ketogenic diet",
+        "very low energy ketogenic therapy",
+        "modified atkins diet",
+        "nutritional ketosis",
+        "vlckd",
+        "vlekt",
+        "keto diet",
+    )
+
+    if any(p in title for p in direct_phrases):
         return True
 
-    if "diet, ketogenic" in mesh or re.search(r"\bketosis\b", mesh):
+    if "diet, ketogenic" in mesh:
         return True
 
-    if (
-        any(x in body for x in SECONDARY)
-        and any(x in body for x in CONTEXT)
-    ):
+    # Direct diet/therapy wording in the abstract is also sufficient.
+    if any(p in abstract for p in direct_phrases):
         return True
 
+    # 2) Exogenous ketones are intrinsically in scope when they are central.
+    exogenous_phrases = (
+        "exogenous ketone",
+        "exogenous ketones",
+        "ketone ester",
+        "ketone esters",
+        "ketone salt",
+        "ketone salts",
+    )
+    if any(p in title for p in exogenous_phrases):
+        return True
+    if any(p in abstract for p in exogenous_phrases):
+        # Require repeated/central mention when not present in the title.
+        if sum(abstract.count(p) for p in exogenous_phrases) >= 2:
+            return True
+
+    # 3) Mechanistic ketogenesis / ketone-body biology.
+    # Accept when ketogenesis/ketones are clearly the study focus, not a
+    # secondary pathway mentioned in passing.
+    mechanism_terms = (
+        "ketogenesis",
+        "ketogenic metabolism",
+        "ketone metabolism",
+        "ketone body metabolism",
+        "ketone bodies",
+        "beta-hydroxybutyrate",
+        "β-hydroxybutyrate",
+        "b-hydroxybutyrate",
+        "acetoacetate",
+    )
+
+    # Strongest signal: mechanistic term appears in the title.
+    title_mechanism_hits = sum(1 for t in mechanism_terms if t in title)
+    if title_mechanism_hits:
+        # Reject titles where ketones are explicitly framed only as one
+        # downstream branch/pathway of another primary mechanism.
+        incidental_title_patterns = (
+            r"\bthrough\b.{0,80}\bketone bod(?:y|ies)\b",
+            r"\bvia\b.{0,80}\bketone bod(?:y|ies)\b",
+            r"\band ketone body signaling\b",
+            r"\bwith ketone body signaling\b",
+            r"\bassociated with ketogenesis\b",
+        )
+        if any(re.search(p, title) for p in incidental_title_patterns):
+            primary_focus_terms = (
+                "ketogenesis as",
+                "ketogenesis in",
+                "ketogenesis and",
+                "ketone bodies as",
+                "ketone bodies in",
+                "ketone metabolism",
+                "beta-hydroxybutyrate",
+                "β-hydroxybutyrate",
+            )
+            if not any(p in title for p in primary_focus_terms):
+                return False
+        return True
+
+    # If the mechanism is only in the abstract, require stronger evidence of
+    # centrality: repeated mentions plus explicit objective/conclusion framing.
+    mech_mentions = sum(abstract.count(t) for t in mechanism_terms)
+    if mech_mentions >= 3:
+        centrality_markers = (
+            "we investigated",
+            "we examined",
+            "we evaluated",
+            "we studied",
+            "we review",
+            "this review",
+            "the aim",
+            "the objective",
+            "focuses on",
+            "focused on",
+            "role of ketogenesis",
+            "role of ketone",
+            "ketone metabolism",
+            "ketogenic metabolism",
+        )
+        if any(m in abstract for m in centrality_markers):
+            return True
+
+    # 4) Generic MeSH "Ketosis" or a single ketone/BHB mention is not enough.
+    # This deliberately excludes papers whose actual focus is lipolysis,
+    # hepatic lipid accumulation, PPAR-alpha signalling, etc.
     return False
 
 
