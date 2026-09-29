@@ -20,33 +20,66 @@ EMAIL = os.getenv("NCBI_EMAIL", "info@ketogenicresearch.org")
 API_KEY = os.getenv("NCBI_API_KEY", "")
 WINDOW_DAYS = int(os.getenv("WINDOW_DAYS", "90"))
 CURATION_WINDOW_DAYS = int(os.getenv("CURATION_WINDOW_DAYS", "365"))
-MAX_RECORDS = int(os.getenv("MAX_RECORDS", "100"))
-CURATION_MAX_RECORDS = int(os.getenv("CURATION_MAX_RECORDS", "500"))
+MAX_RECORDS = int(os.getenv("MAX_RECORDS", "1000"))
+CURATION_MAX_RECORDS = int(os.getenv("CURATION_MAX_RECORDS", "5000"))
 
 BASE = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 
 QUERY = r'''(
-"ketogenic diet"[Title/Abstract] OR "ketogenic diets"[Title/Abstract]
-OR "ketogenic therapy"[Title/Abstract] OR "ketogenic metabolic therapy"[Title/Abstract]
-OR "nutritional ketosis"[Title/Abstract] OR "very low calorie ketogenic diet"[Title/Abstract]
-OR "very-low-calorie ketogenic diet"[Title/Abstract] OR "very low energy ketogenic therapy"[Title/Abstract]
-OR "modified Atkins diet"[Title/Abstract] OR VLCKD[Title/Abstract] OR VLEKT[Title/Abstract]
-OR "exogenous ketone"[Title/Abstract] OR "exogenous ketones"[Title/Abstract]
-OR "ketone ester"[Title/Abstract] OR "ketone esters"[Title/Abstract]
-OR "ketone salt"[Title/Abstract] OR "ketone salts"[Title/Abstract]
-OR (("beta-hydroxybutyrate"[Title/Abstract] OR "ketone bodies"[Title/Abstract])
-AND (ketogenic[Title/Abstract] OR "nutritional ketosis"[Title/Abstract] OR "ketogenic therapy"[Title/Abstract]))
+"ketogenic"[Title/Abstract]
+OR "ketogenesis"[Title/Abstract]
+OR "ketotic"[Title/Abstract]
+OR "keto diet"[Title/Abstract]
+OR "ketogenic diet"[Title/Abstract]
+OR "ketogenic diets"[Title/Abstract]
+OR "ketogenic dietary therapy"[Title/Abstract]
+OR "ketogenic dietary therapies"[Title/Abstract]
+OR "ketogenic diet therapy"[Title/Abstract]
+OR "classic ketogenic diet"[Title/Abstract]
+OR "classical ketogenic diet"[Title/Abstract]
+OR "MCT ketogenic diet"[Title/Abstract]
+OR "low-carbohydrate ketogenic diet"[Title/Abstract]
+OR "low carbohydrate ketogenic diet"[Title/Abstract]
+OR "ketogenic nutritional protocol"[Title/Abstract]
+OR "ketogenic therapy"[Title/Abstract]
+OR "ketogenic metabolic therapy"[Title/Abstract]
+OR "nutritional ketosis"[Title/Abstract]
+OR "very low calorie ketogenic diet"[Title/Abstract]
+OR "very-low-calorie ketogenic diet"[Title/Abstract]
+OR "very low energy ketogenic therapy"[Title/Abstract]
+OR "modified Atkins diet"[Title/Abstract]
+OR VLCKD[Title/Abstract]
+OR VLEKT[Title/Abstract]
+OR "exogenous ketone"[Title/Abstract]
+OR "exogenous ketones"[Title/Abstract]
+OR "ketone ester"[Title/Abstract]
+OR "ketone esters"[Title/Abstract]
+OR "ketone salt"[Title/Abstract]
+OR "ketone salts"[Title/Abstract]
+OR "beta-hydroxybutyrate"[Title/Abstract]
+OR "β-hydroxybutyrate"[Title/Abstract]
+OR "ketone bodies"[Title/Abstract]
+OR "Diet, Ketogenic"[Mesh]
+OR "Ketosis"[Mesh]
 )'''
 
 CORE = (
-    "ketogenic", "nutritional ketosis", "modified atkins", "vlckd", "vlekt",
+    "ketogenic", "ketogenesis", "ketotic", "keto diet",
+    "nutritional ketosis", "modified atkins", "vlckd", "vlekt",
     "exogenous ketone", "ketone ester", "ketone salt",
 )
-SECONDARY = ("beta-hydroxybutyrate", "ketone bodies")
-CONTEXT = (
-    "ketogenic diet", "ketogenic diets", "ketogenic therapy",
-    "ketogenic metabolic therapy", "nutritional ketosis",
+
+SECONDARY = (
+    "beta-hydroxybutyrate", "β-hydroxybutyrate", "b-hydroxybutyrate",
+    "ketone bodies",
 )
+
+CONTEXT = (
+    "ketogenic", "ketogenesis", "ketotic", "keto diet",
+    "nutritional ketosis", "modified atkins", "vlckd", "vlekt",
+    "diet, ketogenic", "ketosis",
+)
+
 
 AREA_RULES = {
     "Obesity": ["obesity", "obese", "weight loss", "body weight", "bariatric"],
@@ -233,27 +266,36 @@ def previous_queue():
         return {}
 
 
-def relevant(article):
-    title = text(
-        article.find("ArticleTitle")
-    ).lower()
+def relevant(article, citation):
+    """Broad but controlled ketogenic relevance filter."""
+    title = text(article.find("ArticleTitle")).lower()
 
     abstract = " ".join(
         text(n)
-        for n in article.findall(
-            "Abstract/AbstractText"
-        )
+        for n in article.findall("Abstract/AbstractText")
     ).lower()
 
-    body = title + " " + abstract
+    mesh = " ".join(
+        text(n)
+        for n in citation.findall(".//MeshHeading/DescriptorName")
+        if text(n)
+    ).lower()
 
-    return (
-        any(x in title for x in CORE)
-        or (
-            any(x in title for x in SECONDARY)
-            and any(x in body for x in CONTEXT)
-        )
-    )
+    body = f"{title} {abstract} {mesh}"
+
+    if any(x in body for x in CORE):
+        return True
+
+    if "diet, ketogenic" in mesh or re.search(r"\bketosis\b", mesh):
+        return True
+
+    if (
+        any(x in body for x in SECONDARY)
+        and any(x in body for x in CONTEXT)
+    ):
+        return True
+
+    return False
 
 
 def classify(title, abstract, mesh):
@@ -624,6 +666,8 @@ def main():
 
     latest = []
     queue = []
+    fetched_count = len(ids)
+    relevant_count = 0
 
     for item in root.findall(
         ".//PubmedArticle"
@@ -641,9 +685,11 @@ def main():
         if (
             citation is None
             or article is None
-            or not relevant(article)
+            or not relevant(article, citation)
         ):
             continue
+
+        relevant_count += 1
 
         pmid = text(
             citation.find(
@@ -970,6 +1016,12 @@ def main():
                     WINDOW_DAYS,
                 "max_records":
                     MAX_RECORDS,
+                "pubmed_records_fetched":
+                    fetched_count,
+                "relevant_records_after_filter":
+                    relevant_count,
+                "truncated":
+                    len(latest) >= MAX_RECORDS,
                 "source":
                     "PubMed / NCBI E-utilities",
                 "count":
@@ -1022,9 +1074,20 @@ def main():
     )
 
     print(
+        f"PubMed fetched {fetched_count} candidate record(s); "
+        f"{relevant_count} passed the ketogenic relevance filter."
+    )
+
+    print(
         f"Wrote {len(latest)} recent records "
         f"to {LATEST_OUT.name}"
     )
+
+    if len(latest) >= MAX_RECORDS:
+        print(
+            f"WARNING: Latest Evidence reached MAX_RECORDS={MAX_RECORDS}. "
+            "Increase MAX_RECORDS to avoid truncation."
+        )
 
     print(
         f"Wrote {len(queue)} non-curated candidates "
