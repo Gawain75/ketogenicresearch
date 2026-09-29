@@ -108,19 +108,68 @@ def parse_pubmed(item) -> dict | None:
     }
 
 
+def _fetch_pubmed_batch(batch: list[str], depth: int = 0) -> dict[str, dict]:
+    """Fetch a PubMed batch robustly.
+
+    NCBI occasionally returns a truncated or malformed XML payload even when
+    the HTTP request itself succeeds. Retry the same batch, then split it into
+    smaller batches so one bad response cannot abort the entire backfill.
+    """
+    if not batch:
+        return {}
+
+    last_error = None
+    for attempt in range(4):
+        try:
+            payload = eutils("efetch.fcgi", {
+                "db": "pubmed",
+                "id": ",".join(batch),
+                "retmode": "xml",
+            })
+            root = ET.fromstring(payload)
+            out = {}
+            for item in root.findall(".//PubmedArticle"):
+                rec = parse_pubmed(item)
+                if rec and rec["pmid"]:
+                    out[rec["pmid"]] = rec
+            return out
+        except ET.ParseError as exc:
+            last_error = exc
+            wait = min(20, 2 ** attempt * 2)
+            print(
+                f"Malformed PubMed XML for batch of {len(batch)} records "
+                f"(attempt {attempt + 1}/4): {exc}. Retrying in {wait}s..."
+            )
+            time.sleep(wait)
+
+    if len(batch) == 1:
+        print(
+            f"WARNING: unable to parse PubMed XML for PMID {batch[0]} "
+            f"after retries: {last_error}. The record will be resolved by "
+            "DOI/title fallback when possible."
+        )
+        return {}
+
+    mid = len(batch) // 2
+    print(
+        f"Splitting malformed PubMed batch of {len(batch)} into "
+        f"{mid} + {len(batch) - mid} records."
+    )
+    left = _fetch_pubmed_batch(batch[:mid], depth + 1)
+    right = _fetch_pubmed_batch(batch[mid:], depth + 1)
+    left.update(right)
+    return left
+
+
 def fetch_pmids(pmids: list[str]) -> dict[str, dict]:
     unique = list(dict.fromkeys(p for p in pmids if p and p.isdigit()))
     out = {}
-    for i in range(0, len(unique), 120):
-        batch = unique[i:i+120]
-        root = ET.fromstring(eutils("efetch.fcgi", {
-            "db": "pubmed", "id": ",".join(batch), "retmode": "xml",
-        }))
-        for item in root.findall(".//PubmedArticle"):
-            rec = parse_pubmed(item)
-            if rec and rec["pmid"]:
-                out[rec["pmid"]] = rec
-        print(f"Fetched PubMed batch {i//120 + 1}/{(len(unique)+119)//120}.")
+    batch_size = 50
+    total_batches = (len(unique) + batch_size - 1) // batch_size
+    for i in range(0, len(unique), batch_size):
+        batch = unique[i:i + batch_size]
+        out.update(_fetch_pubmed_batch(batch))
+        print(f"Fetched PubMed batch {i // batch_size + 1}/{total_batches}.")
     return out
 
 
