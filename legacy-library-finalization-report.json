@@ -1,0 +1,956 @@
+{
+  "audited": 154,
+  "corrected": 0,
+  "duplicates_removed": 0,
+  "unverified_removed": 118,
+  "manual_review": 36,
+  "cards_missing_since_audit": 0,
+  "policy": "Only generic legacy cards without PMID/DOI are eligible. not_found records are removed. probable records are corrected only with a stable identifier plus strict title agreement; ambiguous probable records are retained for manual review. Existing canonical duplicates are preserved and the legacy copy is removed.",
+  "corrected_records": [],
+  "duplicate_legacy_records_removed": [],
+  "unverified_records_removed": [
+    {
+      "legacy_title": "Effects of One-Month Very-Low-Calorie Ketogenic Diet on 24h Energy Metabolism",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "European Society for the Study of Obesity (EASO) Position Statement on Very Low-Calorie Ketogenic Diets",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "VLCKD in Combination with Physical Exercise Preserves Skeletal Muscle in Obesity",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Effects of One-Month Very-Low-Calorie Ketogenic Diet on 24-h Energy Expenditure",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Epigenetic Aging Acceleration in Obesity Is Slowed Down by Nutritional Ketosis Following VLCKD",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketogenic Diet Combined with Moderate Aerobic Exercise in Obesity",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Reduction of Cardio-Metabolic Risk and Body Weight through Ketogenic Nutritional Intervention",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Sustained metabolic improvements in a remotely delivered ketogenic nutrition intervention in type 2 diabetes",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "BDH1-mediated β-hydroxybutyrate metabolism ameliorates diabetic kidney disease",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Effect of Low-Carbohydrate Diets on Glycemic Control",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Greater Reduction in the Proinsulin-C-Peptide Ratio with a Ketogenic Nutritional Intervention",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Sustained Metabolic Improvements in a Remotely Delivered Ketogenic Nutrition Intervention",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Low-Carbohydrate Ketogenic Diets Reduce Cardiovascular Risk Factor Levels in Patients with Type 2 Diabetes",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "The Ketogenic Diet Through a Metabolomic Lens",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketogenic diet time-dependently prevents NAFLD",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketogenic Diet Time-Dependently Prevents NAFLD through Metabolic Remodeling",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Higher-Level Steatosis Is Associated with a Greater Decrease in MASLD after Eight Weeks of a Very Low-Calorie Ketogenic Diet in Subjects with Overweight or Obesity",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Treatment of NAFLD with Intermittent Calorie Restriction or Low-Carbohydrate Diet",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Low-density lipoprotein cholesterol elevation with carbohydrate-restricted diets",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "LDL Keto Trial",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Reduction of Cardio-Metabolic Risk and Body Weight through a ketogenic dietary intervention",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Italian Ketogenic Mediterranean Diet in Overweight and Obese Adults",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Effects of a two-meals-a-day ketogenic diet on metabolic markers",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Is a Ketogenic Diet Superior to a Low-Fat Diet?",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Effects of ketogenic diet on health",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "The Lipid Energy Model",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Reduction of Cardio-Metabolic Risk and Body Weight through Ketogenic Nutritional Intervention",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Low-Density Lipoprotein Cholesterol Elevation in the Context of a Ketogenic Diet",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Nutritional Intervention in Cushing’s Disease: The Potential Role of a Ketogenic Strategy",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Effects of Ketogenic Diet on Reproductive Hormones in PCOS",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Low-Calorie Ketogenic Diet: Potential Application in PCOS",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Long-term effectiveness and tolerability of ketogenic diet therapy in patients with genetic epilepsy",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "The ketogenic diet increases Neuregulin 1 in an epilepsy model",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Treatment of refractory epilepsy: comparison of ketogenic dietary approaches",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Seizure modulation by the gut microbiota and ketogenic diet",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "The efficacy of non-fasting ketogenic diet protocols in epilepsy",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Stress biomarkers in adult patients with drug-resistant epilepsy during ketogenic diet therapy",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Fecal Transfers from Children on the Ketogenic Diet Mimic Key Metabolic Effects",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Intractable Seizures in Children With Type 1 Diabetes Treated With Ketogenic Dietary Therapy",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Graph Theory-Based Electroencephalographic Connectivity During Ketogenic Diet Therapy",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketogenic Diet Therapy for Refractory Epilepsy",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "The Effect of Simultaneous Application of a Plant-Rich Ketogenic Diet in Alzheimer’s Disease",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Dietary approaches to improve efficacy and management in Parkinson’s disease with ketogenic strategies",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Neuroprotection by the Ketogenic Diet",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Dietary Ketosis Improves Metabolic and Neurological Features in Experimental Huntington’s Disease",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Neuroprotection by the ketogenic diet",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "The Implication of Physiological Ketosis on Cognitive Function",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Association Between Ketogenic Diet and Cognitive Function",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Dietary and Metabolic Approaches for Treating Cognitive Impairment Comorbid with Epilepsy",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Mediterranean Ketogenic Diet Accounts for Reduced Pain Frequency in Migraine",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "The Long-Term Treatment of Drug-Resistant Migraine with Ketogenic Dietary Therapy",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Migraine Prevention through Ketogenic Diet: More than Body Weight Reduction",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "The Role of Nutrition and Physical Activity in Multiple Sclerosis",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Therapeutic Alternative of the Ketogenic Mediterranean Diet in Multiple Sclerosis",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketogenic Diet: A Dietary Intervention via Gut Microbiota in Autism Spectrum Disorder",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Efficacy and Safety of Diet Therapies in Autism Spectrum Disorder including ketogenic interventions",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Effect of 3 months of ketogenic diet on euthymia in bipolar II disorder",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketogenic diet-derived faecal microbiota and schizophrenia",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Effects of a ketogenic diet on bipolar disorder",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Perspectives on the Ketogenic Diet as a Non-pharmacological Intervention in Mental Health",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "KETO-MOOD: Ketogenic Diet for Microbiome Optimization in Mood Disorders",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Evaluating the efficacy and mechanisms of a ketogenic diet as adjunctive treatment in serious mental illness",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketosis and bipolar disorder",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketogenic Diet and Ketamine Infusion Treatment in Anorexia Nervosa",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Overcoming immunosuppression in cancer: how ketogenic diets may boost anti-tumor immunity",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "β-Hydroxybutyrate and Malignant Neoplasms",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketogenic Diets Slow Melanoma Growth",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketogenic Diet and Chemotherapy Combine to Improve Antitumor Effects",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketogenesis Attenuates KLF5-Dependent Production of CXCL12 to Overcome Tumor-Promoting Signaling",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "LDL Keto Trial",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "The ketogenic diet has the potential to decrease atherosclerotic cardiovascular disease risk",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketogenic Diet and the Potential to Decrease Atherosclerotic Cardiovascular Disease Risk",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketogenic Diet: Mental Health Benefits versus Cardiovascular Risk",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketogenic Diet and Myocardial Fatty Acid Oxidation in Humans",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketone Bodies and Cardiometabolic Inflammation: Epigenetic Mechanisms",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketone Bodies in Ischemic Heart Disease",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Heart Rate Variability during a Very Low-Calorie Ketogenic Diet",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Feasibility and impact of ketogenic dietary interventions in ADPKD",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "GREASE II: randomized trial of ketogenic metabolic therapy in autosomal dominant polycystic kidney disease",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketogenic Diets and β-Hydroxybutyrate in Kidney Disease",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Risks of the Ketogenic Diet in Chronic Kidney Disease",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "BDH1-Mediated β-Hydroxybutyrate Metabolism Ameliorates Diabetic Kidney Disease",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "VLCKD in Combination with Physical Exercise Preserves Skeletal Muscle in Obesity",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "VLCKD combined with physical interval training",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketogenic Diet Ameliorates Inflammasome Activation in Experimental Osteoarthritis",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Efficacy, Safety and Tolerability of VLCKD in Women with Obesity and Fibromyalgia",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "The Ketogenic Diet and Dermatology",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketones, the ketogenic diet, and the skin: a review of where we are and where we should go",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Beneficial Effects of the Very-Low-Calorie Ketogenic Diet on Reproductive and Metabolic Parameters",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "The Effect of Low Carbohydrate Diets on Fertility",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "The Efficacy of Ketogenic Diets as a Potential Nutritional Intervention for Lipedema",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Dietary liposuction through ketogenic diet: a comparison of three approaches",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Intermittent Fasting, Calorie Restriction, and a Ketogenic Diet Improve Healthspan",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Divergent Sex-Specific Effects of a Ketogenic Diet during Aging",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketogenic Interventions Enhance Circadian and Metabolic Regulation",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketogenic Diet and Microbiota",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Very Low-Energy Ketogenic Therapy and Trimethylamine N-Oxide in Women with Obesity",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Parkinson’s Disease, Gut Microbiota and Ketogenic Diet",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "A Multi-Omics Approach to Intestinal Permeability during a Very Low-Calorie Ketogenic Diet",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketogenic Diet, Epilepsy and the Brain-Gut Axis",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Fecal Microbiota Transfer from Children on a Ketogenic Diet",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Modified Ketogenic Diet and Gut Microbiota in Obesity",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Mitochondrial Epilepsy, Ketogenic Therapy and the Gut Microbiome",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Very Low-Calorie Ketogenic Diet and Microbiota in Obesity",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketogenic Diet, Gut Microbiota and Neurodegenerative Disorders",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Very Low-Carbohydrate Ketogenic Diet, Gut Microbiota and Short-Chain Fatty Acids",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketogenic Diet Intervention via the Gut Microbiota in Autism Spectrum Disorder",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Very Low-Calorie, Ketogenic and Low-Carbohydrate Diets: Effects on the Gut Microbiota",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Impact of ketogenic diet and ketone diester supplementation on body composition and performance",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketogenic Effects of Multiple Doses of a Medium-Chain Triglyceride Supplement",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Tricaprylin Alone Increases Plasma Ketone Concentrations",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketosis After Intake of Coconut Oil",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Impact of the Ketogenic Diet on Body Fat in Athletes",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "VLCKD Combined with Physical Interval Training",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Ketogenic Diet Combined with Moderate Aerobic Exercise",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Effects of 30 Days of Ketogenic Diet on Exercise Performance",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Clinically Meaningful Improvements in Long COVID With a Ketogenic Metabolic Intervention",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    },
+    {
+      "legacy_title": "Clinical efficacy of eucaloric ketogenic nutrition in COVID-19",
+      "reason": "second-pass audit: no sufficiently reliable bibliographic match"
+    }
+  ],
+  "manual_review_records": [
+    {
+      "legacy_title": "An 8-Week Very Low-Calorie Ketogenic Diet Alters Obese-Derived Small Extracellular Vesicles and Hepatic Cell Phenotypes",
+      "best_score": 0.8374,
+      "candidate": {
+        "source": "PubMed",
+        "title": "An 8-Week Very Low-Calorie Ketogenic Diet (VLCKD) Alters the Landscape of Obese-Derived Small Extracellular Vesicles (sEVs), Redefining Hepatic Cell Phenotypes.",
+        "pmid": "39683581",
+        "doi": "10.3390/nu16234189",
+        "year": "2024",
+        "score": 0.8374
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Comparison of a Pre-Bariatric Surgery VLCKD and Mediterranean Diet on Weight Loss, Metabolic Parameters, and Liver Size Reduction",
+      "best_score": 0.8444,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Comparison of a pre-bariatric surgery very low-calorie ketogenic diet and the Mediterranean diet effects on weight loss, metabolic parameters, and liver size reduction",
+        "pmid": "",
+        "doi": "10.1038/s41598-022-24959-z",
+        "year": "2022",
+        "score": 0.8444
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Impact of a VLCKD on Handgrip Strength in Women with Obesity",
+      "best_score": 0.7667,
+      "candidate": {
+        "source": "PubMed",
+        "title": "Impact of a Very Low-Calorie Ketogenic Diet (VLCKD) on Changes in Handgrip Strength in Women with Obesity.",
+        "pmid": "36235866",
+        "doi": "10.3390/nu14194213",
+        "year": "2022",
+        "score": 0.7667
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Effects of very low-carbohydrate ketogenic diet on lipid metabolism in patients with type 2 diabetes",
+      "best_score": 0.8479,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Effects of very low-carbohydrate ketogenic diet on lipid metabolism in patients with type II diabetes mellitus: a meta-analysis",
+        "pmid": "",
+        "doi": "10.20960/nh.03987",
+        "year": "2022",
+        "score": 0.8479
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Clinical Assessment of Intermittent Fasting with Ketogenic Diet in Glycemic Control and Weight Reduction in Type 2 Diabetes",
+      "best_score": 0.7839,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Clinical Assessment of Intermittent Fasting With Ketogenic Diet in Glycemic Control and Weight Reduction in Patients With Type II Diabetes Mellitus: A Systematic Review and Meta-Analysis",
+        "pmid": "",
+        "doi": "10.7759/cureus.30879",
+        "year": "2022",
+        "score": 0.7839
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Very Low Carbohydrate Ketogenic Diets in Type 2 Diabetes: Review",
+      "best_score": 0.835,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Low carbohydrate and ketogenic diets in type 2 diabetes",
+        "pmid": "",
+        "doi": "10.1097/mol.0000000000000241",
+        "year": "2015",
+        "score": 0.835
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Higher-Level Steatosis Is Associated with a Greater Decrease in Metabolic Dysfunction-Associated Steatotic Liver Disease after Eight Weeks of a Very Low-Calorie Ketogenic Diet",
+      "best_score": 0.8475,
+      "candidate": {
+        "source": "PubMed",
+        "title": "Higher-Level Steatosis Is Associated with a Greater Decrease in Metabolic Dysfunction-Associated Steatoic Liver Disease after Eight Weeks of a Very Low-Calorie Ketogenic Diet (VLCKD) in Subjects Affected by Overweight and Obesity.",
+        "pmid": "38542785",
+        "doi": "10.3390/nu16060874",
+        "year": "2024",
+        "score": 0.8475
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Effects of a ketogenic diet in overweight women with PCOS",
+      "best_score": 0.8175,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Effects of a ketogenic diet in overweight women with polycystic ovary syndrome",
+        "pmid": "",
+        "doi": "10.1186/s12967-020-02277-0",
+        "year": "2020",
+        "score": 0.8175
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Effects of a Ketogenic Diet in Overweight and Obese Women with PCOS",
+      "best_score": 0.8046,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Effects of Mixed of a Ketogenic Diet in Overweight and Obese Women with Polycystic Ovary Syndrome",
+        "pmid": "",
+        "doi": "10.3390/ijerph182312490",
+        "year": "2021",
+        "score": 0.8046
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Low-Calorie Ketogenic Diet: Potential Application in Polycystic Ovary Syndrome",
+      "best_score": 0.8339,
+      "candidate": {
+        "source": "PubMed",
+        "title": "Low-Calorie Ketogenic Diet: Potential Application in the Treatment of Polycystic Ovary Syndrome in Adolescents.",
+        "pmid": "37630772",
+        "doi": "10.3390/nu15163582",
+        "year": "2023",
+        "score": 0.8339
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Effects of a Mixed Ketogenic Diet in Overweight and Obese Women with PCOS",
+      "best_score": 0.8315,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Effects of Mixed of a Ketogenic Diet in Overweight and Obese Women with Polycystic Ovary Syndrome",
+        "pmid": "",
+        "doi": "10.3390/ijerph182312490",
+        "year": "2021",
+        "score": 0.8315
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "The gut microbiome and the ketogenic diet in epilepsy",
+      "best_score": 0.8159,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Gut Microbiota, the Ketogenic Diet and Epilepsy",
+        "pmid": "",
+        "doi": "10.15844/pedneurbriefs-32-10",
+        "year": "2018",
+        "score": 0.8159
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Prospective Controlled Study of Efficacy and Influencing Factors of Ketogenic Diet Therapy in Epilepsy",
+      "best_score": 0.7913,
+      "candidate": {
+        "source": "PubMed",
+        "title": "Prospective control study of efficacy and influencing factors of a ketogenic diet on refractory epilepsy in children.",
+        "pmid": "35242660",
+        "doi": "10.21037/tp-21-595",
+        "year": "2022",
+        "score": 0.7913
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Analysis of Factors That May Affect the Effectiveness of Ketogenic Diet Therapy in Epilepsy",
+      "best_score": 0.7694,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Analysis of Factors That May Affect the Effectiveness of Ketogenic Diet Treatment in Pediatric and Adolescent Patients",
+        "pmid": "",
+        "doi": "10.3390/jcm11030606",
+        "year": "2022",
+        "score": 0.7694
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Ketogenic Diet and β-Hydroxybutyrate Rescue Long-Term Potentiation in an Alzheimer’s Mouse Model and Stimulate Synaptic Plasticity Pathways",
+      "best_score": 0.7812,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Ketogenic diet and BHB rescue the fall of long-term potentiation in an Alzheimer’s mouse model and stimulates synaptic plasticity pathway enzymes",
+        "pmid": "",
+        "doi": "10.1038/s42003-024-05860-z",
+        "year": "2024",
+        "score": 0.7812
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "The role of diet and dietary patterns in Parkinson’s disease, including ketogenic approaches",
+      "best_score": 0.8335,
+      "candidate": {
+        "source": "Crossref",
+        "title": "The Role of Diet and Dietary Patterns in Parkinson’s Disease",
+        "pmid": "",
+        "doi": "10.3390/nu14214472",
+        "year": "2022",
+        "score": 0.8335
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "The Long-Term Treatment of Drug-Resistant Migraine with a Ketogenic Diet",
+      "best_score": 0.7667,
+      "candidate": {
+        "source": "Crossref",
+        "title": "The Long-Term Treatment of Drug-Resistant Migraine with the Modified Atkins Ketogenic Diet: A Single-Center, Retrospective Study",
+        "pmid": "",
+        "doi": "10.3390/nu16244324",
+        "year": "2024",
+        "score": 0.7667
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Ketogenic Diet and Low-Glycemic-Index Diet for Chronic and Episodic Migraine: A Real-Life Retrospective Study",
+      "best_score": 0.8438,
+      "candidate": {
+        "source": "Crossref",
+        "title": "2:1 ketogenic diet and low-glycemic-index diet for the treatment of chronic and episodic migraine: a single-center real-life retrospective study",
+        "pmid": "",
+        "doi": "10.1186/s10194-023-01635-9",
+        "year": "2023",
+        "score": 0.8438
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Vocal Communication in Asocial BTBR Mice Is Modulated by a Ketogenic Diet",
+      "best_score": 0.7763,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Vocal communication in asocial BTBR mice is more malleable by a ketogenic diet in juveniles than adults",
+        "pmid": "",
+        "doi": "10.1016/j.neuroscience.2024.10.001",
+        "year": "2024",
+        "score": 0.7763
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Ketogenic diet has a positive association with mental and emotional health",
+      "best_score": 0.78,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Ketogenic diet has a positive association with mental and emotional well-being in the general population",
+        "pmid": "",
+        "doi": "10.1016/j.nut.2024.112420",
+        "year": "2024",
+        "score": 0.78
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Ketogenic Diet Intervention on Metabolic and Psychiatric Health in Bipolar Disorder and Schizophrenia",
+      "best_score": 0.8556,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Ketogenic Diet Intervention on Metabolic and Psychiatric Health in Bipolar and Schizophrenia: A Pilot Trial",
+        "pmid": "",
+        "doi": "10.1016/j.psychres.2024.115866",
+        "year": "2024",
+        "score": 0.8556
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Very-Low-Calorie Ketogenic Diet: A Potential Treatment for Binge-Eating Symptoms in Obesity",
+      "best_score": 0.807,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Very-Low-Calorie Ketogenic Diet: A Potential Treatment for Binge Eating and Food Addiction Symptoms in Women. A Pilot Study",
+        "pmid": "",
+        "doi": "10.3390/ijerph182312802",
+        "year": "2021",
+        "score": 0.807
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Ketogenic Diet in Cancer Prevention and Therapy: Molecular Mechanisms",
+      "best_score": 0.7696,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Ketogenic Diet in Cancer Prevention and Therapy: Molecular Targets and Therapeutic Opportunities",
+        "pmid": "",
+        "doi": "10.3390/cimb43020042",
+        "year": "2021",
+        "score": 0.7696
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Nutritional adequacy of ketogenic diets as a novel dietary intervention for people living with ADPKD",
+      "best_score": 0.8219,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Nutritional adequacy of ketogenic diets as a novel dietary intervention for people living with autosomal dominant polycystic kidney disease",
+        "pmid": "",
+        "doi": "10.1093/joneph/aajaf053",
+        "year": "2026",
+        "score": 0.8219
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "A pilot study to evaluate tolerability and safety of a modified Atkins diet in autosomal dominant polycystic kidney disease",
+      "best_score": 0.7687,
+      "candidate": {
+        "source": "Crossref",
+        "title": "A pilot study to evaluate tolerability and safety of a modified Atkins diet in ADPKD patients",
+        "pmid": "",
+        "doi": "10.1016/j.phanu.2019.100154",
+        "year": "2019",
+        "score": 0.7687
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Incidence and Characteristics of Kidney Stones in Patients on Ketogenic Diets",
+      "best_score": 0.8438,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Incidence and Characteristics of Kidney Stones in Patients on a Ketogenic Diet: A Meta-Analysis",
+        "pmid": "",
+        "doi": "10.1681/asn.20203110s1176a",
+        "year": "2020",
+        "score": 0.8438
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Impact of Fasting and Ketogenic Interventions on the NLRP3 Inflammasome",
+      "best_score": 0.8225,
+      "candidate": {
+        "source": "PubMed",
+        "title": "Impact of fasting & ketogenic interventions on the NLRP3 inflammasome: A narrative review.",
+        "pmid": "37940045",
+        "doi": "10.1016/j.bj.2023.100677",
+        "year": "2024",
+        "score": 0.8225
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Metabolic Effects of Ketogenic Diets: Whole-Body Metabolism, Adipose Tissue and Metabolic Organs",
+      "best_score": 0.8401,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Metabolic Effects of Ketogenic Diets: Exploring Whole-Body Metabolism in Connection with Adipose Tissue and Other Metabolic Organs",
+        "pmid": "",
+        "doi": "10.3390/ijms25137076",
+        "year": "2024",
+        "score": 0.8401
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Persistent Inflammation, Immunosuppression, and Catabolism in Metabolic Disease",
+      "best_score": 0.7703,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Persistent Inflammation, Immunosuppression and Catabolism Syndrome",
+        "pmid": "",
+        "doi": "10.1016/j.ccc.2016.12.001",
+        "year": "2017",
+        "score": 0.7703
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Differential Effects of Short-Term Standard and Ketogenic Diets on the Aging Mouse Brain",
+      "best_score": 0.775,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Differential effects of short-term and long-term ketogenic diet on gene expression in the aging mouse brain",
+        "pmid": "",
+        "doi": "10.1016/j.jnha.2024.100427",
+        "year": "2025",
+        "score": 0.775
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Can the Ketogenic Diet Improve Our Dreams? Effect of VLCKD on Sleep Quality",
+      "best_score": 0.8553,
+      "candidate": {
+        "source": "PubMed",
+        "title": "Can the ketogenic diet improve our dreams? Effect of very low-calorie ketogenic diet (VLCKD) on sleep quality.",
+        "pmid": "37464397",
+        "doi": "10.1186/s12967-023-04280-7",
+        "year": "2023",
+        "score": 0.8553
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Ketogenic Diet, Gut Microbiome and Cancer Immunotherapy Outcomes",
+      "best_score": 0.7768,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Gut microbiome and cancer immunotherapy",
+        "pmid": "",
+        "doi": "10.1002/jcp.29359",
+        "year": "2020",
+        "score": 0.7768
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Very-Low-Calorie Ketogenic Diets and Gut Microbiota in Obesity: Systematic Review and Meta-Analysis",
+      "best_score": 0.8298,
+      "candidate": {
+        "source": "PubMed",
+        "title": "The impact of very-low-calorie ketogenic diets on gut microbiota in individuals with obesity: a systematic review and meta-analysis.",
+        "pmid": "41054273",
+        "doi": "10.1080/19490976.2025.2566305",
+        "year": "2025",
+        "score": 0.8298
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Ketogenic Diet, Gut Microbiota, Cognition and Mood",
+      "best_score": 0.7652,
+      "candidate": {
+        "source": "PubMed",
+        "title": "Ketogenic Diet and Gut Microbiota: Exploring New Perspectives on Cognition and Mood.",
+        "pmid": "40238374",
+        "doi": "10.3390/foods14071215",
+        "year": "2025",
+        "score": 0.7652
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Ketogenic Diet and Gut Microbiota in Neurological Disorders",
+      "best_score": 0.8007,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Gut Microbiota in Neurological Disorders",
+        "pmid": "",
+        "doi": "10.1007/s00005-019-00561-6",
+        "year": "2019",
+        "score": 0.8007
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    },
+    {
+      "legacy_title": "Influence of the Ketogenic Diet on Gut Microbiota",
+      "best_score": 0.8562,
+      "candidate": {
+        "source": "Crossref",
+        "title": "Influence of diet on the gut microbiota",
+        "pmid": "",
+        "doi": "10.12775/jehs.2020.10.05.003",
+        "year": "2020",
+        "score": 0.8562
+      },
+      "reason": "probable match not strong enough for automatic replacement"
+    }
+  ],
+  "missing_records": []
+}
