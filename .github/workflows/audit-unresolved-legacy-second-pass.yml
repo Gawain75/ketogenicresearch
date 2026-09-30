@@ -1,0 +1,27 @@
+name: Audit unresolved legacy Library records - second pass
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Audit 154 unresolved legacy records
+        run: python scripts/audit_unresolved_legacy.py
+      - name: Commit audit report only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add legacy-library-second-pass-audit.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Audit unresolved legacy Library records - second pass"
+          git push
