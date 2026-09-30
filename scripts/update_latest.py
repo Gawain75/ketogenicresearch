@@ -20,6 +20,7 @@ EMAIL = os.getenv("NCBI_EMAIL", "info@ketogenicresearch.org")
 API_KEY = os.getenv("NCBI_API_KEY", "")
 WINDOW_DAYS = int(os.getenv("WINDOW_DAYS", "90"))
 CURATION_WINDOW_DAYS = int(os.getenv("CURATION_WINDOW_DAYS", "365"))
+INDEX_WINDOW_DAYS = int(os.getenv("INDEX_WINDOW_DAYS", "14"))
 MAX_RECORDS = int(os.getenv("MAX_RECORDS", "1000"))
 CURATION_MAX_RECORDS = int(os.getenv("CURATION_MAX_RECORDS", "5000"))
 
@@ -614,77 +615,78 @@ def evidence(
     return "Other"
 
 def pubdate(item):
+    """
+    Return the actual publication date, not an arbitrary PubMed history date.
+
+    Priority:
+      1. Article/ArticleDate (usually electronic publication date)
+      2. JournalIssue/PubDate
+      3. PubMed history date with PubStatus='pubmed' only as a last fallback
+
+    The previous implementation iterated over every PubMedPubDate entry
+    (received, accepted, entrez, pubmed, medline, etc.). That could make a
+    newly published paper look months old and exclude it from recent results.
+    """
     nodes = (
-        item.findall(
-            ".//Article/ArticleDate"
-        )
-        + item.findall(
-            ".//PubmedData/History/PubMedPubDate"
-        )
-        + item.findall(
-            ".//Article/Journal/JournalIssue/PubDate"
-        )
+        item.findall(".//Article/ArticleDate")
+        + item.findall(".//Article/Journal/JournalIssue/PubDate")
     )
 
+    # PubMed indexing date is only a fallback when no publication date exists.
+    history_fallback = []
+    for node in item.findall(".//PubmedData/History/PubMedPubDate"):
+        status = (node.get("PubStatus") or "").strip().lower()
+        if status == "pubmed":
+            history_fallback.append(node)
+
+    nodes += history_fallback
+
     for node in nodes:
-        y = text(
-            node.find("Year")
-        )
-        m = text(
-            node.find("Month")
-        )
-        d = text(
-            node.find("Day")
-        )
+        y = text(node.find("Year"))
+        m = text(node.find("Month"))
+        d = text(node.find("Day"))
 
         if not y.isdigit():
+            # Some journal records use MedlineDate, e.g. "2026 Sep-Oct".
+            medline = text(node.find("MedlineDate"))
+            match = re.search(
+                r"\b(19|20)\d{2}\b(?:\s+([A-Za-z]{3,4}))?",
+                medline,
+            )
+            if match:
+                year = int(match.group(0)[:4])
+                month_token = match.group(2) or ""
+                month = (
+                    MONTHS.get(month_token[:4].lower())
+                    or MONTHS.get(month_token[:3].lower())
+                )
+                if month:
+                    return (dt.date(year, month, 1), "month")
+                return (dt.date(year, 1, 1), "year")
             continue
 
         year = int(y)
-
         month = (
             int(m)
             if m.isdigit()
             else (
-                MONTHS.get(
-                    m[:4].lower()
-                )
-                or MONTHS.get(
-                    m[:3].lower()
-                )
+                MONTHS.get(m[:4].lower())
+                or MONTHS.get(m[:3].lower())
             )
         )
 
-        if (
-            month
-            and d.isdigit()
-        ):
+        if month and d.isdigit():
             try:
-                return (
-                    dt.date(
-                        year,
-                        month,
-                        int(d),
-                    ),
-                    "day",
-                )
+                return (dt.date(year, month, int(d)), "day")
             except ValueError:
                 pass
 
         if month:
-            return (
-                dt.date(
-                    year,
-                    month,
-                    1,
-                ),
-                "month",
-            )
+            return (dt.date(year, month, 1), "month")
 
-    return (
-        None,
-        "unknown",
-    )
+        return (dt.date(year, 1, 1), "year")
+
+    return (None, "unknown")
 
 
 def main():
@@ -721,42 +723,36 @@ def main():
     existing = existing_ids()
     old_queue = previous_queue()
 
-    search = json.loads(
-        api(
-            "esearch.fcgi",
-            {
-                "db": "pubmed",
-                "term": QUERY,
-                "retmode": "json",
-                "retmax": str(
-                    CURATION_MAX_RECORDS
-                ),
-                "sort": "pub date",
-                "datetype": "pdat",
-                "mindate":
-                    search_start.strftime(
-                        "%Y/%m/%d"
-                    ),
-                "maxdate":
-                    search_end.strftime(
-                        "%Y/%m/%d"
-                    ),
-            },
-        ).decode(
-            "utf-8"
-        )
-    )
+    def search_ids(datetype, start_date, end_date):
+        params = {
+            "db": "pubmed",
+            "term": QUERY,
+            "retmode": "json",
+            "retmax": str(CURATION_MAX_RECORDS),
+            "sort": "pub date",
+            "datetype": datetype,
+            "mindate": start_date.strftime("%Y/%m/%d"),
+            "maxdate": end_date.strftime("%Y/%m/%d"),
+        }
+        result = json.loads(api("esearch.fcgi", params).decode("utf-8"))
+        return result.get("esearchresult", {}).get("idlist", [])
 
-    ids = (
-        search
-        .get(
-            "esearchresult",
-            {},
-        )
-        .get(
-            "idlist",
-            [],
-        )
+    # Main discovery by publication date.
+    pdat_ids = search_ids("pdat", search_start, search_end)
+
+    # On normal scheduled runs, also capture records newly entered into PubMed.
+    # A paper can be indexed today while carrying an earlier publication date;
+    # pdat alone can therefore miss genuinely new PubMed additions.
+    edat_ids = []
+    if not BACKFILL_MODE:
+        index_start = today - dt.timedelta(days=INDEX_WINDOW_DAYS)
+        edat_ids = search_ids("edat", index_start, today)
+
+    # Preserve PubMed ordering while removing duplicates.
+    ids = list(dict.fromkeys(pdat_ids + edat_ids))
+    print(
+        f"PubMed discovery: pdat={len(pdat_ids)}, edat={len(edat_ids)}, "
+        f"unique={len(ids)}"
     )
 
     if not ids:
@@ -764,16 +760,14 @@ def main():
             wait_seconds = attempt * 5
             print(f"PubMed returned no records; retry {attempt}/3 after {wait_seconds}s...")
             time.sleep(wait_seconds)
-            retry_search = json.loads(api("esearch.fcgi", {
-                "db": "pubmed", "term": QUERY, "retmode": "json",
-                "retmax": str(CURATION_MAX_RECORDS), "sort": "pub date",
-                "datetype": "pdat",
-                "mindate": search_start.strftime("%Y/%m/%d"),
-                "maxdate": search_end.strftime("%Y/%m/%d"),
-            }).decode("utf-8"))
-            ids = retry_search.get("esearchresult", {}).get("idlist", [])
+            pdat_ids = search_ids("pdat", search_start, search_end)
+            edat_ids = []
+            if not BACKFILL_MODE:
+                index_start = today - dt.timedelta(days=INDEX_WINDOW_DAYS)
+                edat_ids = search_ids("edat", index_start, today)
+            ids = list(dict.fromkeys(pdat_ids + edat_ids))
             if ids:
-                print(f"PubMed recovered on retry {attempt}: {len(ids)} record(s) returned.")
+                print(f"PubMed recovered on retry {attempt}: {len(ids)} unique record(s) returned.")
                 break
 
     if not ids:
@@ -1171,6 +1165,8 @@ def main():
                     generated,
                 "curation_window_days":
                     CURATION_WINDOW_DAYS,
+                "index_window_days":
+                    INDEX_WINDOW_DAYS,
                 "backfill_year":
                     BACKFILL_YEAR_INT if BACKFILL_MODE else None,
                 "auto_approved_count":
