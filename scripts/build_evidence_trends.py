@@ -124,46 +124,25 @@ def build_dataset():
                 self.parent[rb] = ra
 
     uf = UnionFind(len(records))
+
+    # IMPORTANT: use exactly the same canonical identity as
+    # sync_publication_counters.py.  The public Library counter is title-based
+    # whenever a normalized title is available, with PMID/DOI only as fallback.
+    # Evidence Trends must therefore aggregate the same publication universe.
     owner = {}
-
-    # Canonical bibliographic identity: PMID first, DOI second.
-    for i, rec in enumerate(records):
-        tokens = []
-        if rec["pmid"]:
-            tokens.append("pmid:" + rec["pmid"])
-        if rec["doi"]:
-            tokens.append("doi:" + rec["doi"])
-        for token in tokens:
-            if token in owner:
-                uf.union(i, owner[token])
-            else:
-                owner[token] = i
-
-    # Title is only a fallback for records without identifiers.
-    by_title = defaultdict(list)
     for i, rec in enumerate(records):
         if rec["title"]:
-            by_title[rec["title"]].append(i)
-
-    for indices in by_title.values():
-        identified_roots = {
-            uf.find(i) for i in indices
-            if records[i]["pmid"] or records[i]["doi"]
-        }
-        no_id = [
-            i for i in indices
-            if not records[i]["pmid"] and not records[i]["doi"]
-        ]
-
-        if len(identified_roots) == 1 and no_id:
-            representative = next(
-                i for i in indices if uf.find(i) in identified_roots
-            )
-            for i in no_id:
-                uf.union(representative, i)
-        elif not identified_roots and len(no_id) > 1:
-            for i in no_id[1:]:
-                uf.union(no_id[0], i)
+            token = "title:" + rec["title"]
+        elif rec["pmid"]:
+            token = "pmid:" + rec["pmid"]
+        elif rec["doi"]:
+            token = "doi:" + rec["doi"]
+        else:
+            continue
+        if token in owner:
+            uf.union(i, owner[token])
+        else:
+            owner[token] = i
 
     components = {uf.find(i) for i in range(len(records))}
     folder_components = defaultdict(set)
