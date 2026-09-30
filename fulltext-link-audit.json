@@ -1,13 +1,13 @@
 {
-  "library_cards_with_pmid": 12262,
+  "library_cards_with_pmid": 12272,
   "pmid_attributes_inferred_from_pubmed_links": 0,
-  "unique_pmids_checked": 8741,
-  "verified_pmcid_available": 5493,
-  "pmc_fulltext_links_added": 151,
-  "pmc_pdf_links_added": 360,
+  "unique_pmids_checked": 8747,
+  "verified_pmcid_available": 5503,
+  "pmc_fulltext_links_added": 4,
+  "pmc_pdf_links_added": 10,
   "publisher_oa_new_lookups": 300,
-  "publisher_fulltext_links_added": 118,
-  "publisher_pdf_links_added": 89,
-  "publisher_oa_cache_entries": 2557,
+  "publisher_fulltext_links_added": 91,
+  "publisher_pdf_links_added": 53,
+  "publisher_oa_cache_entries": 2789,
   "policy": "PMC remains authoritative when available. When PMCID is absent, OpenAlex OA metadata is checked first. For explicitly open-access works whose PDF is not yet indexed by OpenAlex, the publisher landing page is inspected for scholarly PDF metadata and verified direct PDF links. Cached OA records without a PDF are refreshed on later runs."
 }
