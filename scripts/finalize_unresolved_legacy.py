@@ -2,6 +2,7 @@
 from __future__ import annotations
 import json,re
 from pathlib import Path
+from collections import defaultdict
 from bs4 import BeautifulSoup
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -67,11 +68,19 @@ def main():
  if not LIB.exists() or not AUDIT.exists(): raise SystemExit('Missing library.html or legacy-library-second-pass-audit.json')
  audit=json.loads(AUDIT.read_text(encoding='utf-8')); recs=audit.get('records',[])
  soup=BeautifulSoup(LIB.read_text(encoding='utf-8'),'html.parser')
- bytitle={norm(card_title(c)):c for c in soup.select('article.folder-paper.drive-paper') if is_legacy(c)}
+ bytitle=defaultdict(list)
+ for c in soup.select('article.folder-paper.drive-paper'):
+  if is_legacy(c): bytitle[norm(card_title(c))].append(c)
  corrected=[]; removed=[]; duplicate_removed=[]; manual=[]; missing=[]
  for r in recs:
-  legacy=r.get('legacy_title',''); card=bytitle.get(norm(legacy))
-  if not card: missing.append(legacy); continue
+  legacy=r.get('legacy_title',''); key=norm(legacy)
+  # The audit can contain duplicate legacy titles. A Tag that has already been
+  # decomposed has attrs=None, so never reuse it on a later audit row.
+  candidates=bytitle.get(key,[])
+  while candidates and getattr(candidates[0],'attrs',None) is None:
+   candidates.pop(0)
+  card=candidates.pop(0) if candidates else None
+  if card is None: missing.append(legacy); continue
   # Never touch a legacy-looking card that already acquired a stable identifier since the audit.
   if (card.get('data-pmid') or '').strip() or doi_norm(card.get('data-doi') or ''):
    manual.append({'legacy_title':legacy,'reason':'card now has PMID/DOI; left untouched'}); continue
