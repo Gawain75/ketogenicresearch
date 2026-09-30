@@ -1,0 +1,44 @@
+name: Deduplicate reconciled Library records
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deduplicate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install parser
+        run: pip install beautifulsoup4
+
+      - name: Remove legacy duplicates only
+        run: python scripts/deduplicate_reconciled_library.py
+
+      - name: Commit deduplicated Library
+        run: |
+          if git diff --quiet -- library.html legacy-library-dedup-report.json 2>/dev/null && [ ! -f legacy-library-dedup-report.json ]; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add library.html legacy-library-dedup-report.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "Deduplicate reconciled legacy Library records"
+          git pull --rebase origin main
+          git push origin HEAD:main
