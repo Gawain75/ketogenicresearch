@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: ketogenicresearch-content-write
+  group: update-latest-literature
   cancel-in-progress: false
 
 jobs:
@@ -20,9 +20,6 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-        with:
-          ref: main
-          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -51,8 +48,14 @@ jobs:
       - name: Auto-promote eligible publications
         run: python scripts/promote_auto.py
 
-      - name: Enrich Full text and PDF links
-        run: python scripts/repair_fulltext_links.py
+      - name: Translate new Research details into Italian
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GROQ_MODEL: openai/gpt-oss-120b
+          DETAIL_TRANSLATION_BATCH_MAX: "10"
+          DETAIL_TRANSLATION_MAX_CHARS: "6500"
+        run: python scripts/translate_library_details.py
+        continue-on-error: true
 
       - name: Apply clinical-area rationales
         run: python scripts/apply_clinical_rationales.py
@@ -69,40 +72,17 @@ jobs:
         run: python scripts/build_evidence_trends.py
 
       - name: Commit changes
-        shell: bash
         run: |
-          set -euo pipefail
           git config user.name "Ketogenic Research Bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+          # Stage every generated change so the working tree is clean before rebase.
           git add -A
 
           if git diff --cached --quiet; then
             echo "No literature changes."
-            exit 0
+          else
+            git commit -m "Update literature, clinical rationales and evidence trends"
+            git pull --rebase origin main
+            git push origin main
           fi
-
-          git commit -m "Update literature, clinical rationales and evidence trends"
-
-          if [ -n "$(git status --porcelain)" ]; then
-            echo "Unexpected changes remained after commit:"
-            git status --short
-            exit 1
-          fi
-
-          for attempt in 1 2 3; do
-            echo "Push attempt ${attempt}/3"
-            git fetch origin main
-            git rebase origin/main
-
-            if git push origin HEAD:main; then
-              echo "Push completed successfully."
-              exit 0
-            fi
-
-            echo "Remote main changed before push; retrying..."
-            sleep 5
-          done
-
-          echo "Push failed after 3 attempts."
-          exit 1
