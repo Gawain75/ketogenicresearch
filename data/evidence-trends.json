@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-30T06:35:55+00:00",
+  "generated_at": "2026-09-30T06:40:49+00:00",
   "current_year": 2026,
   "previous_year": 2025,
   "scope_note": {
@@ -7,8 +7,8 @@
     "it": "I conteggi si riferiscono alle pubblicazioni uniche indicizzate nella Biblioteca Scientifica di Ketogenic Research, non a tutte le pubblicazioni esistenti a livello mondiale."
   },
   "global": {
-    "total_unique": 8938,
-    "known_year": 8783,
+    "total_unique": 8960,
+    "known_year": 8805,
     "unknown_year": 155,
     "first_year": 1921,
     "by_year": {
@@ -98,8 +98,8 @@
       "2022": 538,
       "2023": 551,
       "2024": 663,
-      "2025": 786,
-      "2026": 676
+      "2025": 787,
+      "2026": 697
     }
   },
   "clinical_area_count": 53,
@@ -131,8 +131,8 @@
         "it": "Malattia renale policistica autosomica dominante (ADPKD)"
       },
       "type": "clinical",
-      "total_unique": 30,
-      "known_year": 26,
+      "total_unique": 31,
+      "known_year": 27,
       "unknown_year": 4,
       "by_year": {
         "2019": 2,
@@ -142,7 +142,7 @@
         "2023": 4,
         "2024": 6,
         "2025": 3,
-        "2026": 6
+        "2026": 7
       }
     },
     {
@@ -184,8 +184,8 @@
         "it": "Malattia di Alzheimer"
       },
       "type": "clinical",
-      "total_unique": 168,
-      "known_year": 168,
+      "total_unique": 169,
+      "known_year": 169,
       "unknown_year": 0,
       "by_year": {
         "1988": 1,
@@ -210,7 +210,7 @@
         "2022": 10,
         "2023": 17,
         "2024": 20,
-        "2025": 16,
+        "2025": 17,
         "2026": 19
       }
     },
@@ -320,8 +320,8 @@
         "it": "Salute cardiovascolare"
       },
       "type": "clinical",
-      "total_unique": 572,
-      "known_year": 563,
+      "total_unique": 578,
+      "known_year": 569,
       "unknown_year": 9,
       "by_year": {
         "1947": 1,
@@ -392,7 +392,7 @@
         "2023": 42,
         "2024": 58,
         "2025": 57,
-        "2026": 57
+        "2026": 63
       }
     },
     {
@@ -402,8 +402,8 @@
         "it": "Malattia renale cronica"
       },
       "type": "clinical",
-      "total_unique": 70,
-      "known_year": 65,
+      "total_unique": 72,
+      "known_year": 67,
       "unknown_year": 5,
       "by_year": {
         "1953": 1,
@@ -416,7 +416,7 @@
         "2023": 13,
         "2024": 11,
         "2025": 14,
-        "2026": 9
+        "2026": 11
       }
     },
     {
@@ -426,8 +426,8 @@
         "it": "Ritmi circadiani"
       },
       "type": "clinical",
-      "total_unique": 114,
-      "known_year": 112,
+      "total_unique": 115,
+      "known_year": 113,
       "unknown_year": 2,
       "by_year": {
         "1975": 3,
@@ -460,7 +460,7 @@
         "2023": 13,
         "2024": 8,
         "2025": 3,
-        "2026": 17
+        "2026": 18
       }
     },
     {
@@ -470,8 +470,8 @@
         "it": "Funzione cognitiva"
       },
       "type": "clinical",
-      "total_unique": 249,
-      "known_year": 248,
+      "total_unique": 250,
+      "known_year": 249,
       "unknown_year": 1,
       "by_year": {
         "1995": 1,
@@ -496,7 +496,7 @@
         "2023": 18,
         "2024": 24,
         "2025": 25,
-        "2026": 55
+        "2026": 56
       }
     },
     {
@@ -546,8 +546,8 @@
         "it": "Diabete e metabolismo glucidico"
       },
       "type": "clinical",
-      "total_unique": 2198,
-      "known_year": 2187,
+      "total_unique": 2201,
+      "known_year": 2190,
       "unknown_year": 11,
       "by_year": {
         "1948": 1,
@@ -626,7 +626,7 @@
         "2023": 84,
         "2024": 96,
         "2025": 113,
-        "2026": 123
+        "2026": 126
       }
     },
     {
@@ -650,8 +650,8 @@
         "it": "Dislipidemie e metabolismo lipidico"
       },
       "type": "clinical",
-      "total_unique": 1117,
-      "known_year": 1107,
+      "total_unique": 1121,
+      "known_year": 1111,
       "unknown_year": 10,
       "by_year": {
         "1936": 1,
@@ -728,7 +728,7 @@
         "2023": 52,
         "2024": 38,
         "2025": 58,
-        "2026": 82
+        "2026": 86
       }
     },
     {
@@ -778,8 +778,8 @@
         "it": "Epilessia"
       },
       "type": "clinical",
-      "total_unique": 2475,
-      "known_year": 2461,
+      "total_unique": 2477,
+      "known_year": 2463,
       "unknown_year": 14,
       "by_year": {
         "1921": 2,
@@ -845,7 +845,7 @@
         "2023": 121,
         "2024": 146,
         "2025": 179,
-        "2026": 162
+        "2026": 164
       }
     },
     {
@@ -966,15 +966,16 @@
         "it": "Sindrome di Gilbert"
       },
       "type": "clinical",
-      "total_unique": 5,
-      "known_year": 5,
+      "total_unique": 6,
+      "known_year": 6,
       "unknown_year": 0,
       "by_year": {
         "1979": 1,
         "1981": 1,
         "1983": 1,
         "2015": 1,
-        "2020": 1
+        "2020": 1,
+        "2026": 1
       }
     },
     {
@@ -1145,8 +1146,8 @@
         "it": "Infiammazione e immunometabolismo"
       },
       "type": "clinical",
-      "total_unique": 407,
-      "known_year": 404,
+      "total_unique": 409,
+      "known_year": 406,
       "unknown_year": 3,
       "by_year": {
         "1977": 1,
@@ -1174,7 +1175,7 @@
         "2023": 41,
         "2024": 44,
         "2025": 67,
-        "2026": 91
+        "2026": 93
       }
     },
     {
@@ -1331,8 +1332,8 @@
         "it": "Trigliceridi a catena media (MCT)"
       },
       "type": "clinical",
-      "total_unique": 160,
-      "known_year": 157,
+      "total_unique": 161,
+      "known_year": 158,
       "unknown_year": 3,
       "by_year": {
         "1973": 1,
@@ -1374,7 +1375,7 @@
         "2023": 15,
         "2024": 8,
         "2025": 10,
-        "2026": 14
+        "2026": 15
       }
     },
     {
@@ -1411,8 +1412,8 @@
         "it": "Malattie neurodegenerative"
       },
       "type": "clinical",
-      "total_unique": 78,
-      "known_year": 76,
+      "total_unique": 79,
+      "known_year": 77,
       "unknown_year": 2,
       "by_year": {
         "2001": 1,
@@ -1432,7 +1433,7 @@
         "2023": 9,
         "2024": 6,
         "2025": 10,
-        "2026": 7
+        "2026": 8
       }
     },
     {
@@ -1442,8 +1443,8 @@
         "it": "Obesità"
       },
       "type": "clinical",
-      "total_unique": 900,
-      "known_year": 890,
+      "total_unique": 901,
+      "known_year": 891,
       "unknown_year": 10,
       "by_year": {
         "1965": 1,
@@ -1505,7 +1506,7 @@
         "2023": 59,
         "2024": 82,
         "2025": 87,
-        "2026": 83
+        "2026": 84
       }
     },
     {
@@ -1515,8 +1516,8 @@
         "it": "Oncologia e metabolismo tumorale"
       },
       "type": "clinical",
-      "total_unique": 772,
-      "known_year": 762,
+      "total_unique": 774,
+      "known_year": 764,
       "unknown_year": 10,
       "by_year": {
         "1955": 1,
@@ -1574,7 +1575,7 @@
         "2023": 52,
         "2024": 71,
         "2025": 90,
-        "2026": 77
+        "2026": 79
       }
     },
     {
@@ -1632,8 +1633,8 @@
         "it": "Sindrome ovarica metabolica poliendocrina (PMOS, precedentemente PCOS)"
       },
       "type": "clinical",
-      "total_unique": 62,
-      "known_year": 57,
+      "total_unique": 63,
+      "known_year": 58,
       "unknown_year": 5,
       "by_year": {
         "2005": 1,
@@ -1645,7 +1646,7 @@
         "2023": 13,
         "2024": 8,
         "2025": 12,
-        "2026": 10
+        "2026": 11
       }
     },
     {
@@ -1724,8 +1725,8 @@
         "it": "Deficit di piruvato deidrogenasi"
       },
       "type": "clinical",
-      "total_unique": 78,
-      "known_year": 78,
+      "total_unique": 79,
+      "known_year": 79,
       "unknown_year": 0,
       "by_year": {
         "1971": 1,
@@ -1762,7 +1763,7 @@
         "2023": 3,
         "2024": 3,
         "2025": 3,
-        "2026": 3
+        "2026": 4
       }
     },
     {
