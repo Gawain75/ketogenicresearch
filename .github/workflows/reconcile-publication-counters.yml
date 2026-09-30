@@ -1,0 +1,119 @@
+name: Reconcile publication counters
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "40 6 * * *"
+  workflow_run:
+    workflows: ["Update latest scientific literature"]
+    types: [completed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ketogenicresearch-content-write
+  cancel-in-progress: false
+
+jobs:
+  reconcile:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install parser
+        run: python -m pip install beautifulsoup4
+
+      - name: Build Evidence Trends from current Library
+        run: python scripts/build_evidence_trends.py
+
+      - name: Synchronize Home and Library counters
+        run: python scripts/sync_publication_counters.py
+
+      - name: Verify publication counters
+        run: |
+          python - <<'PY'
+          import json, re
+          from pathlib import Path
+          from bs4 import BeautifulSoup
+
+          root = Path('.')
+          library = BeautifulSoup((root / 'library.html').read_text(encoding='utf-8'), 'html.parser')
+          home = BeautifulSoup((root / 'index.html').read_text(encoding='utf-8'), 'html.parser')
+          trends = json.loads((root / 'data/evidence-trends.json').read_text(encoding='utf-8'))
+
+          def first_counter(soup):
+              el = soup.select_one('[data-publication-count]')
+              if not el:
+                  raise SystemExit('ERROR: data-publication-count not found')
+              m = re.search(r'\d+', el.get_text('', strip=True).replace(',', ''))
+              if not m:
+                  raise SystemExit('ERROR: publication counter is not numeric')
+              return int(m.group())
+
+          home_count = first_counter(home)
+          library_count = first_counter(library)
+
+          # Evidence Trends total: prefer explicit total fields if present;
+          # otherwise sum the publication counts by year.
+          trends_count = None
+          for key in ('total_publications', 'totalPublications', 'publications', 'total'):
+              value = trends.get(key) if isinstance(trends, dict) else None
+              if isinstance(value, int):
+                  trends_count = value
+                  break
+
+          if trends_count is None and isinstance(trends, dict):
+              for key in ('years', 'by_year', 'byYear', 'yearly'):
+                  value = trends.get(key)
+                  if isinstance(value, dict) and value:
+                      nums = [v for v in value.values() if isinstance(v, (int, float))]
+                      if nums and len(nums) == len(value):
+                          trends_count = int(sum(nums))
+                          break
+
+          if trends_count is None:
+              # Build script is authoritative for Evidence Trends. If its JSON
+              # has a richer schema, verify the canonical Home/Library pair and
+              # report the generated JSON rather than guessing a total.
+              print('Evidence Trends JSON generated successfully; no scalar total field found.')
+              print(f'Home={home_count} Library={library_count}')
+              if home_count != library_count:
+                  raise SystemExit('ERROR: Home and Library publication counters differ')
+          else:
+              print(f'Home={home_count} Library={library_count} EvidenceTrends={trends_count}')
+              if len({home_count, library_count, trends_count}) != 1:
+                  raise SystemExit('ERROR: publication counters are not aligned')
+
+          print('Publication counters verified.')
+          PY
+
+      - name: Commit reconciled counters and Evidence Trends
+        run: |
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add index.html library.html script.js data/evidence-trends.json evidence-trends.html
+
+          if git diff --cached --quiet; then
+            echo "Publication counters and Evidence Trends already reconciled."
+            exit 0
+          fi
+
+          git commit -m "Reconcile publication counters and evidence trends"
+          git pull --rebase origin main
+          git push origin main
