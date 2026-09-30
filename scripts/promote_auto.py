@@ -170,13 +170,17 @@ def main() -> None:
                 detail_p.string = abstract
             else:
                 study_details["data-detail-source"] = "no-indexed-abstract"
-                notice = (
+                notice_en = (
                     "No abstract is available from the indexed bibliographic sources for this record. "
                     "Use the PubMed, DOI, full-text or PDF links below when available."
                 )
-                detail_p["data-en"] = notice
-                detail_p["data-it"] = notice
-                detail_p.string = notice
+                notice_it = (
+                    "Per questo record non è disponibile un abstract nelle fonti bibliografiche indicizzate. "
+                    "Utilizzare, quando disponibili, i collegamenti PubMed, DOI, testo completo o PDF."
+                )
+                detail_p["data-en"] = notice_en
+                detail_p["data-it"] = notice_it
+                detail_p.string = notice_en
             study_details.append(detail_p)
             art.append(study_details)
 
