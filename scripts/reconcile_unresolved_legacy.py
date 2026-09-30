@@ -93,11 +93,11 @@ def crossref(title):
  return [x[1] for x in sorted(out,key=lambda x:x[0],reverse=True)]
 def bibliographic(rec):
  parts=[]
- if rec['authors']:parts.append(', '.join(rec['authors'][:6])+(' et al.' if len(rec['authors'])>6 else ''))
- if rec['journal']:parts.append(rec['journal'])
- if rec['year']:parts.append(rec['year'])
- if rec['pmid']:parts.append('PMID: '+rec['pmid'])
- if rec['doi']:parts.append('DOI: '+rec['doi'])
+ if rec.get('authors'):parts.append(', '.join(rec.get('authors',[])[:6])+(' et al.' if len(rec.get('authors',[]))>6 else ''))
+ if rec.get('journal'):parts.append(rec['journal'])
+ if rec.get('year'):parts.append(rec['year'])
+ if rec.get('pmid'):parts.append('PMID: '+rec['pmid'])
+ if rec.get('doi'):parts.append('DOI: '+rec['doi'])
  return '. '.join(parts)+('.' if parts else '')
 def add_link(box,label,url):
  if any(a.get('href')==url for a in box.find_all('a',href=True)):return
@@ -130,12 +130,12 @@ def main():
   # Canonicalize the English title; preserve an existing genuine Italian translation if present.
   old_it=h.get('data-it',''); h['data-en']=rec['title']; h.string=num+rec['title']
   if old_it and norm(old_it)!=norm(title):h['data-it']=old_it
-  if rec['year']:card['data-year']=rec['year']
-  if rec['pmid']:card['data-pmid']=rec['pmid']
-  if rec['doi']:card['data-doi']=rec['doi']
+  if rec.get('year'):card['data-year']=rec['year']
+  if rec.get('pmid'):card['data-pmid']=rec['pmid']
+  if rec.get('doi'):card['data-doi']=rec['doi']
   line=bibliographic(rec); p['data-en']=line; p['data-it']=line; p.string=line
   details=card.find('details',class_='paper-study-details')
-  if rec['abstract'] and details:
+  if rec.get('abstract') and details:
    ap=details.find('p',class_='paper-source-abstract')
    if ap:
     ap['data-en']=rec['abstract']; ap.string=rec['abstract']; details['data-detail-source']='pubmed-abstract'
@@ -143,10 +143,10 @@ def main():
   if links:
    for a in list(links.find_all('a',href=True)):
     if 'pubmed.ncbi.nlm.nih.gov/?term=' in a['href']:a.decompose()
-   for label,url in [('PubMed ↗',f"https://pubmed.ncbi.nlm.nih.gov/{rec['pmid']}/" if rec['pmid'] else ''),('DOI ↗',f"https://doi.org/{rec['doi']}" if rec['doi'] else '')]:
+   for label,url in [('PubMed ↗',f"https://pubmed.ncbi.nlm.nih.gov/{rec.get('pmid','')}/" if rec.get('pmid') else ''),('DOI ↗',f"https://doi.org/{rec.get('doi','')}" if rec.get('doi') else '')]:
     if url and not any(a.get('href')==url for a in links.find_all('a',href=True)):
      frag=BeautifulSoup(f'<a href="{url}" target="_blank" rel="noopener" data-en="{label}" data-it="{label}">{label}</a>','html.parser').a; links.append(frag)
-  resolved.append({'old_title':title,'canonical_title':rec['title'],'source':rec['source'],'score':round(score,4),'pmid':rec['pmid'],'doi':rec['doi'],'year':rec['year']})
+  resolved.append({'old_title':title,'canonical_title':rec['title'],'source':rec.get('source',''),'score':round(score,4),'pmid':rec.get('pmid',''),'doi':rec.get('doi',''),'year':rec.get('year','')})
   if n%20==0:print(f'Processed {n}/{len(targets)}')
   time.sleep(.12 if KEY else .35)
  LIB.write_text(str(soup),encoding='utf-8')
