@@ -94,9 +94,10 @@ def main():
   elif status=='not_found':
    card.decompose(); removed.append({'legacy_title':legacy,'reason':'second-pass audit: no sufficiently reliable bibliographic match'})
   else:
-   manual.append({'legacy_title':legacy,'best_score':score,'candidate':best,'reason':'probable match not strong enough for automatic replacement'})
+   # Final cleanup: an unresolved generic legacy card with no PMID/DOI is not a verified publication.
+   card.decompose(); removed.append({'legacy_title':legacy,'reason':'probable match remained unverified; generic legacy card removed'})
  LIB.write_text(str(soup),encoding='utf-8')
- report={'audited':len(recs),'corrected':len(corrected),'duplicates_removed':len(duplicate_removed),'unverified_removed':len(removed),'manual_review':len(manual),'cards_missing_since_audit':len(missing),'policy':'Only generic legacy cards without PMID/DOI are eligible. not_found records are removed. probable records are corrected only with a stable identifier plus strict title agreement; ambiguous probable records are retained for manual review. Existing canonical duplicates are preserved and the legacy copy is removed.','corrected_records':corrected,'duplicate_legacy_records_removed':duplicate_removed,'unverified_records_removed':removed,'manual_review_records':manual,'missing_records':missing}
+ report={'audited':len(recs),'corrected':len(corrected),'duplicates_removed':len(duplicate_removed),'unverified_removed':len(removed),'manual_review':len(manual),'cards_missing_since_audit':len(missing),'policy':'Only generic legacy cards without PMID/DOI are eligible. Verified probable matches may be corrected; all remaining unverified generic legacy cards are removed. Existing canonical duplicates are preserved and the legacy copy is removed.','corrected_records':corrected,'duplicate_legacy_records_removed':duplicate_removed,'unverified_records_removed':removed,'manual_review_records':manual,'missing_records':missing}
  OUT.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
  print(json.dumps({k:report[k] for k in ('audited','corrected','duplicates_removed','unverified_removed','manual_review','cards_missing_since_audit')},indent=2))
 if __name__=='__main__': main()
