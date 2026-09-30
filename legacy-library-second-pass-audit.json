@@ -1,0 +1,4686 @@
+{
+  "audited": 154,
+  "counts": {
+    "identified": 0,
+    "probable": 36,
+    "not_found": 118
+  },
+  "policy": "Audit only: no Library records are modified or deleted. identified >=0.91; probable 0.76-0.9099; not_found <0.76.",
+  "records": [
+    {
+      "legacy_title": "Effects of One-Month Very-Low-Calorie Ketogenic Diet on 24h Energy Metabolism",
+      "status": "not_found",
+      "best_score": 0.6978,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Effects of 1-Month Very-Low-Calorie Ketogenic Diet on 24-Hour Energy Metabolism and Body Composition in Women With Obesity",
+          "pmid": "",
+          "doi": "10.1210/clinem/dgaf196",
+          "year": "2025",
+          "score": 0.6978
+        },
+        {
+          "source": "Crossref",
+          "title": "Very Low Calorie Ketogenic Diet: What Effects on Lipid Metabolism?",
+          "pmid": "",
+          "doi": "10.1007/s13668-024-00556-6",
+          "year": "2024",
+          "score": 0.6522
+        },
+        {
+          "source": "PubMed",
+          "title": "Beneficial Effects of the Very-Low-Calorie Ketogenic Diet on the Symptoms of Male Accessory Gland Inflammation.",
+          "pmid": "35268056",
+          "doi": "10.3390/nu14051081",
+          "year": "2022",
+          "score": 0.5701
+        }
+      ]
+    },
+    {
+      "legacy_title": "European Society for the Study of Obesity (EASO) Position Statement on Very Low-Calorie Ketogenic Diets",
+      "status": "not_found",
+      "best_score": 0.5985,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "European Association for the Study of Obesity (EASO)",
+          "pmid": "",
+          "doi": "10.4135/9781412963855.n431",
+          "year": "2008",
+          "score": 0.5985
+        },
+        {
+          "source": "Crossref",
+          "title": "European Association for the Study of Obesity (EASO) Position Statement on Medical Nutrition Therapy for the Management of Individuals with Overweight or Obesity and Cancer",
+          "pmid": "",
+          "doi": "10.1159/000542155",
+          "year": "2024",
+          "score": 0.5261
+        },
+        {
+          "source": "Crossref",
+          "title": "Joint statement of the European Association for the Study of Obesity and the European Society of Hypertension",
+          "pmid": "",
+          "doi": "10.1097/hjh.0b013e3283537347",
+          "year": "2012",
+          "score": 0.4952
+        }
+      ]
+    },
+    {
+      "legacy_title": "VLCKD in Combination with Physical Exercise Preserves Skeletal Muscle in Obesity",
+      "status": "not_found",
+      "best_score": 0.725,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "VLCKD in Combination with Physical Exercise Preserves Skeletal Muscle Mass in Sarcopenic Obesity after Severe COVID-19 Disease: A Case Report",
+          "pmid": "",
+          "doi": "10.3390/healthcare10030573",
+          "year": "2022",
+          "score": 0.725
+        },
+        {
+          "source": "Crossref",
+          "title": "Effect of physical exercise on skeletal muscle",
+          "pmid": "",
+          "doi": "10.22271/journalofsport.2026.v11.i4a.3218",
+          "year": "2026",
+          "score": 0.523
+        },
+        {
+          "source": "Crossref",
+          "title": "Physical Exercise and Epigenetic Modifications in Skeletal Muscle",
+          "pmid": "",
+          "doi": "10.1007/s40279-019-01070-4",
+          "year": "2019",
+          "score": 0.5018
+        }
+      ]
+    },
+    {
+      "legacy_title": "Effects of One-Month Very-Low-Calorie Ketogenic Diet on 24-h Energy Expenditure",
+      "status": "not_found",
+      "best_score": 0.6658,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Effects of 1-Month Very-Low-Calorie Ketogenic Diet on 24-Hour Energy Metabolism and Body Composition in Women With Obesity",
+          "pmid": "",
+          "doi": "10.1210/clinem/dgaf196",
+          "year": "2025",
+          "score": 0.6658
+        },
+        {
+          "source": "PubMed",
+          "title": "Beneficial Effects of the Very-Low-Calorie Ketogenic Diet on the Symptoms of Male Accessory Gland Inflammation.",
+          "pmid": "35268056",
+          "doi": "10.3390/nu14051081",
+          "year": "2022",
+          "score": 0.5587
+        },
+        {
+          "source": "Crossref",
+          "title": "Very Low Calorie Ketogenic Diet: What Effects on Lipid Metabolism?",
+          "pmid": "",
+          "doi": "10.1007/s13668-024-00556-6",
+          "year": "2024",
+          "score": 0.5352
+        }
+      ]
+    },
+    {
+      "legacy_title": "Epigenetic Aging Acceleration in Obesity Is Slowed Down by Nutritional Ketosis Following VLCKD",
+      "status": "not_found",
+      "best_score": 0.7217,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "Epigenetic Aging Acceleration in Obesity Is Slowed Down by Nutritional Ketosis Following Very Low-Calorie Ketogenic Diet (VLCKD): A New Perspective to Reverse Biological Age.",
+          "pmid": "40292468",
+          "doi": "10.3390/nu17061060",
+          "year": "2025",
+          "score": 0.7217
+        },
+        {
+          "source": "Crossref",
+          "title": "Accelerated epigenetic aging in Down syndrome",
+          "pmid": "",
+          "doi": "10.1111/acel.12325",
+          "year": "2015",
+          "score": 0.4374
+        },
+        {
+          "source": "Crossref",
+          "title": "Slowed epigenetic aging in Olympic champions compared to non-champions",
+          "pmid": "",
+          "doi": "10.1007/s11357-024-01440-5",
+          "year": "2024",
+          "score": 0.3926
+        }
+      ]
+    },
+    {
+      "legacy_title": "An 8-Week Very Low-Calorie Ketogenic Diet Alters Obese-Derived Small Extracellular Vesicles and Hepatic Cell Phenotypes",
+      "status": "probable",
+      "best_score": 0.8374,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "An 8-Week Very Low-Calorie Ketogenic Diet (VLCKD) Alters the Landscape of Obese-Derived Small Extracellular Vesicles (sEVs), Redefining Hepatic Cell Phenotypes.",
+          "pmid": "39683581",
+          "doi": "10.3390/nu16234189",
+          "year": "2024",
+          "score": 0.8374
+        },
+        {
+          "source": "Crossref",
+          "title": "Efficacy of very low calorie ketogenic diet in obese PCOS: a randomized controlled study",
+          "pmid": "",
+          "doi": "10.1530/endoabs.81.p193",
+          "year": "2022",
+          "score": 0.4264
+        },
+        {
+          "source": "Crossref",
+          "title": "Pre-operative Very Low Calorie Ketogenic Diet (VLCKD) vs. Very Low Calorie Diet (VLCD): Surgical Impact",
+          "pmid": "",
+          "doi": "10.1007/s11695-018-3523-2",
+          "year": "2019",
+          "score": 0.3981
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diet Combined with Moderate Aerobic Exercise in Obesity",
+      "status": "not_found",
+      "best_score": 0.5341,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "Ketogenic Diet Combined with Moderate Aerobic Exercise Training Ameliorates White Adipose Tissue Mass, Serum Biomarkers, and Hepatic Lipid Metabolism in High-Fat Diet-Induced Obese Mice.",
+          "pmid": "36615908",
+          "doi": "10.3390/nu15010251",
+          "year": "2023",
+          "score": 0.5341
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet",
+          "pmid": "",
+          "doi": "10.1007/978-3-030-59078-9_48",
+          "year": "2021",
+          "score": 0.4505
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet",
+          "pmid": "",
+          "doi": "10.1002/9781118660584.ese1340",
+          "year": "2014",
+          "score": 0.4505
+        }
+      ]
+    },
+    {
+      "legacy_title": "Comparison of a Pre-Bariatric Surgery VLCKD and Mediterranean Diet on Weight Loss, Metabolic Parameters, and Liver Size Reduction",
+      "status": "probable",
+      "best_score": 0.8444,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Comparison of a pre-bariatric surgery very low-calorie ketogenic diet and the Mediterranean diet effects on weight loss, metabolic parameters, and liver size reduction",
+          "pmid": "",
+          "doi": "10.1038/s41598-022-24959-z",
+          "year": "2022",
+          "score": 0.8444
+        },
+        {
+          "source": "Crossref",
+          "title": "Comparison of Bariatric Surgery and Weight Management with Very Low Calorie Diet",
+          "pmid": "",
+          "doi": "10.1249/00005768-200605001-02800",
+          "year": "2006",
+          "score": 0.4957
+        },
+        {
+          "source": "Crossref",
+          "title": "Comparison of Glucostatic Parameters After Hypocaloric Diet or Bariatric Surgery and Equivalent Weight Loss",
+          "pmid": "",
+          "doi": "10.1038/oby.2011.134",
+          "year": "2011",
+          "score": 0.4943
+        }
+      ]
+    },
+    {
+      "legacy_title": "Impact of a VLCKD on Handgrip Strength in Women with Obesity",
+      "status": "probable",
+      "best_score": 0.7667,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "Impact of a Very Low-Calorie Ketogenic Diet (VLCKD) on Changes in Handgrip Strength in Women with Obesity.",
+          "pmid": "36235866",
+          "doi": "10.3390/nu14194213",
+          "year": "2022",
+          "score": 0.7667
+        },
+        {
+          "source": "Crossref",
+          "title": "Impact of hemodialysis session on handgrip strength",
+          "pmid": "",
+          "doi": "10.5935/0101-2800.20150072",
+          "year": "2015",
+          "score": 0.566
+        },
+        {
+          "source": "Crossref",
+          "title": "Age-Related Associations Between Relative Handgrip Strength and Body Composition in Women with Obesity",
+          "pmid": "",
+          "doi": "10.3390/jcm15155938",
+          "year": "2026",
+          "score": 0.5072
+        }
+      ]
+    },
+    {
+      "legacy_title": "Reduction of Cardio-Metabolic Risk and Body Weight through Ketogenic Nutritional Intervention",
+      "status": "not_found",
+      "best_score": 0.5819,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Reduction of Cardio-Metabolic Risk and Body Weight through a Multiphasic Very-Low Calorie Ketogenic Diet Program in Women with Overweight/Obesity: A Study in a Real-World Setting",
+          "pmid": "",
+          "doi": "10.3390/nu13061804",
+          "year": "2021",
+          "score": 0.5819
+        },
+        {
+          "source": "Crossref",
+          "title": "Cardio-metabolic risk factors",
+          "pmid": "",
+          "doi": "10.4324/9780203095270-7",
+          "year": "2021",
+          "score": 0.4421
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diets and Cardio-Metabolic Diseases",
+          "pmid": "",
+          "doi": "10.3389/fendo.2021.753039",
+          "year": "2021",
+          "score": 0.412
+        }
+      ]
+    },
+    {
+      "legacy_title": "Sustained metabolic improvements in a remotely delivered ketogenic nutrition intervention in type 2 diabetes",
+      "status": "not_found",
+      "best_score": 0.7469,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Sustained metabolic improvements in a remotely delivered ketogenic nutrition programme for veterans with type 2 diabetes: A 3‐year observational study",
+          "pmid": "",
+          "doi": "10.1111/dom.16525",
+          "year": "2025",
+          "score": 0.7469
+        },
+        {
+          "source": "Crossref",
+          "title": "Review for \"Sustained metabolic improvements in a remotely delivered ketogenic nutrition programme for veterans with type 2 diabetes: A 3-year observational study\"",
+          "pmid": "",
+          "doi": "10.1111/dom.16525/v2/review1",
+          "year": "2025",
+          "score": 0.7232
+        },
+        {
+          "source": "Crossref",
+          "title": "Review for \"Sustained metabolic improvements in a remotely delivered ketogenic nutrition programme for veterans with type 2 diabetes: A 3-year observational study\"",
+          "pmid": "",
+          "doi": "10.1111/dom.16525/v1/review2",
+          "year": "2025",
+          "score": 0.7232
+        }
+      ]
+    },
+    {
+      "legacy_title": "Effects of very low-carbohydrate ketogenic diet on lipid metabolism in patients with type 2 diabetes",
+      "status": "probable",
+      "best_score": 0.8479,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Effects of very low-carbohydrate ketogenic diet on lipid metabolism in patients with type II diabetes mellitus: a meta-analysis",
+          "pmid": "",
+          "doi": "10.20960/nh.03987",
+          "year": "2022",
+          "score": 0.8479
+        },
+        {
+          "source": "Crossref",
+          "title": "Effects of low-carbohydrate diet and ketogenic diet on glucose and lipid metabolism in type 2 diabetic mice",
+          "pmid": "",
+          "doi": "10.1016/j.nut.2021.111230",
+          "year": "2021",
+          "score": 0.7251
+        },
+        {
+          "source": "Crossref",
+          "title": "Effects of very low carbohydrate ketogenic diets on skeletal health",
+          "pmid": "",
+          "doi": "10.1097/med.0000000000000811",
+          "year": "2023",
+          "score": 0.6273
+        }
+      ]
+    },
+    {
+      "legacy_title": "BDH1-mediated β-hydroxybutyrate metabolism ameliorates diabetic kidney disease",
+      "status": "not_found",
+      "best_score": 0.6298,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Bdh1-Mediated βOHB Metabolism Ameliorates Diabetic Kidney Disease by Activation of Nrf2-Mediated Antioxidative Pathway",
+          "pmid": "",
+          "doi": "10.21203/rs.3.rs-976505/v1",
+          "year": "2021",
+          "score": 0.6298
+        },
+        {
+          "source": "Crossref",
+          "title": "BDH1-mediated βOHB metabolism ameliorates diabetic kidney disease by activation of NRF2-mediated antioxidative pathway",
+          "pmid": "",
+          "doi": "10.18632/aging.205248",
+          "year": "2023",
+          "score": 0.6298
+        },
+        {
+          "source": "Crossref",
+          "title": "SerpinA3K Deficiency Ameliorates Diabetic Kidney Disease (DKD)",
+          "pmid": "",
+          "doi": "10.1681/asn.20233411s1504d",
+          "year": "2023",
+          "score": 0.5175
+        }
+      ]
+    },
+    {
+      "legacy_title": "Effect of Low-Carbohydrate Diets on Glycemic Control",
+      "status": "not_found",
+      "best_score": 0.6208,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Low-Carbohydrate Diets",
+          "pmid": "",
+          "doi": "10.4135/9781483346304.n276",
+          "year": "2015",
+          "score": 0.6208
+        },
+        {
+          "source": "Crossref",
+          "title": "Low-Carbohydrate Diets",
+          "pmid": "",
+          "doi": "10.7326/0003-4819-141-9-200411020-00023",
+          "year": "2004",
+          "score": 0.6208
+        },
+        {
+          "source": "Crossref",
+          "title": "Low-Carbohydrate Diets",
+          "pmid": "",
+          "doi": "10.1007/978-1-59745-400-1_15",
+          "year": "None",
+          "score": 0.6208
+        }
+      ]
+    },
+    {
+      "legacy_title": "Greater Reduction in the Proinsulin-C-Peptide Ratio with a Ketogenic Nutritional Intervention",
+      "status": "not_found",
+      "best_score": 0.7363,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Greater reduction in the proinsulin-C-peptide ratio with a ketogenic vs control diet in patients with type 2 diabetes",
+          "pmid": "",
+          "doi": "10.1210/jendso/bvag073",
+          "year": "2026",
+          "score": 0.7363
+        },
+        {
+          "source": "Crossref",
+          "title": "Abnormal proinsulin/c-peptide ratio in juvenile diabetes",
+          "pmid": "",
+          "doi": "10.1007/bf02629258",
+          "year": "1982",
+          "score": 0.4984
+        },
+        {
+          "source": "Crossref",
+          "title": "What Does the Proinsulin/C‐Peptide Ratio Reflect?",
+          "pmid": "",
+          "doi": "10.1111/dom.71085",
+          "year": "2026",
+          "score": 0.484
+        }
+      ]
+    },
+    {
+      "legacy_title": "Sustained Metabolic Improvements in a Remotely Delivered Ketogenic Nutrition Intervention",
+      "status": "not_found",
+      "best_score": 0.68,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Sustained metabolic improvements in a remotely delivered ketogenic nutrition programme for veterans with type 2 diabetes: A 3‐year observational study",
+          "pmid": "",
+          "doi": "10.1111/dom.16525",
+          "year": "2025",
+          "score": 0.68
+        },
+        {
+          "source": "Crossref",
+          "title": "Review for \"Sustained metabolic improvements in a remotely delivered ketogenic nutrition programme for veterans with type 2 diabetes: A 3-year observational study\"",
+          "pmid": "",
+          "doi": "10.1111/dom.16525/v2/review1",
+          "year": "2025",
+          "score": 0.6578
+        },
+        {
+          "source": "Crossref",
+          "title": "Review for \"Sustained metabolic improvements in a remotely delivered ketogenic nutrition programme for veterans with type 2 diabetes: A 3-year observational study\"",
+          "pmid": "",
+          "doi": "10.1111/dom.16525/v1/review2",
+          "year": "2025",
+          "score": 0.6578
+        }
+      ]
+    },
+    {
+      "legacy_title": "Low-Carbohydrate Ketogenic Diets Reduce Cardiovascular Risk Factor Levels in Patients with Type 2 Diabetes",
+      "status": "not_found",
+      "best_score": 0.6802,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Low carbohydrate ketogenic diets reduce cardiovascular risk factor levels in obese or overweight patients with T2DM: A meta-analysis of randomized controlled trials",
+          "pmid": "",
+          "doi": "10.3389/fnut.2022.1092031",
+          "year": "2022",
+          "score": 0.6802
+        },
+        {
+          "source": "Crossref",
+          "title": "Low‐carbohydrate diets and cardiovascular risk factors",
+          "pmid": "",
+          "doi": "10.1111/j.1467-789x.2012.01060.x",
+          "year": "2013",
+          "score": 0.5739
+        },
+        {
+          "source": "Crossref",
+          "title": "Very low carbohydrate ketogenic diets and diabetes",
+          "pmid": "",
+          "doi": "10.1002/pdi.2284",
+          "year": "2020",
+          "score": 0.5196
+        }
+      ]
+    },
+    {
+      "legacy_title": "Clinical Assessment of Intermittent Fasting with Ketogenic Diet in Glycemic Control and Weight Reduction in Type 2 Diabetes",
+      "status": "probable",
+      "best_score": 0.7839,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Clinical Assessment of Intermittent Fasting With Ketogenic Diet in Glycemic Control and Weight Reduction in Patients With Type II Diabetes Mellitus: A Systematic Review and Meta-Analysis",
+          "pmid": "",
+          "doi": "10.7759/cureus.30879",
+          "year": "2022",
+          "score": 0.7839
+        },
+        {
+          "source": "Crossref",
+          "title": "A 5:2 Intermittent Fasting Meal Replacement Diet and Glycemic Control for Adults With Diabetes",
+          "pmid": "",
+          "doi": "10.1001/jamanetworkopen.2024.16786",
+          "year": "2024",
+          "score": 0.5676
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diet combined with intermittent fasting: an option for type 2 diabetes remission?",
+          "pmid": "",
+          "doi": "10.1093/nutrit/nuae014",
+          "year": "2025",
+          "score": 0.4942
+        }
+      ]
+    },
+    {
+      "legacy_title": "Very Low Carbohydrate Ketogenic Diets in Type 2 Diabetes: Review",
+      "status": "probable",
+      "best_score": 0.835,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Low carbohydrate and ketogenic diets in type 2 diabetes",
+          "pmid": "",
+          "doi": "10.1097/mol.0000000000000241",
+          "year": "2015",
+          "score": 0.835
+        },
+        {
+          "source": "Crossref",
+          "title": "Very low carbohydrate ketogenic diets and diabetes",
+          "pmid": "",
+          "doi": "10.1002/pdi.2284",
+          "year": "2020",
+          "score": 0.775
+        },
+        {
+          "source": "Crossref",
+          "title": "Very low carbohydrate (ketogenic) diets in type 2 diabetes: A systematic review and meta‐analysis of randomized controlled trials",
+          "pmid": "",
+          "doi": "10.1111/dom.14837",
+          "year": "2022",
+          "score": 0.6982
+        }
+      ]
+    },
+    {
+      "legacy_title": "The Ketogenic Diet Through a Metabolomic Lens",
+      "status": "not_found",
+      "best_score": 0.6306,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "The Ketogenic Diet Through a Metabolomic Lens: Biochemical Pathways, Therapeutic Applications, and Analytical Challenges",
+          "pmid": "",
+          "doi": "10.3390/nu17182969",
+          "year": "2025",
+          "score": 0.6306
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet",
+          "pmid": "",
+          "doi": "10.1007/978-3-030-59078-9_48",
+          "year": "2021",
+          "score": 0.5324
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet",
+          "pmid": "",
+          "doi": "10.1002/9781118660584.ese1340",
+          "year": "2014",
+          "score": 0.5324
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic diet time-dependently prevents NAFLD",
+      "status": "not_found",
+      "best_score": 0.5994,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "Ketogenic diet time-dependently prevents NAFLD through upregulating the expression of antioxidant protein metallothionein-2.",
+          "pmid": "38723301",
+          "doi": "10.1016/j.clnu.2024.04.029",
+          "year": "2024",
+          "score": 0.5994
+        },
+        {
+          "source": "Crossref",
+          "title": "Letter to the Editor: Ketogenic diet time-dependently prevents nonalcoholic fatty liver disease through upregulating the expression of antioxidant protein metallothionein-2",
+          "pmid": "",
+          "doi": "10.1016/j.clnu.2024.06.027",
+          "year": "2024",
+          "score": 0.4567
+        },
+        {
+          "source": "Crossref",
+          "title": "The ketogenic diet: it’s about ‘time’",
+          "pmid": "",
+          "doi": "10.1111/j.1469-8749.2009.03280.x",
+          "year": "2009",
+          "score": 0.4363
+        }
+      ]
+    },
+    {
+      "legacy_title": "Higher-Level Steatosis Is Associated with a Greater Decrease in Metabolic Dysfunction-Associated Steatotic Liver Disease after Eight Weeks of a Very Low-Calorie Ketogenic Diet",
+      "status": "probable",
+      "best_score": 0.8475,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "Higher-Level Steatosis Is Associated with a Greater Decrease in Metabolic Dysfunction-Associated Steatoic Liver Disease after Eight Weeks of a Very Low-Calorie Ketogenic Diet (VLCKD) in Subjects Affected by Overweight and Obesity.",
+          "pmid": "38542785",
+          "doi": "10.3390/nu16060874",
+          "year": "2024",
+          "score": 0.8475
+        },
+        {
+          "source": "Crossref",
+          "title": "SAT-672 Very Low-Calorie Diet Reduces Liver Steatosis in Women with Obesity and Metabolic Dysfunction-Associated Steatotic Liver Disease",
+          "pmid": "",
+          "doi": "10.1210/jendso/bvaf149.107",
+          "year": "2025",
+          "score": 0.5529
+        },
+        {
+          "source": "PubMed",
+          "title": "Higher Adherence to the Mediterranean Diet Is Associated with a Lower Risk of Steatotic, Alcohol-Related, and Metabolic Dysfunction-Associated Steatotic Liver Disease: A Retrospective Analysis.",
+          "pmid": "39458545",
+          "doi": "10.3390/nu16203551",
+          "year": "2024",
+          "score": 0.5376
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diet Time-Dependently Prevents NAFLD through Metabolic Remodeling",
+      "status": "not_found",
+      "best_score": 0.6141,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diet time-dependently prevents NAFLD through upregulating the expression of antioxidant protein metallothionein-2",
+          "pmid": "",
+          "doi": "10.1016/j.clnu.2024.04.029",
+          "year": "2024",
+          "score": 0.6141
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet in Metabolic Epilepsies",
+          "pmid": "",
+          "doi": "10.1891/9780826168641.0014",
+          "year": "None",
+          "score": 0.49
+        },
+        {
+          "source": "Crossref",
+          "title": "Letter to the Editor: Ketogenic diet time-dependently prevents nonalcoholic fatty liver disease through upregulating the expression of antioxidant protein metallothionein-2",
+          "pmid": "",
+          "doi": "10.1016/j.clnu.2024.06.027",
+          "year": "2024",
+          "score": 0.482
+        }
+      ]
+    },
+    {
+      "legacy_title": "Higher-Level Steatosis Is Associated with a Greater Decrease in MASLD after Eight Weeks of a Very Low-Calorie Ketogenic Diet in Subjects with Overweight or Obesity",
+      "status": "not_found",
+      "best_score": 0.7251,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Higher-Level Steatosis Is Associated with a Greater Decrease in Metabolic Dysfunction-Associated Steatoic Liver Disease after Eight Weeks of a Very Low-Calorie Ketogenic Diet (VLCKD) in Subjects Affected by Overweight and Obesity",
+          "pmid": "",
+          "doi": "10.3390/nu16060874",
+          "year": "2024",
+          "score": 0.7251
+        },
+        {
+          "source": "Crossref",
+          "title": "The Effects of Eight Weeks’ Very Low-Calorie Ketogenic Diet (VLCKD) on Liver Health in Subjects Affected by Overweight and Obesity",
+          "pmid": "",
+          "doi": "10.3390/nu15040825",
+          "year": "2023",
+          "score": 0.539
+        },
+        {
+          "source": "Crossref",
+          "title": "Greater Severity of Steatosis Is Associated with a Higher Risk of Incident Diabetes: A Retrospective Longitudinal Study",
+          "pmid": "",
+          "doi": "10.3803/enm.2023.1729",
+          "year": "2023",
+          "score": 0.4178
+        }
+      ]
+    },
+    {
+      "legacy_title": "Treatment of NAFLD with Intermittent Calorie Restriction or Low-Carbohydrate Diet",
+      "status": "not_found",
+      "best_score": 0.7539,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Treatment of NAFLD with intermittent calorie restriction or low-carb high-fat diet – a randomised controlled trial",
+          "pmid": "",
+          "doi": "10.1016/j.jhepr.2021.100256",
+          "year": "2021",
+          "score": 0.7539
+        },
+        {
+          "source": "Crossref",
+          "title": "Effect of Intermittent Calorie Restriction on NAFLD Patients With Disorders of Glucose Metabolism",
+          "pmid": "",
+          "doi": "10.31525/ct1-nct04283942",
+          "year": "2020",
+          "score": 0.5187
+        },
+        {
+          "source": "Crossref",
+          "title": "Treatment of NAFLD",
+          "pmid": "",
+          "doi": "10.1007/978-3-031-48949-5_66",
+          "year": "2023",
+          "score": 0.4682
+        }
+      ]
+    },
+    {
+      "legacy_title": "Low-density lipoprotein cholesterol elevation with carbohydrate-restricted diets",
+      "status": "not_found",
+      "best_score": 0.6471,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Extreme elevations of low-density lipoprotein cholesterol with very low carbohydrate, high fat diets",
+          "pmid": "",
+          "doi": "10.1016/j.jacl.2021.04.010",
+          "year": "2021",
+          "score": 0.6471
+        },
+        {
+          "source": "Crossref",
+          "title": "Low-Density Lipoprotein Cholesterol",
+          "pmid": "",
+          "doi": "10.1161/circulationaha.118.034922",
+          "year": "2018",
+          "score": 0.6459
+        },
+        {
+          "source": "Crossref",
+          "title": "Low-Density Lipoprotein Cholesterol",
+          "pmid": "",
+          "doi": "10.1016/b978-1-4377-1366-4.00014-7",
+          "year": "2011",
+          "score": 0.6459
+        }
+      ]
+    },
+    {
+      "legacy_title": "LDL Keto Trial",
+      "status": "not_found",
+      "best_score": 0.4012,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Carbohydrate restriction-induced elevations in LDL-cholesterol and atherosclerosis: The KETO Trial",
+          "pmid": "",
+          "doi": "10.1016/j.metabol.2024.155854",
+          "year": "2024",
+          "score": 0.4012
+        },
+        {
+          "source": "Crossref",
+          "title": "Clinical trial with 3-keto-desogestrel subdermal implants",
+          "pmid": "",
+          "doi": "10.1016/0010-7824(91)90030-j",
+          "year": "1991",
+          "score": 0.3748
+        },
+        {
+          "source": "Crossref",
+          "title": "Rosuvastatin, C-reactive protein, LDL cholesterol, and the JUPITER trial",
+          "pmid": "",
+          "doi": "10.1016/s0140-6736(09)61227-7",
+          "year": "2009",
+          "score": 0.3511
+        }
+      ]
+    },
+    {
+      "legacy_title": "Reduction of Cardio-Metabolic Risk and Body Weight through a ketogenic dietary intervention",
+      "status": "not_found",
+      "best_score": 0.6163,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Reduction of Cardio-Metabolic Risk and Body Weight through a Multiphasic Very-Low Calorie Ketogenic Diet Program in Women with Overweight/Obesity: A Study in a Real-World Setting",
+          "pmid": "",
+          "doi": "10.3390/nu13061804",
+          "year": "2021",
+          "score": 0.6163
+        },
+        {
+          "source": "Crossref",
+          "title": "Cardio-metabolic risk factors",
+          "pmid": "",
+          "doi": "10.4324/9780203095270-7",
+          "year": "2021",
+          "score": 0.4419
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diets and Cardio-Metabolic Diseases",
+          "pmid": "",
+          "doi": "10.3389/fendo.2021.753039",
+          "year": "2021",
+          "score": 0.4103
+        }
+      ]
+    },
+    {
+      "legacy_title": "Italian Ketogenic Mediterranean Diet in Overweight and Obese Adults",
+      "status": "not_found",
+      "best_score": 0.7121,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Italian Ketogenic Mediterranean Diet in Overweight and Obese Patients with Prediabetes or Type 2 Diabetes",
+          "pmid": "",
+          "doi": "10.3390/nu14204361",
+          "year": "2022",
+          "score": 0.7121
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet, Mediterranean Diet, and Mental Health",
+          "pmid": "",
+          "doi": "10.1007/978-981-97-2681-3_15",
+          "year": "2024",
+          "score": 0.5785
+        },
+        {
+          "source": "Crossref",
+          "title": "Comparative Effects of Mediterranean Diet and Ketogenic Diet on Weight Management in Overweight and Obese Adults: A Systematic Umbrella Review",
+          "pmid": "",
+          "doi": "10.54254/2753-8818/2026.36465",
+          "year": "2026",
+          "score": 0.5686
+        }
+      ]
+    },
+    {
+      "legacy_title": "Effects of a two-meals-a-day ketogenic diet on metabolic markers",
+      "status": "not_found",
+      "best_score": 0.6863,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Effects of the Ketogenic Diet on Metabolic Syndrome",
+          "pmid": "",
+          "doi": "10.14738/bjhmr.102.14410",
+          "year": "2023",
+          "score": 0.6863
+        },
+        {
+          "source": "Crossref",
+          "title": "Effects of a two meals-a-day ketogenic diet on newly diagnosed obese patients with type 2 diabetes mellitus: A retrospective observational study",
+          "pmid": "",
+          "doi": "10.1097/md.0000000000035753",
+          "year": "2023",
+          "score": 0.559
+        },
+        {
+          "source": "Crossref",
+          "title": "ANTIEPILEPTIC EFFECTS OF KETOGENIC DIET",
+          "pmid": "",
+          "doi": "10.17362/dbhad.201428958",
+          "year": "2014",
+          "score": 0.5103
+        }
+      ]
+    },
+    {
+      "legacy_title": "Is a Ketogenic Diet Superior to a Low-Fat Diet?",
+      "status": "not_found",
+      "best_score": 0.5873,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Is a Ketogenic Diet Superior to a High-Fat, High-Cholesterol Diet Regarding Testicular Function and Spermatogenesis?",
+          "pmid": "",
+          "doi": "10.3389/fnut.2022.805794",
+          "year": "2022",
+          "score": 0.5873
+        },
+        {
+          "source": "Crossref",
+          "title": "Mediterranean Diet Superior to Low-Fat Diet for CVD Prevention",
+          "pmid": "",
+          "doi": "10.1097/01.naj.0000874140.28493.19",
+          "year": "2022",
+          "score": 0.5755
+        },
+        {
+          "source": "Crossref",
+          "title": "A Low-Carbohydrate, Ketogenic Diet versus a Low-Fat Diet To Treat Obesity and Hyperlipidemia",
+          "pmid": "",
+          "doi": "10.7326/0003-4819-140-10-200405180-00006",
+          "year": "2004",
+          "score": 0.5382
+        }
+      ]
+    },
+    {
+      "legacy_title": "Effects of ketogenic diet on health",
+      "status": "not_found",
+      "best_score": 0.7102,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Effects of Ketogenic Diet on Muscle Metabolism in Health and Disease",
+          "pmid": "",
+          "doi": "10.3390/nu14183842",
+          "year": "2022",
+          "score": 0.7102
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet and Health",
+          "pmid": "",
+          "doi": "10.21926/obm.icm.2102015",
+          "year": "2021",
+          "score": 0.6788
+        },
+        {
+          "source": "Crossref",
+          "title": "ANTIEPILEPTIC EFFECTS OF KETOGENIC DIET",
+          "pmid": "",
+          "doi": "10.17362/dbhad.201428958",
+          "year": "2014",
+          "score": 0.6745
+        }
+      ]
+    },
+    {
+      "legacy_title": "The Lipid Energy Model",
+      "status": "not_found",
+      "best_score": 0.4705,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "The Lipid Energy Model: Reimagining Lipoprotein Function in the Context of Carbohydrate-Restricted Diets.",
+          "pmid": "35629964",
+          "doi": "10.3390/metabo12050460",
+          "year": "2022",
+          "score": 0.4705
+        },
+        {
+          "source": "Crossref",
+          "title": "Interaction energy of model lipid membranes with water and diiodomethane",
+          "pmid": "",
+          "doi": "10.1016/j.colsurfa.2011.01.001",
+          "year": "2011",
+          "score": 0.4054
+        },
+        {
+          "source": "Crossref",
+          "title": "Evolution in Energy-Limited States: A Stoichiometric Model of Lipid Mobilization",
+          "pmid": "",
+          "doi": "10.21203/rs.3.rs-7103822/v1",
+          "year": "2025",
+          "score": 0.3868
+        }
+      ]
+    },
+    {
+      "legacy_title": "Reduction of Cardio-Metabolic Risk and Body Weight through Ketogenic Nutritional Intervention",
+      "status": "not_found",
+      "best_score": 0.5819,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Reduction of Cardio-Metabolic Risk and Body Weight through a Multiphasic Very-Low Calorie Ketogenic Diet Program in Women with Overweight/Obesity: A Study in a Real-World Setting",
+          "pmid": "",
+          "doi": "10.3390/nu13061804",
+          "year": "2021",
+          "score": 0.5819
+        },
+        {
+          "source": "Crossref",
+          "title": "Cardio-metabolic risk factors",
+          "pmid": "",
+          "doi": "10.4324/9780203095270-7",
+          "year": "2021",
+          "score": 0.4421
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diets and Cardio-Metabolic Diseases",
+          "pmid": "",
+          "doi": "10.3389/fendo.2021.753039",
+          "year": "2021",
+          "score": 0.412
+        }
+      ]
+    },
+    {
+      "legacy_title": "Low-Density Lipoprotein Cholesterol Elevation in the Context of a Ketogenic Diet",
+      "status": "not_found",
+      "best_score": 0.6181,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Low-Density Lipoprotein Cholesterol",
+          "pmid": "",
+          "doi": "10.1161/circulationaha.118.034922",
+          "year": "2018",
+          "score": 0.6181
+        },
+        {
+          "source": "Crossref",
+          "title": "Low-Density Lipoprotein Cholesterol",
+          "pmid": "",
+          "doi": "10.1016/b978-1-4377-1366-4.00014-7",
+          "year": "2011",
+          "score": 0.6181
+        },
+        {
+          "source": "Crossref",
+          "title": "Low-Density Lipoprotein Cholesterol",
+          "pmid": "",
+          "doi": "10.1016/j.jacc.2020.03.033",
+          "year": "2020",
+          "score": 0.6181
+        }
+      ]
+    },
+    {
+      "legacy_title": "Nutritional Intervention in Cushing’s Disease: The Potential Role of a Ketogenic Strategy",
+      "status": "not_found",
+      "best_score": 0.5964,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "The ketogenic diet in Parkinson’s disease: a potential therapeutic strategy",
+          "pmid": "",
+          "doi": "10.1007/s43440-025-00799-2",
+          "year": "2025",
+          "score": 0.5964
+        },
+        {
+          "source": "Crossref",
+          "title": "Nutritional Intervention in Cushing’s Disease: The Ketogenic Diet Effects on Metabolic Comorbidities and Adrenal Steroids",
+          "pmid": "",
+          "doi": "10.20944/preprints202310.0431.v1",
+          "year": "2023",
+          "score": 0.5515
+        },
+        {
+          "source": "Crossref",
+          "title": "Nutritional Intervention in Cushing’s Disease: The Ketogenic Diet’s Effects on Metabolic Comorbidities and Adrenal Steroids",
+          "pmid": "",
+          "doi": "10.3390/nu15214647",
+          "year": "2023",
+          "score": 0.5483
+        }
+      ]
+    },
+    {
+      "legacy_title": "Effects of Ketogenic Diet on Reproductive Hormones in PCOS",
+      "status": "not_found",
+      "best_score": 0.7517,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Effects of Ketogenic Diet on Reproductive Hormones in Women With Polycystic Ovary Syndrome",
+          "pmid": "",
+          "doi": "10.1210/jendso/bvad112",
+          "year": "2023",
+          "score": 0.7517
+        },
+        {
+          "source": "Crossref",
+          "title": "Effects of the Ketogenic Diet on Gonadal Hormones: A Systematic Review",
+          "pmid": "",
+          "doi": "10.1093/nutrit/nuaf105",
+          "year": "2026",
+          "score": 0.6129
+        },
+        {
+          "source": "Crossref",
+          "title": "&lt;b&gt;THE IMPACT OF KETOGENIC DIET ON MALE REPRODUCTIVE HORMONES: A COMPREHENSIVE REVIEW&lt;/b&gt;",
+          "pmid": "",
+          "doi": "10.37557/4wczev27",
+          "year": "2026",
+          "score": 0.5786
+        }
+      ]
+    },
+    {
+      "legacy_title": "Low-Calorie Ketogenic Diet: Potential Application in PCOS",
+      "status": "not_found",
+      "best_score": 0.6719,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "Very Low-Calorie Ketogenic Diet: A Potential Application in the Treatment of Hypercortisolism Comorbidities.",
+          "pmid": "35745118",
+          "doi": "10.3390/nu14122388",
+          "year": "2022",
+          "score": 0.6719
+        },
+        {
+          "source": "PubMed",
+          "title": "Low-Calorie Ketogenic Diet: Potential Application in the Treatment of Polycystic Ovary Syndrome in Adolescents.",
+          "pmid": "37630772",
+          "doi": "10.3390/nu15163582",
+          "year": "2023",
+          "score": 0.665
+        }
+      ]
+    },
+    {
+      "legacy_title": "Effects of a ketogenic diet in overweight women with PCOS",
+      "status": "probable",
+      "best_score": 0.8175,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Effects of a ketogenic diet in overweight women with polycystic ovary syndrome",
+          "pmid": "",
+          "doi": "10.1186/s12967-020-02277-0",
+          "year": "2020",
+          "score": 0.8175
+        },
+        {
+          "source": "Crossref",
+          "title": "EFFECTS OF A KETOGENIC DIET IN OVERWEIGHT WOMEN WITH POLYCYSTIC OVARY SYNDROME",
+          "pmid": "",
+          "doi": "10.54112/bcsrj.v2024i1.734",
+          "year": "2024",
+          "score": 0.8175
+        },
+        {
+          "source": "Crossref",
+          "title": "Effects of Mixed of a Ketogenic Diet in Overweight and Obese Women with Polycystic Ovary Syndrome",
+          "pmid": "",
+          "doi": "10.3390/ijerph182312490",
+          "year": "2021",
+          "score": 0.7278
+        }
+      ]
+    },
+    {
+      "legacy_title": "Effects of a Ketogenic Diet in Overweight and Obese Women with PCOS",
+      "status": "probable",
+      "best_score": 0.8046,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Effects of Mixed of a Ketogenic Diet in Overweight and Obese Women with Polycystic Ovary Syndrome",
+          "pmid": "",
+          "doi": "10.3390/ijerph182312490",
+          "year": "2021",
+          "score": 0.8046
+        },
+        {
+          "source": "Crossref",
+          "title": "Effects of a ketogenic diet in overweight women with polycystic ovary syndrome",
+          "pmid": "",
+          "doi": "10.1186/s12967-020-02277-0",
+          "year": "2020",
+          "score": 0.7324
+        },
+        {
+          "source": "Crossref",
+          "title": "EFFECTS OF A KETOGENIC DIET IN OVERWEIGHT WOMEN WITH POLYCYSTIC OVARY SYNDROME",
+          "pmid": "",
+          "doi": "10.54112/bcsrj.v2024i1.734",
+          "year": "2024",
+          "score": 0.7324
+        }
+      ]
+    },
+    {
+      "legacy_title": "Low-Calorie Ketogenic Diet: Potential Application in Polycystic Ovary Syndrome",
+      "status": "probable",
+      "best_score": 0.8339,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "Low-Calorie Ketogenic Diet: Potential Application in the Treatment of Polycystic Ovary Syndrome in Adolescents.",
+          "pmid": "37630772",
+          "doi": "10.3390/nu15163582",
+          "year": "2023",
+          "score": 0.8339
+        },
+        {
+          "source": "Crossref",
+          "title": "Very Low-Calorie Ketogenic Diet: A Potential Application in the Treatment of Hypercortisolism Comorbidities",
+          "pmid": "",
+          "doi": "10.3390/nu14122388",
+          "year": "2022",
+          "score": 0.5976
+        },
+        {
+          "source": "Crossref",
+          "title": "EFFECTS OF A KETOGENIC DIET IN OVERWEIGHT WOMEN WITH POLYCYSTIC OVARY SYNDROME",
+          "pmid": "",
+          "doi": "10.54112/bcsrj.v2024i1.734",
+          "year": "2024",
+          "score": 0.5686
+        }
+      ]
+    },
+    {
+      "legacy_title": "Effects of a Mixed Ketogenic Diet in Overweight and Obese Women with PCOS",
+      "status": "probable",
+      "best_score": 0.8315,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Effects of Mixed of a Ketogenic Diet in Overweight and Obese Women with Polycystic Ovary Syndrome",
+          "pmid": "",
+          "doi": "10.3390/ijerph182312490",
+          "year": "2021",
+          "score": 0.8315
+        },
+        {
+          "source": "Crossref",
+          "title": "Effects of a ketogenic diet in overweight women with polycystic ovary syndrome",
+          "pmid": "",
+          "doi": "10.1186/s12967-020-02277-0",
+          "year": "2020",
+          "score": 0.7059
+        },
+        {
+          "source": "Crossref",
+          "title": "EFFECTS OF A KETOGENIC DIET IN OVERWEIGHT WOMEN WITH POLYCYSTIC OVARY SYNDROME",
+          "pmid": "",
+          "doi": "10.54112/bcsrj.v2024i1.734",
+          "year": "2024",
+          "score": 0.7059
+        }
+      ]
+    },
+    {
+      "legacy_title": "Long-term effectiveness and tolerability of ketogenic diet therapy in patients with genetic epilepsy",
+      "status": "not_found",
+      "best_score": 0.7186,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Long‐term effectiveness and tolerability of ketogenic diet therapy in patients with genetic developmental and epileptic encephalopathy onset within the first 6 months of life",
+          "pmid": "",
+          "doi": "10.1002/epi4.12899",
+          "year": "2024",
+          "score": 0.7186
+        },
+        {
+          "source": "PubMed",
+          "title": "Long-term effectiveness and adverse effects of ketogenic diet therapy in infants with drug-resistant epilepsy treated at a single center in Argentina.",
+          "pmid": "34763269",
+          "doi": "10.1016/j.eplepsyres.2021.106793",
+          "year": "2021",
+          "score": 0.6382
+        },
+        {
+          "source": "Crossref",
+          "title": "Long-term Effectiveness and Tolerability Profile of Iloperidone in Patients of Psychosis",
+          "pmid": "",
+          "doi": "10.5005/jp-journals-10050-10081",
+          "year": "2017",
+          "score": 0.6376
+        }
+      ]
+    },
+    {
+      "legacy_title": "The ketogenic diet increases Neuregulin 1 in an epilepsy model",
+      "status": "not_found",
+      "best_score": 0.5395,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diet and epilepsy",
+          "pmid": "",
+          "doi": "10.7748/ldp.17.9.15.s18",
+          "year": "2014",
+          "score": 0.5395
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet and Epilepsy",
+          "pmid": "",
+          "doi": "10.1111/j.1469-8749.1975.tb04712.x",
+          "year": "1975",
+          "score": 0.5395
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet for Epilepsy",
+          "pmid": "",
+          "doi": "10.1002/9780470690369.ch14",
+          "year": "2001",
+          "score": 0.5272
+        }
+      ]
+    },
+    {
+      "legacy_title": "Treatment of refractory epilepsy: comparison of ketogenic dietary approaches",
+      "status": "not_found",
+      "best_score": 0.6005,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Treatment-Refractory Epilepsy",
+          "pmid": "",
+          "doi": "10.2165/00115677-199702030-00001",
+          "year": "1997",
+          "score": 0.6005
+        },
+        {
+          "source": "Crossref",
+          "title": "Surgical treatment of refractory epilepsy",
+          "pmid": "",
+          "doi": "10.1007/s11940-996-0027-5",
+          "year": "2004",
+          "score": 0.5746
+        },
+        {
+          "source": "Crossref",
+          "title": "KETOGENIC DIETARY TREATMENT OF REFRACTORY EPILEPSY IN CHILDREN: NARRATIVE REVIEW",
+          "pmid": "",
+          "doi": "10.22533/at.ed.159492423012",
+          "year": "2024",
+          "score": 0.5679
+        }
+      ]
+    },
+    {
+      "legacy_title": "Seizure modulation by the gut microbiota and ketogenic diet",
+      "status": "not_found",
+      "best_score": 0.6357,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Gut Microbiota, the Ketogenic Diet and Epilepsy",
+          "pmid": "",
+          "doi": "10.15844/pedneurbriefs-32-10",
+          "year": "2018",
+          "score": 0.6357
+        },
+        {
+          "source": "PubMed",
+          "title": "Seizure modulation by the gut microbiota and tryptophan-kynurenine metabolism in an animal model of infantile spasms.",
+          "pmid": "35090836",
+          "doi": "10.1016/j.ebiom.2022.103833",
+          "year": "2022",
+          "score": 0.5808
+        },
+        {
+          "source": "Crossref",
+          "title": "The Gut Microbiota Mediates the Anti-Seizure Effects of the Ketogenic Diet",
+          "pmid": "",
+          "doi": "10.1016/j.cell.2018.04.027",
+          "year": "2018",
+          "score": 0.5465
+        }
+      ]
+    },
+    {
+      "legacy_title": "The gut microbiome and the ketogenic diet in epilepsy",
+      "status": "probable",
+      "best_score": 0.8159,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Gut Microbiota, the Ketogenic Diet and Epilepsy",
+          "pmid": "",
+          "doi": "10.15844/pedneurbriefs-32-10",
+          "year": "2018",
+          "score": 0.8159
+        },
+        {
+          "source": "Crossref",
+          "title": "Interactions between the gut microbiome and ketogenic diet in refractory epilepsy",
+          "pmid": "",
+          "doi": "10.1016/bs.irn.2022.06.002",
+          "year": "2022",
+          "score": 0.7841
+        },
+        {
+          "source": "Crossref",
+          "title": "The Ketogenic Diet and the Gut Microbiome",
+          "pmid": "",
+          "doi": "10.1093/med/9780197501207.003.0021",
+          "year": "2022",
+          "score": 0.6332
+        }
+      ]
+    },
+    {
+      "legacy_title": "The efficacy of non-fasting ketogenic diet protocols in epilepsy",
+      "status": "not_found",
+      "best_score": 0.6527,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Efficacy of the Ketogenic Diet",
+          "pmid": "",
+          "doi": "10.1007/978-1-59259-808-3_6",
+          "year": "2004",
+          "score": 0.6527
+        },
+        {
+          "source": "Crossref",
+          "title": "The ketogenic diet in epilepsy—Monitoring of efficacy",
+          "pmid": "",
+          "doi": "10.1111/j.1528-1167.2008.01874.x",
+          "year": "2009",
+          "score": 0.6161
+        },
+        {
+          "source": "PubMed",
+          "title": "The efficacy of non-fasting ketogenic diet protocol in the management of intractable epilepsy in pediatric patients: a single center study from Saudi Arabia.",
+          "pmid": "35259998",
+          "doi": "10.1177/03000605221081714",
+          "year": "2022",
+          "score": 0.5987
+        }
+      ]
+    },
+    {
+      "legacy_title": "Stress biomarkers in adult patients with drug-resistant epilepsy during ketogenic diet therapy",
+      "status": "not_found",
+      "best_score": 0.7006,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Stress biomarkers in adult patients with drug‐resistant epilepsy on a modified Atkins diet: A prospective study",
+          "pmid": "",
+          "doi": "10.1002/epi4.12808",
+          "year": "2023",
+          "score": 0.7006
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diet in drug‐resistant epilepsy with encephalopathy",
+          "pmid": "",
+          "doi": "10.1111/imj.15015",
+          "year": "2020",
+          "score": 0.5768
+        },
+        {
+          "source": "Crossref",
+          "title": "Epigenetic ageing is accelerated in drug-resistant epilepsy and dynamically modulated during ketogenic diet therapy",
+          "pmid": "",
+          "doi": "10.1016/j.ebiom.2026.106449",
+          "year": "2026",
+          "score": 0.5599
+        }
+      ]
+    },
+    {
+      "legacy_title": "Fecal Transfers from Children on the Ketogenic Diet Mimic Key Metabolic Effects",
+      "status": "not_found",
+      "best_score": 0.7341,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Fecal transfers from children on the ketogenic diet mimic the anti-seizure effect in mice",
+          "pmid": "",
+          "doi": "10.1016/j.celrep.2023.113570",
+          "year": "2023",
+          "score": 0.7341
+        },
+        {
+          "source": "Crossref",
+          "title": "Effects of the Ketogenic Diet on Metabolic Syndrome",
+          "pmid": "",
+          "doi": "10.14738/bjhmr.102.14410",
+          "year": "2023",
+          "score": 0.5871
+        },
+        {
+          "source": "Crossref",
+          "title": "Children Grow on the Ketogenic Diet",
+          "pmid": "",
+          "doi": "10.1203/00006450-199904020-02070",
+          "year": "1999",
+          "score": 0.5523
+        }
+      ]
+    },
+    {
+      "legacy_title": "Intractable Seizures in Children With Type 1 Diabetes Treated With Ketogenic Dietary Therapy",
+      "status": "not_found",
+      "best_score": 0.4381,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Intractable Seizures",
+          "pmid": "",
+          "doi": "10.1001/archneur.1972.00490150013003",
+          "year": "1972",
+          "score": 0.4381
+        },
+        {
+          "source": "Crossref",
+          "title": "Intractable Seizures and Limbic Encephalitis, Unaccounted Complications of Type 1 Diabetes Autoimmunity",
+          "pmid": "",
+          "doi": "10.1210/jendso/bvab188",
+          "year": "2022",
+          "score": 0.427
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Therapy: First-Line Management of Intractable Seizures in Children",
+          "pmid": "",
+          "doi": "10.4037/aacnacc2018593",
+          "year": "2018",
+          "score": 0.4245
+        }
+      ]
+    },
+    {
+      "legacy_title": "Graph Theory-Based Electroencephalographic Connectivity During Ketogenic Diet Therapy",
+      "status": "not_found",
+      "best_score": 0.6557,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Graph Theory-Based Electroencephalographic Connectivity and Its Association with Ketogenic Diet Effectiveness in Epileptic Children",
+          "pmid": "",
+          "doi": "10.3390/nu13072186",
+          "year": "2021",
+          "score": 0.6557
+        },
+        {
+          "source": "Crossref",
+          "title": "Graph Theory-Based Electroencephalographic Connectivity via Phase-Locking Value and Its Association with Ketogenic Diet Responsiveness in Patients with Focal Onset Seizures",
+          "pmid": "",
+          "doi": "10.3390/nu14214457",
+          "year": "2022",
+          "score": 0.5698
+        },
+        {
+          "source": "Crossref",
+          "title": "GIS Based Road Connectivity Evaluation Using Graph Theory",
+          "pmid": "",
+          "doi": "10.1007/978-981-32-9042-6_17",
+          "year": "2020",
+          "score": 0.4635
+        }
+      ]
+    },
+    {
+      "legacy_title": "Prospective Controlled Study of Efficacy and Influencing Factors of Ketogenic Diet Therapy in Epilepsy",
+      "status": "probable",
+      "best_score": 0.7913,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "Prospective control study of efficacy and influencing factors of a ketogenic diet on refractory epilepsy in children.",
+          "pmid": "35242660",
+          "doi": "10.21037/tp-21-595",
+          "year": "2022",
+          "score": 0.7913
+        },
+        {
+          "source": "Crossref",
+          "title": "Efficacy, Retention Rate, and Influencing Factors of Ketogenic Diet Therapy in Children with Refractory Epilepsy: A Retrospective Study",
+          "pmid": "",
+          "doi": "10.1055/a-1942-2447",
+          "year": "2023",
+          "score": 0.6358
+        },
+        {
+          "source": "Crossref",
+          "title": "A prospective, controlled assessment of factors influencing acceptance of screening colonoscopy",
+          "pmid": "",
+          "doi": "10.1016/s0002-9270(02)05546-6",
+          "year": "2002",
+          "score": 0.5006
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diet Therapy for Refractory Epilepsy",
+      "status": "not_found",
+      "best_score": 0.6723,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet in Refractory Childhood Epilepsy",
+          "pmid": "",
+          "doi": "10.1177/2329048x18779497",
+          "year": "2018",
+          "score": 0.6723
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet in Infants with Refractory Epilepsy",
+          "pmid": "",
+          "doi": "10.15844/pedneurbriefs-15-7-3",
+          "year": "2001",
+          "score": 0.6684
+        },
+        {
+          "source": "Crossref",
+          "title": "Implementation of Ketogenic Diet Therapy in Refractory Epilepsies",
+          "pmid": "",
+          "doi": "10.4172/2472-0895.1000111",
+          "year": "2016",
+          "score": 0.6495
+        }
+      ]
+    },
+    {
+      "legacy_title": "Analysis of Factors That May Affect the Effectiveness of Ketogenic Diet Therapy in Epilepsy",
+      "status": "probable",
+      "best_score": 0.7694,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Analysis of Factors That May Affect the Effectiveness of Ketogenic Diet Treatment in Pediatric and Adolescent Patients",
+          "pmid": "",
+          "doi": "10.3390/jcm11030606",
+          "year": "2022",
+          "score": 0.7694
+        },
+        {
+          "source": "Crossref",
+          "title": "Analysis of factors that may influence the methylation pattern of oral mucosa",
+          "pmid": "",
+          "doi": "10.3389/conf.fphys.2019.27.00016",
+          "year": "2019",
+          "score": 0.5264
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet Therapy for Epilepsy Management",
+          "pmid": "",
+          "doi": "10.4103/2319-4170.107150",
+          "year": "2013",
+          "score": 0.4569
+        }
+      ]
+    },
+    {
+      "legacy_title": "The Effect of Simultaneous Application of a Plant-Rich Ketogenic Diet in Alzheimer’s Disease",
+      "status": "not_found",
+      "best_score": 0.7024,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "The effect of simultaneous application of plant-rich ketogenic diet and intermittent fasting on early-to-mid-stage Alzheimer's disease: a randomised controlled trial",
+          "pmid": "",
+          "doi": "10.1016/j.jnha.2026.100930",
+          "year": "2026",
+          "score": 0.7024
+        },
+        {
+          "source": "Crossref",
+          "title": "The impact of the ketogenic diet on Alzheimer’s disease",
+          "pmid": "",
+          "doi": "10.1051/e3sconf/202455305027",
+          "year": "2024",
+          "score": 0.6316
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet in Alzheimer’s Disease",
+          "pmid": "",
+          "doi": "10.3390/ijms20163892",
+          "year": "2019",
+          "score": 0.6226
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diet and β-Hydroxybutyrate Rescue Long-Term Potentiation in an Alzheimer’s Mouse Model and Stimulate Synaptic Plasticity Pathways",
+      "status": "probable",
+      "best_score": 0.7812,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diet and BHB rescue the fall of long-term potentiation in an Alzheimer’s mouse model and stimulates synaptic plasticity pathway enzymes",
+          "pmid": "",
+          "doi": "10.1038/s42003-024-05860-z",
+          "year": "2024",
+          "score": 0.7812
+        },
+        {
+          "source": "Crossref",
+          "title": "Pharmacological Rescue of Long-Term Potentiation in Alzheimer Diseased Synapses",
+          "pmid": "",
+          "doi": "10.1523/jneurosci.2774-16.2016",
+          "year": "2017",
+          "score": 0.4839
+        },
+        {
+          "source": "Crossref",
+          "title": "Synaptic Long-Term Potentiation in Pain Pathways",
+          "pmid": "",
+          "doi": "10.1007/springerreference_119363",
+          "year": "None",
+          "score": 0.4838
+        }
+      ]
+    },
+    {
+      "legacy_title": "Dietary approaches to improve efficacy and management in Parkinson’s disease with ketogenic strategies",
+      "status": "not_found",
+      "best_score": 0.6327,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Dietary Approaches to Improve Efficacy and Control Side Effects of Levodopa Therapy in Parkinson's Disease: A Systematic Review",
+          "pmid": "",
+          "doi": "10.1093/advances/nmab060",
+          "year": "2021",
+          "score": 0.6327
+        },
+        {
+          "source": "Crossref",
+          "title": "Current Approaches to the Management of Parkinson Disease",
+          "pmid": "",
+          "doi": "10.1002/9783527629480.ch3",
+          "year": "2010",
+          "score": 0.5306
+        },
+        {
+          "source": "Crossref",
+          "title": "Dietary Antioxidants and Parkinson Disease",
+          "pmid": "",
+          "doi": "10.1001/archneur.1997.00550180070015",
+          "year": "1997",
+          "score": 0.4864
+        }
+      ]
+    },
+    {
+      "legacy_title": "The role of diet and dietary patterns in Parkinson’s disease, including ketogenic approaches",
+      "status": "probable",
+      "best_score": 0.8335,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "The Role of Diet and Dietary Patterns in Parkinson’s Disease",
+          "pmid": "",
+          "doi": "10.3390/nu14214472",
+          "year": "2022",
+          "score": 0.8335
+        },
+        {
+          "source": "Crossref",
+          "title": "Dietary patterns, Mediterranean diet, and cardiovascular disease",
+          "pmid": "",
+          "doi": "10.1097/01.mol.0000452372.36572.9b",
+          "year": "2014",
+          "score": 0.451
+        },
+        {
+          "source": "Crossref",
+          "title": "Dietary patterns, Mediterranean diet, and cardiovascular disease",
+          "pmid": "",
+          "doi": "10.1097/mol.0000000000000044",
+          "year": "2014",
+          "score": 0.451
+        }
+      ]
+    },
+    {
+      "legacy_title": "Neuroprotection by the Ketogenic Diet",
+      "status": "not_found",
+      "best_score": 0.7592,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Neuroprotection by the Ketogenic Diet: Evidence and Controversies",
+          "pmid": "",
+          "doi": "10.3389/fnut.2021.782657",
+          "year": "2021",
+          "score": 0.7592
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diet, neuroprotection, and antiepileptogenesis",
+          "pmid": "",
+          "doi": "10.1016/j.eplepsyres.2020.106444",
+          "year": "2020",
+          "score": 0.5414
+        },
+        {
+          "source": "Crossref",
+          "title": "A fat chance at neuroprotection: Ketogenic diet and Parkinson's disease",
+          "pmid": "",
+          "doi": "10.1016/j.clnesp.2026.103430",
+          "year": "2026",
+          "score": 0.4861
+        }
+      ]
+    },
+    {
+      "legacy_title": "Dietary Ketosis Improves Metabolic and Neurological Features in Experimental Huntington’s Disease",
+      "status": "not_found",
+      "best_score": 0.5359,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Dietary ketosis improves circadian dysfunction as well as motor symptoms in the BACHD mouse model of Huntington’s disease",
+          "pmid": "",
+          "doi": "10.3389/fnut.2022.1034743",
+          "year": "2022",
+          "score": 0.5359
+        },
+        {
+          "source": "Crossref",
+          "title": "Clinical Features of Huntington’s Disease",
+          "pmid": "",
+          "doi": "10.1007/978-3-319-71779-1_1",
+          "year": "2018",
+          "score": 0.5077
+        },
+        {
+          "source": "Crossref",
+          "title": "A Metabolic Study of Huntington’s Disease",
+          "pmid": "",
+          "doi": "10.1371/journal.pone.0146480",
+          "year": "2016",
+          "score": 0.4679
+        }
+      ]
+    },
+    {
+      "legacy_title": "Neuroprotection by the ketogenic diet",
+      "status": "not_found",
+      "best_score": 0,
+      "candidates": []
+    },
+    {
+      "legacy_title": "The Implication of Physiological Ketosis on Cognitive Function",
+      "status": "not_found",
+      "best_score": 0.7563,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "The Implication of Physiological Ketosis on The Cognitive Brain: A Narrative Review",
+          "pmid": "",
+          "doi": "10.3390/nu14030513",
+          "year": "2022",
+          "score": 0.7563
+        },
+        {
+          "source": "Crossref",
+          "title": "Exogenous Ketosis Counteracts The Decline In Cognitive Function During Ultra-running",
+          "pmid": "",
+          "doi": "10.1249/01.mss.0000875988.86918.bf",
+          "year": "2022",
+          "score": 0.4153
+        },
+        {
+          "source": "Crossref",
+          "title": "Physiological and clinical aspects of ketosis",
+          "pmid": "",
+          "doi": "10.1007/bf02997960",
+          "year": "1944",
+          "score": 0.3841
+        }
+      ]
+    },
+    {
+      "legacy_title": "Association Between Ketogenic Diet and Cognitive Function",
+      "status": "not_found",
+      "best_score": 0.628,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diet and microRNAs: focus on cognitive function",
+          "pmid": "",
+          "doi": "10.3389/fnut.2025.1545832",
+          "year": "2025",
+          "score": 0.628
+        },
+        {
+          "source": "Crossref",
+          "title": "Association between ketogenic diet and gout among U.S. adults with diabetes",
+          "pmid": "",
+          "doi": "10.1097/js9.0000000000004868",
+          "year": "2026",
+          "score": 0.6184
+        },
+        {
+          "source": "PubMed",
+          "title": "Association between ketogenic diet and cognitive function in older adults: The mediating role of neutrophil to high-density lipoprotein cholesterol ratio.",
+          "pmid": "41630286",
+          "doi": "10.1097/MD.0000000000047441",
+          "year": "2026",
+          "score": 0.5833
+        }
+      ]
+    },
+    {
+      "legacy_title": "Dietary and Metabolic Approaches for Treating Cognitive Impairment Comorbid with Epilepsy",
+      "status": "not_found",
+      "best_score": 0.6883,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "Dietary and Metabolic Approaches for Treating Autism Spectrum Disorders, Affective Disorders and Cognitive Impairment Comorbid with Epilepsy: A Review of Clinical and Preclinical Evidence.",
+          "pmid": "38398876",
+          "doi": "10.3390/nu16040553",
+          "year": "2024",
+          "score": 0.6883
+        },
+        {
+          "source": "Crossref",
+          "title": "Comorbid Neurocognitive Impairment in Patients with Epilepsy",
+          "pmid": "",
+          "doi": "10.30877/ijmh.9.3.2022.261-266",
+          "year": "2022",
+          "score": 0.4958
+        },
+        {
+          "source": "Crossref",
+          "title": "Comorbid Visual and Cognitive Impairment",
+          "pmid": "",
+          "doi": "10.1177/1010539512443698",
+          "year": "2014",
+          "score": 0.4821
+        }
+      ]
+    },
+    {
+      "legacy_title": "The Long-Term Treatment of Drug-Resistant Migraine with a Ketogenic Diet",
+      "status": "probable",
+      "best_score": 0.7667,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "The Long-Term Treatment of Drug-Resistant Migraine with the Modified Atkins Ketogenic Diet: A Single-Center, Retrospective Study",
+          "pmid": "",
+          "doi": "10.3390/nu16244324",
+          "year": "2024",
+          "score": 0.7667
+        },
+        {
+          "source": "Crossref",
+          "title": "MIGRAINE AND ITS TREATMENT WITH KETOGENIC DIET",
+          "pmid": "",
+          "doi": "10.1097/00005053-193201000-00025",
+          "year": "1932",
+          "score": 0.5584
+        },
+        {
+          "source": "Crossref",
+          "title": "Long-Term Treatment Over 52 Weeks with Monthly Fremanezumab in Drug-Resistant Migraine: A Prospective Multicenter Cohort Study",
+          "pmid": "",
+          "doi": "10.1007/s40263-023-01050-3",
+          "year": "2023",
+          "score": 0.5369
+        }
+      ]
+    },
+    {
+      "legacy_title": "Mediterranean Ketogenic Diet Accounts for Reduced Pain Frequency in Migraine",
+      "status": "not_found",
+      "best_score": 0.7528,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "Mediterranean ketogenic diet accounts for reduced pain frequency and intensity in patients with chronic migraine: A pilot study.",
+          "pmid": "38941791",
+          "doi": "10.1016/j.clnu.2024.06.015",
+          "year": "2024",
+          "score": 0.7528
+        },
+        {
+          "source": "PubMed",
+          "title": "Letter to the editor - \"Mediterranean ketogenic diet accounts for reduced pain frequency and intensity in patients with chronic migraine: A pilot study\".",
+          "pmid": "39413655",
+          "doi": "10.1016/j.clnu.2024.10.005",
+          "year": "2024",
+          "score": 0.6885
+        },
+        {
+          "source": "Crossref",
+          "title": "Can Ketogenic Diet Therapy Improve Migraine Frequency, Severity and Duration?",
+          "pmid": "",
+          "doi": "10.3390/healthcare9091105",
+          "year": "2021",
+          "score": 0.4557
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diet and Low-Glycemic-Index Diet for Chronic and Episodic Migraine: A Real-Life Retrospective Study",
+      "status": "probable",
+      "best_score": 0.8438,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "2:1 ketogenic diet and low-glycemic-index diet for the treatment of chronic and episodic migraine: a single-center real-life retrospective study",
+          "pmid": "",
+          "doi": "10.1186/s10194-023-01635-9",
+          "year": "2023",
+          "score": 0.8438
+        },
+        {
+          "source": "Crossref",
+          "title": "Dukan diet, ketogenic diet and low glycemic index diet: Biochemical basis and metabolic consequences",
+          "pmid": "",
+          "doi": "10.1016/j.nut.2026.113289",
+          "year": "2026",
+          "score": 0.5205
+        },
+        {
+          "source": "PubMed",
+          "title": "Ketogenic Diet Improves Sleep Quality and Daytime Sleepiness in Chronic Migraine: A Pilot Study.",
+          "pmid": "39585050",
+          "doi": "10.3390/neurolint16060091",
+          "year": "2024",
+          "score": 0.4682
+        }
+      ]
+    },
+    {
+      "legacy_title": "The Long-Term Treatment of Drug-Resistant Migraine with Ketogenic Dietary Therapy",
+      "status": "not_found",
+      "best_score": 0.7008,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "The Long-Term Treatment of Drug-Resistant Migraine with the Modified Atkins Ketogenic Diet: A Single-Center, Retrospective Study",
+          "pmid": "",
+          "doi": "10.3390/nu16244324",
+          "year": "2024",
+          "score": 0.7008
+        },
+        {
+          "source": "Crossref",
+          "title": "Long-term outcome of migraine therapy",
+          "pmid": "",
+          "doi": "10.1212/wnl.51.5.1475",
+          "year": "1998",
+          "score": 0.5704
+        },
+        {
+          "source": "Crossref",
+          "title": "Long-Term Treatment Over 52 Weeks with Monthly Fremanezumab in Drug-Resistant Migraine: A Prospective Multicenter Cohort Study",
+          "pmid": "",
+          "doi": "10.1007/s40263-023-01050-3",
+          "year": "2023",
+          "score": 0.4864
+        }
+      ]
+    },
+    {
+      "legacy_title": "Migraine Prevention through Ketogenic Diet: More than Body Weight Reduction",
+      "status": "not_found",
+      "best_score": 0.7581,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Migraine Prevention through Ketogenic Diet: More than Body Mass Composition Changes",
+          "pmid": "",
+          "doi": "10.3390/jcm11174946",
+          "year": "2022",
+          "score": 0.7581
+        },
+        {
+          "source": "Crossref",
+          "title": "Diet and Body Weight Reduction",
+          "pmid": "",
+          "doi": "10.1007/978-3-642-59651-3_10",
+          "year": "2000",
+          "score": 0.5576
+        },
+        {
+          "source": "Crossref",
+          "title": "Sex differences in ketogenic diet: are men more likely than women to lose weight?",
+          "pmid": "",
+          "doi": "10.3389/fnut.2025.1600927",
+          "year": "2025",
+          "score": 0.439
+        }
+      ]
+    },
+    {
+      "legacy_title": "The Role of Nutrition and Physical Activity in Multiple Sclerosis",
+      "status": "not_found",
+      "best_score": 0.7553,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "The Role of Nutrition and Physical Activity in Modulating Disease Progression and Quality of Life in Multiple Sclerosis.",
+          "pmid": "40871741",
+          "doi": "10.3390/nu17162713",
+          "year": "2025",
+          "score": 0.7553
+        },
+        {
+          "source": "Crossref",
+          "title": "The role of lifestyle physical activity in preventing multiple sclerosis",
+          "pmid": "",
+          "doi": "10.5114/hm/191101",
+          "year": "2024",
+          "score": 0.7522
+        },
+        {
+          "source": "Crossref",
+          "title": "Physical Activity and Multiple Sclerosis",
+          "pmid": "",
+          "doi": "10.1249/00005768-200505001-00930",
+          "year": "2005",
+          "score": 0.7231
+        }
+      ]
+    },
+    {
+      "legacy_title": "Therapeutic Alternative of the Ketogenic Mediterranean Diet in Multiple Sclerosis",
+      "status": "not_found",
+      "best_score": 0.6545,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Therapeutic alternative of the ketogenic Mediterranean diet to improve mitochondrial activity in Amyotrophic Lateral Sclerosis (ALS): A Comprehensive Review",
+          "pmid": "",
+          "doi": "10.1002/fsn3.1324",
+          "year": "2020",
+          "score": 0.6545
+        },
+        {
+          "source": "Crossref",
+          "title": "The Ketogenic Mediterranean Diet",
+          "pmid": "",
+          "doi": "10.1016/b978-0-12-407849-9.00025-7",
+          "year": "2015",
+          "score": 0.6115
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diet: a therapeutic alternative in pediatric refractory epilepsies",
+          "pmid": "",
+          "doi": "10.51745/najfnr.6.13.39-45",
+          "year": "2022",
+          "score": 0.4542
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diet: A Dietary Intervention via Gut Microbiota in Autism Spectrum Disorder",
+      "status": "not_found",
+      "best_score": 0.6853,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diet modifies the gut microbiota in a murine model of autism spectrum disorder",
+          "pmid": "",
+          "doi": "10.1186/s13229-016-0099-3",
+          "year": "2016",
+          "score": 0.6853
+        },
+        {
+          "source": "Crossref",
+          "title": "Gut Microbiota Alterations in Autism Spectrum Disorder",
+          "pmid": "",
+          "doi": "10.5152/turkarchpediatr.2024.24086",
+          "year": "2024",
+          "score": 0.6216
+        },
+        {
+          "source": "Crossref",
+          "title": "Microbiota-gut-brain axis in autism spectrum disorder",
+          "pmid": "",
+          "doi": "10.1016/j.jgg.2021.07.001",
+          "year": "2021",
+          "score": 0.5623
+        }
+      ]
+    },
+    {
+      "legacy_title": "Efficacy and Safety of Diet Therapies in Autism Spectrum Disorder including ketogenic interventions",
+      "status": "not_found",
+      "best_score": 0.6703,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Efficacy and Safety of Diet Therapies in Children With Autism Spectrum Disorder: A Systematic Literature Review and Meta-Analysis",
+          "pmid": "",
+          "doi": "10.3389/fneur.2022.844117",
+          "year": "2022",
+          "score": 0.6703
+        },
+        {
+          "source": "Crossref",
+          "title": "Safety and Efficacy of Cannabis in Autism Spectrum Disorder",
+          "pmid": "",
+          "doi": "10.15844/pedneurbriefs-34-25",
+          "year": "2020",
+          "score": 0.613
+        },
+        {
+          "source": "Crossref",
+          "title": "Diet and Autism Spectrum Disorder",
+          "pmid": "",
+          "doi": "10.1007/978-3-031-32035-4_65-1",
+          "year": "2024",
+          "score": 0.5628
+        }
+      ]
+    },
+    {
+      "legacy_title": "Vocal Communication in Asocial BTBR Mice Is Modulated by a Ketogenic Diet",
+      "status": "probable",
+      "best_score": 0.7763,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Vocal communication in asocial BTBR mice is more malleable by a ketogenic diet in juveniles than adults",
+          "pmid": "",
+          "doi": "10.1016/j.neuroscience.2024.10.001",
+          "year": "2024",
+          "score": 0.7763
+        },
+        {
+          "source": "Crossref",
+          "title": "Improving vocal communication with a ketogenic diet in a mouse model of autism",
+          "pmid": "",
+          "doi": "10.1101/2023.10.05.561083",
+          "year": "2023",
+          "score": 0.4674
+        },
+        {
+          "source": "Crossref",
+          "title": "Dysfunctional dopaminergic neurotransmission in asocial BTBR mice",
+          "pmid": "",
+          "doi": "10.1038/tp.2014.69",
+          "year": "2014",
+          "score": 0.452
+        }
+      ]
+    },
+    {
+      "legacy_title": "Effect of 3 months of ketogenic diet on euthymia in bipolar II disorder",
+      "status": "not_found",
+      "best_score": 0.6604,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diet in bipolar disorder",
+          "pmid": "",
+          "doi": "10.1111/bdi.13013",
+          "year": "2020",
+          "score": 0.6604
+        },
+        {
+          "source": "Crossref",
+          "title": "The ketogenic diet for type II bipolar disorder",
+          "pmid": "",
+          "doi": "10.1080/13554794.2012.690421",
+          "year": "2013",
+          "score": 0.5812
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet and Bipolar Disorder",
+          "pmid": "",
+          "doi": "10.1192/bjo.2026.11128",
+          "year": "2026",
+          "score": 0.5794
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic diet-derived faecal microbiota and schizophrenia",
+      "status": "not_found",
+      "best_score": 0,
+      "candidates": []
+    },
+    {
+      "legacy_title": "Effects of a ketogenic diet on bipolar disorder",
+      "status": "not_found",
+      "best_score": 0.6585,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "Case series: Effects of a ketogenic diet on cardiometabolic health in seven outpatients with bipolar disorder.",
+          "pmid": "41127096",
+          "doi": "10.3389/fnut.2025.1635489",
+          "year": "2025",
+          "score": 0.6585
+        },
+        {
+          "source": "PubMed",
+          "title": "Correction: Case series: Effects of a ketogenic diet on cardiometabolic health in seven outpatients with bipolar disorder.",
+          "pmid": "41572968",
+          "doi": "10.3389/fnut.2025.1750745",
+          "year": "2025",
+          "score": 0.6291
+        },
+        {
+          "source": "PubMed",
+          "title": "A pilot study of a ketogenic diet in bipolar disorder: clinical, metabolic and magnetic resonance spectroscopy findings.",
+          "pmid": "39995103",
+          "doi": "10.1192/bjo.2024.841",
+          "year": "2025",
+          "score": 0.5083
+        }
+      ]
+    },
+    {
+      "legacy_title": "Perspectives on the Ketogenic Diet as a Non-pharmacological Intervention in Mental Health",
+      "status": "not_found",
+      "best_score": 0.7501,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Perspectives on the ketogenic diet as a non-pharmacological intervention for major depressive disorder",
+          "pmid": "",
+          "doi": "10.47626/2237-6089-2024-0932",
+          "year": "2025",
+          "score": 0.7501
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet as a Non-pharmacological Treatment in Epileptic Disorders in a Tertiary Hospital",
+          "pmid": "",
+          "doi": "10.31080/asps.2020.04.0593",
+          "year": "2020",
+          "score": 0.5367
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet, Mediterranean Diet, and Mental Health",
+          "pmid": "",
+          "doi": "10.1007/978-981-97-2681-3_15",
+          "year": "2024",
+          "score": 0.5064
+        }
+      ]
+    },
+    {
+      "legacy_title": "KETO-MOOD: Ketogenic Diet for Microbiome Optimization in Mood Disorders",
+      "status": "not_found",
+      "best_score": 0.6062,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "KETO-MOOD: Ketogenic Diet for Microbiome Optimization and Overcoming Depression: A Protocol for a Randomized Controlled Trial",
+          "pmid": "",
+          "doi": "10.1159/000542979",
+          "year": "2024",
+          "score": 0.6062
+        },
+        {
+          "source": "Crossref",
+          "title": "The Ketogenic Diet as a Treatment for Mood Disorders",
+          "pmid": "",
+          "doi": "10.1007/s40501-024-00322-z",
+          "year": "2024",
+          "score": 0.5228
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet and Mood Disorder",
+          "pmid": "",
+          "doi": "10.47572/muskutd.748885",
+          "year": "2021",
+          "score": 0.5225
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic diet has a positive association with mental and emotional health",
+      "status": "probable",
+      "best_score": 0.78,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diet has a positive association with mental and emotional well-being in the general population",
+          "pmid": "",
+          "doi": "10.1016/j.nut.2024.112420",
+          "year": "2024",
+          "score": 0.78
+        },
+        {
+          "source": "Crossref",
+          "title": "Fostering Positive Mental and Emotional Health",
+          "pmid": "",
+          "doi": "10.4324/9781003125624-6",
+          "year": "2020",
+          "score": 0.6283
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet and Health",
+          "pmid": "",
+          "doi": "10.21926/obm.icm.2102015",
+          "year": "2021",
+          "score": 0.5687
+        }
+      ]
+    },
+    {
+      "legacy_title": "Evaluating the efficacy and mechanisms of a ketogenic diet as adjunctive treatment in serious mental illness",
+      "status": "not_found",
+      "best_score": 0.6406,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "Evaluating the efficacy and mechanisms of a ketogenic diet as adjunctive treatment for people with treatment-resistant depression: A protocol for a randomised controlled trial.",
+          "pmid": "38653031",
+          "doi": "10.1016/j.jpsychires.2024.04.023",
+          "year": "2024",
+          "score": 0.6406
+        },
+        {
+          "source": "Crossref",
+          "title": "KETOGENIC DIET | Anticonvulsant Mechanisms of a Ketogenic Diet",
+          "pmid": "",
+          "doi": "10.1016/b978-012373961-2.00030-8",
+          "year": "2009",
+          "score": 0.4956
+        },
+        {
+          "source": "Crossref",
+          "title": "Evaluating the efficacy and mechanisms of action of seriniquinone against pediatric neuroblastoma.",
+          "pmid": "",
+          "doi": "10.1200/jco.2026.44.16_suppl.e15125",
+          "year": "2026",
+          "score": 0.4864
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diet Intervention on Metabolic and Psychiatric Health in Bipolar Disorder and Schizophrenia",
+      "status": "probable",
+      "best_score": 0.8556,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet Intervention on Metabolic and Psychiatric Health in Bipolar and Schizophrenia: A Pilot Trial",
+          "pmid": "",
+          "doi": "10.1016/j.psychres.2024.115866",
+          "year": "2024",
+          "score": 0.8556
+        },
+        {
+          "source": "Crossref",
+          "title": "Impact of a Ketogenic Diet on Metabolic and Psychiatric Health in Patients With Schizophrenia or Bipolar Illness",
+          "pmid": "",
+          "doi": "10.31525/ct1-nct03935854",
+          "year": "2019",
+          "score": 0.6649
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet and Bipolar Disorder",
+          "pmid": "",
+          "doi": "10.1192/bjo.2026.11128",
+          "year": "2026",
+          "score": 0.5873
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketosis and bipolar disorder",
+      "status": "not_found",
+      "best_score": 0.4257,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "The Old and the New: Promising Interventions for Bipolar Disorder Combining Mood-Stabilizing Medication With Nutritional Ketosis.",
+          "pmid": "41585355",
+          "doi": "10.1016/j.bpsgos.2025.100677",
+          "year": "2026",
+          "score": 0.4257
+        },
+        {
+          "source": "PubMed",
+          "title": "Association between bipolar disorder and diabetic ketoacidosis/hyperosmolar hyperglycemic state.",
+          "pmid": "40596274",
+          "doi": "10.1038/s41598-025-08087-y",
+          "year": "2025",
+          "score": 0.397
+        },
+        {
+          "source": "PubMed",
+          "title": "A pilot study of a ketogenic diet in bipolar disorder: clinical, metabolic and magnetic resonance spectroscopy findings.",
+          "pmid": "39995103",
+          "doi": "10.1192/bjo.2024.841",
+          "year": "2025",
+          "score": 0.3762
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diet and Ketamine Infusion Treatment in Anorexia Nervosa",
+      "status": "not_found",
+      "best_score": 0.7201,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diet and anorexia nervosa",
+          "pmid": "",
+          "doi": "10.1016/j.mehy.2017.10.011",
+          "year": "2017",
+          "score": 0.7201
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diet and ketamine infusion treatment to target chronic persistent eating disorder psychopathology in anorexia nervosa: a pilot study",
+          "pmid": "",
+          "doi": "10.1007/s40519-022-01455-x",
+          "year": "2022",
+          "score": 0.6691
+        },
+        {
+          "source": "Crossref",
+          "title": "Therapeutic ketogenic diet as treatment for anorexia nervosa",
+          "pmid": "",
+          "doi": "10.3389/fnut.2024.1392135",
+          "year": "2024",
+          "score": 0.622
+        }
+      ]
+    },
+    {
+      "legacy_title": "Very-Low-Calorie Ketogenic Diet: A Potential Treatment for Binge-Eating Symptoms in Obesity",
+      "status": "probable",
+      "best_score": 0.807,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Very-Low-Calorie Ketogenic Diet: A Potential Treatment for Binge Eating and Food Addiction Symptoms in Women. A Pilot Study",
+          "pmid": "",
+          "doi": "10.3390/ijerph182312802",
+          "year": "2021",
+          "score": 0.807
+        },
+        {
+          "source": "Crossref",
+          "title": "Very Low-Calorie Ketogenic Diet: A Potential Application in the Treatment of Hypercortisolism Comorbidities",
+          "pmid": "",
+          "doi": "10.3390/nu14122388",
+          "year": "2022",
+          "score": 0.6062
+        },
+        {
+          "source": "Crossref",
+          "title": "Comparison of a very low-calorie-ketogenic diet with a standard low-calorie diet in the treatment of obesity",
+          "pmid": "",
+          "doi": "10.1007/s12020-014-0192-3",
+          "year": "2014",
+          "score": 0.5637
+        }
+      ]
+    },
+    {
+      "legacy_title": "Overcoming immunosuppression in cancer: how ketogenic diets may boost anti-tumor immunity",
+      "status": "not_found",
+      "best_score": 0.7212,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Overcoming immunosuppression in cancer: how ketogenic diets boost immune checkpoint blockade",
+          "pmid": "",
+          "doi": "10.1007/s00262-024-03867-3",
+          "year": "2024",
+          "score": 0.7212
+        },
+        {
+          "source": "Crossref",
+          "title": "HEATR1 deficiency enhanced gastric cancer cell PANoptosis to boost anti-tumor immunity",
+          "pmid": "",
+          "doi": "10.1186/s10020-026-01574-6",
+          "year": "2026",
+          "score": 0.4462
+        },
+        {
+          "source": "Crossref",
+          "title": "Overcoming Tumor-Mediated Immunosuppression",
+          "pmid": "",
+          "doi": "10.2217/imt.14.58",
+          "year": "2014",
+          "score": 0.4428
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diet in Cancer Prevention and Therapy: Molecular Mechanisms",
+      "status": "probable",
+      "best_score": 0.7696,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet in Cancer Prevention and Therapy: Molecular Targets and Therapeutic Opportunities",
+          "pmid": "",
+          "doi": "10.3390/cimb43020042",
+          "year": "2021",
+          "score": 0.7696
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diet in cancer therapy",
+          "pmid": "",
+          "doi": "10.18632/aging.101382",
+          "year": "2018",
+          "score": 0.6909
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet and Cancer",
+          "pmid": "",
+          "doi": "10.52976/vansaglik.1621908",
+          "year": "2025",
+          "score": 0.5832
+        }
+      ]
+    },
+    {
+      "legacy_title": "β-Hydroxybutyrate and Malignant Neoplasms",
+      "status": "not_found",
+      "best_score": 0.6317,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Malignant Neoplasms",
+          "pmid": "",
+          "doi": "10.1007/978-3-031-41467-1_24",
+          "year": "2024",
+          "score": 0.6317
+        },
+        {
+          "source": "Crossref",
+          "title": "Malignant Neoplasms",
+          "pmid": "",
+          "doi": "10.1016/b978-1-4377-1788-4.00018-6",
+          "year": "2011",
+          "score": 0.6317
+        },
+        {
+          "source": "Crossref",
+          "title": "Malignant Neoplasms",
+          "pmid": "",
+          "doi": "10.1007/978-1-59259-360-6_9",
+          "year": "2003",
+          "score": 0.6317
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diets Slow Melanoma Growth",
+      "status": "not_found",
+      "best_score": 0.6235,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diets",
+          "pmid": "",
+          "doi": "10.1002/9781119467205.ch17",
+          "year": "2020",
+          "score": 0.6235
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diets",
+          "pmid": "",
+          "doi": "10.1097/wco.0b013e3283515e4a",
+          "year": "2012",
+          "score": 0.6235
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diets",
+          "pmid": "",
+          "doi": "10.1016/b978-0-443-10944-7.00101-3",
+          "year": "2026",
+          "score": 0.6235
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diet and Chemotherapy Combine to Improve Antitumor Effects",
+      "status": "not_found",
+      "best_score": 0.5886,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diet and chemotherapy combine to disrupt pancreatic cancer metabolism and growth",
+          "pmid": "",
+          "doi": "10.1016/j.medj.2021.12.008",
+          "year": "2022",
+          "score": 0.5886
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diet may improve disability and quality of life",
+          "pmid": "",
+          "doi": "10.55788/a34e5b51",
+          "year": "2022",
+          "score": 0.4595
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet",
+          "pmid": "",
+          "doi": "10.1007/978-3-030-59078-9_48",
+          "year": "2021",
+          "score": 0.4434
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenesis Attenuates KLF5-Dependent Production of CXCL12 to Overcome Tumor-Promoting Signaling",
+      "status": "not_found",
+      "best_score": 0.7181,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "Ketogenesis Attenuates KLF5-Dependent Production of CXCL12 to Overcome the Immunosuppressive Tumor Microenvironment in Colorectal Cancer.",
+          "pmid": "35247887",
+          "doi": "10.1158/0008-5472.CAN-21-2778",
+          "year": "2022",
+          "score": 0.7181
+        },
+        {
+          "source": "Crossref",
+          "title": "Data from Ketogenesis Attenuates KLF5-Dependent Production of CXCL12 to Overcome the Immunosuppressive Tumor Microenvironment in Colorectal Cancer",
+          "pmid": "",
+          "doi": "10.1158/0008-5472.c.6513858",
+          "year": "2023",
+          "score": 0.6871
+        },
+        {
+          "source": "Crossref",
+          "title": "Data from Ketogenesis Attenuates KLF5-Dependent Production of CXCL12 to Overcome the Immunosuppressive Tumor Microenvironment in Colorectal Cancer",
+          "pmid": "",
+          "doi": "10.1158/0008-5472.c.6513858.v1",
+          "year": "2023",
+          "score": 0.6871
+        }
+      ]
+    },
+    {
+      "legacy_title": "LDL Keto Trial",
+      "status": "not_found",
+      "best_score": 0.4012,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Carbohydrate restriction-induced elevations in LDL-cholesterol and atherosclerosis: The KETO Trial",
+          "pmid": "",
+          "doi": "10.1016/j.metabol.2024.155854",
+          "year": "2024",
+          "score": 0.4012
+        },
+        {
+          "source": "Crossref",
+          "title": "Clinical trial with 3-keto-desogestrel subdermal implants",
+          "pmid": "",
+          "doi": "10.1016/0010-7824(91)90030-j",
+          "year": "1991",
+          "score": 0.3748
+        },
+        {
+          "source": "Crossref",
+          "title": "Rosuvastatin, C-reactive protein, LDL cholesterol, and the JUPITER trial",
+          "pmid": "",
+          "doi": "10.1016/s0140-6736(09)61227-7",
+          "year": "2009",
+          "score": 0.3511
+        }
+      ]
+    },
+    {
+      "legacy_title": "The ketogenic diet has the potential to decrease atherosclerotic cardiovascular disease risk",
+      "status": "not_found",
+      "best_score": 0.604,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "The ketogenic diet has the potential to decrease all-cause mortality without a concomitant increase in cardiovascular-related mortality",
+          "pmid": "",
+          "doi": "10.21203/rs.3.rs-4586381/v1",
+          "year": "2024",
+          "score": 0.604
+        },
+        {
+          "source": "Crossref",
+          "title": "The ketogenic diet has the potential to decrease all-cause mortality without a concomitant increase in cardiovascular-related mortality",
+          "pmid": "",
+          "doi": "10.1038/s41598-024-73384-x",
+          "year": "2024",
+          "score": 0.604
+        },
+        {
+          "source": "Crossref",
+          "title": "The ketogenic diet and cardiovascular disease prevention",
+          "pmid": "",
+          "doi": "10.17116/profmed202124121105",
+          "year": "2021",
+          "score": 0.5958
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diet and the Potential to Decrease Atherosclerotic Cardiovascular Disease Risk",
+      "status": "not_found",
+      "best_score": 0.6325,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "The ketogenic diet and cardiovascular disease prevention",
+          "pmid": "",
+          "doi": "10.17116/profmed202124121105",
+          "year": "2021",
+          "score": 0.6325
+        },
+        {
+          "source": "Crossref",
+          "title": "The Ketogenic Diet and Cardiovascular Diseases",
+          "pmid": "",
+          "doi": "10.3390/nu15153368",
+          "year": "2023",
+          "score": 0.6156
+        },
+        {
+          "source": "Crossref",
+          "title": "Atherosclerotic Cardiovascular Disease (ASCVD) Risk",
+          "pmid": "",
+          "doi": "10.21019/9781582122403.ch2",
+          "year": "2015",
+          "score": 0.5886
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diet: Mental Health Benefits versus Cardiovascular Risk",
+      "status": "not_found",
+      "best_score": 0.5913,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Opinion: Are mental health benefits of the ketogenic diet accompanied by an increased risk of cardiovascular disease?",
+          "pmid": "",
+          "doi": "10.3389/fnut.2024.1394610",
+          "year": "2024",
+          "score": 0.5913
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet and Health",
+          "pmid": "",
+          "doi": "10.21926/obm.icm.2102015",
+          "year": "2021",
+          "score": 0.5176
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet, Mediterranean Diet, and Mental Health",
+          "pmid": "",
+          "doi": "10.1007/978-981-97-2681-3_15",
+          "year": "2024",
+          "score": 0.5012
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diet and Myocardial Fatty Acid Oxidation in Humans",
+      "status": "not_found",
+      "best_score": 0.6257,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "A ketogenic diet lowers myocardial fatty acid oxidation but does not affect oxygen consumption: a study in overweight humans",
+          "pmid": "",
+          "doi": "10.1002/oby.23967",
+          "year": "2024",
+          "score": 0.6257
+        },
+        {
+          "source": "Crossref",
+          "title": "Decreased postoperative myocardial fatty acid oxidation",
+          "pmid": "",
+          "doi": "10.1016/0022-4804(88)90120-5",
+          "year": "1988",
+          "score": 0.5877
+        },
+        {
+          "source": "Crossref",
+          "title": "Imaging of myocardial fatty acid oxidation",
+          "pmid": "",
+          "doi": "10.1016/j.bbalip.2016.02.019",
+          "year": "2016",
+          "score": 0.5801
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketone Bodies and Cardiometabolic Inflammation: Epigenetic Mechanisms",
+      "status": "not_found",
+      "best_score": 0.5176,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Ketone bodies as epigenetic modifiers",
+          "pmid": "",
+          "doi": "10.1097/mco.0000000000000475",
+          "year": "2018",
+          "score": 0.5176
+        },
+        {
+          "source": "Crossref",
+          "title": "Epigenetic Mechanisms in Inflammation",
+          "pmid": "",
+          "doi": "10.1007/978-981-99-4780-5_3",
+          "year": "2023",
+          "score": 0.4638
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketone Bodies",
+          "pmid": "",
+          "doi": "10.1515/iupac.79.1518",
+          "year": "2016",
+          "score": 0.448
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketone Bodies in Ischemic Heart Disease",
+      "status": "not_found",
+      "best_score": 0.7259,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Ketone Bodies in Cardiovascular Disease",
+          "pmid": "",
+          "doi": "10.1016/j.jacbts.2025.101328",
+          "year": "2025",
+          "score": 0.7259
+        },
+        {
+          "source": "PubMed",
+          "title": "Ketone Body Metabolism in the Ischemic Heart.",
+          "pmid": "34950719",
+          "doi": "10.3389/fcvm.2021.789458",
+          "year": "2021",
+          "score": 0.642
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketone bodies and the heart",
+          "pmid": "",
+          "doi": "10.5114/amsad.2021.112475",
+          "year": "2021",
+          "score": 0.6138
+        }
+      ]
+    },
+    {
+      "legacy_title": "Heart Rate Variability during a Very Low-Calorie Ketogenic Diet",
+      "status": "not_found",
+      "best_score": 0.6888,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "Heart Rate Variability and Sympathetic Activity Is Modulated by Very Low-Calorie Ketogenic Diet.",
+          "pmid": "35206443",
+          "doi": "10.3390/ijerph19042253",
+          "year": "2022",
+          "score": 0.6888
+        },
+        {
+          "source": "Crossref",
+          "title": "Phase angle as biomarker of inflammatory changes during very low-calorie ketogenic diet",
+          "pmid": "",
+          "doi": "10.1038/s41366-022-01201-4",
+          "year": "2023",
+          "score": 0.5529
+        },
+        {
+          "source": "Crossref",
+          "title": "Resting metabolic rate of obese patients under very low calorie ketogenic diet",
+          "pmid": "",
+          "doi": "10.1186/s12986-018-0249-z",
+          "year": "2018",
+          "score": 0.5414
+        }
+      ]
+    },
+    {
+      "legacy_title": "Nutritional adequacy of ketogenic diets as a novel dietary intervention for people living with ADPKD",
+      "status": "probable",
+      "best_score": 0.8219,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Nutritional adequacy of ketogenic diets as a novel dietary intervention for people living with autosomal dominant polycystic kidney disease",
+          "pmid": "",
+          "doi": "10.1093/joneph/aajaf053",
+          "year": "2026",
+          "score": 0.8219
+        },
+        {
+          "source": "Crossref",
+          "title": "Review of Treatments for ADPKD on Tolvaptan and ketogenic Dietary Intervention as a Novel Therapy",
+          "pmid": "",
+          "doi": "10.54254/2753-8818/3/20220214",
+          "year": "2023",
+          "score": 0.4896
+        },
+        {
+          "source": "Crossref",
+          "title": "Nutritional adequacy of two vegan diets for cats",
+          "pmid": "",
+          "doi": "10.2460/javma.2004.225.1670",
+          "year": "2004",
+          "score": 0.4843
+        }
+      ]
+    },
+    {
+      "legacy_title": "Feasibility and impact of ketogenic dietary interventions in ADPKD",
+      "status": "not_found",
+      "best_score": 0.7085,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Feasibility and impact of ketogenic dietary interventions in polycystic kidney disease: KETO-ADPKD—a randomized controlled trial",
+          "pmid": "",
+          "doi": "10.1016/j.xcrm.2023.101283",
+          "year": "2023",
+          "score": 0.7085
+        },
+        {
+          "source": "Crossref",
+          "title": "Impact of ketogenic dietary interventions on thyroid hormone conversion efficiency and reverse triiodothyronine levels in obese adults",
+          "pmid": "",
+          "doi": "10.33545/26646579.2026.v8.i1a.80",
+          "year": "2026",
+          "score": 0.5062
+        },
+        {
+          "source": "Crossref",
+          "title": "Restrictive dietary interventions in everyday life: rethinking feasibility?",
+          "pmid": "",
+          "doi": "10.1093/eurjcn/zvag116",
+          "year": "2026",
+          "score": 0.446
+        }
+      ]
+    },
+    {
+      "legacy_title": "A pilot study to evaluate tolerability and safety of a modified Atkins diet in autosomal dominant polycystic kidney disease",
+      "status": "probable",
+      "best_score": 0.7687,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "A pilot study to evaluate tolerability and safety of a modified Atkins diet in ADPKD patients",
+          "pmid": "",
+          "doi": "10.1016/j.phanu.2019.100154",
+          "year": "2019",
+          "score": 0.7687
+        },
+        {
+          "source": "Crossref",
+          "title": "Autosomal Dominant Polycystic Kidney Disease",
+          "pmid": "",
+          "doi": "10.1016/b978-0-323-05876-6.00044-7",
+          "year": "2010",
+          "score": 0.5593
+        },
+        {
+          "source": "Crossref",
+          "title": "Autosomal dominant polycystic kidney disease",
+          "pmid": "",
+          "doi": "10.53347/rid-91582",
+          "year": "2021",
+          "score": 0.5593
+        }
+      ]
+    },
+    {
+      "legacy_title": "GREASE II: randomized trial of ketogenic metabolic therapy in autosomal dominant polycystic kidney disease",
+      "status": "not_found",
+      "best_score": 0.6729,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Metabolic Reprogramming in Autosomal Dominant Polycystic Kidney Disease",
+          "pmid": "",
+          "doi": "10.2215/cjn.13291019",
+          "year": "2020",
+          "score": 0.6729
+        },
+        {
+          "source": "Crossref",
+          "title": "Metabolic abnormalities in autosomal dominant polycystic kidney disease",
+          "pmid": "",
+          "doi": "10.1093/ndt/gfu044",
+          "year": "2015",
+          "score": 0.6667
+        },
+        {
+          "source": "Crossref",
+          "title": "A Randomized Clinical Trial of Metformin to Treat Autosomal Dominant Polycystic Kidney Disease",
+          "pmid": "",
+          "doi": "10.1159/000488807",
+          "year": "2018",
+          "score": 0.6484
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diets and β-Hydroxybutyrate in Kidney Disease",
+      "status": "not_found",
+      "best_score": 0.6581,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet and Beta-Hydroxybutyrate in Colorectal Cancer",
+          "pmid": "",
+          "doi": "10.1089/dna.2022.0486",
+          "year": "2022",
+          "score": 0.6581
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diets and β-hydroxybutyrate in the prevention and treatment of diabetic kidney disease: current progress and future perspectives",
+          "pmid": "",
+          "doi": "10.1186/s12882-025-04019-0",
+          "year": "2025",
+          "score": 0.6399
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diets for polycystic kidney disease",
+          "pmid": "",
+          "doi": "10.12968/jokc.2024.9.1.50",
+          "year": "2024",
+          "score": 0.5964
+        }
+      ]
+    },
+    {
+      "legacy_title": "Risks of the Ketogenic Diet in Chronic Kidney Disease",
+      "status": "not_found",
+      "best_score": 0.7365,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Diet in Chronic Kidney Disease",
+          "pmid": "",
+          "doi": "10.5772/intechopen.1004733",
+          "year": "2024",
+          "score": 0.7365
+        },
+        {
+          "source": "Crossref",
+          "title": "Diet and Chronic Kidney Disease",
+          "pmid": "",
+          "doi": "10.1093/advances/nmz011",
+          "year": "2019",
+          "score": 0.6398
+        },
+        {
+          "source": "Crossref",
+          "title": "Chronic kidney disease and diet",
+          "pmid": "",
+          "doi": "10.1186/s41100-025-00668-x",
+          "year": "2025",
+          "score": 0.5481
+        }
+      ]
+    },
+    {
+      "legacy_title": "BDH1-Mediated β-Hydroxybutyrate Metabolism Ameliorates Diabetic Kidney Disease",
+      "status": "not_found",
+      "best_score": 0.6298,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Bdh1-Mediated βOHB Metabolism Ameliorates Diabetic Kidney Disease by Activation of Nrf2-Mediated Antioxidative Pathway",
+          "pmid": "",
+          "doi": "10.21203/rs.3.rs-976505/v1",
+          "year": "2021",
+          "score": 0.6298
+        },
+        {
+          "source": "Crossref",
+          "title": "BDH1-mediated βOHB metabolism ameliorates diabetic kidney disease by activation of NRF2-mediated antioxidative pathway",
+          "pmid": "",
+          "doi": "10.18632/aging.205248",
+          "year": "2023",
+          "score": 0.6298
+        },
+        {
+          "source": "Crossref",
+          "title": "SerpinA3K Deficiency Ameliorates Diabetic Kidney Disease (DKD)",
+          "pmid": "",
+          "doi": "10.1681/asn.20233411s1504d",
+          "year": "2023",
+          "score": 0.5175
+        }
+      ]
+    },
+    {
+      "legacy_title": "Incidence and Characteristics of Kidney Stones in Patients on Ketogenic Diets",
+      "status": "probable",
+      "best_score": 0.8438,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Incidence and Characteristics of Kidney Stones in Patients on a Ketogenic Diet: A Meta-Analysis",
+          "pmid": "",
+          "doi": "10.1681/asn.20203110s1176a",
+          "year": "2020",
+          "score": 0.8438
+        },
+        {
+          "source": "Crossref",
+          "title": "Incidence and Characteristics of Kidney Stones in Patients on Ketogenic Diet: A Systematic Review and Meta-Analysis",
+          "pmid": "",
+          "doi": "10.3390/diseases9020039",
+          "year": "2021",
+          "score": 0.7723
+        },
+        {
+          "source": "Crossref",
+          "title": "Incidence and characteristics of kidney stones in patients with horseshoe kidney: A systematic review and meta-analysis",
+          "pmid": "",
+          "doi": "10.4103/ua.ua_76_17",
+          "year": "2018",
+          "score": 0.6627
+        }
+      ]
+    },
+    {
+      "legacy_title": "VLCKD in Combination with Physical Exercise Preserves Skeletal Muscle in Obesity",
+      "status": "not_found",
+      "best_score": 0.725,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "VLCKD in Combination with Physical Exercise Preserves Skeletal Muscle Mass in Sarcopenic Obesity after Severe COVID-19 Disease: A Case Report",
+          "pmid": "",
+          "doi": "10.3390/healthcare10030573",
+          "year": "2022",
+          "score": 0.725
+        },
+        {
+          "source": "Crossref",
+          "title": "Effect of physical exercise on skeletal muscle",
+          "pmid": "",
+          "doi": "10.22271/journalofsport.2026.v11.i4a.3218",
+          "year": "2026",
+          "score": 0.523
+        },
+        {
+          "source": "Crossref",
+          "title": "Physical Exercise and Epigenetic Modifications in Skeletal Muscle",
+          "pmid": "",
+          "doi": "10.1007/s40279-019-01070-4",
+          "year": "2019",
+          "score": 0.5018
+        }
+      ]
+    },
+    {
+      "legacy_title": "VLCKD combined with physical interval training",
+      "status": "not_found",
+      "best_score": 0.4718,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "Very low calorie ketogenic diet combined with physical interval training for preserving muscle mass during weight loss in sarcopenic obesity: A pilot study.",
+          "pmid": "36245515",
+          "doi": "10.3389/fnut.2022.955024",
+          "year": "2022",
+          "score": 0.4718
+        },
+        {
+          "source": "PubMed",
+          "title": "Corrigendum: Very low calorie ketogenic diet combined with physical interval training for preserving muscle mass during weight loss in sarcopenic obesity: A pilot study.",
+          "pmid": "36438751",
+          "doi": "10.3389/fnut.2022.1076667",
+          "year": "2022",
+          "score": 0.4553
+        },
+        {
+          "source": "Crossref",
+          "title": "A Combined Chronoscope and Interval-Timer",
+          "pmid": "",
+          "doi": "10.2307/1415171",
+          "year": "1931",
+          "score": 0.4328
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diet Ameliorates Inflammasome Activation in Experimental Osteoarthritis",
+      "status": "not_found",
+      "best_score": 0.6237,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet Ameliorates Inflammation by Inhibiting the NLRP3 Inflammasome in Osteoarthritis",
+          "pmid": "",
+          "doi": "10.21203/rs.3.rs-805699/v1",
+          "year": "2021",
+          "score": 0.6237
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diet ameliorates inflammation by inhibiting the NLRP3 inflammasome in osteoarthritis",
+          "pmid": "",
+          "doi": "10.1186/s13075-022-02802-0",
+          "year": "2022",
+          "score": 0.6237
+        },
+        {
+          "source": "PubMed",
+          "title": "Ketogenic diet attenuates microglia-mediated neuroinflammation by inhibiting NLRP3 inflammasome activation via HDAC3 inhibition to activate mitophagy in experimental autoimmune encephalomyelitis.",
+          "pmid": "40421817",
+          "doi": "10.1039/d5fo00422e",
+          "year": "2025",
+          "score": 0.4912
+        }
+      ]
+    },
+    {
+      "legacy_title": "Efficacy, Safety and Tolerability of VLCKD in Women with Obesity and Fibromyalgia",
+      "status": "not_found",
+      "best_score": 0.6287,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "Efficacy, safety and tolerability of very low-calorie ketogenic diet in obese women with fibromyalgia: a pilot interventional study.",
+          "pmid": "37502721",
+          "doi": "10.3389/fnut.2023.1219321",
+          "year": "2023",
+          "score": 0.6287
+        },
+        {
+          "source": "Crossref",
+          "title": "Efficacy, safety, and tolerability of oxcarbazepine monotherapy",
+          "pmid": "",
+          "doi": "10.1016/j.yebeh.2006.04.022",
+          "year": "2006",
+          "score": 0.5979
+        },
+        {
+          "source": "PubMed",
+          "title": "Efficacy, Safety, and Tolerability of a Very Low-Calorie Ketogenic Diet in Women with Obesity and Symptomatic Knee Osteoarthritis: A Pilot Interventional Study.",
+          "pmid": "39408203",
+          "doi": "10.3390/nu16193236",
+          "year": "2024",
+          "score": 0.5971
+        }
+      ]
+    },
+    {
+      "legacy_title": "The Ketogenic Diet and Dermatology",
+      "status": "not_found",
+      "best_score": 0.7028,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "The ketogenic diet and dermatology: a primer on current literature.",
+          "pmid": "32074146",
+          "doi": "",
+          "year": "2020",
+          "score": 0.7028
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet",
+          "pmid": "",
+          "doi": "10.1007/978-3-030-59078-9_48",
+          "year": "2021",
+          "score": 0.6208
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet",
+          "pmid": "",
+          "doi": "10.1002/9781118660584.ese1340",
+          "year": "2014",
+          "score": 0.6208
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketones, the ketogenic diet, and the skin: a review of where we are and where we should go",
+      "status": "not_found",
+      "best_score": 0.5229,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Generalisation: Where Are We? Where Should We Go?",
+          "pmid": "",
+          "doi": "10.1201/9781003062691-15",
+          "year": "2020",
+          "score": 0.5229
+        },
+        {
+          "source": "Crossref",
+          "title": "The Ketogenic Diet Revisited: Beyond Ketones",
+          "pmid": "",
+          "doi": "10.3389/fneur.2021.720073",
+          "year": "2021",
+          "score": 0.4666
+        },
+        {
+          "source": "PubMed",
+          "title": "Interplay Between the Ketogenic Diet and the Gut Microbiome in Glioblastoma: A Comprehensive Review of Mechanisms and Clinical Implications.",
+          "pmid": "42250251",
+          "doi": "10.1080/01635581.2026.2684070",
+          "year": "2026",
+          "score": 0.4418
+        }
+      ]
+    },
+    {
+      "legacy_title": "Impact of Fasting and Ketogenic Interventions on the NLRP3 Inflammasome",
+      "status": "probable",
+      "best_score": 0.8225,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "Impact of fasting & ketogenic interventions on the NLRP3 inflammasome: A narrative review.",
+          "pmid": "37940045",
+          "doi": "10.1016/j.bj.2023.100677",
+          "year": "2024",
+          "score": 0.8225
+        },
+        {
+          "source": "Crossref",
+          "title": "Impact of Maternal Ketogenic Diet on NLRP3 Inflammasome Response in the Offspring Brain",
+          "pmid": "",
+          "doi": "10.3390/nu15081994",
+          "year": "2023",
+          "score": 0.5905
+        },
+        {
+          "source": "Crossref",
+          "title": "Fasting and refeeding differentially regulate NLRP3 inflammasome activation in human subjects",
+          "pmid": "",
+          "doi": "10.1172/jci83260",
+          "year": "2015",
+          "score": 0.4339
+        }
+      ]
+    },
+    {
+      "legacy_title": "Metabolic Effects of Ketogenic Diets: Whole-Body Metabolism, Adipose Tissue and Metabolic Organs",
+      "status": "probable",
+      "best_score": 0.8401,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Metabolic Effects of Ketogenic Diets: Exploring Whole-Body Metabolism in Connection with Adipose Tissue and Other Metabolic Organs",
+          "pmid": "",
+          "doi": "10.3390/ijms25137076",
+          "year": "2024",
+          "score": 0.8401
+        },
+        {
+          "source": "Crossref",
+          "title": "Metabolic Effects of Ketogenic Diets",
+          "pmid": "",
+          "doi": "10.15844/pedneurbriefs-3-4-5",
+          "year": "1989",
+          "score": 0.6088
+        },
+        {
+          "source": "Crossref",
+          "title": "Role of adipose tissue in whole body metabolism",
+          "pmid": "",
+          "doi": "10.1016/s0899-9007(97)85130-1",
+          "year": "1996",
+          "score": 0.5224
+        }
+      ]
+    },
+    {
+      "legacy_title": "Persistent Inflammation, Immunosuppression, and Catabolism in Metabolic Disease",
+      "status": "probable",
+      "best_score": 0.7703,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Persistent Inflammation, Immunosuppression and Catabolism Syndrome",
+          "pmid": "",
+          "doi": "10.1016/j.ccc.2016.12.001",
+          "year": "2017",
+          "score": 0.7703
+        },
+        {
+          "source": "Crossref",
+          "title": "Persistent Inflammation, Immunosuppression, and Catabolism Syndrome in Sepsis",
+          "pmid": "",
+          "doi": "10.32629/jcmr.v5i1.1785",
+          "year": "2024",
+          "score": 0.7559
+        },
+        {
+          "source": "Crossref",
+          "title": "Persistent Inflammation, Immunosuppression and Catabolism Syndrome (PICS)",
+          "pmid": "",
+          "doi": "10.4274/tybd.19484",
+          "year": "2019",
+          "score": 0.7393
+        }
+      ]
+    },
+    {
+      "legacy_title": "Beneficial Effects of the Very-Low-Calorie Ketogenic Diet on Reproductive and Metabolic Parameters",
+      "status": "not_found",
+      "best_score": 0.6906,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Efficacy and durability of a very low calorie ketogenic diet protocol on metabolic parameters",
+          "pmid": "",
+          "doi": "10.1530/endoabs.90.ep378",
+          "year": "2023",
+          "score": 0.6906
+        },
+        {
+          "source": "Crossref",
+          "title": "Beneficial Effects of the Very-Low-Calorie Ketogenic Diet on the Symptoms of Male Accessory Gland Inflammation",
+          "pmid": "",
+          "doi": "10.3390/nu14051081",
+          "year": "2022",
+          "score": 0.6552
+        },
+        {
+          "source": "Crossref",
+          "title": "Very Low Calorie Ketogenic Diet: What Effects on Lipid Metabolism?",
+          "pmid": "",
+          "doi": "10.1007/s13668-024-00556-6",
+          "year": "2024",
+          "score": 0.5689
+        }
+      ]
+    },
+    {
+      "legacy_title": "The Effect of Low Carbohydrate Diets on Fertility",
+      "status": "not_found",
+      "best_score": 0.729,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "The effect of low carbohydrate on energy metabolism",
+          "pmid": "",
+          "doi": "10.1038/sj.ijo.0803086",
+          "year": "2005",
+          "score": 0.729
+        },
+        {
+          "source": "Crossref",
+          "title": "Low-Carbohydrate Diets",
+          "pmid": "",
+          "doi": "10.4135/9781483346304.n276",
+          "year": "2015",
+          "score": 0.6346
+        },
+        {
+          "source": "Crossref",
+          "title": "Low-Carbohydrate Diets",
+          "pmid": "",
+          "doi": "10.7326/0003-4819-141-9-200411020-00023",
+          "year": "2004",
+          "score": 0.6346
+        }
+      ]
+    },
+    {
+      "legacy_title": "The Efficacy of Ketogenic Diets as a Potential Nutritional Intervention for Lipedema",
+      "status": "not_found",
+      "best_score": 0.7449,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diet as a potential intervention for lipedema",
+          "pmid": "",
+          "doi": "10.1016/j.mehy.2020.110435",
+          "year": "2021",
+          "score": 0.7449
+        },
+        {
+          "source": "Crossref",
+          "title": "The Efficacy of Ketogenic Diets (Low Carbohydrate; High Fat) as a Potential Nutritional Intervention for Lipedema: A Systematic Review and Meta-Analysis",
+          "pmid": "",
+          "doi": "10.3390/nu16193276",
+          "year": "2024",
+          "score": 0.7411
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet: A Nutritional Therapeutic Tool for Lipedema?",
+          "pmid": "",
+          "doi": "10.1007/s13679-023-00536-x",
+          "year": "2023",
+          "score": 0.5879
+        }
+      ]
+    },
+    {
+      "legacy_title": "Dietary liposuction through ketogenic diet: a comparison of three approaches",
+      "status": "not_found",
+      "best_score": 0.4301,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "KETOGENIC DIET | Animal Models of the Ketogenic Diet and Other Dietary Therapies",
+          "pmid": "",
+          "doi": "10.1016/b978-012373961-2.00184-3",
+          "year": "2009",
+          "score": 0.4301
+        },
+        {
+          "source": "Crossref",
+          "title": "The Ketogenic Diet: Three Decades Later",
+          "pmid": "",
+          "doi": "10.1177/08830738261450750",
+          "year": "2026",
+          "score": 0.4205
+        },
+        {
+          "source": "Crossref",
+          "title": "Dietary Management of Diabetes: Focus on Ketogenic Diet",
+          "pmid": "",
+          "doi": "10.1055/s-0038-1675675",
+          "year": "2018",
+          "score": 0.4102
+        }
+      ]
+    },
+    {
+      "legacy_title": "Intermittent Fasting, Calorie Restriction, and a Ketogenic Diet Improve Healthspan",
+      "status": "not_found",
+      "best_score": 0.5968,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Intermittent fasting, calorie restriction, and a ketogenic diet improve mitochondrial function by reducing lipopolysaccharide signaling in monocytes during obesity: A randomized clinical trial",
+          "pmid": "",
+          "doi": "10.1016/j.clnu.2024.06.036",
+          "year": "2024",
+          "score": 0.5968
+        },
+        {
+          "source": "Crossref",
+          "title": "Biology of Calorie Restriction and Intermittent Fasting",
+          "pmid": "",
+          "doi": "10.1201/9781003437734-12",
+          "year": "2024",
+          "score": 0.5404
+        },
+        {
+          "source": "Crossref",
+          "title": "Biology of Calorie Restriction and Intermittent Fasting",
+          "pmid": "",
+          "doi": "10.1201/9781003437673-12",
+          "year": "2023",
+          "score": 0.5404
+        }
+      ]
+    },
+    {
+      "legacy_title": "Divergent Sex-Specific Effects of a Ketogenic Diet during Aging",
+      "status": "not_found",
+      "best_score": 0.5532,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Sex-specific neuroprotective effects of ketogenic diet in a rodent model of early-life stress",
+          "pmid": "",
+          "doi": "10.1016/j.nsa.2025.105959",
+          "year": "2026",
+          "score": 0.5532
+        },
+        {
+          "source": "Crossref",
+          "title": "Sex-specific effects of ketogenic diet after pre-exposure to a high-fat, high-sugar diet in rats",
+          "pmid": "",
+          "doi": "10.1016/j.numecd.2020.09.034",
+          "year": "2021",
+          "score": 0.5454
+        },
+        {
+          "source": "Crossref",
+          "title": "Divergent sex-specific effects on a ketogenic diet: Male, but not female, mice exhibit oxidative stress and cellular senescence",
+          "pmid": "",
+          "doi": "10.1016/j.celrep.2025.116026",
+          "year": "2025",
+          "score": 0.5431
+        }
+      ]
+    },
+    {
+      "legacy_title": "Differential Effects of Short-Term Standard and Ketogenic Diets on the Aging Mouse Brain",
+      "status": "probable",
+      "best_score": 0.775,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Differential effects of short-term and long-term ketogenic diet on gene expression in the aging mouse brain",
+          "pmid": "",
+          "doi": "10.1016/j.jnha.2024.100427",
+          "year": "2025",
+          "score": 0.775
+        },
+        {
+          "source": "Crossref",
+          "title": "Differential Effects of Short-term Ketogenic, High Fat and Fructose-enriched Diets on Metabolic Parameters in Mice (P08-042-19)",
+          "pmid": "",
+          "doi": "10.1093/cdn/nzz044.p08-042-19",
+          "year": "2019",
+          "score": 0.5247
+        },
+        {
+          "source": "Crossref",
+          "title": "Differential effects of neuropeptides on short-term memory in primates",
+          "pmid": "",
+          "doi": "10.1016/0196-9781(81)90067-x",
+          "year": "1981",
+          "score": 0.5027
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Interventions Enhance Circadian and Metabolic Regulation",
+      "status": "not_found",
+      "best_score": 0.5334,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diet and metabolic regulation of brain microglia",
+          "pmid": "",
+          "doi": "10.1093/neuonc/noz167.035",
+          "year": "2019",
+          "score": 0.5334
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic interventions enhance REM sleep in females and support memory in aged rats",
+          "pmid": "",
+          "doi": "10.3389/fnagi.2026.1797686",
+          "year": "2026",
+          "score": 0.5183
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet, Circadian Rhythm and Aging",
+          "pmid": "",
+          "doi": "10.1007/978-3-030-83017-5_16",
+          "year": "2021",
+          "score": 0.4834
+        }
+      ]
+    },
+    {
+      "legacy_title": "Can the Ketogenic Diet Improve Our Dreams? Effect of VLCKD on Sleep Quality",
+      "status": "probable",
+      "best_score": 0.8553,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "Can the ketogenic diet improve our dreams? Effect of very low-calorie ketogenic diet (VLCKD) on sleep quality.",
+          "pmid": "37464397",
+          "doi": "10.1186/s12967-023-04280-7",
+          "year": "2023",
+          "score": 0.8553
+        },
+        {
+          "source": "Crossref",
+          "title": "How Can a Ketogenic Diet Improve Motor Function?",
+          "pmid": "",
+          "doi": "10.3389/fnmol.2018.00015",
+          "year": "2018",
+          "score": 0.4861
+        },
+        {
+          "source": "Crossref",
+          "title": "Can the ketogenic diet improve the hamstring muscle rupture? A narrative review",
+          "pmid": "",
+          "doi": "10.32598/jsrs.2407.1004",
+          "year": "2024",
+          "score": 0.4679
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diet and Microbiota",
+      "status": "not_found",
+      "best_score": 0,
+      "candidates": []
+    },
+    {
+      "legacy_title": "Ketogenic Diet, Gut Microbiome and Cancer Immunotherapy Outcomes",
+      "status": "probable",
+      "best_score": 0.7768,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Gut microbiome and cancer immunotherapy",
+          "pmid": "",
+          "doi": "10.1002/jcp.29359",
+          "year": "2020",
+          "score": 0.7768
+        },
+        {
+          "source": "Crossref",
+          "title": "Gut microbiome and cancer immunotherapy",
+          "pmid": "",
+          "doi": "10.1016/j.canlet.2019.01.015",
+          "year": "2019",
+          "score": 0.7768
+        },
+        {
+          "source": "Crossref",
+          "title": "Antibiotics, gut microbiome, and cancer immunotherapy",
+          "pmid": "",
+          "doi": "10.52843/cassyni.chhppv",
+          "year": "2026",
+          "score": 0.7301
+        }
+      ]
+    },
+    {
+      "legacy_title": "Very Low-Energy Ketogenic Therapy and Trimethylamine N-Oxide in Women with Obesity",
+      "status": "not_found",
+      "best_score": 0.6151,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "Time Exposure and Fat Mass Reduction Drive Trimethylamine N-Oxide Modulation During a Very-Low-Energy Ketogenic Therapy (VLEKT) in Women with Obesity.",
+          "pmid": "41893301",
+          "doi": "10.3390/metabo16030150",
+          "year": "2026",
+          "score": 0.6151
+        },
+        {
+          "source": "Crossref",
+          "title": "Very low energy ketogenic therapy: an anti-inflammatory medical nutritional approach for MASLD in obesity",
+          "pmid": "",
+          "doi": "10.1186/s12967-025-07295-4",
+          "year": "2025",
+          "score": 0.5163
+        },
+        {
+          "source": "Crossref",
+          "title": "Unlocking the potential: very-low-energy ketogenic therapy in obesity-related disorders",
+          "pmid": "",
+          "doi": "10.1080/09540105.2024.2442368",
+          "year": "2025",
+          "score": 0.502
+        }
+      ]
+    },
+    {
+      "legacy_title": "Parkinson’s Disease, Gut Microbiota and Ketogenic Diet",
+      "status": "not_found",
+      "best_score": 0.6413,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Human gut microbiota and Parkinson Disease",
+          "pmid": "",
+          "doi": "10.37212/jcnos.610152",
+          "year": "2018",
+          "score": 0.6413
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diet and Parkinson’s disease",
+          "pmid": "",
+          "doi": "10.3389/fnmol.2026.1914756",
+          "year": "2026",
+          "score": 0.6172
+        },
+        {
+          "source": "Crossref",
+          "title": "Gut Microbiota, the Ketogenic Diet and Epilepsy",
+          "pmid": "",
+          "doi": "10.15844/pedneurbriefs-32-10",
+          "year": "2018",
+          "score": 0.6012
+        }
+      ]
+    },
+    {
+      "legacy_title": "Very-Low-Calorie Ketogenic Diets and Gut Microbiota in Obesity: Systematic Review and Meta-Analysis",
+      "status": "probable",
+      "best_score": 0.8298,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "The impact of very-low-calorie ketogenic diets on gut microbiota in individuals with obesity: a systematic review and meta-analysis.",
+          "pmid": "41054273",
+          "doi": "10.1080/19490976.2025.2566305",
+          "year": "2025",
+          "score": 0.8298
+        },
+        {
+          "source": "Crossref",
+          "title": "The Impact of a Very-Low-Calorie Ketogenic Diet in the Gut Microbiota Composition in Obesity",
+          "pmid": "",
+          "doi": "10.3390/nu15122728",
+          "year": "2023",
+          "score": 0.5559
+        },
+        {
+          "source": "Crossref",
+          "title": "Effect of a Very Low-Calorie Ketogenic Diet on Gut Microbiota and Fat Distribution",
+          "pmid": "",
+          "doi": "10.31525/ct1-nct04019431",
+          "year": "2019",
+          "score": 0.5317
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diet, Gut Microbiota, Cognition and Mood",
+      "status": "probable",
+      "best_score": 0.7652,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "Ketogenic Diet and Gut Microbiota: Exploring New Perspectives on Cognition and Mood.",
+          "pmid": "40238374",
+          "doi": "10.3390/foods14071215",
+          "year": "2025",
+          "score": 0.7652
+        }
+      ]
+    },
+    {
+      "legacy_title": "A Multi-Omics Approach to Intestinal Permeability during a Very Low-Calorie Ketogenic Diet",
+      "status": "not_found",
+      "best_score": 0.7296,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "A Multi-Omics Approach to Disclose Metabolic Pathways Impacting Intestinal Permeability in Obese Patients Undergoing Very Low Calorie Ketogenic Diet",
+          "pmid": "",
+          "doi": "10.3390/nu16132079",
+          "year": "2024",
+          "score": 0.7296
+        },
+        {
+          "source": "Crossref",
+          "title": "Metabolomic Profiling of Obese Patients with Altered Intestinal Permeability Undergoing a Very Low-Calorie Ketogenic Diet",
+          "pmid": "",
+          "doi": "10.3390/nu15245026",
+          "year": "2023",
+          "score": 0.625
+        },
+        {
+          "source": "Crossref",
+          "title": "Intestinal permeability during exercise (IPEX)",
+          "pmid": "",
+          "doi": "10.1186/isrctn33686980",
+          "year": "2013",
+          "score": 0.4819
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diet, Epilepsy and the Brain-Gut Axis",
+      "status": "not_found",
+      "best_score": 0.6315,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "KETOGENIC DIET THERAPY FOR EPILEPSY AND BRAIN CANCER",
+          "pmid": "",
+          "doi": "10.1055/s-2006-943597",
+          "year": "2006",
+          "score": 0.6315
+        },
+        {
+          "source": "Crossref",
+          "title": "Gut Microbiota, the Ketogenic Diet and Epilepsy",
+          "pmid": "",
+          "doi": "10.15844/pedneurbriefs-32-10",
+          "year": "2018",
+          "score": 0.6131
+        },
+        {
+          "source": "Crossref",
+          "title": "The Interplay Between Ketogenic Diet and the Microbiota-Gut-Brain Axis in Drug-Resistant Epilepsy: A Systematic Review",
+          "pmid": "",
+          "doi": "10.1093/nutrit/nuaf311",
+          "year": "2026",
+          "score": 0.5268
+        }
+      ]
+    },
+    {
+      "legacy_title": "Fecal Microbiota Transfer from Children on a Ketogenic Diet",
+      "status": "not_found",
+      "best_score": 0.6107,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Fecal Microbiota Transfer",
+          "pmid": "",
+          "doi": "10.3238/arztebl.2020.0031",
+          "year": "2020",
+          "score": 0.6107
+        },
+        {
+          "source": "Crossref",
+          "title": "Fecal transfers from children on the ketogenic diet mimic the anti-seizure effect in mice",
+          "pmid": "",
+          "doi": "10.1016/j.celrep.2023.113570",
+          "year": "2023",
+          "score": 0.5709
+        },
+        {
+          "source": "Crossref",
+          "title": "Fecal microbiota transplantation in children",
+          "pmid": "",
+          "doi": "10.26800/lv-144-supl1-14",
+          "year": "2022",
+          "score": 0.5299
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diet and Gut Microbiota in Neurological Disorders",
+      "status": "probable",
+      "best_score": 0.8007,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Gut Microbiota in Neurological Disorders",
+          "pmid": "",
+          "doi": "10.1007/s00005-019-00561-6",
+          "year": "2019",
+          "score": 0.8007
+        },
+        {
+          "source": "Crossref",
+          "title": "The potential impact of the ketogenic diet on gut microbiota in the context of neurological disorders",
+          "pmid": "",
+          "doi": "10.2478/ahem-2022-0019",
+          "year": "2022",
+          "score": 0.6919
+        },
+        {
+          "source": "Crossref",
+          "title": "Rewiring the brain: Ketogenic diet and gut microbiota in nervous system development",
+          "pmid": "",
+          "doi": "10.1016/j.nut.2026.113106",
+          "year": "2026",
+          "score": 0.5926
+        }
+      ]
+    },
+    {
+      "legacy_title": "Modified Ketogenic Diet and Gut Microbiota in Obesity",
+      "status": "not_found",
+      "best_score": 0.736,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Diet, Gut Microbiota and Obesity",
+          "pmid": "",
+          "doi": "10.15226/jnhfs.2015.00150",
+          "year": "2015",
+          "score": 0.736
+        },
+        {
+          "source": "Crossref",
+          "title": "Obesity, Diet and the Gut Microbiota",
+          "pmid": "",
+          "doi": "10.1007/s13668-015-0146-2",
+          "year": "2015",
+          "score": 0.6431
+        },
+        {
+          "source": "Crossref",
+          "title": "The Ketogenic Diet and the Gut Microbiome",
+          "pmid": "",
+          "doi": "10.1093/med/9780197501207.003.0021",
+          "year": "2022",
+          "score": 0.6312
+        }
+      ]
+    },
+    {
+      "legacy_title": "Influence of the Ketogenic Diet on Gut Microbiota",
+      "status": "probable",
+      "best_score": 0.8562,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Influence of diet on the gut microbiota",
+          "pmid": "",
+          "doi": "10.12775/jehs.2020.10.05.003",
+          "year": "2020",
+          "score": 0.8562
+        },
+        {
+          "source": "Crossref",
+          "title": "The Role of Ketogenic Diet in Gut Microbiota",
+          "pmid": "",
+          "doi": "10.54097/hset.v19i.2692",
+          "year": "2022",
+          "score": 0.7376
+        },
+        {
+          "source": "Crossref",
+          "title": "The Influence of Ketogenic Diet on Gut Microbiota: Potential Benefits, Risks and Indications",
+          "pmid": "",
+          "doi": "10.3390/nu15173680",
+          "year": "2023",
+          "score": 0.71
+        }
+      ]
+    },
+    {
+      "legacy_title": "Mitochondrial Epilepsy, Ketogenic Therapy and the Gut Microbiome",
+      "status": "not_found",
+      "best_score": 0.7075,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "The Ketogenic Diet and the Gut Microbiome",
+          "pmid": "",
+          "doi": "10.1093/med/9780197501207.003.0021",
+          "year": "2022",
+          "score": 0.7075
+        },
+        {
+          "source": "Crossref",
+          "title": "Interactions between the gut microbiome and ketogenic diet in refractory epilepsy",
+          "pmid": "",
+          "doi": "10.1016/bs.irn.2022.06.002",
+          "year": "2022",
+          "score": 0.464
+        },
+        {
+          "source": "Crossref",
+          "title": "Ketogenic Diet Impacts Epilepsy via Alterations in Gut Microbiome Composition: A Review",
+          "pmid": "",
+          "doi": "10.1007/s44411-025-00368-2",
+          "year": "2025",
+          "score": 0.4357
+        }
+      ]
+    },
+    {
+      "legacy_title": "Very Low-Calorie Ketogenic Diet and Microbiota in Obesity",
+      "status": "not_found",
+      "best_score": 0.7172,
+      "candidates": [
+        {
+          "source": "PubMed",
+          "title": "The Impact of a Very-Low-Calorie Ketogenic Diet in the Gut Microbiota Composition in Obesity.",
+          "pmid": "37375632",
+          "doi": "10.3390/nu15122728",
+          "year": "2023",
+          "score": 0.7172
+        },
+        {
+          "source": "Crossref",
+          "title": "Comparison of a very low-calorie-ketogenic diet with a standard low-calorie diet in the treatment of obesity",
+          "pmid": "",
+          "doi": "10.1007/s12020-014-0192-3",
+          "year": "2014",
+          "score": 0.5983
+        },
+        {
+          "source": "PubMed",
+          "title": "The Role of Short-Chain Fatty Acids in Mediating Very Low-Calorie Ketogenic Diet-Infant Gut Microbiota Relationships and Its Therapeutic Potential in Obesity.",
+          "pmid": "34835958",
+          "doi": "10.3390/nu13113702",
+          "year": "2021",
+          "score": 0.5857
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diet, Gut Microbiota and Neurodegenerative Disorders",
+      "status": "not_found",
+      "best_score": 0.7416,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Gut microbiota in neurodegenerative disorders",
+          "pmid": "",
+          "doi": "10.1016/j.jneuroim.2019.01.004",
+          "year": "2019",
+          "score": 0.7416
+        },
+        {
+          "source": "Crossref",
+          "title": "Microbiota-Brain-Gut Axis and Neurodegenerative Disorders",
+          "pmid": "",
+          "doi": "10.1016/b978-0-12-819265-8.00031-0",
+          "year": "2022",
+          "score": 0.6733
+        },
+        {
+          "source": "Crossref",
+          "title": "P.0637 The link between gut microbiota, ketogenic diet and anxiety disorders",
+          "pmid": "",
+          "doi": "10.1016/j.euroneuro.2021.10.602",
+          "year": "2021",
+          "score": 0.5942
+        }
+      ]
+    },
+    {
+      "legacy_title": "Very Low-Carbohydrate Ketogenic Diet, Gut Microbiota and Short-Chain Fatty Acids",
+      "status": "not_found",
+      "best_score": 0.5903,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Very low carbohydrate ketogenic diets and diabetes",
+          "pmid": "",
+          "doi": "10.1002/pdi.2284",
+          "year": "2020",
+          "score": 0.5903
+        },
+        {
+          "source": "Crossref",
+          "title": "Gut Microbiota, Short-Chain Fatty Acids, and Herbal Medicines",
+          "pmid": "",
+          "doi": "10.3389/fphar.2018.01354",
+          "year": "2018",
+          "score": 0.5835
+        },
+        {
+          "source": "Crossref",
+          "title": "Effect of a Very Low-Calorie Ketogenic Diet on Gut Microbiota and Fat Distribution",
+          "pmid": "",
+          "doi": "10.31525/ct1-nct04019431",
+          "year": "2019",
+          "score": 0.5709
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diet Intervention via the Gut Microbiota in Autism Spectrum Disorder",
+      "status": "not_found",
+      "best_score": 0.7284,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Ketogenic diet modifies the gut microbiota in a murine model of autism spectrum disorder",
+          "pmid": "",
+          "doi": "10.1186/s13229-016-0099-3",
+          "year": "2016",
+          "score": 0.7284
+        },
+        {
+          "source": "Crossref",
+          "title": "Gut Microbiota Alterations in Autism Spectrum Disorder",
+          "pmid": "",
+          "doi": "10.5152/turkarchpediatr.2024.24086",
+          "year": "2024",
+          "score": 0.6464
+        },
+        {
+          "source": "Crossref",
+          "title": "A Ketogenic Diet and the Treatment of Autism Spectrum Disorder",
+          "pmid": "",
+          "doi": "10.3389/fped.2021.650624",
+          "year": "2021",
+          "score": 0.605
+        }
+      ]
+    },
+    {
+      "legacy_title": "Very Low-Calorie, Ketogenic and Low-Carbohydrate Diets: Effects on the Gut Microbiota",
+      "status": "not_found",
+      "best_score": 0.7285,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "The Potential Roles of Very Low Calorie, Very Low Calorie Ketogenic Diets and Very Low Carbohydrate Diets on the Gut Microbiota Composition",
+          "pmid": "",
+          "doi": "10.3389/fendo.2021.662591",
+          "year": "2021",
+          "score": 0.7285
+        },
+        {
+          "source": "Crossref",
+          "title": "Corrigendum: The Potential Roles of Very Low Calorie, Very Low Calorie Ketogenic Diets and Very Low Carbohydrate Diets on the Gut Microbiota Composition",
+          "pmid": "",
+          "doi": "10.3389/fendo.2021.825790",
+          "year": "2021",
+          "score": 0.6992
+        },
+        {
+          "source": "Crossref",
+          "title": "Very Low Calorie Ketogenic Diet: What Effects on Lipid Metabolism?",
+          "pmid": "",
+          "doi": "10.1007/s13668-024-00556-6",
+          "year": "2024",
+          "score": 0.5655
+        }
+      ]
+    },
+    {
+      "legacy_title": "Impact of ketogenic diet and ketone diester supplementation on body composition and performance",
+      "status": "not_found",
+      "best_score": 0.6468,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Impact of ketogenic diet and ketone diester supplementation on body weight, blood glucose, and ketones in Sprague Dawley rats fed over two weeks",
+          "pmid": "",
+          "doi": "10.1016/j.fochms.2021.100029",
+          "year": "2021",
+          "score": 0.6468
+        },
+        {
+          "source": "Crossref",
+          "title": "Acute Ketogenic Diet and Ketone Ester Supplementation Impairs Race Walk Performance",
+          "pmid": "",
+          "doi": "10.1249/mss.0000000000002517",
+          "year": "2021",
+          "score": 0.6237
+        },
+        {
+          "source": "Crossref",
+          "title": "Effects of Ketogenic Diet on Body Composition and Performance in Soccer Players",
+          "pmid": "",
+          "doi": "10.31525/ct1-nct04078971",
+          "year": "2019",
+          "score": 0.6124
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Effects of Multiple Doses of a Medium-Chain Triglyceride Supplement",
+      "status": "not_found",
+      "best_score": 0.5775,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "The Ketogenic Effect of Medium-Chain Triacylglycerides",
+          "pmid": "",
+          "doi": "10.3389/fnut.2021.747284",
+          "year": "2021",
+          "score": 0.5775
+        },
+        {
+          "source": "PubMed",
+          "title": "Ketogenic Effects of Multiple Doses of a Medium Chain Triglycerides Enriched Ketogenic Formula in Healthy Men under the Ketogenic Diet: A Randomized, Double-Blinded, Placebo-Controlled Study.",
+          "pmid": "35334856",
+          "doi": "10.3390/nu14061199",
+          "year": "2022",
+          "score": 0.5483
+        },
+        {
+          "source": "Crossref",
+          "title": "The Medium‐Chain Triglyceride Ketogenic Diet",
+          "pmid": "",
+          "doi": "10.1002/9781118702772.ch9",
+          "year": "2012",
+          "score": 0.5076
+        }
+      ]
+    },
+    {
+      "legacy_title": "Tricaprylin Alone Increases Plasma Ketone Concentrations",
+      "status": "not_found",
+      "best_score": 0.6212,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Fluoxetine increases plasma clozapine concentrations,",
+          "pmid": "",
+          "doi": "10.2165/00128415-199807110-00008",
+          "year": "1998",
+          "score": 0.6212
+        },
+        {
+          "source": "Crossref",
+          "title": "Amiodarone increases plasma digoxin concentrations.",
+          "pmid": "",
+          "doi": "10.1136/bmj.282.6260.272",
+          "year": "1981",
+          "score": 0.6185
+        },
+        {
+          "source": "Crossref",
+          "title": "Amiodarone increases plasma digoxin concentrations.",
+          "pmid": "",
+          "doi": "10.1136/bmj.282.6276.1630-a",
+          "year": "1981",
+          "score": 0.6185
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketosis After Intake of Coconut Oil",
+      "status": "not_found",
+      "best_score": 0.5464,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Coconut Oil",
+          "pmid": "",
+          "doi": "10.1002/9780470114735.hawley04019",
+          "year": "2007",
+          "score": 0.5464
+        },
+        {
+          "source": "Crossref",
+          "title": "Coconut Oil",
+          "pmid": "",
+          "doi": "10.1007/978-0-387-92897-5_100202",
+          "year": "2013",
+          "score": 0.5464
+        },
+        {
+          "source": "Crossref",
+          "title": "Quantification of Ketosis After Intake of Coconut Oil and Caprylic Acid—With and Without Glucose—After a 12-hour Fast",
+          "pmid": "",
+          "doi": "10.31525/ct1-nct03904433",
+          "year": "2019",
+          "score": 0.5415
+        }
+      ]
+    },
+    {
+      "legacy_title": "Impact of the Ketogenic Diet on Body Fat in Athletes",
+      "status": "not_found",
+      "best_score": 0.6443,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Impact of the ketogenic diet on body fat, muscle mass, and exercise performance: a review",
+          "pmid": "",
+          "doi": "10.20463/pan.2023.0031",
+          "year": "2023",
+          "score": 0.6443
+        },
+        {
+          "source": "Crossref",
+          "title": "Impact of ketogenic diet on cardiovascular disease",
+          "pmid": "",
+          "doi": "10.1093/nutrit/nuad152",
+          "year": "2024",
+          "score": 0.5921
+        },
+        {
+          "source": "Crossref",
+          "title": "Effect of Ketogenic Diet on Body Composition, Athletic Fitness Factor in Taekwondo Athletes",
+          "pmid": "",
+          "doi": "10.47684/jcd.2019.12.21.4.164",
+          "year": "2019",
+          "score": 0.5902
+        }
+      ]
+    },
+    {
+      "legacy_title": "VLCKD Combined with Physical Interval Training",
+      "status": "not_found",
+      "best_score": 0.5289,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Digoxin Combined with Aerobic Interval Training Improved Cardiomyocyte Contractility",
+          "pmid": "",
+          "doi": "10.1055/a-1300-2583",
+          "year": "2021",
+          "score": 0.5289
+        },
+        {
+          "source": "Crossref",
+          "title": "Power Training Combined With Interval Treadmill Training in Cerebral Palsy: An RCT",
+          "pmid": "",
+          "doi": "10.1542/peds.2025-074493",
+          "year": "2026",
+          "score": 0.4874
+        },
+        {
+          "source": "PubMed",
+          "title": "Very low calorie ketogenic diet combined with physical interval training for preserving muscle mass during weight loss in sarcopenic obesity: A pilot study.",
+          "pmid": "36245515",
+          "doi": "10.3389/fnut.2022.955024",
+          "year": "2022",
+          "score": 0.4718
+        }
+      ]
+    },
+    {
+      "legacy_title": "Ketogenic Diet Combined with Moderate Aerobic Exercise",
+      "status": "not_found",
+      "best_score": 0.5527,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Moderate Intensity, Aerobic Exercise",
+          "pmid": "",
+          "doi": "10.1007/978-3-540-29807-6_2675",
+          "year": "2012",
+          "score": 0.5527
+        },
+        {
+          "source": "Crossref",
+          "title": "Moderate Intensity, Aerobic Exercise",
+          "pmid": "",
+          "doi": "10.1007/978-3-032-05988-8_2675",
+          "year": "2026",
+          "score": 0.5527
+        },
+        {
+          "source": "Crossref",
+          "title": "Effects of a Ketogenic Diet Combined with Aerobic Exercise on Muscle Fiber Types and Exercise Capacity in Tail-Suspended Mice",
+          "pmid": "",
+          "doi": "10.20944/preprints202501.1061.v1",
+          "year": "2025",
+          "score": 0.523
+        }
+      ]
+    },
+    {
+      "legacy_title": "Effects of 30 Days of Ketogenic Diet on Exercise Performance",
+      "status": "not_found",
+      "best_score": 0.5759,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Effects of 30 days of ketogenic diet on body composition, muscle strength, muscle area, metabolism, and performance in semi-professional soccer players",
+          "pmid": "",
+          "doi": "10.1186/s12970-021-00459-9",
+          "year": "2021",
+          "score": 0.5759
+        },
+        {
+          "source": "Crossref",
+          "title": "Effect of 30 days of ketogenic Mediterranean diet with phytoextracts on athletes' gut microbiome composition",
+          "pmid": "",
+          "doi": "10.3389/fnut.2022.979651",
+          "year": "2022",
+          "score": 0.5377
+        },
+        {
+          "source": "Crossref",
+          "title": "Low-carbohydrate, Ketogenic Diet Impairs Anaerobic Exercise Performance",
+          "pmid": "",
+          "doi": "10.1016/j.jand.2018.06.176",
+          "year": "2018",
+          "score": 0.5069
+        }
+      ]
+    },
+    {
+      "legacy_title": "Clinically Meaningful Improvements in Long COVID With a Ketogenic Metabolic Intervention",
+      "status": "not_found",
+      "best_score": 0.6021,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Clinically Meaningful Improvements in Long COVID Symptoms Following Ketogenic Metabolic Therapy Combined with Lifestyle Interventions&amp;#8212;A Clinical Case Report and Review of the Literature",
+          "pmid": "",
+          "doi": "10.4236/crcm.2025.148052",
+          "year": "2025",
+          "score": 0.6021
+        },
+        {
+          "source": "Crossref",
+          "title": "Clinically-meaningful improvements in therapy for unresectable NSCLC",
+          "pmid": "",
+          "doi": "10.1080/14737140.2022.2102483",
+          "year": "2022",
+          "score": 0.5192
+        },
+        {
+          "source": "Crossref",
+          "title": "Cariprazine Leads to Clinically Meaningful Improvements in Bipolar Symptoms",
+          "pmid": "",
+          "doi": "10.1177/1559897715593506",
+          "year": "2015",
+          "score": 0.4416
+        }
+      ]
+    },
+    {
+      "legacy_title": "Clinical efficacy of eucaloric ketogenic nutrition in COVID-19",
+      "status": "not_found",
+      "best_score": 0.6611,
+      "candidates": [
+        {
+          "source": "Crossref",
+          "title": "Clinical Efficacy of Eucaloric Ketogenic Nutrition in the COVID-19 Cytokine Storm: a Retrospective Analysis of Mortality and ICU Admission",
+          "pmid": "",
+          "doi": "10.21203/rs.3.rs-103541/v2",
+          "year": "2020",
+          "score": 0.6611
+        },
+        {
+          "source": "Crossref",
+          "title": "Clinical Efficacy of Eucaloric Ketogenic Nutrion in Covid-19-cytokine Storm: A Retrospective Analysis on Mortality and ICU Access",
+          "pmid": "",
+          "doi": "10.21203/rs.3.rs-103541/v1",
+          "year": "2020",
+          "score": 0.6251
+        },
+        {
+          "source": "Crossref",
+          "title": "Clinical efficacy of eucaloric ketogenic nutrition in the COVID-19 cytokine storm: A retrospective analysis of mortality and intensive care unit admission",
+          "pmid": "",
+          "doi": "10.1016/j.nut.2021.111236",
+          "year": "2021",
+          "score": 0.6244
+        }
+      ]
+    }
+  ]
+}
