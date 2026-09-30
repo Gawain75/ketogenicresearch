@@ -1,10 +1,38 @@
 {
-  "generated_at": "2026-09-30T03:29:36+00:00",
+  "generated_at": "2026-09-30T06:34:04+00:00",
   "curation_window_days": 365,
   "backfill_year": null,
-  "auto_approved_count": 3,
+  "auto_approved_count": 1,
   "excluded_count": 119,
   "records": [
+    {
+      "pmid": "42810956",
+      "title": "Ketone-targeting Approaches in Glioma.",
+      "authors": [
+        "Ioannou M",
+        "Schreck KC"
+      ],
+      "journal": "Hematology/oncology clinics of North America",
+      "date": "2026-09-29",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.hoc.2026.08.009",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42810956/",
+      "doi_url": "https://doi.org/10.1016/j.hoc.2026.08.009",
+      "pmc_url": "",
+      "areas": [
+        "Oncology & Cancer Metabolism"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-30",
+      "status": "new",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
     {
       "pmid": "42790707",
       "title": "Letter to the Editor: Methodological considerations when determining the minimum amount of dietary carbohydrates that prevents nutritional ketosis.",
@@ -31,38 +59,6 @@
       "status": "new",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "42807640",
-      "title": "Aging, the microbiota-gut-brain axis, and late-life epilepsy: a hypothesis-driven review.",
-      "authors": [
-        "Cao Y",
-        "Li H",
-        "Xu M",
-        "Teng Y"
-      ],
-      "journal": "Frontiers in molecular neuroscience",
-      "date": "2026-09-14",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3389/fnmol.2026.1861519",
-      "pmc": "PMC13617328",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42807640/",
-      "doi_url": "https://doi.org/10.3389/fnmol.2026.1861519",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13617328/",
-      "areas": [
-        "Epilepsy",
-        "Gut Microbiome",
-        "Longevity & Healthy Aging"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-30",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
     },
     {
       "pmid": "42799402",
@@ -3395,49 +3391,6 @@
       "curation_status": "excluded-low-confidence"
     },
     {
-      "pmid": "41631456",
-      "title": "Prostaglandin D2 Synthase Controls Schwann Cells Metabolism and Peripheral Myelin Homeostasis.",
-      "authors": [
-        "Trimarco A",
-        "Audano M",
-        "La Marca R",
-        "Pellegatta M",
-        "Canevazzi P",
-        "Cariello M",
-        "Falco M",
-        "Pedretti S",
-        "Imperato G",
-        "Cestaro A",
-        "Podini P",
-        "Dina G",
-        "Quattrini A",
-        "Massimino L",
-        "Caruso D",
-        "Mitro N",
-        "Taveggia C"
-      ],
-      "journal": "Glia",
-      "date": "2025-11-28",
-      "date_precision": "day",
-      "year": 2025,
-      "doi": "10.1002/glia.70137",
-      "pmc": "PMC12865749",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41631456/",
-      "doi_url": "https://doi.org/10.1002/glia.70137",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12865749/",
-      "areas": [
-        "Dyslipidemia & Lipid Metabolism"
-      ],
-      "category_confidence": 2,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-30",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
       "pmid": "41522662",
       "title": "Denosumab as a treatment for pediatric hypercalcemia-a multicenter experience.",
       "authors": [
@@ -3642,46 +3595,6 @@
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "41460648",
-      "title": "Proximal Tubule-Specific Genetic Deficiency of PPARα Worsens Systemic Lipid and Glucose Metabolism During Fasting.",
-      "authors": [
-        "Aomura D",
-        "Nimura T",
-        "Yamaka K",
-        "Yamada Y",
-        "Harada M",
-        "Nakajima T",
-        "Kimura T",
-        "Hashimoto K",
-        "Kanno H",
-        "Yanagita M",
-        "Gonzalez FJ",
-        "Tanaka N",
-        "Kamijo Y"
-      ],
-      "journal": "FASEB journal : official publication of the Federation of American Societies for Experimental Biology",
-      "date": "2025-11-14",
-      "date_precision": "day",
-      "year": 2025,
-      "doi": "10.1096/fj.202502975R",
-      "pmc": "PMC12747219",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41460648/",
-      "doi_url": "https://doi.org/10.1096/fj.202502975R",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12747219/",
-      "areas": [
-        "Diabetes & Glucose Metabolism",
-        "Dyslipidemia & Lipid Metabolism"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-30",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
     },
     {
       "pmid": "41241322",

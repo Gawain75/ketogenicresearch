@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-30T03:29:36+00:00",
+  "generated_at": "2026-09-30T06:34:04+00:00",
   "window_days": 90,
   "max_records": 100,
   "pubmed_records_fetched": 2000,
@@ -8,6 +8,32 @@
   "source": "PubMed / NCBI E-utilities",
   "count": 100,
   "publications": [
+    {
+      "pmid": "42810956",
+      "title": "Ketone-targeting Approaches in Glioma.",
+      "authors": [
+        "Ioannou M",
+        "Schreck KC"
+      ],
+      "journal": "Hematology/oncology clinics of North America",
+      "date": "2026-09-29",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.hoc.2026.08.009",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42810956/",
+      "doi_url": "https://doi.org/10.1016/j.hoc.2026.08.009",
+      "pmc_url": "",
+      "areas": [
+        "Oncology & Cancer Metabolism"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-09-30",
+      "status": "new"
+    },
     {
       "pmid": "42800643",
       "title": "Neuroenergetic Flexibility in the Aging Brain: Cellular Mechanisms and Diet-Induced Metabolic Switching.",
@@ -3181,40 +3207,8 @@
       "source": "PubMed",
       "first_seen": "2026-09-30",
       "status": "indexed"
-    },
-    {
-      "pmid": "42600679",
-      "title": "Serum β-hydroxybutyrate and diagnostic interpretability of cardiac 18F-fluorodeoxyglucose positron emission tomography in suspected cardiac sarcoidosis.",
-      "authors": [
-        "Hart H",
-        "Chen M",
-        "Vohra S",
-        "Ippolito P",
-        "Bimal T",
-        "Patel KK",
-        "Agarwal V"
-      ],
-      "journal": "Journal of nuclear cardiology : official publication of the American Society of Nuclear Cardiology",
-      "date": "2026-08-14",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.nuclcard.2026.102945",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42600679/",
-      "doi_url": "https://doi.org/10.1016/j.nuclcard.2026.102945",
-      "pmc_url": "",
-      "areas": [
-        "Cardiovascular Health",
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-30",
-      "status": "indexed"
     }
   ],
-  "verified_at": "2026-09-30T03:29:36+00:00",
-  "content_updated_at": "2026-09-30T03:29:36+00:00"
+  "verified_at": "2026-09-30T06:34:04+00:00",
+  "content_updated_at": "2026-09-30T06:34:04+00:00"
 }
