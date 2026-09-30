@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-30T07:03:16+00:00",
+  "generated_at": "2026-09-30T07:11:26+00:00",
   "current_year": 2026,
   "previous_year": 2025,
   "scope_note": {
@@ -7,8 +7,8 @@
     "it": "I conteggi si riferiscono alle pubblicazioni uniche indicizzate nella Biblioteca Scientifica di Ketogenic Research, non a tutte le pubblicazioni esistenti a livello mondiale."
   },
   "global": {
-    "total_unique": 8960,
-    "known_year": 8805,
+    "total_unique": 8998,
+    "known_year": 8843,
     "unknown_year": 155,
     "first_year": 1921,
     "by_year": {
@@ -81,25 +81,25 @@
       "2005": 59,
       "2006": 68,
       "2007": 93,
-      "2008": 132,
+      "2008": 131,
       "2009": 105,
       "2010": 108,
       "2011": 159,
       "2012": 127,
-      "2013": 152,
-      "2014": 204,
+      "2013": 154,
+      "2014": 205,
       "2015": 190,
       "2016": 237,
       "2017": 279,
       "2018": 329,
       "2019": 411,
-      "2020": 521,
-      "2021": 534,
-      "2022": 538,
-      "2023": 551,
-      "2024": 663,
-      "2025": 787,
-      "2026": 697
+      "2020": 523,
+      "2021": 535,
+      "2022": 544,
+      "2023": 556,
+      "2024": 669,
+      "2025": 794,
+      "2026": 706
     }
   },
   "clinical_area_count": 53,
@@ -184,8 +184,8 @@
         "it": "Malattia di Alzheimer"
       },
       "type": "clinical",
-      "total_unique": 169,
-      "known_year": 169,
+      "total_unique": 170,
+      "known_year": 170,
       "unknown_year": 0,
       "by_year": {
         "1988": 1,
@@ -211,7 +211,7 @@
         "2023": 17,
         "2024": 20,
         "2025": 17,
-        "2026": 19
+        "2026": 20
       }
     },
     {
@@ -320,8 +320,8 @@
         "it": "Salute cardiovascolare"
       },
       "type": "clinical",
-      "total_unique": 578,
-      "known_year": 569,
+      "total_unique": 579,
+      "known_year": 570,
       "unknown_year": 9,
       "by_year": {
         "1947": 1,
@@ -390,7 +390,7 @@
         "2021": 44,
         "2022": 32,
         "2023": 42,
-        "2024": 58,
+        "2024": 59,
         "2025": 57,
         "2026": 63
       }
@@ -608,7 +608,7 @@
         "2005": 17,
         "2006": 21,
         "2007": 21,
-        "2008": 30,
+        "2008": 29,
         "2009": 23,
         "2010": 25,
         "2011": 47,
@@ -624,7 +624,7 @@
         "2021": 90,
         "2022": 82,
         "2023": 84,
-        "2024": 96,
+        "2024": 97,
         "2025": 113,
         "2026": 126
       }
@@ -650,8 +650,8 @@
         "it": "Dislipidemie e metabolismo lipidico"
       },
       "type": "clinical",
-      "total_unique": 1121,
-      "known_year": 1111,
+      "total_unique": 1122,
+      "known_year": 1112,
       "unknown_year": 10,
       "by_year": {
         "1936": 1,
@@ -715,7 +715,7 @@
         "2010": 15,
         "2011": 11,
         "2012": 15,
-        "2013": 17,
+        "2013": 18,
         "2014": 15,
         "2015": 26,
         "2016": 25,
@@ -738,8 +738,8 @@
         "it": "Disturbi della nutrizione e dell’alimentazione"
       },
       "type": "clinical",
-      "total_unique": 27,
-      "known_year": 24,
+      "total_unique": 28,
+      "known_year": 25,
       "unknown_year": 3,
       "by_year": {
         "1954": 1,
@@ -753,7 +753,7 @@
         "2023": 2,
         "2024": 3,
         "2025": 3,
-        "2026": 4
+        "2026": 5
       }
     },
     {
@@ -778,8 +778,8 @@
         "it": "Epilessia"
       },
       "type": "clinical",
-      "total_unique": 2477,
-      "known_year": 2463,
+      "total_unique": 2476,
+      "known_year": 2462,
       "unknown_year": 14,
       "by_year": {
         "1921": 2,
@@ -827,7 +827,7 @@
         "2005": 33,
         "2006": 37,
         "2007": 51,
-        "2008": 84,
+        "2008": 83,
         "2009": 52,
         "2010": 53,
         "2011": 83,
@@ -855,8 +855,8 @@
         "it": "Sport, esercizio e performance"
       },
       "type": "clinical",
-      "total_unique": 453,
-      "known_year": 449,
+      "total_unique": 454,
+      "known_year": 450,
       "unknown_year": 4,
       "by_year": {
         "1968": 1,
@@ -909,7 +909,7 @@
         "2023": 35,
         "2024": 25,
         "2025": 43,
-        "2026": 49
+        "2026": 50
       }
     },
     {
@@ -1031,8 +1031,8 @@
         "it": "Sindrome da deficit di GLUT1"
       },
       "type": "clinical",
-      "total_unique": 203,
-      "known_year": 203,
+      "total_unique": 202,
+      "known_year": 202,
       "unknown_year": 0,
       "by_year": {
         "1996": 1,
@@ -1044,7 +1044,7 @@
         "2005": 2,
         "2006": 3,
         "2007": 5,
-        "2008": 6,
+        "2008": 5,
         "2009": 7,
         "2010": 3,
         "2011": 9,
@@ -1072,8 +1072,8 @@
         "it": "Microbiota intestinale"
       },
       "type": "clinical",
-      "total_unique": 280,
-      "known_year": 262,
+      "total_unique": 281,
+      "known_year": 263,
       "unknown_year": 18,
       "by_year": {
         "1979": 1,
@@ -1091,7 +1091,7 @@
         "2023": 26,
         "2024": 30,
         "2025": 44,
-        "2026": 54
+        "2026": 55
       }
     },
     {
@@ -1185,8 +1185,8 @@
         "it": "Keto rash / Prurigo pigmentosa"
       },
       "type": "clinical",
-      "total_unique": 31,
-      "known_year": 31,
+      "total_unique": 32,
+      "known_year": 32,
       "unknown_year": 0,
       "by_year": {
         "2013": 1,
@@ -1197,7 +1197,7 @@
         "2023": 3,
         "2024": 2,
         "2025": 9,
-        "2026": 4
+        "2026": 5
       }
     },
     {
@@ -1443,8 +1443,8 @@
         "it": "Obesità"
       },
       "type": "clinical",
-      "total_unique": 901,
-      "known_year": 891,
+      "total_unique": 904,
+      "known_year": 894,
       "unknown_year": 10,
       "by_year": {
         "1965": 1,
@@ -1494,7 +1494,7 @@
         "2011": 13,
         "2012": 6,
         "2013": 12,
-        "2014": 15,
+        "2014": 16,
         "2015": 12,
         "2016": 19,
         "2017": 21,
@@ -1505,8 +1505,8 @@
         "2022": 74,
         "2023": 59,
         "2024": 82,
-        "2025": 87,
-        "2026": 84
+        "2025": 88,
+        "2026": 85
       }
     },
     {
@@ -1516,8 +1516,8 @@
         "it": "Oncologia e metabolismo tumorale"
       },
       "type": "clinical",
-      "total_unique": 774,
-      "known_year": 764,
+      "total_unique": 776,
+      "known_year": 766,
       "unknown_year": 10,
       "by_year": {
         "1955": 1,
@@ -1572,10 +1572,10 @@
         "2020": 58,
         "2021": 50,
         "2022": 61,
-        "2023": 52,
+        "2023": 53,
         "2024": 71,
         "2025": 90,
-        "2026": 79
+        "2026": 80
       }
     },
     {
@@ -1678,8 +1678,8 @@
         "it": "Psichiatria e salute mentale"
       },
       "type": "clinical",
-      "total_unique": 220,
-      "known_year": 209,
+      "total_unique": 221,
+      "known_year": 210,
       "unknown_year": 11,
       "by_year": {
         "1961": 1,
@@ -1714,7 +1714,7 @@
         "2022": 9,
         "2023": 14,
         "2024": 28,
-        "2025": 38,
+        "2025": 39,
         "2026": 43
       }
     },
