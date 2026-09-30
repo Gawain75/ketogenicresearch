@@ -1,8 +1,8 @@
 // Ketogenic Research — V70 recovery script
 
 const KR_LIBRARY_STATS = {
-  publications: 8937,
-  clinicalAreas: 53
+  publications: 4010,
+  clinicalAreas: 54
 };
 
 let KR_LATEST_DATA = null;
@@ -42,6 +42,7 @@ function setLang(lang) {
     localStorage.setItem('kr-lang', safeLang);
   } catch (error) {}
 
+  populateObesityGlp1Keto();
   applyLibraryFilters();
   updateLibraryCounters();
   renderLatestEvidence();
@@ -113,6 +114,140 @@ function evidenceMatches(rawValue, selected) {
   return norm === selected;
 }
 
+function topicMatches(rawText, selected) {
+  if (selected === 'all') return true;
+  const text = (rawText || '').toLowerCase();
+
+  if (selected === 'glp1-keto') {
+    const glpTerms = [
+      'glp-1',
+      'glp1',
+      'glucagon-like peptide-1',
+      'semaglutide',
+      'liraglutide',
+      'dulaglutide',
+      'exenatide',
+      'lixisenatide',
+      'tirzepatide',
+      'retatrutide',
+      'survodutide',
+      'orforglipron',
+      'cagrisema'
+    ];
+
+    const ketoTerms = [
+      'ketogenic',
+      'ketosis',
+      'ketone',
+      'ketones',
+      'ketonemia',
+      'ketonaemia',
+      'beta-hydroxybutyrate',
+      'β-hydroxybutyrate',
+      'b-hydroxybutyrate',
+      'bhb',
+      'vlckd',
+      'vlekt',
+      'low-energy ketogenic',
+      'very low-calorie ketogenic',
+      'very-low-calorie ketogenic',
+      'keto diet'
+    ];
+
+    return (
+      glpTerms.some(term => text.includes(term)) &&
+      ketoTerms.some(term => text.includes(term))
+    );
+  }
+
+  return true;
+}
+
+function isGlp1KetoIntersection(paper) {
+  const titleEl = paper.querySelector('h4');
+  const text = [
+    paper.dataset.search || '',
+    titleEl?.dataset?.en || '',
+    titleEl?.dataset?.it || '',
+    titleEl?.textContent || ''
+  ].join(' ').toLowerCase();
+
+  const glpTerms = [
+    'glp-1', 'glp1', 'glp-1ra', 'glp1ra', 'glp-1 receptor agonist',
+    'glucagon-like peptide-1', 'incretin',
+    'semaglutide', 'liraglutide', 'dulaglutide', 'exenatide',
+    'lixisenatide', 'tirzepatide', 'retatrutide', 'survodutide',
+    'orforglipron', 'cagrisema'
+  ];
+
+  const ketoTerms = [
+    'ketogenic', 'ketosis', 'ketone', 'ketones',
+    'ketonemia', 'ketonaemia', 'beta-hydroxybutyrate',
+    'β-hydroxybutyrate', 'b-hydroxybutyrate', 'bhb',
+    'ketone ester', 'exogenous ketone',
+    'vlckd', 'vlekt', 'low-energy ketogenic',
+    'very low-calorie ketogenic', 'very-low-calorie ketogenic',
+    'keto diet'
+  ];
+
+  return (
+    glpTerms.some(term => text.includes(term)) &&
+    ketoTerms.some(term => text.includes(term))
+  );
+}
+
+function populateObesityGlp1Keto() {
+  const obesity = document.getElementById('obesity');
+  const host = document.getElementById('obesityGlp1KetoList');
+  const count = document.getElementById('obesityGlp1KetoCount');
+  const empty = document.getElementById('obesityGlp1KetoEmpty');
+  if (!obesity || !host) return;
+
+  const papers = Array.from(
+    obesity.querySelectorAll('.folder-curated > article.folder-paper')
+  );
+
+  const matches = papers.filter(isGlp1KetoIntersection);
+  host.innerHTML = '';
+
+  const lang = currentLang();
+
+  matches.forEach(paper => {
+    const card = document.createElement('article');
+    card.className = 'topic-subfolder-paper';
+
+    const sourceTitle = paper.querySelector('h4');
+    if (sourceTitle) {
+      const h4 = document.createElement('h4');
+      const en = sourceTitle.dataset.en || sourceTitle.textContent || '';
+      const it = sourceTitle.dataset.it || en;
+      h4.dataset.en = en;
+      h4.dataset.it = it;
+      h4.innerHTML = lang === 'it' ? it : en;
+      card.appendChild(h4);
+    }
+
+    const meta = paper.querySelector('p');
+    if (meta) {
+      const p = meta.cloneNode(true);
+      if (p.dataset.en || p.dataset.it) {
+        p.innerHTML = lang === 'it'
+          ? (p.dataset.it || p.dataset.en || p.textContent)
+          : (p.dataset.en || p.textContent);
+      }
+      card.appendChild(p);
+    }
+
+    const links = paper.querySelector('.paper-links');
+    if (links) card.appendChild(links.cloneNode(true));
+
+    host.appendChild(card);
+  });
+
+  if (count) count.textContent = String(matches.length);
+  if (empty) empty.hidden = matches.length > 0;
+}
+
 function publicationIdentity(paper) {
   const h4 = paper.querySelector('h4');
   const rawTitle = h4?.dataset?.en || h4?.textContent || '';
@@ -137,11 +272,13 @@ function applyLibraryFilters() {
 
   const searchEl = document.getElementById('librarySearch');
   const evidenceEl = document.getElementById('evidenceFilter');
+  const topicEl = document.getElementById('topicFilter');
   const yearEl = document.getElementById('yearFilter');
   const areaEl = document.getElementById('areaFilter');
 
   const q = (searchEl?.value || '').trim().toLowerCase();
   const ev = evidenceEl?.value || 'all';
+  const topic = topicEl?.value || 'all';
   const yr = yearEl?.value || 'all';
   const area = areaEl?.value || 'all';
 
@@ -173,6 +310,7 @@ function applyLibraryFilters() {
 
       const qOk = !q || blob.includes(q);
       const evOk = evidenceMatches(paper.dataset.evidence, ev);
+      const topicOk = topicMatches(blob, topic);
 
       let yrOk = true;
       if (yr !== 'all') {
@@ -186,7 +324,7 @@ function applyLibraryFilters() {
         }
       }
 
-      const show = qOk && evOk && yrOk;
+      const show = qOk && evOk && topicOk && yrOk;
       paper.hidden = !show;
 
       if (show) {
@@ -202,7 +340,7 @@ function applyLibraryFilters() {
 
     if (showFolder) {
       visibleFolders++;
-      if (q || ev !== 'all' || yr !== 'all' || area !== 'all') {
+      if (q || ev !== 'all' || topic !== 'all' || yr !== 'all' || area !== 'all') {
         folder.open = true;
       }
     }
@@ -225,7 +363,8 @@ function applyLibraryFilters() {
 }
 
 function initLibrary() {
-  ['librarySearch', 'evidenceFilter', 'yearFilter', 'areaFilter'].forEach(id => {
+  populateObesityGlp1Keto();
+  ['librarySearch', 'evidenceFilter', 'topicFilter', 'yearFilter', 'areaFilter'].forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
 
@@ -240,11 +379,13 @@ function initLibrary() {
     clear.addEventListener('click', () => {
       const search = document.getElementById('librarySearch');
       const evidence = document.getElementById('evidenceFilter');
+      const topic = document.getElementById('topicFilter');
       const year = document.getElementById('yearFilter');
       const area = document.getElementById('areaFilter');
 
       if (search) search.value = '';
       if (evidence) evidence.value = 'all';
+      if (topic) topic.value = 'all';
       if (year) year.value = 'all';
       if (area) area.value = 'all';
 
@@ -256,17 +397,11 @@ function initLibrary() {
 }
 
 function updateLibraryCounters() {
-  let publications = KR_LIBRARY_STATS.publications;
-  let clinicalAreas = KR_LIBRARY_STATS.clinicalAreas;
-
-  const papers = [...document.querySelectorAll('article.folder-paper')];
-  const folders = document.querySelectorAll('details.library-folder');
-
-  if (papers.length) {
-    const keys = new Set(papers.map(publicationIdentity));
-    publications = keys.size;
-  }
-  if (folders.length) clinicalAreas = folders.length;
+  // Global counters use the canonical synchronized values only.
+  // Do not recount Library cards from the DOM, because the same publication
+  // can appear in more than one clinical area and this causes visible jumps.
+  const publications = KR_LIBRARY_STATS.publications;
+  const clinicalAreas = KR_LIBRARY_STATS.clinicalAreas;
 
   const locale = currentLang() === 'it' ? 'it-IT' : 'en-US';
 
@@ -448,7 +583,7 @@ async function loadLatestEvidence() {
 
   try {
     const response = await fetch(
-      'latest-publications.json?v=70',
+      'latest-publications.json?v=72',
       { cache: 'no-store' }
     );
 
@@ -479,18 +614,11 @@ async function loadLatestEvidence() {
 
     const contentUpdated = document.getElementById('latestContentUpdated');
     if (contentUpdated) {
-      const publicationDates = (KR_LATEST_DATA.publications || [])
-        .map(p => String(p.date || '').slice(0, 10))
-        .filter(value => /^\d{4}-\d{2}-\d{2}$/.test(value))
-        .sort();
-
-      const mostRecentPublicationDate =
-        publicationDates.length
-          ? publicationDates[publicationDates.length - 1]
-          : '';
-
-      contentUpdated.textContent = mostRecentPublicationDate
-        ? latestDateLabel(mostRecentPublicationDate)
+      const stamp =
+        KR_LATEST_DATA.content_updated_at ||
+        KR_LATEST_DATA.generated_at;
+      contentUpdated.textContent = stamp
+        ? latestDateLabel(stamp.slice(0, 10))
         : '—';
     }
 
@@ -577,7 +705,7 @@ async function syncLiteratureUpdateDate() {
 
   try {
     const response = await fetch(
-      'latest-publications.json?v=70',
+      'latest-publications.json?v=72',
       { cache: 'no-store' }
     );
 
@@ -586,9 +714,12 @@ async function syncLiteratureUpdateDate() {
     }
 
     const data = await response.json();
-    if (!data.generated_at) return;
+    const literatureUpdatedAt =
+      data.content_updated_at ||
+      data.generated_at;
+    if (!literatureUpdatedAt) return;
 
-    const date = new Date(data.generated_at);
+    const date = new Date(literatureUpdatedAt);
     if (Number.isNaN(date.getTime())) return;
 
     const label = new Intl.DateTimeFormat(
@@ -601,7 +732,7 @@ async function syncLiteratureUpdateDate() {
 
     targets.forEach(el => {
       el.textContent = label;
-      el.setAttribute('datetime', data.generated_at);
+      el.setAttribute('datetime', literatureUpdatedAt);
     });
 
   } catch (error) {
@@ -691,3 +822,10 @@ window.addEventListener(
   openLibraryAreaFromHash
 );
 
+// Test reversibile: razionale meccanicistico Alzheimer
+if (document.getElementById('alzheimers-disease')) {
+  const krAlzheimerMechanisms = document.createElement('script');
+  krAlzheimerMechanisms.src = 'alzheimer-mechanisms.js?v=1';
+  krAlzheimerMechanisms.defer = true;
+  document.head.appendChild(krAlzheimerMechanisms);
+}
