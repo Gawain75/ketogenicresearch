@@ -1,42 +1,11 @@
 {
-  "generated_at": "2026-09-30T14:42:34+00:00",
+  "generated_at": "2026-10-01T03:30:10+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
-  "auto_approved_count": 1,
-  "excluded_count": 121,
+  "auto_approved_count": 2,
+  "excluded_count": 120,
   "records": [
-    {
-      "pmid": "42812005",
-      "title": "Ketogenic diet fails to mitigate seizures and neuroinflammatory responses in a mouse model of virus-induced epilepsy.",
-      "authors": [
-        "Meili CH",
-        "Allen K",
-        "Doty DJ",
-        "Del Fiol S",
-        "DePaula-Silva AB"
-      ],
-      "journal": "Epilepsia",
-      "date": "2026-09-30",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1002/epi.70509",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42812005/",
-      "doi_url": "https://doi.org/10.1002/epi.70509",
-      "pmc_url": "",
-      "areas": [
-        "Epilepsy"
-      ],
-      "category_confidence": 13,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-30",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
     {
       "pmid": "42790707",
       "title": "Letter to the Editor: Methodological considerations when determining the minimum amount of dietary carbohydrates that prevents nutritional ketosis.",
@@ -63,6 +32,62 @@
       "status": "new",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "42812893",
+      "title": "Mitohormesis linking metabolic dysfunction and neurodegeneration: implications for dementia and therapeutic strategies.",
+      "authors": [
+        "Otoda T",
+        "Nakajima H",
+        "Takayama T"
+      ],
+      "journal": "Frontiers in molecular neuroscience",
+      "date": "2026-09-15",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3389/fnmol.2026.1892506",
+      "pmc": "PMC13621133",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42812893/",
+      "doi_url": "https://doi.org/10.3389/fnmol.2026.1892506",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13621133/",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 2,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-10-01",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "42812287",
+      "title": "Enhancing readiness for exposure and response prevention in obsessive compulsive disorder: ketogenic metabolic therapy as a candidate readiness adjunct.",
+      "authors": [
+        "Laurent N"
+      ],
+      "journal": "Frontiers in psychology",
+      "date": "2026-09-15",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3389/fpsyg.2026.1770306",
+      "pmc": "PMC13619587",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42812287/",
+      "doi_url": "https://doi.org/10.3389/fpsyg.2026.1770306",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13619587/",
+      "areas": [
+        "Candida & Mycobiome"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
+      "source": "PubMed",
+      "first_seen": "2026-10-01",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
     },
     {
       "pmid": "42799402",
@@ -4090,38 +4115,6 @@
       "category_confidence": 1,
       "evidence_type": "Case report / case series",
       "evidence_type_it": "Case report / case series",
-      "source": "PubMed",
-      "first_seen": "2026-09-30",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "41043268",
-      "title": "Quantifying endogenous and tracer-derived ketone bodies using a dual-label UHPLC-MS/MS method.",
-      "authors": [
-        "Adámez-Rodríguez S",
-        "Queathem ED",
-        "Hayir A",
-        "Marina ML",
-        "Castro-Puyana M",
-        "Puchalska P"
-      ],
-      "journal": "Talanta",
-      "date": "2025-09-30",
-      "date_precision": "day",
-      "year": 2025,
-      "doi": "10.1016/j.talanta.2025.128919",
-      "pmc": "PMC12704222",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41043268/",
-      "doi_url": "https://doi.org/10.1016/j.talanta.2025.128919",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12704222/",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 1,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
       "source": "PubMed",
       "first_seen": "2026-09-30",
       "status": "indexed",
