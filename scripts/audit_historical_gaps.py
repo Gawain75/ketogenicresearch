@@ -136,7 +136,26 @@ def main():
                 unusable += 1
                 continue
 
-            if not V.U.relevant(article):
+            # `relevant` has existed in both one-argument and two-argument
+            # forms across Library/update_latest revisions. Support both so the
+            # historical audit stays compatible with the version checked out
+            # by the workflow. Some two-argument implementations also return
+            # (is_relevant, reason) rather than a bare bool.
+            try:
+                relevance = V.U.relevant(article, citation)
+            except TypeError as exc:
+                # Fall back only for the known signature mismatch. Do not hide
+                # unrelated TypeErrors raised inside the relevance function.
+                if "positional argument" not in str(exc):
+                    raise
+                relevance = V.U.relevant(article)
+
+            is_relevant = (
+                bool(relevance[0])
+                if isinstance(relevance, tuple)
+                else bool(relevance)
+            )
+            if not is_relevant:
                 continue
 
             rec = V.record_from_item(item)
