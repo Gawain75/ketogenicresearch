@@ -1,0 +1,97 @@
+name: Set Health Icons syringe for GLP1
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix_glp1_icon:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Replace GLP1 icon
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 <<'PY'
+          from pathlib import Path
+          from urllib.request import urlopen
+          from bs4 import BeautifulSoup
+
+          url = "https://raw.githubusercontent.com/resolvetosavelives/healthicons/main/public/icons/svg/outline-24px/syringe.svg"
+          raw = urlopen(url, timeout=30).read().decode("utf-8")
+          official = BeautifulSoup(raw, "html.parser").find("svg")
+          if official is None:
+              raise SystemExit("STOP: Health Icons syringe SVG not available")
+          official["aria-hidden"] = "true"
+
+          # Current Library
+          p = Path("library.html")
+          soup = BeautifulSoup(p.read_text(encoding="utf-8"), "html.parser")
+          folder = soup.find("details", id="glp1-keto-metabolic-endocrine")
+          if folder is None:
+              raise SystemExit("STOP: GLP-1 folder not found")
+          summary = folder.find("summary")
+          icon = summary.find("span", class_=lambda c: c and "folder-icon" in c)
+          if icon is None:
+              raise SystemExit("STOP: GLP-1 icon container not found")
+          icon.clear()
+          icon.append(official)
+          icon["data-icon-source"] = "healthicons"
+          icon["data-icon-name"] = "syringe"
+          icon["data-icon-style"] = "outline-24px"
+          p.write_text(str(soup), encoding="utf-8")
+
+          # Future daily regeneration
+          p = Path("scripts/maintain_obesity_glp1_keto.py")
+          src = p.read_text(encoding="utf-8")
+          start = src.find("    svg = BeautifulSoup(")
+          if start < 0:
+              raise SystemExit("STOP: generator SVG block start not found")
+          end_marker = '    ).find("svg")'
+          end = src.find(end_marker, start)
+          if end < 0:
+              raise SystemExit("STOP: generator SVG block end not found")
+          end += len(end_marker)
+
+          svg_text = str(official)
+          replacement = (
+              "    svg = BeautifulSoup(\\n"
+              "        '''\\n"
+              + "        " + svg_text + "\\n"
+              "        ''',\\n"
+              '        "html.parser",\\n'
+              '    ).find("svg")'
+          )
+          src = src[:start] + replacement + src[end:]
+          p.write_text(src, encoding="utf-8")
+          PY
+
+      - name: Verify only intended files changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          changed="$(git diff --name-only)"
+          printf '%s\n' "$changed"
+          test "$(printf '%s\n' "$changed" | sed '/^$/d' | wc -l)" -eq 2
+          printf '%s\n' "$changed" | grep -qx 'library.html'
+          printf '%s\n' "$changed" | grep -qx 'scripts/maintain_obesity_glp1_keto.py'
+          grep -q 'data-icon-source="healthicons"' library.html
+          grep -q 'data-icon-name="syringe"' library.html
+
+      - name: Commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add library.html scripts/maintain_obesity_glp1_keto.py
+          git commit -m "Use Health Icons syringe for GLP1"
+          git push origin main
