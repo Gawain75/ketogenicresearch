@@ -1,0 +1,94 @@
+name: Fix GLP1 icon and full update date
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ketogenicresearch-content-write
+  cancel-in-progress: false
+
+jobs:
+  fix-glp1-date:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Apply only the two fixes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 <<'PY'
+          from pathlib import Path
+
+          p = Path("script.js")
+          s = p.read_text(encoding="utf-8")
+          old = "      {\n        month: 'short',\n        year: 'numeric'\n      }\n"
+          new = "      {\n        day: 'numeric',\n        month: 'short',\n        year: 'numeric'\n      }\n"
+          if s.count(old) != 1:
+              raise SystemExit(f"STOP: expected exactly 1 date formatter, found {s.count(old)}")
+          p.write_text(s.replace(old, new, 1), encoding="utf-8")
+
+          p = Path("scripts/maintain_obesity_glp1_keto.py")
+          s = p.read_text(encoding="utf-8")
+          old_svg = '''        <svg aria-hidden="true" viewBox="0 0 24 24">
+                    <circle cx="6" cy="6" r="2"></circle>
+                    <path d="M6 8v3c0 2.2 1.8 4 4 4h2"></path>
+                    <path d="M16 4s3.5 3.8 3.5 6.5a3.5 3.5 0 0 1-7 0C12.5 7.8 16 4 16 4Z"></path>
+                    <path d="M10 18h8"></path>
+                    <path d="M14 15v6"></path>
+                  </svg>'''
+          new_svg = '''        <svg aria-hidden="true" viewBox="0 0 24 24">
+                    <path d="M6 4v7m-2-4h4M5 4h2M5 11h2l1 3"></path>
+                    <path d="M12 16c0-3 3-5.5 3-8 0 2.5 3 5 3 8a3 3 0 0 1-6 0Z"></path>
+                    <path d="M9 18h2m-1-3v6"></path>
+                  </svg>'''
+          if s.count(old_svg) != 1:
+              raise SystemExit(f"STOP: expected exactly 1 old GLP-1 icon, found {s.count(old_svg)}")
+          p.write_text(s.replace(old_svg, new_svg, 1), encoding="utf-8")
+
+          p = Path("library.html")
+          s = p.read_text(encoding="utf-8")
+          if s.count("script.js?v=71") != 1:
+              raise SystemExit(f"STOP: expected exactly 1 script.js?v=71 reference, found {s.count('script.js?v=71')}")
+          p.write_text(s.replace("script.js?v=71", "script.js?v=72", 1), encoding="utf-8")
+          PY
+
+      - name: Safety check
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q "day: 'numeric'" script.js
+          grep -q 'M6 4v7m-2-4h4M5 4h2M5 11h2l1 3' scripts/maintain_obesity_glp1_keto.py
+          grep -q 'script.js?v=72' library.html
+          changed="$(git diff --name-only)"
+          printf '%s\n' "$changed"
+          unexpected="$(printf '%s\n' "$changed" | grep -Ev '^(script\.js|library\.html|scripts/maintain_obesity_glp1_keto\.py)$' || true)"
+          if [ -n "$unexpected" ]; then
+            echo "STOP: unexpected files changed:"
+            echo "$unexpected"
+            exit 1
+          fi
+          count="$(printf '%s\n' "$changed" | sed '/^$/d' | wc -l)"
+          if [ "$count" -ne 3 ]; then
+            echo "STOP: expected exactly 3 changed files, found $count"
+            exit 1
+          fi
+
+      - name: Commit and push
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add script.js library.html scripts/maintain_obesity_glp1_keto.py
+          git commit -m "Fix GLP1 icon and show full update date"
+          git pull --rebase origin main
+          git push origin main
