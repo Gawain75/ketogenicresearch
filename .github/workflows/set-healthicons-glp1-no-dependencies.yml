@@ -1,0 +1,100 @@
+name: Set official Health Icons syringe for GLP1
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix_glp1_icon:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Download official Health Icons syringe
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --silent --show-error \
+            https://raw.githubusercontent.com/resolvetosavelives/healthicons/main/public/icons/svg/outline/devices/syringe.svg \
+            --output /tmp/healthicons-syringe.svg
+          grep -q '<svg' /tmp/healthicons-syringe.svg
+          grep -q '</svg>' /tmp/healthicons-syringe.svg
+
+      - name: Replace only GLP1 icon
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 <<'PY'
+          from pathlib import Path
+          import re
+
+          svg = Path("/tmp/healthicons-syringe.svg").read_text(encoding="utf-8").strip()
+          svg = re.sub(r"<\?xml[^>]*>\s*", "", svg, count=1)
+          svg = re.sub(r"<svg\b", '<svg aria-hidden="true"', svg, count=1)
+
+          # Current Library: only the SVG in the GLP-1 icon container.
+          p = Path("library.html")
+          html = p.read_text(encoding="utf-8")
+          pat = re.compile(
+              r'(<details\b[^>]*id="glp1-keto-metabolic-endocrine"[^>]*>'
+              r'<summary><span class="folder-icon glp1-keto-icon"[^>]*>)'
+              r'<svg\b.*?</svg>'
+              r'(</span>)',
+              re.S,
+          )
+          found = list(pat.finditer(html))
+          if len(found) != 1:
+              raise SystemExit(f"STOP: GLP-1 SVG blocks in library.html = {len(found)}, expected 1")
+          html = pat.sub(lambda m: m.group(1) + svg + m.group(2), html, count=1)
+          p.write_text(html, encoding="utf-8")
+
+          # Future generator: there is exactly one BeautifulSoup SVG assignment in this file.
+          p = Path("scripts/maintain_obesity_glp1_keto.py")
+          src = p.read_text(encoding="utf-8")
+          if src.count("    svg = BeautifulSoup(") != 1:
+              raise SystemExit("STOP: unexpected generator structure")
+          start = src.index("    svg = BeautifulSoup(")
+          marker = '    ).find("svg")'
+          end = src.find(marker, start)
+          if end < 0:
+              raise SystemExit("STOP: generator SVG assignment end not found")
+          end += len(marker)
+
+          replacement = (
+              "    svg = BeautifulSoup(\n"
+              "        '''\n"
+              + svg
+              + "\n        ''',\n"
+              '        "html.parser",\n'
+              '    ).find("svg")'
+          )
+          src = src[:start] + replacement + src[end:]
+          p.write_text(src, encoding="utf-8")
+          PY
+
+      - name: Verify exact scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          changed="$(git diff --name-only)"
+          printf '%s\n' "$changed"
+          test "$(printf '%s\n' "$changed" | sed '/^$/d' | wc -l)" -eq 2
+          printf '%s\n' "$changed" | grep -qx 'library.html'
+          printf '%s\n' "$changed" | grep -qx 'scripts/maintain_obesity_glp1_keto.py'
+          grep -q 'id="glp1-keto-metabolic-endocrine"' library.html
+
+      - name: Commit and push
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add library.html scripts/maintain_obesity_glp1_keto.py
+          git commit -m "Use official Health Icons syringe for GLP1"
+          git push origin main
