@@ -725,6 +725,7 @@ async function syncLiteratureUpdateDate() {
     const label = new Intl.DateTimeFormat(
       currentLang() === 'it' ? 'it-IT' : 'en-GB',
       {
+        day: 'numeric',
         month: 'short',
         year: 'numeric'
       }

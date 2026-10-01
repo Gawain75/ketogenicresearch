@@ -275,11 +275,9 @@ def make_folder(soup: BeautifulSoup, matches: list[tuple[str, object]]):
     svg = BeautifulSoup(
         '''
         <svg aria-hidden="true" viewBox="0 0 24 24">
-          <circle cx="6" cy="6" r="2"></circle>
-          <path d="M6 8v3c0 2.2 1.8 4 4 4h2"></path>
-          <path d="M16 4s3.5 3.8 3.5 6.5a3.5 3.5 0 0 1-7 0C12.5 7.8 16 4 16 4Z"></path>
-          <path d="M10 18h8"></path>
-          <path d="M14 15v6"></path>
+          <path d="M6 4v7m-2-4h4M5 4h2M5 11h2l1 3"></path>
+          <path d="M12 16c0-3 3-5.5 3-8 0 2.5 3 5 3 8a3 3 0 0 1-6 0Z"></path>
+          <path d="M9 18h2m-1-3v6"></path>
         </svg>
         ''',
         "html.parser",
