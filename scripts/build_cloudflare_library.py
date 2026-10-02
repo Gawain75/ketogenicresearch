@@ -274,6 +274,32 @@ def main():
         src=x.read_text(encoding="utf-8",errors="ignore")
         m=re.search(r"<title>(.*?)</title>",src,re.I|re.S)
         pages.append({"path":x.name,"title":htmlmod.unescape(re.sub(r"<[^>]+>","",m.group(1)).strip()) if m else x.stem})
+    # Snapshot the site's existing navigation so the Admin starts from the real menu,
+    # not from an empty configuration. This also makes hide/delete/order operations reversible.
+    menu=[]
+    index_src=(ROOT/"index.html").read_text(encoding="utf-8",errors="ignore")
+    nav_m=re.search(r'<nav[^>]*class="[^"]*site-nav[^"]*"[^>]*>(.*?)</nav>',index_src,re.I|re.S)
+    if nav_m:
+        nav_html=nav_m.group(1)
+        more_m=re.search(r'<div[^>]*class="[^"]*nav-submenu[^"]*"[^>]*>(.*?)</div>',nav_html,re.I|re.S)
+        more_html=more_m.group(1) if more_m else ""
+        direct_html=re.sub(r'<details[^>]*class="[^"]*nav-more[^"]*"[^>]*>.*?</details>','',nav_html,flags=re.I|re.S)
+        def add_links(fragment,group,start):
+            n=start
+            for am in re.finditer(r'<a\b([^>]*)>(.*?)</a>',fragment,re.I|re.S):
+                attrs,body=am.group(1),am.group(2)
+                hm=re.search(r'href="([^"]+)"',attrs,re.I)
+                if not hm: continue
+                href=htmlmod.unescape(hm.group(1)).strip()
+                if href and not re.match(r'^(?:https?:|mailto:|#)',href,re.I): href='/'+href.lstrip('/')
+                enm=re.search(r'data-en="([^"]*)"',attrs,re.I); itm=re.search(r'data-it="([^"]*)"',attrs,re.I)
+                text=htmlmod.unescape(re.sub(r'<[^>]+>','',body)).strip()
+                menu.append({"label_en":htmlmod.unescape(enm.group(1)) if enm else text,"label_it":htmlmod.unescape(itm.group(1)) if itm else text,"href":href,"group":group,"visible":True,"order":n})
+                n+=10
+            return n
+        order=add_links(direct_html,"main",10)
+        add_links(more_html,"more",order)
+
     articles=[]
     for x in sorted((ROOT/"articles").glob("*.html"),reverse=True):
         src=x.read_text(encoding="utf-8",errors="ignore")
@@ -307,6 +333,7 @@ def main():
         shutil.copy2(source, DIST / name)
 
     (DIST / "_admin-pages.json").write_text(json.dumps(pages,ensure_ascii=False),encoding="utf-8")
+    (DIST / "_admin-menu.json").write_text(json.dumps(menu,ensure_ascii=False),encoding="utf-8")
     (DIST / "_admin-articles.json").write_text(json.dumps(articles,ensure_ascii=False),encoding="utf-8")
     (DIST / "_admin-library.json").write_text(json.dumps(studies,ensure_ascii=False),encoding="utf-8")
     source_dir=DIST/"_admin-source"; (source_dir/"articles").mkdir(parents=True,exist_ok=True)
