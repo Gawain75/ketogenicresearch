@@ -213,9 +213,62 @@ async function exportUsersXlsx(env) {
   return new Response(upstream.body, { status: 200, headers });
 }
 
+
+const SITE_ADMIN_CONFIG_KEY = "site-admin:config:v1";
+const SITE_ADMIN_PAGE_PREFIX = "site-admin:page:";
+
+function safeSlug(v) { return String(v || "").toLowerCase().trim().replace(/[^a-z0-9-]+/g,"-").replace(/^-+|-+$/g,"").slice(0,80); }
+function siteAdminJson(data,status=200){ return new Response(JSON.stringify(data),{status,headers:{"Content-Type":"application/json; charset=utf-8","Cache-Control":"no-store"}}); }
+async function requireSiteAdmin(request, env) {
+  const cookies=parseCookies(request);
+  const session=await verifySession(cookies.kr_session || "", env.SESSION_SECRET);
+  if(!session) return {ok:false,response:redirectToLogin(request,"login")};
+  if(!isAdminSession(session,env)) return {ok:false,response:new Response("Accesso non autorizzato.",{status:403,headers:{"Cache-Control":"no-store"}})};
+  return {ok:true,session};
+}
+async function getSiteAdminConfig(env){
+  if(!env.SITE_ADMIN) throw new Error("SITE_ADMIN binding non configurato.");
+  return (await env.SITE_ADMIN.get(SITE_ADMIN_CONFIG_KEY,"json")) || {menu:[]};
+}
+async function handleSiteAdminApi(request,env,url){
+  const auth=await requireSiteAdmin(request,env); if(!auth.ok) return auth.response;
+  if(!env.SITE_ADMIN) return siteAdminJson({error:"SITE_ADMIN binding non configurato."},500);
+  try {
+    if(url.pathname==="/api/site-admin/config") {
+      if(request.method==="GET") return siteAdminJson(await getSiteAdminConfig(env));
+      if(request.method==="PUT") { const b=await request.json().catch(()=>({})); const cfg={menu:Array.isArray(b.menu)?b.menu:[]}; await env.SITE_ADMIN.put(SITE_ADMIN_CONFIG_KEY,JSON.stringify(cfg)); return siteAdminJson({ok:true,config:cfg}); }
+    }
+    if(url.pathname==="/api/site-admin/pages") {
+      if(request.method==="GET") { const list=await env.SITE_ADMIN.list({prefix:SITE_ADMIN_PAGE_PREFIX}); const pages=[]; for(const k of list.keys){const p=await env.SITE_ADMIN.get(k.name,"json"); if(p) pages.push(p);} pages.sort((a,b)=>String(a.title||"").localeCompare(String(b.title||""))); return siteAdminJson({pages}); }
+      if(request.method==="POST") { const b=await request.json().catch(()=>({})); const slug=safeSlug(b.slug||b.title); if(!slug) return siteAdminJson({error:"Slug non valido."},400); const key=SITE_ADMIN_PAGE_PREFIX+slug; if(await env.SITE_ADMIN.get(key)) return siteAdminJson({error:"Slug già esistente."},409); const now=new Date().toISOString(); const page={slug,title:String(b.title||slug).slice(0,160),description:String(b.description||"").slice(0,300),body_html:String(b.body_html||""),status:b.status==="published"?"published":"draft",created_at:now,updated_at:now}; await env.SITE_ADMIN.put(key,JSON.stringify(page)); return siteAdminJson({ok:true,page}); }
+    }
+    const m=url.pathname.match(/^\/api\/site-admin\/pages\/([a-z0-9-]+)$/);
+    if(m){ const key=SITE_ADMIN_PAGE_PREFIX+safeSlug(m[1]);
+      if(request.method==="GET"){const page=await env.SITE_ADMIN.get(key,"json"); return page?siteAdminJson({page}):siteAdminJson({error:"Pagina non trovata."},404);}
+      if(request.method==="PUT"){const old=await env.SITE_ADMIN.get(key,"json"); if(!old)return siteAdminJson({error:"Pagina non trovata."},404); const b=await request.json().catch(()=>({})); const page={...old,title:String(b.title??old.title).slice(0,160),description:String(b.description??old.description).slice(0,300),body_html:String(b.body_html??old.body_html),status:b.status==="published"?"published":"draft",updated_at:new Date().toISOString()}; await env.SITE_ADMIN.put(key,JSON.stringify(page)); return siteAdminJson({ok:true,page});}
+      if(request.method==="DELETE"){await env.SITE_ADMIN.delete(key); return siteAdminJson({ok:true});}
+    }
+    return siteAdminJson({error:"Endpoint non trovato."},404);
+  } catch(e){return siteAdminJson({error:e?.message||"Site Admin error."},500);}
+}
+function cmsPageHtml(page){ return `<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${String(page.title||"").replace(/[<>&]/g,"")}</title><meta name="description" content="${String(page.description||"").replace(/["<>]/g,"")}"><link rel="stylesheet" href="/style.css"></head><body><main style="max-width:980px;margin:50px auto;padding:24px"><h1>${page.title||""}</h1>${page.body_html||""}</main></body></html>`; }
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    if (url.pathname.startsWith("/api/site-admin/")) return handleSiteAdminApi(request, env, url);
+
+    if ((url.pathname === "/admin" || url.pathname === "/admin/") && request.method === "GET") {
+      const auth = await requireSiteAdmin(request, env); if (!auth.ok) return auth.response;
+      const assetUrl = new URL("/admin.html", request.url);
+      const r = await env.ASSETS.fetch(new Request(assetUrl, request));
+      const h = new Headers(r.headers); h.set("Cache-Control","private, no-store"); h.set("X-Robots-Tag","noindex, noarchive,nofollow");
+      return new Response(r.body,{status:r.status,statusText:r.statusText,headers:h});
+    }
+
+    const cms = url.pathname.match(/^\/p\/([a-z0-9-]+)\/?$/);
+    if (cms && env.SITE_ADMIN) { const page=await env.SITE_ADMIN.get(SITE_ADMIN_PAGE_PREFIX+safeSlug(cms[1]),"json"); if(!page||page.status!=="published") return new Response("Not found",{status:404}); return new Response(cmsPageHtml(page),{headers:{"Content-Type":"text/html; charset=utf-8","Cache-Control":"public, max-age=60"}}); }
 
     if (!env.SESSION_SECRET) {
       return new Response("SESSION_SECRET non configurato su Cloudflare.", {
@@ -319,7 +372,7 @@ export default {
     }
 
     if (
-      (url.pathname === "/admin" || url.pathname === "/admin/" || url.pathname === "/admin/export-users") &&
+      (url.pathname === "/admin/export-users") &&
       request.method === "GET"
     ) {
       const cookies = parseCookies(request);
