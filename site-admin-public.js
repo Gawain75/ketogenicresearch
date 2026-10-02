@@ -1,10 +1,17 @@
 (async function(){
   const base="https://library.ketogenicresearch.org";
+  function currentLang(){try{return localStorage.getItem('kr-lang')||document.documentElement.lang||'en'}catch(e){return document.documentElement.lang||'en'}}
   try{
     const cfg=await fetch(base+"/api/site-public/config",{cache:"no-store"}).then(r=>r.ok?r.json():null);
     if(cfg&&Array.isArray(cfg.menu)&&cfg.menu.length){
       const nav=document.querySelector('.site-nav');
-      if(nav){ const direct=cfg.menu.filter(x=>x.visible!==false&&x.group!=="more").sort((a,b)=>(a.order||0)-(b.order||0)); const links=[...nav.children].filter(x=>x.tagName==='A'); direct.forEach((x,i)=>{if(links[i]){links[i].href=x.href;links[i].textContent=x.label_en||x.label_it||x.href;}}); }
+      if(nav){
+        const items=cfg.menu.filter(x=>x.visible!==false).sort((a,b)=>(a.order||0)-(b.order||0));
+        const direct=items.filter(x=>x.group!=="more"), more=items.filter(x=>x.group==="more");
+        nav.innerHTML='';
+        direct.forEach(x=>{const a=document.createElement('a');a.href=x.href;a.dataset.en=x.label_en||x.label_it||x.href;a.dataset.it=x.label_it||x.label_en||x.href;a.textContent=currentLang()==='it'?a.dataset.it:a.dataset.en;nav.appendChild(a)});
+        if(more.length){const d=document.createElement('details');d.className='nav-more';const s=document.createElement('summary');const sp=document.createElement('span');sp.dataset.en='More';sp.dataset.it='Altro';sp.textContent=currentLang()==='it'?'Altro':'More';const caret=document.createElement('span');caret.className='nav-caret';caret.setAttribute('aria-hidden','true');caret.textContent='▾';s.append(sp,caret);const sub=document.createElement('div');sub.className='nav-submenu';more.forEach(x=>{const a=document.createElement('a');a.href=x.href;a.dataset.en=x.label_en||x.label_it||x.href;a.dataset.it=x.label_it||x.label_en||x.href;a.textContent=currentLang()==='it'?a.dataset.it:a.dataset.en;sub.appendChild(a)});d.append(s,sub);nav.appendChild(d)}
+      }
     }
   }catch(e){}
   try{
