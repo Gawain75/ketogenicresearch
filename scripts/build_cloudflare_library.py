@@ -4,6 +4,7 @@ import re
 import shutil
 import json
 import html as htmlmod
+from datetime import datetime, timezone
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "cloudflare-dist"
@@ -336,6 +337,20 @@ def main():
     (DIST / "_admin-menu.json").write_text(json.dumps(menu,ensure_ascii=False),encoding="utf-8")
     (DIST / "_admin-articles.json").write_text(json.dumps(articles,ensure_ascii=False),encoding="utf-8")
     (DIST / "_admin-library.json").write_text(json.dumps(studies,ensure_ascii=False),encoding="utf-8")
+    # Safe appearance manifest: existing clinical-area identifiers only. The admin can
+    # override their icons, never names/slugs/classification rules.
+    clinical_areas=[]
+    select_m=re.search(r'<select[^>]+id="areaFilter"[^>]*>(.*?)</select>',original_library_html,re.I|re.S)
+    icon_by_label={}
+    for im in re.finditer(r'<span[^>]+class="[^"]*kr-area-icon[^"]*"[^>]+data-icon-for="([^"]+)"[^>]*>\s*<img[^>]+src="([^"]+)"',original_library_html,re.I|re.S):
+        icon_by_label[htmlmod.unescape(im.group(1)).strip()]=htmlmod.unescape(im.group(2))
+    if select_m:
+        for om in re.finditer(r'<option\b([^>]*)>(.*?)</option>',select_m.group(1),re.I|re.S):
+            attrs=om.group(1); vm=re.search(r'value="([^"]+)"',attrs,re.I)
+            if not vm or vm.group(1)=="all": continue
+            em=re.search(r'data-en="([^"]+)"',attrs,re.I); label=htmlmod.unescape(em.group(1) if em else re.sub(r'<[^>]+>','',om.group(2))).strip()
+            clinical_areas.append({"slug":htmlmod.unescape(vm.group(1)).strip(),"label":label,"icon":icon_by_label.get(label,"")})
+    (DIST / "_admin-status.json").write_text(json.dumps({"generated_at":datetime.now(timezone.utc).isoformat(),"clinical_areas":clinical_areas},ensure_ascii=False),encoding="utf-8")
     source_dir=DIST/"_admin-source"; (source_dir/"articles").mkdir(parents=True,exist_ok=True)
     for x in page_files: (source_dir/(x.name+".txt")).write_text(x.read_text(encoding="utf-8",errors="ignore"),encoding="utf-8")
     for x in (ROOT/"articles").glob("*.html"): (source_dir/"articles"/(x.name+".txt")).write_text(x.read_text(encoding="utf-8",errors="ignore"),encoding="utf-8")
