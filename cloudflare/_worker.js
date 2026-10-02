@@ -95,7 +95,7 @@ function clearCookie(name) {
 }
 
 function redirectToLogin(request, reason = "login") {
-  const u = new URL("/library-access", request.url);
+  const u = new URL("/library-access.html", request.url);
   u.searchParams.set("reason", reason);
   return Response.redirect(u.toString(), 302);
 }
