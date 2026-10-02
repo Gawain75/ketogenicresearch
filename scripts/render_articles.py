@@ -221,6 +221,7 @@ def article_page(meta, en_title, en_html, it_title, it_html, slug, description):
 <link href="../favicon.svg" rel="icon">
 <link href="../styles.css?v=115" rel="stylesheet">
 <link href="../articles.css?v=1" rel="stylesheet">
+<script src="https://library.ketogenicresearch.org/site-admin-public.js" defer></script>
 </head>
 <body class="article-page">
 <header class="header">
@@ -342,6 +343,7 @@ def index_page(cards):
 <link href="favicon.svg" rel="icon">
 <link href="styles.css?v=115" rel="stylesheet">
 <link href="articles.css?v=1" rel="stylesheet">
+<script src="https://library.ketogenicresearch.org/site-admin-public.js" defer></script>
 </head>
 <body class="article-index-page">
 <header class="header">
