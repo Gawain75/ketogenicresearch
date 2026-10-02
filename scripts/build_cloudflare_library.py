@@ -286,6 +286,12 @@ def main():
             raise SystemExit(f"Required Cloudflare asset missing: cloudflare/{name}")
         shutil.copy2(source, DIST / name)
 
+    # Raw copies are deliberately stored with .txt extensions. Cloudflare Pages
+    # canonicalizes .html asset URLs; serving these raw copies through the Worker
+    # prevents redirect loops for the login and admin routes.
+    shutil.copy2(CF / "library-access.html", DIST / "_raw-library-access.txt")
+    shutil.copy2(ROOT / "admin.html", DIST / "_raw-admin.txt")
+
     checks = {
         "library.html": ["Scientific Library", "script.js?v=71", "styles.css", "data-kr-library-chunk"],
         "library-access.html": ["forgotPassword", "Complete your Library profile"],
