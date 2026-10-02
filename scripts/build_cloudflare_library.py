@@ -274,6 +274,12 @@ def main():
             raise SystemExit(f"Required Library asset missing: {name}")
         shutil.copy2(source, DIST / name)
 
+    for name in ["admin.html", "admin.js", "admin.css"]:
+        source = ROOT / name
+        if not source.exists():
+            raise SystemExit(f"Required admin asset missing: {name}")
+        shutil.copy2(source, DIST / name)
+
     for name in ["library-access.html", "reset-password.html", "_worker.js", "index.html"]:
         source = CF / name
         if not source.exists():
