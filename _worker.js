@@ -205,9 +205,134 @@ async function handleDraftApi(request, env) {
 }
 
 
+// --- Site Admin CMS -------------------------------------------------------
+const SITE_ADMIN_CONFIG_KEY = "site-admin:config:v1";
+const SITE_ADMIN_PAGE_PREFIX = "site-admin:page:";
+
+const DEFAULT_SITE_ADMIN_CONFIG = {
+  menu: [
+    { id: "home", label_en: "Home", label_it: "Home", href: "index.html", visible: true, group: "main", order: 10 },
+    { id: "research", label_en: "Research", label_it: "Ricerca", href: "research.html", visible: true, group: "main", order: 20 },
+    { id: "library", label_en: "Scientific Library", label_it: "Biblioteca Scientifica", href: "https://library.ketogenicresearch.org/library", visible: true, group: "main", order: 30 },
+    { id: "latest", label_en: "Latest Evidence", label_it: "Ultime evidenze", href: "latest.html", visible: true, group: "main", order: 40 },
+    { id: "trends", label_en: "Evidence Trends", label_it: "Andamento evidenze", href: "evidence-trends.html", visible: true, group: "main", order: 50 },
+    { id: "articles", label_en: "Articles", label_it: "Articoli", href: "articles.html", visible: true, group: "main", order: 60 },
+    { id: "director", label_en: "Scientific Direction", label_it: "Direzione scientifica", href: "director.html", visible: true, group: "main", order: 70 },
+    { id: "methodology", label_en: "Methodology", label_it: "Metodologia", href: "methodology.html", visible: true, group: "more", order: 80 },
+    { id: "contact", label_en: "Contact", label_it: "Contatti", href: "contact.html", visible: true, group: "more", order: 90 }
+  ]
+};
+
+function escHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function safeSlug(value) {
+  return String(value || "").toLowerCase().trim().replace(/[^a-z0-9-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 80);
+}
+function safeHref(value) {
+  const v = String(value || "").trim();
+  if (!v) return "#";
+  if (/^(https?:\/\/|\/|[a-z0-9._-]+(?:\.html)?(?:[?#].*)?$)/i.test(v)) return v;
+  return "#";
+}
+async function getSiteAdminConfig(env) {
+  if (!env.SITE_ADMIN) return structuredClone(DEFAULT_SITE_ADMIN_CONFIG);
+  const stored = await env.SITE_ADMIN.get(SITE_ADMIN_CONFIG_KEY, "json");
+  return stored && Array.isArray(stored.menu) ? stored : structuredClone(DEFAULT_SITE_ADMIN_CONFIG);
+}
+function renderMenu(config) {
+  const rows = (config?.menu || []).filter(x => x && x.visible !== false).sort((a,b) => Number(a.order||0)-Number(b.order||0));
+  const link = x => `<a data-en="${escHtml(x.label_en || x.label_it || "Page")}" data-it="${escHtml(x.label_it || x.label_en || "Pagina")}" href="${escHtml(safeHref(x.href))}">${escHtml(x.label_en || x.label_it || "Page")}</a>`;
+  const main = rows.filter(x => x.group !== "more").map(link).join("\n");
+  const moreRows = rows.filter(x => x.group === "more");
+  const more = moreRows.length ? `<details class="nav-more"><summary><span data-en="More" data-it="Altro">More</span><span aria-hidden="true" class="nav-caret">▾</span></summary><div class="nav-submenu">${moreRows.map(link).join("\n")}</div></details>` : "";
+  return main + "\n" + more;
+}
+async function applyManagedMenu(response, env) {
+  const type = response.headers.get("Content-Type") || "";
+  if (!type.includes("text/html") || !env.SITE_ADMIN) return response;
+  const config = await getSiteAdminConfig(env);
+  return new HTMLRewriter().on("nav.site-nav", { element(el) { el.setInnerContent(renderMenu(config), { html: true }); } }).transform(response);
+}
+function cmsPageHtml(page, config) {
+  const title = escHtml(page.title || "");
+  const body = String(page.body_html || "");
+  const description = escHtml(page.description || "");
+  const nav = renderMenu(config);
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title} | Ketogenic Research Hub</title><meta name="description" content="${description}"><link rel="stylesheet" href="style.css"></head><body><header class="header"><div class="wrap nav"><a aria-label="Ketogenic Research Hub" class="brand" href="/index.html"><img alt="Ketogenic Research Hub" class="site-logo" src="/logo-ketogenic-research.png"></a><nav aria-label="Primary navigation" class="site-nav">${nav}</nav><div class="actions"><div class="lang"><button class="active" data-lang="en">EN</button><button data-lang="it">IT</button></div><button aria-label="Menu" class="menu">☰</button></div></div></header><main><section class="section"><div class="wrap"><article class="cms-page"><h1>${title}</h1>${body}</article></div></section></main><script src="/script.js"></script></body></html>`;
+}
+async function handleSiteAdminApi(request, env, url) {
+  if (!env.SITE_ADMIN) return jsonResponse({ error: "SITE_ADMIN KV binding is not configured." }, 503);
+  const admin = await requireReviewAdmin(request, env);
+  if (!admin.ok) return admin.response;
+  try {
+    if (url.pathname === "/api/site-admin/config") {
+      if (request.method === "GET") return withRefreshedCookies(jsonResponse(await getSiteAdminConfig(env)), admin.refreshed);
+      if (request.method === "PUT") {
+        const body = await request.json().catch(() => null);
+        if (!body || !Array.isArray(body.menu)) return jsonResponse({ error: "Invalid menu configuration." }, 400);
+        const menu = body.menu.slice(0,100).map((x,i) => ({
+          id: String(x.id || `item-${i}`).slice(0,80), label_en: String(x.label_en || "").slice(0,100), label_it: String(x.label_it || "").slice(0,100),
+          href: safeHref(x.href), visible: x.visible !== false, group: x.group === "more" ? "more" : "main", order: Number.isFinite(Number(x.order)) ? Number(x.order) : (i+1)*10
+        }));
+        const current = await getSiteAdminConfig(env); current.menu = menu;
+        await env.SITE_ADMIN.put(SITE_ADMIN_CONFIG_KEY, JSON.stringify(current));
+        return withRefreshedCookies(jsonResponse({ ok: true, config: current }), admin.refreshed);
+      }
+      return jsonResponse({ error: "Method not allowed." }, 405);
+    }
+    if (url.pathname === "/api/site-admin/pages") {
+      if (request.method === "GET") {
+        const list = await env.SITE_ADMIN.list({ prefix: SITE_ADMIN_PAGE_PREFIX });
+        const pages = [];
+        for (const key of list.keys) { const p = await env.SITE_ADMIN.get(key.name, "json"); if (p) pages.push(p); }
+        pages.sort((a,b) => String(a.title||"").localeCompare(String(b.title||"")));
+        return withRefreshedCookies(jsonResponse({ pages }), admin.refreshed);
+      }
+      if (request.method === "POST") {
+        const b = await request.json().catch(() => ({})); const slug = safeSlug(b.slug || b.title);
+        if (!slug) return jsonResponse({ error: "A valid slug is required." }, 400);
+        const page = { slug, title: String(b.title||slug).slice(0,160), description: String(b.description||"").slice(0,300), body_html: String(b.body_html||""), status: b.status === "published" ? "published" : "draft", updated_at: new Date().toISOString() };
+        await env.SITE_ADMIN.put(SITE_ADMIN_PAGE_PREFIX + slug, JSON.stringify(page));
+        return withRefreshedCookies(jsonResponse({ ok:true, page }), admin.refreshed);
+      }
+      return jsonResponse({ error: "Method not allowed." }, 405);
+    }
+    const m = url.pathname.match(/^\/api\/site-admin\/pages\/([a-z0-9-]+)$/);
+    if (m) {
+      const slug = safeSlug(m[1]); const key = SITE_ADMIN_PAGE_PREFIX + slug;
+      if (request.method === "GET") { const page = await env.SITE_ADMIN.get(key,"json"); return withRefreshedCookies(page ? jsonResponse({page}) : jsonResponse({error:"Page not found."},404), admin.refreshed); }
+      if (request.method === "PUT") { const old = await env.SITE_ADMIN.get(key,"json"); if (!old) return jsonResponse({error:"Page not found."},404); const b=await request.json().catch(()=>({})); const page={...old,title:String(b.title??old.title).slice(0,160),description:String(b.description??old.description).slice(0,300),body_html:String(b.body_html??old.body_html),status:b.status==="published"?"published":"draft",updated_at:new Date().toISOString()}; await env.SITE_ADMIN.put(key,JSON.stringify(page)); return withRefreshedCookies(jsonResponse({ok:true,page}),admin.refreshed); }
+      if (request.method === "DELETE") { await env.SITE_ADMIN.delete(key); return withRefreshedCookies(jsonResponse({ok:true}),admin.refreshed); }
+      return jsonResponse({ error: "Method not allowed." }, 405);
+    }
+    return jsonResponse({ error: "Unknown Site Admin endpoint." }, 404);
+  } catch (err) { return withRefreshedCookies(jsonResponse({ error: err?.message || "Site Admin error." }, 500), admin.refreshed); }
+}
+// --- /Site Admin CMS ------------------------------------------------------
+
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    const siteAdminPath = url.pathname === "/admin" || url.pathname === "/admin/" || url.pathname === "/admin.html";
+    const siteAdminApi = url.pathname.startsWith("/api/site-admin/");
+    if (siteAdminApi) return handleSiteAdminApi(request, env, url);
+    if (siteAdminPath) {
+      const admin = await requireReviewAdmin(request, env);
+      if (!admin.ok) return admin.response;
+      const assetUrl = new URL("/admin.html", request.url);
+      const assetResponse = await env.ASSETS.fetch(new Request(assetUrl, request));
+      const headers = new Headers(assetResponse.headers); headers.set("Cache-Control","private, no-store"); headers.set("X-Robots-Tag","noindex, noarchive,nofollow");
+      return withRefreshedCookies(new Response(assetResponse.body,{status:assetResponse.status,statusText:assetResponse.statusText,headers}),admin.refreshed);
+    }
+    const cmsMatch = url.pathname.match(/^\/p\/([a-z0-9-]+)\/?$/);
+    if (cmsMatch && env.SITE_ADMIN) {
+      const page = await env.SITE_ADMIN.get(SITE_ADMIN_PAGE_PREFIX + safeSlug(cmsMatch[1]), "json");
+      if (!page || page.status !== "published") return new Response("Not found", {status:404});
+      const config = await getSiteAdminConfig(env);
+      return new Response(cmsPageHtml(page, config), {headers:{"Content-Type":"text/html; charset=utf-8","Cache-Control":"public, max-age=60"}});
+    }
     const protectedLibraryPath = url.pathname === "/library.html" || url.pathname === "/library" || url.pathname === "/library/";
     const protectedReviewPath = url.pathname === "/review-studio.html" || url.pathname === "/review-studio" || url.pathname === "/review-studio/";
     const reviewApi = url.pathname.startsWith("/api/review/");
@@ -238,7 +363,7 @@ export default {
       return withRefreshedCookies(new Response(assetResponse.body, { status: assetResponse.status, statusText: assetResponse.statusText, headers }), admin.refreshed);
     }
 
-    if (!protectedLibraryPath) return env.ASSETS.fetch(request);
+    if (!protectedLibraryPath) return applyManagedMenu(await env.ASSETS.fetch(request), env);
 
     const auth = await authenticatedUser(request);
     if (!auth.user) return redirectToLogin(request, "login");
@@ -263,9 +388,10 @@ export default {
     const headers = new Headers(assetResponse.headers);
     headers.set("Cache-Control", "private, no-store");
     headers.set("X-Robots-Tag", "noindex, noarchive, nofollow");
-    return withRefreshedCookies(new Response(assetResponse.body, {
+    const protectedResponse = new Response(assetResponse.body, {
       status: assetResponse.status,
       statusText: assetResponse.statusText,
       headers
-    }), auth.refreshed);
+    });
+    return withRefreshedCookies(await applyManagedMenu(protectedResponse, env), auth.refreshed);
   }};
