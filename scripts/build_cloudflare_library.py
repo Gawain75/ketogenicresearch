@@ -350,6 +350,25 @@ def main():
             if not vm or vm.group(1)=="all": continue
             em=re.search(r'data-en="([^"]+)"',attrs,re.I); label=htmlmod.unescape(em.group(1) if em else re.sub(r'<[^>]+>','',om.group(2))).strip()
             clinical_areas.append({"slug":htmlmod.unescape(vm.group(1)).strip(),"label":label,"icon":icon_by_label.get(label,"")})
+    # Include thematic clinical folders that are displayed in the Library but are not
+    # part of areaFilter (for example GLP-1RA + Ketogenic Metabolism). They are
+    # appearance-only entries: exposing them here does not change classification.
+    known_slugs={a["slug"] for a in clinical_areas}
+    for fm in re.finditer(r'<details\b([^>]*\bclass="[^"]*library-folder[^"]*"[^>]*)>(.*?)</details>',original_library_html,re.I|re.S):
+        attrs,body=fm.group(1),fm.group(2)
+        idm=re.search(r'\bid="([^"]+)"',attrs,re.I)
+        if not idm: continue
+        slug=htmlmod.unescape(idm.group(1)).strip()
+        if slug in known_slugs: continue
+        sm=re.search(r'<span[^>]+class="[^"]*folder-icon[^"]*"[^>]+data-icon-area="([^"]+)"[^>]*>(.*?)</span>',body,re.I|re.S)
+        if not sm: continue
+        label=htmlmod.unescape(sm.group(1)).strip()
+        icon_html=sm.group(2).strip()
+        icon=""
+        imgm=re.search(r'<img[^>]+src="([^"]+)"',icon_html,re.I|re.S)
+        if imgm: icon=htmlmod.unescape(imgm.group(1))
+        clinical_areas.append({"slug":slug,"label":label,"icon":icon,"kind":"folder"})
+        known_slugs.add(slug)
     (DIST / "_admin-status.json").write_text(json.dumps({"generated_at":datetime.now(timezone.utc).isoformat(),"clinical_areas":clinical_areas},ensure_ascii=False),encoding="utf-8")
     source_dir=DIST/"_admin-source"; (source_dir/"articles").mkdir(parents=True,exist_ok=True)
     for x in page_files: (source_dir/(x.name+".txt")).write_text(x.read_text(encoding="utf-8",errors="ignore"),encoding="utf-8")
