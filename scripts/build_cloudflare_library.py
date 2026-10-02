@@ -2,6 +2,8 @@
 from pathlib import Path
 import re
 import shutil
+import json
+import html as htmlmod
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "cloudflare-dist"
@@ -263,7 +265,31 @@ def main():
     if not library.exists():
         raise SystemExit("library.html not found")
 
-    html = clean_library_html(library.read_text(encoding="utf-8"))
+    original_library_html = library.read_text(encoding="utf-8")
+
+    # Admin manifests: lightweight indexes used by the browser backend.
+    page_files = [x for x in ROOT.glob("*.html") if x.name not in {"admin.html", "library.html", "library-access.html", "reset-password.html", "review-studio.html"}]
+    pages = []
+    for x in sorted(page_files):
+        src=x.read_text(encoding="utf-8",errors="ignore")
+        m=re.search(r"<title>(.*?)</title>",src,re.I|re.S)
+        pages.append({"path":x.name,"title":htmlmod.unescape(re.sub(r"<[^>]+>","",m.group(1)).strip()) if m else x.stem})
+    articles=[]
+    for x in sorted((ROOT/"articles").glob("*.html"),reverse=True):
+        src=x.read_text(encoding="utf-8",errors="ignore")
+        m=re.search(r"<h1[^>]*>(.*?)</h1>",src,re.I|re.S); pm=re.search(r"PMID:\s*(\d+)",src,re.I) or re.search(r"(?:^|-)\b(\d{7,9})-",x.name)
+        title=htmlmod.unescape(re.sub(r"<[^>]+>","",m.group(1)).strip()) if m else x.stem
+        articles.append({"path":"articles/"+x.name,"title":title,"pmid":pm.group(1) if pm else ""})
+    studies=[]; seen=set()
+    pat=re.compile(r'(<article[^>]*data-pmid="(\d+)"[^>]*>).*?<h4[^>]*>(.*?)</h4>',re.I|re.S)
+    for m in pat.finditer(original_library_html):
+        pmid=m.group(2)
+        if pmid in seen: continue
+        seen.add(pmid); title=htmlmod.unescape(re.sub(r"<[^>]+>","",m.group(3))).strip(); title=re.sub(r"^\d+\.\s*","",title)
+        dm=re.search(r'data-doi="([^"]*)"',m.group(1),re.I)
+        studies.append({"pmid":pmid,"doi":dm.group(1) if dm else "","title":title})
+
+    html = clean_library_html(original_library_html)
     html = inject_account_status(html)
     html = split_library_payload(html)
     (DIST / "library.html").write_text(html, encoding="utf-8")
@@ -274,11 +300,18 @@ def main():
             raise SystemExit(f"Required Library asset missing: {name}")
         shutil.copy2(source, DIST / name)
 
-    for name in ["admin.html", "admin.js", "admin.css"]:
+    for name in ["admin.html", "admin.js", "admin.css", "review-studio.js", "review-studio.css", "site-admin-public.js"]:
         source = ROOT / name
         if not source.exists():
             raise SystemExit(f"Required admin asset missing: {name}")
         shutil.copy2(source, DIST / name)
+
+    (DIST / "_admin-pages.json").write_text(json.dumps(pages,ensure_ascii=False),encoding="utf-8")
+    (DIST / "_admin-articles.json").write_text(json.dumps(articles,ensure_ascii=False),encoding="utf-8")
+    (DIST / "_admin-library.json").write_text(json.dumps(studies,ensure_ascii=False),encoding="utf-8")
+    source_dir=DIST/"_admin-source"; (source_dir/"articles").mkdir(parents=True,exist_ok=True)
+    for x in page_files: (source_dir/(x.name+".txt")).write_text(x.read_text(encoding="utf-8",errors="ignore"),encoding="utf-8")
+    for x in (ROOT/"articles").glob("*.html"): (source_dir/"articles"/(x.name+".txt")).write_text(x.read_text(encoding="utf-8",errors="ignore"),encoding="utf-8")
 
     for name in ["library-access.html", "reset-password.html", "_worker.js", "index.html"]:
         source = CF / name
@@ -291,6 +324,7 @@ def main():
     # prevents redirect loops for the login and admin routes.
     shutil.copy2(CF / "library-access.html", DIST / "_raw-library-access.txt")
     shutil.copy2(ROOT / "admin.html", DIST / "_raw-admin.txt")
+    shutil.copy2(ROOT / "review-studio.html", DIST / "_raw-review-studio.txt")
 
     checks = {
         "library.html": ["Scientific Library", "script.js?v=71", "styles.css", "data-kr-library-chunk"],
