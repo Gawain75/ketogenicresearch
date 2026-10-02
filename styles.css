@@ -2593,34 +2593,26 @@ article.folder-paper p,
   display:none;
 }
 
-/* Admin clinical icon overrides: normalize uploaded icons to the Library icon system. */
-.library-folder .folder-icon .kr-admin-clinical-icon,
-.kr-area-icon .kr-admin-clinical-icon,
-.kr-admin-clinical-icon{
+/* KR admin custom clinical icons — visual normalization only.
+   Does not alter folders, GLP-1 visibility, IDs or classification. */
+.library-folder .folder-icon .kr-admin-icon-mask{
   display:block;
   width:min(20px,72%);
   height:min(20px,72%);
-  max-width:72%;
-  max-height:72%;
-  aspect-ratio:1 / 1;
-  background-color:currentColor;
-  -webkit-mask-image:var(--kr-admin-icon);
-  mask-image:var(--kr-admin-icon);
+  flex:0 0 auto;
+  background:currentColor;
+  -webkit-mask-image:var(--kr-admin-icon-src);
+  mask-image:var(--kr-admin-icon-src);
   -webkit-mask-repeat:no-repeat;
   mask-repeat:no-repeat;
   -webkit-mask-position:center;
   mask-position:center;
   -webkit-mask-size:contain;
   mask-size:contain;
-  flex:0 0 auto;
 }
 @media (max-width:640px){
-  .library-folder .folder-icon .kr-admin-clinical-icon,
-  .kr-area-icon .kr-admin-clinical-icon{width:min(18px,72%);height:min(18px,72%)}
-}
-/* Keep thematic folders visually identical to the other clinical areas. */
-.library-folder .folder-icon.glp1-keto-icon{
-  background:#f7fafb;
-  border-color:var(--line);
-  color:var(--primary);
+  .library-folder .folder-icon .kr-admin-icon-mask{
+    width:min(18px,72%);
+    height:min(18px,72%);
+  }
 }
