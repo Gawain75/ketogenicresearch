@@ -354,7 +354,9 @@ async function requireSiteAdmin(request, env) {
 }
 async function getSiteAdminConfig(env){
   if(!env.SITE_ADMIN) throw new Error("SITE_ADMIN binding non configurato.");
-  return (await env.SITE_ADMIN.get(SITE_ADMIN_CONFIG_KEY,"json")) || {menu:[]};
+  const saved=await env.SITE_ADMIN.get(SITE_ADMIN_CONFIG_KEY,"json");
+  if(saved) return saved;
+  return {menu:[]};
 }
 
 const SITE_ADMIN_CONTENT_PREFIX = "site-admin:content:";
@@ -381,12 +383,12 @@ async function handleSiteAdminApi(request,env,url){
   if(!env.SITE_ADMIN) return siteAdminJson({error:"SITE_ADMIN binding non configurato."},500);
   try {
     if(url.pathname==="/api/site-admin/manifests" && request.method==="GET") {
-      const pages=await assetJson(request,env,"_admin-pages.json"), articles=await assetJson(request,env,"_admin-articles.json"), library=await assetJson(request,env,"_admin-library.json");
+      const pages=await assetJson(request,env,"_admin-pages.json"), articles=await assetJson(request,env,"_admin-articles.json"), library=await assetJson(request,env,"_admin-library.json"), defaultMenu=await assetJson(request,env,"_admin-menu.json");
       for(const x of [...pages,...articles]){const st=await contentState(env,x.path);x.override=!!st;x.deleted=!!st?.deleted;}
-      return siteAdminJson({pages,articles,library});
+      return siteAdminJson({pages,articles,library,defaultMenu});
     }
     if(url.pathname==="/api/site-admin/content") {
-      if(request.method==="GET"){const path=safeContentPath(url.searchParams.get("path"));if(!path)return siteAdminJson({error:"Percorso non valido."},400);const st=await contentState(env,path);if(st?.deleted)return siteAdminJson({path,deleted:true,html:""});if(st?.html)return siteAdminJson({path,override:true,html:st.html});const html=await assetText(request,env,"_admin-source/"+path+".txt");return html===null?siteAdminJson({error:"Contenuto non trovato."},404):siteAdminJson({path,html});}
+      if(request.method==="GET"){const path=safeContentPath(url.searchParams.get("path"));if(!path)return siteAdminJson({error:"Percorso non valido."},400);const original=url.searchParams.get("original")==="1";const st=await contentState(env,path);if(!original&&st?.deleted)return siteAdminJson({path,deleted:true,html:""});if(!original&&st?.html)return siteAdminJson({path,override:true,html:st.html});const html=await assetText(request,env,"_admin-source/"+path+".txt");return html===null?siteAdminJson({error:"Contenuto non trovato."},404):siteAdminJson({path,html,original:true});}
       const b=await request.json().catch(()=>({}));const path=safeContentPath(b.path);if(!path)return siteAdminJson({error:"Percorso non valido."},400);
       if(request.method==="PUT"){await env.SITE_ADMIN.put(SITE_ADMIN_CONTENT_PREFIX+path,JSON.stringify({html:String(b.html||""),deleted:false,updated_at:new Date().toISOString()}));return siteAdminJson({ok:true});}
       if(request.method==="POST"&&b.action==="delete"){await env.SITE_ADMIN.put(SITE_ADMIN_CONTENT_PREFIX+path,JSON.stringify({deleted:true,updated_at:new Date().toISOString()}));return siteAdminJson({ok:true});}
@@ -431,7 +433,7 @@ export default {
     const url = new URL(request.url);
 
     if (url.pathname === "/api/site-public/content" && request.method === "GET") return handlePublicContent(request,env,url);
-    if (url.pathname === "/api/site-public/config" && request.method === "GET") { const cfg=env.SITE_ADMIN?await getSiteAdminConfig(env):{menu:[]}; return new Response(JSON.stringify(cfg),{headers:{"Content-Type":"application/json; charset=utf-8","Access-Control-Allow-Origin":"https://ketogenicresearch.org","Cache-Control":"no-store"}}); }
+    if (url.pathname === "/api/site-public/config" && request.method === "GET") { let cfg=env.SITE_ADMIN?await getSiteAdminConfig(env):{menu:[]}; if(!Array.isArray(cfg.menu)||!cfg.menu.length){try{cfg={menu:await assetJson(request,env,"_admin-menu.json")};}catch(e){cfg={menu:[]};}} return new Response(JSON.stringify(cfg),{headers:{"Content-Type":"application/json; charset=utf-8","Access-Control-Allow-Origin":"https://ketogenicresearch.org","Cache-Control":"no-store"}}); }
 
     if ((url.pathname === "/review-studio" || url.pathname === "/review-studio/" || url.pathname === "/review-studio.html") && request.method === "GET") {
       const auth=await requireReviewAdmin(request,env); if(!auth.ok)return auth.response;
