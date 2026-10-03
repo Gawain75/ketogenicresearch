@@ -4,10 +4,10 @@
   "unique_pmids_checked": 9000,
   "verified_pmcid_available": 5661,
   "pmc_fulltext_links_added": 0,
-  "pmc_pdf_links_added": 4,
+  "pmc_pdf_links_added": 0,
   "publisher_oa_new_lookups": 300,
-  "publisher_fulltext_links_added": 3,
-  "publisher_pdf_links_added": 4,
+  "publisher_fulltext_links_added": 0,
+  "publisher_pdf_links_added": 1,
   "publisher_oa_cache_entries": 4222,
   "policy": "PMC remains authoritative when available. When PMCID is absent, OpenAlex OA metadata is checked first. For explicitly open-access works whose PDF is not yet indexed by OpenAlex, the publisher landing page is inspected for scholarly PDF metadata and verified direct PDF links. Cached OA records without a PDF are refreshed on later runs."
 }
