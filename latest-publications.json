@@ -1,13 +1,71 @@
 {
-  "generated_at": "2026-10-02T03:29:40+00:00",
+  "generated_at": "2026-10-03T03:35:10+00:00",
   "window_days": 90,
   "max_records": 100,
-  "pubmed_records_fetched": 1994,
-  "relevant_records_after_filter": 1050,
+  "pubmed_records_fetched": 2001,
+  "relevant_records_after_filter": 1056,
   "truncated": true,
   "source": "PubMed / NCBI E-utilities",
   "count": 100,
   "publications": [
+    {
+      "pmid": "42826040",
+      "title": "The Ketogenic Diet Improved Liver Health in Trial, But What Does That Mean in the Real World?",
+      "authors": [
+        "Abbasi J"
+      ],
+      "journal": "JAMA",
+      "date": "2026-10-02",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1001/jama.2026.18718",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42826040/",
+      "doi_url": "https://doi.org/10.1001/jama.2026.18718",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-10-03",
+      "status": "new"
+    },
+    {
+      "pmid": "42825834",
+      "title": "β-Hydroxybutyrate Maintains Energetically Demanding Neural Functions During Exogenous Glucose Deprivation.",
+      "authors": [
+        "Ricks RL",
+        "Nevers DS",
+        "Poulos T",
+        "Shafer TL",
+        "Dunford C",
+        "Hansen JM",
+        "Reynolds PR",
+        "Bikman BT",
+        "Parrish RR"
+      ],
+      "journal": "Cellular and molecular neurobiology",
+      "date": "2026-10-02",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1007/s10571-026-01834-3",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42825834/",
+      "doi_url": "https://doi.org/10.1007/s10571-026-01834-3",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-10-03",
+      "status": "new"
+    },
     {
       "pmid": "42742013",
       "title": "[Effectiveness and tolerability of ketogenic diet therapy in children with genetic developmental and epileptic encephalopathy onset within 2 years of age].",
@@ -42,7 +100,67 @@
       "evidence_type": "Observational human study",
       "evidence_type_it": "Studio osservazionale umano",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
+      "status": "new"
+    },
+    {
+      "pmid": "42822582",
+      "title": "Diet and Risk of Cardiovascular Disease.",
+      "authors": [
+        "Sultan S",
+        "Mahdi M",
+        "Ahmed A",
+        "Sultan S",
+        "Birnbaum Y",
+        "Lavie CJ",
+        "Krittanawong C"
+      ],
+      "journal": "The American journal of medicine",
+      "date": "2026-10-01",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.amjmed.2026.09.031",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42822582/",
+      "doi_url": "https://doi.org/10.1016/j.amjmed.2026.09.031",
+      "pmc_url": "",
+      "areas": [
+        "Cardiovascular Health"
+      ],
+      "category_confidence": 14,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
+      "source": "PubMed",
+      "first_seen": "2026-10-03",
+      "status": "new"
+    },
+    {
+      "pmid": "42820895",
+      "title": "Anesthetic Considerations for Dental Surgery in a Child with HUWE1-Related Neurodevelopmental Disorder, Lennox-Gastaut Syndrome, and Blindness: A Case Report.",
+      "authors": [
+        "Mavridou P",
+        "Kitsakou P",
+        "Gkegka M",
+        "Exarchos C",
+        "Stratsiani A"
+      ],
+      "journal": "Journal of perianesthesia nursing : official journal of the American Society of PeriAnesthesia Nurses",
+      "date": "2026-10-01",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.jopan.2026.09.011",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42820895/",
+      "doi_url": "https://doi.org/10.1016/j.jopan.2026.09.011",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Case report / case series",
+      "evidence_type_it": "Case report / case series",
+      "source": "PubMed",
+      "first_seen": "2026-10-03",
       "status": "new"
     },
     {
@@ -79,7 +197,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-10-01",
+      "first_seen": "2026-10-03",
       "status": "new"
     },
     {
@@ -108,7 +226,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "new"
     },
     {
@@ -134,7 +252,36 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
+      "status": "new"
+    },
+    {
+      "pmid": "42826233",
+      "title": "Neurometabolic Epilepsies: A Practical Guide to Recognition, Diagnostic Workup, and Precision Treatment.",
+      "authors": [
+        "Şengenç E",
+        "Zubarioglu T",
+        "Kiykim E",
+        "Aktuğlu Zeybek Ç"
+      ],
+      "journal": "Turkish archives of pediatrics",
+      "date": "2026-09-28",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.65717/TurkArchPediatr.2026.26401",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42826233/",
+      "doi_url": "https://doi.org/10.65717/TurkArchPediatr.2026.26401",
+      "pmc_url": "",
+      "areas": [
+        "Cognitive Function",
+        "Epilepsy"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Clinical trial / intervention",
+      "evidence_type_it": "Trial clinico / intervento",
+      "source": "PubMed",
+      "first_seen": "2026-10-03",
       "status": "new"
     },
     {
@@ -164,7 +311,7 @@
       "evidence_type": "Review",
       "evidence_type_it": "Revisione",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "new"
     },
     {
@@ -219,7 +366,7 @@
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "new"
     },
     {
@@ -246,7 +393,7 @@
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "new"
     },
     {
@@ -277,7 +424,7 @@
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "new"
     },
     {
@@ -303,7 +450,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "new"
     },
     {
@@ -337,7 +484,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "new"
     },
     {
@@ -368,7 +515,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "new"
     },
     {
@@ -409,7 +556,7 @@
       "evidence_type": "Observational human study",
       "evidence_type_it": "Studio osservazionale umano",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "new"
     },
     {
@@ -439,7 +586,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "new"
     },
     {
@@ -484,7 +631,7 @@
       "evidence_type": "Case report / case series",
       "evidence_type_it": "Case report / case series",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "new"
     },
     {
@@ -517,7 +664,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "new"
     },
     {
@@ -553,7 +700,7 @@
       "evidence_type": "Review",
       "evidence_type_it": "Revisione",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "new"
     },
     {
@@ -582,7 +729,7 @@
       "evidence_type": "Review",
       "evidence_type_it": "Revisione",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "new"
     },
     {
@@ -611,7 +758,7 @@
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "new"
     },
     {
@@ -642,7 +789,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "new"
     },
     {
@@ -667,7 +814,7 @@
       "evidence_type": "Review",
       "evidence_type_it": "Revisione",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "new"
     },
     {
@@ -697,8 +844,8 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
-      "status": "new"
+      "first_seen": "2026-10-03",
+      "status": "indexed"
     },
     {
       "pmid": "42760380",
@@ -731,8 +878,8 @@
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
-      "status": "new"
+      "first_seen": "2026-10-03",
+      "status": "indexed"
     },
     {
       "pmid": "42758370",
@@ -762,8 +909,8 @@
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
-      "status": "new"
+      "first_seen": "2026-10-03",
+      "status": "indexed"
     },
     {
       "pmid": "42757470",
@@ -802,8 +949,100 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
-      "status": "new"
+      "first_seen": "2026-10-03",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42825179",
+      "title": "The ketogenic diet in Parkinson's disease: mechanisms, evidence, and clinical practice.",
+      "authors": [
+        "A M",
+        "Bai Y",
+        "Wang Y",
+        "Lv P",
+        "Wang S"
+      ],
+      "journal": "Frontiers in nutrition",
+      "date": "2026-09-17",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3389/fnut.2026.1918711",
+      "pmc": "PMC13629526",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42825179/",
+      "doi_url": "https://doi.org/10.3389/fnut.2026.1918711",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13629526/",
+      "areas": [
+        "Parkinson’s Disease"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-10-03",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42824462",
+      "title": "Febrile infection-related epilepsy syndrome with claustrum sign following a human rhinovirus-positive respiratory illness in an adult: a case report.",
+      "authors": [
+        "Yang T",
+        "Wang L",
+        "Ji C",
+        "Ma S",
+        "Dong D",
+        "Yang P"
+      ],
+      "journal": "Frontiers in immunology",
+      "date": "2026-09-17",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3389/fimmu.2026.1935305",
+      "pmc": "PMC13627439",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42824462/",
+      "doi_url": "https://doi.org/10.3389/fimmu.2026.1935305",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13627439/",
+      "areas": [
+        "Epilepsy"
+      ],
+      "category_confidence": 9,
+      "evidence_type": "Case report / case series",
+      "evidence_type_it": "Case report / case series",
+      "source": "PubMed",
+      "first_seen": "2026-10-03",
+      "status": "indexed"
+    },
+    {
+      "pmid": "42824025",
+      "title": "Efficacy and safety evaluation of ketogenic diet therapy in patients with glucose transporter type 1 deficiency syndrome.",
+      "authors": [
+        "Wang M",
+        "Liu L",
+        "Shang L",
+        "Huang D",
+        "Li Q",
+        "Guo H",
+        "Wang Y",
+        "Yu H"
+      ],
+      "journal": "Frontiers in nutrition",
+      "date": "2026-09-17",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3389/fnut.2026.1920521",
+      "pmc": "PMC13627066",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42824025/",
+      "doi_url": "https://doi.org/10.3389/fnut.2026.1920521",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13627066/",
+      "areas": [
+        "GLUT1 Deficiency Syndrome",
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 7,
+      "evidence_type": "Observational human study",
+      "evidence_type_it": "Studio osservazionale umano",
+      "source": "PubMed",
+      "first_seen": "2026-10-03",
+      "status": "indexed"
     },
     {
       "pmid": "42753853",
@@ -833,7 +1072,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -877,7 +1116,7 @@
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -917,7 +1156,7 @@
       "evidence_type": "Case report / case series",
       "evidence_type_it": "Case report / case series",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -948,7 +1187,7 @@
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -975,7 +1214,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-01",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1000,7 +1239,7 @@
       "evidence_type": "Review",
       "evidence_type_it": "Revisione",
       "source": "PubMed",
-      "first_seen": "2026-10-01",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1036,7 +1275,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1074,7 +1313,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1104,7 +1343,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1135,7 +1374,7 @@
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1197,7 +1436,7 @@
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1231,7 +1470,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1260,7 +1499,7 @@
       "evidence_type": "Case report / case series",
       "evidence_type_it": "Case report / case series",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1290,7 +1529,7 @@
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1321,7 +1560,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1352,7 +1591,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1378,7 +1617,7 @@
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1419,7 +1658,7 @@
       "evidence_type": "Observational human study",
       "evidence_type_it": "Studio osservazionale umano",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1489,7 +1728,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1514,7 +1753,7 @@
       "evidence_type": "Review",
       "evidence_type_it": "Revisione",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1612,7 +1851,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1644,7 +1883,7 @@
       "evidence_type": "Review",
       "evidence_type_it": "Revisione",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1687,7 +1926,7 @@
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1714,7 +1953,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1743,7 +1982,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1780,7 +2019,7 @@
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1813,7 +2052,7 @@
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1842,7 +2081,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1872,7 +2111,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1913,7 +2152,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1944,7 +2183,7 @@
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -1975,7 +2214,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2010,7 +2249,7 @@
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2039,7 +2278,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2070,7 +2309,7 @@
       "evidence_type": "Review",
       "evidence_type_it": "Revisione",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2104,7 +2343,7 @@
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2133,7 +2372,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2157,7 +2396,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2196,7 +2435,7 @@
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2231,7 +2470,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2276,7 +2515,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2326,7 +2565,7 @@
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2366,7 +2605,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2394,7 +2633,7 @@
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2425,7 +2664,7 @@
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2459,7 +2698,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2498,7 +2737,7 @@
       "evidence_type": "Observational human study",
       "evidence_type_it": "Studio osservazionale umano",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2530,7 +2769,7 @@
       "evidence_type": "Observational human study",
       "evidence_type_it": "Studio osservazionale umano",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2593,7 +2832,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2623,7 +2862,7 @@
       "evidence_type": "Case report / case series",
       "evidence_type_it": "Case report / case series",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2651,7 +2890,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2679,7 +2918,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2744,7 +2983,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2772,7 +3011,7 @@
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2802,7 +3041,7 @@
       "evidence_type": "Case report / case series",
       "evidence_type_it": "Case report / case series",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2864,7 +3103,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2891,7 +3130,7 @@
       "evidence_type": "Review",
       "evidence_type_it": "Revisione",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2922,7 +3161,7 @@
       "evidence_type": "Systematic review / meta-analysis",
       "evidence_type_it": "Revisione sistematica / meta-analisi",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2960,7 +3199,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-10-02",
+      "first_seen": "2026-10-03",
       "status": "indexed"
     },
     {
@@ -2992,271 +3231,8 @@
       "source": "PubMed",
       "first_seen": "2026-09-30",
       "status": "indexed"
-    },
-    {
-      "pmid": "42632233",
-      "title": "Epigenetic ageing is accelerated in drug-resistant epilepsy and dynamically modulated during ketogenic diet therapy.",
-      "authors": [
-        "Gervin K",
-        "Kverneland M",
-        "Nakken KO",
-        "Rudi K",
-        "Iversen PO",
-        "Selmer KK"
-      ],
-      "journal": "EBioMedicine",
-      "date": "2026-08-22",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.ebiom.2026.106449",
-      "pmc": "PMC13524883",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42632233/",
-      "doi_url": "https://doi.org/10.1016/j.ebiom.2026.106449",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13524883/",
-      "areas": [
-        "Epilepsy"
-      ],
-      "category_confidence": 13,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
-      "source": "PubMed",
-      "first_seen": "2026-10-02",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42628914",
-      "title": "Time-restricted eating, immunomodulation and ketone metabolism in humans.",
-      "authors": [
-        "Macheret NA",
-        "Thota GP",
-        "Hengist A",
-        "Courville A",
-        "Chen KY",
-        "Brychta RJ",
-        "Klein RJ",
-        "Malandrino N",
-        "Puchalska P",
-        "Crawford PA",
-        "Duan D",
-        "Huang A",
-        "Recupero TC",
-        "Sullivan BS",
-        "Sack MN",
-        "Chung ST"
-      ],
-      "journal": "Metabolism: clinical and experimental",
-      "date": "2026-08-21",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.metabol.2026.156753",
-      "pmc": "PMC13585283",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42628914/",
-      "doi_url": "https://doi.org/10.1016/j.metabol.2026.156753",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13585283/",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 1,
-      "evidence_type": "Review",
-      "evidence_type_it": "Revisione",
-      "source": "PubMed",
-      "first_seen": "2026-09-30",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42623429",
-      "title": "Impact of medium-chain triglyceride with and without ketogenic diet in the management of drug-resistant epilepsy: a systematic review.",
-      "authors": [
-        "Pellizzari M",
-        "De Clauser L",
-        "Mir-Majidi S",
-        "Leone A",
-        "Veggiotti P",
-        "Previtali R",
-        "Olivotto S",
-        "Bertoli S",
-        "De Amicis R"
-      ],
-      "journal": "Nutritional neuroscience",
-      "date": "2026-08-20",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1080/1028415X.2026.2720527",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42623429/",
-      "doi_url": "https://doi.org/10.1080/1028415X.2026.2720527",
-      "pmc_url": "",
-      "areas": [
-        "Epilepsy"
-      ],
-      "category_confidence": 13,
-      "evidence_type": "Systematic review / meta-analysis",
-      "evidence_type_it": "Revisione sistematica / meta-analisi",
-      "source": "PubMed",
-      "first_seen": "2026-10-02",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42689126",
-      "title": "Glycosylation disorders in pediatric epilepsy: pathophysiology, imaging and precision therapy.",
-      "authors": [
-        "Fan L",
-        "Shen Y",
-        "Wang J",
-        "Gan J"
-      ],
-      "journal": "Frontiers in neurology",
-      "date": "2026-08-19",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3389/fneur.2026.1878916",
-      "pmc": "PMC13536898",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42689126/",
-      "doi_url": "https://doi.org/10.3389/fneur.2026.1878916",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13536898/",
-      "areas": [
-        "Epilepsy",
-        "Longevity & Healthy Aging"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
-      "source": "PubMed",
-      "first_seen": "2026-10-02",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42652823",
-      "title": "Glucose Transporter Type 1 Deficiency Syndrome: Clinical Variability and Challenges in Ketogenic Diet Management in a Paediatric Case Series.",
-      "authors": [
-        "Viegas M",
-        "Baptista N",
-        "Martins F",
-        "Almeida J",
-        "Pereira C",
-        "Rodrigues F",
-        "Salgado J",
-        "Ribeiro J",
-        "Ferreira S",
-        "Diogo R"
-      ],
-      "journal": "Journal of clinical medicine",
-      "date": "2026-08-19",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/jcm15166419",
-      "pmc": "PMC13514181",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42652823/",
-      "doi_url": "https://doi.org/10.3390/jcm15166419",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13514181/",
-      "areas": [
-        "GLUT1 Deficiency Syndrome",
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Case report / case series",
-      "evidence_type_it": "Case report / case series",
-      "source": "PubMed",
-      "first_seen": "2026-10-02",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42617931",
-      "title": "The impact of medium chain triglyceride ketogenic diet on liver mitochondria and cytochrome P450 2E1.",
-      "authors": [
-        "Ryan AS",
-        "Roberts RM",
-        "Stayer KM",
-        "Tomasevich AA",
-        "Misare KR",
-        "Hollis F",
-        "McQuail JA",
-        "Hartman JH"
-      ],
-      "journal": "Archives of biochemistry and biophysics",
-      "date": "2026-08-19",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.abb.2026.110978",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42617931/",
-      "doi_url": "https://doi.org/10.1016/j.abb.2026.110978",
-      "pmc_url": "",
-      "areas": [
-        "Medium-Chain Triglycerides (MCT)",
-        "Dyslipidemia & Lipid Metabolism"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-10-02",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42617797",
-      "title": "Ketogenic diet attenuates seizures by promoting lipid droplet formation via peroxisome proliferator-activated receptor gamma signaling pathway.",
-      "authors": [
-        "Xi Z",
-        "Zhang W",
-        "Liu Q",
-        "Wang Q",
-        "Qi Y"
-      ],
-      "journal": "Life sciences",
-      "date": "2026-08-19",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.lfs.2026.124638",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42617797/",
-      "doi_url": "https://doi.org/10.1016/j.lfs.2026.124638",
-      "pmc_url": "",
-      "areas": [
-        "Epilepsy",
-        "Dyslipidemia & Lipid Metabolism"
-      ],
-      "category_confidence": 10,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-10-02",
-      "status": "indexed"
-    },
-    {
-      "pmid": "42617287",
-      "title": "A direct comparison of butyrate, 4-phenylbutyrate, and β-hydroxybutyrate in an in vitro tumor therapy model.",
-      "authors": [
-        "Katsika H",
-        "Purps D",
-        "Montag C",
-        "Ludwig F",
-        "Marx C",
-        "Schwenkschuster I",
-        "Glei M",
-        "Meyer FB",
-        "Thierbach R"
-      ],
-      "journal": "Cancer treatment and research communications",
-      "date": "2026-08-19",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.ctarc.2026.101366",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42617287/",
-      "doi_url": "https://doi.org/10.1016/j.ctarc.2026.101366",
-      "pmc_url": "",
-      "areas": [
-        "Oncology & Cancer Metabolism"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-10-02",
-      "status": "indexed"
     }
   ],
-  "verified_at": "2026-10-02T03:29:40+00:00",
-  "content_updated_at": "2026-10-02T03:29:40+00:00"
+  "verified_at": "2026-10-03T03:35:10+00:00",
+  "content_updated_at": "2026-10-03T03:35:10+00:00"
 }

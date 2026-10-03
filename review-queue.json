@@ -1,11 +1,168 @@
 {
-  "generated_at": "2026-10-02T03:29:40+00:00",
+  "generated_at": "2026-10-03T03:35:09+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
-  "auto_approved_count": 0,
+  "auto_approved_count": 9,
   "excluded_count": 120,
   "records": [
+    {
+      "pmid": "42826040",
+      "title": "The Ketogenic Diet Improved Liver Health in Trial, But What Does That Mean in the Real World?",
+      "authors": [
+        "Abbasi J"
+      ],
+      "journal": "JAMA",
+      "date": "2026-10-02",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1001/jama.2026.18718",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42826040/",
+      "doi_url": "https://doi.org/10.1001/jama.2026.18718",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-10-03",
+      "status": "new",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "42825834",
+      "title": "β-Hydroxybutyrate Maintains Energetically Demanding Neural Functions During Exogenous Glucose Deprivation.",
+      "authors": [
+        "Ricks RL",
+        "Nevers DS",
+        "Poulos T",
+        "Shafer TL",
+        "Dunford C",
+        "Hansen JM",
+        "Reynolds PR",
+        "Bikman BT",
+        "Parrish RR"
+      ],
+      "journal": "Cellular and molecular neurobiology",
+      "date": "2026-10-02",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1007/s10571-026-01834-3",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42825834/",
+      "doi_url": "https://doi.org/10.1007/s10571-026-01834-3",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-10-03",
+      "status": "new",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "42822582",
+      "title": "Diet and Risk of Cardiovascular Disease.",
+      "authors": [
+        "Sultan S",
+        "Mahdi M",
+        "Ahmed A",
+        "Sultan S",
+        "Birnbaum Y",
+        "Lavie CJ",
+        "Krittanawong C"
+      ],
+      "journal": "The American journal of medicine",
+      "date": "2026-10-01",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.amjmed.2026.09.031",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42822582/",
+      "doi_url": "https://doi.org/10.1016/j.amjmed.2026.09.031",
+      "pmc_url": "",
+      "areas": [
+        "Cardiovascular Health"
+      ],
+      "category_confidence": 14,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
+      "source": "PubMed",
+      "first_seen": "2026-10-03",
+      "status": "new",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "42820895",
+      "title": "Anesthetic Considerations for Dental Surgery in a Child with HUWE1-Related Neurodevelopmental Disorder, Lennox-Gastaut Syndrome, and Blindness: A Case Report.",
+      "authors": [
+        "Mavridou P",
+        "Kitsakou P",
+        "Gkegka M",
+        "Exarchos C",
+        "Stratsiani A"
+      ],
+      "journal": "Journal of perianesthesia nursing : official journal of the American Society of PeriAnesthesia Nurses",
+      "date": "2026-10-01",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.jopan.2026.09.011",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42820895/",
+      "doi_url": "https://doi.org/10.1016/j.jopan.2026.09.011",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Case report / case series",
+      "evidence_type_it": "Case report / case series",
+      "source": "PubMed",
+      "first_seen": "2026-10-03",
+      "status": "new",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "42826233",
+      "title": "Neurometabolic Epilepsies: A Practical Guide to Recognition, Diagnostic Workup, and Precision Treatment.",
+      "authors": [
+        "Şengenç E",
+        "Zubarioglu T",
+        "Kiykim E",
+        "Aktuğlu Zeybek Ç"
+      ],
+      "journal": "Turkish archives of pediatrics",
+      "date": "2026-09-28",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.65717/TurkArchPediatr.2026.26401",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42826233/",
+      "doi_url": "https://doi.org/10.65717/TurkArchPediatr.2026.26401",
+      "pmc_url": "",
+      "areas": [
+        "Cognitive Function",
+        "Epilepsy"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Clinical trial / intervention",
+      "evidence_type_it": "Trial clinico / intervento",
+      "source": "PubMed",
+      "first_seen": "2026-10-03",
+      "status": "new",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
     {
       "pmid": "42790707",
       "title": "Letter to the Editor: Methodological considerations when determining the minimum amount of dietary carbohydrates that prevents nutritional ketosis.",
@@ -32,6 +189,104 @@
       "status": "new",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "42825179",
+      "title": "The ketogenic diet in Parkinson's disease: mechanisms, evidence, and clinical practice.",
+      "authors": [
+        "A M",
+        "Bai Y",
+        "Wang Y",
+        "Lv P",
+        "Wang S"
+      ],
+      "journal": "Frontiers in nutrition",
+      "date": "2026-09-17",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3389/fnut.2026.1918711",
+      "pmc": "PMC13629526",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42825179/",
+      "doi_url": "https://doi.org/10.3389/fnut.2026.1918711",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13629526/",
+      "areas": [
+        "Parkinson’s Disease"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-10-03",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "42824462",
+      "title": "Febrile infection-related epilepsy syndrome with claustrum sign following a human rhinovirus-positive respiratory illness in an adult: a case report.",
+      "authors": [
+        "Yang T",
+        "Wang L",
+        "Ji C",
+        "Ma S",
+        "Dong D",
+        "Yang P"
+      ],
+      "journal": "Frontiers in immunology",
+      "date": "2026-09-17",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3389/fimmu.2026.1935305",
+      "pmc": "PMC13627439",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42824462/",
+      "doi_url": "https://doi.org/10.3389/fimmu.2026.1935305",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13627439/",
+      "areas": [
+        "Epilepsy"
+      ],
+      "category_confidence": 9,
+      "evidence_type": "Case report / case series",
+      "evidence_type_it": "Case report / case series",
+      "source": "PubMed",
+      "first_seen": "2026-10-03",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "42824025",
+      "title": "Efficacy and safety evaluation of ketogenic diet therapy in patients with glucose transporter type 1 deficiency syndrome.",
+      "authors": [
+        "Wang M",
+        "Liu L",
+        "Shang L",
+        "Huang D",
+        "Li Q",
+        "Guo H",
+        "Wang Y",
+        "Yu H"
+      ],
+      "journal": "Frontiers in nutrition",
+      "date": "2026-09-17",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3389/fnut.2026.1920521",
+      "pmc": "PMC13627066",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42824025/",
+      "doi_url": "https://doi.org/10.3389/fnut.2026.1920521",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13627066/",
+      "areas": [
+        "GLUT1 Deficiency Syndrome",
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 7,
+      "evidence_type": "Observational human study",
+      "evidence_type_it": "Studio osservazionale umano",
+      "source": "PubMed",
+      "first_seen": "2026-10-03",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
     },
     {
       "pmid": "42799402",
@@ -659,6 +914,35 @@
       "curation_status": "excluded-low-confidence"
     },
     {
+      "pmid": "42823001",
+      "title": "Mechanisms and treatment of RSE: Of neurotransmission and neuroinflammation.",
+      "authors": [
+        "Sculier C",
+        "Gaspard N",
+        "Vezzani A"
+      ],
+      "journal": "Seminars in pediatric neurology",
+      "date": "2026-07-25",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.spen.2026.101321",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42823001/",
+      "doi_url": "https://doi.org/10.1016/j.spen.2026.101321",
+      "pmc_url": "",
+      "areas": [
+        "Inflammation & Immunometabolism"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
+      "source": "PubMed",
+      "first_seen": "2026-10-03",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
       "pmid": "42470908",
       "title": "Inhibition in β-hydroxybutyrate synthesis by 6-PPD quinone at environmentally relevant concentrations is associated with immunosuppression induction in Caenorhabditis elegans.",
       "authors": [
@@ -865,10 +1149,10 @@
       "date_precision": "day",
       "year": 2026,
       "doi": "10.1038/s41387-026-00446-6",
-      "pmc": "",
+      "pmc": "PMC13627703",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42414265/",
       "doi_url": "https://doi.org/10.1038/s41387-026-00446-6",
-      "pmc_url": "",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13627703/",
       "areas": [
         "Other / General"
       ],
@@ -984,6 +1268,35 @@
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "42823000",
+      "title": "Symptomatic management of NORSE/FIRES: Acute and chronic anti-seizure treatment.",
+      "authors": [
+        "Gettings JV",
+        "Carozza RB",
+        "Stredny CM"
+      ],
+      "journal": "Seminars in pediatric neurology",
+      "date": "2026-07-01",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.spen.2026.101320",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42823000/",
+      "doi_url": "https://doi.org/10.1016/j.spen.2026.101320",
+      "pmc_url": "",
+      "areas": [
+        "Epilepsy"
+      ],
+      "category_confidence": 10,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
+      "source": "PubMed",
+      "first_seen": "2026-10-03",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
     },
     {
       "pmid": "42366668",
@@ -2109,16 +2422,16 @@
       "doi_url": "https://doi.org/10.1038/s41418-026-01706-9",
       "pmc_url": "",
       "areas": [
-        "Other / General"
+        "MASLD / Metabolic Liver Disease"
       ],
-      "category_confidence": 1,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
+      "category_confidence": 2,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
       "first_seen": "2026-09-30",
       "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
     },
     {
       "pmid": "41159535",
@@ -4028,37 +4341,6 @@
       "category_confidence": 0,
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-30",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "41054158",
-      "title": "Ketogenic diet for alternating hemiplegia of childhood: Case report and literature review.",
-      "authors": [
-        "Yang Y",
-        "Liu P",
-        "Li P",
-        "Huang Y",
-        "Hu S"
-      ],
-      "journal": "Medicine",
-      "date": "2025-10-03",
-      "date_precision": "day",
-      "year": 2025,
-      "doi": "10.1097/MD.0000000000044993",
-      "pmc": "PMC12499699",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41054158/",
-      "doi_url": "https://doi.org/10.1097/MD.0000000000044993",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12499699/",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 1,
-      "evidence_type": "Case report / case series",
-      "evidence_type_it": "Case report / case series",
       "source": "PubMed",
       "first_seen": "2026-09-30",
       "status": "indexed",
