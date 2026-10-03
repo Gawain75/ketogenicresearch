@@ -39,7 +39,8 @@
     "42800643",
     "42810956",
     "42812005",
-    "42815840"
+    "42815840",
+    "42825834"
   ],
   "failures": [
     {
@@ -627,17 +628,24 @@
       "at": "2026-09-29T09:26:30.557031+00:00",
       "stage": "source",
       "error": "PubMed abstract unavailable"
+    },
+    {
+      "pmid": "42826040",
+      "at": "2026-10-03T03:38:54.864401+00:00",
+      "stage": "source",
+      "error": "PubMed abstract unavailable"
     }
   ],
-  "updated_at": "2026-10-02T03:34:45.088892+00:00",
+  "updated_at": "2026-10-03T03:40:15.777835+00:00",
   "source_unavailable_pmids": [
     "42642354",
     "42717355",
     "42777120",
-    "42790707"
+    "42790707",
+    "42826040"
   ],
   "last_run": {
-    "attempted_candidates": 1,
+    "attempted_candidates": 2,
     "published_articles": 1,
     "status": "published"
   }
