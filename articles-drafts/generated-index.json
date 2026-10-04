@@ -24,6 +24,7 @@
     "42763398",
     "42763564",
     "42766067",
+    "42767539",
     "42771559",
     "42772973",
     "42773801",
@@ -634,18 +635,56 @@
       "at": "2026-10-03T03:38:54.864401+00:00",
       "stage": "source",
       "error": "PubMed abstract unavailable"
+    },
+    {
+      "pmid": "42828422",
+      "at": "2026-10-04T05:23:02.770668+00:00",
+      "stage": "source",
+      "error": "PubMed abstract unavailable"
+    },
+    {
+      "pmid": "42827191",
+      "at": "2026-10-04T05:23:03.046360+00:00",
+      "stage": "source",
+      "error": "PubMed abstract unavailable"
+    },
+    {
+      "pmid": "42822582",
+      "at": "2026-10-04T05:23:03.382937+00:00",
+      "stage": "generation",
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "pmid": "42820895",
+      "at": "2026-10-04T05:23:03.476570+00:00",
+      "stage": "generation",
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "pmid": "42826233",
+      "at": "2026-10-04T05:23:03.570425+00:00",
+      "stage": "generation",
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "pmid": "42799463",
+      "at": "2026-10-04T05:23:04.144322+00:00",
+      "stage": "generation",
+      "error": "HTTP Error 429: Too Many Requests"
     }
   ],
-  "updated_at": "2026-10-03T03:40:15.777835+00:00",
+  "updated_at": "2026-10-04T05:24:25.067444+00:00",
   "source_unavailable_pmids": [
     "42642354",
     "42717355",
     "42777120",
     "42790707",
-    "42826040"
+    "42826040",
+    "42827191",
+    "42828422"
   ],
   "last_run": {
-    "attempted_candidates": 2,
+    "attempted_candidates": 10,
     "published_articles": 1,
     "status": "published"
   }
