@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-03T07:05:16+00:00",
+  "generated_at": "2026-10-04T05:21:24+00:00",
   "current_year": 2026,
   "previous_year": 2025,
   "scope_note": {
@@ -7,17 +7,19 @@
     "it": "I conteggi si riferiscono alle pubblicazioni uniche indicizzate nella Biblioteca Scientifica di Ketogenic Research, non a tutte le pubblicazioni esistenti a livello mondiale."
   },
   "global": {
-    "total_unique": 9053,
-    "known_year": 9053,
+    "total_unique": 9061,
+    "known_year": 9061,
     "unknown_year": 0,
     "first_year": 1921,
     "by_year": {
-      "1921": 2,
+      "1921": 3,
       "1924": 1,
       "1925": 1,
       "1926": 1,
-      "1927": 1,
+      "1927": 4,
       "1928": 1,
+      "1929": 1,
+      "1930": 1,
       "1933": 1,
       "1936": 1,
       "1945": 1,
@@ -101,7 +103,7 @@
       "2023": 565,
       "2024": 673,
       "2025": 805,
-      "2026": 713
+      "2026": 715
     }
   },
   "clinical_area_count": 53,
@@ -551,8 +553,8 @@
         "it": "Diabete e metabolismo glucidico"
       },
       "type": "clinical",
-      "total_unique": 2254,
-      "known_year": 2254,
+      "total_unique": 2255,
+      "known_year": 2255,
       "unknown_year": 0,
       "by_year": {
         "1945": 1,
@@ -634,7 +636,7 @@
         "2023": 86,
         "2024": 99,
         "2025": 117,
-        "2026": 129
+        "2026": 130
       }
     },
     {
@@ -787,16 +789,18 @@
         "it": "Epilessia"
       },
       "type": "clinical",
-      "total_unique": 2523,
-      "known_year": 2523,
+      "total_unique": 2529,
+      "known_year": 2529,
       "unknown_year": 0,
       "by_year": {
-        "1921": 2,
+        "1921": 3,
         "1924": 1,
         "1925": 1,
         "1926": 1,
-        "1927": 1,
+        "1927": 4,
         "1928": 1,
+        "1929": 1,
+        "1930": 1,
         "1933": 1,
         "1948": 1,
         "1951": 1,
@@ -1527,8 +1531,8 @@
         "it": "Oncologia e metabolismo tumorale"
       },
       "type": "clinical",
-      "total_unique": 783,
-      "known_year": 783,
+      "total_unique": 784,
+      "known_year": 784,
       "unknown_year": 0,
       "by_year": {
         "1955": 1,
@@ -1586,7 +1590,7 @@
         "2023": 57,
         "2024": 71,
         "2025": 94,
-        "2026": 77
+        "2026": 78
       }
     },
     {
