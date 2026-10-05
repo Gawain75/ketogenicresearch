@@ -374,6 +374,21 @@ async function assetText(request,env,path){ const u=new URL('/'+path.replace(/^\
 async function assetJson(request,env,path){ const t=await assetText(request,env,path); return t?JSON.parse(t):[]; }
 async function contentState(env,path){ return env.SITE_ADMIN.get(SITE_ADMIN_CONTENT_PREFIX+path,'json'); }
 async function excludedPmids(env){ return (await env.SITE_ADMIN.get(SITE_ADMIN_LIBRARY_EXCLUSIONS,'json')) || []; }
+async function deletedArticlePaths(env){
+  if(!env.SITE_ADMIN) return [];
+  const out=[]; let cursor=undefined;
+  do {
+    const page=await env.SITE_ADMIN.list({prefix:SITE_ADMIN_CONTENT_PREFIX,cursor});
+    for(const k of page.keys){
+      const path=k.name.slice(SITE_ADMIN_CONTENT_PREFIX.length);
+      if(!path.startsWith("articles/")) continue;
+      const st=await env.SITE_ADMIN.get(k.name,"json");
+      if(st?.deleted) out.push(path);
+    }
+    cursor=page.list_complete?undefined:page.cursor;
+  } while(cursor);
+  return out;
+}
 async function handlePublicContent(request,env,url){
   const path=safeContentPath(url.searchParams.get('path')); if(!path) return siteAdminJson({error:'Invalid path'},400);
   if(!env.SITE_ADMIN) return siteAdminJson({},404);
@@ -457,6 +472,10 @@ export default {
     const url = new URL(request.url);
 
     if (url.pathname === "/api/site-public/content" && request.method === "GET") return handlePublicContent(request,env,url);
+    if (url.pathname === "/api/site-public/deleted-articles" && request.method === "GET") {
+      const deleted=await deletedArticlePaths(env);
+      return new Response(JSON.stringify({deleted}),{headers:{"Content-Type":"application/json; charset=utf-8","Access-Control-Allow-Origin":"https://ketogenicresearch.org","Cache-Control":"no-store"}});
+    }
     if (url.pathname === "/api/site-public/config" && request.method === "GET") { let cfg=env.SITE_ADMIN?await getSiteAdminConfig(env):{menu:[]}; if(!Array.isArray(cfg.menu)||!cfg.menu.length){try{cfg={menu:await assetJson(request,env,"_admin-menu.json")};}catch(e){cfg={menu:[]};}} if(env.SITE_ADMIN) cfg.extended=await getExtendedConfig(env); return new Response(JSON.stringify(cfg),{headers:{"Content-Type":"application/json; charset=utf-8","Access-Control-Allow-Origin":"https://ketogenicresearch.org","Cache-Control":"no-store"}}); }
     const mediaMatch=url.pathname.match(/^\/media\/([a-zA-Z0-9_-]+)$/);if(mediaMatch&&env.SITE_ADMIN){const m=await env.SITE_ADMIN.get(SITE_ADMIN_MEDIA_PREFIX+safeMediaId(mediaMatch[1]),"json");if(!m)return new Response("Not found",{status:404});const comma=String(m.data||"").indexOf(',');const bytes=Uint8Array.from(atob(String(m.data||"").slice(comma+1)),c=>c.charCodeAt(0));return new Response(bytes,{headers:{"Content-Type":m.type||"application/octet-stream","Cache-Control":"public, max-age=3600","X-Content-Type-Options":"nosniff"}});}
     if((url.pathname==="/scientific-committee"||url.pathname==="/scientific-committee/")&&env.SITE_ADMIN){const c=(await getExtendedConfig(env)).committee;if(!c?.published)return new Response("Not found",{status:404});return new Response(committeeHtml(c),{headers:{"Content-Type":"text/html; charset=utf-8","Cache-Control":"public, max-age=60"}});}
