@@ -20,6 +20,19 @@
     }
   }catch(e){}
   try{
+    if(location.pathname==="/articles.html" || location.pathname==="/articles" || location.pathname==="/articles/"){
+      const j=await fetch(base+"/api/site-public/deleted-articles",{cache:"no-store"}).then(r=>r.ok?r.json():null);
+      const deleted=new Set((j&&Array.isArray(j.deleted)?j.deleted:[]).map(x=>String(x).replace(/^\/+/,"")));
+      if(deleted.size){
+        document.querySelectorAll('.article-card').forEach(card=>{
+          const a=card.querySelector('a[href]'); if(!a)return;
+          let path=''; try{path=new URL(a.getAttribute('href'),location.href).pathname.replace(/^\/+/,"");}catch(e){}
+          if(deleted.has(path)) card.remove();
+        });
+      }
+    }
+  }catch(e){}
+  try{
     const path=location.pathname.replace(/^\/+/,"") || "index.html";
     const r=await fetch(base+"/api/site-public/content?path="+encodeURIComponent(path),{cache:"no-store"});
     if(r.status===404)return; const j=await r.json();
