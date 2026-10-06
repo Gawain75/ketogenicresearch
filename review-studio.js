@@ -208,6 +208,15 @@
   function saveProtocolIfEditable(){if(!project.protocol?.frozen)project.protocol=readProtocol();project.question=$('question').value.trim();project.name=$('projectName').value.trim();project.language=$('projectLanguage').value;saveProject();}
   function saveExtractionIfVisible(){if(!$('panel-extraction').hidden)saveExtraction();}
 
+  let evidenceAreas=[];
+  async function loadEvidenceAreas(){
+    try{const d=await api('/api/review/evidence/areas');evidenceAreas=d.areas||[];const sel=$('evidenceArea');sel.innerHTML='<option value="">Select an area…</option>'+evidenceAreas.map(a=>`<option value="${esc(a.slug)}">${esc(a.label)} (${a.total})</option>`).join('');}
+    catch(e){setStatus('evidenceStatus',e.message,'error');}
+  }
+  function evidenceCardHtml(c){return `<article class="study-card"><h3>${esc(c.title||('PMID '+c.pmid))}</h3><div class="study-meta">PMID ${esc(c.pmid)} · ${esc(c.study_design||'')} · ${esc(c.evidence_domain||'')} · source: ${esc(c.source_level||'')} · confidence: ${esc(c.extraction_confidence||'')}</div><p><strong>Population:</strong> ${esc(c.population||'not reported')}<br><strong>Intervention:</strong> ${esc(c.intervention||'not reported')}<br><strong>Comparator:</strong> ${esc(c.comparator||'not reported')}<br><strong>Duration:</strong> ${esc(c.duration||'not reported')}</p><p><strong>Main result:</strong> ${esc(c.main_result||'not reported')}</p><p class="small"><strong>Limitations:</strong> ${esc(c.limitations||'not reported')}</p><div class="study-actions"><a class="screen-btn" href="https://pubmed.ncbi.nlm.nih.gov/${encodeURIComponent(c.pmid)}/" target="_blank" rel="noopener">PubMed ↗</a></div></article>`;}
+  async function refreshEvidence(){const area=$('evidenceArea').value;if(!area){$('evTotal').textContent=$('evProcessed').textContent=$('evAbstract').textContent=$('evRemaining').textContent='—';$('evidenceCards').innerHTML='<div class="empty">Choose an area first.</div>';return;}setStatus('evidenceStatus','Loading Evidence Lab status…');try{const d=await api('/api/review/evidence/status?area='+encodeURIComponent(area));$('evTotal').textContent=d.area.total;$('evProcessed').textContent=d.processed;$('evAbstract').textContent=d.source_counts.abstract_available;$('evRemaining').textContent=d.remaining;$('evidenceCards').innerHTML=(d.cards||[]).length?(d.cards||[]).map(evidenceCardHtml).join(''):'<div class="empty">No Evidence Cards generated for this area yet.</div>';setStatus('evidenceStatus',`${d.processed} of ${d.area.total} studies processed. ${d.source_counts.metadata_only} currently have metadata only. Nothing is public.`, 'ok');}catch(e){setStatus('evidenceStatus',e.message,'error');}}
+  async function processEvidence(){const area=$('evidenceArea').value;if(!area){setStatus('evidenceStatus','Choose a clinical area first.','error');return;}const btn=$('evidenceProcess');btn.disabled=true;setStatus('evidenceStatus','Extracting the next Evidence Card batch…');try{const d=await api('/api/review/evidence/process',{area,batch:Number($('evidenceBatch').value)||6});setStatus('evidenceStatus',`Processed ${d.processed_now||0} studies. ${d.remaining||0} remaining.`, 'ok');await refreshEvidence();}catch(e){setStatus('evidenceStatus',e.message,'error');}finally{btn.disabled=false;}}
+
   document.querySelectorAll('.review-step').forEach(b=>b.addEventListener('click',()=>showStep(b.dataset.step)));
   $('generateProtocol').addEventListener('click',generateProtocol);
   $('freezeProtocol').addEventListener('click',freezeProtocol); $('unfreezeProtocol').addEventListener('click',unfreezeProtocol); $('saveProtocol').addEventListener('click',saveProtocol);
@@ -218,5 +227,7 @@
   $('newProject').addEventListener('click',()=>{if(confirm('Start a new project? Export the current project first if needed.')){project=blankProject();saveProject();bindProjectToForm();renderStudies();showStep('question');setStatus('questionStatus','New project ready.');}});
   $('importJson').addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;try{const p=JSON.parse(await f.text());if(!p||p.version!==1)throw new Error('Unsupported project file.');project=p;saveProject();bindProjectToForm();renderStudies();showStep('question');setStatus('questionStatus','Project imported.','ok');}catch(err){setStatus('questionStatus',err.message,'error');}e.target.value='';});
 
-  bindProjectToForm(); renderStudies(); renderMeta();
+  $('evidenceArea').addEventListener('change',refreshEvidence); $('evidenceRefresh').addEventListener('click',refreshEvidence); $('evidenceProcess').addEventListener('click',processEvidence);
+
+  bindProjectToForm(); renderStudies(); renderMeta(); loadEvidenceAreas();
 })();

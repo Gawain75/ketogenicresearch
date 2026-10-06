@@ -6,7 +6,7 @@
 <title>Review Studio | Ketogenic Research Hub</title>
 <meta name="robots" content="noindex,nofollow,noarchive"/>
 <link rel="stylesheet" href="styles.css?v=70"/>
-<link rel="stylesheet" href="review-studio.css?v=1"/>
+<link rel="stylesheet" href="review-studio.css?v=2"/>
 <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
 </head>
 <body>
@@ -22,6 +22,7 @@
 <aside class="review-sidebar">
 <h2>Review workflow</h2>
 <div class="review-steps">
+<button class="review-step" data-step="evidence">Evidence Lab<small>Private area synthesis</small></button>
 <button class="review-step active" data-step="question">1. Question<small>Research question & project</small></button>
 <button class="review-step" data-step="protocol">2. Protocol<small>PICO, criteria, search</small></button>
 <button class="review-step" data-step="screening">3. Screening<small>PubMed candidates</small></button>
@@ -34,6 +35,14 @@
 </aside>
 
 <section class="review-main">
+<div class="review-panel" id="panel-evidence" hidden>
+<div class="project-row"><div><p class="kicker" style="margin:0 0 5px">PRIVATE · EXPERIMENTAL</p><h2 style="margin-bottom:4px">Evidence Lab</h2><p class="sub" style="margin:0">Build cached Evidence Cards from the current Scientific Library. Nothing here is published to the public website.</p></div><span class="protocol-lock">Private draft</span></div>
+<div class="form-grid" style="margin-top:18px"><div class="review-field"><label>Clinical area</label><select id="evidenceArea"><option value="">Loading areas…</option></select></div><div class="review-field"><label>Batch size</label><select id="evidenceBatch"><option>4</option><option selected>6</option><option>8</option><option>10</option></select></div></div>
+<div class="metric-grid"><div class="metric"><strong id="evTotal">—</strong><span>Library studies</span></div><div class="metric"><strong id="evProcessed">—</strong><span>Evidence Cards</span></div><div class="metric"><strong id="evAbstract">—</strong><span>Abstract available</span></div><div class="metric"><strong id="evRemaining">—</strong><span>Remaining</span></div></div>
+<div class="review-actions"><button class="review-btn" id="evidenceProcess">Process next batch</button><button class="review-btn muted" id="evidenceRefresh">Refresh status</button></div>
+<div class="review-status" id="evidenceStatus">Choose a clinical area. Processing is incremental and does not modify Library classification.</div>
+<h3 style="margin-top:22px">Recent Evidence Cards</h3><div class="study-list" id="evidenceCards"><div class="empty">No Evidence Cards generated for this area yet.</div></div>
+</div>
 <div class="review-panel" id="panel-question">
 <h2>Start from a research question</h2><p class="sub">Write the question as you would ask it scientifically. The protocol generator will convert it into an editable PICO/PECO framework.</p>
 <div class="review-field"><label for="question">Research question</label><textarea id="question" placeholder="Example: In adults with obesity, do VLCKD/VLEKT interventions affect LDL-C differently from high-fat ketogenic diets or non-ketogenic comparators?"></textarea></div>
@@ -96,6 +105,6 @@
 </div>
 </main>
 <footer><div class="wrap footer"><span>KETOGENIC RESEARCH HUB</span><span>Private Review Studio · MVP</span></div></footer>
-<script src="review-studio.js?v=1"></script>
+<script src="review-studio.js?v=2"></script>
 </body>
 </html>
