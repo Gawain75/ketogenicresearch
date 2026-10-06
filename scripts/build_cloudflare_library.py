@@ -337,6 +337,46 @@ def main():
     (DIST / "_admin-menu.json").write_text(json.dumps(menu,ensure_ascii=False),encoding="utf-8")
     (DIST / "_admin-articles.json").write_text(json.dumps(articles,ensure_ascii=False),encoding="utf-8")
     (DIST / "_admin-library.json").write_text(json.dumps(studies,ensure_ascii=False),encoding="utf-8")
+
+    # Evidence Lab index. Keep this derived strictly from the already-rendered
+    # Library: it does not alter clinical classification or the public Library.
+    # Folder boundaries are determined by the next top-level library-folder start;
+    # this avoids being confused by nested <details> elements inside study cards.
+    evidence_areas=[]
+    folder_starts=list(re.finditer(r'<details\b([^>]*\bclass="[^"]*library-folder[^"]*"[^>]*)>',original_library_html,re.I|re.S))
+    for i,fm in enumerate(folder_starts):
+        attrs=fm.group(1)
+        idm=re.search(r'\bid="([^"]+)"',attrs,re.I)
+        if not idm: continue
+        slug=htmlmod.unescape(idm.group(1)).strip()
+        end=folder_starts[i+1].start() if i+1<len(folder_starts) else len(original_library_html)
+        body=original_library_html[fm.end():end]
+        # The first strong label in the folder summary is the public area label.
+        lm=re.search(r'<strong\b[^>]*data-en="([^"]+)"[^>]*>',body,re.I|re.S)
+        if lm:
+            label=htmlmod.unescape(lm.group(1)).strip()
+        else:
+            lm=re.search(r'<summary\b[^>]*>(.*?)</summary>',body,re.I|re.S)
+            label=htmlmod.unescape(re.sub(r'<[^>]+>',' ',lm.group(1))).strip() if lm else slug
+            label=re.sub(r'\s+',' ',label)
+        area_studies=[]; area_seen=set()
+        for am in re.finditer(r'<article\b([^>]*\bdata-pmid="(\d+)"[^>]*)>(.*?)</article>',body,re.I|re.S):
+            aattrs,pmid,acontent=am.group(1),am.group(2),am.group(3)
+            if pmid in area_seen: continue
+            area_seen.add(pmid)
+            tm=re.search(r'<h4[^>]*>(.*?)</h4>',acontent,re.I|re.S)
+            title=htmlmod.unescape(re.sub(r'<[^>]+>','',tm.group(1))).strip() if tm else ''
+            title=re.sub(r'^\d+\.\s*','',title)
+            dm=re.search(r'\bdata-doi="([^"]*)"',aattrs,re.I)
+            ym=re.search(r'\bdata-year="([^"]*)"',aattrs,re.I)
+            em=re.search(r'\bdata-evidence="([^"]*)"',aattrs,re.I)
+            pmcm=re.search(r'\bdata-pmcid="([^"]*)"',aattrs,re.I)
+            has_abstract=bool(re.search(r'\bclass="[^"]*paper-source-abstract[^"]*"',acontent,re.I))
+            area_studies.append({"pmid":pmid,"doi":htmlmod.unescape(dm.group(1)).strip() if dm else "","title":title,"year":htmlmod.unescape(ym.group(1)).strip() if ym else "","evidence":htmlmod.unescape(em.group(1)).strip() if em else "","pmcid":htmlmod.unescape(pmcm.group(1)).strip() if pmcm else "","has_abstract":has_abstract})
+        if area_studies:
+            evidence_areas.append({"slug":slug,"label":label,"count":len(area_studies),"studies":area_studies})
+    (DIST / "_evidence-lab-index.json").write_text(json.dumps({"generated_at":datetime.now(timezone.utc).isoformat(),"areas":evidence_areas},ensure_ascii=False),encoding="utf-8")
+    print(f'Evidence Lab index generated: {len(evidence_areas)} areas, {sum(a["count"] for a in evidence_areas)} area-study memberships.')
     # Safe appearance manifest: existing clinical-area identifiers only. The admin can
     # override their icons, never names/slugs/classification rules.
     clinical_areas=[]
