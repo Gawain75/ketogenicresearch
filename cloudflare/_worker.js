@@ -377,6 +377,35 @@ async function handleEvidenceSynthesisGet(request,env){
   const saved=await env.SITE_ADMIN.get(EVIDENCE_LAB_SYNTHESIS_PREFIX+slug,"json");
   return jsonResponse({synthesis:saved||null});
 }
+async function groqSynthesisJson(env,messages){
+  if(!env.GROQ_API_KEY) throw new Error("GROQ_API_KEY is not configured in Cloudflare.");
+  const schema={
+    type:"object",additionalProperties:false,
+    properties:{
+      overall_interpretation:{type:"string"},
+      evidence_consistency:{type:"string",enum:["consistent","mostly_consistent","mixed","conflicting","insufficient"]},
+      human_clinical:{type:"string"},reviews_meta_analyses:{type:"string"},preclinical_mechanistic:{type:"string"},
+      main_findings:{type:"array",items:{type:"object",additionalProperties:false,properties:{finding:{type:"string"},pmids:{type:"array",items:{type:"string"}}},required:["finding","pmids"]}},
+      conflicting_evidence:{type:"array",items:{type:"object",additionalProperties:false,properties:{issue:{type:"string"},pmids:{type:"array",items:{type:"string"}}},required:["issue","pmids"]}},
+      limitations:{type:"array",items:{type:"string"}},research_gaps:{type:"array",items:{type:"string"}},bottom_line:{type:"string"}
+    },
+    required:["overall_interpretation","evidence_consistency","human_clinical","reviews_meta_analyses","preclinical_mechanistic","main_findings","conflicting_evidence","limitations","research_gaps","bottom_line"]
+  };
+  const payload={
+    model:env.GROQ_MODEL||"openai/gpt-oss-120b",temperature:0.1,reasoning_effort:"low",reasoning_format:"hidden",max_completion_tokens:5000,messages,
+    response_format:{type:"json_schema",json_schema:{name:"evidence_synthesis",strict:true,schema}}
+  };
+  let r;
+  try{r=await fetch("https://api.groq.com/openai/v1/chat/completions",{method:"POST",headers:{"Authorization":`Bearer ${env.GROQ_API_KEY}`,"Content-Type":"application/json"},body:JSON.stringify(payload)});}
+  catch(e){throw new Error(`AI service could not be reached: ${e?.message||e}`);}
+  const raw=await r.text();
+  if(!r.ok){let detail="";try{const j=JSON.parse(raw);detail=j?.error?.message||j?.message||"";}catch{} throw new Error(`AI synthesis service error (${r.status})${detail?`: ${detail.slice(0,350)}`:""}`);}
+  let data;try{data=JSON.parse(raw);}catch{throw new Error("AI synthesis service returned an unreadable response.");}
+  const content=data?.choices?.[0]?.message?.content;
+  if(!content)throw new Error("AI synthesis service returned no synthesis content.");
+  try{return JSON.parse(content);}catch{throw new Error("AI synthesis returned invalid structured JSON.");}
+}
+
 async function handleEvidenceSynthesize(request,env){
   if(!env.SITE_ADMIN)return jsonResponse({error:"Evidence Lab storage (SITE_ADMIN) is not configured."},503);
   if(!env.GROQ_API_KEY)return jsonResponse({error:"GROQ_API_KEY is not configured."},503);
@@ -385,20 +414,38 @@ async function handleEvidenceSynthesize(request,env){
   if(!area)return jsonResponse({error:"Clinical area not found."},404);
   const st=await evidenceLabState(env,slug), ids=(st.processed||[]).map(String);
   if(ids.length<12)return jsonResponse({error:`At least 12 Evidence Cards are required for a provisional synthesis. Currently available: ${ids.length}.`},400);
-  const cards=[];
-  for(const pmid of ids.slice(-120)){
-    const c=await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");
-    if(c)cards.push(compactEvidenceCard(c));
-  }
-  if(cards.length<12)return jsonResponse({error:"Not enough readable Evidence Cards for synthesis."},400);
-  const counts={clinical:0,review:0,preclinical:0,mechanistic:0,other:0,abstract:0,metadata:0};
-  for(const c of cards){const d=String(c.evidence_domain||"other");counts[d]=(counts[d]||0)+1;counts[c.source_level==="abstract"?"abstract":"metadata"]++;}
-  const system=`You are producing a PRIVATE, PROVISIONAL scientific evidence synthesis from structured Evidence Cards. Use ONLY the supplied cards. Do not add external knowledge or citations. Human clinical evidence, reviews/meta-analyses, preclinical animal evidence, and mechanistic evidence MUST be interpreted separately. Never infer causality from observational evidence. Never convert absence of reporting into a negative finding. Do not use vote counting alone to determine conclusions. Weight interpretation by study design, sample size, controls/randomization, source level, extraction confidence, consistency and limitations. Every substantive finding must include supporting PMID numbers that exist in the packet. If evidence is insufficient or heterogeneous, say so explicitly. This is not a formal GRADE assessment and you must not label certainty as GRADE. Return ONLY valid JSON with keys: overall_interpretation (string), evidence_consistency (one of consistent,mostly_consistent,mixed,conflicting,insufficient), human_clinical (string), reviews_meta_analyses (string), preclinical_mechanistic (string), main_findings (array of objects {finding,pmids}), conflicting_evidence (array of objects {issue,pmids}), limitations (array), research_gaps (array), bottom_line (string). Keep the synthesis concise and scientifically cautious.`;
-  const packet={area:area.label,library_total:area.count,cards_analyzed:cards.length,counts,cards};
-  const out=await groqJson(env,[{role:"system",content:system},{role:"user",content:JSON.stringify(packet)}]);
-  const allowed=new Set(ids), cleanPmids=v=>Array.isArray(v)?v.map(String).filter(x=>allowed.has(x)).slice(0,12):[];
-  const synthesis={schema_version:1,area_slug:slug,area_label:area.label,generated_at:new Date().toISOString(),library_total:area.count,cards_analyzed:cards.length,counts,evidence_consistency:String(out?.evidence_consistency||"insufficient"),overall_interpretation:String(out?.overall_interpretation||""),human_clinical:String(out?.human_clinical||""),reviews_meta_analyses:String(out?.reviews_meta_analyses||""),preclinical_mechanistic:String(out?.preclinical_mechanistic||""),main_findings:(Array.isArray(out?.main_findings)?out.main_findings:[]).slice(0,8).map(x=>({finding:String(x?.finding||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.finding),conflicting_evidence:(Array.isArray(out?.conflicting_evidence)?out.conflicting_evidence:[]).slice(0,6).map(x=>({issue:String(x?.issue||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.issue),limitations:(Array.isArray(out?.limitations)?out.limitations:[]).map(String).slice(0,8),research_gaps:(Array.isArray(out?.research_gaps)?out.research_gaps:[]).map(String).slice(0,8),bottom_line:String(out?.bottom_line||"")};
-  await env.SITE_ADMIN.put(EVIDENCE_LAB_SYNTHESIS_PREFIX+slug,JSON.stringify(synthesis));
+
+  // Read cards concurrently. This keeps the Worker request short even for large areas.
+  const selectedIds=ids.slice(-120);
+  const loaded=await Promise.all(selectedIds.map(async pmid=>{
+    try{return await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");}catch{return null;}
+  }));
+  const allCards=loaded.filter(Boolean).map(compactEvidenceCard);
+  if(allCards.length<12)return jsonResponse({error:"Not enough readable Evidence Cards for synthesis."},400);
+
+  // Metadata-only cards (corrections, editorials without abstract, etc.) are visible in Evidence Lab
+  // but are not allowed to drive scientific conclusions.
+  const cards=allCards.filter(c=>c.source_level==="abstract");
+  const metadataExcluded=allCards.length-cards.length;
+  if(cards.length<12)return jsonResponse({error:`Only ${cards.length} Evidence Cards contain an abstract. At least 12 abstract-based cards are required; ${metadataExcluded} metadata-only cards were excluded.`},400);
+
+  const counts={clinical:0,review:0,preclinical:0,mechanistic:0,other:0,abstract:cards.length,metadata_excluded:metadataExcluded};
+  for(const c of cards){const d=String(c.evidence_domain||"other");counts[d]=(counts[d]||0)+1;}
+  const system=`You are producing a PRIVATE, PROVISIONAL scientific evidence synthesis from structured Evidence Cards. Use ONLY the supplied cards. Do not add external knowledge or citations. Human clinical evidence, reviews/meta-analyses, preclinical animal evidence, and mechanistic evidence MUST be interpreted separately. Never infer causality from observational evidence. Never convert absence of reporting into a negative finding. Do not use vote counting alone to determine conclusions. Weight interpretation by study design, sample size, controls/randomization, extraction confidence, consistency and limitations. A favorable preclinical result is not clinical efficacy. Reviews must not be double-counted as independent primary evidence. Every substantive finding must include supporting PMID numbers that exist in the packet. If evidence is insufficient or heterogeneous, say so explicitly. This is not a formal GRADE assessment. Keep the synthesis concise and scientifically cautious.`;
+  const packet={area:area.label,library_total:area.count,cards_available:allCards.length,cards_analyzed:cards.length,metadata_only_excluded:metadataExcluded,counts,cards};
+  const packetText=JSON.stringify(packet);
+  if(packetText.length>260000)return jsonResponse({error:`Synthesis packet is too large (${packetText.length} characters). Reduce the synthesis window before retrying.`},413);
+
+  let out;
+  try{out=await groqSynthesisJson(env,[{role:"system",content:system},{role:"user",content:packetText}]);}
+  catch(e){return jsonResponse({error:e?.message||"AI synthesis failed."},502);}
+
+  const allowed=new Set(cards.map(c=>String(c.pmid))), cleanPmids=v=>Array.isArray(v)?v.map(String).filter(x=>allowed.has(x)).slice(0,12):[];
+  const validConsistency=new Set(["consistent","mostly_consistent","mixed","conflicting","insufficient"]);
+  const consistency=String(out?.evidence_consistency||"insufficient");
+  const synthesis={schema_version:2,area_slug:slug,area_label:area.label,generated_at:new Date().toISOString(),library_total:area.count,cards_available:allCards.length,cards_analyzed:cards.length,metadata_only_excluded:metadataExcluded,counts,evidence_consistency:validConsistency.has(consistency)?consistency:"insufficient",overall_interpretation:String(out?.overall_interpretation||""),human_clinical:String(out?.human_clinical||""),reviews_meta_analyses:String(out?.reviews_meta_analyses||""),preclinical_mechanistic:String(out?.preclinical_mechanistic||""),main_findings:(Array.isArray(out?.main_findings)?out.main_findings:[]).slice(0,8).map(x=>({finding:String(x?.finding||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.finding),conflicting_evidence:(Array.isArray(out?.conflicting_evidence)?out.conflicting_evidence:[]).slice(0,6).map(x=>({issue:String(x?.issue||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.issue),limitations:(Array.isArray(out?.limitations)?out.limitations:[]).map(String).slice(0,8),research_gaps:(Array.isArray(out?.research_gaps)?out.research_gaps:[]).map(String).slice(0,8),bottom_line:String(out?.bottom_line||"")};
+  try{await env.SITE_ADMIN.put(EVIDENCE_LAB_SYNTHESIS_PREFIX+slug,JSON.stringify(synthesis));}
+  catch(e){return jsonResponse({error:`Synthesis was generated but could not be saved: ${e?.message||e}`},500);}
   return jsonResponse({ok:true,synthesis});
 }
 
