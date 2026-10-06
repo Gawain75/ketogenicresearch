@@ -34,15 +34,6 @@
     const el=$(id); el.textContent=text; el.className='review-status'+(kind?' '+kind:'');
   }
   function showStep(step){
-    function pmidLinks(pmids){return (pmids||[]).map(p=>`<a href="https://pubmed.ncbi.nlm.nih.gov/${encodeURIComponent(p)}/" target="_blank" rel="noopener">PMID ${esc(p)}</a>`).join(', ');}
-  function synthesisHtml(s){
-    if(!s)return '<div class="empty">No synthesis generated for this area yet.</div>';
-    const items=(arr,field)=>Array.isArray(arr)&&arr.length?'<ul>'+arr.map(x=>typeof x==='string'?`<li>${esc(x)}</li>`:`<li>${esc(x[field]||'')}${x.pmids?.length?` <span class="small">(${pmidLinks(x.pmids)})</span>`:''}</li>`).join('')+'</ul>':'<p class="small">No specific items identified.</p>';
-    return `<article class="study-card"><div class="study-meta">Generated ${esc(s.generated_at||'')} · ${esc(s.cards_analyzed)} Evidence Cards · consistency: ${esc(s.evidence_consistency||'not assessed')}</div><h3>Overall interpretation</h3><p>${esc(s.overall_interpretation||'Not available.')}</p><h3>Human clinical evidence</h3><p>${esc(s.human_clinical||'Insufficient evidence in the processed cards.')}</p><h3>Reviews / meta-analyses</h3><p>${esc(s.reviews_meta_analyses||'Insufficient evidence in the processed cards.')}</p><h3>Preclinical & mechanistic evidence</h3><p>${esc(s.preclinical_mechanistic||'Insufficient evidence in the processed cards.')}</p><h3>Main findings</h3>${items(s.main_findings,'finding')}<h3>Conflicting evidence</h3>${items(s.conflicting_evidence,'issue')}<h3>Limitations</h3>${items(s.limitations)}<h3>Research gaps</h3>${items(s.research_gaps)}<h3>Provisional bottom line</h3><p><strong>${esc(s.bottom_line||'Not available.')}</strong></p><p class="small">Private provisional synthesis. Not a formal GRADE assessment and not published to the public website.</p></article>`;
-  }
-  async function loadEvidenceSynthesis(){const area=$('evidenceArea').value;if(!area){setStatus('synthesisStatus','Choose a clinical area first.','error');return;}setStatus('synthesisStatus','Loading saved synthesis…');try{const d=await api('/api/review/evidence/synthesis?area='+encodeURIComponent(area));$('evidenceSynthesis').innerHTML=synthesisHtml(d.synthesis);setStatus('synthesisStatus',d.synthesis?`Saved synthesis loaded: ${d.synthesis.cards_analyzed} Evidence Cards.`:'No saved synthesis for this area yet.',d.synthesis?'ok':'');}catch(e){setStatus('synthesisStatus',e.message,'error');}}
-  async function generateEvidenceSynthesis(){const area=$('evidenceArea').value;if(!area){setStatus('synthesisStatus','Choose a clinical area first.','error');return;}const btn=$('evidenceSynthesize');btn.disabled=true;setStatus('synthesisStatus','Generating a provisional synthesis from cached Evidence Cards…');try{const d=await api('/api/review/evidence/synthesize',{area});$('evidenceSynthesis').innerHTML=synthesisHtml(d.synthesis);setStatus('synthesisStatus',`Provisional synthesis generated from ${d.synthesis.cards_analyzed} Evidence Cards. Nothing has been published.`, 'ok');}catch(e){setStatus('synthesisStatus',e.message,'error');}finally{btn.disabled=false;}}
-
   document.querySelectorAll('.review-step').forEach(b=>b.classList.toggle('active', b.dataset.step===step));
     document.querySelectorAll('[id^="panel-"]').forEach(p=>p.hidden = p.id !== `panel-${step}`);
     if(step==='screening') renderStudies();
@@ -86,7 +77,10 @@
   }
 
   async function api(path, payload){
-    const r=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const opts = payload === undefined
+      ? {method:'GET', headers:{'Accept':'application/json'}}
+      : {method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body:JSON.stringify(payload)};
+    const r=await fetch(path,opts);
     const data=await r.json().catch(()=>({}));
     if(!r.ok) throw new Error(data.error || `Request failed (${r.status})`);
     return data;
