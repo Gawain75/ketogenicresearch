@@ -540,24 +540,32 @@ async function handleEvidenceSynthesize(request,env){
   // This keeps every included card represented without exceeding a single-request TPM envelope.
   const chunkSize=10;
   const chunks=[]; for(let i=0;i<nano.length;i+=chunkSize) chunks.push(nano.slice(i,i+chunkSize));
-  const checkpointKey=`evidence-lab:v2:synthesis-checkpoint:${slug}:v9`;
+  const checkpointKey=`evidence-lab:v2:synthesis-checkpoint:${slug}:v10`;
   const corpusFingerprint=nano.map(x=>x.p).join(",")+"|"+JSON.stringify(exactProfile)+"|"+JSON.stringify(relevance_profile);
   let checkpoint=await env.SITE_ADMIN.get(checkpointKey,"json").catch(()=>null);
   if(!checkpoint || checkpoint.fingerprint!==corpusFingerprint) checkpoint={fingerprint:corpusFingerprint,chunks:{}};
   const chunkSystem=`Compress this chunk of structured Evidence Cards for a PRIVATE scientific synthesis. Use ONLY supplied cards. Preserve study type, relevance level, direction, conflicts, limitations and PMID traceability. direct may inform the selected clinical question; supporting is indirect/mechanistic and cannot establish clinical efficacy; contextual is background only. Do not infer missing facts. Return concise PLAIN TEXT, not JSON, with these exact headings: SUMMARY; HUMAN; REVIEWS; PRECLINICAL; FINDINGS; CONFLICTS; LIMITATIONS. Put PMIDs beside every evidence claim. Maximum 450 words.`;
   const chunkSummaries=[];
+  let nextMissing=-1;
   for(let ci=0;ci<chunks.length;ci++){
-    const cards=chunks[ci], key=String(ci);
-    let cs=checkpoint.chunks[key];
-    if(!cs){
-      const packet=JSON.stringify({area:area.label,chunk:ci+1,total_chunks:chunks.length,evidence_cards:cards});
-      try{cs=await groqTextLimited(env,[{role:"system",content:chunkSystem},{role:"user",content:packet}],600);}
-      catch(e){return jsonResponse({error:`Evidence synthesis chunk ${ci+1}/${chunks.length} failed: ${e?.message||"AI service error"}`,diagnostic:{cards_processed:raw.length,cards_usable:usable.length,completed_chunks:chunkSummaries.length,total_chunks:chunks.length}},502);}
-      checkpoint.chunks[key]=cs;
-      try{await env.SITE_ADMIN.put(checkpointKey,JSON.stringify(checkpoint),{expirationTtl:86400});}catch{}
-    }
+    const cards=chunks[ci], key=String(ci), cs=checkpoint.chunks[key];
+    if(!cs){nextMissing=ci;break;}
     chunkSummaries.push({chunk:ci+1,pmids:cards.map(x=>x.p),summary:cs});
   }
+  // One HTTP request performs at most ONE AI chunk. This prevents browser/Worker timeouts.
+  if(nextMissing>=0){
+    const ci=nextMissing, cards=chunks[ci], key=String(ci);
+    const packet=JSON.stringify({area:area.label,chunk:ci+1,total_chunks:chunks.length,evidence_cards:cards});
+    let cs;
+    try{cs=await groqTextLimited(env,[{role:"system",content:chunkSystem},{role:"user",content:packet}],600);}
+    catch(e){return jsonResponse({error:`Evidence synthesis chunk ${ci+1}/${chunks.length} failed: ${e?.message||"AI service error"}`,progress:{phase:"chunks",completed:ci,total:chunks.length,cards_processed:raw.length,cards_usable:usable.length}},502);}
+    checkpoint.chunks[key]=cs;
+    try{await env.SITE_ADMIN.put(checkpointKey,JSON.stringify(checkpoint),{expirationTtl:86400});}
+    catch(e){return jsonResponse({error:`Chunk ${ci+1} generated but checkpoint save failed: ${e?.message||"storage error"}`},500);}
+    return jsonResponse({ok:true,done:false,progress:{phase:"chunks",completed:ci+1,total:chunks.length,cards_processed:raw.length,cards_usable:usable.length}});
+  }
+  // All chunk checkpoints exist. Rebuild their ordered summaries; this request performs only the final synthesis.
+  for(let ci=0;ci<chunks.length;ci++){const cards=chunks[ci],cs=checkpoint.chunks[String(ci)];chunkSummaries.push({chunk:ci+1,pmids:cards.map(x=>x.p),summary:cs});}
   const finalPacket=JSON.stringify({area:area.label,library_total:area.count,cards_processed:raw.length,cards_included:usable.length,cards_excluded:excluded.length,EXACT_EVIDENCE_PROFILE:exactProfile,EXACT_RELEVANCE_PROFILE:relevance_profile,all_included_pmids:nano.map(x=>x.p),chunk_summaries:chunkSummaries});
   if(finalPacket.length>25500)return jsonResponse({error:`Hierarchical synthesis summaries are unexpectedly too large (${finalPacket.length} characters). Checkpoints were preserved; no studies were dropped.`,diagnostic:{cards_processed:raw.length,cards_usable:usable.length,total_chunks:chunks.length,final_packet_chars:finalPacket.length}},413);
   const finalSystem=`You are producing a PRIVATE, PROVISIONAL scientific evidence synthesis from hierarchical summaries of structured Evidence Cards. Use ONLY the supplied packet. All included studies have already been represented in chunk_summaries. EXACT_EVIDENCE_PROFILE and EXACT_RELEVANCE_PROFILE are deterministic ground truth and MUST NOT be recalculated, merged or contradicted. direct may support conclusions for the selected clinical question; supporting may support plausibility but NOT establish clinical efficacy; contextual is background only and MUST NOT support efficacy/safety conclusions. Clinical trials and observational studies are separate. Reviews are not additional independent primary studies. Never present preclinical benefit as demonstrated clinical efficacy. Never infer causality from observational evidence. Every PMID cited must occur in all_included_pmids. This is NOT a formal GRADE assessment. Return ONLY valid JSON with keys: overall_interpretation (string), evidence_consistency (consistent|mostly_consistent|mixed|conflicting|insufficient), human_clinical (string), reviews_meta_analyses (string), preclinical_mechanistic (string), main_findings (array of {finding,pmids}), conflicting_evidence (array of {issue,pmids}), limitations (array of strings), research_gaps (array of strings), bottom_line (string).`;
@@ -567,10 +575,10 @@ async function handleEvidenceSynthesize(request,env){
   catch(e){return jsonResponse({error:`Evidence synthesis final stage failed: ${e?.message||"AI service error"}. Chunk checkpoints were preserved; retry Generate synthesis to resume without repeating completed chunks.`,diagnostic:{cards_processed:raw.length,cards_usable:usable.length,cards_synthesized:nano.length,completed_chunks:chunks.length,final_packet_chars:finalPacket.length}},502);}
 
   const allowed=new Set(nano.map(x=>x.p)), cleanPmids=v=>Array.isArray(v)?v.map(String).filter(x=>allowed.has(x)).slice(0,12):[];
-  const synthesis={schema_version:9,area_slug:slug,area_label:area.label,generated_at:new Date().toISOString(),library_total:area.count,cards_processed:raw.length,cards_analyzed:usable.length,cards_excluded:excluded.length,cards_sent_to_model:nano.length,cards_synthesized:nano.length,synthesis_chunks:chunks.length,excluded_cards:excluded,evidence_profile,relevance_profile,relevance_cards:relevanceAudit,counts,evidence_consistency:String(out?.evidence_consistency||"insufficient"),overall_interpretation:String(out?.overall_interpretation||""),human_clinical:String(out?.human_clinical||""),reviews_meta_analyses:String(out?.reviews_meta_analyses||""),preclinical_mechanistic:String(out?.preclinical_mechanistic||""),main_findings:(Array.isArray(out?.main_findings)?out.main_findings:[]).slice(0,8).map(x=>({finding:String(x?.finding||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.finding),conflicting_evidence:(Array.isArray(out?.conflicting_evidence)?out.conflicting_evidence:[]).slice(0,6).map(x=>({issue:String(x?.issue||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.issue),limitations:(Array.isArray(out?.limitations)?out.limitations:[]).map(String).slice(0,8),research_gaps:(Array.isArray(out?.research_gaps)?out.research_gaps:[]).map(String).slice(0,8),bottom_line:String(out?.bottom_line||"")};
+  const synthesis={schema_version:10,area_slug:slug,area_label:area.label,generated_at:new Date().toISOString(),library_total:area.count,cards_processed:raw.length,cards_analyzed:usable.length,cards_excluded:excluded.length,cards_sent_to_model:nano.length,cards_synthesized:nano.length,synthesis_chunks:chunks.length,excluded_cards:excluded,evidence_profile,relevance_profile,relevance_cards:relevanceAudit,counts,evidence_consistency:String(out?.evidence_consistency||"insufficient"),overall_interpretation:String(out?.overall_interpretation||""),human_clinical:String(out?.human_clinical||""),reviews_meta_analyses:String(out?.reviews_meta_analyses||""),preclinical_mechanistic:String(out?.preclinical_mechanistic||""),main_findings:(Array.isArray(out?.main_findings)?out.main_findings:[]).slice(0,8).map(x=>({finding:String(x?.finding||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.finding),conflicting_evidence:(Array.isArray(out?.conflicting_evidence)?out.conflicting_evidence:[]).slice(0,6).map(x=>({issue:String(x?.issue||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.issue),limitations:(Array.isArray(out?.limitations)?out.limitations:[]).map(String).slice(0,8),research_gaps:(Array.isArray(out?.research_gaps)?out.research_gaps:[]).map(String).slice(0,8),bottom_line:String(out?.bottom_line||"")};
   try{await env.SITE_ADMIN.put(EVIDENCE_LAB_SYNTHESIS_PREFIX+slug,JSON.stringify(synthesis)); await env.SITE_ADMIN.delete(checkpointKey).catch(()=>{});}
   catch(e){return jsonResponse({error:`Synthesis generated but KV save failed: ${e?.message||"unknown storage error"}`},500);}
-  return jsonResponse({ok:true,synthesis});
+  return jsonResponse({ok:true,done:true,synthesis,progress:{phase:"complete",completed:chunks.length,total:chunks.length}});
 }
 
 async function handleEvidenceProcess(request,env){
