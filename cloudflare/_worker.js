@@ -283,14 +283,15 @@ async function groqJsonLimited(env, messages, maxCompletionTokens=1100) {
     }catch(e){lastError=new Error(`AI synthesis network error: ${e?.message||"request failed"}`); if(attempt<4){await sleep(1200*(attempt+1));continue;} break;}
     if(!r.ok){
       let detail=""; try{const j=await r.json();detail=String(j?.error?.message||j?.message||"");}catch{try{detail=await r.text();}catch{}}
-      if(r.status===429){
+      const failedGeneration=/failed_generation|failed to generate/i.test(detail);
+      if(r.status===429 && !failedGeneration){
         const h=Number(r.headers.get("retry-after"));
         const m=detail.match(/try again in\s*([0-9.]+)s/i);
-        const waitMs=Math.min(15000,Math.max(1200,Math.ceil(((Number.isFinite(h)&&h>0?h:(m?Number(m[1]):2))+0.75)*1000)));
+        const waitMs=Math.min(20000,Math.max(1500,Math.ceil(((Number.isFinite(h)&&h>0?h:(m?Number(m[1]):2))+0.8)*1000)));
         lastError=new Error(`AI synthesis rate limit (429); retrying after ${Math.ceil(waitMs/1000)}s.`);
         if(attempt<4){await sleep(waitMs);continue;}
       }
-      if((r.status===400||r.status===422)&&/response_format|json/i.test(detail)){
+      if(failedGeneration || ((r.status===400||r.status===422)&&/response_format|json/i.test(detail))){
         // Compatibility fallback for providers/models that reject JSON mode.
         r=await fetch(endpoint,{method:"POST",headers:{"Authorization":`Bearer ${env.GROQ_API_KEY}`,"Content-Type":"application/json"},body:JSON.stringify({model,temperature:0.1,max_completion_tokens:maxCompletionTokens,reasoning_effort:"low",messages:attemptMessages})});
         if(r.ok){const data=await r.json();try{return extractJsonObject(data?.choices?.[0]?.message?.content||"");}catch(e){lastError=e;if(!jsonRepairUsed){jsonRepairUsed=true;continue;}}}
@@ -303,6 +304,34 @@ async function groqJsonLimited(env, messages, maxCompletionTokens=1100) {
     const data=await r.json();
     try{return extractJsonObject(data?.choices?.[0]?.message?.content||"");}
     catch(e){lastError=e;if(!jsonRepairUsed){jsonRepairUsed=true;continue;}break;}
+  }
+  throw new Error(`AI synthesis failed after controlled retries: ${lastError?.message||"invalid response"}`);
+}
+
+async function groqTextLimited(env, messages, maxCompletionTokens=650) {
+  if (!env.GROQ_API_KEY) throw new Error("GROQ_API_KEY is not configured in Cloudflare.");
+  const endpoint="https://api.groq.com/openai/v1/chat/completions";
+  const model=env.GROQ_MODEL || "openai/gpt-oss-120b";
+  const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+  let lastError=null;
+  for(let attempt=0;attempt<5;attempt++){
+    let r;
+    try{r=await fetch(endpoint,{method:"POST",headers:{"Authorization":`Bearer ${env.GROQ_API_KEY}`,"Content-Type":"application/json"},body:JSON.stringify({model,temperature:0.1,max_completion_tokens:maxCompletionTokens,reasoning_effort:"low",messages})});}
+    catch(e){lastError=new Error(`AI synthesis network error: ${e?.message||"request failed"}`);if(attempt<4){await sleep(1200*(attempt+1));continue;}break;}
+    if(!r.ok){
+      let detail="";try{const j=await r.json();detail=String(j?.error?.message||j?.message||"");}catch{try{detail=await r.text();}catch{}}
+      const failedGeneration=/failed_generation|failed to generate/i.test(detail);
+      if(r.status===429 && !failedGeneration){
+        const h=Number(r.headers.get("retry-after")),m=detail.match(/try again in\s*([0-9.]+)s/i);
+        const waitMs=Math.min(20000,Math.max(1500,Math.ceil(((Number.isFinite(h)&&h>0?h:(m?Number(m[1]):2))+0.8)*1000)));
+        lastError=new Error(`AI synthesis rate limit (429); retrying after ${Math.ceil(waitMs/1000)}s.`);if(attempt<4){await sleep(waitMs);continue;}
+      }
+      lastError=new Error(`AI synthesis service error (${r.status})${detail?`: ${detail.slice(0,700)}`:""}`);
+      if(failedGeneration || [400,401,403,413,422].includes(r.status)) throw lastError;
+      if(attempt<4){await sleep(1000*(attempt+1));continue;}break;
+    }
+    const data=await r.json();const out=String(data?.choices?.[0]?.message?.content||"").trim();if(out)return out;
+    lastError=new Error("AI synthesis returned an empty response.");
   }
   throw new Error(`AI synthesis failed after controlled retries: ${lastError?.message||"invalid response"}`);
 }
@@ -511,18 +540,18 @@ async function handleEvidenceSynthesize(request,env){
   // This keeps every included card represented without exceeding a single-request TPM envelope.
   const chunkSize=10;
   const chunks=[]; for(let i=0;i<nano.length;i+=chunkSize) chunks.push(nano.slice(i,i+chunkSize));
-  const checkpointKey=`evidence-lab:v2:synthesis-checkpoint:${slug}:v8`;
+  const checkpointKey=`evidence-lab:v2:synthesis-checkpoint:${slug}:v9`;
   const corpusFingerprint=nano.map(x=>x.p).join(",")+"|"+JSON.stringify(exactProfile)+"|"+JSON.stringify(relevance_profile);
   let checkpoint=await env.SITE_ADMIN.get(checkpointKey,"json").catch(()=>null);
   if(!checkpoint || checkpoint.fingerprint!==corpusFingerprint) checkpoint={fingerprint:corpusFingerprint,chunks:{}};
-  const chunkSystem=`You are compressing one chunk of structured Evidence Cards for a PRIVATE scientific synthesis. Use ONLY supplied cards. Preserve study type, relevance level, direction, conflicts, limitations and PMID traceability. direct may inform the selected clinical question; supporting is indirect/mechanistic and cannot establish clinical efficacy; contextual is background only. Do not infer missing facts. Return ONLY JSON with keys: summary (string), human (string), reviews (string), preclinical (string), findings (array of {finding,pmids}), conflicts (array of {issue,pmids}), limitations (array of strings).`;
+  const chunkSystem=`Compress this chunk of structured Evidence Cards for a PRIVATE scientific synthesis. Use ONLY supplied cards. Preserve study type, relevance level, direction, conflicts, limitations and PMID traceability. direct may inform the selected clinical question; supporting is indirect/mechanistic and cannot establish clinical efficacy; contextual is background only. Do not infer missing facts. Return concise PLAIN TEXT, not JSON, with these exact headings: SUMMARY; HUMAN; REVIEWS; PRECLINICAL; FINDINGS; CONFLICTS; LIMITATIONS. Put PMIDs beside every evidence claim. Maximum 450 words.`;
   const chunkSummaries=[];
   for(let ci=0;ci<chunks.length;ci++){
     const cards=chunks[ci], key=String(ci);
     let cs=checkpoint.chunks[key];
     if(!cs){
       const packet=JSON.stringify({area:area.label,chunk:ci+1,total_chunks:chunks.length,evidence_cards:cards});
-      try{cs=await groqJsonLimited(env,[{role:"system",content:chunkSystem},{role:"user",content:packet}],520);}
+      try{cs=await groqTextLimited(env,[{role:"system",content:chunkSystem},{role:"user",content:packet}],600);}
       catch(e){return jsonResponse({error:`Evidence synthesis chunk ${ci+1}/${chunks.length} failed: ${e?.message||"AI service error"}`,diagnostic:{cards_processed:raw.length,cards_usable:usable.length,completed_chunks:chunkSummaries.length,total_chunks:chunks.length}},502);}
       checkpoint.chunks[key]=cs;
       try{await env.SITE_ADMIN.put(checkpointKey,JSON.stringify(checkpoint),{expirationTtl:86400});}catch{}
@@ -538,7 +567,7 @@ async function handleEvidenceSynthesize(request,env){
   catch(e){return jsonResponse({error:`Evidence synthesis final stage failed: ${e?.message||"AI service error"}. Chunk checkpoints were preserved; retry Generate synthesis to resume without repeating completed chunks.`,diagnostic:{cards_processed:raw.length,cards_usable:usable.length,cards_synthesized:nano.length,completed_chunks:chunks.length,final_packet_chars:finalPacket.length}},502);}
 
   const allowed=new Set(nano.map(x=>x.p)), cleanPmids=v=>Array.isArray(v)?v.map(String).filter(x=>allowed.has(x)).slice(0,12):[];
-  const synthesis={schema_version:8,area_slug:slug,area_label:area.label,generated_at:new Date().toISOString(),library_total:area.count,cards_processed:raw.length,cards_analyzed:usable.length,cards_excluded:excluded.length,cards_sent_to_model:nano.length,cards_synthesized:nano.length,synthesis_chunks:chunks.length,excluded_cards:excluded,evidence_profile,relevance_profile,relevance_cards:relevanceAudit,counts,evidence_consistency:String(out?.evidence_consistency||"insufficient"),overall_interpretation:String(out?.overall_interpretation||""),human_clinical:String(out?.human_clinical||""),reviews_meta_analyses:String(out?.reviews_meta_analyses||""),preclinical_mechanistic:String(out?.preclinical_mechanistic||""),main_findings:(Array.isArray(out?.main_findings)?out.main_findings:[]).slice(0,8).map(x=>({finding:String(x?.finding||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.finding),conflicting_evidence:(Array.isArray(out?.conflicting_evidence)?out.conflicting_evidence:[]).slice(0,6).map(x=>({issue:String(x?.issue||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.issue),limitations:(Array.isArray(out?.limitations)?out.limitations:[]).map(String).slice(0,8),research_gaps:(Array.isArray(out?.research_gaps)?out.research_gaps:[]).map(String).slice(0,8),bottom_line:String(out?.bottom_line||"")};
+  const synthesis={schema_version:9,area_slug:slug,area_label:area.label,generated_at:new Date().toISOString(),library_total:area.count,cards_processed:raw.length,cards_analyzed:usable.length,cards_excluded:excluded.length,cards_sent_to_model:nano.length,cards_synthesized:nano.length,synthesis_chunks:chunks.length,excluded_cards:excluded,evidence_profile,relevance_profile,relevance_cards:relevanceAudit,counts,evidence_consistency:String(out?.evidence_consistency||"insufficient"),overall_interpretation:String(out?.overall_interpretation||""),human_clinical:String(out?.human_clinical||""),reviews_meta_analyses:String(out?.reviews_meta_analyses||""),preclinical_mechanistic:String(out?.preclinical_mechanistic||""),main_findings:(Array.isArray(out?.main_findings)?out.main_findings:[]).slice(0,8).map(x=>({finding:String(x?.finding||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.finding),conflicting_evidence:(Array.isArray(out?.conflicting_evidence)?out.conflicting_evidence:[]).slice(0,6).map(x=>({issue:String(x?.issue||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.issue),limitations:(Array.isArray(out?.limitations)?out.limitations:[]).map(String).slice(0,8),research_gaps:(Array.isArray(out?.research_gaps)?out.research_gaps:[]).map(String).slice(0,8),bottom_line:String(out?.bottom_line||"")};
   try{await env.SITE_ADMIN.put(EVIDENCE_LAB_SYNTHESIS_PREFIX+slug,JSON.stringify(synthesis)); await env.SITE_ADMIN.delete(checkpointKey).catch(()=>{});}
   catch(e){return jsonResponse({error:`Synthesis generated but KV save failed: ${e?.message||"unknown storage error"}`},500);}
   return jsonResponse({ok:true,synthesis});
