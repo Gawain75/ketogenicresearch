@@ -540,7 +540,7 @@ async function handleEvidenceSynthesize(request,env){
   // This keeps every included card represented without exceeding a single-request TPM envelope.
   const chunkSize=10;
   const chunks=[]; for(let i=0;i<nano.length;i+=chunkSize) chunks.push(nano.slice(i,i+chunkSize));
-  const checkpointKey=`evidence-lab:v2:synthesis-checkpoint:${slug}:v11`;
+  const checkpointKey=`evidence-lab:v2:synthesis-checkpoint:${slug}:v12`;
   const corpusFingerprint=nano.map(x=>x.p).join(",")+"|"+JSON.stringify(exactProfile)+"|"+JSON.stringify(relevance_profile);
   let checkpoint=await env.SITE_ADMIN.get(checkpointKey,"json").catch(()=>null);
   if(!checkpoint || checkpoint.fingerprint!==corpusFingerprint) checkpoint={fingerprint:corpusFingerprint,chunks:{}};
@@ -574,8 +574,34 @@ async function handleEvidenceSynthesize(request,env){
   try{out=await groqJsonLimited(env,[{role:"system",content:finalSystem},{role:"user",content:finalPacket}],1100);}
   catch(e){return jsonResponse({error:`Evidence synthesis final stage failed: ${e?.message||"AI service error"}. Chunk checkpoints were preserved; retry Generate synthesis to resume without repeating completed chunks.`,diagnostic:{cards_processed:raw.length,cards_usable:usable.length,cards_synthesized:nano.length,completed_chunks:chunks.length,final_packet_chars:finalPacket.length}},502);}
 
-  const allowed=new Set(nano.map(x=>x.p)), cleanPmids=v=>Array.isArray(v)?v.map(String).filter(x=>allowed.has(x)).slice(0,12):[];
-  const synthesis={schema_version:11,area_slug:slug,area_label:area.label,generated_at:new Date().toISOString(),library_total:area.count,cards_processed:raw.length,cards_analyzed:usable.length,cards_excluded:excluded.length,cards_sent_to_model:nano.length,cards_synthesized:nano.length,synthesis_chunks:chunks.length,excluded_cards:excluded,evidence_profile,relevance_profile,relevance_cards:relevanceAudit,counts,evidence_consistency:String(out?.evidence_consistency||"insufficient"),overall_interpretation:String(out?.overall_interpretation||""),human_clinical:String(out?.human_clinical||""),reviews_meta_analyses:String(out?.reviews_meta_analyses||""),preclinical_mechanistic:String(out?.preclinical_mechanistic||""),main_findings:(Array.isArray(out?.main_findings)?out.main_findings:[]).slice(0,8).map(x=>({finding:String(x?.finding||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.finding),conflicting_evidence:(Array.isArray(out?.conflicting_evidence)?out.conflicting_evidence:[]).slice(0,6).map(x=>({issue:String(x?.issue||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.issue),limitations:(Array.isArray(out?.limitations)?out.limitations:[]).map(String).slice(0,8),research_gaps:(Array.isArray(out?.research_gaps)?out.research_gaps:[]).map(String).slice(0,8),bottom_line:String(out?.bottom_line||"")};
+  // Deterministic citation validator. The model may only attach a PMID to a section whose
+  // evidence class matches the locked Evidence Card. This prevents a review being cited as an
+  // observational/animal study (and analogous cross-domain citation drift).
+  const cardByPmid=new Map(usable.map(x=>[String(x.card.pmid||""),{card:x.card,rel:x.level}]));
+  const allowed=new Set(cardByPmid.keys());
+  const pubType=pmid=>String(cardByPmid.get(String(pmid))?.card?.publication_type||"other");
+  const sectionAllows=(section,pmid)=>{
+    const t=pubType(pmid);
+    if(section==="human") return t==="clinical_trial"||t==="observational"||t==="mechanistic_human"||t==="case_report_series";
+    if(section==="reviews") return t==="systematic_review_meta_analysis"||t==="narrative_review";
+    if(section==="preclinical") return t==="preclinical_animal"||t==="mechanistic_preclinical";
+    return allowed.has(String(pmid));
+  };
+  const citedPmids=text=>[...String(text||"").matchAll(/(?:PMID\s*)?(\d{7,9})/gi)].map(m=>m[1]).filter(x=>allowed.has(x));
+  const sanitizeSection=(text,section)=>{
+    const parts=String(text||"").split(/(?<=[.!?])\s+/);
+    return parts.filter(sentence=>{const ps=citedPmids(sentence);return !ps.length||ps.every(p=>sectionAllows(section,p));}).join(" ").trim();
+  };
+  const classifyClaim=text=>{const q=String(text||"").toLowerCase();
+    if(/animal|mouse|mice|rat|zebrafish|mptp|rotenone|6[- ]?ohda|in vitro|cell|dopaminergic neuron|preclinical/.test(q))return "preclinical";
+    if(/systematic review|meta-analysis|meta analysis|narrative review|review/.test(q))return "reviews";
+    if(/trial|rct|randomi|participant|patient|human|observational|cohort|voice handicap|updrs|nmss|cognitive|levodopa/.test(q))return "human";
+    return "any";};
+  const cleanPmids=(v,claim="")=>{const section=classifyClaim(claim);return Array.isArray(v)?v.map(String).filter(x=>allowed.has(x)&&(section==="any"||sectionAllows(section,x))).slice(0,12):[];};
+  const citation_validation={removed_section_sentences:[],removed_claim_citations:[]};
+  const validateSection=(value,section)=>{const before=String(value||"");const after=sanitizeSection(before,section);if(after!==before)citation_validation.removed_section_sentences.push(section);return after;};
+  const mapClaims=(items,label)=> (Array.isArray(items)?items:[]).slice(0,label==="finding"?8:6).map(x=>{const txt=String(x?.[label]||"");const original=Array.isArray(x?.pmids)?x.pmids.map(String):[];const pmids=cleanPmids(original,txt);if(pmids.length!==original.filter(p=>allowed.has(p)).length)citation_validation.removed_claim_citations.push({type:label,text:txt.slice(0,140)});return {[label]:txt,pmids};}).filter(x=>x[label]);
+  const synthesis={schema_version:12,area_slug:slug,area_label:area.label,generated_at:new Date().toISOString(),library_total:area.count,cards_processed:raw.length,cards_analyzed:usable.length,cards_excluded:excluded.length,cards_sent_to_model:nano.length,cards_synthesized:nano.length,synthesis_chunks:chunks.length,excluded_cards:excluded,evidence_profile,relevance_profile,relevance_cards:relevanceAudit,counts,citation_validation,evidence_consistency:String(out?.evidence_consistency||"insufficient"),overall_interpretation:String(out?.overall_interpretation||""),human_clinical:validateSection(out?.human_clinical,"human"),reviews_meta_analyses:validateSection(out?.reviews_meta_analyses,"reviews"),preclinical_mechanistic:validateSection(out?.preclinical_mechanistic,"preclinical"),main_findings:mapClaims(out?.main_findings,"finding"),conflicting_evidence:mapClaims(out?.conflicting_evidence,"issue"),limitations:(Array.isArray(out?.limitations)?out.limitations:[]).map(String).slice(0,8),research_gaps:(Array.isArray(out?.research_gaps)?out.research_gaps:[]).map(String).slice(0,8),bottom_line:String(out?.bottom_line||"")};
   try{await env.SITE_ADMIN.put(EVIDENCE_LAB_SYNTHESIS_PREFIX+slug,JSON.stringify(synthesis)); await env.SITE_ADMIN.delete(checkpointKey).catch(()=>{});}
   catch(e){return jsonResponse({error:`Synthesis generated but KV save failed: ${e?.message||"unknown storage error"}`},500);}
   return jsonResponse({ok:true,done:true,synthesis,progress:{phase:"complete",completed:chunks.length,total:chunks.length}});
