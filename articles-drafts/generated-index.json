@@ -41,6 +41,7 @@
     "42810956",
     "42812005",
     "42815840",
+    "42822582",
     "42825834"
   ],
   "failures": [
@@ -715,7 +716,7 @@
       "error": "HTTP Error 429: Too Many Requests"
     }
   ],
-  "updated_at": "2026-10-05T03:35:35.847364+00:00",
+  "updated_at": "2026-10-06T03:33:14.577129+00:00",
   "source_unavailable_pmids": [
     "42642354",
     "42717355",
@@ -726,8 +727,8 @@
     "42828422"
   ],
   "last_run": {
-    "attempted_candidates": 10,
-    "published_articles": 0,
-    "status": "no_article_published"
+    "attempted_candidates": 4,
+    "published_articles": 1,
+    "status": "published"
   }
 }
