@@ -41,6 +41,12 @@
 <div class="metric-grid"><div class="metric"><strong id="evTotal">—</strong><span>Library studies</span></div><div class="metric"><strong id="evProcessed">—</strong><span>Evidence Cards</span></div><div class="metric"><strong id="evAbstract">—</strong><span>Abstract available</span></div><div class="metric"><strong id="evRemaining">—</strong><span>Remaining</span></div></div>
 <div class="review-actions"><button class="review-btn" id="evidenceProcess">Process next batch</button><button class="review-btn muted" id="evidenceRefresh">Refresh status</button></div>
 <div class="review-status" id="evidenceStatus">Choose a clinical area. Processing is incremental and does not modify Library classification.</div>
+<div style="margin-top:24px;padding-top:20px;border-top:1px solid #dbe4ee">
+<div class="project-row"><div><h3 style="margin:0 0 4px">Provisional Evidence Synthesis</h3><p class="sub" style="margin:0">Private interpretation generated only from cached Evidence Cards. It is never published automatically.</p></div><span class="protocol-lock">Draft</span></div>
+<div class="review-actions"><button class="review-btn secondary" id="evidenceSynthesize">Generate synthesis</button><button class="review-btn muted" id="evidenceLoadSynthesis">Load saved synthesis</button></div>
+<div class="review-status" id="synthesisStatus">Generate after a meaningful sample of Evidence Cards has been checked.</div>
+<div id="evidenceSynthesis" style="margin-top:16px"><div class="empty">No synthesis generated for this area yet.</div></div>
+</div>
 <h3 style="margin-top:22px">Recent Evidence Cards</h3><div class="study-list" id="evidenceCards"><div class="empty">No Evidence Cards generated for this area yet.</div></div>
 </div>
 <div class="review-panel" id="panel-question">
