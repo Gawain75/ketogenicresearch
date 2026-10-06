@@ -340,8 +340,9 @@ async function handleDraftApi(request, env) {
 }
 
 
-const EVIDENCE_LAB_STATE_PREFIX = "evidence-lab:state:";
-const EVIDENCE_LAB_CARD_PREFIX = "evidence-lab:card:";
+const EVIDENCE_LAB_STATE_PREFIX = "evidence-lab:v2:state:";
+const EVIDENCE_LAB_CARD_PREFIX = "evidence-lab:v2:card:";
+const EVIDENCE_LAB_SCHEMA_VERSION = 2;
 
 function evidenceLabSlug(v){ return String(v||"").toLowerCase().replace(/[^a-z0-9-]/g,"").slice(0,100); }
 async function evidenceLabIndex(request,env){
@@ -393,12 +394,21 @@ async function handleEvidenceProcess(request,env){
   }catch(e){warnings.push(`PubMed enrichment unavailable: ${e?.message||e}`);}
 
   const now=new Date().toISOString();
-  const fallback=src=>({pmid:String(src.pmid),study_design:"not extracted",population:"not reported",sample_size:null,intervention:"not reported",comparator:"not reported",duration:"not reported",outcomes:"not reported",main_result:"AI extraction pending",limitations:"not reported",evidence_domain:"other",source_level:abstracts[src.pmid]?"abstract":"metadata",extraction_confidence:"low"});
+  const fallback=src=>({schema_version:EVIDENCE_LAB_SCHEMA_VERSION,pmid:String(src.pmid),publication_type:"other",study_design:"not extracted",evidence_domain:"other",study_purpose:"other",population:"not reported",sample_size:null,sample_size_details:"not reported",intervention:"not reported",comparator:"not reported",duration:"not reported",primary_outcomes:[],secondary_outcomes:[],effect_direction:"not_reported",statistical_significance:"not_reported",randomized:"not_applicable",controlled:"not_applicable",time_orientation:"not_applicable",population_phenotype:"not reported",review_studies_included:null,review_participants:null,review_study_types:"not reported",pooled_effect:"not reported",heterogeneity:"not reported",risk_of_bias_or_certainty:"not reported",animal_species:"not applicable",animal_model:"not applicable",mechanistic_targets:[],main_result:"AI extraction pending",limitations:["not reported"],source_level:abstracts[src.pmid]?"abstract":"metadata",extraction_confidence:"low"});
   const extracted=new Map();
 
   // Keep each AI request deliberately small. Large multi-abstract calls were fragile on
   // Cloudflare/Groq and could make the whole request fail with a platform 500.
-  const aiSystem=`You are an evidence-extraction engine. Use ONLY the supplied records. Never infer unreported sample sizes, outcomes, effects or limitations. Return ONLY valid JSON: {"cards":[...]}. Return exactly one card per PMID. Each card must contain: pmid, study_design, population, sample_size, intervention, comparator, duration, outcomes, main_result, limitations, evidence_domain, source_level, extraction_confidence. evidence_domain must be one of clinical, preclinical, mechanistic, review, other. source_level must be abstract or metadata. extraction_confidence must be high, moderate or low. Use null or "not reported" when absent. Keep main_result factual and concise; do not convert association into causation.`;
+  const aiSystem=`You are an evidence-extraction engine for a scientific Evidence Lab. Use ONLY the supplied record. Do not infer facts that are not explicitly supported by the title/abstract. Return ONLY valid JSON as {"cards":[...]}, exactly one card per PMID.
+
+COMMON FIELDS required for every card: schema_version (integer 2), pmid, publication_type, study_design, evidence_domain, study_purpose, population, sample_size, sample_size_details, intervention, comparator, duration, primary_outcomes (array), secondary_outcomes (array), effect_direction, statistical_significance, main_result, limitations (array), source_level, extraction_confidence.
+
+Allowed publication_type: clinical_trial, observational, systematic_review_meta_analysis, narrative_review, preclinical_animal, mechanistic_human, mechanistic_preclinical, case_report_series, protocol, other. evidence_domain: clinical, preclinical, mechanistic, review, other. study_purpose: efficacy, safety, mechanism, association, diagnostic, feasibility, mixed, other. effect_direction: favorable, neutral, unfavorable, mixed, not_reported. statistical_significance: yes, no, mixed, not_reported. source_level: abstract or metadata. extraction_confidence: high, moderate, low.
+
+CLINICAL TRIAL / OBSERVATIONAL fields: randomized (yes/no/not_reported/not_applicable), controlled (yes/no/not_reported/not_applicable), time_orientation (prospective/retrospective/cross_sectional/not_reported/not_applicable), population_phenotype.
+SYSTEMATIC REVIEW / META-ANALYSIS fields: review_studies_included (number or null), review_participants (number or null), review_study_types, pooled_effect, heterogeneity, risk_of_bias_or_certainty. Do not treat a review as if it were a single trial.
+PRECLINICAL fields: animal_species, animal_model, mechanistic_targets (array).
+For fields not applicable to a publication type use "not applicable" or null/[] as appropriate. Never invent sample size, randomization, significance, effect estimates, limitations or certainty. If the abstract does not report something, use "not reported". Preserve whether evidence is human clinical versus animal/preclinical. main_result must be factual, concise, and must not turn association into causation.`
   if(env.GROQ_API_KEY){
     for(let i=0;i<todo.length;i+=2){
       const group=todo.slice(i,i+2);
@@ -424,7 +434,7 @@ async function handleEvidenceProcess(request,env){
   let processedNow=0;
   for(const src of todo){
     const pmid=String(src.pmid), c=extracted.get(pmid)||fallback(src);
-    c.pmid=pmid; c.title=src.title; c.doi=src.doi; c.year=src.year; c.area=slug; c.extracted_at=now;
+    c.schema_version=EVIDENCE_LAB_SCHEMA_VERSION; c.pmid=pmid; c.title=src.title; c.doi=src.doi; c.year=src.year; c.area=slug; c.extracted_at=now;
     // Only mark genuinely AI-extracted cards as processed. Fallback cards stay retryable.
     try{
       await env.SITE_ADMIN.put(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,JSON.stringify(c));
