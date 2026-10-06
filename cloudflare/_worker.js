@@ -234,11 +234,17 @@ async function requireReviewAdmin(request, env) {
 }
 
 function extractJsonObject(text) {
-  const raw = String(text || "").trim();
+  let raw = String(text || "").trim();
+  if (!raw) throw new Error("The model returned an empty response.");
+  // Tolerate Markdown fences and harmless prose around a JSON object.
+  raw = raw.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "").trim();
   try { return JSON.parse(raw); } catch {}
   const first = raw.indexOf("{");
   const last = raw.lastIndexOf("}");
-  if (first >= 0 && last > first) return JSON.parse(raw.slice(first, last + 1));
+  if (first >= 0 && last > first) {
+    const candidate = raw.slice(first, last + 1);
+    try { return JSON.parse(candidate); } catch {}
+  }
   throw new Error("The model did not return valid JSON.");
 }
 
@@ -263,24 +269,47 @@ async function groqJson(env, messages) {
 
 async function groqJsonLimited(env, messages, maxCompletionTokens=1600) {
   if (!env.GROQ_API_KEY) throw new Error("GROQ_API_KEY is not configured in Cloudflare.");
-  const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-    method: "POST",
-    headers: {"Authorization": `Bearer ${env.GROQ_API_KEY}`, "Content-Type": "application/json"},
-    body: JSON.stringify({
-      model: env.GROQ_MODEL || "openai/gpt-oss-120b",
-      temperature: 0.1,
-      max_completion_tokens: maxCompletionTokens,
-      reasoning_effort: "low",
-      messages
-    })
-  });
-  if (!r.ok) {
-    let detail="";
-    try { const j=await r.json(); detail=String(j?.error?.message||j?.message||""); } catch { try{detail=await r.text();}catch{} }
-    throw new Error(`AI synthesis service error (${r.status})${detail?`: ${detail.slice(0,700)}`:""}`);
+  const endpoint="https://api.groq.com/openai/v1/chat/completions";
+  const model=env.GROQ_MODEL || "openai/gpt-oss-120b";
+  let lastError=null;
+  // Two controlled attempts. JSON mode constrains the model at generation time; the
+  // second attempt also adds an explicit repair instruction without changing evidence.
+  for (let attempt=0; attempt<2; attempt++) {
+    const attemptMessages = attempt===0 ? messages : [
+      ...messages,
+      {role:"system",content:"RETRY: The previous response was not parseable JSON. Return exactly one complete JSON object, with no Markdown fences, commentary, or trailing text. Keep the same evidence and required keys."}
+    ];
+    let r;
+    try {
+      r=await fetch(endpoint,{
+        method:"POST",
+        headers:{"Authorization":`Bearer ${env.GROQ_API_KEY}`,"Content-Type":"application/json"},
+        body:JSON.stringify({
+          model, temperature:0.1, max_completion_tokens:maxCompletionTokens, reasoning_effort:"low",
+          response_format:{type:"json_object"}, messages:attemptMessages
+        })
+      });
+    } catch(e) { lastError=new Error(`AI synthesis network error: ${e?.message||"request failed"}`); continue; }
+    if(!r.ok){
+      let detail=""; try{const j=await r.json();detail=String(j?.error?.message||j?.message||"");}catch{try{detail=await r.text();}catch{}}
+      // If JSON mode itself is rejected by the provider/model, retry once without it.
+      if(attempt===0 && (r.status===400 || r.status===422) && /response_format|json/i.test(detail)){
+        try{
+          r=await fetch(endpoint,{method:"POST",headers:{"Authorization":`Bearer ${env.GROQ_API_KEY}`,"Content-Type":"application/json"},body:JSON.stringify({model,temperature:0.1,max_completion_tokens:maxCompletionTokens,reasoning_effort:"low",messages:attemptMessages})});
+          if(r.ok){const data=await r.json();try{return extractJsonObject(data?.choices?.[0]?.message?.content||"");}catch(e){lastError=e;continue;}}
+          try{const j=await r.json();detail=String(j?.error?.message||j?.message||detail);}catch{}
+        }catch(e){lastError=e;continue;}
+      }
+      lastError=new Error(`AI synthesis service error (${r.status})${detail?`: ${detail.slice(0,700)}`:""}`);
+      // Rate/size/auth errors are not fixed by a JSON retry.
+      if([401,403,413,429].includes(r.status)) throw lastError;
+      continue;
+    }
+    const data=await r.json();
+    try{return extractJsonObject(data?.choices?.[0]?.message?.content||"");}
+    catch(e){lastError=e;}
   }
-  const data=await r.json();
-  return extractJsonObject(data?.choices?.[0]?.message?.content || "");
+  throw new Error(`AI JSON validation failed after controlled retry: ${lastError?.message||"invalid response"}`);
 }
 
 async function groqText(env, messages) {
