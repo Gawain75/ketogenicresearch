@@ -366,6 +366,42 @@ async function handleEvidenceStatus(request,env){
   const withAbstract=area.studies.filter(x=>x.has_abstract).length, withPmc=area.studies.filter(x=>x.pmcid).length;
   return jsonResponse({area:{slug,label:area.label,total:area.count},processed:processed.size,remaining:Math.max(0,area.count-processed.size),failed:(st.failed||[]).length,source_counts:{pmc_linked:withPmc,abstract_available:withAbstract,metadata_only:area.count-withAbstract},updated_at:st.updated_at,cards:sample});
 }
+const EVIDENCE_LAB_SYNTHESIS_PREFIX = "evidence-lab:v2:synthesis:";
+
+function compactEvidenceCard(c){
+  return {pmid:c.pmid,title:c.title,publication_type:c.publication_type,study_design:c.study_design,evidence_domain:c.evidence_domain,study_purpose:c.study_purpose,population:c.population,sample_size:c.sample_size,sample_size_details:c.sample_size_details,intervention:c.intervention,comparator:c.comparator,duration:c.duration,primary_outcomes:c.primary_outcomes,effect_direction:c.effect_direction,statistical_significance:c.statistical_significance,randomized:c.randomized,controlled:c.controlled,review_studies_included:c.review_studies_included,review_participants:c.review_participants,pooled_effect:c.pooled_effect,heterogeneity:c.heterogeneity,risk_of_bias_or_certainty:c.risk_of_bias_or_certainty,animal_species:c.animal_species,animal_model:c.animal_model,mechanistic_targets:c.mechanistic_targets,main_result:c.main_result,limitations:c.limitations,source_level:c.source_level,extraction_confidence:c.extraction_confidence};
+}
+async function handleEvidenceSynthesisGet(request,env){
+  const url=new URL(request.url), slug=evidenceLabSlug(url.searchParams.get("area"));
+  if(!slug)return jsonResponse({error:"Clinical area is required."},400);
+  const saved=await env.SITE_ADMIN.get(EVIDENCE_LAB_SYNTHESIS_PREFIX+slug,"json");
+  return jsonResponse({synthesis:saved||null});
+}
+async function handleEvidenceSynthesize(request,env){
+  if(!env.SITE_ADMIN)return jsonResponse({error:"Evidence Lab storage (SITE_ADMIN) is not configured."},503);
+  if(!env.GROQ_API_KEY)return jsonResponse({error:"GROQ_API_KEY is not configured."},503);
+  const body=await request.json().catch(()=>({})), slug=evidenceLabSlug(body.area);
+  const idx=await evidenceLabIndex(request,env), area=idx.areas.find(a=>a.slug===slug);
+  if(!area)return jsonResponse({error:"Clinical area not found."},404);
+  const st=await evidenceLabState(env,slug), ids=(st.processed||[]).map(String);
+  if(ids.length<12)return jsonResponse({error:`At least 12 Evidence Cards are required for a provisional synthesis. Currently available: ${ids.length}.`},400);
+  const cards=[];
+  for(const pmid of ids.slice(-120)){
+    const c=await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");
+    if(c)cards.push(compactEvidenceCard(c));
+  }
+  if(cards.length<12)return jsonResponse({error:"Not enough readable Evidence Cards for synthesis."},400);
+  const counts={clinical:0,review:0,preclinical:0,mechanistic:0,other:0,abstract:0,metadata:0};
+  for(const c of cards){const d=String(c.evidence_domain||"other");counts[d]=(counts[d]||0)+1;counts[c.source_level==="abstract"?"abstract":"metadata"]++;}
+  const system=`You are producing a PRIVATE, PROVISIONAL scientific evidence synthesis from structured Evidence Cards. Use ONLY the supplied cards. Do not add external knowledge or citations. Human clinical evidence, reviews/meta-analyses, preclinical animal evidence, and mechanistic evidence MUST be interpreted separately. Never infer causality from observational evidence. Never convert absence of reporting into a negative finding. Do not use vote counting alone to determine conclusions. Weight interpretation by study design, sample size, controls/randomization, source level, extraction confidence, consistency and limitations. Every substantive finding must include supporting PMID numbers that exist in the packet. If evidence is insufficient or heterogeneous, say so explicitly. This is not a formal GRADE assessment and you must not label certainty as GRADE. Return ONLY valid JSON with keys: overall_interpretation (string), evidence_consistency (one of consistent,mostly_consistent,mixed,conflicting,insufficient), human_clinical (string), reviews_meta_analyses (string), preclinical_mechanistic (string), main_findings (array of objects {finding,pmids}), conflicting_evidence (array of objects {issue,pmids}), limitations (array), research_gaps (array), bottom_line (string). Keep the synthesis concise and scientifically cautious.`;
+  const packet={area:area.label,library_total:area.count,cards_analyzed:cards.length,counts,cards};
+  const out=await groqJson(env,[{role:"system",content:system},{role:"user",content:JSON.stringify(packet)}]);
+  const allowed=new Set(ids), cleanPmids=v=>Array.isArray(v)?v.map(String).filter(x=>allowed.has(x)).slice(0,12):[];
+  const synthesis={schema_version:1,area_slug:slug,area_label:area.label,generated_at:new Date().toISOString(),library_total:area.count,cards_analyzed:cards.length,counts,evidence_consistency:String(out?.evidence_consistency||"insufficient"),overall_interpretation:String(out?.overall_interpretation||""),human_clinical:String(out?.human_clinical||""),reviews_meta_analyses:String(out?.reviews_meta_analyses||""),preclinical_mechanistic:String(out?.preclinical_mechanistic||""),main_findings:(Array.isArray(out?.main_findings)?out.main_findings:[]).slice(0,8).map(x=>({finding:String(x?.finding||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.finding),conflicting_evidence:(Array.isArray(out?.conflicting_evidence)?out.conflicting_evidence:[]).slice(0,6).map(x=>({issue:String(x?.issue||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.issue),limitations:(Array.isArray(out?.limitations)?out.limitations:[]).map(String).slice(0,8),research_gaps:(Array.isArray(out?.research_gaps)?out.research_gaps:[]).map(String).slice(0,8),bottom_line:String(out?.bottom_line||"")};
+  await env.SITE_ADMIN.put(EVIDENCE_LAB_SYNTHESIS_PREFIX+slug,JSON.stringify(synthesis));
+  return jsonResponse({ok:true,synthesis});
+}
+
 async function handleEvidenceProcess(request,env){
   const body=await request.json().catch(()=>({}));
   const slug=evidenceLabSlug(body.area), batch=Math.max(1,Math.min(10,Number(body.batch)||6));
@@ -592,7 +628,7 @@ export default {
     }
     if (url.pathname.startsWith("/api/review/")) {
       const auth=await requireReviewAdmin(request,env); if(!auth.ok)return auth.response;
-      try { if(url.pathname==="/api/review/evidence/areas")return handleEvidenceAreas(request,env); if(url.pathname==="/api/review/evidence/status")return handleEvidenceStatus(request,env); if(url.pathname==="/api/review/evidence/process"&&request.method==="POST")return handleEvidenceProcess(request,env); if(url.pathname==="/api/review/protocol")return handleProtocolApi(request,env); if(url.pathname==="/api/review/pubmed")return handlePubmedApi(request,env); if(url.pathname==="/api/review/draft")return handleDraftApi(request,env); return jsonResponse({error:"Not found"},404); } catch(e){ return jsonResponse({error:e?.message||"Review Studio error"},500); }
+      try { if(url.pathname==="/api/review/evidence/areas")return handleEvidenceAreas(request,env); if(url.pathname==="/api/review/evidence/status")return handleEvidenceStatus(request,env); if(url.pathname==="/api/review/evidence/process"&&request.method==="POST")return handleEvidenceProcess(request,env); if(url.pathname==="/api/review/evidence/synthesis"&&request.method==="GET")return handleEvidenceSynthesisGet(request,env); if(url.pathname==="/api/review/evidence/synthesize"&&request.method==="POST")return handleEvidenceSynthesize(request,env); if(url.pathname==="/api/review/protocol")return handleProtocolApi(request,env); if(url.pathname==="/api/review/pubmed")return handlePubmedApi(request,env); if(url.pathname==="/api/review/draft")return handleDraftApi(request,env); return jsonResponse({error:"Not found"},404); } catch(e){ return jsonResponse({error:e?.message||"Review Studio error"},500); }
     }
 
     // Serve the login document from a non-HTML raw asset. This bypasses
