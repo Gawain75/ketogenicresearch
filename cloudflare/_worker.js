@@ -427,26 +427,40 @@ function evidenceRelevance(c,areaLabel){
   const norm=v=>String(v??"").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"");
   const join=v=>Array.isArray(v)?v.map(x=>typeof x==="string"?x:JSON.stringify(x)).join(" "):String(v??"");
   const title=norm(c.title), intervention=norm(c.intervention), result=norm(c.main_result), population=norm(c.population), model=norm(c.animal_model), targets=norm(join(c.mechanistic_targets));
-  const all=[title,intervention,result,population,model,targets,norm(c.study_design)].join(" ");
-  const keto=/(ketogenic|ketosis|ketone|beta[- ]?hydroxybutyrate|β[- ]?hydroxybutyrate|\bbhb\b|medium[- ]?chain triglycer|\bmct\b|ketoflex|low[- ]?carbohydrate)/;
-  const ketoIntervention=/(ketogenic|ketosis|beta[- ]?hydroxybutyrate|β[- ]?hydroxybutyrate|\bbhb\b|medium[- ]?chain triglycer|\bmct\b|ketoflex|low[- ]?carbohydrate)/.test(intervention);
-  const areaWords=norm(areaLabel).split(/[^a-z0-9]+/).filter(x=>x.length>3 && !["disease","syndrome","disorder"].includes(x));
+  const all=[title,intervention,result,population,model,targets,norm(c.study_design),norm(join(c.primary_outcomes))].join(" ");
+  const keto=/(ketogenic|ketosis|ketone|beta[- ]?hydroxybutyrate|β[- ]?hydroxybutyrate|d[- ]?beta[- ]?hydroxybutyrate|hydroxybutyrate|\bbhb\b|medium[- ]?chain triglycer|\bmct\b|ketoflex|low[- ]?carbohydrate)/;
+  const ketoIntervention=keto.test(intervention);
+  const areaNorm=norm(areaLabel);
+  const areaWords=areaNorm.split(/[^a-z0-9]+/).filter(x=>x.length>3 && !["disease","syndrome","disorder"].includes(x));
   const areaDirect=areaWords.length===0 || areaWords.some(w=>all.includes(w));
   const type=String(c.publication_type||"other");
   const human=["clinical_trial","observational","case_report_series","mechanistic_human"].includes(type);
   const preclinical=["preclinical_animal","mechanistic_preclinical"].includes(type);
   const review=["systematic_review_meta_analysis","narrative_review"].includes(type);
-  if(!keto.test(all)) return {level:"exclude",reason:"no ketogenic/ketone-specific evidence in the extracted card"};
+
+  // Disease-model evidence can be directly relevant even when the disease name is absent from
+  // the abstract fields (common in toxin/cell models). These markers are deliberately narrow.
+  let diseaseModelDirect=false;
+  if(areaNorm.includes("parkinson")){
+    diseaseModelDirect=/(mptp|6[- ]?ohda|6[- ]?hydroxydopamine|rotenone|dopaminergic|substantia nigra|striatal dopamine|synphilin|alpha[- ]?synuclein|α[- ]?synuclein)/.test(all);
+  }
+  const diseaseSpecific=areaDirect || diseaseModelDirect;
+
+  // MCT-related metabolic substrates are supporting—not direct—evidence when tested in a
+  // disease-specific model. They must never be promoted to human efficacy evidence by this rule.
+  const metabolicSupport=/(octanoic acid|caprylic acid|c8\b|medium[- ]?chain fatty|pantethine)/.test(all);
+
   if(human && ketoIntervention && areaDirect) return {level:"direct",reason:"human evidence directly evaluating a ketogenic/ketone intervention in the selected clinical area"};
   if(review && areaDirect && keto.test(title+" "+result)){
     const focused=keto.test(title) && areaWords.some(w=>title.includes(w));
     return focused?{level:"direct",reason:"review directly focused on ketogenic/ketone evidence in the selected clinical area"}:{level:"contextual",reason:"review provides broader context in which ketogenic/ketone evidence is only one component"};
   }
-  if(preclinical && areaDirect && (ketoIntervention || keto.test(result+" "+targets))) return {level:"supporting",reason:"ketogenic/ketone mechanistic or preclinical evidence directly relevant to the selected clinical area"};
-  if(areaDirect && keto.test(all)) return {level:"supporting",reason:"ketogenic/ketone evidence supports biological or clinical plausibility but is not direct efficacy evidence"};
+  if(preclinical && diseaseSpecific && (ketoIntervention || keto.test(result+" "+targets+" "+title))) return {level:"supporting",reason:"ketone/ketogenic mechanism tested in a disease-specific preclinical or mechanistic model"};
+  if(preclinical && diseaseSpecific && metabolicSupport) return {level:"supporting",reason:"ketogenic-metabolism/MCT-related substrate tested in a disease-specific model; supportive mechanistic evidence, not direct ketogenic-diet efficacy evidence"};
+  if(!keto.test(all)) return {level:"exclude",reason:"no ketogenic/ketone-specific evidence in the extracted card and no disease-specific ketogenic-metabolism support signal"};
+  if(diseaseSpecific && keto.test(all)) return {level:"supporting",reason:"ketogenic/ketone evidence supports disease-specific biological plausibility but is not direct clinical efficacy evidence"};
   return {level:"contextual",reason:"ketogenic/ketone evidence is present but is not directly focused on the selected clinical question"};
 }
-
 async function handleEvidenceSynthesize(request,env){
   if(!env.SITE_ADMIN)return jsonResponse({error:"Evidence Lab storage (SITE_ADMIN) is not configured."},503);
   if(!env.GROQ_API_KEY)return jsonResponse({error:"GROQ_API_KEY is not configured."},503);
@@ -502,7 +516,7 @@ async function handleEvidenceSynthesize(request,env){
   catch(e){return jsonResponse({error:`Evidence synthesis final stage failed: ${e?.message||"AI service error"}`,diagnostic:{cards_processed:raw.length,cards_usable:usable.length,cards_synthesized:nano.length,final_packet_chars:finalPacket.length}},502);}
 
   const allowed=new Set(nano.map(x=>x.p)), cleanPmids=v=>Array.isArray(v)?v.map(String).filter(x=>allowed.has(x)).slice(0,12):[];
-  const synthesis={schema_version:6,area_slug:slug,area_label:area.label,generated_at:new Date().toISOString(),library_total:area.count,cards_processed:raw.length,cards_analyzed:usable.length,cards_excluded:excluded.length,cards_sent_to_model:nano.length,cards_synthesized:nano.length,synthesis_chunks:1,excluded_cards:excluded,evidence_profile,relevance_profile,relevance_cards:relevanceAudit,counts,evidence_consistency:String(out?.evidence_consistency||"insufficient"),overall_interpretation:String(out?.overall_interpretation||""),human_clinical:String(out?.human_clinical||""),reviews_meta_analyses:String(out?.reviews_meta_analyses||""),preclinical_mechanistic:String(out?.preclinical_mechanistic||""),main_findings:(Array.isArray(out?.main_findings)?out.main_findings:[]).slice(0,8).map(x=>({finding:String(x?.finding||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.finding),conflicting_evidence:(Array.isArray(out?.conflicting_evidence)?out.conflicting_evidence:[]).slice(0,6).map(x=>({issue:String(x?.issue||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.issue),limitations:(Array.isArray(out?.limitations)?out.limitations:[]).map(String).slice(0,8),research_gaps:(Array.isArray(out?.research_gaps)?out.research_gaps:[]).map(String).slice(0,8),bottom_line:String(out?.bottom_line||"")};
+  const synthesis={schema_version:7,area_slug:slug,area_label:area.label,generated_at:new Date().toISOString(),library_total:area.count,cards_processed:raw.length,cards_analyzed:usable.length,cards_excluded:excluded.length,cards_sent_to_model:nano.length,cards_synthesized:nano.length,synthesis_chunks:1,excluded_cards:excluded,evidence_profile,relevance_profile,relevance_cards:relevanceAudit,counts,evidence_consistency:String(out?.evidence_consistency||"insufficient"),overall_interpretation:String(out?.overall_interpretation||""),human_clinical:String(out?.human_clinical||""),reviews_meta_analyses:String(out?.reviews_meta_analyses||""),preclinical_mechanistic:String(out?.preclinical_mechanistic||""),main_findings:(Array.isArray(out?.main_findings)?out.main_findings:[]).slice(0,8).map(x=>({finding:String(x?.finding||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.finding),conflicting_evidence:(Array.isArray(out?.conflicting_evidence)?out.conflicting_evidence:[]).slice(0,6).map(x=>({issue:String(x?.issue||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.issue),limitations:(Array.isArray(out?.limitations)?out.limitations:[]).map(String).slice(0,8),research_gaps:(Array.isArray(out?.research_gaps)?out.research_gaps:[]).map(String).slice(0,8),bottom_line:String(out?.bottom_line||"")};
   try{await env.SITE_ADMIN.put(EVIDENCE_LAB_SYNTHESIS_PREFIX+slug,JSON.stringify(synthesis));}
   catch(e){return jsonResponse({error:`Synthesis generated but KV save failed: ${e?.message||"unknown storage error"}`},500);}
   return jsonResponse({ok:true,synthesis});
