@@ -366,20 +366,74 @@ async function handleEvidenceStatus(request,env){
   return jsonResponse({area:{slug,label:area.label,total:area.count},processed:processed.size,remaining:Math.max(0,area.count-processed.size),failed:(st.failed||[]).length,source_counts:{pmc_linked:withPmc,abstract_available:withAbstract,metadata_only:area.count-withAbstract},updated_at:st.updated_at,cards:sample});
 }
 async function handleEvidenceProcess(request,env){
-  const body=await request.json().catch(()=>({})), slug=evidenceLabSlug(body.area), batch=Math.max(1,Math.min(10,Number(body.batch)||6));
-  const idx=await evidenceLabIndex(request,env), area=idx.areas.find(a=>a.slug===slug); if(!area)return jsonResponse({error:"Clinical area not found."},404);
-  const st=await evidenceLabState(env,slug), done=new Set(st.processed||[]), todo=area.studies.filter(x=>!done.has(x.pmid)).slice(0,batch); if(!todo.length)return jsonResponse({ok:true,processed_now:0,processed:done.size,remaining:0,complete:true});
-  const abstracts={};
-  const ep=new URLSearchParams({db:"pubmed",id:todo.map(x=>x.pmid).join(","),retmode:"xml"}); if(env.NCBI_API_KEY)ep.set("api_key",env.NCBI_API_KEY);
-  const er=await fetch(`https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?${ep.toString()}`,{headers:{"User-Agent":"KetogenicResearchHub-EvidenceLab/1.0 (info@ketogenicresearch.org)"}});
-  if(er.ok){const xml=await er.text();const clean=t=>String(t||"").replace(/<[^>]+>/g," ").replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&").replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/\s+/g," ").trim();for(const part of xml.split(/<PubmedArticle>/i).slice(1)){const pm=part.match(/<PMID[^>]*>(\d+)<\/PMID>/i);if(!pm)continue;const abs=[...part.matchAll(/<AbstractText[^>]*>([\s\S]*?)<\/AbstractText>/gi)].map(m=>clean(m[1])).filter(Boolean).join(" ");if(abs)abstracts[pm[1]]=abs;}}
-  const packet=todo.map(x=>({pmid:x.pmid,title:x.title,year:x.year,doi:x.doi,evidence_label:x.evidence,source:abstracts[x.pmid]?"PubMed abstract":"metadata only",abstract:abstracts[x.pmid]||""}));
-  const system=`You are an evidence-extraction engine. Use ONLY the supplied records. Never infer unreported sample sizes, outcomes, effects or limitations. Return ONLY JSON: {"cards":[...]}. Return exactly one card per PMID. Each card must contain: pmid, study_design, population, sample_size, intervention, comparator, duration, outcomes, main_result, limitations, evidence_domain, source_level, extraction_confidence. evidence_domain must be one of clinical, preclinical, mechanistic, review, other. source_level must be abstract or metadata. extraction_confidence must be high, moderate or low. Use null or "not reported" when absent. Keep main_result factual and concise; do not convert association into causation.`;
-  const out=await groqJson(env,[{role:"system",content:system},{role:"user",content:JSON.stringify(packet)}]);
-  const cards=Array.isArray(out.cards)?out.cards:[], byId=new Map(cards.map(c=>[String(c.pmid),c])), now=new Date().toISOString();
-  for(const src of todo){ const c=byId.get(src.pmid)||{pmid:src.pmid,study_design:"not extracted",population:"not reported",sample_size:null,intervention:"not reported",comparator:"not reported",duration:"not reported",outcomes:"not reported",main_result:"Extraction unavailable",limitations:"not reported",evidence_domain:"other",source_level:abstracts[src.pmid]?"abstract":"metadata",extraction_confidence:"low"}; c.pmid=src.pmid;c.title=src.title;c.doi=src.doi;c.year=src.year;c.area=slug;c.extracted_at=now; await env.SITE_ADMIN.put(EVIDENCE_LAB_CARD_PREFIX+slug+":"+src.pmid,JSON.stringify(c)); done.add(src.pmid); }
-  const next={processed:[...done],failed:st.failed||[],updated_at:now}; await env.SITE_ADMIN.put(EVIDENCE_LAB_STATE_PREFIX+slug,JSON.stringify(next));
-  return jsonResponse({ok:true,processed_now:todo.length,processed:done.size,remaining:Math.max(0,area.count-done.size)});
+  const body=await request.json().catch(()=>({}));
+  const slug=evidenceLabSlug(body.area), batch=Math.max(1,Math.min(10,Number(body.batch)||6));
+  if(!env.SITE_ADMIN)return jsonResponse({error:"Evidence Lab storage (SITE_ADMIN) is not configured."},503);
+  const idx=await evidenceLabIndex(request,env), area=idx.areas.find(a=>a.slug===slug);
+  if(!area)return jsonResponse({error:"Clinical area not found."},404);
+  const st=await evidenceLabState(env,slug), done=new Set(st.processed||[]), failed=Array.isArray(st.failed)?st.failed:[];
+  const todo=area.studies.filter(x=>!done.has(String(x.pmid))).slice(0,batch);
+  if(!todo.length)return jsonResponse({ok:true,processed_now:0,processed:done.size,remaining:0,complete:true,warnings:[]});
+
+  // PubMed is enrichment, not a single point of failure. Evidence Lab can still save a
+  // metadata card if NCBI is temporarily unavailable and retry that PMID later.
+  const abstracts={}, warnings=[];
+  try{
+    const ep=new URLSearchParams({db:"pubmed",id:todo.map(x=>x.pmid).join(","),retmode:"xml"});
+    if(env.NCBI_API_KEY)ep.set("api_key",env.NCBI_API_KEY);
+    const er=await fetch(`https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?${ep.toString()}`,{headers:{"User-Agent":"KetogenicResearchHub-EvidenceLab/1.1 (info@ketogenicresearch.org)"}});
+    if(!er.ok) throw new Error(`PubMed HTTP ${er.status}`);
+    const xml=await er.text();
+    const clean=t=>String(t||"").replace(/<[^>]+>/g," ").replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&").replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/\s+/g," ").trim();
+    for(const part of xml.split(/<PubmedArticle>/i).slice(1)){
+      const pm=part.match(/<PMID[^>]*>(\d+)<\/PMID>/i); if(!pm)continue;
+      const abs=[...part.matchAll(/<AbstractText[^>]*>([\s\S]*?)<\/AbstractText>/gi)].map(m=>clean(m[1])).filter(Boolean).join(" ");
+      if(abs)abstracts[pm[1]]=abs;
+    }
+  }catch(e){warnings.push(`PubMed enrichment unavailable: ${e?.message||e}`);}
+
+  const now=new Date().toISOString();
+  const fallback=src=>({pmid:String(src.pmid),study_design:"not extracted",population:"not reported",sample_size:null,intervention:"not reported",comparator:"not reported",duration:"not reported",outcomes:"not reported",main_result:"AI extraction pending",limitations:"not reported",evidence_domain:"other",source_level:abstracts[src.pmid]?"abstract":"metadata",extraction_confidence:"low"});
+  const extracted=new Map();
+
+  // Keep each AI request deliberately small. Large multi-abstract calls were fragile on
+  // Cloudflare/Groq and could make the whole request fail with a platform 500.
+  const aiSystem=`You are an evidence-extraction engine. Use ONLY the supplied records. Never infer unreported sample sizes, outcomes, effects or limitations. Return ONLY valid JSON: {"cards":[...]}. Return exactly one card per PMID. Each card must contain: pmid, study_design, population, sample_size, intervention, comparator, duration, outcomes, main_result, limitations, evidence_domain, source_level, extraction_confidence. evidence_domain must be one of clinical, preclinical, mechanistic, review, other. source_level must be abstract or metadata. extraction_confidence must be high, moderate or low. Use null or "not reported" when absent. Keep main_result factual and concise; do not convert association into causation.`;
+  if(env.GROQ_API_KEY){
+    for(let i=0;i<todo.length;i+=2){
+      const group=todo.slice(i,i+2);
+      const packet=group.map(x=>({pmid:String(x.pmid),title:x.title,year:x.year,doi:x.doi,evidence_label:x.evidence,source:abstracts[x.pmid]?"PubMed abstract":"metadata only",abstract:String(abstracts[x.pmid]||"").slice(0,6500)}));
+      try{
+        const out=await groqJson(env,[{role:"system",content:aiSystem},{role:"user",content:JSON.stringify(packet)}]);
+        for(const c of (Array.isArray(out?.cards)?out.cards:[])) if(c?.pmid) extracted.set(String(c.pmid),c);
+      }catch(e){
+        warnings.push(`AI batch retry for PMID ${group.map(x=>x.pmid).join(", ")}: ${e?.message||e}`);
+        // Retry individually so one malformed/oversized record cannot block its neighbour.
+        for(const x of group){
+          const one={pmid:String(x.pmid),title:x.title,year:x.year,doi:x.doi,evidence_label:x.evidence,source:abstracts[x.pmid]?"PubMed abstract":"metadata only",abstract:String(abstracts[x.pmid]||"").slice(0,5000)};
+          try{
+            const retry=await groqJson(env,[{role:"system",content:aiSystem},{role:"user",content:JSON.stringify([one])}]);
+            const card=Array.isArray(retry?.cards)?retry.cards.find(c=>String(c?.pmid)===String(x.pmid)):null;
+            if(card) extracted.set(String(x.pmid),card); else warnings.push(`AI returned no card for PMID ${x.pmid}.`);
+          }catch(re){warnings.push(`AI extraction failed for PMID ${x.pmid}: ${re?.message||re}`);}
+        }
+      }
+    }
+  }else warnings.push("GROQ_API_KEY is not configured; cards were saved for later AI extraction.");
+
+  let processedNow=0;
+  for(const src of todo){
+    const pmid=String(src.pmid), c=extracted.get(pmid)||fallback(src);
+    c.pmid=pmid; c.title=src.title; c.doi=src.doi; c.year=src.year; c.area=slug; c.extracted_at=now;
+    // Only mark genuinely AI-extracted cards as processed. Fallback cards stay retryable.
+    try{
+      await env.SITE_ADMIN.put(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,JSON.stringify(c));
+      if(extracted.has(pmid)){done.add(pmid);processedNow++;}
+    }catch(e){warnings.push(`Storage failed for PMID ${pmid}: ${e?.message||e}`);}
+  }
+  const next={processed:[...done],failed,updated_at:now};
+  await env.SITE_ADMIN.put(EVIDENCE_LAB_STATE_PREFIX+slug,JSON.stringify(next));
+  return jsonResponse({ok:true,processed_now:processedNow,attempted:todo.length,processed:done.size,remaining:Math.max(0,area.count-done.size),warnings});
 }
 
 const SITE_ADMIN_CONFIG_KEY = "site-admin:config:v1";
