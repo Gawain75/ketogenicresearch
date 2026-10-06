@@ -423,6 +423,30 @@ async function handleEvidenceSynthesisGet(request,env){
   const saved=await env.SITE_ADMIN.get(EVIDENCE_LAB_SYNTHESIS_PREFIX+slug,"json");
   return jsonResponse({synthesis:saved||null});
 }
+function evidenceRelevance(c,areaLabel){
+  const norm=v=>String(v??"").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"");
+  const join=v=>Array.isArray(v)?v.map(x=>typeof x==="string"?x:JSON.stringify(x)).join(" "):String(v??"");
+  const title=norm(c.title), intervention=norm(c.intervention), result=norm(c.main_result), population=norm(c.population), model=norm(c.animal_model), targets=norm(join(c.mechanistic_targets));
+  const all=[title,intervention,result,population,model,targets,norm(c.study_design)].join(" ");
+  const keto=/(ketogenic|ketosis|ketone|beta[- ]?hydroxybutyrate|β[- ]?hydroxybutyrate|\bbhb\b|medium[- ]?chain triglycer|\bmct\b|ketoflex|low[- ]?carbohydrate)/;
+  const ketoIntervention=/(ketogenic|ketosis|beta[- ]?hydroxybutyrate|β[- ]?hydroxybutyrate|\bbhb\b|medium[- ]?chain triglycer|\bmct\b|ketoflex|low[- ]?carbohydrate)/.test(intervention);
+  const areaWords=norm(areaLabel).split(/[^a-z0-9]+/).filter(x=>x.length>3 && !["disease","syndrome","disorder"].includes(x));
+  const areaDirect=areaWords.length===0 || areaWords.some(w=>all.includes(w));
+  const type=String(c.publication_type||"other");
+  const human=["clinical_trial","observational","case_report_series","mechanistic_human"].includes(type);
+  const preclinical=["preclinical_animal","mechanistic_preclinical"].includes(type);
+  const review=["systematic_review_meta_analysis","narrative_review"].includes(type);
+  if(!keto.test(all)) return {level:"exclude",reason:"no ketogenic/ketone-specific evidence in the extracted card"};
+  if(human && ketoIntervention && areaDirect) return {level:"direct",reason:"human evidence directly evaluating a ketogenic/ketone intervention in the selected clinical area"};
+  if(review && areaDirect && keto.test(title+" "+result)){
+    const focused=keto.test(title) && areaWords.some(w=>title.includes(w));
+    return focused?{level:"direct",reason:"review directly focused on ketogenic/ketone evidence in the selected clinical area"}:{level:"contextual",reason:"review provides broader context in which ketogenic/ketone evidence is only one component"};
+  }
+  if(preclinical && areaDirect && (ketoIntervention || keto.test(result+" "+targets))) return {level:"supporting",reason:"ketogenic/ketone mechanistic or preclinical evidence directly relevant to the selected clinical area"};
+  if(areaDirect && keto.test(all)) return {level:"supporting",reason:"ketogenic/ketone evidence supports biological or clinical plausibility but is not direct efficacy evidence"};
+  return {level:"contextual",reason:"ketogenic/ketone evidence is present but is not directly focused on the selected clinical question"};
+}
+
 async function handleEvidenceSynthesize(request,env){
   if(!env.SITE_ADMIN)return jsonResponse({error:"Evidence Lab storage (SITE_ADMIN) is not configured."},503);
   if(!env.GROQ_API_KEY)return jsonResponse({error:"GROQ_API_KEY is not configured."},503);
@@ -441,57 +465,44 @@ async function handleEvidenceSynthesize(request,env){
 
   const counts={clinical:0,review:0,preclinical:0,mechanistic:0,other:0,abstract:0,metadata:0};
   for(const c of raw){const d=String(c.evidence_domain||"other"); counts[d]=(counts[d]||0)+1; counts[c.source_level==="abstract"?"abstract":"metadata"]++;}
-  const usable=raw.filter(c=>c.source_level==="abstract" || c.source_level==="full_text");
+  const evidenceBearing=raw.filter(c=>c.source_level==="abstract" || c.source_level==="full_text");
   const excluded=raw.filter(c=>!(c.source_level==="abstract" || c.source_level==="full_text")).map(c=>({pmid:String(c.pmid||""),title:String(c.title||""),reason:"metadata-only / no evidence-bearing abstract or full text"}));
-  if(usable.length<8)return jsonResponse({error:`Only ${usable.length} evidence-bearing cards are available; metadata-only records are excluded from synthesis.`},400);
+  if(evidenceBearing.length<8)return jsonResponse({error:`Only ${evidenceBearing.length} evidence-bearing cards are available; metadata-only records are excluded from synthesis.`},400);
 
-  // Audit profile is deterministic and is the sole authority for study-type counts.
+  // Relevance is computed deterministically from the locked Evidence Card fields. It does not
+  // require another model call and therefore cannot consume synthesis TPM or drift between runs.
+  const relevance_profile={direct:0,supporting:0,contextual:0,exclude:0};
+  const relevance_cards=[];
+  for(const c of evidenceBearing){const rel=evidenceRelevance(c,area.label); relevance_profile[rel.level]++; relevance_cards.push({card:c,...rel});}
+  for(const x of relevance_cards.filter(x=>x.level==="exclude")) excluded.push({pmid:String(x.card.pmid||""),title:String(x.card.title||""),reason:x.reason});
+  const usable=relevance_cards.filter(x=>x.level!=="exclude");
+  if(usable.length<8)return jsonResponse({error:`Only ${usable.length} relevant evidence-bearing cards remain after relevance screening.`},400);
+
   const evidence_profile={clinical_trial:0,observational:0,systematic_review_meta_analysis:0,narrative_review:0,preclinical_animal:0,mechanistic_human:0,mechanistic_preclinical:0,case_report_series:0,protocol:0,other:0};
-  for(const c of usable){const k=String(c.publication_type||"other"); if(Object.prototype.hasOwnProperty.call(evidence_profile,k))evidence_profile[k]++; else evidence_profile.other++;}
+  for(const x of usable){const k=String(x.card.publication_type||"other"); if(Object.prototype.hasOwnProperty.call(evidence_profile,k))evidence_profile[k]++; else evidence_profile.other++;}
 
   const clip=(v,n)=>String(v??"").replace(/\s+/g," ").trim().slice(0,n);
   const arr=(v,n=4,m=90)=>Array.isArray(v)?v.slice(0,n).map(x=>clip(typeof x==="string"?x:(x?.outcome||x?.name||JSON.stringify(x)),m)).filter(Boolean):[];
-  const micro=usable.map(c=>({
-    p:String(c.pmid||""), type:clip(c.publication_type||"other",38), domain:clip(c.evidence_domain||"other",20),
-    design:clip(c.study_design||"",55), n:clip(c.sample_size||c.sample_size_details||"",45), pop:clip(c.population||"",90),
-    i:clip(c.intervention||"",90), cmp:clip(c.comparator||"",70), dur:clip(c.duration||"",35), o:arr(c.primary_outcomes,4,65),
-    dir:clip(c.effect_direction||"",18), sig:clip(c.statistical_significance||"",18), r:clip(c.main_result||c.pooled_effect||"",240),
-    lim:clip(c.limitations||c.risk_of_bias_or_certainty||"",130), conf:clip(c.extraction_confidence||"",12)
-  }));
-
-  // TPM-safe single-pass synthesis. Every usable card is represented once in a compact,
-  // deterministic evidence packet. There are no AI batch calls, so corpus size does not
-  // multiply provider TPM usage. The exact profile remains authoritative.
-  const nano=usable.map(c=>({
-    p:String(c.pmid||""),
-    t:clip(c.publication_type||"other",24),
-    d:clip(c.study_design||"",32),
-    n:clip(c.sample_size||c.sample_size_details||"",22),
-    pop:clip(c.population||"",48),
-    i:clip(c.intervention||"",48),
-    cmp:clip(c.comparator||"",32),
-    dur:clip(c.duration||"",18),
-    o:arr(c.primary_outcomes,2,38),
-    dir:clip(c.effect_direction||"",12),
-    sig:clip(c.statistical_significance||"",10),
-    r:clip(c.main_result||c.pooled_effect||"",105),
-    lim:clip(c.limitations||c.risk_of_bias_or_certainty||"",55)
-  }));
+  const nano=usable.map(x=>{const c=x.card;return {
+    p:String(c.pmid||""), rel:x.level,
+    t:clip(c.publication_type||"other",24), d:clip(c.study_design||"",32), n:clip(c.sample_size||c.sample_size_details||"",22),
+    pop:clip(c.population||"",48), i:clip(c.intervention||"",48), cmp:clip(c.comparator||"",32), dur:clip(c.duration||"",18),
+    o:arr(c.primary_outcomes,2,38), dir:clip(c.effect_direction||"",12), sig:clip(c.statistical_significance||"",10),
+    r:clip(c.main_result||c.pooled_effect||"",105), lim:clip(c.limitations||c.risk_of_bias_or_certainty||"",55)
+  }});
   const profileLabels={clinical_trial:"clinical trials",observational:"observational studies",systematic_review_meta_analysis:"systematic reviews/meta-analyses",narrative_review:"narrative reviews",preclinical_animal:"preclinical animal studies",mechanistic_human:"mechanistic human studies",mechanistic_preclinical:"mechanistic preclinical studies",case_report_series:"case reports/series",protocol:"protocols",other:"other"};
   const exactProfile=Object.fromEntries(Object.entries(evidence_profile).map(([k,v])=>[profileLabels[k]||k,v]));
-  const finalPacket=JSON.stringify({area:area.label,library_total:area.count,cards_processed:raw.length,cards_included:usable.length,cards_excluded:excluded.length,EXACT_EVIDENCE_PROFILE:exactProfile,all_included_pmids:nano.map(x=>x.p),evidence_cards:nano});
-  // Hard guard: keep the request comfortably below an 8k TPM tier. If an unusually large
-  // corpus exceeds this compact packet, fail before contacting the provider rather than
-  // burning quota or silently dropping studies.
+  const relevanceAudit=relevance_cards.map(x=>({pmid:String(x.card.pmid||""),title:String(x.card.title||""),level:x.level,reason:x.reason}));
+  const finalPacket=JSON.stringify({area:area.label,library_total:area.count,cards_processed:raw.length,cards_included:usable.length,cards_excluded:excluded.length,EXACT_EVIDENCE_PROFILE:exactProfile,EXACT_RELEVANCE_PROFILE:relevance_profile,all_included_pmids:nano.map(x=>x.p),evidence_cards:nano});
   if(finalPacket.length>25500)return jsonResponse({error:`Evidence corpus is too large for one TPM-safe synthesis request (${finalPacket.length} compact characters). No studies were dropped.`,diagnostic:{cards_processed:raw.length,cards_usable:usable.length,compact_packet_chars:finalPacket.length}},413);
-  const finalSystem=`You are producing a PRIVATE, PROVISIONAL scientific evidence synthesis from structured Evidence Cards. Use ONLY the supplied packet. EVERY card in evidence_cards must be considered. EXACT_EVIDENCE_PROFILE is deterministic ground truth and MUST NOT be recalculated, merged or contradicted. Clinical trials and observational studies are separate categories. If you mention an n for a study type, it MUST equal EXACT_EVIDENCE_PROFILE exactly; otherwise omit the n. Reviews summarize prior evidence and are not additional independent primary studies. Separate human clinical, observational, reviews/meta-analyses, and preclinical/mechanistic evidence. Never present preclinical benefit as demonstrated clinical efficacy. Never infer causality from observational evidence. Do not convert 'not reported' into a negative finding. Every PMID cited must occur in all_included_pmids. This is NOT a formal GRADE assessment. Return ONLY valid JSON with keys: overall_interpretation (string), evidence_consistency (consistent|mostly_consistent|mixed|conflicting|insufficient), human_clinical (string), reviews_meta_analyses (string), preclinical_mechanistic (string), main_findings (array of {finding,pmids}), conflicting_evidence (array of {issue,pmids}), limitations (array of strings), research_gaps (array of strings), bottom_line (string).`;
+  const finalSystem=`You are producing a PRIVATE, PROVISIONAL scientific evidence synthesis from structured Evidence Cards. Use ONLY the supplied packet. EVERY card in evidence_cards must be considered. EXACT_EVIDENCE_PROFILE and EXACT_RELEVANCE_PROFILE are deterministic ground truth and MUST NOT be recalculated, merged or contradicted. Relevance has strict meaning: direct = may support clinical conclusions for the selected question; supporting = mechanistic/preclinical or indirect evidence that may support plausibility but NOT establish clinical efficacy; contextual = background only and MUST NOT support efficacy/safety conclusions. Clinical trials and observational studies are separate categories. If you mention an n for a study type, it MUST equal EXACT_EVIDENCE_PROFILE exactly; otherwise omit the n. Reviews summarize prior evidence and are not additional independent primary studies. Separate human clinical, observational, reviews/meta-analyses, and preclinical/mechanistic evidence. Never present preclinical benefit as demonstrated clinical efficacy. Never infer causality from observational evidence. Do not convert 'not reported' into a negative finding. Every PMID cited must occur in all_included_pmids. This is NOT a formal GRADE assessment. Return ONLY valid JSON with keys: overall_interpretation (string), evidence_consistency (consistent|mostly_consistent|mixed|conflicting|insufficient), human_clinical (string), reviews_meta_analyses (string), preclinical_mechanistic (string), main_findings (array of {finding,pmids}), conflicting_evidence (array of {issue,pmids}), limitations (array of strings), research_gaps (array of strings), bottom_line (string).`;
 
   let out;
   try{out=await groqJsonLimited(env,[{role:"system",content:finalSystem},{role:"user",content:finalPacket}],1100);}
   catch(e){return jsonResponse({error:`Evidence synthesis final stage failed: ${e?.message||"AI service error"}`,diagnostic:{cards_processed:raw.length,cards_usable:usable.length,cards_synthesized:nano.length,final_packet_chars:finalPacket.length}},502);}
 
   const allowed=new Set(nano.map(x=>x.p)), cleanPmids=v=>Array.isArray(v)?v.map(String).filter(x=>allowed.has(x)).slice(0,12):[];
-  const synthesis={schema_version:5,area_slug:slug,area_label:area.label,generated_at:new Date().toISOString(),library_total:area.count,cards_processed:raw.length,cards_analyzed:usable.length,cards_excluded:excluded.length,cards_sent_to_model:nano.length,cards_synthesized:nano.length,synthesis_chunks:1,excluded_cards:excluded,evidence_profile,counts,evidence_consistency:String(out?.evidence_consistency||"insufficient"),overall_interpretation:String(out?.overall_interpretation||""),human_clinical:String(out?.human_clinical||""),reviews_meta_analyses:String(out?.reviews_meta_analyses||""),preclinical_mechanistic:String(out?.preclinical_mechanistic||""),main_findings:(Array.isArray(out?.main_findings)?out.main_findings:[]).slice(0,8).map(x=>({finding:String(x?.finding||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.finding),conflicting_evidence:(Array.isArray(out?.conflicting_evidence)?out.conflicting_evidence:[]).slice(0,6).map(x=>({issue:String(x?.issue||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.issue),limitations:(Array.isArray(out?.limitations)?out.limitations:[]).map(String).slice(0,8),research_gaps:(Array.isArray(out?.research_gaps)?out.research_gaps:[]).map(String).slice(0,8),bottom_line:String(out?.bottom_line||"")};
+  const synthesis={schema_version:6,area_slug:slug,area_label:area.label,generated_at:new Date().toISOString(),library_total:area.count,cards_processed:raw.length,cards_analyzed:usable.length,cards_excluded:excluded.length,cards_sent_to_model:nano.length,cards_synthesized:nano.length,synthesis_chunks:1,excluded_cards:excluded,evidence_profile,relevance_profile,relevance_cards:relevanceAudit,counts,evidence_consistency:String(out?.evidence_consistency||"insufficient"),overall_interpretation:String(out?.overall_interpretation||""),human_clinical:String(out?.human_clinical||""),reviews_meta_analyses:String(out?.reviews_meta_analyses||""),preclinical_mechanistic:String(out?.preclinical_mechanistic||""),main_findings:(Array.isArray(out?.main_findings)?out.main_findings:[]).slice(0,8).map(x=>({finding:String(x?.finding||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.finding),conflicting_evidence:(Array.isArray(out?.conflicting_evidence)?out.conflicting_evidence:[]).slice(0,6).map(x=>({issue:String(x?.issue||""),pmids:cleanPmids(x?.pmids)})).filter(x=>x.issue),limitations:(Array.isArray(out?.limitations)?out.limitations:[]).map(String).slice(0,8),research_gaps:(Array.isArray(out?.research_gaps)?out.research_gaps:[]).map(String).slice(0,8),bottom_line:String(out?.bottom_line||"")};
   try{await env.SITE_ADMIN.put(EVIDENCE_LAB_SYNTHESIS_PREFIX+slug,JSON.stringify(synthesis));}
   catch(e){return jsonResponse({error:`Synthesis generated but KV save failed: ${e?.message||"unknown storage error"}`},500);}
   return jsonResponse({ok:true,synthesis});
