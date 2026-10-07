@@ -667,7 +667,7 @@ async function handleEvidenceAsk(request,env){
   if(!selected.length)return jsonResponse({answer:"The current approved Evidence Lab corpus does not contain evidence-bearing cards that can answer this question.",claims:[],pmids:[],support_level:"not_supported",cards_considered:0});
   const allowed=new Set(selected.map(x=>String(x.card.pmid||"")));
   const packet={area:area.label,question,approved_overall_interpretation:current.overall_interpretation,approved_bottom_line:current.bottom_line,evidence:selected.map(x=>({pmid:String(x.card.pmid||""),relevance:x.rel,publication_type:x.card.publication_type,study_design:x.card.study_design,study_purpose:x.card.study_purpose,population:x.card.population,sample_size:x.card.sample_size||x.card.sample_size_details,intervention:x.card.intervention,comparator:x.card.comparator,duration:x.card.duration,primary_outcomes:x.card.primary_outcomes,effect_direction:x.card.effect_direction,statistical_significance:x.card.statistical_significance,main_result:x.card.main_result,limitations:x.card.limitations,source_level:x.card.source_level}))};
-  const system=`You answer questions for a PRIVATE scientific Evidence Lab. Use ONLY the supplied approved synthesis boundaries and Evidence Cards. Do not use outside knowledge. Do not infer unreported facts. Answer in the SAME LANGUAGE as the user's question, including summary, claims and caveat. Distinguish direct human evidence from supporting/contextual evidence. Never turn association, feasibility, safety or mechanistic evidence into efficacy. If the supplied cards do not support the requested point, say so explicitly. The approved bottom line is a hard clinical boundary and must not be strengthened. When support_level is mixed, the summary MUST use neutral discordance-first wording: state that the evidence/findings are mixed or inconsistent, then briefly describe favorable and null/uncertain findings; do not summarize mixed evidence as an overall benefit. Return ONLY JSON with this exact structure: {"summary":"1-3 concise sentences","claims":[{"text":"one factual evidence statement","pmids":["12345678"]}],"support_level":"direct|mixed|indirect|not_supported","caveat":"concise limitation or empty string"}. Every claim must cite one or more PMID values from the supplied evidence. Do not cite a PMID unless that specific supplied card directly supports the claim. Maximum 5 claims.`;
+  const system=`You answer questions for a PRIVATE scientific Evidence Lab. Use ONLY the supplied approved synthesis boundaries and Evidence Cards. Do not use outside knowledge. Do not infer unreported facts. Answer in the SAME LANGUAGE as the user's question, including summary, claims and caveat. Distinguish direct human evidence from supporting/contextual evidence. Never turn association, feasibility, safety or mechanistic evidence into efficacy. If the supplied cards do not support the requested point, say so explicitly. The approved bottom line is a hard clinical boundary and must not be strengthened. When support_level is mixed, the summary MUST state that the evidence/findings are mixed, non-uniform, or inconsistent, then briefly describe favorable and null/uncertain findings; NEVER use the words discordant, discordance, discordante, or discordanti for a mixed result, because Discordant is a separate Evidence Lab taxonomy state; do not summarize mixed evidence as an overall benefit. Return ONLY JSON with this exact structure: {"summary":"1-3 concise sentences","claims":[{"text":"one factual evidence statement","pmids":["12345678"]}],"support_level":"direct|mixed|indirect|not_supported","caveat":"concise limitation or empty string"}. Every claim must cite one or more PMID values from the supplied evidence. Do not cite a PMID unless that specific supplied card directly supports the claim. Maximum 5 claims.`;
   let out;
   try{out=await groqJsonLimited(env,[{role:"system",content:system},{role:"user",content:JSON.stringify(packet)}],900);}
   catch(e){return jsonResponse({error:`Ask the Evidence failed: ${e?.message||"AI service error"}. No answer was saved.`},502);}
@@ -679,9 +679,23 @@ async function handleEvidenceAsk(request,env){
   }
   const cited=[...new Set(claims.flatMap(x=>x.pmids))];
   const support=["direct","mixed","indirect","not_supported"].includes(String(out?.support_level||""))?String(out.support_level):claims.length?"mixed":"not_supported";
-  let summary=String(out?.summary||"").replace(/\s+/g," ").trim();
+  const cleanMixedTaxonomy=text=>{
+    let t=String(text||"").replace(/\s+/g," ").trim();
+    if(support!=="mixed")return t;
+    // Keep UI/scientific taxonomy aligned with Contradiction Explorer: mixed != discordant.
+    return t
+      .replace(/\bdiscordant evidence\b/gi,"mixed evidence")
+      .replace(/\bdiscordant findings\b/gi,"mixed findings")
+      .replace(/\bdiscordance\b/gi,"mixed findings")
+      .replace(/\bdiscordant\b/gi,"mixed")
+      .replace(/\bdiscordanti\b/gi,"non uniformi")
+      .replace(/\bdiscordante\b/gi,"non uniforme");
+  };
+  let summary=cleanMixedTaxonomy(out?.summary);
   if(!claims.length){summary="The supplied approved Evidence Cards do not provide enough source-locked evidence to answer this question.";}
-  return jsonResponse({area:{slug,label:area.label},question,summary,claims,pmids:cited,support_level:support,caveat:String(out?.caveat||"").replace(/\s+/g," ").trim(),cards_considered:selected.length,approval:{approved_at:review.approved_at||null,current:true}});
+  const safeClaims=claims.map(x=>({...x,text:cleanMixedTaxonomy(x.text)}));
+  const caveat=cleanMixedTaxonomy(out?.caveat);
+  return jsonResponse({area:{slug,label:area.label},question,summary,claims:safeClaims,pmids:cited,support_level:support,caveat,cards_considered:selected.length,approval:{approved_at:review.approved_at||null,current:true}});
 }
 
 const EVIDENCE_LAB_SYNTHESIS_PREFIX = "evidence-lab:v2:synthesis:";
