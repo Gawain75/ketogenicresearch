@@ -1230,6 +1230,71 @@ For fields not applicable to a publication type use "not applicable" or null/[] 
   return jsonResponse({ok:true,processed_now:processedNow,attempted:todo.length,processed:done.size,remaining:Math.max(0,area.count-done.size),large_corpus:area.count>EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD,warnings});
 }
 
+
+const EVIDENCE_AUTO_LEDGER_PREFIX="evidence-lab:v2:auto:ledger:";
+const EVIDENCE_AUTO_CURSOR_KEY="evidence-lab:v2:auto:cursor";
+function evidenceAutoInt(v,def,min,max){const n=Number(v);return Number.isFinite(n)?Math.max(min,Math.min(max,Math.floor(n))):def;}
+function evidenceAutoConfig(env){return {daily_card_budget:evidenceAutoInt(env.EVIDENCE_AUTO_DAILY_CARD_BUDGET,120,1,10000),per_area_daily_cap:evidenceAutoInt(env.EVIDENCE_AUTO_AREA_DAILY_CAP,48,1,5000),batch_size:evidenceAutoInt(env.EVIDENCE_AUTO_BATCH_SIZE,6,1,10)};}
+function evidenceAutoDay(d=new Date()){return d.toISOString().slice(0,10);}
+async function evidenceAutoLedger(env,day=evidenceAutoDay()){
+  const v=await env.SITE_ADMIN.get(EVIDENCE_AUTO_LEDGER_PREFIX+day,"json").catch(()=>null);
+  return v&&typeof v==="object"?v:{date:day,attempted_total:0,processed_total:0,areas:{},last_run_at:null,last_area:null,last_error:null};
+}
+async function evidenceAutoSnapshot(request,env){
+  if(!env.SITE_ADMIN)throw new Error("Evidence Lab storage (SITE_ADMIN) is not configured.");
+  const cfg=evidenceAutoConfig(env), day=evidenceAutoDay(), ledger=await evidenceAutoLedger(env,day), idx=await evidenceLabIndex(request,env), cursor=(await env.SITE_ADMIN.get(EVIDENCE_AUTO_CURSOR_KEY,"json").catch(()=>null))||{};
+  const rows=[];
+  for(const a of idx.areas){
+    const st=await evidenceLabState(env,a.slug), processed=(st.processed||[]).length, remaining=Math.max(0,Number(a.count||0)-processed), today=ledger.areas?.[a.slug]||{attempted:0,processed:0,runs:0};
+    const weight=a.count>EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD?6:(a.count>50?3:1);
+    rows.push({slug:a.slug,label:a.label,total:Number(a.count||0),processed,remaining,today_attempted:Number(today.attempted||0),today_processed:Number(today.processed||0),today_runs:Number(today.runs||0),weight});
+  }
+  const incomplete=rows.filter(x=>x.remaining>0);
+  const eligible=incomplete.filter(x=>x.today_attempted<cfg.per_area_daily_cap);
+  const last=String(cursor.last_slug||""); const order=new Map(rows.map((x,i)=>[x.slug,i])); const lastIndex=order.has(last)?order.get(last):-1;
+  eligible.sort((a,b)=>{
+    const sa=a.today_attempted/a.weight, sb=b.today_attempted/b.weight;
+    if(sa!==sb)return sa-sb;
+    const da=(order.get(a.slug)-lastIndex+rows.length)%rows.length, db=(order.get(b.slug)-lastIndex+rows.length)%rows.length;
+    return da-db;
+  });
+  return {cfg,day,ledger,idx,rows,incomplete,eligible,next:eligible[0]||null};
+}
+async function evidenceAutoRunOne(request,env){
+  const snap=await evidenceAutoSnapshot(request,env), {cfg,ledger,day}=snap;
+  if(Number(ledger.attempted_total||0)>=cfg.daily_card_budget)return {ok:true,reason:"daily_budget_reached",message:`Daily Evidence Lab budget reached (${ledger.attempted_total}/${cfg.daily_card_budget} cards attempted).`,config:cfg,today:ledger};
+  const area=snap.next;
+  if(!area)return {ok:true,reason:snap.incomplete.length?"per_area_caps_reached":"all_complete",message:snap.incomplete.length?"All incomplete areas reached their per-area daily cap.":"All Evidence Lab areas are complete.",config:cfg,today:ledger};
+  const remainingBudget=Math.max(0,cfg.daily_card_budget-Number(ledger.attempted_total||0));
+  const remainingAreaCap=Math.max(0,cfg.per_area_daily_cap-area.today_attempted);
+  const batch=Math.max(1,Math.min(cfg.batch_size,remainingBudget,remainingAreaCap,area.remaining));
+  const internal=new Request(new URL("/api/review/evidence/process",request.url).toString(),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({area:area.slug,batch})});
+  let parsed={}; let status=500;
+  try{const response=await handleEvidenceProcess(internal,env);status=response.status;parsed=await response.json();}
+  catch(e){parsed={error:e?.message||String(e)};}
+  const attempted=Math.max(0,Number(parsed.attempted??batch)||0), processedNow=Math.max(0,Number(parsed.processed_now||0));
+  const entry=ledger.areas?.[area.slug]||{attempted:0,processed:0,runs:0};
+  ledger.areas={...(ledger.areas||{}),[area.slug]:{attempted:Number(entry.attempted||0)+attempted,processed:Number(entry.processed||0)+processedNow,runs:Number(entry.runs||0)+1,last_run_at:new Date().toISOString()}};
+  ledger.attempted_total=Number(ledger.attempted_total||0)+attempted;ledger.processed_total=Number(ledger.processed_total||0)+processedNow;ledger.last_run_at=new Date().toISOString();ledger.last_area=area.slug;ledger.last_error=status>=400?(parsed.error||`HTTP ${status}`):((parsed.warnings||[]).length&&!processedNow?String(parsed.warnings[0]):null);
+  await env.SITE_ADMIN.put(EVIDENCE_AUTO_LEDGER_PREFIX+day,JSON.stringify(ledger));
+  await env.SITE_ADMIN.put(EVIDENCE_AUTO_CURSOR_KEY,JSON.stringify({last_slug:area.slug,updated_at:ledger.last_run_at}));
+  if(status>=400)return {ok:false,error:parsed.error||`Evidence batch failed (${status})`,config:cfg,today:ledger,run:{area:area.slug,area_label:area.label,attempted,processed_now:processedNow,remaining:area.remaining,warnings:parsed.warnings||[]}};
+  return {ok:true,config:cfg,today:ledger,run:{area:area.slug,area_label:area.label,attempted,processed_now:processedNow,remaining:parsed.remaining,warnings:parsed.warnings||[]}};
+}
+async function handleEvidenceAutomation(request,env){
+  if(request.method==="GET"){
+    const snap=await evidenceAutoSnapshot(request,env);
+    return jsonResponse({enabled:!!env.EVIDENCE_AUTOMATION_SECRET,config:snap.cfg,today:snap.ledger,incomplete_areas:snap.incomplete.length,next_area:snap.next?.slug||null,next_area_label:snap.next?.label||null,areas:snap.rows.map(x=>({slug:x.slug,label:x.label,total:x.total,processed:x.processed,remaining:x.remaining,today_attempted:x.today_attempted,today_processed:x.today_processed,weight:x.weight}))});
+  }
+  const body=await request.json().catch(()=>({})); if(body.action!=="run")return jsonResponse({error:"Unsupported automation action."},400);
+  const out=await evidenceAutoRunOne(request,env); return jsonResponse(out,out.ok?200:503);
+}
+async function handleEvidenceAutomationCron(request,env){
+  const secret=String(env.EVIDENCE_AUTOMATION_SECRET||""); if(!secret)return jsonResponse({error:"EVIDENCE_AUTOMATION_SECRET is not configured."},503);
+  const auth=String(request.headers.get("Authorization")||""); if(auth!==`Bearer ${secret}`)return jsonResponse({error:"Unauthorized."},401);
+  const out=await evidenceAutoRunOne(request,env); return jsonResponse(out,out.ok?200:503);
+}
+
 const SITE_ADMIN_CONFIG_KEY = "site-admin:config:v1";
 const SITE_ADMIN_PAGE_PREFIX = "site-admin:page:";
 
@@ -1382,9 +1447,11 @@ export default {
       const auth=await requireReviewAdmin(request,env); if(!auth.ok)return auth.response;
       return serveRawHtmlAsset(request,env,"/_raw-review-studio.txt",{"Cache-Control":"private, no-store","X-Robots-Tag":"noindex,nofollow"});
     }
+    if(url.pathname==="/api/evidence-automation/daily"&&request.method==="POST")return handleEvidenceAutomationCron(request,env);
+
     if (url.pathname.startsWith("/api/review/")) {
       const auth=await requireReviewAdmin(request,env); if(!auth.ok)return auth.response;
-      try { if(url.pathname==="/api/review/evidence/areas")return handleEvidenceAreas(request,env); if(url.pathname==="/api/review/evidence/status")return handleEvidenceStatus(request,env); if(url.pathname==="/api/review/evidence/map"&&request.method==="GET")return handleEvidenceMap(request,env); if(url.pathname==="/api/review/evidence/contradictions"&&request.method==="GET")return handleEvidenceContradictions(request,env); if(url.pathname==="/api/review/evidence/conclusion"&&request.method==="GET")return handleEvidenceConclusion(request,env); if(url.pathname==="/api/review/evidence/publication"&&(request.method==="GET"||request.method==="POST"))return handleEvidencePublication(request,env,auth.session); if(url.pathname==="/api/review/evidence/ask"&&request.method==="POST")return handleEvidenceAsk(request,env); if(url.pathname==="/api/review/evidence/process"&&request.method==="POST")return handleEvidenceProcess(request,env); if(url.pathname==="/api/review/evidence/synthesis"&&request.method==="GET")return handleEvidenceSynthesisGet(request,env); if(url.pathname==="/api/review/evidence/review"&&(request.method==="GET"||request.method==="POST"))return handleEvidenceReview(request,env,auth.session); if(url.pathname==="/api/review/evidence/synthesize"&&request.method==="POST")return handleEvidenceSynthesize(request,env); if(url.pathname==="/api/review/protocol")return handleProtocolApi(request,env); if(url.pathname==="/api/review/pubmed")return handlePubmedApi(request,env); if(url.pathname==="/api/review/draft")return handleDraftApi(request,env); return jsonResponse({error:"Not found"},404); } catch(e){ return jsonResponse({error:e?.message||"Review Studio error"},500); }
+      try { if(url.pathname==="/api/review/evidence/automation"&&(request.method==="GET"||request.method==="POST"))return handleEvidenceAutomation(request,env); if(url.pathname==="/api/review/evidence/areas")return handleEvidenceAreas(request,env); if(url.pathname==="/api/review/evidence/status")return handleEvidenceStatus(request,env); if(url.pathname==="/api/review/evidence/map"&&request.method==="GET")return handleEvidenceMap(request,env); if(url.pathname==="/api/review/evidence/contradictions"&&request.method==="GET")return handleEvidenceContradictions(request,env); if(url.pathname==="/api/review/evidence/conclusion"&&request.method==="GET")return handleEvidenceConclusion(request,env); if(url.pathname==="/api/review/evidence/publication"&&(request.method==="GET"||request.method==="POST"))return handleEvidencePublication(request,env,auth.session); if(url.pathname==="/api/review/evidence/ask"&&request.method==="POST")return handleEvidenceAsk(request,env); if(url.pathname==="/api/review/evidence/process"&&request.method==="POST")return handleEvidenceProcess(request,env); if(url.pathname==="/api/review/evidence/synthesis"&&request.method==="GET")return handleEvidenceSynthesisGet(request,env); if(url.pathname==="/api/review/evidence/review"&&(request.method==="GET"||request.method==="POST"))return handleEvidenceReview(request,env,auth.session); if(url.pathname==="/api/review/evidence/synthesize"&&request.method==="POST")return handleEvidenceSynthesize(request,env); if(url.pathname==="/api/review/protocol")return handleProtocolApi(request,env); if(url.pathname==="/api/review/pubmed")return handlePubmedApi(request,env); if(url.pathname==="/api/review/draft")return handleDraftApi(request,env); return jsonResponse({error:"Not found"},404); } catch(e){ return jsonResponse({error:e?.message||"Review Studio error"},500); }
     }
 
     // Serve the login document from a non-HTML raw asset. This bypasses
