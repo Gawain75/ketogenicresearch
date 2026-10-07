@@ -1317,7 +1317,26 @@ async function evidenceAutoRunOne(request,env){
 async function handleEvidenceAutomation(request,env){
   if(request.method==="GET"){
     const snap=await evidenceAutoSnapshot(request,env);
-    return jsonResponse({enabled:!!env.EVIDENCE_AUTOMATION_SECRET,config:snap.cfg,today:snap.ledger,incomplete_areas:snap.incomplete.length,next_area:snap.next?.slug||null,next_area_label:snap.next?.label||null,areas:snap.rows.map(x=>({slug:x.slug,label:x.label,total:x.total,processed:x.processed,remaining:x.remaining,today_attempted:x.today_attempted,today_processed:x.today_processed,weight:x.weight}))});
+    const areas=[];
+    for(const x of snap.rows){
+      let reviewStatus="draft", approvalCurrent=false, hasSynthesis=false;
+      if(x.remaining===0){
+        const synthesis=await env.SITE_ADMIN.get(EVIDENCE_LAB_SYNTHESIS_PREFIX+x.slug,"json").catch(()=>null);
+        hasSynthesis=!!synthesis;
+        const review={...evidenceReviewDefault(),...((await env.SITE_ADMIN.get(EVIDENCE_LAB_REVIEW_PREFIX+x.slug,"json").catch(()=>null))||{})};
+        reviewStatus=String(review.status||"draft");
+        if(hasSynthesis&&reviewStatus==="approved"&&review.approved_snapshot){
+          const st=await evidenceLabState(env,x.slug);
+          const currentPmids=(st.processed||[]).map(String).sort();
+          const approvedPmids=(review.approved_snapshot.processed_pmids||[]).map(String).sort();
+          approvalCurrent=currentPmids.length===approvedPmids.length&&currentPmids.every((v,i)=>v===approvedPmids[i]);
+        }
+      }
+      const status=x.remaining>0?"in_progress":(hasSynthesis&&reviewStatus==="approved"&&approvalCurrent?"completed":"needs_review");
+      const percent=x.total>0?Math.round((x.processed/x.total)*1000)/10:100;
+      areas.push({slug:x.slug,label:x.label,total:x.total,processed:x.processed,remaining:x.remaining,percent,status,review_status:reviewStatus,approval_current:approvalCurrent,has_synthesis:hasSynthesis,today_attempted:x.today_attempted,today_processed:x.today_processed,weight:x.weight});
+    }
+    return jsonResponse({enabled:!!env.EVIDENCE_AUTOMATION_SECRET,config:snap.cfg,today:snap.ledger,incomplete_areas:snap.incomplete.length,next_area:snap.next?.slug||null,next_area_label:snap.next?.label||null,areas});
   }
   const body=await request.json().catch(()=>({})); if(body.action!=="run")return jsonResponse({error:"Unsupported automation action."},400);
   const out=await evidenceAutoRunOne(request,env); return jsonResponse(out,out.ok?200:503);
