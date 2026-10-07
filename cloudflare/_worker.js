@@ -931,20 +931,20 @@ async function handleEvidenceSynthesize(request,env){
   const idx=await evidenceLabIndex(request,env), area=idx.areas.find(a=>a.slug===slug);
   if(!area)return jsonResponse({error:"Clinical area not found."},404);
   const st=await evidenceLabState(env,slug), ids=(st.processed||[]).map(String);
-  if(ids.length<12)return jsonResponse({error:`At least 12 Evidence Cards are required for a provisional synthesis. Currently available: ${ids.length}.`},400);
+  if(ids.length<1)return jsonResponse({error:"At least 1 Evidence Card is required for a provisional synthesis."},400);
 
   const raw=[];
   for(const pmid of ids.slice(-500)){
     const c=await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");
     if(c)raw.push(c);
   }
-  if(raw.length<12)return jsonResponse({error:"Not enough readable Evidence Cards for synthesis."},400);
+  if(raw.length<1)return jsonResponse({error:"No readable Evidence Cards are available for synthesis."},400);
 
   const counts={clinical:0,review:0,preclinical:0,mechanistic:0,other:0,abstract:0,metadata:0};
   for(const c of raw){const d=String(c.evidence_domain||"other"); counts[d]=(counts[d]||0)+1; counts[c.source_level==="abstract"?"abstract":"metadata"]++;}
   const evidenceBearing=raw.filter(c=>c.source_level==="abstract" || c.source_level==="full_text");
   const excluded=raw.filter(c=>!(c.source_level==="abstract" || c.source_level==="full_text")).map(c=>({pmid:String(c.pmid||""),title:String(c.title||""),reason:"metadata-only / no evidence-bearing abstract or full text"}));
-  if(evidenceBearing.length<8)return jsonResponse({error:`Only ${evidenceBearing.length} evidence-bearing cards are available; metadata-only records are excluded from synthesis.`},400);
+  if(evidenceBearing.length<1)return jsonResponse({error:"No evidence-bearing cards are available; metadata-only records are excluded from synthesis."},400);
 
   // Relevance is computed deterministically from the locked Evidence Card fields. It does not
   // require another model call and therefore cannot consume synthesis TPM or drift between runs.
@@ -953,7 +953,7 @@ async function handleEvidenceSynthesize(request,env){
   for(const c of evidenceBearing){const rel=evidenceRelevance(c,area.label); relevance_profile[rel.level]++; relevance_cards.push({card:c,...rel});}
   for(const x of relevance_cards.filter(x=>x.level==="exclude")) excluded.push({pmid:String(x.card.pmid||""),title:String(x.card.title||""),reason:x.reason});
   const usable=relevance_cards.filter(x=>x.level!=="exclude");
-  if(usable.length<8)return jsonResponse({error:`Only ${usable.length} relevant evidence-bearing cards remain after relevance screening.`},400);
+  if(usable.length<1)return jsonResponse({error:"No relevant evidence-bearing cards remain after relevance screening."},400);
 
   const evidence_profile={clinical_trial:0,observational:0,systematic_review_meta_analysis:0,narrative_review:0,preclinical_animal:0,mechanistic_human:0,mechanistic_preclinical:0,case_report_series:0,protocol:0,other:0};
   for(const x of usable){const k=String(x.card.publication_type||"other"); if(Object.prototype.hasOwnProperty.call(evidence_profile,k))evidence_profile[k]++; else evidence_profile.other++;}
