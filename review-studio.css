@@ -97,3 +97,15 @@
 /* Evidence Lab only */
 .evidence-only-grid{grid-template-columns:minmax(0,1fr)}
 .evidence-only-grid .review-main{width:100%;min-width:0}
+
+
+/* Ask the Evidence */
+.ask-evidence-box{margin:18px 0;padding:18px;border:1px solid #d8e4ec;border-radius:14px;background:#fbfdff}
+.ask-evidence-box textarea{min-height:86px}
+.ask-answer{margin-top:14px;border:1px solid #dce6ed;border-radius:12px;background:#fff;padding:16px}
+.ask-answer-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.ask-summary{font-size:16px;line-height:1.55;margin:14px 0}
+.ask-claims{display:grid;gap:10px}
+.ask-claim{padding:12px 14px;border-left:4px solid #2f7c4a;background:#f2faf5;border-radius:8px}
+.ask-claim p{margin:0 0 6px;line-height:1.5}
+@media(max-width:560px){.ask-evidence-box{padding:14px}.ask-answer{padding:14px}.ask-answer-top{align-items:flex-start}}
