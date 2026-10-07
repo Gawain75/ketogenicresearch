@@ -520,7 +520,7 @@
       const c=d.config||{}, l=d.today||{};
       $('dailyAutoBadge').textContent=d.enabled?'Enabled':'Needs scheduler';
       $('dailyAutoSummary').innerHTML=[
-        dailyAutoMetric(`${Number(l.attempted_total||0)}/${Number(c.daily_card_budget||0)}`,'Daily card budget'),
+        dailyAutoMetric(Number(l.attempted_total||0),'Cards attempted today'),
         dailyAutoMetric(`${Number(l.token_total||0).toLocaleString()}/${Number(c.daily_token_budget||0).toLocaleString()}`,'Groq tokens today'),
         dailyAutoMetric(Number(l.groq_calls||0),'Groq calls today'),
         dailyAutoMetric(Number(l.processed_total||0),'Cards completed today'),
@@ -534,7 +534,7 @@
   }
   async function runDailyAutomationNow(){
     const b=$('dailyAutoRunNow');b.disabled=true;setStatus('dailyAutoStatus','Running one globally fair Evidence Lab batch…');
-    try{const d=await api('/api/review/evidence/automation',{action:'run'});const r=d.run||{};setStatus('dailyAutoStatus',r.area_label?`${r.area_label}: ${r.processed_now||0} cards completed · ${r.remaining??'—'} remaining. Cards ${d.today?.attempted_total||0}/${d.config?.daily_card_budget||0} · Groq tokens ${Number(d.today?.token_total||0).toLocaleString()}/${Number(d.config?.daily_token_budget||0).toLocaleString()}.`:(d.message||r.message||'No batch required.'),'ok');await loadDailyAutomation();await refreshEvidence();}
+    try{const d=await api('/api/review/evidence/automation',{action:'run'});const r=d.run||{};setStatus('dailyAutoStatus',r.area_label?`${r.area_label}: ${r.processed_now||0} cards completed · ${r.remaining??'—'} remaining. Groq tokens ${Number(d.today?.token_total||0).toLocaleString()}/${Number(d.config?.daily_token_budget||0).toLocaleString()} · ${Number(d.today?.attempted_total||0)} cards attempted today.`:(d.message||r.message||'No batch required.'),'ok');await loadDailyAutomation();await refreshEvidence();}
     catch(e){setStatus('dailyAutoStatus',e.message,'error');}
     finally{b.disabled=false;}
   }
