@@ -34,4 +34,4 @@ jobs:
             -X POST \
             -H "Authorization: Bearer ${EVIDENCE_AUTOMATION_SECRET}" \
             -H "Accept: application/json" \
-            https://ketogenicresearch.org/api/evidence-automation/daily
+            https://ketogenicresearch-library.pages.dev/api/evidence-automation/daily
