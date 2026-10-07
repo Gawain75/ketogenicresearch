@@ -445,7 +445,26 @@ async function handleDraftApi(request, env) {
 
 const EVIDENCE_LAB_STATE_PREFIX = "evidence-lab:v2:state:";
 const EVIDENCE_LAB_CARD_PREFIX = "evidence-lab:v2:card:";
+const EVIDENCE_LAB_COMPACT_PREFIX = "evidence-lab:v2:compact:";
+const EVIDENCE_LAB_COMPACT_BUCKETS = 64;
+const EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD = 200;
 const EVIDENCE_LAB_SCHEMA_VERSION = 2;
+
+function evidenceCompactBucket(pmid){
+  const x=String(pmid||""); let h=0; for(let i=0;i<x.length;i++)h=(h*31+x.charCodeAt(i))>>>0; return h%EVIDENCE_LAB_COMPACT_BUCKETS;
+}
+function evidenceCompactCard(c){
+  return {schema_version:Number(c?.schema_version||EVIDENCE_LAB_SCHEMA_VERSION),pmid:String(c?.pmid||""),title:String(c?.title||""),doi:c?.doi||null,year:c?.year||null,publication_type:String(c?.publication_type||"other"),study_design:String(c?.study_design||""),evidence_domain:String(c?.evidence_domain||"other"),study_purpose:String(c?.study_purpose||"other"),population:String(c?.population||""),sample_size:c?.sample_size??null,sample_size_details:String(c?.sample_size_details||""),intervention:String(c?.intervention||""),comparator:String(c?.comparator||""),duration:String(c?.duration||""),primary_outcomes:Array.isArray(c?.primary_outcomes)?c.primary_outcomes:[],secondary_outcomes:Array.isArray(c?.secondary_outcomes)?c.secondary_outcomes:[],effect_direction:String(c?.effect_direction||"not_reported"),statistical_significance:String(c?.statistical_significance||"not_reported"),randomized:String(c?.randomized||"not_reported"),controlled:String(c?.controlled||"not_reported"),time_orientation:String(c?.time_orientation||"not_reported"),population_phenotype:String(c?.population_phenotype||""),review_studies_included:c?.review_studies_included??null,review_participants:c?.review_participants??null,review_study_types:String(c?.review_study_types||""),pooled_effect:String(c?.pooled_effect||""),heterogeneity:String(c?.heterogeneity||""),risk_of_bias_or_certainty:String(c?.risk_of_bias_or_certainty||""),animal_species:String(c?.animal_species||""),animal_model:String(c?.animal_model||""),mechanistic_targets:Array.isArray(c?.mechanistic_targets)?c.mechanistic_targets:[],main_result:String(c?.main_result||""),limitations:Array.isArray(c?.limitations)?c.limitations:[],source_level:String(c?.source_level||"metadata"),extraction_confidence:String(c?.extraction_confidence||"low")};
+}
+async function evidenceCompactLoad(env,slug){
+  const rows=await Promise.all(Array.from({length:EVIDENCE_LAB_COMPACT_BUCKETS},(_,i)=>env.SITE_ADMIN.get(`${EVIDENCE_LAB_COMPACT_PREFIX}${slug}:${i}`,"json").catch(()=>null)));
+  const out=new Map(); for(const row of rows){for(const c of (Array.isArray(row?.cards)?row.cards:[])){if(c?.pmid)out.set(String(c.pmid),c);}} return out;
+}
+async function evidenceCompactPutMany(env,slug,cards){
+  const groups=new Map();
+  for(const card of cards||[]){if(!card?.pmid)continue;const b=evidenceCompactBucket(card.pmid);if(!groups.has(b))groups.set(b,[]);groups.get(b).push(evidenceCompactCard(card));}
+  for(const [b,list] of groups){const key=`${EVIDENCE_LAB_COMPACT_PREFIX}${slug}:${b}`;const row=(await env.SITE_ADMIN.get(key,"json").catch(()=>null))||{schema_version:1,cards:[]};const m=new Map((Array.isArray(row.cards)?row.cards:[]).map(x=>[String(x.pmid),x]));for(const c of list)m.set(String(c.pmid),c);await env.SITE_ADMIN.put(key,JSON.stringify({schema_version:1,updated_at:new Date().toISOString(),cards:[...m.values()]}));}
+}
 
 function evidenceLabSlug(v){ return String(v||"").toLowerCase().replace(/[^a-z0-9-]/g,"").slice(0,100); }
 async function evidenceLabIndex(request,env){
@@ -467,7 +486,8 @@ async function handleEvidenceStatus(request,env){
   const st=await evidenceLabState(env,slug), processed=new Set(st.processed||[]);
   const sample=[]; for(const pmid of [...processed].slice(-12).reverse()){const c=await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");if(c)sample.push(c);}
   const withAbstract=area.studies.filter(x=>x.has_abstract).length, withPmc=area.studies.filter(x=>x.pmcid).length;
-  return jsonResponse({area:{slug,label:area.label,total:area.count},processed:processed.size,remaining:Math.max(0,area.count-processed.size),failed:(st.failed||[]).length,source_counts:{pmc_linked:withPmc,abstract_available:withAbstract,metadata_only:area.count-withAbstract},updated_at:st.updated_at,cards:sample});
+  let indexed=null; if(area.count>EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD || processed.size>EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD){const compact=await evidenceCompactLoad(env,slug);indexed=[...processed].filter(x=>compact.has(String(x))).length;}
+  return jsonResponse({area:{slug,label:area.label,total:area.count},processed:processed.size,remaining:Math.max(0,area.count-processed.size),failed:(st.failed||[]).length,source_counts:{pmc_linked:withPmc,abstract_available:withAbstract,metadata_only:area.count-withAbstract},large_corpus:area.count>EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD,indexed_cards:indexed,updated_at:st.updated_at,cards:sample});
 }
 async function handleEvidenceMap(request,env){
   if(!env.SITE_ADMIN)return jsonResponse({error:"Evidence Lab storage (SITE_ADMIN) is not configured."},503);
@@ -476,11 +496,15 @@ async function handleEvidenceMap(request,env){
   const idx=await evidenceLabIndex(request,env), area=idx.areas.find(a=>a.slug===slug);
   if(!area)return jsonResponse({error:"Clinical area not found."},404);
   const st=await evidenceLabState(env,slug), cards=[];
+  const processedIds=(st.processed||[]).map(String);
+  let workCards=[];
+  if(area.count>EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD || processedIds.length>EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD){const compact=await evidenceCompactLoad(env,slug);workCards=processedIds.map(p=>compact.get(p)).filter(Boolean);}
+  else{for(const pmid of processedIds){const c=await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");if(c)workCards.push(c);}}
   const classOf=t=>{t=String(t||"other");if(["clinical_trial","observational","mechanistic_human","case_report_series"].includes(t))return "human_clinical";if(["systematic_review_meta_analysis","narrative_review"].includes(t))return "reviews";if(["preclinical_animal","mechanistic_preclinical"].includes(t))return "preclinical";return "other";};
   const relevance_counts={direct:0,supporting:0,contextual:0,not_evaluable:0,exclude:0}, class_counts={human_clinical:0,reviews:0,preclinical:0,other:0}, direction_counts={favorable:0,mixed:0,neutral:0,unfavorable:0,not_reported:0};
   const matrix={human_clinical:{direct:0,supporting:0,contextual:0,not_evaluable:0,exclude:0},reviews:{direct:0,supporting:0,contextual:0,not_evaluable:0,exclude:0},preclinical:{direct:0,supporting:0,contextual:0,not_evaluable:0,exclude:0},other:{direct:0,supporting:0,contextual:0,not_evaluable:0,exclude:0}};
-  for(const pmid of (st.processed||[]).map(String).slice(-1000)){
-    const c=await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");if(!c)continue;
+  for(const c of workCards){
+    const pmid=String(c.pmid||"");if(!c)continue;
     const evidenceBearing=c.source_level==="abstract"||c.source_level==="full_text";
     const rel=evidenceBearing?evidenceRelevance(c,area.label):{level:"not_evaluable",reason:"metadata-only / no evidence-bearing abstract or full text"}, evidence_class=classOf(c.publication_type), dir=["favorable","mixed","neutral","unfavorable"].includes(String(c.effect_direction||""))?String(c.effect_direction):"not_reported";
     relevance_counts[rel.level]=(relevance_counts[rel.level]||0)+1;class_counts[evidence_class]=(class_counts[evidence_class]||0)+1;direction_counts[dir]=(direction_counts[dir]||0)+1;matrix[evidence_class][rel.level]=(matrix[evidence_class][rel.level]||0)+1;
@@ -546,8 +570,12 @@ async function handleEvidenceContradictions(request,env){
   const idx=await evidenceLabIndex(request,env), area=idx.areas.find(a=>a.slug===slug);
   if(!area)return jsonResponse({error:"Clinical area not found."},404);
   const st=await evidenceLabState(env,slug), human=[];
-  for(const pmid of (st.processed||[]).map(String).slice(-1000)){
-    const c=await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");
+  const processedIds=(st.processed||[]).map(String);
+  let workCards=[];
+  if(area.count>EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD || processedIds.length>EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD){const compact=await evidenceCompactLoad(env,slug);workCards=processedIds.map(p=>compact.get(p)).filter(Boolean);}
+  else{for(const pmid of processedIds){const c=await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");if(c)workCards.push(c);}}
+  for(const c of workCards){
+    const pmid=String(c.pmid||"");
     if(!c || !(c.source_level==="abstract"||c.source_level==="full_text"))continue;
     const rel=evidenceRelevance(c,area.label), type=String(c.publication_type||"");
     if(rel.level!=="direct" || !["clinical_trial","observational","mechanistic_human","case_report_series"].includes(type))continue;
@@ -654,8 +682,12 @@ async function handleEvidenceAsk(request,env){
   const changes=evidenceReviewDiff(review.approved_snapshot,current);
   if(review.status!=="approved" || !review.approved_snapshot || changes.has_changes)return jsonResponse({error:"Ask the Evidence requires a current approved synthesis. Review and approve the current evidence state first.",code:"approval_required"},409);
   const st=await evidenceLabState(env,slug), candidates=[];
-  for(const pmid of (st.processed||[]).map(String).slice(-500)){
-    const c=await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");
+  const processedIds=(st.processed||[]).map(String);
+  let workCards=[];
+  if(area.count>EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD || processedIds.length>EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD){const compact=await evidenceCompactLoad(env,slug);workCards=processedIds.map(p=>compact.get(p)).filter(Boolean);}
+  else{for(const pmid of processedIds){const c=await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");if(c)workCards.push(c);}}
+  for(const c of workCards){
+    const pmid=String(c.pmid||"");
     if(!c || !(c.source_level==="abstract"||c.source_level==="full_text"))continue;
     const rel=evidenceRelevance(c,area.label);if(rel.level==="exclude")continue;
     const score=evidenceAskScore(c,question,rel.level);
@@ -933,10 +965,20 @@ async function handleEvidenceSynthesize(request,env){
   const st=await evidenceLabState(env,slug), ids=(st.processed||[]).map(String);
   if(ids.length<1)return jsonResponse({error:"At least 1 Evidence Card is required for a provisional synthesis."},400);
 
-  const raw=[];
-  for(const pmid of ids.slice(-500)){
-    const c=await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");
-    if(c)raw.push(c);
+  const largeCorpus=area.count>EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD || ids.length>EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD;
+  let raw=[];
+  if(largeCorpus){
+    const compact=await evidenceCompactLoad(env,slug);
+    const missing=ids.filter(p=>!compact.has(String(p)));
+    if(missing.length){
+      const backfill=[];
+      for(const pmid of missing.slice(0,24)){const c=await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");if(c)backfill.push(c);}
+      if(backfill.length)await evidenceCompactPutMany(env,slug,backfill);
+      return jsonResponse({ok:true,done:false,progress:{phase:"large_index",completed:ids.length-missing.length+backfill.length,total:ids.length,cards_processed:ids.length,message:`Large Corpus index: ${Math.min(ids.length,ids.length-missing.length+backfill.length)}/${ids.length} cards prepared. No AI call was made.`}});
+    }
+    raw=ids.map(p=>compact.get(String(p))).filter(Boolean);
+  }else{
+    for(const pmid of ids){const c=await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");if(c)raw.push(c);}
   }
   if(raw.length<1)return jsonResponse({error:"No readable Evidence Cards are available for synthesis."},400);
 
@@ -962,7 +1004,7 @@ async function handleEvidenceSynthesize(request,env){
   const arr=(v,n=4,m=90)=>Array.isArray(v)?v.slice(0,n).map(x=>clip(typeof x==="string"?x:(x?.outcome||x?.name||JSON.stringify(x)),m)).filter(Boolean):[];
   const nano=usable.map(x=>{const c=x.card;return {
     p:String(c.pmid||""), rel:x.level,
-    t:clip(c.publication_type||"other",24), d:clip(c.study_design||"",32), n:clip(c.sample_size||c.sample_size_details||"",22),
+    t:clip(c.publication_type||"other",40), d:clip(c.study_design||"",32), n:clip(c.sample_size||c.sample_size_details||"",22),
     pop:clip(c.population||"",48), i:clip(c.intervention||"",48), cmp:clip(c.comparator||"",32), dur:clip(c.duration||"",18),
     o:arr(c.primary_outcomes,2,38), dir:clip(c.effect_direction||"",12), sig:clip(c.statistical_significance||"",10),
     r:clip(c.main_result||c.pooled_effect||"",105), lim:clip(c.limitations||c.risk_of_bias_or_certainty||"",55)
@@ -972,8 +1014,10 @@ async function handleEvidenceSynthesize(request,env){
   const relevanceAudit=relevance_cards.map(x=>({pmid:String(x.card.pmid||""),title:String(x.card.title||""),level:x.level,reason:x.reason}));
   // Hierarchical synthesis: bounded chunks, persisted checkpoints, then a compact final pass.
   // This keeps every included card represented without exceeding a single-request TPM envelope.
-  const chunkSize=10;
-  const chunks=[]; for(let i=0;i<nano.length;i+=chunkSize) chunks.push(nano.slice(i,i+chunkSize));
+  const chunkSize=largeCorpus?20:10;
+  const stratumOf=x=>["clinical_trial","observational","mechanistic_human","case_report_series"].includes(x.t)?"human":["systematic_review_meta_analysis","narrative_review"].includes(x.t)?"reviews":["preclinical_animal","mechanistic_preclinical"].includes(x.t)?"preclinical":"other";
+  const ordered=[]; for(const k of ["human","reviews","preclinical","other"])ordered.push(...nano.filter(x=>stratumOf(x)===k));
+  const chunks=[]; for(let i=0;i<ordered.length;i+=chunkSize) chunks.push(ordered.slice(i,i+chunkSize));
   const checkpointKey=`evidence-lab:v2:synthesis-checkpoint:${slug}:v14`;
   const corpusFingerprint=nano.map(x=>x.p).join(",")+"|"+JSON.stringify(exactProfile)+"|"+JSON.stringify(relevance_profile);
   let checkpoint=await env.SITE_ADMIN.get(checkpointKey,"json").catch(()=>null);
@@ -1179,9 +1223,11 @@ For fields not applicable to a publication type use "not applicable" or null/[] 
       if(extracted.has(pmid)){done.add(pmid);processedNow++;}
     }catch(e){warnings.push(`Storage failed for PMID ${pmid}: ${e?.message||e}`);}
   }
+  const compactNew=[]; for(const src of todo){const pmid=String(src.pmid);if(extracted.has(pmid)){const saved=extracted.get(pmid);saved.pmid=pmid;saved.title=src.title;saved.doi=src.doi;saved.year=src.year;compactNew.push(saved);}}
+  if(compactNew.length)await evidenceCompactPutMany(env,slug,compactNew);
   const next={processed:[...done],failed,updated_at:now};
   await env.SITE_ADMIN.put(EVIDENCE_LAB_STATE_PREFIX+slug,JSON.stringify(next));
-  return jsonResponse({ok:true,processed_now:processedNow,attempted:todo.length,processed:done.size,remaining:Math.max(0,area.count-done.size),warnings});
+  return jsonResponse({ok:true,processed_now:processedNow,attempted:todo.length,processed:done.size,remaining:Math.max(0,area.count-done.size),large_corpus:area.count>EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD,warnings});
 }
 
 const SITE_ADMIN_CONFIG_KEY = "site-admin:config:v1";
