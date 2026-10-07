@@ -109,3 +109,10 @@
 .ask-claim{padding:12px 14px;border-left:4px solid #2f7c4a;background:#f2faf5;border-radius:8px}
 .ask-claim p{margin:0 0 6px;line-height:1.5}
 @media(max-width:560px){.ask-evidence-box{padding:14px}.ask-answer{padding:14px}.ask-answer-top{align-items:flex-start}}
+
+/* v38: manual public evidence brief */
+.public-evidence-box{margin-top:20px;padding-top:20px;border-top:1px solid #dbe4ee}
+.public-evidence-box .public-preview{margin-top:12px;padding:16px;border:1px solid #dbe4ee;border-radius:16px;background:#fff}
+.public-evidence-box .public-preview h4{margin:0 0 8px}.public-evidence-box .public-preview p{margin:6px 0}.public-evidence-box .public-preview ul{margin:8px 0 0;padding-left:22px}
+.public-evidence-box .public-preview-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+@media(max-width:760px){.public-evidence-box .public-preview-grid{grid-template-columns:1fr}.public-evidence-box .review-actions{align-items:stretch}.public-evidence-box .review-btn{width:100%;text-align:center}}

@@ -50,6 +50,12 @@
     <div class="review-status" id="evidenceConclusionStatus">Conclusion not loaded.</div>
     <div id="evidenceConclusionDetails"></div>
   </div>
+  <div class="public-evidence-box" id="publicEvidenceBox">
+    <div class="project-row public-evidence-head"><div><h3 style="margin:0 0 4px">Public Evidence Brief</h3><p class="sub" style="margin:0">Manual public snapshot built only from the approved synthesis and deterministic Evidence Conclusion. No live Groq call is used on the public page.</p></div><span class="protocol-lock" id="publicEvidenceBadge">Not published</span></div>
+    <div class="review-actions"><button class="review-btn" id="publicEvidencePublish">Publish approved brief</button><button class="review-btn muted" id="publicEvidenceUnpublish">Unpublish</button><a class="review-btn muted" id="publicEvidenceOpen" href="#" target="_blank" rel="noopener" hidden>Open public page</a></div>
+    <div class="review-status" id="publicEvidenceStatus">Nothing is published automatically.</div>
+    <div id="publicEvidencePreview"><div class="empty">Approve the current synthesis, then publish manually when ready.</div></div>
+  </div>
   <div class="ask-evidence-box" id="askEvidenceBox">
     <div class="project-row ask-evidence-head"><div><h3 style="margin:0 0 4px">Ask the Evidence</h3><p class="sub" style="margin:0">Ask a question answered only from the current approved Evidence Cards. Every evidence claim must resolve to a validated PMID.</p></div></div>
     <div class="review-field" style="margin-top:14px"><label for="askEvidenceQuestion">Evidence question</label><textarea id="askEvidenceQuestion" placeholder="Example: What does the direct human evidence show for motor symptoms in Parkinson’s disease?"></textarea></div>
