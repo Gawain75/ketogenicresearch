@@ -26,6 +26,12 @@
 <div class="review-actions"><button class="review-btn" id="evidenceProcess">Process next batch</button><button class="review-btn secondary" id="evidenceAutoProcess">Auto-process corpus</button><button class="review-btn muted" id="evidenceStopAuto" disabled>Stop</button><button class="review-btn muted" id="evidenceRefresh">Refresh status</button></div>
 <div class="review-status" id="evidenceStatus">Choose a clinical area. Processing is incremental and does not modify Library classification.</div>
 <div class="large-corpus-note" id="largeCorpusNote" hidden><strong>Large Corpus mode</strong><span id="largeCorpusText">Large evidence sets are processed incrementally with resumable checkpoints. Keep this tab open during automatic processing; you can stop and resume without losing completed Evidence Cards.</span></div>
+<div class="daily-auto-box" id="dailyAutoBox">
+  <div class="project-row"><div><h3 style="margin:0 0 4px">Daily Auto Processor</h3><p class="sub" style="margin:0">Global background processing across all Evidence Lab areas with a shared daily Groq budget and fair allocation.</p></div><span class="protocol-lock" id="dailyAutoBadge">Loading…</span></div>
+  <div class="evidence-map-summary" id="dailyAutoSummary" style="margin-top:12px"><div class="empty">Loading automation status…</div></div>
+  <div class="review-actions"><button class="review-btn muted" id="dailyAutoRefresh">Refresh automation</button><button class="review-btn" id="dailyAutoRunNow">Run one fair batch now</button></div>
+  <div class="review-status" id="dailyAutoStatus">Automation status not loaded.</div>
+</div>
 <div style="margin-top:24px;padding-top:20px;border-top:1px solid #dbe4ee">
 <div class="project-row"><div><h3 style="margin:0 0 4px">Provisional Evidence Synthesis</h3><p class="sub" style="margin:0">Private interpretation generated only from cached Evidence Cards. It is never published automatically.</p></div><span class="protocol-lock">Draft</span></div>
 <div class="review-actions"><button class="review-btn secondary" id="evidenceSynthesize">Generate synthesis</button><button class="review-btn muted" id="evidenceLoadSynthesis">Load saved synthesis</button></div>

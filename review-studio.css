@@ -118,3 +118,6 @@
 @media(max-width:760px){.public-evidence-box .public-preview-grid{grid-template-columns:1fr}.public-evidence-box .review-actions{align-items:stretch}.public-evidence-box .review-btn{width:100%;text-align:center}}
 
 .large-corpus-note{margin:12px 0 0;padding:12px 14px;border:1px solid #cbd9e8;border-radius:12px;background:#f6f9fc;display:flex;gap:10px;align-items:flex-start;line-height:1.45}.large-corpus-note[hidden]{display:none}.large-corpus-note strong{white-space:nowrap;color:#173b5d}.large-corpus-note span{color:#56697b}@media(max-width:760px){.large-corpus-note{display:block}.large-corpus-note strong{display:block;margin-bottom:4px}}
+
+/* v42 Daily Auto Processor */
+.daily-auto-box{margin:16px 0;padding:18px;border:1px solid #d6e2ea;border-radius:16px;background:#fbfdff}.daily-auto-box .evidence-map-summary{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:760px){.daily-auto-box{padding:14px}.daily-auto-box .evidence-map-summary{grid-template-columns:repeat(2,minmax(0,1fr))}}
