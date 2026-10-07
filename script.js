@@ -46,6 +46,7 @@ function setLang(lang) {
   applyLibraryFilters();
   updateLibraryCounters();
   renderLatestEvidence();
+  refreshEvidenceBriefLinkLanguage();
 }
 
 function initHeader() {
@@ -830,3 +831,43 @@ if (document.getElementById('alzheimers-disease')) {
   krAlzheimerMechanisms.defer = true;
   document.head.appendChild(krAlzheimerMechanisms);
 }
+
+
+// Published Evidence Brief links (Library + Research)
+let KR_EVIDENCE_BRIEFS = new Map();
+function evidenceBriefHref(item){
+  if(!item)return '#';
+  return currentLang()==='it' && item.url_it ? item.url_it : item.url;
+}
+function refreshEvidenceBriefLinkLanguage(){
+  document.querySelectorAll('[data-evidence-brief-slug]').forEach(a=>{
+    const item=KR_EVIDENCE_BRIEFS.get(a.dataset.evidenceBriefSlug);
+    if(!item)return;
+    a.href=evidenceBriefHref(item);
+    a.textContent=currentLang()==='it'?'Sintesi evidenze':'Evidence Summary';
+    a.setAttribute('aria-label',currentLang()==='it'?`Apri la sintesi delle evidenze: ${item.label}`:`Open evidence summary: ${item.label}`);
+  });
+}
+function installEvidenceBriefLinks(){
+  KR_EVIDENCE_BRIEFS.forEach((item,slug)=>{
+    const folder=document.getElementById(slug);
+    const summary=folder?.querySelector(':scope > summary');
+    if(summary&&!summary.querySelector(`[data-evidence-brief-slug="${slug}"]`)){
+      const a=document.createElement('a');a.className='evidence-summary-link';a.dataset.evidenceBriefSlug=slug;
+      a.addEventListener('click',e=>e.stopPropagation());
+      const arrow=summary.querySelector('.folder-arrow'); summary.insertBefore(a,arrow||null);
+    }
+    document.querySelectorAll(`a[data-area-slug="${slug}"]`).forEach(areaLink=>{
+      const parent=areaLink.parentElement;if(!parent||parent.querySelector(`[data-evidence-brief-slug="${slug}"]`))return;
+      const a=document.createElement('a');a.className='evidence-summary-link evidence-summary-program';a.dataset.evidenceBriefSlug=slug;parent.appendChild(a);
+    });
+  });
+  refreshEvidenceBriefLinkLanguage();
+}
+async function initEvidenceBriefLinks(){
+  try{
+    const r=await fetch('/api/site-public/evidence-briefs',{headers:{'Accept':'application/json'}});if(!r.ok)return;
+    const d=await r.json();KR_EVIDENCE_BRIEFS=new Map((d.briefs||[]).map(x=>[x.slug,x]));installEvidenceBriefLinks();
+  }catch(e){}
+}
+window.addEventListener('DOMContentLoaded',initEvidenceBriefLinks);

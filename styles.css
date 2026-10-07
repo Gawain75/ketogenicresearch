@@ -2616,3 +2616,11 @@ article.folder-paper p,
     height:min(18px,72%);
   }
 }
+
+
+/* Published Evidence Brief links */
+.evidence-summary-link{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;text-decoration:none;font-size:12px;font-weight:750;line-height:1;padding:7px 10px;border:1px solid #bfd0de;border-radius:999px;background:#edf5fa;color:#174f7b;transition:background .15s ease,border-color .15s ease}
+.evidence-summary-link:hover{background:#e2f0f8;border-color:#9fbdd2;color:#123f63}
+.library-folder summary:has(.evidence-summary-link){grid-template-columns:42px 1fr auto 30px}
+.program-links .evidence-summary-program{background:#eef7f2;border-color:#b9d8c6;color:#23643f}
+@media(max-width:700px){.library-folder summary:has(.evidence-summary-link){grid-template-columns:34px 1fr 24px}.library-folder summary .evidence-summary-link{grid-column:2;justify-self:start;margin-top:6px}.library-folder summary .folder-arrow{grid-column:3;grid-row:1}.evidence-summary-link{font-size:11px;padding:6px 8px}}
