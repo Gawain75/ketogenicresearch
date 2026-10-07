@@ -734,21 +734,51 @@ async function handleEvidenceAsk(request,env){
 const PUBLIC_EVIDENCE_PREFIX = "evidence-public:v1:";
 function publicEvidenceEsc(v){return String(v??"").replace(/[&<>\"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
 function publicEvidenceList(items,empty){const a=Array.isArray(items)?items.filter(Boolean):[];return a.length?`<ul>${a.map(x=>`<li>${publicEvidenceEsc(x)}</li>`).join("")}</ul>`:`<p>${publicEvidenceEsc(empty||"Not available.")}</p>`;}
-function publicEvidencePageHtml(b){
-  const area=b?.area||{}, approved=b?.source?.approved_at?new Date(b.source.approved_at).toLocaleDateString("en-GB",{year:"numeric",month:"long",day:"numeric"}):"—";
-  const published=b?.published_at?new Date(b.published_at).toLocaleDateString("en-GB",{year:"numeric",month:"long",day:"numeric"}):"—";
-  const fav=(b.consistent_favorable_domains||[]).map(x=>x.label||x), mixed=(b.mixed_domains||[]).map(x=>x.label||x);
-  const faq=Array.isArray(b.faq)?b.faq:[];
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${publicEvidenceEsc(area.label||"Evidence Brief")} | Ketogenic Research Hub</title><meta name="description" content="Approved evidence brief from the Ketogenic Research Hub."><meta name="robots" content="index,follow"><link rel="stylesheet" href="/styles.css"><style>
-  body{background:#f6f8fb;color:#18324b}.evidence-public{max-width:980px;margin:0 auto;padding:42px 22px 70px}.evidence-public .top{margin-bottom:24px}.evidence-public .k{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#587089}.evidence-public h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.05;margin:.25rem 0 .7rem}.evidence-public .lead{font-size:1.15rem;line-height:1.65;color:#4e6275}.evidence-public .meta{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.evidence-public .pill{padding:7px 11px;border-radius:999px;background:#eaf2f8;font-size:.9rem}.evidence-public .card{background:white;border:1px solid #dce5ed;border-radius:20px;padding:22px;margin:16px 0}.evidence-public .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.evidence-public h2{font-size:1.25rem;margin:0 0 10px}.evidence-public h3{font-size:1.05rem;margin:18px 0 8px}.evidence-public p,.evidence-public li{line-height:1.62}.evidence-public ul{padding-left:22px;margin:8px 0}.evidence-public .bottom{border-left:5px solid #2b7a4b;background:#eef8f1}.evidence-public .faq details{border-top:1px solid #e2e8ee;padding:14px 0}.evidence-public .faq details:first-child{border-top:0}.evidence-public summary{cursor:pointer;font-weight:700}.evidence-public .note{font-size:.9rem;color:#66788a}.evidence-public a{color:#1f5c8f}@media(max-width:700px){.evidence-public{padding:28px 16px 52px}.evidence-public .grid{grid-template-columns:1fr}.evidence-public .card{padding:18px}}
-  </style></head><body><main class="evidence-public"><div class="top"><div class="k">Ketogenic Research Hub · Approved Evidence Brief</div><h1>${publicEvidenceEsc(area.label||"")}</h1><p class="lead">${publicEvidenceEsc(b.approved_overall_interpretation||b.interpretation||"")}</p><div class="meta"><span class="pill">${publicEvidenceEsc(b.signal||"Evidence signal")}</span><span class="pill">Evidence maturity: ${publicEvidenceEsc(b.maturity||"—")}</span><span class="pill">${Number(b.direct_human_studies||0)} direct human studies</span><span class="pill">${Number(b.clinical_trials||0)} clinical trials</span></div></div>
-  <section class="card"><h2>What the direct human evidence shows</h2><p>${publicEvidenceEsc(b.interpretation||"")}</p></section>
-  <div class="grid"><section class="card"><h2>Most consistent favorable domains</h2>${publicEvidenceList(fav,"No domain met the consistency rule.")}</section><section class="card"><h2>Mixed / uncertain domains</h2>${publicEvidenceList(mixed,"No mixed domains identified.")}</section></div>
-  <div class="grid"><section class="card"><h2>Main limitations</h2>${publicEvidenceList(b.limitations,"No limitations recorded.")}</section><section class="card"><h2>Research gaps</h2>${publicEvidenceList(b.research_gaps,"No research gaps recorded.")}</section></div>
-  <section class="card bottom"><h2>Clinical bottom line</h2><p><strong>${publicEvidenceEsc(b.approved_bottom_line||"")}</strong></p><p class="note">This is a deterministic summary of the approved Evidence Lab snapshot. It is not a formal GRADE assessment and does not replace clinical judgment.</p></section>
-  ${faq.length?`<section class="card faq"><h2>Questions answered by the evidence</h2>${faq.map(x=>`<details><summary>${publicEvidenceEsc(x.question)}</summary><p>${publicEvidenceEsc(x.answer)}</p></details>`).join("")}</section>`:""}
+function publicEvidencePageHtml(b,lang="en"){
+  const isIt=lang==="it"&&b?.translations?.it, t=isIt?b.translations.it:null, area=b?.area||{};
+  const L=isIt?{
+    kicker:"Ketogenic Research Hub · Sintesi delle evidenze approvata",what:"Cosa mostrano le evidenze umane dirette",fav:"Domini favorevoli più consistenti",mixed:"Domini misti / incerti",limitations:"Principali limiti",gaps:"Lacune della ricerca",bottom:"Conclusione clinica",questions:"Domande a cui rispondono le evidenze",maturity:"Maturità delle evidenze",direct:"studi umani diretti",trials:"trial clinici",emptyFav:"Nessun dominio ha soddisfatto il criterio di consistenza.",emptyMixed:"Nessun dominio misto identificato.",emptyLim:"Nessun limite registrato.",emptyGap:"Nessuna lacuna di ricerca registrata.",note:"Sintesi deterministica dello snapshot approvato dell’Evidence Lab. Non costituisce una valutazione GRADE formale né sostituisce il giudizio clinico.",switchLabel:"English",switchHref:`/evidence/${area.slug}`
+  }:{
+    kicker:"Ketogenic Research Hub · Approved Evidence Brief",what:"What the direct human evidence shows",fav:"Most consistent favorable domains",mixed:"Mixed / uncertain domains",limitations:"Main limitations",gaps:"Research gaps",bottom:"Clinical bottom line",questions:"Questions answered by the evidence",maturity:"Evidence maturity",direct:"direct human studies",trials:"clinical trials",emptyFav:"No domain met the consistency rule.",emptyMixed:"No mixed domains identified.",emptyLim:"No limitations recorded.",emptyGap:"No research gaps recorded.",note:"This is a deterministic summary of the approved Evidence Lab snapshot. It is not a formal GRADE assessment and does not replace clinical judgment.",switchLabel:"Italiano",switchHref:`/it/evidence/${area.slug}`
+  };
+  const areaLabel=isIt?(t.area_label||area.label):area.label;
+  const signal=isIt?(t.signal||b.signal):b.signal, maturity=isIt?(t.maturity||b.maturity):b.maturity;
+  const interpretation=isIt?(t.interpretation||b.interpretation):b.interpretation;
+  const overall=isIt?(t.approved_overall_interpretation||b.approved_overall_interpretation):b.approved_overall_interpretation;
+  const bottom=isIt?(t.approved_bottom_line||b.approved_bottom_line):b.approved_bottom_line;
+  const fav=isIt?(t.favorable_domains||[]):(b.consistent_favorable_domains||[]).map(x=>x.label||x);
+  const mixed=isIt?(t.mixed_domains||[]):(b.mixed_domains||[]).map(x=>x.label||x);
+  const limitations=isIt?(t.limitations||[]):(b.limitations||[]), gaps=isIt?(t.research_gaps||[]):(b.research_gaps||[]);
+  const faq=isIt?(t.faq||[]):(Array.isArray(b.faq)?b.faq:[]);
+  const canonical=`https://ketogenicresearch.org${isIt?`/it/evidence/${area.slug}`:`/evidence/${area.slug}`}`;
+  return `<!doctype html><html lang="${isIt?'it':'en'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${publicEvidenceEsc(areaLabel||"Evidence Brief")} | Ketogenic Research Hub</title><meta name="description" content="${isIt?'Sintesi approvata delle evidenze del Ketogenic Research Hub.':'Approved evidence brief from the Ketogenic Research Hub.'}"><meta name="robots" content="index,follow"><link rel="canonical" href="${canonical}"><link rel="alternate" hreflang="en" href="https://ketogenicresearch.org/evidence/${area.slug}"><link rel="alternate" hreflang="it" href="https://ketogenicresearch.org/it/evidence/${area.slug}"><link rel="stylesheet" href="/styles.css"><style>
+  body{background:#f6f8fb;color:#18324b}.evidence-public{max-width:980px;margin:0 auto;padding:42px 22px 70px}.evidence-public .top{margin-bottom:24px}.evidence-public .k{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#587089}.evidence-public h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.05;margin:.25rem 0 .7rem}.evidence-public .lead{font-size:1.15rem;line-height:1.65;color:#4e6275}.evidence-public .meta{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.evidence-public .pill{padding:7px 11px;border-radius:999px;background:#eaf2f8;font-size:.9rem}.evidence-public .card{background:white;border:1px solid #dce5ed;border-radius:20px;padding:22px;margin:16px 0}.evidence-public .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.evidence-public h2{font-size:1.25rem;margin:0 0 10px}.evidence-public h3{font-size:1.05rem;margin:18px 0 8px}.evidence-public p,.evidence-public li{line-height:1.62}.evidence-public ul{padding-left:22px;margin:8px 0}.evidence-public .bottom{border-left:5px solid #2b7a4b;background:#eef8f1}.evidence-public .faq details{border-top:1px solid #e2e8ee;padding:14px 0}.evidence-public .faq details:first-child{border-top:0}.evidence-public summary{cursor:pointer;font-weight:700}.evidence-public .note{font-size:.9rem;color:#66788a}.evidence-public a{color:#1f5c8f}.evidence-public .language-switch{float:right;font-size:.9rem;font-weight:700;text-decoration:none;padding:7px 11px;border:1px solid #cbd8e3;border-radius:999px;background:#fff}@media(max-width:700px){.evidence-public{padding:28px 16px 52px}.evidence-public .grid{grid-template-columns:1fr}.evidence-public .card{padding:18px}}
+  </style></head><body><main class="evidence-public"><div class="top"><a class="language-switch" href="${L.switchHref}"${!isIt&&!b?.translations?.it?' style="display:none"':''}>${L.switchLabel}</a><div class="k">${L.kicker}</div><h1>${publicEvidenceEsc(areaLabel||"")}</h1><p class="lead">${publicEvidenceEsc(overall||interpretation||"")}</p><div class="meta"><span class="pill">${publicEvidenceEsc(signal||"Evidence signal")}</span><span class="pill">${L.maturity}: ${publicEvidenceEsc(maturity||"—")}</span><span class="pill">${Number(b.direct_human_studies||0)} ${L.direct}</span><span class="pill">${Number(b.clinical_trials||0)} ${L.trials}</span></div></div>
+  <section class="card"><h2>${L.what}</h2><p>${publicEvidenceEsc(interpretation||"")}</p></section>
+  <div class="grid"><section class="card"><h2>${L.fav}</h2>${publicEvidenceList(fav,L.emptyFav)}</section><section class="card"><h2>${L.mixed}</h2>${publicEvidenceList(mixed,L.emptyMixed)}</section></div>
+  <div class="grid"><section class="card"><h2>${L.limitations}</h2>${publicEvidenceList(limitations,L.emptyLim)}</section><section class="card"><h2>${L.gaps}</h2>${publicEvidenceList(gaps,L.emptyGap)}</section></div>
+  <section class="card bottom"><h2>${L.bottom}</h2><p><strong>${publicEvidenceEsc(bottom||"")}</strong></p><p class="note">${L.note}</p></section>
+  ${faq.length?`<section class="card faq"><h2>${L.questions}</h2>${faq.map(x=>`<details><summary>${publicEvidenceEsc(x.question)}</summary><p>${publicEvidenceEsc(x.answer)}</p></details>`).join("")}</section>`:""}
 </main></body></html>`;
 }
+async function publicEvidenceItalianTranslation(env,brief){
+  if(!env.GROQ_API_KEY)return null;
+  const source={
+    area_label:brief.area?.label||"",signal:brief.signal||"",maturity:brief.maturity||"",interpretation:brief.interpretation||"",
+    favorable_domains:(brief.consistent_favorable_domains||[]).map(x=>x.label||x),mixed_domains:(brief.mixed_domains||[]).map(x=>x.label||x),
+    limitations:brief.limitations||[],research_gaps:brief.research_gaps||[],approved_overall_interpretation:brief.approved_overall_interpretation||"",
+    approved_bottom_line:brief.approved_bottom_line||"",faq:(brief.faq||[]).map(x=>({question:x.question||"",answer:x.answer||""}))
+  };
+  const system=`Translate the supplied Ketogenic Research Hub Evidence Brief from English to Italian. Translation only: preserve scientific meaning, direction of effect, uncertainty, numbers, study counts, acronyms and clinical caution exactly. Do not add, remove, strengthen, weaken, summarize or reinterpret any claim. Keep standard scientific acronyms such as RCT, ADL, MCT, GRADE where appropriate. Return ONLY JSON with exactly the same keys and array lengths as the input.`;
+  try{
+    const x=await groqJsonLimited(env,[{role:"system",content:system},{role:"user",content:JSON.stringify(source)}],1800);
+    if(!x||typeof x!=="object")return null;
+    const same=(a,b)=>Array.isArray(a)&&Array.isArray(b)&&a.length===b.length;
+    if(!same(x.favorable_domains,source.favorable_domains)||!same(x.mixed_domains,source.mixed_domains)||!same(x.limitations,source.limitations)||!same(x.research_gaps,source.research_gaps)||!same(x.faq,source.faq))return null;
+    return x;
+  }catch(e){return null;}
+}
+
 async function handleEvidencePublication(request,env,session){
   if(!env.SITE_ADMIN)return jsonResponse({error:"Evidence Lab storage (SITE_ADMIN) is not configured."},503);
   const url=new URL(request.url);let body={};if(request.method!=="GET")body=await request.json().catch(()=>({}));
@@ -759,10 +789,10 @@ async function handleEvidencePublication(request,env,session){
   const current=await evidenceReviewSnapshot(request,env,slug);
   const changes=current?evidenceReviewDiff(review.approved_snapshot,current):{has_changes:true};
   const can_publish=!!(current&&review.status==="approved"&&review.approved_snapshot&&!changes.has_changes);
-  if(request.method==="GET")return jsonResponse({area:{slug,label:area.label},published:existing||null,can_publish,approval_current:can_publish,public_url:`/evidence/${slug}`});
+  if(request.method==="GET")return jsonResponse({area:{slug,label:area.label},published:existing||null,can_publish,approval_current:can_publish,public_url:`/evidence/${slug}`,public_url_it:existing?.translations?.it?`/it/evidence/${slug}`:null});
   if(request.method!=="POST")return jsonResponse({error:"Method not allowed."},405);
   const action=String(body.action||"").toLowerCase();
-  if(action==="unpublish"){await env.SITE_ADMIN.delete(key);return jsonResponse({ok:true,area:{slug,label:area.label},published:null,can_publish,public_url:`/evidence/${slug}`});}
+  if(action==="unpublish"){await env.SITE_ADMIN.delete(key);return jsonResponse({ok:true,area:{slug,label:area.label},published:null,can_publish,public_url:`/evidence/${slug}`,public_url_it:null});}
   if(action!=="publish")return jsonResponse({error:"Action must be publish or unpublish."},400);
   if(!can_publish)return jsonResponse({error:"Only a current approved synthesis can be published. Review and approve the current evidence state first."},409);
   const cu=new URL(request.url);cu.pathname="/api/review/evidence/conclusion";cu.searchParams.set("area",slug);
@@ -770,8 +800,11 @@ async function handleEvidencePublication(request,env,session){
   const now=new Date().toISOString(), who=String(session?.email||"administrator");
   const fav=(conclusion.consistent_favorable_domains||[]).map(x=>({domain:x.domain,label:x.label})), mixed=[...(conclusion.mixed_domains||[]),...(conclusion.discordant_domains||[])].map(x=>({domain:x.domain,label:x.label}));
   const brief={schema_version:1,area:{slug,label:area.label},published_at:now,published_by:who,source:{approved_at:review.approved_at||null,approved_by:review.approved_by||null,synthesis_generated_at:current.synthesis_generated_at||null,cards_processed_current:current.cards_processed_current||0},signal:conclusion.signal,maturity:conclusion.maturity,interpretation:conclusion.interpretation,direct_human_studies:conclusion.direct_human_studies,clinical_trials:conclusion.clinical_trials,consistent_favorable_domains:fav,mixed_domains:mixed,limitations:conclusion.limitations||[],research_gaps:conclusion.research_gaps||[],approved_overall_interpretation:conclusion.approved_overall_interpretation||"",approved_bottom_line:conclusion.approved_bottom_line||"",faq:[{question:"What does the current approved evidence suggest?",answer:conclusion.approved_overall_interpretation||conclusion.interpretation||""},{question:"How consistent is the direct human evidence?",answer:conclusion.interpretation||""},{question:"What are the main limitations?",answer:(conclusion.limitations||[]).join("; ")||"No limitations recorded in the approved synthesis."},{question:"What research is still needed?",answer:(conclusion.research_gaps||[]).join("; ")||"No research gaps recorded in the approved synthesis."},{question:"What is the approved clinical bottom line?",answer:conclusion.approved_bottom_line||""}]};
+  const it=await publicEvidenceItalianTranslation(env,brief);
+  brief.translations={it:it||null};
+  brief.translation_status=it?"ready":"unavailable";
   await env.SITE_ADMIN.put(key,JSON.stringify(brief));
-  return jsonResponse({ok:true,area:{slug,label:area.label},published:brief,can_publish:true,approval_current:true,public_url:`/evidence/${slug}`});
+  return jsonResponse({ok:true,area:{slug,label:area.label},published:brief,can_publish:true,approval_current:true,public_url:`/evidence/${slug}`,public_url_it:it?`/it/evidence/${slug}`:null,translation_status:brief.translation_status});
 }
 
 const EVIDENCE_LAB_SYNTHESIS_PREFIX = "evidence-lab:v2:synthesis:";
@@ -1432,15 +1465,23 @@ export default {
       return new Response(JSON.stringify({deleted}),{headers:{"Content-Type":"application/json; charset=utf-8","Access-Control-Allow-Origin":"https://ketogenicresearch.org","Cache-Control":"no-store"}});
     }
     if (url.pathname === "/api/site-public/config" && request.method === "GET") { let cfg=env.SITE_ADMIN?await getSiteAdminConfig(env):{menu:[]}; if(!Array.isArray(cfg.menu)||!cfg.menu.length){try{cfg={menu:await assetJson(request,env,"_admin-menu.json")};}catch(e){cfg={menu:[]};}} if(env.SITE_ADMIN) cfg.extended=await getExtendedConfig(env); return new Response(JSON.stringify(cfg),{headers:{"Content-Type":"application/json; charset=utf-8","Access-Control-Allow-Origin":"https://ketogenicresearch.org","Cache-Control":"no-store"}}); }
+    if (url.pathname === "/api/site-public/evidence-briefs" && request.method === "GET") {
+      if(!env.SITE_ADMIN)return new Response(JSON.stringify({briefs:[]}),{headers:{"Content-Type":"application/json; charset=utf-8","Cache-Control":"public, max-age=60"}});
+      const listed=await env.SITE_ADMIN.list({prefix:PUBLIC_EVIDENCE_PREFIX,limit:1000});
+      const briefs=[];
+      for(const k of listed.keys||[]){const slug=evidenceLabSlug(String(k.name||"").slice(PUBLIC_EVIDENCE_PREFIX.length));if(!slug)continue;const b=await env.SITE_ADMIN.get(k.name,"json");if(b)briefs.push({slug,label:b.area?.label||slug,url:`/evidence/${slug}`,url_it:b.translations?.it?`/it/evidence/${slug}`:null});}
+      return new Response(JSON.stringify({briefs}),{headers:{"Content-Type":"application/json; charset=utf-8","Cache-Control":"public, max-age=60, stale-while-revalidate=300","Access-Control-Allow-Origin":"*"}});
+    }
     const mediaMatch=url.pathname.match(/^\/media\/([a-zA-Z0-9_-]+)$/);if(mediaMatch&&env.SITE_ADMIN){const m=await env.SITE_ADMIN.get(SITE_ADMIN_MEDIA_PREFIX+safeMediaId(mediaMatch[1]),"json");if(!m)return new Response("Not found",{status:404});const comma=String(m.data||"").indexOf(',');const bytes=Uint8Array.from(atob(String(m.data||"").slice(comma+1)),c=>c.charCodeAt(0));return new Response(bytes,{headers:{"Content-Type":m.type||"application/octet-stream","Cache-Control":"public, max-age=3600","X-Content-Type-Options":"nosniff"}});}
     if((url.pathname==="/scientific-committee"||url.pathname==="/scientific-committee/")&&env.SITE_ADMIN){const c=(await getExtendedConfig(env)).committee;if(!c?.published)return new Response("Not found",{status:404});return new Response(committeeHtml(c),{headers:{"Content-Type":"text/html; charset=utf-8","Cache-Control":"public, max-age=60"}});}
 
-    const publicEvidenceMatch=url.pathname.match(/^\/evidence\/([a-z0-9-]+)\/?$/);
+    const publicEvidenceMatch=url.pathname.match(/^\/(it\/)?evidence\/([a-z0-9-]+)\/?$/);
     if(publicEvidenceMatch&&request.method==="GET"){
       if(!env.SITE_ADMIN)return new Response("Not found",{status:404});
-      const brief=await env.SITE_ADMIN.get(PUBLIC_EVIDENCE_PREFIX+evidenceLabSlug(publicEvidenceMatch[1]),"json");
-      if(!brief)return new Response("Not found",{status:404,headers:{"X-Robots-Tag":"noindex"}});
-      return new Response(publicEvidencePageHtml(brief),{headers:{"Content-Type":"text/html; charset=utf-8","Cache-Control":"public, max-age=60, stale-while-revalidate=300","X-Content-Type-Options":"nosniff"}});
+      const lang=publicEvidenceMatch[1]?"it":"en", slug=evidenceLabSlug(publicEvidenceMatch[2]);
+      const brief=await env.SITE_ADMIN.get(PUBLIC_EVIDENCE_PREFIX+slug,"json");
+      if(!brief|| (lang==="it"&&!brief.translations?.it))return new Response("Not found",{status:404,headers:{"X-Robots-Tag":"noindex"}});
+      return new Response(publicEvidencePageHtml(brief,lang),{headers:{"Content-Type":"text/html; charset=utf-8","Cache-Control":"public, max-age=60, stale-while-revalidate=300","X-Content-Type-Options":"nosniff"}});
     }
 
     if ((url.pathname === "/review-studio" || url.pathname === "/review-studio/" || url.pathname === "/review-studio.html") && request.method === "GET") {
