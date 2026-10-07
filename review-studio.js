@@ -348,7 +348,7 @@
   }
   function askEvidenceHtml(d){
     const claims=Array.isArray(d.claims)&&d.claims.length?`<div class="ask-claims">${d.claims.map(x=>`<div class="ask-claim"><p>${esc(x.text||'')}</p><div class="small">${pmidLinks(x.pmids||[])}</div></div>`).join('')}</div>`:'<p class="small">No source-locked claims were available for this question.</p>';
-    return `<div class="ask-answer"><div class="ask-answer-top"><span class="map-pill">${esc(String(d.support_level||'not_supported').replaceAll('_',' '))}</span><span class="small">${Number(d.cards_considered||0)} Evidence Cards considered</span></div><p class="ask-summary"><strong>${esc(d.summary||'')}</strong></p>${claims}${d.caveat?`<div class="notice"><strong>Caveat.</strong> ${esc(d.caveat)}</div>`:''}</div>`;
+    return `<div class="ask-answer"><div class="ask-answer-top"><span class="map-pill">${esc(String(d.support_level||'not_supported').replaceAll('_',' '))}</span><span class="small">${Number(d.cards_considered||0)} considered · ${Number(d.pmids?.length||0)} cited</span></div><p class="ask-summary"><strong>${esc(d.summary||'')}</strong></p>${claims}${d.caveat?`<div class="notice"><strong>Caveat.</strong> ${esc(d.caveat)}</div>`:''}</div>`;
   }
   async function askEvidence(){
     const area=$('evidenceArea').value,question=$('askEvidenceQuestion').value.trim();
