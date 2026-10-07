@@ -286,6 +286,56 @@ async function groqJsonLimited(env, messages, maxCompletionTokens=1100) {
   catch(e){throw new Error(`AI synthesis returned invalid JSON: ${e?.message||"parse error"}. No repair/retry request was attempted.`);}
 }
 
+
+async function groqTextSingle(env, messages, maxCompletionTokens=520) {
+  if (!env.GROQ_API_KEY) throw new Error("GROQ_API_KEY is not configured in Cloudflare.");
+  const endpoint="https://api.groq.com/openai/v1/chat/completions";
+  const model=env.GROQ_MODEL || "openai/gpt-oss-120b";
+  let r;
+  try{
+    r=await fetch(endpoint,{method:"POST",headers:{"Authorization":`Bearer ${env.GROQ_API_KEY}`,"Content-Type":"application/json"},body:JSON.stringify({model,temperature:0.1,max_completion_tokens:maxCompletionTokens,reasoning_effort:"low",messages})});
+  }catch(e){throw new Error(`AI synthesis network error: ${e?.message||"request failed"}. No automatic retry was attempted.`);}
+  if(!r.ok){
+    let detail="";try{const j=await r.json();detail=String(j?.error?.message||j?.message||"");}catch{try{detail=await r.text();}catch{}}
+    throw new Error(`AI synthesis service error (${r.status})${detail?`: ${detail.slice(0,700)}`:""}. No automatic retry was attempted.`);
+  }
+  const data=await r.json();
+  const out=String(data?.choices?.[0]?.message?.content||"").trim();
+  if(!out) throw new Error("AI synthesis returned an empty response. No automatic retry was attempted.");
+  return out;
+}
+
+function parseFinalNarrativeText(text){
+  const keys={OVERALL:"overall_interpretation",CONSISTENCY:"evidence_consistency",HUMAN:"human_clinical",REVIEWS:"reviews_meta_analyses",PRECLINICAL:"preclinical_mechanistic",LIMITATIONS:"limitations",GAPS:"research_gaps",BOTTOM:"bottom_line"};
+  const out={limitations:[],research_gaps:[]};
+  for(const raw of String(text||"").split(/\r?\n/)){
+    const line=raw.trim(); if(!line) continue;
+    const m=line.match(/^(OVERALL|CONSISTENCY|HUMAN|REVIEWS|PRECLINICAL|LIMITATIONS|GAPS|BOTTOM)\s*[:|]\s*(.*)$/i);
+    if(!m) continue; const tag=m[1].toUpperCase(), val=m[2].trim();
+    if(tag==="LIMITATIONS") out.limitations=val.split(/\s*;\s*/).filter(Boolean).slice(0,8);
+    else if(tag==="GAPS") out.research_gaps=val.split(/\s*;\s*/).filter(Boolean).slice(0,8);
+    else out[keys[tag]]=val;
+  }
+  const required=["overall_interpretation","evidence_consistency","human_clinical","reviews_meta_analyses","preclinical_mechanistic","bottom_line"];
+  if(required.some(k=>!String(out[k]||"").trim())) throw new Error("AI narrative response did not contain all required labelled lines. No automatic retry was attempted.");
+  if(!["consistent","mostly_consistent","mixed","conflicting","insufficient"].includes(out.evidence_consistency)) out.evidence_consistency="insufficient";
+  return out;
+}
+
+function parseFinalClaimsText(text){
+  const out={main_findings:[],conflicting_evidence:[]};
+  for(const raw of String(text||"").split(/\r?\n/)){
+    const line=raw.trim(); if(!line) continue;
+    const m=line.match(/^([FC])\|([^|]+)\|(.+)$/i); if(!m) continue;
+    const pmids=m[2].split(",").map(x=>x.trim()).filter(x=>/^\d{7,9}$/.test(x));
+    const claim=m[3].trim(); if(!pmids.length||!claim) continue;
+    if(m[1].toUpperCase()==="F" && out.main_findings.length<8) out.main_findings.push({finding:claim,pmids});
+    if(m[1].toUpperCase()==="C" && out.conflicting_evidence.length<6) out.conflicting_evidence.push({issue:claim,pmids});
+  }
+  if(!out.main_findings.length && !out.conflicting_evidence.length) throw new Error("AI source-lock response contained no parseable sourced claims. No automatic retry was attempted.");
+  return out;
+}
+
 async function groqTextLimited(env, messages, maxCompletionTokens=650) {
   if (!env.GROQ_API_KEY) throw new Error("GROQ_API_KEY is not configured in Cloudflare.");
   const endpoint="https://api.groq.com/openai/v1/chat/completions";
@@ -557,20 +607,29 @@ async function handleEvidenceSynthesize(request,env){
   // Phase A generates narrative prose, Phase B generates source-locked findings/conflicts,
   // Phase C assembles + validates + saves without any AI call.
   checkpoint.final = checkpoint.final && typeof checkpoint.final === "object" ? checkpoint.final : {};
-  const finalNarrativeSystem=`You are producing PRIVATE, PROVISIONAL scientific evidence synthesis prose from hierarchical summaries of structured Evidence Cards. Use ONLY the supplied packet. EXACT_EVIDENCE_PROFILE and EXACT_RELEVANCE_PROFILE are deterministic ground truth and MUST NOT be recalculated or contradicted. direct may support the selected clinical question; supporting is indirect/mechanistic and cannot establish clinical efficacy; contextual is background only and MUST NOT support efficacy/safety conclusions. Clinical trials and observational studies are separate. Reviews are not additional independent primary studies. Never present preclinical benefit as demonstrated clinical efficacy. Never infer causality from observational evidence. DO NOT write PMID numbers, bracketed numeric citations, or aggregate study counts. Do not state counts such as “seven trials”; the application inserts exact deterministic counts. This is NOT a formal GRADE assessment. Return ONLY valid JSON with keys: overall_interpretation (string), evidence_consistency (consistent|mostly_consistent|mixed|conflicting|insufficient), human_clinical (string), reviews_meta_analyses (string), preclinical_mechanistic (string), limitations (array of strings), research_gaps (array of strings), bottom_line (string).`;
+  const finalNarrativeSystem=`Produce a PRIVATE provisional scientific synthesis using ONLY the supplied digest. Do not output JSON and do not output PMID numbers. Do not recalculate study counts. Keep direct, supporting and contextual evidence distinct; do not present preclinical findings as clinical efficacy. Output EXACTLY eight labelled lines and nothing else:
+OVERALL: one concise sentence
+CONSISTENCY: exactly one of consistent, mostly_consistent, mixed, conflicting, insufficient
+HUMAN: concise human evidence synthesis
+REVIEWS: concise review evidence synthesis
+PRECLINICAL: concise preclinical/mechanistic synthesis
+LIMITATIONS: semicolon-separated short items
+GAPS: semicolon-separated short items
+BOTTOM: one concise sentence`;
   if(!checkpoint.final.narrative){
     let part;
-    try{part=await groqJsonLimited(env,[{role:"system",content:finalNarrativeSystem},{role:"user",content:finalNarrativePacket}],420);}
+    try{const txt=await groqTextSingle(env,[{role:"system",content:finalNarrativeSystem},{role:"user",content:finalNarrativePacket}],520);part=parseFinalNarrativeText(txt);}
     catch(e){return jsonResponse({error:`Evidence synthesis final narrative stage failed: ${e?.message||"AI service error"}. All chunk checkpoints were preserved.`,diagnostic:{cards_processed:raw.length,cards_usable:usable.length,completed_chunks:chunks.length,final_packet_chars:finalNarrativePacket.length},progress:{phase:"final_narrative",completed:0,total:2}},502);}
     checkpoint.final.narrative=part;
-    // Force the second AI stage into a fresh Groq TPM window. Requests arriving during
-    // cooldown return progress only and make ZERO Groq calls.
     checkpoint.final.claims_not_before=Date.now()+65000;
     try{await env.SITE_ADMIN.put(checkpointKey,JSON.stringify(checkpoint),{expirationTtl:86400});}
     catch(e){return jsonResponse({error:`Final narrative generated but checkpoint save failed: ${e?.message||"storage error"}`},500);}
     return jsonResponse({ok:true,done:false,progress:{phase:"final_narrative",completed:1,total:2,message:"Final narrative checkpoint saved"}});
   }
-  const finalClaimsSystem=`You are extracting source-locked claims for a PRIVATE scientific synthesis from hierarchical summaries of structured Evidence Cards. Use ONLY the supplied packet. Return ONLY claims directly supported by the supplied summaries. Every claim MUST contain at least one PMID copied exactly from allowed_pmids and directly supporting that exact claim. Never invent, shorten, alter or infer a PMID. If a claim cannot be tied to a supplied PMID, OMIT it. direct evidence may support clinical conclusions; supporting evidence may support plausibility but NOT clinical efficacy; contextual evidence MUST NOT support efficacy/safety conclusions. Return ONLY valid JSON with keys: main_findings (array of {finding,pmids}), conflicting_evidence (array of {issue,pmids}). Maximum 8 findings and 6 conflicts.`;
+  const finalClaimsSystem=`Extract ONLY source-locked claims from the supplied digest. Do not output JSON. Every line must have one of these exact formats:
+F|PMID[,PMID]|finding text
+C|PMID[,PMID]|conflicting-evidence text
+Use only PMID values present in allowed_pmids and only when the digest directly supports the claim. Omit any unsourced claim. Maximum 8 F lines and 6 C lines. No headings, bullets, commentary or other text.`;
   if(!checkpoint.final.claims){
     const notBefore=Number(checkpoint.final.claims_not_before||0);
     if(notBefore>Date.now()){
@@ -578,7 +637,7 @@ async function handleEvidenceSynthesize(request,env){
       return jsonResponse({ok:true,done:false,progress:{phase:"tpm_cooldown",completed:1,total:2,wait_seconds:waitSeconds,message:`Narrative saved. Waiting ${waitSeconds}s for a fresh Groq TPM window; no AI call was made.`}});
     }
     let part;
-    try{part=await groqJsonLimited(env,[{role:"system",content:finalClaimsSystem},{role:"user",content:finalClaimsPacket}],420);}
+    try{const txt=await groqTextSingle(env,[{role:"system",content:finalClaimsSystem},{role:"user",content:finalClaimsPacket}],480);part=parseFinalClaimsText(txt);}
     catch(e){return jsonResponse({error:`Evidence synthesis source-lock stage failed: ${e?.message||"AI service error"}. Narrative and chunk checkpoints were preserved.`,diagnostic:{cards_processed:raw.length,cards_usable:usable.length,completed_chunks:chunks.length,final_packet_chars:finalClaimsPacket.length},progress:{phase:"final_claims",completed:1,total:2}},502);}
     checkpoint.final.claims=part;
     try{await env.SITE_ADMIN.put(checkpointKey,JSON.stringify(checkpoint),{expirationTtl:86400});}
@@ -633,7 +692,7 @@ async function handleEvidenceSynthesize(request,env){
   const reviewPrefix=`Exact evidence profile: ${evidence_profile.systematic_review_meta_analysis} systematic reviews/meta-analyses; ${evidence_profile.narrative_review} narrative reviews.`;
   const preclinicalPrefix=`Exact evidence profile: ${evidence_profile.preclinical_animal} preclinical animal studies; ${evidence_profile.mechanistic_preclinical} mechanistic preclinical studies.`;
   const lockedSection=(value,section,prefix)=>`${prefix} ${stripModelCitations(validateSection(value,section))}`.trim();
-  const synthesis={schema_version:18,area_slug:slug,area_label:area.label,generated_at:new Date().toISOString(),library_total:area.count,cards_processed:raw.length,cards_analyzed:usable.length,cards_excluded:excluded.length,cards_sent_to_model:nano.length,cards_synthesized:nano.length,synthesis_chunks:chunks.length,excluded_cards:excluded,evidence_profile,relevance_profile,relevance_cards:relevanceAudit,counts,citation_validation,evidence_consistency:String(out?.evidence_consistency||"insufficient"),overall_interpretation:stripModelCitations(out?.overall_interpretation),human_clinical:lockedSection(out?.human_clinical,"human",humanPrefix),reviews_meta_analyses:lockedSection(out?.reviews_meta_analyses,"reviews",reviewPrefix),preclinical_mechanistic:lockedSection(out?.preclinical_mechanistic,"preclinical",preclinicalPrefix),main_findings:mapClaims(out?.main_findings,"finding").map(x=>({finding:stripModelCitations(x.finding),pmids:x.pmids})),conflicting_evidence:mapClaims(out?.conflicting_evidence,"issue").map(x=>({issue:stripModelCitations(x.issue),pmids:x.pmids})),limitations:(Array.isArray(out?.limitations)?out.limitations:[]).map(stripModelCitations).slice(0,8),research_gaps:(Array.isArray(out?.research_gaps)?out.research_gaps:[]).map(stripModelCitations).slice(0,8),bottom_line:stripModelCitations(out?.bottom_line)};
+  const synthesis={schema_version:19,area_slug:slug,area_label:area.label,generated_at:new Date().toISOString(),library_total:area.count,cards_processed:raw.length,cards_analyzed:usable.length,cards_excluded:excluded.length,cards_sent_to_model:nano.length,cards_synthesized:nano.length,synthesis_chunks:chunks.length,excluded_cards:excluded,evidence_profile,relevance_profile,relevance_cards:relevanceAudit,counts,citation_validation,evidence_consistency:String(out?.evidence_consistency||"insufficient"),overall_interpretation:stripModelCitations(out?.overall_interpretation),human_clinical:lockedSection(out?.human_clinical,"human",humanPrefix),reviews_meta_analyses:lockedSection(out?.reviews_meta_analyses,"reviews",reviewPrefix),preclinical_mechanistic:lockedSection(out?.preclinical_mechanistic,"preclinical",preclinicalPrefix),main_findings:mapClaims(out?.main_findings,"finding").map(x=>({finding:stripModelCitations(x.finding),pmids:x.pmids})),conflicting_evidence:mapClaims(out?.conflicting_evidence,"issue").map(x=>({issue:stripModelCitations(x.issue),pmids:x.pmids})),limitations:(Array.isArray(out?.limitations)?out.limitations:[]).map(stripModelCitations).slice(0,8),research_gaps:(Array.isArray(out?.research_gaps)?out.research_gaps:[]).map(stripModelCitations).slice(0,8),bottom_line:stripModelCitations(out?.bottom_line)};
   try{await env.SITE_ADMIN.put(EVIDENCE_LAB_SYNTHESIS_PREFIX+slug,JSON.stringify(synthesis)); await env.SITE_ADMIN.delete(checkpointKey).catch(()=>{});}
   catch(e){return jsonResponse({error:`Synthesis generated but KV save failed: ${e?.message||"unknown storage error"}`},500);}
   return jsonResponse({ok:true,done:true,synthesis,progress:{phase:"complete",completed:chunks.length,total:chunks.length}});
