@@ -474,11 +474,51 @@ const EVIDENCE_LAB_SYNTHESIS_PREFIX = "evidence-lab:v2:synthesis:";
 function compactEvidenceCard(c){
   return {pmid:c.pmid,title:c.title,publication_type:c.publication_type,study_design:c.study_design,evidence_domain:c.evidence_domain,study_purpose:c.study_purpose,population:c.population,sample_size:c.sample_size,sample_size_details:c.sample_size_details,intervention:c.intervention,comparator:c.comparator,duration:c.duration,primary_outcomes:c.primary_outcomes,effect_direction:c.effect_direction,statistical_significance:c.statistical_significance,randomized:c.randomized,controlled:c.controlled,review_studies_included:c.review_studies_included,review_participants:c.review_participants,pooled_effect:c.pooled_effect,heterogeneity:c.heterogeneity,risk_of_bias_or_certainty:c.risk_of_bias_or_certainty,animal_species:c.animal_species,animal_model:c.animal_model,mechanistic_targets:c.mechanistic_targets,main_result:c.main_result,limitations:c.limitations,source_level:c.source_level,extraction_confidence:c.extraction_confidence};
 }
+async function deterministicEvidenceClaims(env,slug,areaLabel){
+  const st=await evidenceLabState(env,slug), cards=[];
+  for(const pmid of (st.processed||[]).map(String).slice(-500)){
+    const c=await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");
+    if(c) cards.push(c);
+  }
+  const humanTypes=new Set(["clinical_trial","observational","mechanistic_human","case_report_series"]);
+  const norm=v=>String(v??"").trim();
+  const arr=v=>Array.isArray(v)?v.map(norm).filter(Boolean):[];
+  const eligible=cards.filter(c=>humanTypes.has(String(c.publication_type||"")) && evidenceRelevance(c,areaLabel).level==="direct")
+    .sort((a,b)=>{
+      const rank=x=>String(x.publication_type||"")==="clinical_trial"?0:String(x.publication_type||"")==="observational"?1:2;
+      return rank(a)-rank(b) || String(a.pmid||"").localeCompare(String(b.pmid||""));
+    });
+  const main_findings=[];
+  const conflicting_evidence=[];
+  for(const c of eligible){
+    const pmid=norm(c.pmid); if(!/^\d{7,9}$/.test(pmid)) continue;
+    const outcomes=arr(c.primary_outcomes).slice(0,5);
+    const intervention=norm(c.intervention);
+    if(!intervention || !outcomes.length) continue;
+    const duration=norm(c.duration);
+    const direction=norm(c.effect_direction);
+    const significance=norm(c.statistical_significance);
+    const parts=[`Intervention: ${intervention}`];
+    if(duration && !/^(not reported|not applicable)$/i.test(duration)) parts.push(`duration: ${duration}`);
+    parts.push(`recorded primary outcome${outcomes.length>1?"s":""}: ${outcomes.join("; ")}`);
+    if(direction && !/^not[_ ]?reported$/i.test(direction)) parts.push(`extracted effect direction: ${direction.replaceAll("_"," ")}`);
+    if(significance && !/^not[_ ]?reported$/i.test(significance)) parts.push(`extracted statistical significance: ${significance.replaceAll("_"," ")}`);
+    main_findings.push({finding:parts.join("; ")+".",pmids:[pmid]});
+    if(/mixed|inconsistent|conflict/i.test(direction+" "+significance)){
+      conflicting_evidence.push({issue:`Evidence Card reports mixed/inconsistent extracted effects across the recorded outcome set: ${outcomes.join("; ")}.`,pmids:[pmid]});
+    }
+    if(main_findings.length>=8) break;
+  }
+  return {main_findings,conflicting_evidence:conflicting_evidence.slice(0,6)};
+}
+
 async function handleEvidenceSynthesisGet(request,env){
   const url=new URL(request.url), slug=evidenceLabSlug(url.searchParams.get("area"));
   if(!slug)return jsonResponse({error:"Clinical area is required."},400);
   const saved=await env.SITE_ADMIN.get(EVIDENCE_LAB_SYNTHESIS_PREFIX+slug,"json");
-  return jsonResponse({synthesis:saved||null});
+  if(!saved)return jsonResponse({synthesis:null});
+  const locked=await deterministicEvidenceClaims(env,slug,String(saved.area_label||slug));
+  return jsonResponse({synthesis:{...saved,schema_version:20,main_findings:locked.main_findings,conflicting_evidence:locked.conflicting_evidence,claim_generation:"deterministic_from_evidence_cards"}});
 }
 function evidenceRelevance(c,areaLabel){
   const norm=v=>String(v??"").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"");
@@ -626,25 +666,11 @@ BOTTOM: one concise sentence`;
     catch(e){return jsonResponse({error:`Final narrative generated but checkpoint save failed: ${e?.message||"storage error"}`},500);}
     return jsonResponse({ok:true,done:false,progress:{phase:"final_narrative",completed:1,total:2,message:"Final narrative checkpoint saved"}});
   }
-  const finalClaimsSystem=`Extract ONLY source-locked claims from the supplied digest. Do not output JSON. Every line must have one of these exact formats:
-F|PMID[,PMID]|finding text
-C|PMID[,PMID]|conflicting-evidence text
-Use only PMID values present in allowed_pmids and only when the digest directly supports the claim. Omit any unsourced claim. Maximum 8 F lines and 6 C lines. No headings, bullets, commentary or other text.`;
-  if(!checkpoint.final.claims){
-    const notBefore=Number(checkpoint.final.claims_not_before||0);
-    if(notBefore>Date.now()){
-      const waitSeconds=Math.max(1,Math.ceil((notBefore-Date.now())/1000));
-      return jsonResponse({ok:true,done:false,progress:{phase:"tpm_cooldown",completed:1,total:2,wait_seconds:waitSeconds,message:`Narrative saved. Waiting ${waitSeconds}s for a fresh Groq TPM window; no AI call was made.`}});
-    }
-    let part;
-    try{const txt=await groqTextSingle(env,[{role:"system",content:finalClaimsSystem},{role:"user",content:finalClaimsPacket}],480);part=parseFinalClaimsText(txt);}
-    catch(e){return jsonResponse({error:`Evidence synthesis source-lock stage failed: ${e?.message||"AI service error"}. Narrative and chunk checkpoints were preserved.`,diagnostic:{cards_processed:raw.length,cards_usable:usable.length,completed_chunks:chunks.length,final_packet_chars:finalClaimsPacket.length},progress:{phase:"final_claims",completed:1,total:2}},502);}
-    checkpoint.final.claims=part;
-    try{await env.SITE_ADMIN.put(checkpointKey,JSON.stringify(checkpoint),{expirationTtl:86400});}
-    catch(e){return jsonResponse({error:`Source-locked claims generated but checkpoint save failed: ${e?.message||"storage error"}`},500);}
-    return jsonResponse({ok:true,done:false,progress:{phase:"final_claims",completed:2,total:2,message:"Source-lock checkpoint saved; next request assembles without AI"}});
-  }
-  const out={...(checkpoint.final.narrative||{}),...(checkpoint.final.claims||{})};
+  // v20: Main findings and conflicts are deterministic projections of Evidence Cards.
+  // No model call is allowed to rewrite outcomes, combine subscales, or attach PMIDs.
+  const deterministicClaims=await deterministicEvidenceClaims(env,slug,area.label);
+  checkpoint.final.claims=deterministicClaims;
+  const out={...(checkpoint.final.narrative||{}),...deterministicClaims};
 
   // Deterministic citation validator. The model may only attach a PMID to a section whose
   // evidence class matches the locked Evidence Card. This prevents a review being cited as an
@@ -692,7 +718,7 @@ Use only PMID values present in allowed_pmids and only when the digest directly 
   const reviewPrefix=`Exact evidence profile: ${evidence_profile.systematic_review_meta_analysis} systematic reviews/meta-analyses; ${evidence_profile.narrative_review} narrative reviews.`;
   const preclinicalPrefix=`Exact evidence profile: ${evidence_profile.preclinical_animal} preclinical animal studies; ${evidence_profile.mechanistic_preclinical} mechanistic preclinical studies.`;
   const lockedSection=(value,section,prefix)=>`${prefix} ${stripModelCitations(validateSection(value,section))}`.trim();
-  const synthesis={schema_version:19,area_slug:slug,area_label:area.label,generated_at:new Date().toISOString(),library_total:area.count,cards_processed:raw.length,cards_analyzed:usable.length,cards_excluded:excluded.length,cards_sent_to_model:nano.length,cards_synthesized:nano.length,synthesis_chunks:chunks.length,excluded_cards:excluded,evidence_profile,relevance_profile,relevance_cards:relevanceAudit,counts,citation_validation,evidence_consistency:String(out?.evidence_consistency||"insufficient"),overall_interpretation:stripModelCitations(out?.overall_interpretation),human_clinical:lockedSection(out?.human_clinical,"human",humanPrefix),reviews_meta_analyses:lockedSection(out?.reviews_meta_analyses,"reviews",reviewPrefix),preclinical_mechanistic:lockedSection(out?.preclinical_mechanistic,"preclinical",preclinicalPrefix),main_findings:mapClaims(out?.main_findings,"finding").map(x=>({finding:stripModelCitations(x.finding),pmids:x.pmids})),conflicting_evidence:mapClaims(out?.conflicting_evidence,"issue").map(x=>({issue:stripModelCitations(x.issue),pmids:x.pmids})),limitations:(Array.isArray(out?.limitations)?out.limitations:[]).map(stripModelCitations).slice(0,8),research_gaps:(Array.isArray(out?.research_gaps)?out.research_gaps:[]).map(stripModelCitations).slice(0,8),bottom_line:stripModelCitations(out?.bottom_line)};
+  const synthesis={schema_version:20,area_slug:slug,area_label:area.label,generated_at:new Date().toISOString(),library_total:area.count,cards_processed:raw.length,cards_analyzed:usable.length,cards_excluded:excluded.length,cards_sent_to_model:nano.length,cards_synthesized:nano.length,synthesis_chunks:chunks.length,excluded_cards:excluded,evidence_profile,relevance_profile,relevance_cards:relevanceAudit,counts,citation_validation,claim_generation:"deterministic_from_evidence_cards",evidence_consistency:String(out?.evidence_consistency||"insufficient"),overall_interpretation:stripModelCitations(out?.overall_interpretation),human_clinical:lockedSection(out?.human_clinical,"human",humanPrefix),reviews_meta_analyses:lockedSection(out?.reviews_meta_analyses,"reviews",reviewPrefix),preclinical_mechanistic:lockedSection(out?.preclinical_mechanistic,"preclinical",preclinicalPrefix),main_findings:mapClaims(out?.main_findings,"finding").map(x=>({finding:stripModelCitations(x.finding),pmids:x.pmids})),conflicting_evidence:mapClaims(out?.conflicting_evidence,"issue").map(x=>({issue:stripModelCitations(x.issue),pmids:x.pmids})),limitations:(Array.isArray(out?.limitations)?out.limitations:[]).map(stripModelCitations).slice(0,8),research_gaps:(Array.isArray(out?.research_gaps)?out.research_gaps:[]).map(stripModelCitations).slice(0,8),bottom_line:stripModelCitations(out?.bottom_line)};
   try{await env.SITE_ADMIN.put(EVIDENCE_LAB_SYNTHESIS_PREFIX+slug,JSON.stringify(synthesis)); await env.SITE_ADMIN.delete(checkpointKey).catch(()=>{});}
   catch(e){return jsonResponse({error:`Synthesis generated but KV save failed: ${e?.message||"unknown storage error"}`},500);}
   return jsonResponse({ok:true,done:true,synthesis,progress:{phase:"complete",completed:chunks.length,total:chunks.length}});
