@@ -575,6 +575,61 @@ async function handleEvidenceContradictions(request,env){
   const conclusion_signal=discordant?"heterogeneous":mixed?"mixed_with_favorable_signal":consistent_favorable?"favorable_signal_with_limited_evidence":"insufficient";
   return jsonResponse({schema_version:1,generated_at:new Date().toISOString(),area:{slug,label:area.label},direct_human_studies:human.length,outcome_domains:groups.length,discordant_domains:discordant,mixed_domains:mixed,consistent_favorable_domains:consistent_favorable,conclusion_signal,groups});
 }
+async function handleEvidenceConclusion(request,env){
+  if(!env.SITE_ADMIN)return jsonResponse({error:"Evidence Lab storage (SITE_ADMIN) is not configured."},503);
+  const url=new URL(request.url), slug=evidenceLabSlug(url.searchParams.get("area"));
+  if(!slug)return jsonResponse({error:"Clinical area is required."},400);
+  const idx=await evidenceLabIndex(request,env), area=idx.areas.find(a=>a.slug===slug);
+  if(!area)return jsonResponse({error:"Clinical area not found."},404);
+  const reviewKey="evidence-lab:v2:review:"+slug;
+  const review={schema_version:1,status:"draft",...((await env.SITE_ADMIN.get(reviewKey,"json"))||{})};
+  const current=await evidenceReviewSnapshot(request,env,slug);
+  if(!current)return jsonResponse({error:"A saved synthesis is required before a conclusion can be generated."},409);
+  const changes=evidenceReviewDiff(review.approved_snapshot,current);
+  if(review.status!=="approved" || !review.approved_snapshot)return jsonResponse({error:"The synthesis must be approved before an evidence conclusion is available.",code:"approval_required"},409);
+  if(changes.has_changes)return jsonResponse({error:"The evidence state changed after approval. Review and approve the current synthesis before using the conclusion.",code:"approval_outdated",changes},409);
+
+  const cu=new URL(request.url);cu.pathname="/api/review/evidence/contradictions";cu.searchParams.set("area",slug);
+  const cr=await handleEvidenceContradictions(new Request(cu.toString(),{method:"GET"}),env);
+  const contradiction=await cr.json();
+  if(!cr.ok)return jsonResponse({error:contradiction?.error||"Unable to build outcome-level evidence comparison."},cr.status||500);
+
+  const groups=Array.isArray(contradiction.groups)?contradiction.groups:[];
+  const favorable=groups.filter(g=>g.status==="consistent_favorable");
+  const mixed=groups.filter(g=>g.status==="mixed");
+  const discordant=groups.filter(g=>g.status==="discordant");
+  const nullish=groups.filter(g=>g.status==="consistent_null_or_unfavorable");
+  const profile=current.evidence_profile||{};
+  const clinicalTrials=Number(profile.clinical_trial||0);
+  const directHuman=Number(contradiction.direct_human_studies||0);
+  let maturity="very limited";
+  if(directHuman>=6 && clinicalTrials>=4 && discordant.length===0)maturity="developing";
+  else if(directHuman>=3 && clinicalTrials>=2)maturity="limited";
+  const signal=discordant.length?"heterogeneous / discordant":(mixed.length&&favorable.length)?"favorable signal with outcome-level uncertainty":favorable.length>=2?"favorable signal across several outcome domains":nullish.length>=2?"predominantly null or unfavorable":"insufficiently characterized";
+  const interpretation=discordant.length
+    ? `Direct human evidence is heterogeneous, with ${discordant.length} discordant outcome domain${discordant.length===1?"":"s"}.`
+    : favorable.length&&mixed.length
+      ? `Direct human evidence shows a favorable signal in ${favorable.length} outcome domain${favorable.length===1?"":"s"}, while ${mixed.length} domain${mixed.length===1?" remains":"s remain"} mixed.`
+      : favorable.length
+        ? `Direct human evidence shows a consistent favorable signal in ${favorable.length} outcome domain${favorable.length===1?"":"s"}, without a detected discordant domain.`
+        : `Direct human evidence does not show a sufficiently consistent favorable signal across outcome domains.`;
+  const limitations=(current.limitations||[]).map(String).filter(Boolean).slice(0,6);
+  const gaps=(current.research_gaps||[]).map(String).filter(Boolean).slice(0,6);
+  return jsonResponse({
+    schema_version:1,generated_at:new Date().toISOString(),area:{slug,label:area.label},
+    approval:{approved_at:review.approved_at||null,approved_by:review.approved_by||null,current:true},
+    signal,maturity,interpretation,
+    direct_human_studies:directHuman,clinical_trials:clinicalTrials,outcome_domains:Number(contradiction.outcome_domains||0),
+    consistent_favorable_domains:favorable.map(g=>({domain:g.domain,label:g.label,counts:g.counts})),
+    mixed_domains:mixed.map(g=>({domain:g.domain,label:g.label,counts:g.counts})),
+    discordant_domains:discordant.map(g=>({domain:g.domain,label:g.label,counts:g.counts})),
+    null_or_unfavorable_domains:nullish.map(g=>({domain:g.domain,label:g.label,counts:g.counts})),
+    limitations,research_gaps:gaps,
+    approved_overall_interpretation:String(current.overall_interpretation||""),
+    approved_bottom_line:String(current.bottom_line||""),
+    note:"Deterministic interpretation; not a formal GRADE assessment and not a substitute for the approved synthesis."
+  });
+}
 const EVIDENCE_LAB_SYNTHESIS_PREFIX = "evidence-lab:v2:synthesis:";
 const EVIDENCE_LAB_REVIEW_PREFIX = "evidence-lab:v2:review:";
 
@@ -1163,7 +1218,7 @@ export default {
     }
     if (url.pathname.startsWith("/api/review/")) {
       const auth=await requireReviewAdmin(request,env); if(!auth.ok)return auth.response;
-      try { if(url.pathname==="/api/review/evidence/areas")return handleEvidenceAreas(request,env); if(url.pathname==="/api/review/evidence/status")return handleEvidenceStatus(request,env); if(url.pathname==="/api/review/evidence/map"&&request.method==="GET")return handleEvidenceMap(request,env); if(url.pathname==="/api/review/evidence/contradictions"&&request.method==="GET")return handleEvidenceContradictions(request,env); if(url.pathname==="/api/review/evidence/process"&&request.method==="POST")return handleEvidenceProcess(request,env); if(url.pathname==="/api/review/evidence/synthesis"&&request.method==="GET")return handleEvidenceSynthesisGet(request,env); if(url.pathname==="/api/review/evidence/review"&&(request.method==="GET"||request.method==="POST"))return handleEvidenceReview(request,env,auth.session); if(url.pathname==="/api/review/evidence/synthesize"&&request.method==="POST")return handleEvidenceSynthesize(request,env); if(url.pathname==="/api/review/protocol")return handleProtocolApi(request,env); if(url.pathname==="/api/review/pubmed")return handlePubmedApi(request,env); if(url.pathname==="/api/review/draft")return handleDraftApi(request,env); return jsonResponse({error:"Not found"},404); } catch(e){ return jsonResponse({error:e?.message||"Review Studio error"},500); }
+      try { if(url.pathname==="/api/review/evidence/areas")return handleEvidenceAreas(request,env); if(url.pathname==="/api/review/evidence/status")return handleEvidenceStatus(request,env); if(url.pathname==="/api/review/evidence/map"&&request.method==="GET")return handleEvidenceMap(request,env); if(url.pathname==="/api/review/evidence/contradictions"&&request.method==="GET")return handleEvidenceContradictions(request,env); if(url.pathname==="/api/review/evidence/conclusion"&&request.method==="GET")return handleEvidenceConclusion(request,env); if(url.pathname==="/api/review/evidence/process"&&request.method==="POST")return handleEvidenceProcess(request,env); if(url.pathname==="/api/review/evidence/synthesis"&&request.method==="GET")return handleEvidenceSynthesisGet(request,env); if(url.pathname==="/api/review/evidence/review"&&(request.method==="GET"||request.method==="POST"))return handleEvidenceReview(request,env,auth.session); if(url.pathname==="/api/review/evidence/synthesize"&&request.method==="POST")return handleEvidenceSynthesize(request,env); if(url.pathname==="/api/review/protocol")return handleProtocolApi(request,env); if(url.pathname==="/api/review/pubmed")return handlePubmedApi(request,env); if(url.pathname==="/api/review/draft")return handleDraftApi(request,env); return jsonResponse({error:"Not found"},404); } catch(e){ return jsonResponse({error:e?.message||"Review Studio error"},500); }
     }
 
     // Serve the login document from a non-HTML raw asset. This bypasses
