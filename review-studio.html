@@ -56,6 +56,13 @@
   <div class="project-row evidence-map-head"><div><h3 style="margin:0 0 4px">Evidence Map</h3><p class="sub" style="margin:0">Deterministic map of the current Evidence Cards by evidence class, relevance and effect direction.</p></div><button class="review-btn muted compact" id="evidenceRefreshMap">Refresh map</button></div>
   <div class="evidence-map-summary" id="evidenceMapSummary"><div class="empty">Choose a clinical area to build the map.</div></div>
   <div class="evidence-map-matrix" id="evidenceMapMatrix"></div>
+<div class="contradiction-box" id="contradictionBox">
+  <div class="project-row contradiction-head"><div><h3 style="margin:0 0 4px">Contradiction Explorer</h3><p class="sub" style="margin:0">Outcome-level comparison of direct human evidence. Distinguishes true discordance from studies measuring different outcomes.</p></div><button class="review-btn muted compact" id="evidenceRefreshContradictions">Refresh explorer</button></div>
+  <div class="contradiction-summary" id="contradictionSummary"><div class="empty">Choose a clinical area to compare direct human evidence.</div></div>
+  <div class="review-status" id="contradictionStatus">Explorer not loaded.</div>
+  <div class="contradiction-groups" id="contradictionGroups"><div class="empty">No outcome comparison loaded.</div></div>
+</div>
+
   <div class="evidence-map-filters">
     <div class="review-field"><label for="evidenceMapClass">Evidence class</label><select id="evidenceMapClass"><option value="">All</option><option value="human_clinical">Human clinical</option><option value="reviews">Reviews</option><option value="preclinical">Preclinical</option><option value="other">Other</option></select></div>
     <div class="review-field"><label for="evidenceMapRelevance">Relevance</label><select id="evidenceMapRelevance"><option value="">All</option><option value="direct">Direct</option><option value="supporting">Supporting</option><option value="contextual">Contextual</option><option value="not_evaluable">Not evaluable</option><option value="exclude">Excluded</option></select></div>
@@ -65,12 +72,7 @@
   <div class="review-status" id="evidenceMapStatus">Map not loaded.</div>
   <div class="evidence-map-results" id="evidenceMapResults"><div class="empty">No mapped Evidence Cards loaded.</div></div>
 </div>
-<div class="contradiction-box" id="contradictionBox">
-  <div class="project-row contradiction-head"><div><h3 style="margin:0 0 4px">Contradiction Explorer</h3><p class="sub" style="margin:0">Outcome-level comparison of direct human evidence. Distinguishes true discordance from studies measuring different outcomes.</p></div><button class="review-btn muted compact" id="evidenceRefreshContradictions">Refresh explorer</button></div>
-  <div class="contradiction-summary" id="contradictionSummary"><div class="empty">Choose a clinical area to compare direct human evidence.</div></div>
-  <div class="review-status" id="contradictionStatus">Explorer not loaded.</div>
-  <div class="contradiction-groups" id="contradictionGroups"><div class="empty">No outcome comparison loaded.</div></div>
-</div>
+
 <div id="evidenceSynthesis" style="margin-top:16px"><div class="empty">No synthesis generated for this area yet.</div></div>
 </div>
 <h3 style="margin-top:22px">Recent Evidence Cards</h3><div class="study-list" id="evidenceCards"><div class="empty">No Evidence Cards generated for this area yet.</div></div>
