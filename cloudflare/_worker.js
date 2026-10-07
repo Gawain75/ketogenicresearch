@@ -489,6 +489,92 @@ async function handleEvidenceMap(request,env){
   cards.sort((a,b)=>{const rank={direct:0,supporting:1,contextual:2,not_evaluable:3,exclude:4};const r=(rank[a.relevance]??9)-(rank[b.relevance]??9);if(r)return r;const y=Number(b.year||0)-Number(a.year||0);if(y)return y;return a.title.localeCompare(b.title);});
   return jsonResponse({schema_version:1,generated_at:new Date().toISOString(),area:{slug,label:area.label,total:area.count},cards_mapped:cards.length,relevance_counts,class_counts,direction_counts,matrix,cards});
 }
+
+function evidenceOutcomeDomains(card){
+  const norm=v=>String(v??"").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"");
+  const join=v=>Array.isArray(v)?v.map(x=>typeof x==="string"?x:JSON.stringify(x)).join(" "):String(v??"");
+  const text=norm([join(card.primary_outcomes),join(card.secondary_outcomes),card.main_result,card.title].join(" "));
+  const defs=[
+    ["motor",/(updrs[- ]?iii|updrs part iii|motor symptom|motor score|motor function|bradykines|rigidity|tremor)/],
+    ["non_motor",/(non[- ]?motor|nmss|updrs part 1|updrs[- ]?i\b|apathy|sleep|fatigue|mood|constipation)/],
+    ["gait_balance",/(timed up and go|\btug\b|gait|freezing|balance|postural)/],
+    ["cognition",/(cognit|memory|lexical|executive|attention|moca|mmse)/],
+    ["voice",/(voice|vhi|phonat|speech)/],
+    ["quality_of_life",/(quality of life|pdq[- ]?39|pdq[- ]?8|adl|iadl|activities of daily living)/],
+    ["safety",/(safety|safe|adverse|tolerab|side effect)/],
+    ["feasibility_adherence",/(feasib|acceptab|adherence|compliance|dropout|retention)/],
+    ["pharmacokinetics",/(pharmacokinetic|levodopa|bioavailability|auc|cmax|tmax)/],
+    ["biomarkers_microbiome",/(microbi|biomarker|beta[- ]?hydroxybutyrate|\bbhb\b|ketosis|metabol|inflamm|oxidative)/]
+  ];
+  const found=defs.filter(([,re])=>re.test(text)).map(([k])=>k);
+  return found.length?found:["other_clinical"];
+}
+function evidenceDomainDirection(card,domain){
+  const norm=v=>String(v??"").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"");
+  const result=norm(card.main_result||"");
+  const chunks=result.split(/(?<=[.!?;])\s+/).filter(Boolean);
+  const domainRegex={
+    motor:/(updrs[- ]?iii|updrs part iii|motor symptom|motor score|motor function|bradykines|rigidity|tremor)/,
+    non_motor:/(non[- ]?motor|nmss|updrs part 1|updrs[- ]?i\b|apathy|sleep|fatigue|mood|constipation)/,
+    gait_balance:/(timed up and go|\btug\b|gait|freezing|balance|postural)/,
+    cognition:/(cognit|memory|lexical|executive|attention|moca|mmse)/,
+    voice:/(voice|vhi|phonat|speech)/,
+    quality_of_life:/(quality of life|pdq[- ]?39|pdq[- ]?8|adl|iadl|activities of daily living)/,
+    safety:/(safety|safe|adverse|tolerab|side effect)/,
+    feasibility_adherence:/(feasib|acceptab|adherence|compliance|dropout|retention)/,
+    pharmacokinetics:/(pharmacokinetic|levodopa|bioavailability|auc|cmax|tmax)/,
+    biomarkers_microbiome:/(microbi|biomarker|beta[- ]?hydroxybutyrate|\bbhb\b|ketosis|metabol|inflamm|oxidative)/,
+    other_clinical:/.*/
+  }[domain]||/.*/;
+  const relevant=chunks.filter(x=>domainRegex.test(x));
+  const text=(relevant.length?relevant:[result]).join(" ");
+  const nullish=/(no significant|not significant|no between[- ]?group|no difference|did not improve|did not affect|failed to|unchanged|comparable gains|similar between)/.test(text);
+  const adverse=/(worsen|worse|deteriorat|unfavorable|adverse effect|increased symptoms)/.test(text);
+  const positive=/(significant improvement|improved|improvement|greater reduction|decreased more|better|favorable|benefit|reduced|ameliorat)/.test(text);
+  if(adverse && positive)return "mixed";
+  if(adverse)return "unfavorable";
+  if(nullish && positive)return "mixed";
+  if(nullish)return "neutral";
+  if(positive)return "favorable";
+  const d=String(card.effect_direction||"not_reported");
+  return ["favorable","mixed","neutral","unfavorable"].includes(d)?d:"not_reported";
+}
+async function handleEvidenceContradictions(request,env){
+  if(!env.SITE_ADMIN)return jsonResponse({error:"Evidence Lab storage (SITE_ADMIN) is not configured."},503);
+  const url=new URL(request.url), slug=evidenceLabSlug(url.searchParams.get("area"));
+  if(!slug)return jsonResponse({error:"Clinical area is required."},400);
+  const idx=await evidenceLabIndex(request,env), area=idx.areas.find(a=>a.slug===slug);
+  if(!area)return jsonResponse({error:"Clinical area not found."},404);
+  const st=await evidenceLabState(env,slug), human=[];
+  for(const pmid of (st.processed||[]).map(String).slice(-1000)){
+    const c=await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");
+    if(!c || !(c.source_level==="abstract"||c.source_level==="full_text"))continue;
+    const rel=evidenceRelevance(c,area.label), type=String(c.publication_type||"");
+    if(rel.level!=="direct" || !["clinical_trial","observational","mechanistic_human","case_report_series"].includes(type))continue;
+    const domains=evidenceOutcomeDomains(c);
+    human.push({pmid:String(c.pmid||pmid),title:String(c.title||""),year:c.year||null,publication_type:type,study_design:String(c.study_design||""),study_purpose:String(c.study_purpose||"other"),randomized:String(c.randomized||"not_reported"),controlled:String(c.controlled||"not_reported"),sample_size:c.sample_size??null,intervention:String(c.intervention||""),comparator:String(c.comparator||""),primary_outcomes:Array.isArray(c.primary_outcomes)?c.primary_outcomes:[],main_result:String(c.main_result||""),effect_direction:String(c.effect_direction||"not_reported"),domains:domains.map(domain=>({domain,direction:evidenceDomainDirection(c,domain)}))});
+  }
+  const domainLabels={motor:"Motor symptoms",non_motor:"Non-motor symptoms",gait_balance:"Gait / balance",cognition:"Cognition",voice:"Voice / speech",quality_of_life:"Quality of life / ADL",safety:"Safety / tolerability",feasibility_adherence:"Feasibility / adherence",pharmacokinetics:"Pharmacokinetics",biomarkers_microbiome:"Biomarkers / microbiome / ketosis",other_clinical:"Other clinical outcomes"};
+  const groups=[];
+  for(const domain of Object.keys(domainLabels)){
+    const studies=human.flatMap(c=>c.domains.filter(d=>d.domain===domain).map(d=>({...c,domain_direction:d.direction}))).map(({domains,...x})=>x);
+    if(!studies.length)continue;
+    const counts={favorable:0,mixed:0,neutral:0,unfavorable:0,not_reported:0};for(const x of studies)counts[x.domain_direction]=(counts[x.domain_direction]||0)+1;
+    const informative=counts.favorable+counts.mixed+counts.neutral+counts.unfavorable;
+    let status="insufficient";
+    if(counts.favorable>0&&(counts.neutral>0||counts.unfavorable>0))status="discordant";
+    else if(counts.favorable>0&&counts.mixed>0)status="mixed";
+    else if(counts.favorable>=2&&!counts.mixed&&!counts.neutral&&!counts.unfavorable)status="consistent_favorable";
+    else if((counts.neutral+counts.unfavorable)>=2&&!counts.favorable&&!counts.mixed)status="consistent_null_or_unfavorable";
+    else if(informative>=1)status=counts.mixed?"mixed":"limited";
+    const priority={discordant:0,mixed:1,consistent_favorable:2,consistent_null_or_unfavorable:3,limited:4,insufficient:5};
+    groups.push({domain,label:domainLabels[domain],status,counts,studies,priority:priority[status]??9});
+  }
+  groups.sort((a,b)=>a.priority-b.priority||b.studies.length-a.studies.length||a.label.localeCompare(b.label));
+  const discordant=groups.filter(x=>x.status==="discordant").length, mixed=groups.filter(x=>x.status==="mixed").length, consistent_favorable=groups.filter(x=>x.status==="consistent_favorable").length;
+  const conclusion_signal=discordant?"heterogeneous":mixed?"mixed_with_favorable_signal":consistent_favorable?"favorable_signal_with_limited_evidence":"insufficient";
+  return jsonResponse({schema_version:1,generated_at:new Date().toISOString(),area:{slug,label:area.label},direct_human_studies:human.length,outcome_domains:groups.length,discordant_domains:discordant,mixed_domains:mixed,consistent_favorable_domains:consistent_favorable,conclusion_signal,groups});
+}
 const EVIDENCE_LAB_SYNTHESIS_PREFIX = "evidence-lab:v2:synthesis:";
 const EVIDENCE_LAB_REVIEW_PREFIX = "evidence-lab:v2:review:";
 
@@ -1077,7 +1163,7 @@ export default {
     }
     if (url.pathname.startsWith("/api/review/")) {
       const auth=await requireReviewAdmin(request,env); if(!auth.ok)return auth.response;
-      try { if(url.pathname==="/api/review/evidence/areas")return handleEvidenceAreas(request,env); if(url.pathname==="/api/review/evidence/status")return handleEvidenceStatus(request,env); if(url.pathname==="/api/review/evidence/map"&&request.method==="GET")return handleEvidenceMap(request,env); if(url.pathname==="/api/review/evidence/process"&&request.method==="POST")return handleEvidenceProcess(request,env); if(url.pathname==="/api/review/evidence/synthesis"&&request.method==="GET")return handleEvidenceSynthesisGet(request,env); if(url.pathname==="/api/review/evidence/review"&&(request.method==="GET"||request.method==="POST"))return handleEvidenceReview(request,env,auth.session); if(url.pathname==="/api/review/evidence/synthesize"&&request.method==="POST")return handleEvidenceSynthesize(request,env); if(url.pathname==="/api/review/protocol")return handleProtocolApi(request,env); if(url.pathname==="/api/review/pubmed")return handlePubmedApi(request,env); if(url.pathname==="/api/review/draft")return handleDraftApi(request,env); return jsonResponse({error:"Not found"},404); } catch(e){ return jsonResponse({error:e?.message||"Review Studio error"},500); }
+      try { if(url.pathname==="/api/review/evidence/areas")return handleEvidenceAreas(request,env); if(url.pathname==="/api/review/evidence/status")return handleEvidenceStatus(request,env); if(url.pathname==="/api/review/evidence/map"&&request.method==="GET")return handleEvidenceMap(request,env); if(url.pathname==="/api/review/evidence/contradictions"&&request.method==="GET")return handleEvidenceContradictions(request,env); if(url.pathname==="/api/review/evidence/process"&&request.method==="POST")return handleEvidenceProcess(request,env); if(url.pathname==="/api/review/evidence/synthesis"&&request.method==="GET")return handleEvidenceSynthesisGet(request,env); if(url.pathname==="/api/review/evidence/review"&&(request.method==="GET"||request.method==="POST"))return handleEvidenceReview(request,env,auth.session); if(url.pathname==="/api/review/evidence/synthesize"&&request.method==="POST")return handleEvidenceSynthesize(request,env); if(url.pathname==="/api/review/protocol")return handleProtocolApi(request,env); if(url.pathname==="/api/review/pubmed")return handlePubmedApi(request,env); if(url.pathname==="/api/review/draft")return handleDraftApi(request,env); return jsonResponse({error:"Not found"},404); } catch(e){ return jsonResponse({error:e?.message||"Review Studio error"},500); }
     }
 
     // Serve the login document from a non-HTML raw asset. This bypasses
