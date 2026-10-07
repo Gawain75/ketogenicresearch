@@ -630,6 +630,60 @@ async function handleEvidenceConclusion(request,env){
     note:"Deterministic interpretation; not a formal GRADE assessment and not a substitute for the approved synthesis."
   });
 }
+
+function evidenceAskTokens(value){
+  return [...new Set(String(value||"").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"").match(/[a-z0-9]{3,}/g)||[])];
+}
+function evidenceAskScore(card,question,rel){
+  const q=evidenceAskTokens(question); if(!q.length)return 0;
+  const fields=[card.title,card.study_purpose,card.population,card.intervention,card.comparator,Array.isArray(card.primary_outcomes)?card.primary_outcomes.join(" "):card.primary_outcomes,card.main_result,card.effect_direction,card.publication_type].join(" ").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"");
+  let score=rel==="direct"?5:rel==="supporting"?2:0;
+  for(const t of q){if(fields.includes(t))score+=2;if(String(card.title||"").toLowerCase().includes(t))score+=2;}
+  return score;
+}
+async function handleEvidenceAsk(request,env){
+  if(!env.SITE_ADMIN)return jsonResponse({error:"Evidence Lab storage (SITE_ADMIN) is not configured."},503);
+  if(!env.GROQ_API_KEY)return jsonResponse({error:"GROQ_API_KEY is not configured."},503);
+  const body=await request.json().catch(()=>({})), slug=evidenceLabSlug(body.area), question=String(body.question||"").replace(/\s+/g," ").trim();
+  if(!slug)return jsonResponse({error:"Clinical area is required."},400);
+  if(question.length<4)return jsonResponse({error:"Enter a specific evidence question."},400);
+  if(question.length>1200)return jsonResponse({error:"Question is too long (maximum 1200 characters)."},400);
+  const idx=await evidenceLabIndex(request,env), area=idx.areas.find(a=>a.slug===slug);if(!area)return jsonResponse({error:"Clinical area not found."},404);
+  const review={...evidenceReviewDefault(),...((await env.SITE_ADMIN.get(EVIDENCE_LAB_REVIEW_PREFIX+slug,"json"))||{})};
+  const current=await evidenceReviewSnapshot(request,env,slug);if(!current)return jsonResponse({error:"A saved synthesis is required before Ask the Evidence is available."},409);
+  const changes=evidenceReviewDiff(review.approved_snapshot,current);
+  if(review.status!=="approved" || !review.approved_snapshot || changes.has_changes)return jsonResponse({error:"Ask the Evidence requires a current approved synthesis. Review and approve the current evidence state first.",code:"approval_required"},409);
+  const st=await evidenceLabState(env,slug), candidates=[];
+  for(const pmid of (st.processed||[]).map(String).slice(-500)){
+    const c=await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");
+    if(!c || !(c.source_level==="abstract"||c.source_level==="full_text"))continue;
+    const rel=evidenceRelevance(c,area.label);if(rel.level==="exclude")continue;
+    const score=evidenceAskScore(c,question,rel.level);
+    candidates.push({score,rel:rel.level,card:c});
+  }
+  candidates.sort((a,b)=>b.score-a.score || (a.rel==="direct"?-1:1));
+  let selected=candidates.filter(x=>x.score>0).slice(0,12);
+  if(!selected.length)selected=candidates.filter(x=>x.rel==="direct").slice(0,8);
+  if(!selected.length)return jsonResponse({answer:"The current approved Evidence Lab corpus does not contain evidence-bearing cards that can answer this question.",claims:[],pmids:[],support_level:"not_supported",cards_considered:0});
+  const allowed=new Set(selected.map(x=>String(x.card.pmid||"")));
+  const packet={area:area.label,question,approved_overall_interpretation:current.overall_interpretation,approved_bottom_line:current.bottom_line,evidence:selected.map(x=>({pmid:String(x.card.pmid||""),relevance:x.rel,publication_type:x.card.publication_type,study_design:x.card.study_design,study_purpose:x.card.study_purpose,population:x.card.population,sample_size:x.card.sample_size||x.card.sample_size_details,intervention:x.card.intervention,comparator:x.card.comparator,duration:x.card.duration,primary_outcomes:x.card.primary_outcomes,effect_direction:x.card.effect_direction,statistical_significance:x.card.statistical_significance,main_result:x.card.main_result,limitations:x.card.limitations,source_level:x.card.source_level}))};
+  const system=`You answer questions for a PRIVATE scientific Evidence Lab. Use ONLY the supplied approved synthesis boundaries and Evidence Cards. Do not use outside knowledge. Do not infer unreported facts. Distinguish direct human evidence from supporting/contextual evidence. Never turn association, feasibility, safety or mechanistic evidence into efficacy. If the supplied cards do not support the requested point, say so explicitly. The approved bottom line is a hard clinical boundary and must not be strengthened. Return ONLY JSON with this exact structure: {"summary":"1-3 concise sentences","claims":[{"text":"one factual evidence statement","pmids":["12345678"]}],"support_level":"direct|mixed|indirect|not_supported","caveat":"concise limitation or empty string"}. Every claim must cite one or more PMID values from the supplied evidence. Do not cite a PMID unless that specific supplied card directly supports the claim. Maximum 5 claims.`;
+  let out;
+  try{out=await groqJsonLimited(env,[{role:"system",content:system},{role:"user",content:JSON.stringify(packet)}],900);}
+  catch(e){return jsonResponse({error:`Ask the Evidence failed: ${e?.message||"AI service error"}. No answer was saved.`},502);}
+  const claims=[];
+  for(const x of (Array.isArray(out?.claims)?out.claims:[]).slice(0,5)){
+    const text=String(x?.text||"").replace(/\s+/g," ").trim();
+    const pmids=[...new Set((Array.isArray(x?.pmids)?x.pmids:[]).map(String).filter(p=>allowed.has(p)))];
+    if(text&&pmids.length)claims.push({text,pmids});
+  }
+  const cited=[...new Set(claims.flatMap(x=>x.pmids))];
+  const support=["direct","mixed","indirect","not_supported"].includes(String(out?.support_level||""))?String(out.support_level):claims.length?"mixed":"not_supported";
+  let summary=String(out?.summary||"").replace(/\s+/g," ").trim();
+  if(!claims.length){summary="The supplied approved Evidence Cards do not provide enough source-locked evidence to answer this question.";}
+  return jsonResponse({area:{slug,label:area.label},question,summary,claims,pmids:cited,support_level:support,caveat:String(out?.caveat||"").replace(/\s+/g," ").trim(),cards_considered:selected.length,approval:{approved_at:review.approved_at||null,current:true}});
+}
+
 const EVIDENCE_LAB_SYNTHESIS_PREFIX = "evidence-lab:v2:synthesis:";
 const EVIDENCE_LAB_REVIEW_PREFIX = "evidence-lab:v2:review:";
 
@@ -1218,7 +1272,7 @@ export default {
     }
     if (url.pathname.startsWith("/api/review/")) {
       const auth=await requireReviewAdmin(request,env); if(!auth.ok)return auth.response;
-      try { if(url.pathname==="/api/review/evidence/areas")return handleEvidenceAreas(request,env); if(url.pathname==="/api/review/evidence/status")return handleEvidenceStatus(request,env); if(url.pathname==="/api/review/evidence/map"&&request.method==="GET")return handleEvidenceMap(request,env); if(url.pathname==="/api/review/evidence/contradictions"&&request.method==="GET")return handleEvidenceContradictions(request,env); if(url.pathname==="/api/review/evidence/conclusion"&&request.method==="GET")return handleEvidenceConclusion(request,env); if(url.pathname==="/api/review/evidence/process"&&request.method==="POST")return handleEvidenceProcess(request,env); if(url.pathname==="/api/review/evidence/synthesis"&&request.method==="GET")return handleEvidenceSynthesisGet(request,env); if(url.pathname==="/api/review/evidence/review"&&(request.method==="GET"||request.method==="POST"))return handleEvidenceReview(request,env,auth.session); if(url.pathname==="/api/review/evidence/synthesize"&&request.method==="POST")return handleEvidenceSynthesize(request,env); if(url.pathname==="/api/review/protocol")return handleProtocolApi(request,env); if(url.pathname==="/api/review/pubmed")return handlePubmedApi(request,env); if(url.pathname==="/api/review/draft")return handleDraftApi(request,env); return jsonResponse({error:"Not found"},404); } catch(e){ return jsonResponse({error:e?.message||"Review Studio error"},500); }
+      try { if(url.pathname==="/api/review/evidence/areas")return handleEvidenceAreas(request,env); if(url.pathname==="/api/review/evidence/status")return handleEvidenceStatus(request,env); if(url.pathname==="/api/review/evidence/map"&&request.method==="GET")return handleEvidenceMap(request,env); if(url.pathname==="/api/review/evidence/contradictions"&&request.method==="GET")return handleEvidenceContradictions(request,env); if(url.pathname==="/api/review/evidence/conclusion"&&request.method==="GET")return handleEvidenceConclusion(request,env); if(url.pathname==="/api/review/evidence/ask"&&request.method==="POST")return handleEvidenceAsk(request,env); if(url.pathname==="/api/review/evidence/process"&&request.method==="POST")return handleEvidenceProcess(request,env); if(url.pathname==="/api/review/evidence/synthesis"&&request.method==="GET")return handleEvidenceSynthesisGet(request,env); if(url.pathname==="/api/review/evidence/review"&&(request.method==="GET"||request.method==="POST"))return handleEvidenceReview(request,env,auth.session); if(url.pathname==="/api/review/evidence/synthesize"&&request.method==="POST")return handleEvidenceSynthesize(request,env); if(url.pathname==="/api/review/protocol")return handleProtocolApi(request,env); if(url.pathname==="/api/review/pubmed")return handlePubmedApi(request,env); if(url.pathname==="/api/review/draft")return handleDraftApi(request,env); return jsonResponse({error:"Not found"},404); } catch(e){ return jsonResponse({error:e?.message||"Review Studio error"},500); }
     }
 
     // Serve the login document from a non-HTML raw asset. This bypasses
