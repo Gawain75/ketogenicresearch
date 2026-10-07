@@ -91,3 +91,5 @@
 .conclusion-columns ul{margin:6px 0 0;padding-left:19px}
 .conclusion-columns li{margin:4px 0}
 @media(max-width:760px){.evidence-conclusion-box{padding:14px}.evidence-conclusion-head .review-btn{width:100%}.evidence-conclusion-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.conclusion-columns{grid-template-columns:1fr}}
+
+.contradiction-box>.evidence-conclusion-box{margin:16px 0 18px}
