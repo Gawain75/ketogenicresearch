@@ -226,7 +226,51 @@
     return `<article class="study-card"><h3>${esc(c.title||('PMID '+c.pmid))}</h3><div class="study-meta">PMID ${esc(c.pmid)} · ${esc(c.publication_type||c.study_design||'')} · ${esc(c.study_design||'')} · ${esc(c.evidence_domain||'')} · purpose: ${esc(c.study_purpose||'')} · source: ${esc(c.source_level||'')} · confidence: ${esc(c.extraction_confidence||'')}</div>${common}${specific}<p><strong>Main result:</strong> ${esc(c.main_result||'not reported')}</p><p class="small"><strong>Limitations:</strong> ${esc(list(c.limitations))}</p><div class="study-actions"><a class="screen-btn" href="https://pubmed.ncbi.nlm.nih.gov/${encodeURIComponent(c.pmid)}/" target="_blank" rel="noopener">PubMed ↗</a></div></article>`;
   }
   async function refreshEvidence(){const area=$('evidenceArea').value;if(!area){$('evTotal').textContent=$('evProcessed').textContent=$('evAbstract').textContent=$('evRemaining').textContent='—';$('evidenceCards').innerHTML='<div class="empty">Choose an area first.</div>';return;}setStatus('evidenceStatus','Loading Evidence Lab status…');try{const d=await api('/api/review/evidence/status?area='+encodeURIComponent(area));$('evTotal').textContent=d.area.total;$('evProcessed').textContent=d.processed;$('evAbstract').textContent=d.source_counts.abstract_available;$('evRemaining').textContent=d.remaining;$('evidenceCards').innerHTML=(d.cards||[]).length?(d.cards||[]).map(evidenceCardHtml).join(''):'<div class="empty">No Evidence Cards generated for this area yet.</div>';setStatus('evidenceStatus',`${d.processed} of ${d.area.total} studies processed. Abstract available: ${d.source_counts.abstract_available}; PMC-linked: ${d.source_counts.pmc_linked}; metadata only: ${d.source_counts.metadata_only}. Nothing is public.`, 'ok');}catch(e){setStatus('evidenceStatus',e.message,'error');}}
-  async function processEvidence(){const area=$('evidenceArea').value;if(!area){setStatus('evidenceStatus','Choose a clinical area first.','error');return;}const btn=$('evidenceProcess');btn.disabled=true;setStatus('evidenceStatus','Extracting the next Evidence Card batch…');try{const d=await api('/api/review/evidence/process',{area,batch:Number($('evidenceBatch').value)||6});setStatus('evidenceStatus',`Processed ${d.processed_now||0} studies. ${d.remaining||0} remaining.`, 'ok');await refreshEvidence();}catch(e){setStatus('evidenceStatus',e.message,'error');}finally{btn.disabled=false;}}
+  async function processEvidence(){const area=$('evidenceArea').value;if(!area){setStatus('evidenceStatus','Choose a clinical area first.','error');return;}const btn=$('evidenceProcess');btn.disabled=true;setStatus('evidenceStatus','Extracting the next Evidence Card batch…');try{const d=await api('/api/review/evidence/process',{area,batch:Number($('evidenceBatch').value)||6});setStatus('evidenceStatus',`Processed ${d.processed_now||0} studies. ${d.remaining||0} remaining.`, 'ok');await refreshEvidence();await loadEvidenceMap();}catch(e){setStatus('evidenceStatus',e.message,'error');}finally{btn.disabled=false;}}
+
+  let evidenceMapData=null;
+  const evidenceClassLabel=v=>({human_clinical:'Human clinical',reviews:'Reviews',preclinical:'Preclinical',other:'Other'})[v]||v;
+  const relevanceLabel=v=>({direct:'Direct',supporting:'Supporting',contextual:'Contextual',not_evaluable:'Not evaluable',exclude:'Excluded'})[v]||v;
+  const publicationTypeLabel=v=>String(v||'other').replaceAll('_',' ').replace(/\b\w/g,m=>m.toUpperCase());
+  function resetEvidenceMap(message='Choose a clinical area to build the map.'){evidenceMapData=null;$('evidenceMapSummary').innerHTML=`<div class="empty">${esc(message)}</div>`;$('evidenceMapMatrix').innerHTML='';$('evidenceMapResults').innerHTML='<div class="empty">No mapped Evidence Cards loaded.</div>';$('evidenceMapType').innerHTML='<option value="">All</option>';setStatus('evidenceMapStatus','Map not loaded.');}
+  function evidenceMapCardHtml(c){
+    const direction=String(c.effect_direction||'not_reported').replaceAll('_',' ');
+    return `<article class="evidence-map-card" data-pmid="${esc(c.pmid)}"><div class="evidence-map-card-top"><div><strong>${esc(c.title||('PMID '+c.pmid))}</strong><div class="study-meta">PMID ${esc(c.pmid)}${c.year?` · ${esc(c.year)}`:''} · ${esc(publicationTypeLabel(c.publication_type))}</div></div><span class="map-pill map-${esc(c.relevance)}">${esc(relevanceLabel(c.relevance))}</span></div><div class="map-card-tags"><span>${esc(evidenceClassLabel(c.evidence_class))}</span><span>${esc(direction)}</span>${c.randomized==='yes'?'<span>Randomized</span>':''}${c.controlled==='yes'?'<span>Controlled</span>':''}</div><p class="small">${esc(c.main_result||'No extracted result.')}</p><p class="small map-reason"><strong>Map rationale:</strong> ${esc(c.relevance_reason||'')}</p><a class="screen-btn" href="https://pubmed.ncbi.nlm.nih.gov/${encodeURIComponent(c.pmid)}/" target="_blank" rel="noopener">PubMed ↗</a></article>`;
+  }
+  function applyEvidenceMapFilters(){
+    if(!evidenceMapData)return;
+    const cls=$('evidenceMapClass').value,rel=$('evidenceMapRelevance').value,type=$('evidenceMapType').value,dir=$('evidenceMapDirection').value;
+    const cards=(evidenceMapData.cards||[]).filter(c=>(!cls||c.evidence_class===cls)&&(!rel||c.relevance===rel)&&(!type||c.publication_type===type)&&(!dir||c.effect_direction===dir));
+    $('evidenceMapResults').innerHTML=cards.length?cards.map(evidenceMapCardHtml).join(''):'<div class="empty">No Evidence Cards match the selected filters.</div>';
+    setStatus('evidenceMapStatus',`${cards.length} of ${evidenceMapData.cards_mapped||0} mapped Evidence Cards shown.`,'ok');
+  }
+  function setEvidenceMapCell(evidenceClass,relevance){
+    if(!evidenceMapData)return;
+    $('evidenceMapClass').value=evidenceClass||'';
+    $('evidenceMapRelevance').value=relevance||'';
+    $('evidenceMapType').value='';
+    $('evidenceMapDirection').value='';
+    const cards=(evidenceMapData.cards||[]).filter(c=>(!evidenceClass||c.evidence_class===evidenceClass)&&(!relevance||c.relevance===relevance));
+    $('evidenceMapResults').innerHTML=cards.length?cards.map(evidenceMapCardHtml).join(''):'<div class="empty">No Evidence Cards in this map cell.</div>';
+    setStatus('evidenceMapStatus',`${cards.length} Evidence Cards in ${evidenceClass?evidenceClassLabel(evidenceClass):'all classes'} / ${relevance?relevanceLabel(relevance):'all relevance levels'}.`,'ok');
+  }
+  function renderEvidenceMap(d){
+    evidenceMapData=d;
+    const r=d.relevance_counts||{}, dc=d.direction_counts||{};
+    $('evidenceMapSummary').innerHTML=`<div class="map-summary-chip"><strong>${Number(d.cards_mapped||0)}</strong><span>Mapped</span></div><div class="map-summary-chip"><strong>${Number(r.direct||0)}</strong><span>Direct</span></div><div class="map-summary-chip"><strong>${Number(r.supporting||0)}</strong><span>Supporting</span></div><div class="map-summary-chip"><strong>${Number(r.contextual||0)}</strong><span>Contextual</span></div><div class="map-summary-chip"><strong>${Number(r.not_evaluable||0)}</strong><span>Not evaluable</span></div><div class="map-summary-chip"><strong>${Number(dc.favorable||0)}</strong><span>Favorable</span></div><div class="map-summary-chip"><strong>${Number(dc.mixed||0)}</strong><span>Mixed</span></div>`;
+    const rows=['human_clinical','reviews','preclinical','other'], cols=['direct','supporting','contextual','not_evaluable','exclude'], matrix=d.matrix||{};
+    $('evidenceMapMatrix').innerHTML=`<div class="map-grid map-grid-head"><div>Evidence class</div>${cols.map(c=>`<div>${esc(relevanceLabel(c))}</div>`).join('')}</div>`+rows.map(row=>`<div class="map-grid"><div class="map-row-label">${esc(evidenceClassLabel(row))}</div>${cols.map(col=>`<button type="button" class="map-cell" data-map-class="${esc(row)}" data-map-rel="${esc(col)}"><strong>${Number(matrix?.[row]?.[col]||0)}</strong><span>studies</span></button>`).join('')}</div>`).join('');
+    $('evidenceMapMatrix').querySelectorAll('.map-cell').forEach(b=>b.addEventListener('click',()=>setEvidenceMapCell(b.dataset.mapClass,b.dataset.mapRel)));
+    const types=[...new Set((d.cards||[]).map(c=>c.publication_type).filter(Boolean))].sort();
+    $('evidenceMapType').innerHTML='<option value="">All</option>'+types.map(t=>`<option value="${esc(t)}">${esc(publicationTypeLabel(t))}</option>`).join('');
+    applyEvidenceMapFilters();
+  }
+  async function loadEvidenceMap(){
+    const area=$('evidenceArea').value;if(!area){resetEvidenceMap();return;}
+    setStatus('evidenceMapStatus','Loading deterministic Evidence Map…');
+    try{const d=await api('/api/review/evidence/map?area='+encodeURIComponent(area));renderEvidenceMap(d);}
+    catch(e){setStatus('evidenceMapStatus',e.message,'error');$('evidenceMapResults').innerHTML='<div class="empty">Evidence Map unavailable.</div>';}
+  }
 
   function pmidLinks(pmids){return (pmids||[]).map(p=>`<a href="https://pubmed.ncbi.nlm.nih.gov/${encodeURIComponent(p)}/" target="_blank" rel="noopener">PMID ${esc(p)}</a>`).join(', ');}
   function synthesisHtml(s){
@@ -330,7 +374,7 @@
   $('newProject').addEventListener('click',()=>{if(confirm('Start a new project? Export the current project first if needed.')){project=blankProject();saveProject();bindProjectToForm();renderStudies();showStep('question');setStatus('questionStatus','New project ready.');}});
   $('importJson').addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;try{const p=JSON.parse(await f.text());if(!p||p.version!==1)throw new Error('Unsupported project file.');project=p;saveProject();bindProjectToForm();renderStudies();showStep('question');setStatus('questionStatus','Project imported.','ok');}catch(err){setStatus('questionStatus',err.message,'error');}e.target.value='';});
 
-  $('evidenceArea').addEventListener('change',()=>{refreshEvidence();loadEvidenceSynthesis();}); $('evidenceRefresh').addEventListener('click',refreshEvidence); $('evidenceProcess').addEventListener('click',processEvidence); $('evidenceSynthesize').addEventListener('click',generateEvidenceSynthesis); $('evidenceLoadSynthesis').addEventListener('click',loadEvidenceSynthesis); $('evidenceMarkReviewed').addEventListener('click',()=>evidenceReviewAction('review')); $('evidenceApprove').addEventListener('click',()=>evidenceReviewAction('approve')); $('evidenceReopen').addEventListener('click',()=>evidenceReviewAction('reopen')); $('evidenceRefreshReview').addEventListener('click',loadEvidenceReview);
+  $('evidenceArea').addEventListener('change',()=>{resetEvidenceMap();refreshEvidence();loadEvidenceSynthesis();loadEvidenceMap();}); $('evidenceRefresh').addEventListener('click',()=>{refreshEvidence();loadEvidenceMap();}); $('evidenceProcess').addEventListener('click',processEvidence); $('evidenceSynthesize').addEventListener('click',generateEvidenceSynthesis); $('evidenceLoadSynthesis').addEventListener('click',()=>{loadEvidenceSynthesis();loadEvidenceMap();}); $('evidenceMarkReviewed').addEventListener('click',()=>evidenceReviewAction('review')); $('evidenceApprove').addEventListener('click',()=>evidenceReviewAction('approve')); $('evidenceReopen').addEventListener('click',()=>evidenceReviewAction('reopen')); $('evidenceRefreshReview').addEventListener('click',loadEvidenceReview); $('evidenceRefreshMap').addEventListener('click',loadEvidenceMap); $('evidenceMapClass').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapRelevance').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapType').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapDirection').addEventListener('change',applyEvidenceMapFilters);
 
   bindProjectToForm(); renderStudies(); renderMeta(); loadEvidenceAreas();
 })();

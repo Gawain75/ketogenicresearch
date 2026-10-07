@@ -6,7 +6,7 @@
 <title>Review Studio | Ketogenic Research Hub</title>
 <meta name="robots" content="noindex,nofollow,noarchive"/>
 <link rel="stylesheet" href="styles.css?v=70"/>
-<link rel="stylesheet" href="review-studio.css?v=3"/>
+<link rel="stylesheet" href="review-studio.css?v=4"/>
 <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
 </head>
 <body>
@@ -51,6 +51,19 @@
   <div class="review-actions"><button class="review-btn secondary" id="evidenceMarkReviewed">Mark as reviewed</button><button class="review-btn" id="evidenceApprove">Approve synthesis</button><button class="review-btn muted" id="evidenceReopen">Reopen</button><button class="review-btn muted" id="evidenceRefreshReview">Refresh What changed?</button></div>
   <div class="review-status" id="evidenceReviewStatus">Load a saved synthesis to check its review status.</div>
   <div id="evidenceWhatChanged" class="what-changed"><div class="empty">No approved baseline yet.</div></div>
+</div>
+<div class="evidence-map-box" id="evidenceMapBox">
+  <div class="project-row evidence-map-head"><div><h3 style="margin:0 0 4px">Evidence Map</h3><p class="sub" style="margin:0">Deterministic map of the current Evidence Cards by evidence class, relevance and effect direction.</p></div><button class="review-btn muted compact" id="evidenceRefreshMap">Refresh map</button></div>
+  <div class="evidence-map-summary" id="evidenceMapSummary"><div class="empty">Choose a clinical area to build the map.</div></div>
+  <div class="evidence-map-matrix" id="evidenceMapMatrix"></div>
+  <div class="evidence-map-filters">
+    <div class="review-field"><label for="evidenceMapClass">Evidence class</label><select id="evidenceMapClass"><option value="">All</option><option value="human_clinical">Human clinical</option><option value="reviews">Reviews</option><option value="preclinical">Preclinical</option><option value="other">Other</option></select></div>
+    <div class="review-field"><label for="evidenceMapRelevance">Relevance</label><select id="evidenceMapRelevance"><option value="">All</option><option value="direct">Direct</option><option value="supporting">Supporting</option><option value="contextual">Contextual</option><option value="not_evaluable">Not evaluable</option><option value="exclude">Excluded</option></select></div>
+    <div class="review-field"><label for="evidenceMapType">Study type</label><select id="evidenceMapType"><option value="">All</option></select></div>
+    <div class="review-field"><label for="evidenceMapDirection">Effect direction</label><select id="evidenceMapDirection"><option value="">All</option><option value="favorable">Favorable</option><option value="mixed">Mixed</option><option value="neutral">Neutral</option><option value="unfavorable">Unfavorable</option><option value="not_reported">Not reported</option></select></div>
+  </div>
+  <div class="review-status" id="evidenceMapStatus">Map not loaded.</div>
+  <div class="evidence-map-results" id="evidenceMapResults"><div class="empty">No mapped Evidence Cards loaded.</div></div>
 </div>
 <div id="evidenceSynthesis" style="margin-top:16px"><div class="empty">No synthesis generated for this area yet.</div></div>
 </div>
@@ -118,6 +131,6 @@
 </div>
 </main>
 <footer><div class="wrap footer"><span>KETOGENIC RESEARCH HUB</span><span>Private Review Studio · MVP</span></div></footer>
-<script src="review-studio.js?v=3"></script>
+<script src="review-studio.js?v=4"></script>
 </body>
 </html>
