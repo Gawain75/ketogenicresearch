@@ -521,18 +521,20 @@
       $('dailyAutoBadge').textContent=d.enabled?'Enabled':'Needs scheduler';
       $('dailyAutoSummary').innerHTML=[
         dailyAutoMetric(`${Number(l.attempted_total||0)}/${Number(c.daily_card_budget||0)}`,'Daily card budget'),
+        dailyAutoMetric(`${Number(l.token_total||0).toLocaleString()}/${Number(c.daily_token_budget||0).toLocaleString()}`,'Groq tokens today'),
+        dailyAutoMetric(Number(l.groq_calls||0),'Groq calls today'),
         dailyAutoMetric(Number(l.processed_total||0),'Cards completed today'),
         dailyAutoMetric(Number(d.incomplete_areas||0),'Areas with backlog'),
         dailyAutoMetric(d.next_area_label||'—','Next fair area')
       ].join('');
       $('dailyAutoProgress').innerHTML=dailyAutoProgressHtml(d.areas);
       const last=l.last_run_at?new Date(l.last_run_at).toLocaleString():'not run today';
-      setStatus('dailyAutoStatus',`Batch ${c.batch_size||0} · per-area daily cap ${c.per_area_daily_cap||0} · last run ${last}${l.last_error?` · last error: ${l.last_error}`:''}.`,l.last_error?'error':'ok');
+      setStatus('dailyAutoStatus',`Batch ${c.batch_size||0} · per-area daily cap ${c.per_area_daily_cap||0} · Groq token ceiling ${Number(c.daily_token_budget||0).toLocaleString()}/day · token reserve ${Number(c.token_call_reserve||0).toLocaleString()}/call · last run ${last}${l.last_error?` · last error: ${l.last_error}`:''}.`,l.last_error?'error':'ok');
     }catch(e){$('dailyAutoBadge').textContent='Unavailable';$('dailyAutoProgress').innerHTML='<div class="empty">Area progress unavailable.</div>';setStatus('dailyAutoStatus',e.message,'error');}
   }
   async function runDailyAutomationNow(){
     const b=$('dailyAutoRunNow');b.disabled=true;setStatus('dailyAutoStatus','Running one globally fair Evidence Lab batch…');
-    try{const d=await api('/api/review/evidence/automation',{action:'run'});const r=d.run||{};setStatus('dailyAutoStatus',r.area_label?`${r.area_label}: ${r.processed_now||0} cards completed · ${r.remaining??'—'} remaining. Daily budget ${d.today?.attempted_total||0}/${d.config?.daily_card_budget||0}.`:(r.message||'No batch required.'),'ok');await loadDailyAutomation();await refreshEvidence();}
+    try{const d=await api('/api/review/evidence/automation',{action:'run'});const r=d.run||{};setStatus('dailyAutoStatus',r.area_label?`${r.area_label}: ${r.processed_now||0} cards completed · ${r.remaining??'—'} remaining. Cards ${d.today?.attempted_total||0}/${d.config?.daily_card_budget||0} · Groq tokens ${Number(d.today?.token_total||0).toLocaleString()}/${Number(d.config?.daily_token_budget||0).toLocaleString()}.`:(d.message||r.message||'No batch required.'),'ok');await loadDailyAutomation();await refreshEvidence();}
     catch(e){setStatus('dailyAutoStatus',e.message,'error');}
     finally{b.disabled=false;}
   }
