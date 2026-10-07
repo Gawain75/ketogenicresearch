@@ -271,41 +271,19 @@ async function groqJsonLimited(env, messages, maxCompletionTokens=1100) {
   if (!env.GROQ_API_KEY) throw new Error("GROQ_API_KEY is not configured in Cloudflare.");
   const endpoint="https://api.groq.com/openai/v1/chat/completions";
   const model=env.GROQ_MODEL || "openai/gpt-oss-120b";
-  const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
-  let lastError=null, jsonRepairUsed=false;
-  // Provider-aware loop: 429 is transient and is retried using Retry-After/provider text.
-  // JSON repair is attempted at most once so a malformed answer cannot create an endless loop.
-  for(let attempt=0; attempt<5; attempt++){
-    const attemptMessages=jsonRepairUsed ? [...messages,{role:"system",content:"REPAIR: Return exactly one complete valid JSON object matching the requested keys. No Markdown, commentary or trailing text."}] : messages;
-    let r;
-    try{
-      r=await fetch(endpoint,{method:"POST",headers:{"Authorization":`Bearer ${env.GROQ_API_KEY}`,"Content-Type":"application/json"},body:JSON.stringify({model,temperature:0.1,max_completion_tokens:maxCompletionTokens,reasoning_effort:"low",response_format:{type:"json_object"},messages:attemptMessages})});
-    }catch(e){lastError=new Error(`AI synthesis network error: ${e?.message||"request failed"}`); if(attempt<4){await sleep(1200*(attempt+1));continue;} break;}
-    if(!r.ok){
-      let detail=""; try{const j=await r.json();detail=String(j?.error?.message||j?.message||"");}catch{try{detail=await r.text();}catch{}}
-      const failedGeneration=/failed_generation|failed to generate/i.test(detail);
-      if(r.status===429 && !failedGeneration){
-        const h=Number(r.headers.get("retry-after"));
-        const m=detail.match(/try again in\s*([0-9.]+)s/i);
-        const waitMs=Math.min(20000,Math.max(1500,Math.ceil(((Number.isFinite(h)&&h>0?h:(m?Number(m[1]):2))+0.8)*1000)));
-        lastError=new Error(`AI synthesis rate limit (429); retrying after ${Math.ceil(waitMs/1000)}s.`);
-        if(attempt<4){await sleep(waitMs);continue;}
-      }
-      if(failedGeneration || ((r.status===400||r.status===422)&&/response_format|json/i.test(detail))){
-        // Compatibility fallback for providers/models that reject JSON mode.
-        r=await fetch(endpoint,{method:"POST",headers:{"Authorization":`Bearer ${env.GROQ_API_KEY}`,"Content-Type":"application/json"},body:JSON.stringify({model,temperature:0.1,max_completion_tokens:maxCompletionTokens,reasoning_effort:"low",messages:attemptMessages})});
-        if(r.ok){const data=await r.json();try{return extractJsonObject(data?.choices?.[0]?.message?.content||"");}catch(e){lastError=e;if(!jsonRepairUsed){jsonRepairUsed=true;continue;}}}
-      }
-      lastError=new Error(`AI synthesis service error (${r.status})${detail?`: ${detail.slice(0,700)}`:""}`);
-      if([401,403,413].includes(r.status)) throw lastError;
-      if(attempt<4){await sleep(1000*(attempt+1));continue;}
-      break;
-    }
-    const data=await r.json();
-    try{return extractJsonObject(data?.choices?.[0]?.message?.content||"");}
-    catch(e){lastError=e;if(!jsonRepairUsed){jsonRepairUsed=true;continue;}break;}
+  let r;
+  try{
+    r=await fetch(endpoint,{method:"POST",headers:{"Authorization":`Bearer ${env.GROQ_API_KEY}`,"Content-Type":"application/json"},body:JSON.stringify({model,temperature:0.1,max_completion_tokens:maxCompletionTokens,reasoning_effort:"low",response_format:{type:"json_object"},messages})});
+  }catch(e){
+    throw new Error(`AI synthesis network error: ${e?.message||"request failed"}. No automatic retry was attempted.`);
   }
-  throw new Error(`AI synthesis failed after controlled retries: ${lastError?.message||"invalid response"}`);
+  if(!r.ok){
+    let detail=""; try{const j=await r.json();detail=String(j?.error?.message||j?.message||"");}catch{try{detail=await r.text();}catch{}}
+    throw new Error(`AI synthesis service error (${r.status})${detail?`: ${detail.slice(0,700)}`:""}. No automatic retry was attempted.`);
+  }
+  const data=await r.json();
+  try{return extractJsonObject(data?.choices?.[0]?.message?.content||"");}
+  catch(e){throw new Error(`AI synthesis returned invalid JSON: ${e?.message||"parse error"}. No repair/retry request was attempted.`);}
 }
 
 async function groqTextLimited(env, messages, maxCompletionTokens=650) {
