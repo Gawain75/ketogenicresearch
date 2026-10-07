@@ -2,6 +2,7 @@
   'use strict';
 
   const STORAGE_KEY = 'kr_review_studio_project_v1';
+  const UI_STATE_KEY = 'kr_review_studio_ui_v1';
   const $ = id => document.getElementById(id);
   const num = v => Number.parseFloat(v);
   const finite = v => Number.isFinite(v);
@@ -30,12 +31,23 @@
   function loadProject(){
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch { return null; }
   }
+  function loadUiState(){
+    try { return JSON.parse(localStorage.getItem(UI_STATE_KEY)) || {}; } catch { return {}; }
+  }
+  function saveUiState(patch){
+    const next={...loadUiState(),...patch};
+    localStorage.setItem(UI_STATE_KEY,JSON.stringify(next));
+    return next;
+  }
   function setStatus(id, text, kind=''){
     const el=$(id); el.textContent=text; el.className='review-status'+(kind?' '+kind:'');
   }
   function showStep(step){
-  document.querySelectorAll('.review-step').forEach(b=>b.classList.toggle('active', b.dataset.step===step));
+    const allowed=new Set(['evidence','question','protocol','screening','extraction','analysis','draft']);
+    if(!allowed.has(step))step='evidence';
+    document.querySelectorAll('.review-step').forEach(b=>b.classList.toggle('active', b.dataset.step===step));
     document.querySelectorAll('[id^="panel-"]').forEach(p=>p.hidden = p.id !== `panel-${step}`);
+    saveUiState({active_step:step});
     if(step==='screening') renderStudies();
     if(step==='extraction') renderExtraction();
     if(step==='analysis') renderMeta();
@@ -213,8 +225,21 @@
 
   let evidenceAreas=[];
   async function loadEvidenceAreas(){
-    try{const d=await api('/api/review/evidence/areas');evidenceAreas=d.areas||[];const sel=$('evidenceArea');sel.innerHTML='<option value="">Select an area…</option>'+evidenceAreas.map(a=>`<option value="${esc(a.slug)}">${esc(a.label)} (${a.total})</option>`).join('');}
-    catch(e){setStatus('evidenceStatus',e.message,'error');}
+    try{
+      const d=await api('/api/review/evidence/areas');
+      evidenceAreas=d.areas||[];
+      const sel=$('evidenceArea');
+      sel.innerHTML='<option value="">Select an area…</option>'+evidenceAreas.map(a=>`<option value="${esc(a.slug)}">${esc(a.label)} (${a.total})</option>`).join('');
+      const savedArea=String(loadUiState().evidence_area||'');
+      if(savedArea && evidenceAreas.some(a=>a.slug===savedArea)){
+        sel.value=savedArea;
+        await refreshEvidence();
+        await loadEvidenceSynthesis();
+        await loadEvidenceMap();
+        await loadContradictionExplorer();
+        await loadEvidenceConclusion();
+      }
+    }catch(e){setStatus('evidenceStatus',e.message,'error');}
   }
   function evidenceCardHtml(c){
     const list=v=>Array.isArray(v)?(v.length?v.join('; '):'not reported'):(v||'not reported');
@@ -308,7 +333,7 @@
   function renderEvidenceConclusion(d){
     $('evidenceConclusionSummary').innerHTML=`<div class="conclusion-chip"><strong>${esc(d.signal||'—')}</strong><span>Overall signal</span></div><div class="conclusion-chip"><strong>${esc(d.maturity||'—')}</strong><span>Evidence maturity</span></div><div class="conclusion-chip"><strong>${Number(d.direct_human_studies||0)}</strong><span>Direct human studies</span></div><div class="conclusion-chip"><strong>${Number(d.clinical_trials||0)}</strong><span>Clinical trials</span></div>`;
     $('evidenceConclusionDetails').innerHTML=`<div class="conclusion-callout"><h4>Structured interpretation</h4><p>${esc(d.interpretation||'')}</p></div><div class="conclusion-columns"><section><h4>Most consistent favorable domains</h4>${conclusionDomainList(d.consistent_favorable_domains,'No domain met the consistency rule.')}</section><section><h4>Mixed / uncertain domains</h4>${conclusionDomainList([...(d.mixed_domains||[]),...(d.discordant_domains||[])],'No mixed or discordant domains identified.')}</section></div><div class="conclusion-columns"><section><h4>Main limitations</h4>${Array.isArray(d.limitations)&&d.limitations.length?`<ul>${d.limitations.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:'<p class="small">No limitations recorded in the approved synthesis.</p>'}</section><section><h4>Research gaps</h4>${Array.isArray(d.research_gaps)&&d.research_gaps.length?`<ul>${d.research_gaps.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:'<p class="small">No research gaps recorded in the approved synthesis.</p>'}</section></div><div class="approved-boundary"><h4>Approved clinical bottom line</h4><p><strong>${esc(d.approved_bottom_line||'Not available.')}</strong></p><p class="small">${esc(d.note||'')}</p></div>`;
-    setStatus('evidenceConclusionStatus',`Conclusion anchored to the approved synthesis${d.approval?.approved_at?` approved ${new Date(d.approval.approved_at).toLocaleString()}`:''}.`,'ok');
+    setStatus('evidenceConclusionStatus',`Conclusion anchored to the approved synthesis${d.approval?.approved_at?` of ${new Date(d.approval.approved_at).toLocaleString()}`:''}.`,'ok');
   }
   async function loadEvidenceConclusion(){
     const area=$('evidenceArea').value;if(!area){resetEvidenceConclusion();return;}
@@ -419,7 +444,9 @@
   $('newProject').addEventListener('click',()=>{if(confirm('Start a new project? Export the current project first if needed.')){project=blankProject();saveProject();bindProjectToForm();renderStudies();showStep('question');setStatus('questionStatus','New project ready.');}});
   $('importJson').addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;try{const p=JSON.parse(await f.text());if(!p||p.version!==1)throw new Error('Unsupported project file.');project=p;saveProject();bindProjectToForm();renderStudies();showStep('question');setStatus('questionStatus','Project imported.','ok');}catch(err){setStatus('questionStatus',err.message,'error');}e.target.value='';});
 
-  $('evidenceArea').addEventListener('change',()=>{resetEvidenceMap();resetContradictionExplorer();resetEvidenceConclusion();refreshEvidence();loadEvidenceSynthesis();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();}); $('evidenceRefresh').addEventListener('click',()=>{refreshEvidence();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();}); $('evidenceProcess').addEventListener('click',processEvidence); $('evidenceSynthesize').addEventListener('click',generateEvidenceSynthesis); $('evidenceLoadSynthesis').addEventListener('click',()=>{loadEvidenceSynthesis();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();}); $('evidenceMarkReviewed').addEventListener('click',()=>evidenceReviewAction('review')); $('evidenceApprove').addEventListener('click',()=>evidenceReviewAction('approve')); $('evidenceReopen').addEventListener('click',()=>evidenceReviewAction('reopen')); $('evidenceRefreshReview').addEventListener('click',()=>{loadEvidenceReview();loadEvidenceConclusion();}); $('evidenceRefreshMap').addEventListener('click',loadEvidenceMap); $('evidenceRefreshContradictions').addEventListener('click',()=>{loadContradictionExplorer();loadEvidenceConclusion();}); $('evidenceRefreshConclusion').addEventListener('click',loadEvidenceConclusion); $('evidenceMapClass').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapRelevance').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapType').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapDirection').addEventListener('change',applyEvidenceMapFilters);
+  $('evidenceArea').addEventListener('change',()=>{saveUiState({evidence_area:$('evidenceArea').value||''});resetEvidenceMap();resetContradictionExplorer();resetEvidenceConclusion();refreshEvidence();loadEvidenceSynthesis();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();}); $('evidenceRefresh').addEventListener('click',()=>{refreshEvidence();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();}); $('evidenceProcess').addEventListener('click',processEvidence); $('evidenceSynthesize').addEventListener('click',generateEvidenceSynthesis); $('evidenceLoadSynthesis').addEventListener('click',()=>{loadEvidenceSynthesis();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();}); $('evidenceMarkReviewed').addEventListener('click',()=>evidenceReviewAction('review')); $('evidenceApprove').addEventListener('click',()=>evidenceReviewAction('approve')); $('evidenceReopen').addEventListener('click',()=>evidenceReviewAction('reopen')); $('evidenceRefreshReview').addEventListener('click',()=>{loadEvidenceReview();loadEvidenceConclusion();}); $('evidenceRefreshMap').addEventListener('click',loadEvidenceMap); $('evidenceRefreshContradictions').addEventListener('click',()=>{loadContradictionExplorer();loadEvidenceConclusion();}); $('evidenceRefreshConclusion').addEventListener('click',loadEvidenceConclusion); $('evidenceMapClass').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapRelevance').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapType').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapDirection').addEventListener('change',applyEvidenceMapFilters);
 
-  bindProjectToForm(); renderStudies(); renderMeta(); loadEvidenceAreas();
+  bindProjectToForm(); renderStudies(); renderMeta();
+  showStep('evidence');
+  loadEvidenceAreas();
 })();

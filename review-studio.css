@@ -93,3 +93,7 @@
 @media(max-width:760px){.evidence-conclusion-box{padding:14px}.evidence-conclusion-head .review-btn{width:100%}.evidence-conclusion-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.conclusion-columns{grid-template-columns:1fr}}
 
 .contradiction-box>.evidence-conclusion-box{margin:16px 0 18px}
+
+/* Evidence Lab only */
+.evidence-only-grid{grid-template-columns:minmax(0,1fr)}
+.evidence-only-grid .review-main{width:100%;min-width:0}
