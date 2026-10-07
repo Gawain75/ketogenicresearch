@@ -31,23 +31,27 @@
 
 
 @media(max-width:760px){
-  .evidence-map-box{padding:14px}
+  .evidence-map-box{padding:12px}
   .evidence-map-head{align-items:stretch}
   .evidence-map-head .review-btn{width:100%}
-  .evidence-map-filters{grid-template-columns:1fr}
-  .evidence-map-summary{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .evidence-map-matrix{overflow:visible}
+  .evidence-map-filters{grid-template-columns:1fr;gap:8px}
+  .evidence-map-summary{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:12px 0}
+  .map-summary-chip{padding:8px 10px}
+  .map-summary-chip strong{font-size:18px}
+  .evidence-map-matrix{overflow:visible;margin:8px 0 12px}
   .map-grid-head{display:none}
-  .map-grid{grid-template-columns:repeat(2,minmax(0,1fr));min-width:0;gap:10px;margin-bottom:14px;padding:12px;border:1px solid #dce6ed;border-radius:12px;background:#fff}
-  .map-row-label{grid-column:1/-1;padding:0 0 2px 0;font-size:16px}
-  .map-cell{padding:10px 8px;min-height:82px;display:flex;flex-direction:column;justify-content:center;align-items:center}
-  .map-cell-label{display:block;font-style:normal;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#5f7885;margin-bottom:4px}
+  .map-grid{grid-template-columns:repeat(2,minmax(0,1fr));min-width:0;gap:7px;margin-bottom:10px;padding:9px;border:1px solid #dce6ed;border-radius:11px;background:#fff}
+  .map-row-label{grid-column:1/-1;padding:0 0 1px 0;font-size:15px}
+  .map-cell{padding:7px 6px;min-height:62px;display:flex;flex-direction:column;justify-content:center;align-items:center;border-radius:9px}
+  .map-cell-label{display:block;font-style:normal;font-size:9px;font-weight:800;letter-spacing:.035em;text-transform:uppercase;color:#5f7885;margin-bottom:2px}
+  .map-cell strong{font-size:16px;line-height:1.05}
+  .map-cell span{font-size:10px;line-height:1.1;margin-top:2px}
 }
 @media(min-width:761px){
   .map-cell-label{display:none}
 }
 @media(max-width:430px){
   .evidence-map-summary{grid-template-columns:1fr 1fr}
-  .map-grid{grid-template-columns:1fr}
-  .map-row-label{grid-column:1}
+  .map-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .map-row-label{grid-column:1/-1}
 }
