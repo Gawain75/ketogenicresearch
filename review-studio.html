@@ -6,7 +6,7 @@
 <title>Review Studio | Ketogenic Research Hub</title>
 <meta name="robots" content="noindex,nofollow,noarchive"/>
 <link rel="stylesheet" href="styles.css?v=70"/>
-<link rel="stylesheet" href="review-studio.css?v=2"/>
+<link rel="stylesheet" href="review-studio.css?v=3"/>
 <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
 </head>
 <body>
@@ -45,6 +45,13 @@
 <div class="project-row"><div><h3 style="margin:0 0 4px">Provisional Evidence Synthesis</h3><p class="sub" style="margin:0">Private interpretation generated only from cached Evidence Cards. It is never published automatically.</p></div><span class="protocol-lock">Draft</span></div>
 <div class="review-actions"><button class="review-btn secondary" id="evidenceSynthesize">Generate synthesis</button><button class="review-btn muted" id="evidenceLoadSynthesis">Load saved synthesis</button></div>
 <div class="review-status" id="synthesisStatus">Generate after a meaningful sample of Evidence Cards has been checked.</div>
+<div class="evidence-review-box" id="evidenceReviewBox">
+  <div class="project-row evidence-review-head"><div><h3 style="margin:0 0 4px">Scientific review</h3><p class="sub" style="margin:0">Manual review state for the current saved synthesis. Approval does not publish anything.</p></div><span class="protocol-lock review-state-draft" id="evidenceReviewBadge">Draft</span></div>
+  <div class="review-field" style="margin-top:14px"><label for="evidenceReviewNote">Reviewer note</label><textarea id="evidenceReviewNote" placeholder="Optional note for this review or approval."></textarea></div>
+  <div class="review-actions"><button class="review-btn secondary" id="evidenceMarkReviewed">Mark as reviewed</button><button class="review-btn" id="evidenceApprove">Approve synthesis</button><button class="review-btn muted" id="evidenceReopen">Reopen</button><button class="review-btn muted" id="evidenceRefreshReview">Refresh What changed?</button></div>
+  <div class="review-status" id="evidenceReviewStatus">Load a saved synthesis to check its review status.</div>
+  <div id="evidenceWhatChanged" class="what-changed"><div class="empty">No approved baseline yet.</div></div>
+</div>
 <div id="evidenceSynthesis" style="margin-top:16px"><div class="empty">No synthesis generated for this area yet.</div></div>
 </div>
 <h3 style="margin-top:22px">Recent Evidence Cards</h3><div class="study-list" id="evidenceCards"><div class="empty">No Evidence Cards generated for this area yet.</div></div>
@@ -111,6 +118,6 @@
 </div>
 </main>
 <footer><div class="wrap footer"><span>KETOGENIC RESEARCH HUB</span><span>Private Review Studio · MVP</span></div></footer>
-<script src="review-studio.js?v=2"></script>
+<script src="review-studio.js?v=3"></script>
 </body>
 </html>

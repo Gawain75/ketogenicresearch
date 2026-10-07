@@ -247,8 +247,78 @@
     const excludedHtml=Array.isArray(s.excluded_cards)&&s.excluded_cards.length?'<ul>'+s.excluded_cards.map(x=>`<li><a href="https://pubmed.ncbi.nlm.nih.gov/${encodeURIComponent(x.pmid)}/" target="_blank" rel="noopener">PMID ${esc(x.pmid)}</a>${x.title?` — ${esc(x.title)}`:''}<br><span class="small">Reason: ${esc(x.reason||'non-evaluable')}</span></li>`).join('')+'</ul>':'<p class="small">No excluded cards.</p>';
     return `<article class="study-card"><div class="study-meta">Generated ${esc(s.generated_at||'')} · ${processed} processed · ${included} included · ${excluded} excluded · ${sent} synthesized${chunks?` in ${chunks} batches`:''} · consistency: ${esc(s.evidence_consistency||'not assessed')}</div><h3>Evidence profile</h3>${profileHtml}<h3>Evidence relevance</h3>${relHtml}<h3>Contextual evidence</h3>${contextualHtml}<h3>Excluded from synthesis</h3>${excludedHtml}<h3>Overall interpretation</h3><p>${esc(s.overall_interpretation||'Not available.')}</p><h3>Human clinical evidence</h3><p>${esc(s.human_clinical||'Insufficient evidence in the processed cards.')}</p><h3>Reviews / meta-analyses</h3><p>${esc(s.reviews_meta_analyses||'Insufficient evidence in the processed cards.')}</p><h3>Preclinical & mechanistic evidence</h3><p>${esc(s.preclinical_mechanistic||'Insufficient evidence in the processed cards.')}</p><h3>Main findings</h3>${items(s.main_findings,'finding')}<h3>Conflicting evidence</h3>${items(s.conflicting_evidence,'issue')}<h3>Limitations</h3>${items(s.limitations)}<h3>Research gaps</h3>${items(s.research_gaps)}<h3>Provisional bottom line</h3><p><strong>${esc(s.bottom_line||'Not available.')}</strong></p><p class="small">Private provisional synthesis. Not a formal GRADE assessment and not published to the public website.</p></article>`;
   }
-  async function loadEvidenceSynthesis(){const area=$('evidenceArea').value;if(!area){setStatus('synthesisStatus','Choose a clinical area first.','error');return;}setStatus('synthesisStatus','Loading saved synthesis…');try{const d=await api('/api/review/evidence/synthesis?area='+encodeURIComponent(area));$('evidenceSynthesis').innerHTML=synthesisHtml(d.synthesis);setStatus('synthesisStatus',d.synthesis?`Saved synthesis loaded: ${d.synthesis.cards_processed??d.synthesis.cards_analyzed} processed · ${d.synthesis.cards_analyzed} included · ${d.synthesis.cards_excluded??0} excluded.`:'No saved synthesis for this area yet.',d.synthesis?'ok':'');}catch(e){setStatus('synthesisStatus',e.message,'error');}}
-  async function generateEvidenceSynthesis(){const area=$('evidenceArea').value;if(!area){setStatus('synthesisStatus','Choose a clinical area first.','error');return;}const btn=$('evidenceSynthesize');btn.disabled=true;setStatus('synthesisStatus','Starting provisional synthesis…');try{for(let step=0;step<100;step++){const d=await api('/api/review/evidence/synthesize',{area});if(d.done&&d.synthesis){$('evidenceSynthesis').innerHTML=synthesisHtml(d.synthesis);setStatus('synthesisStatus',`Provisional synthesis: ${d.synthesis.cards_processed??d.synthesis.cards_analyzed} processed · ${d.synthesis.cards_analyzed} included · ${d.synthesis.cards_excluded??0} excluded. Nothing has been published.`,'ok');return;}const p=d.progress||{};setStatus('synthesisStatus',`Synthesis progress: chunk ${Number(p.completed||0)}/${Number(p.total||0)} completed. Checkpoint saved…`,'ok');await new Promise(r=>setTimeout(r,900));}throw new Error('Synthesis stopped after the safety step limit. Press Generate synthesis to resume from saved checkpoints.');}catch(e){setStatus('synthesisStatus',e.message,'error');}finally{btn.disabled=false;}}
+  function reviewStatusLabel(status){
+    return ({draft:'Draft',reviewed:'Reviewed',approved:'Approved',changes_pending_review:'Changes pending review'})[status]||'Draft';
+  }
+  function reviewBadgeClass(status){
+    if(status==='approved')return 'protocol-lock review-state-approved';
+    if(status==='reviewed')return 'protocol-lock review-state-reviewed';
+    if(status==='changes_pending_review')return 'protocol-lock review-state-changed';
+    return 'protocol-lock review-state-draft';
+  }
+  function diffRows(obj){
+    const entries=Object.entries(obj||{}); if(!entries.length)return '';
+    return '<ul>'+entries.map(([k,v])=>`<li>${esc(k.replaceAll('_',' '))}: ${Number(v.before||0)} → <strong>${Number(v.after||0)}</strong>${Number(v.delta||0)?` (${Number(v.delta)>0?'+':''}${Number(v.delta)})`:''}</li>`).join('')+'</ul>';
+  }
+  function claimChangeList(arr,field){
+    if(!Array.isArray(arr)||!arr.length)return '';
+    return '<ul>'+arr.map(x=>`<li>${esc(x?.[field]||'')}${x?.pmids?.length?` <span class="small">(${pmidLinks(x.pmids)})</span>`:''}</li>`).join('')+'</ul>';
+  }
+  function whatChangedHtml(changes,review){
+    if(!changes?.baseline){return '<div class="notice"><strong>No approved baseline yet.</strong> Approve the current synthesis to establish the comparison baseline.</div>';}
+    if(!changes.has_changes){return '<div class="notice review-no-changes"><strong>No changes since the approved synthesis.</strong> The current evidence state matches the approved snapshot.</div>';}
+    const blocks=[];
+    if(changes.new_cards?.length)blocks.push(`<h4>New Evidence Cards</h4><p>${changes.new_cards.map(x=>esc(x)).join(', ')}</p>`);
+    if(changes.removed_cards?.length)blocks.push(`<h4>Removed Evidence Cards</h4><p>${changes.removed_cards.map(x=>esc(x)).join(', ')}</p>`);
+    if(Object.keys(changes.profile_changes||{}).length)blocks.push(`<h4>Evidence profile changes</h4>${diffRows(changes.profile_changes)}`);
+    if(Object.keys(changes.relevance_changes||{}).length)blocks.push(`<h4>Relevance changes</h4>${diffRows(changes.relevance_changes)}`);
+    if(changes.main_findings_added?.length)blocks.push(`<h4>Main findings added</h4>${claimChangeList(changes.main_findings_added,'finding')}`);
+    if(changes.main_findings_removed?.length)blocks.push(`<h4>Main findings removed</h4>${claimChangeList(changes.main_findings_removed,'finding')}`);
+    if(changes.conflicts_added?.length)blocks.push(`<h4>Conflicting evidence added</h4>${claimChangeList(changes.conflicts_added,'issue')}`);
+    if(changes.conflicts_removed?.length)blocks.push(`<h4>Conflicting evidence removed</h4>${claimChangeList(changes.conflicts_removed,'issue')}`);
+    if(changes.overall_interpretation_changed)blocks.push('<h4>Overall interpretation changed</h4><p class="small">The current wording differs from the approved snapshot.</p>');
+    if(changes.bottom_line_changed)blocks.push('<h4>Bottom line changed</h4><p class="small">The current wording differs from the approved snapshot.</p>');
+    return `<div class="notice review-changes"><strong>Changes detected since approval.</strong> Review them before approving the updated synthesis.</div>${blocks.join('')}`;
+  }
+  function resetEvidenceReview(message='Load a saved synthesis to check its review status.'){
+    const badge=$('evidenceReviewBadge'); badge.textContent='Draft'; badge.className='protocol-lock review-state-draft';
+    $('evidenceReviewNote').value='';
+    $('evidenceMarkReviewed').disabled=false;
+    $('evidenceApprove').disabled=true;
+    $('evidenceReopen').disabled=true;
+    setStatus('evidenceReviewStatus',message);
+    $('evidenceWhatChanged').innerHTML='<div class="empty">No approved baseline yet.</div>';
+  }
+  function renderEvidenceReview(d){
+    const r=d?.review||{}, status=r.effective_status||r.status||'draft';
+    const badge=$('evidenceReviewBadge'); badge.textContent=reviewStatusLabel(status); badge.className=reviewBadgeClass(status);
+    $('evidenceReviewNote').value=r.note||'';
+    $('evidenceMarkReviewed').disabled=status==='reviewed'||status==='approved';
+    $('evidenceApprove').disabled=status!=='reviewed';
+    $('evidenceReopen').disabled=status==='draft';
+    const who=status==='approved'?(r.approved_by||''):(status==='reviewed'?(r.reviewed_by||''):'');
+    const when=status==='approved'?(r.approved_at||''):(status==='reviewed'?(r.reviewed_at||''):'');
+    let msg=`Review status: ${reviewStatusLabel(status)}.`;
+    if(who||when)msg+=` ${who?`By ${who}`:''}${when?`${who?' · ':''}${new Date(when).toLocaleString()}`:''}.`;
+    if(status==='changes_pending_review')msg+=' The evidence state has changed since the last approval.';
+    setStatus('evidenceReviewStatus',msg,status==='approved'?'ok':(status==='changes_pending_review'?'error':''));
+    $('evidenceWhatChanged').innerHTML=whatChangedHtml(d?.changes,r);
+  }
+  async function loadEvidenceReview(){
+    const area=$('evidenceArea').value;
+    if(!area){resetEvidenceReview('Choose a clinical area first.');return;}
+    try{const d=await api('/api/review/evidence/review?area='+encodeURIComponent(area));renderEvidenceReview(d);}
+    catch(e){setStatus('evidenceReviewStatus',e.message,'error');$('evidenceWhatChanged').innerHTML='<div class="empty">Review state unavailable until a saved synthesis exists.</div>';}
+  }
+  async function evidenceReviewAction(action){
+    const area=$('evidenceArea').value;if(!area){setStatus('evidenceReviewStatus','Choose a clinical area first.','error');return;}
+    if(action==='approve'&&!confirm('Approve the current synthesis as the reviewed baseline? This does not publish it to the public website.'))return;
+    const buttons=[$('evidenceMarkReviewed'),$('evidenceApprove'),$('evidenceReopen'),$('evidenceRefreshReview')];buttons.forEach(b=>b.disabled=true);
+    try{const d=await api('/api/review/evidence/review',{area,action,note:$('evidenceReviewNote').value.trim()});renderEvidenceReview(d);}
+    catch(e){setStatus('evidenceReviewStatus',e.message,'error');buttons.forEach(b=>b.disabled=false);if(action!=='review')$('evidenceApprove').disabled=true;}
+  }
+  async function loadEvidenceSynthesis(){const area=$('evidenceArea').value;if(!area){setStatus('synthesisStatus','Choose a clinical area first.','error');resetEvidenceReview('Choose a clinical area first.');return;}resetEvidenceReview('Loading review status…');setStatus('synthesisStatus','Loading saved synthesis…');try{const d=await api('/api/review/evidence/synthesis?area='+encodeURIComponent(area));$('evidenceSynthesis').innerHTML=synthesisHtml(d.synthesis);setStatus('synthesisStatus',d.synthesis?`Saved synthesis loaded: ${d.synthesis.cards_processed??d.synthesis.cards_analyzed} processed · ${d.synthesis.cards_analyzed} included · ${d.synthesis.cards_excluded??0} excluded.`:'No saved synthesis for this area yet.',d.synthesis?'ok':'');if(d.synthesis)await loadEvidenceReview();else resetEvidenceReview('No saved synthesis for this area yet.');}catch(e){setStatus('synthesisStatus',e.message,'error');resetEvidenceReview('Review state unavailable.');}}
+  async function generateEvidenceSynthesis(){const area=$('evidenceArea').value;if(!area){setStatus('synthesisStatus','Choose a clinical area first.','error');return;}const btn=$('evidenceSynthesize');btn.disabled=true;setStatus('synthesisStatus','Starting provisional synthesis…');try{for(let step=0;step<100;step++){const d=await api('/api/review/evidence/synthesize',{area});if(d.done&&d.synthesis){$('evidenceSynthesis').innerHTML=synthesisHtml(d.synthesis);setStatus('synthesisStatus',`Provisional synthesis: ${d.synthesis.cards_processed??d.synthesis.cards_analyzed} processed · ${d.synthesis.cards_analyzed} included · ${d.synthesis.cards_excluded??0} excluded. Nothing has been published.`,'ok');await loadEvidenceReview();return;}const p=d.progress||{};setStatus('synthesisStatus',`Synthesis progress: chunk ${Number(p.completed||0)}/${Number(p.total||0)} completed. Checkpoint saved…`,'ok');await new Promise(r=>setTimeout(r,900));}throw new Error('Synthesis stopped after the safety step limit. Press Generate synthesis to resume from saved checkpoints.');}catch(e){setStatus('synthesisStatus',e.message,'error');}finally{btn.disabled=false;}}
 
   document.querySelectorAll('.review-step').forEach(b=>b.addEventListener('click',()=>showStep(b.dataset.step)));
   $('generateProtocol').addEventListener('click',generateProtocol);
@@ -260,7 +330,7 @@
   $('newProject').addEventListener('click',()=>{if(confirm('Start a new project? Export the current project first if needed.')){project=blankProject();saveProject();bindProjectToForm();renderStudies();showStep('question');setStatus('questionStatus','New project ready.');}});
   $('importJson').addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;try{const p=JSON.parse(await f.text());if(!p||p.version!==1)throw new Error('Unsupported project file.');project=p;saveProject();bindProjectToForm();renderStudies();showStep('question');setStatus('questionStatus','Project imported.','ok');}catch(err){setStatus('questionStatus',err.message,'error');}e.target.value='';});
 
-  $('evidenceArea').addEventListener('change',()=>{refreshEvidence();loadEvidenceSynthesis();}); $('evidenceRefresh').addEventListener('click',refreshEvidence); $('evidenceProcess').addEventListener('click',processEvidence); $('evidenceSynthesize').addEventListener('click',generateEvidenceSynthesis); $('evidenceLoadSynthesis').addEventListener('click',loadEvidenceSynthesis);
+  $('evidenceArea').addEventListener('change',()=>{refreshEvidence();loadEvidenceSynthesis();}); $('evidenceRefresh').addEventListener('click',refreshEvidence); $('evidenceProcess').addEventListener('click',processEvidence); $('evidenceSynthesize').addEventListener('click',generateEvidenceSynthesis); $('evidenceLoadSynthesis').addEventListener('click',loadEvidenceSynthesis); $('evidenceMarkReviewed').addEventListener('click',()=>evidenceReviewAction('review')); $('evidenceApprove').addEventListener('click',()=>evidenceReviewAction('approve')); $('evidenceReopen').addEventListener('click',()=>evidenceReviewAction('reopen')); $('evidenceRefreshReview').addEventListener('click',loadEvidenceReview);
 
   bindProjectToForm(); renderStudies(); renderMeta(); loadEvidenceAreas();
 })();
