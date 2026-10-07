@@ -469,6 +469,26 @@ async function handleEvidenceStatus(request,env){
   const withAbstract=area.studies.filter(x=>x.has_abstract).length, withPmc=area.studies.filter(x=>x.pmcid).length;
   return jsonResponse({area:{slug,label:area.label,total:area.count},processed:processed.size,remaining:Math.max(0,area.count-processed.size),failed:(st.failed||[]).length,source_counts:{pmc_linked:withPmc,abstract_available:withAbstract,metadata_only:area.count-withAbstract},updated_at:st.updated_at,cards:sample});
 }
+async function handleEvidenceMap(request,env){
+  if(!env.SITE_ADMIN)return jsonResponse({error:"Evidence Lab storage (SITE_ADMIN) is not configured."},503);
+  const url=new URL(request.url), slug=evidenceLabSlug(url.searchParams.get("area"));
+  if(!slug)return jsonResponse({error:"Clinical area is required."},400);
+  const idx=await evidenceLabIndex(request,env), area=idx.areas.find(a=>a.slug===slug);
+  if(!area)return jsonResponse({error:"Clinical area not found."},404);
+  const st=await evidenceLabState(env,slug), cards=[];
+  const classOf=t=>{t=String(t||"other");if(["clinical_trial","observational","mechanistic_human","case_report_series"].includes(t))return "human_clinical";if(["systematic_review_meta_analysis","narrative_review"].includes(t))return "reviews";if(["preclinical_animal","mechanistic_preclinical"].includes(t))return "preclinical";return "other";};
+  const relevance_counts={direct:0,supporting:0,contextual:0,not_evaluable:0,exclude:0}, class_counts={human_clinical:0,reviews:0,preclinical:0,other:0}, direction_counts={favorable:0,mixed:0,neutral:0,unfavorable:0,not_reported:0};
+  const matrix={human_clinical:{direct:0,supporting:0,contextual:0,not_evaluable:0,exclude:0},reviews:{direct:0,supporting:0,contextual:0,not_evaluable:0,exclude:0},preclinical:{direct:0,supporting:0,contextual:0,not_evaluable:0,exclude:0},other:{direct:0,supporting:0,contextual:0,not_evaluable:0,exclude:0}};
+  for(const pmid of (st.processed||[]).map(String).slice(-1000)){
+    const c=await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");if(!c)continue;
+    const evidenceBearing=c.source_level==="abstract"||c.source_level==="full_text";
+    const rel=evidenceBearing?evidenceRelevance(c,area.label):{level:"not_evaluable",reason:"metadata-only / no evidence-bearing abstract or full text"}, evidence_class=classOf(c.publication_type), dir=["favorable","mixed","neutral","unfavorable"].includes(String(c.effect_direction||""))?String(c.effect_direction):"not_reported";
+    relevance_counts[rel.level]=(relevance_counts[rel.level]||0)+1;class_counts[evidence_class]=(class_counts[evidence_class]||0)+1;direction_counts[dir]=(direction_counts[dir]||0)+1;matrix[evidence_class][rel.level]=(matrix[evidence_class][rel.level]||0)+1;
+    cards.push({pmid:String(c.pmid||pmid),title:String(c.title||""),year:c.year||null,publication_type:String(c.publication_type||"other"),study_design:String(c.study_design||""),evidence_domain:String(c.evidence_domain||"other"),study_purpose:String(c.study_purpose||"other"),effect_direction:dir,statistical_significance:String(c.statistical_significance||"not_reported"),randomized:String(c.randomized||"not_reported"),controlled:String(c.controlled||"not_reported"),source_level:String(c.source_level||"metadata"),extraction_confidence:String(c.extraction_confidence||"low"),main_result:String(c.main_result||""),relevance:rel.level,relevance_reason:rel.reason,evidence_class});
+  }
+  cards.sort((a,b)=>{const rank={direct:0,supporting:1,contextual:2,not_evaluable:3,exclude:4};const r=(rank[a.relevance]??9)-(rank[b.relevance]??9);if(r)return r;const y=Number(b.year||0)-Number(a.year||0);if(y)return y;return a.title.localeCompare(b.title);});
+  return jsonResponse({schema_version:1,generated_at:new Date().toISOString(),area:{slug,label:area.label,total:area.count},cards_mapped:cards.length,relevance_counts,class_counts,direction_counts,matrix,cards});
+}
 const EVIDENCE_LAB_SYNTHESIS_PREFIX = "evidence-lab:v2:synthesis:";
 const EVIDENCE_LAB_REVIEW_PREFIX = "evidence-lab:v2:review:";
 
@@ -1057,7 +1077,7 @@ export default {
     }
     if (url.pathname.startsWith("/api/review/")) {
       const auth=await requireReviewAdmin(request,env); if(!auth.ok)return auth.response;
-      try { if(url.pathname==="/api/review/evidence/areas")return handleEvidenceAreas(request,env); if(url.pathname==="/api/review/evidence/status")return handleEvidenceStatus(request,env); if(url.pathname==="/api/review/evidence/process"&&request.method==="POST")return handleEvidenceProcess(request,env); if(url.pathname==="/api/review/evidence/synthesis"&&request.method==="GET")return handleEvidenceSynthesisGet(request,env); if(url.pathname==="/api/review/evidence/review"&&(request.method==="GET"||request.method==="POST"))return handleEvidenceReview(request,env,auth.session); if(url.pathname==="/api/review/evidence/synthesize"&&request.method==="POST")return handleEvidenceSynthesize(request,env); if(url.pathname==="/api/review/protocol")return handleProtocolApi(request,env); if(url.pathname==="/api/review/pubmed")return handlePubmedApi(request,env); if(url.pathname==="/api/review/draft")return handleDraftApi(request,env); return jsonResponse({error:"Not found"},404); } catch(e){ return jsonResponse({error:e?.message||"Review Studio error"},500); }
+      try { if(url.pathname==="/api/review/evidence/areas")return handleEvidenceAreas(request,env); if(url.pathname==="/api/review/evidence/status")return handleEvidenceStatus(request,env); if(url.pathname==="/api/review/evidence/map"&&request.method==="GET")return handleEvidenceMap(request,env); if(url.pathname==="/api/review/evidence/process"&&request.method==="POST")return handleEvidenceProcess(request,env); if(url.pathname==="/api/review/evidence/synthesis"&&request.method==="GET")return handleEvidenceSynthesisGet(request,env); if(url.pathname==="/api/review/evidence/review"&&(request.method==="GET"||request.method==="POST"))return handleEvidenceReview(request,env,auth.session); if(url.pathname==="/api/review/evidence/synthesize"&&request.method==="POST")return handleEvidenceSynthesize(request,env); if(url.pathname==="/api/review/protocol")return handleProtocolApi(request,env); if(url.pathname==="/api/review/pubmed")return handlePubmedApi(request,env); if(url.pathname==="/api/review/draft")return handleDraftApi(request,env); return jsonResponse({error:"Not found"},404); } catch(e){ return jsonResponse({error:e?.message||"Review Studio error"},500); }
     }
 
     // Serve the login document from a non-HTML raw asset. This bypasses
