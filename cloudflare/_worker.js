@@ -481,12 +481,14 @@ async function handleEvidenceSynthesisGet(request,env){
   if(!saved)return jsonResponse({synthesis:null});
 
   // READ-ONLY source lock. Loading a saved synthesis must never invoke Groq.
-  // Main findings are rendered verbatim from the cached Evidence Cards so the
-  // display cannot broaden, merge or rewrite an outcome (e.g. Part 1 -> Part 1/2).
+  // Main findings are rendered verbatim from cached Evidence Cards. The human-clinical
+  // summary is rebuilt deterministically from current card metadata so it cannot drift
+  // out of sync with the source-locked findings shown immediately below it.
   const st=await evidenceLabState(env,slug);
   const idx=await evidenceLabIndex(request,env);
   const area=idx.areas.find(a=>a.slug===slug);
   const directHuman=[], mixedHuman=[];
+  let deterministicHumanSummary="";
   if(area){
     const norm=v=>String(v??"").toLowerCase().replace(/\s+/g," ").trim();
     const join=v=>Array.isArray(v)?v.map(x=>typeof x==="string"?x:JSON.stringify(x)).join(" "):String(v??"");
@@ -528,10 +530,23 @@ async function handleEvidenceSynthesisGet(request,env){
       if(mixedDirection || nullOrMixedSignificance || explicitClinicalNull)
         mixedHuman.push({issue:x.result,pmids:item.pmids,source:"evidence_card_verbatim"});
     }
+
+    // Deterministic current-state human evidence summary. No generated efficacy prose is reused.
+    const profile=saved.evidence_profile||{};
+    const randomizedControlled=candidates.filter(x=>String(x.card.publication_type||"")==="clinical_trial" && norm(x.card.randomized)==="yes" && norm(x.card.controlled)==="yes").length;
+    const directions={favorable:0,mixed:0,neutral:0,unfavorable:0,not_reported:0};
+    for(const x of candidates){
+      const d=norm(x.card.effect_direction).replace(/\s+/g,"_");
+      if(Object.prototype.hasOwnProperty.call(directions,d))directions[d]++; else directions.not_reported++;
+    }
+    const directionText=Object.entries(directions).filter(([,n])=>n>0).map(([k,n])=>`${k.replaceAll("_"," ")}: ${n}`).join("; ") || "not reported";
+    deterministicHumanSummary=`Exact evidence profile: ${Number(profile.clinical_trial||0)} clinical trials; ${Number(profile.observational||0)} observational studies; ${Number(profile.mechanistic_human||0)} mechanistic human studies; ${Number(profile.case_report_series||0)} case reports/series. Direct ketogenic/ketone human clinical evidence eligible for source-locked findings: ${candidates.length} studies, including ${randomizedControlled} randomized controlled trials. Evidence-card direction labels: ${directionText}. Main findings below reproduce each Evidence Card main_result verbatim; mixed or null comparative results are shown separately under Conflicting evidence.`;
   }
   const out={...saved};
-  out.schema_version=22;
-  out.claim_generation="deterministic_verbatim_clinical_hierarchy_v22";
+  out.schema_version=23;
+  out.claim_generation="deterministic_verbatim_clinical_hierarchy_v23";
+  out.human_clinical_generation="deterministic_from_current_evidence_cards";
+  if(deterministicHumanSummary)out.human_clinical=deterministicHumanSummary;
   out.main_findings=directHuman.slice(0,8);
   out.conflicting_evidence=mixedHuman.slice(0,6);
   return jsonResponse({synthesis:out});
