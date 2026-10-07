@@ -504,6 +504,16 @@
     catch(e){setStatus('evidenceReviewStatus',e.message,'error');buttons.forEach(b=>b.disabled=false);if(action!=='review')$('evidenceApprove').disabled=true;}
   }
   function dailyAutoMetric(value,label){return `<div class="evidence-map-stat"><strong>${esc(value)}</strong><span>${esc(label)}</span></div>`;}
+  function dailyAutoProgressHtml(rows){
+    const list=Array.isArray(rows)?rows:[];
+    if(!list.length)return '<div class="empty">No Evidence Lab areas found.</div>';
+    const rank={in_progress:0,needs_review:1,completed:2};
+    const ordered=[...list].sort((a,b)=>{const ra=rank[a.status]??9,rb=rank[b.status]??9;if(ra!==rb)return ra-rb;const pa=Number(a.percent||0),pb=Number(b.percent||0);if(ra===0&&pa!==pb)return pb-pa;return String(a.label||'').localeCompare(String(b.label||''));});
+    const label=s=>s==='completed'?'Completed':(s==='needs_review'?'Needs review':'In progress');
+    const badge=s=>`<span class="daily-area-status daily-area-${esc(s||'in_progress')}">${esc(label(s))}</span>`;
+    const rowsHtml=ordered.map(x=>{const total=Number(x.total||0),processed=Number(x.processed||0),remaining=Number(x.remaining||0),pct=Math.max(0,Math.min(100,Number(x.percent||0)));return `<tr><td><strong>${esc(x.label||x.slug||'—')}</strong></td><td>${total}</td><td>${processed}</td><td>${remaining}</td><td><div class="daily-progress-cell"><span>${pct.toFixed(pct%1?1:0)}%</span><div class="daily-progress-track"><i style="width:${pct}%"></i></div></div></td><td>${badge(x.status)}</td></tr>`;}).join('');
+    return `<div class="daily-auto-table-wrap"><table class="daily-auto-table"><thead><tr><th>Clinical area</th><th>Total</th><th>Cards</th><th>Remaining</th><th>Progress</th><th>Status</th></tr></thead><tbody>${rowsHtml}</tbody></table></div>`;
+  }
   async function loadDailyAutomation(){
     try{
       const d=await api('/api/review/evidence/automation');
@@ -515,9 +525,10 @@
         dailyAutoMetric(Number(d.incomplete_areas||0),'Areas with backlog'),
         dailyAutoMetric(d.next_area_label||'—','Next fair area')
       ].join('');
+      $('dailyAutoProgress').innerHTML=dailyAutoProgressHtml(d.areas);
       const last=l.last_run_at?new Date(l.last_run_at).toLocaleString():'not run today';
       setStatus('dailyAutoStatus',`Batch ${c.batch_size||0} · per-area daily cap ${c.per_area_daily_cap||0} · last run ${last}${l.last_error?` · last error: ${l.last_error}`:''}.`,l.last_error?'error':'ok');
-    }catch(e){$('dailyAutoBadge').textContent='Unavailable';setStatus('dailyAutoStatus',e.message,'error');}
+    }catch(e){$('dailyAutoBadge').textContent='Unavailable';$('dailyAutoProgress').innerHTML='<div class="empty">Area progress unavailable.</div>';setStatus('dailyAutoStatus',e.message,'error');}
   }
   async function runDailyAutomationNow(){
     const b=$('dailyAutoRunNow');b.disabled=true;setStatus('dailyAutoStatus','Running one globally fair Evidence Lab batch…');
