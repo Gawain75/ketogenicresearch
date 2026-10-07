@@ -870,4 +870,8 @@ async function initEvidenceBriefLinks(){
     const d=await r.json();KR_EVIDENCE_BRIEFS=new Map((d.briefs||[]).map(x=>[x.slug,x]));installEvidenceBriefLinks();
   }catch(e){}
 }
-window.addEventListener('DOMContentLoaded',initEvidenceBriefLinks);
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initEvidenceBriefLinks);
+} else {
+  initEvidenceBriefLinks();
+}
