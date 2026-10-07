@@ -1,0 +1,37 @@
+name: Evidence Lab Daily Auto Processor
+
+on:
+  schedule:
+    # Spread work across the day. The Worker enforces the daily budget and per-area caps.
+    - cron: '7,37 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: evidence-lab-daily-auto
+  cancel-in-progress: false
+
+jobs:
+  process-one-fair-batch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Run one globally fair Evidence Lab batch
+        env:
+          EVIDENCE_AUTOMATION_SECRET: ${{ secrets.EVIDENCE_AUTOMATION_SECRET }}
+        run: |
+          if [ -z "$EVIDENCE_AUTOMATION_SECRET" ]; then
+            echo "Missing GitHub secret EVIDENCE_AUTOMATION_SECRET"
+            exit 1
+          fi
+          curl --fail-with-body \
+            --retry 2 \
+            --retry-all-errors \
+            --retry-delay 30 \
+            --max-time 300 \
+            -X POST \
+            -H "Authorization: Bearer ${EVIDENCE_AUTOMATION_SECRET}" \
+            -H "Accept: application/json" \
+            https://ketogenicresearch.org/api/evidence-automation/daily
