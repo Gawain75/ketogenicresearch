@@ -1307,7 +1307,7 @@ For fields not applicable to a publication type use "not applicable" or null/[] 
 const EVIDENCE_AUTO_LEDGER_PREFIX="evidence-lab:v2:auto:ledger:";
 const EVIDENCE_AUTO_CURSOR_KEY="evidence-lab:v2:auto:cursor";
 function evidenceAutoInt(v,def,min,max){const n=Number(v);return Number.isFinite(n)?Math.max(min,Math.min(max,Math.floor(n))):def;}
-function evidenceAutoConfig(env){return {daily_card_budget:evidenceAutoInt(env.EVIDENCE_AUTO_DAILY_CARD_BUDGET,60,1,10000),per_area_daily_cap:evidenceAutoInt(env.EVIDENCE_AUTO_AREA_DAILY_CAP,24,1,5000),batch_size:evidenceAutoInt(env.EVIDENCE_AUTO_BATCH_SIZE,6,1,10),daily_token_budget:evidenceAutoInt(env.EVIDENCE_AUTO_DAILY_TOKEN_BUDGET,120000,10000,50000000),token_call_reserve:evidenceAutoInt(env.EVIDENCE_AUTO_TOKEN_CALL_RESERVE,6000,500,50000)};}
+function evidenceAutoConfig(env){return {per_area_daily_cap:evidenceAutoInt(env.EVIDENCE_AUTO_AREA_DAILY_CAP,24,1,5000),batch_size:evidenceAutoInt(env.EVIDENCE_AUTO_BATCH_SIZE,6,1,10),daily_token_budget:evidenceAutoInt(env.EVIDENCE_AUTO_DAILY_TOKEN_BUDGET,120000,10000,50000000),token_call_reserve:evidenceAutoInt(env.EVIDENCE_AUTO_TOKEN_CALL_RESERVE,6000,500,50000)};}
 function evidenceAutoDay(d=new Date()){return d.toISOString().slice(0,10);}
 async function evidenceAutoLedger(env,day=evidenceAutoDay()){
   const v=await env.SITE_ADMIN.get(EVIDENCE_AUTO_LEDGER_PREFIX+day,"json").catch(()=>null);
@@ -1335,13 +1335,11 @@ async function evidenceAutoSnapshot(request,env){
 }
 async function evidenceAutoRunOne(request,env){
   const snap=await evidenceAutoSnapshot(request,env), {cfg,ledger,day}=snap;
-  if(Number(ledger.attempted_total||0)>=cfg.daily_card_budget)return {ok:true,reason:"daily_card_budget_reached",message:`Daily Evidence Lab card budget reached (${ledger.attempted_total}/${cfg.daily_card_budget} cards attempted).`,config:cfg,today:ledger};
   if(Number(ledger.token_total||0)+cfg.token_call_reserve>cfg.daily_token_budget)return {ok:true,reason:"daily_token_budget_reached",message:`Daily Evidence Lab Groq token budget reached (${ledger.token_total}/${cfg.daily_token_budget} tokens used).`,config:cfg,today:ledger};
   const area=snap.next;
   if(!area)return {ok:true,reason:snap.incomplete.length?"per_area_caps_reached":"all_complete",message:snap.incomplete.length?"All incomplete areas reached their per-area daily cap.":"All Evidence Lab areas are complete.",config:cfg,today:ledger};
-  const remainingBudget=Math.max(0,cfg.daily_card_budget-Number(ledger.attempted_total||0));
   const remainingAreaCap=Math.max(0,cfg.per_area_daily_cap-area.today_attempted);
-  const batch=Math.max(1,Math.min(cfg.batch_size,remainingBudget,remainingAreaCap,area.remaining));
+  const batch=Math.max(1,Math.min(cfg.batch_size,remainingAreaCap,area.remaining));
   const remainingTokenBudget=Math.max(0,cfg.daily_token_budget-Number(ledger.token_total||0));
   const internal=new Request(new URL("/api/review/evidence/process",request.url).toString(),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({area:area.slug,batch,automation_token_budget_remaining:remainingTokenBudget,automation_token_call_reserve:cfg.token_call_reserve})});
   let parsed={}; let status=500;
