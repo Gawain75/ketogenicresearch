@@ -267,6 +267,32 @@ async function groqJson(env, messages) {
   return extractJsonObject(data?.choices?.[0]?.message?.content || "");
 }
 
+
+async function groqJsonWithUsage(env, messages) {
+  if (!env.GROQ_API_KEY) throw new Error("GROQ_API_KEY is not configured in Cloudflare.");
+  const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${env.GROQ_API_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      model: env.GROQ_MODEL || "openai/gpt-oss-120b",
+      temperature: 0.1,
+      messages
+    })
+  });
+  if (!r.ok) throw new Error(`AI service error (${r.status}).`);
+  const data = await r.json();
+  const usage = {
+    prompt_tokens: Math.max(0, Number(data?.usage?.prompt_tokens || 0)),
+    completion_tokens: Math.max(0, Number(data?.usage?.completion_tokens || 0)),
+    total_tokens: Math.max(0, Number(data?.usage?.total_tokens || 0)),
+    calls: 1
+  };
+  return { value: extractJsonObject(data?.choices?.[0]?.message?.content || ""), usage };
+}
+
 async function groqJsonLimited(env, messages, maxCompletionTokens=1100) {
   if (!env.GROQ_API_KEY) throw new Error("GROQ_API_KEY is not configured in Cloudflare.");
   const endpoint="https://api.groq.com/openai/v1/chat/completions";
@@ -1211,6 +1237,13 @@ async function handleEvidenceProcess(request,env){
   const now=new Date().toISOString();
   const fallback=src=>({schema_version:EVIDENCE_LAB_SCHEMA_VERSION,pmid:String(src.pmid),publication_type:"other",study_design:"not extracted",evidence_domain:"other",study_purpose:"other",population:"not reported",sample_size:null,sample_size_details:"not reported",intervention:"not reported",comparator:"not reported",duration:"not reported",primary_outcomes:[],secondary_outcomes:[],effect_direction:"not_reported",statistical_significance:"not_reported",randomized:"not_applicable",controlled:"not_applicable",time_orientation:"not_applicable",population_phenotype:"not reported",review_studies_included:null,review_participants:null,review_study_types:"not reported",pooled_effect:"not reported",heterogeneity:"not reported",risk_of_bias_or_certainty:"not reported",animal_species:"not applicable",animal_model:"not applicable",mechanistic_targets:[],main_result:"AI extraction pending",limitations:["not reported"],source_level:abstracts[src.pmid]?"abstract":"metadata",extraction_confidence:"low"});
   const extracted=new Map();
+  const groqUsage={prompt_tokens:0,completion_tokens:0,total_tokens:0,calls:0};
+  const attemptedPmids=new Set();
+  const automationTokenBudget=Math.max(0,Number(body.automation_token_budget_remaining||0));
+  const automationCallReserve=Math.max(500,Number(body.automation_token_call_reserve||0));
+  let stoppedForTokenBudget=false;
+  const addGroqUsage=u=>{groqUsage.prompt_tokens+=Math.max(0,Number(u?.prompt_tokens||0));groqUsage.completion_tokens+=Math.max(0,Number(u?.completion_tokens||0));groqUsage.total_tokens+=Math.max(0,Number(u?.total_tokens||0));groqUsage.calls+=Math.max(0,Number(u?.calls||0));};
+  const tokenBudgetAllowsCall=()=>!automationTokenBudget || (groqUsage.total_tokens+automationCallReserve)<=automationTokenBudget;
 
   // Keep each AI request deliberately small. Large multi-abstract calls were fragile on
   // Cloudflare/Groq and could make the whole request fail with a platform 500.
@@ -1226,10 +1259,14 @@ PRECLINICAL fields: animal_species, animal_model, mechanistic_targets (array).
 For fields not applicable to a publication type use "not applicable" or null/[] as appropriate. Never invent sample size, randomization, significance, effect estimates, limitations or certainty. If the abstract does not report something, use "not reported". Preserve whether evidence is human clinical versus animal/preclinical. main_result must be factual, concise, and must not turn association into causation.`
   if(env.GROQ_API_KEY){
     for(let i=0;i<todo.length;i+=2){
+      if(!tokenBudgetAllowsCall()){stoppedForTokenBudget=true;warnings.push("Automation token budget headroom reached; remaining records were left for the next scheduled run.");break;}
       const group=todo.slice(i,i+2);
+      group.forEach(x=>attemptedPmids.add(String(x.pmid)));
       const packet=group.map(x=>({pmid:String(x.pmid),title:x.title,year:x.year,doi:x.doi,evidence_label:x.evidence,source:abstracts[x.pmid]?"PubMed abstract":"metadata only",abstract:String(abstracts[x.pmid]||"").slice(0,6500)}));
       try{
-        const out=await groqJson(env,[{role:"system",content:aiSystem},{role:"user",content:JSON.stringify(packet)}]);
+        const gr=await groqJsonWithUsage(env,[{role:"system",content:aiSystem},{role:"user",content:JSON.stringify(packet)}]);
+        addGroqUsage(gr.usage);
+        const out=gr.value;
         for(const c of (Array.isArray(out?.cards)?out.cards:[])) if(c?.pmid) extracted.set(String(c.pmid),c);
       }catch(e){
         warnings.push(`AI batch retry for PMID ${group.map(x=>x.pmid).join(", ")}: ${e?.message||e}`);
@@ -1237,7 +1274,10 @@ For fields not applicable to a publication type use "not applicable" or null/[] 
         for(const x of group){
           const one={pmid:String(x.pmid),title:x.title,year:x.year,doi:x.doi,evidence_label:x.evidence,source:abstracts[x.pmid]?"PubMed abstract":"metadata only",abstract:String(abstracts[x.pmid]||"").slice(0,5000)};
           try{
-            const retry=await groqJson(env,[{role:"system",content:aiSystem},{role:"user",content:JSON.stringify([one])}]);
+            if(!tokenBudgetAllowsCall()){stoppedForTokenBudget=true;warnings.push(`Automation token budget headroom reached before retrying PMID ${x.pmid}.`);break;}
+            const gr=await groqJsonWithUsage(env,[{role:"system",content:aiSystem},{role:"user",content:JSON.stringify([one])}]);
+            addGroqUsage(gr.usage);
+            const retry=gr.value;
             const card=Array.isArray(retry?.cards)?retry.cards.find(c=>String(c?.pmid)===String(x.pmid)):null;
             if(card) extracted.set(String(x.pmid),card); else warnings.push(`AI returned no card for PMID ${x.pmid}.`);
           }catch(re){warnings.push(`AI extraction failed for PMID ${x.pmid}: ${re?.message||re}`);}
@@ -1260,18 +1300,18 @@ For fields not applicable to a publication type use "not applicable" or null/[] 
   if(compactNew.length)await evidenceCompactPutMany(env,slug,compactNew);
   const next={processed:[...done],failed,updated_at:now};
   await env.SITE_ADMIN.put(EVIDENCE_LAB_STATE_PREFIX+slug,JSON.stringify(next));
-  return jsonResponse({ok:true,processed_now:processedNow,attempted:todo.length,processed:done.size,remaining:Math.max(0,area.count-done.size),large_corpus:area.count>EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD,warnings});
+  return jsonResponse({ok:true,processed_now:processedNow,attempted:env.GROQ_API_KEY?attemptedPmids.size:todo.length,processed:done.size,remaining:Math.max(0,area.count-done.size),large_corpus:area.count>EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD,warnings,groq_usage:groqUsage,token_budget_stopped:stoppedForTokenBudget});
 }
 
 
 const EVIDENCE_AUTO_LEDGER_PREFIX="evidence-lab:v2:auto:ledger:";
 const EVIDENCE_AUTO_CURSOR_KEY="evidence-lab:v2:auto:cursor";
 function evidenceAutoInt(v,def,min,max){const n=Number(v);return Number.isFinite(n)?Math.max(min,Math.min(max,Math.floor(n))):def;}
-function evidenceAutoConfig(env){return {daily_card_budget:evidenceAutoInt(env.EVIDENCE_AUTO_DAILY_CARD_BUDGET,120,1,10000),per_area_daily_cap:evidenceAutoInt(env.EVIDENCE_AUTO_AREA_DAILY_CAP,48,1,5000),batch_size:evidenceAutoInt(env.EVIDENCE_AUTO_BATCH_SIZE,6,1,10)};}
+function evidenceAutoConfig(env){return {daily_card_budget:evidenceAutoInt(env.EVIDENCE_AUTO_DAILY_CARD_BUDGET,60,1,10000),per_area_daily_cap:evidenceAutoInt(env.EVIDENCE_AUTO_AREA_DAILY_CAP,24,1,5000),batch_size:evidenceAutoInt(env.EVIDENCE_AUTO_BATCH_SIZE,6,1,10),daily_token_budget:evidenceAutoInt(env.EVIDENCE_AUTO_DAILY_TOKEN_BUDGET,120000,10000,50000000),token_call_reserve:evidenceAutoInt(env.EVIDENCE_AUTO_TOKEN_CALL_RESERVE,6000,500,50000)};}
 function evidenceAutoDay(d=new Date()){return d.toISOString().slice(0,10);}
 async function evidenceAutoLedger(env,day=evidenceAutoDay()){
   const v=await env.SITE_ADMIN.get(EVIDENCE_AUTO_LEDGER_PREFIX+day,"json").catch(()=>null);
-  return v&&typeof v==="object"?v:{date:day,attempted_total:0,processed_total:0,areas:{},last_run_at:null,last_area:null,last_error:null};
+  return v&&typeof v==="object"?v:{date:day,attempted_total:0,processed_total:0,token_total:0,prompt_tokens:0,completion_tokens:0,groq_calls:0,areas:{},last_run_at:null,last_area:null,last_error:null};
 }
 async function evidenceAutoSnapshot(request,env){
   if(!env.SITE_ADMIN)throw new Error("Evidence Lab storage (SITE_ADMIN) is not configured.");
@@ -1295,24 +1335,29 @@ async function evidenceAutoSnapshot(request,env){
 }
 async function evidenceAutoRunOne(request,env){
   const snap=await evidenceAutoSnapshot(request,env), {cfg,ledger,day}=snap;
-  if(Number(ledger.attempted_total||0)>=cfg.daily_card_budget)return {ok:true,reason:"daily_budget_reached",message:`Daily Evidence Lab budget reached (${ledger.attempted_total}/${cfg.daily_card_budget} cards attempted).`,config:cfg,today:ledger};
+  if(Number(ledger.attempted_total||0)>=cfg.daily_card_budget)return {ok:true,reason:"daily_card_budget_reached",message:`Daily Evidence Lab card budget reached (${ledger.attempted_total}/${cfg.daily_card_budget} cards attempted).`,config:cfg,today:ledger};
+  if(Number(ledger.token_total||0)+cfg.token_call_reserve>cfg.daily_token_budget)return {ok:true,reason:"daily_token_budget_reached",message:`Daily Evidence Lab Groq token budget reached (${ledger.token_total}/${cfg.daily_token_budget} tokens used).`,config:cfg,today:ledger};
   const area=snap.next;
   if(!area)return {ok:true,reason:snap.incomplete.length?"per_area_caps_reached":"all_complete",message:snap.incomplete.length?"All incomplete areas reached their per-area daily cap.":"All Evidence Lab areas are complete.",config:cfg,today:ledger};
   const remainingBudget=Math.max(0,cfg.daily_card_budget-Number(ledger.attempted_total||0));
   const remainingAreaCap=Math.max(0,cfg.per_area_daily_cap-area.today_attempted);
   const batch=Math.max(1,Math.min(cfg.batch_size,remainingBudget,remainingAreaCap,area.remaining));
-  const internal=new Request(new URL("/api/review/evidence/process",request.url).toString(),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({area:area.slug,batch})});
+  const remainingTokenBudget=Math.max(0,cfg.daily_token_budget-Number(ledger.token_total||0));
+  const internal=new Request(new URL("/api/review/evidence/process",request.url).toString(),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({area:area.slug,batch,automation_token_budget_remaining:remainingTokenBudget,automation_token_call_reserve:cfg.token_call_reserve})});
   let parsed={}; let status=500;
   try{const response=await handleEvidenceProcess(internal,env);status=response.status;parsed=await response.json();}
   catch(e){parsed={error:e?.message||String(e)};}
   const attempted=Math.max(0,Number(parsed.attempted??batch)||0), processedNow=Math.max(0,Number(parsed.processed_now||0));
   const entry=ledger.areas?.[area.slug]||{attempted:0,processed:0,runs:0};
   ledger.areas={...(ledger.areas||{}),[area.slug]:{attempted:Number(entry.attempted||0)+attempted,processed:Number(entry.processed||0)+processedNow,runs:Number(entry.runs||0)+1,last_run_at:new Date().toISOString()}};
-  ledger.attempted_total=Number(ledger.attempted_total||0)+attempted;ledger.processed_total=Number(ledger.processed_total||0)+processedNow;ledger.last_run_at=new Date().toISOString();ledger.last_area=area.slug;ledger.last_error=status>=400?(parsed.error||`HTTP ${status}`):((parsed.warnings||[]).length&&!processedNow?String(parsed.warnings[0]):null);
+  const gu=parsed.groq_usage||{};
+  ledger.attempted_total=Number(ledger.attempted_total||0)+attempted;ledger.processed_total=Number(ledger.processed_total||0)+processedNow;
+  ledger.token_total=Number(ledger.token_total||0)+Math.max(0,Number(gu.total_tokens||0));ledger.prompt_tokens=Number(ledger.prompt_tokens||0)+Math.max(0,Number(gu.prompt_tokens||0));ledger.completion_tokens=Number(ledger.completion_tokens||0)+Math.max(0,Number(gu.completion_tokens||0));ledger.groq_calls=Number(ledger.groq_calls||0)+Math.max(0,Number(gu.calls||0));
+  ledger.last_run_at=new Date().toISOString();ledger.last_area=area.slug;ledger.last_error=status>=400?(parsed.error||`HTTP ${status}`):((parsed.warnings||[]).length&&!processedNow?String(parsed.warnings[0]):null);
   await env.SITE_ADMIN.put(EVIDENCE_AUTO_LEDGER_PREFIX+day,JSON.stringify(ledger));
   await env.SITE_ADMIN.put(EVIDENCE_AUTO_CURSOR_KEY,JSON.stringify({last_slug:area.slug,updated_at:ledger.last_run_at}));
-  if(status>=400)return {ok:false,error:parsed.error||`Evidence batch failed (${status})`,config:cfg,today:ledger,run:{area:area.slug,area_label:area.label,attempted,processed_now:processedNow,remaining:area.remaining,warnings:parsed.warnings||[]}};
-  return {ok:true,config:cfg,today:ledger,run:{area:area.slug,area_label:area.label,attempted,processed_now:processedNow,remaining:parsed.remaining,warnings:parsed.warnings||[]}};
+  if(status>=400)return {ok:false,error:parsed.error||`Evidence batch failed (${status})`,config:cfg,today:ledger,run:{area:area.slug,area_label:area.label,attempted,processed_now:processedNow,remaining:area.remaining,warnings:parsed.warnings||[],groq_usage:parsed.groq_usage||{},token_budget_stopped:!!parsed.token_budget_stopped}};
+  return {ok:true,config:cfg,today:ledger,run:{area:area.slug,area_label:area.label,attempted,processed_now:processedNow,remaining:parsed.remaining,warnings:parsed.warnings||[],groq_usage:parsed.groq_usage||{},token_budget_stopped:!!parsed.token_budget_stopped}};
 }
 async function handleEvidenceAutomation(request,env){
   if(request.method==="GET"){
