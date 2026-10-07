@@ -488,22 +488,50 @@ async function handleEvidenceSynthesisGet(request,env){
   const area=idx.areas.find(a=>a.slug===slug);
   const directHuman=[], mixedHuman=[];
   if(area){
+    const norm=v=>String(v??"").toLowerCase().replace(/\s+/g," ").trim();
+    const join=v=>Array.isArray(v)?v.map(x=>typeof x==="string"?x:JSON.stringify(x)).join(" "):String(v??"");
+    const isNonEfficacyOnly=c=>{
+      const design=norm(c.study_design), purpose=norm(c.study_purpose), outcomes=norm(join(c.primary_outcomes)), result=norm(c.main_result), title=norm(c.title);
+      const text=[design,purpose,outcomes,result,title].join(" ");
+      const pharmacokinetic=/(pharmacokinetic|pharmacokinetics|\bpk\b|plasma concentration|drug absorption|levodopa kinetics)/.test(text);
+      const qualitative=/(qualitative|interview|focus group|thematic analysis|acceptability barrier|adherence barrier|care partner|participant attitudes)/.test(text);
+      return pharmacokinetic || qualitative;
+    };
+    const clinicalPriority=c=>{
+      const type=String(c.publication_type||"");
+      const randomized=norm(c.randomized)==="yes" ? 4 : 0;
+      const controlled=norm(c.controlled)==="yes" ? 3 : 0;
+      const purpose=norm(c.study_purpose);
+      const purposeScore=purpose==="efficacy"?4:purpose==="mixed"?3:purpose==="feasibility"?1:0;
+      const typeScore=type==="clinical_trial"?20:type==="observational"?8:0;
+      return typeScore+randomized+controlled+purposeScore;
+    };
+    const candidates=[];
     for(const pmid of (st.processed||[]).map(String).slice(-500)){
       const c=await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");
       if(!c || !(c.source_level==="abstract" || c.source_level==="full_text"))continue;
       const rel=evidenceRelevance(c,area.label);
-      const human=["clinical_trial","observational","case_report_series","mechanistic_human"].includes(String(c.publication_type||""));
+      const type=String(c.publication_type||"");
+      const humanClinical=type==="clinical_trial" || type==="observational";
       const result=String(c.main_result||"").replace(/\s+/g," ").trim();
-      if(!human || rel.level!=="direct" || !result || result==="AI extraction pending" || result==="not reported")continue;
-      const item={finding:result,pmids:[String(c.pmid||pmid)],source:"evidence_card_verbatim"};
+      if(!humanClinical || rel.level!=="direct" || !result || result==="AI extraction pending" || result==="not reported" || isNonEfficacyOnly(c))continue;
+      candidates.push({card:c,pmid:String(c.pmid||pmid),result,priority:clinicalPriority(c)});
+    }
+    candidates.sort((a,b)=>b.priority-a.priority || Number(b.card.year||0)-Number(a.card.year||0) || a.pmid.localeCompare(b.pmid));
+    for(const x of candidates){
+      const item={finding:x.result,pmids:[x.pmid],source:"evidence_card_verbatim"};
       directHuman.push(item);
-      if(/mixed|inconsistent|no significant|not significant|no difference|did not|failed to/i.test(String(c.effect_direction||"")+" "+String(c.statistical_significance||"")+" "+result))
-        mixedHuman.push({issue:result,pmids:item.pmids,source:"evidence_card_verbatim"});
+      const signal=[x.card.effect_direction,x.card.statistical_significance,x.result].map(norm).join(" ");
+      const mixedDirection=["mixed","neutral","unfavorable"].includes(norm(x.card.effect_direction));
+      const nullOrMixedSignificance=["no","mixed"].includes(norm(x.card.statistical_significance));
+      const explicitClinicalNull=/(no significant (?:difference|effect|improvement)|not significant|no between-group difference|no between group difference|did not (?:improve|reduce|change|affect) (?!pharmacokinetic)|failed to (?:improve|reduce|show)|comparable gains|inconsistent)/.test(signal);
+      if(mixedDirection || nullOrMixedSignificance || explicitClinicalNull)
+        mixedHuman.push({issue:x.result,pmids:item.pmids,source:"evidence_card_verbatim"});
     }
   }
   const out={...saved};
-  out.schema_version=21;
-  out.claim_generation="deterministic_verbatim_from_evidence_cards";
+  out.schema_version=22;
+  out.claim_generation="deterministic_verbatim_clinical_hierarchy_v22";
   out.main_findings=directHuman.slice(0,8);
   out.conflicting_evidence=mixedHuman.slice(0,6);
   return jsonResponse({synthesis:out});
