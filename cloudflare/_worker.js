@@ -544,8 +544,13 @@ async function handleEvidenceSynthesize(request,env){
   }
   // All chunk checkpoints exist. Rebuild their ordered summaries; this request performs only the final synthesis.
   for(let ci=0;ci<chunks.length;ci++){const cards=chunks[ci],cs=String(checkpoint.chunks[String(ci)]||"").replace(/\s+/g," ").trim();chunkSummaries.push({chunk:ci+1,pmids:cards.map(x=>x.p),summary:cs.slice(0,2400)});}
-  const finalPacket=JSON.stringify({area:area.label,library_total:area.count,cards_processed:raw.length,cards_included:usable.length,cards_excluded:excluded.length,EXACT_EVIDENCE_PROFILE:exactProfile,EXACT_RELEVANCE_PROFILE:relevance_profile,all_included_pmids:nano.map(x=>x.p),chunk_summaries:chunkSummaries});
-  if(finalPacket.length>22000)return jsonResponse({error:`Final synthesis packet remains too large (${finalPacket.length} characters) after bounded chunk compression. Checkpoints were preserved; no studies were dropped.`,diagnostic:{cards_processed:raw.length,cards_usable:usable.length,total_chunks:chunks.length,final_packet_chars:finalPacket.length}},413);
+  // TPM-safe final packets. The full chunk summaries remain in KV, but the two final AI calls
+  // receive a bounded digest so one request cannot consume most of the 8k TPM allowance.
+  const finalDigest=chunkSummaries.map(x=>({chunk:x.chunk,pmids:x.pmids,summary:String(x.summary||"").slice(0,700)}));
+  const finalNarrativePacket=JSON.stringify({area:area.label,EXACT_EVIDENCE_PROFILE:exactProfile,EXACT_RELEVANCE_PROFILE:relevance_profile,chunk_summaries:finalDigest.map(x=>({chunk:x.chunk,summary:x.summary}))});
+  const finalClaimsPacket=JSON.stringify({area:area.label,all_included_pmids:nano.map(x=>x.p),chunk_summaries:finalDigest});
+  const finalPacketChars=finalNarrativePacket.length+finalClaimsPacket.length;
+  if(finalNarrativePacket.length>9000||finalClaimsPacket.length>11000)return jsonResponse({error:`TPM-safe final packet guard triggered. Checkpoints were preserved; no studies were dropped.`,diagnostic:{cards_processed:raw.length,cards_usable:usable.length,total_chunks:chunks.length,narrative_packet_chars:finalNarrativePacket.length,claims_packet_chars:finalClaimsPacket.length}},413);
   // Finalization is also incremental. Never keep the browser waiting for the entire final synthesis.
   // Phase A generates narrative prose, Phase B generates source-locked findings/conflicts,
   // Phase C assembles + validates + saves without any AI call.
@@ -553,18 +558,26 @@ async function handleEvidenceSynthesize(request,env){
   const finalNarrativeSystem=`You are producing PRIVATE, PROVISIONAL scientific evidence synthesis prose from hierarchical summaries of structured Evidence Cards. Use ONLY the supplied packet. EXACT_EVIDENCE_PROFILE and EXACT_RELEVANCE_PROFILE are deterministic ground truth and MUST NOT be recalculated or contradicted. direct may support the selected clinical question; supporting is indirect/mechanistic and cannot establish clinical efficacy; contextual is background only and MUST NOT support efficacy/safety conclusions. Clinical trials and observational studies are separate. Reviews are not additional independent primary studies. Never present preclinical benefit as demonstrated clinical efficacy. Never infer causality from observational evidence. DO NOT write PMID numbers, bracketed numeric citations, or aggregate study counts. Do not state counts such as “seven trials”; the application inserts exact deterministic counts. This is NOT a formal GRADE assessment. Return ONLY valid JSON with keys: overall_interpretation (string), evidence_consistency (consistent|mostly_consistent|mixed|conflicting|insufficient), human_clinical (string), reviews_meta_analyses (string), preclinical_mechanistic (string), limitations (array of strings), research_gaps (array of strings), bottom_line (string).`;
   if(!checkpoint.final.narrative){
     let part;
-    try{part=await groqJsonLimited(env,[{role:"system",content:finalNarrativeSystem},{role:"user",content:finalPacket}],650);}
-    catch(e){return jsonResponse({error:`Evidence synthesis final narrative stage failed: ${e?.message||"AI service error"}. All chunk checkpoints were preserved.`,diagnostic:{cards_processed:raw.length,cards_usable:usable.length,completed_chunks:chunks.length,final_packet_chars:finalPacket.length},progress:{phase:"final_narrative",completed:0,total:2}},502);}
+    try{part=await groqJsonLimited(env,[{role:"system",content:finalNarrativeSystem},{role:"user",content:finalNarrativePacket}],420);}
+    catch(e){return jsonResponse({error:`Evidence synthesis final narrative stage failed: ${e?.message||"AI service error"}. All chunk checkpoints were preserved.`,diagnostic:{cards_processed:raw.length,cards_usable:usable.length,completed_chunks:chunks.length,final_packet_chars:finalNarrativePacket.length},progress:{phase:"final_narrative",completed:0,total:2}},502);}
     checkpoint.final.narrative=part;
+    // Force the second AI stage into a fresh Groq TPM window. Requests arriving during
+    // cooldown return progress only and make ZERO Groq calls.
+    checkpoint.final.claims_not_before=Date.now()+65000;
     try{await env.SITE_ADMIN.put(checkpointKey,JSON.stringify(checkpoint),{expirationTtl:86400});}
     catch(e){return jsonResponse({error:`Final narrative generated but checkpoint save failed: ${e?.message||"storage error"}`},500);}
     return jsonResponse({ok:true,done:false,progress:{phase:"final_narrative",completed:1,total:2,message:"Final narrative checkpoint saved"}});
   }
   const finalClaimsSystem=`You are extracting source-locked claims for a PRIVATE scientific synthesis from hierarchical summaries of structured Evidence Cards. Use ONLY the supplied packet. Return ONLY claims directly supported by the supplied summaries. Every claim MUST contain at least one PMID copied exactly from all_included_pmids and directly supporting that exact claim. Never invent, shorten, alter or infer a PMID. If a claim cannot be tied to a supplied PMID, OMIT it. direct evidence may support clinical conclusions; supporting evidence may support plausibility but NOT clinical efficacy; contextual evidence MUST NOT support efficacy/safety conclusions. Return ONLY valid JSON with keys: main_findings (array of {finding,pmids}), conflicting_evidence (array of {issue,pmids}). Maximum 8 findings and 6 conflicts.`;
   if(!checkpoint.final.claims){
+    const notBefore=Number(checkpoint.final.claims_not_before||0);
+    if(notBefore>Date.now()){
+      const waitSeconds=Math.max(1,Math.ceil((notBefore-Date.now())/1000));
+      return jsonResponse({ok:true,done:false,progress:{phase:"tpm_cooldown",completed:1,total:2,wait_seconds:waitSeconds,message:`Narrative saved. Waiting ${waitSeconds}s for a fresh Groq TPM window; no AI call was made.`}});
+    }
     let part;
-    try{part=await groqJsonLimited(env,[{role:"system",content:finalClaimsSystem},{role:"user",content:finalPacket}],650);}
-    catch(e){return jsonResponse({error:`Evidence synthesis source-lock stage failed: ${e?.message||"AI service error"}. Narrative and chunk checkpoints were preserved.`,diagnostic:{cards_processed:raw.length,cards_usable:usable.length,completed_chunks:chunks.length,final_packet_chars:finalPacket.length},progress:{phase:"final_claims",completed:1,total:2}},502);}
+    try{part=await groqJsonLimited(env,[{role:"system",content:finalClaimsSystem},{role:"user",content:finalClaimsPacket}],420);}
+    catch(e){return jsonResponse({error:`Evidence synthesis source-lock stage failed: ${e?.message||"AI service error"}. Narrative and chunk checkpoints were preserved.`,diagnostic:{cards_processed:raw.length,cards_usable:usable.length,completed_chunks:chunks.length,final_packet_chars:finalClaimsPacket.length},progress:{phase:"final_claims",completed:1,total:2}},502);}
     checkpoint.final.claims=part;
     try{await env.SITE_ADMIN.put(checkpointKey,JSON.stringify(checkpoint),{expirationTtl:86400});}
     catch(e){return jsonResponse({error:`Source-locked claims generated but checkpoint save failed: ${e?.message||"storage error"}`},500);}
