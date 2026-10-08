@@ -374,7 +374,9 @@
     if(!b)return '<div class="empty">No public snapshot exists for this area.</div>';
     const fav=(b.consistent_favorable_domains||[]).map(x=>x.label||x),mixed=(b.mixed_domains||[]).map(x=>x.label||x);
     const list=(a,empty)=>Array.isArray(a)&&a.length?`<ul>${a.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:`<p class="small">${esc(empty)}</p>`;
-    return `<div class="public-preview"><h4>${esc(b.area?.label||'Approved evidence brief')}</h4><p><strong>${esc(b.signal||'')}</strong> · maturity: ${esc(b.maturity||'—')} · ${Number(b.direct_human_studies||0)} direct human studies · ${Number(b.clinical_trials||0)} clinical trials</p><p>${esc(b.approved_overall_interpretation||b.interpretation||'')}</p><div class="public-preview-grid"><section><h4>Consistent favorable domains</h4>${list(fav,'None identified.')}</section><section><h4>Mixed / uncertain domains</h4>${list(mixed,'None identified.')}</section></div><p><strong>Clinical bottom line:</strong> ${esc(b.approved_bottom_line||'')}</p><p class="small">Published snapshot: ${b.published_at?new Date(b.published_at).toLocaleString():'—'} · no live AI call for visitors.</p></div>`;
+    const wn=b.whats_new||null;
+    const wnHtml=wn?.has_changes?`<div class="public-whats-new-preview"><h4>What’s new since the previous public brief</h4><p>${Number(wn.new_studies_count||0)} new studies${Number(wn.removed_studies_count||0)?` · ${Number(wn.removed_studies_count||0)} removed`:''}${wn.overall_interpretation_changed?' · interpretation updated':''}${wn.bottom_line_changed?' · bottom line updated':''}</p></div>`:'';
+    return `<div class="public-preview"><h4>${esc(b.area?.label||'Approved evidence brief')}</h4><p><strong>${esc(b.signal||'')}</strong> · maturity: ${esc(b.maturity||'—')} · ${Number(b.direct_human_studies||0)} direct human studies · ${Number(b.clinical_trials||0)} clinical trials</p><p>${esc(b.approved_overall_interpretation||b.interpretation||'')}</p>${wnHtml}<div class="public-preview-grid"><section><h4>Consistent favorable domains</h4>${list(fav,'None identified.')}</section><section><h4>Mixed / uncertain domains</h4>${list(mixed,'None identified.')}</section></div><p><strong>Clinical bottom line:</strong> ${esc(b.approved_bottom_line||'')}</p></div>`;
   }
   function renderPublicEvidence(d){
     const b=d?.published||null,badge=$('publicEvidenceBadge'),can=!!d?.can_publish;
@@ -452,7 +454,7 @@
   }
   function whatChangedHtml(changes,review){
     if(!changes?.baseline){return '<div class="notice"><strong>No approved baseline yet.</strong> Approve the current synthesis to establish the comparison baseline.</div>';}
-    if(!changes.has_changes){return '<div class="notice review-no-changes"><strong>No changes since the approved synthesis.</strong> The current evidence state matches the approved snapshot.</div>';}
+    if(!changes.has_changes){return '<div class="notice review-no-changes"><strong>No new evidence since the approved synthesis.</strong> The current evidence state matches the approved snapshot.</div>';}
     const blocks=[];
     if(changes.new_cards?.length)blocks.push(`<h4>New Evidence Cards</h4><p>${changes.new_cards.map(x=>esc(x)).join(', ')}</p>`);
     if(changes.removed_cards?.length)blocks.push(`<h4>Removed Evidence Cards</h4><p>${changes.removed_cards.map(x=>esc(x)).join(', ')}</p>`);
@@ -464,7 +466,7 @@
     if(changes.conflicts_removed?.length)blocks.push(`<h4>Conflicting evidence removed</h4>${claimChangeList(changes.conflicts_removed,'issue')}`);
     if(changes.overall_interpretation_changed)blocks.push('<h4>Overall interpretation changed</h4><p class="small">The current wording differs from the approved snapshot.</p>');
     if(changes.bottom_line_changed)blocks.push('<h4>Bottom line changed</h4><p class="small">The current wording differs from the approved snapshot.</p>');
-    return `<div class="notice review-changes"><strong>Changes detected since approval.</strong> Review them before approving the updated synthesis.</div>${blocks.join('')}`;
+    return `<div class="notice review-changes"><strong>What’s new since approval.</strong> New or changed evidence has been detected. Review it before approving the updated synthesis.</div>${blocks.join('')}`;
   }
   function resetEvidenceReview(message='Load a saved synthesis to check its review status.'){
     const badge=$('evidenceReviewBadge'); badge.textContent='Draft'; badge.className='protocol-lock review-state-draft';
