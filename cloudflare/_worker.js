@@ -874,11 +874,14 @@ async function handleEvidencePublication(request,env,session){
   const whatsNew=publicEvidenceWhatsNew(existing?.source_snapshot||null,current);
   const fav=(conclusion.consistent_favorable_domains||[]).map(x=>({domain:x.domain,label:x.label})), mixed=[...(conclusion.mixed_domains||[]),...(conclusion.discordant_domains||[])].map(x=>({domain:x.domain,label:x.label}));
   const brief={schema_version:2,area:{slug,label:area.label},published_at:now,published_by:who,source:{approved_at:review.approved_at||null,approved_by:review.approved_by||null,synthesis_generated_at:current.synthesis_generated_at||null,cards_processed_current:current.cards_processed_current||0},source_snapshot:current,whats_new:whatsNew,signal:conclusion.signal,maturity:conclusion.maturity,interpretation:conclusion.interpretation,direct_human_studies:conclusion.direct_human_studies,clinical_trials:conclusion.clinical_trials,consistent_favorable_domains:fav,mixed_domains:mixed,limitations:conclusion.limitations||[],research_gaps:conclusion.research_gaps||[],approved_overall_interpretation:conclusion.approved_overall_interpretation||"",approved_bottom_line:conclusion.approved_bottom_line||"",faq:[{question:"What does the current approved evidence suggest?",answer:conclusion.approved_overall_interpretation||conclusion.interpretation||""},{question:"How consistent is the direct human evidence?",answer:conclusion.interpretation||""},{question:"What are the main limitations?",answer:(conclusion.limitations||[]).join("; ")||"No limitations recorded in the approved synthesis."},{question:"What research is still needed?",answer:(conclusion.research_gaps||[]).join("; ")||"No research gaps recorded in the approved synthesis."},{question:"What is the approved clinical bottom line?",answer:conclusion.approved_bottom_line||""}]};
-  const it=await publicEvidenceItalianTranslation(env,brief);
-  brief.translations={it:it||null};
-  brief.translation_status=it?"ready":"unavailable";
+  let it=await publicEvidenceItalianTranslation(env,brief);
+  const sameSnapshot=!!(existing?.source_snapshot&&JSON.stringify(existing.source_snapshot)===JSON.stringify(current));
+  if(!it&&sameSnapshot&&existing?.translations?.it)it=existing.translations.it;
+  if(!it)return jsonResponse({error:"Italian translation could not be generated. The existing public brief has been left unchanged. Retry Publish later; saving or changing the hero image does not require republishing."},503);
+  brief.translations={it};
+  brief.translation_status="ready";
   await env.SITE_ADMIN.put(key,JSON.stringify(brief));
-  return jsonResponse({...publicationState(brief,hero||null,{ok:true}),can_publish:true,approval_current:true,public_url_it:it?`/it/evidence/${slug}`:null,translation_status:brief.translation_status});
+  return jsonResponse({...publicationState(brief,hero||null,{ok:true}),can_publish:true,approval_current:true,public_url_it:`/it/evidence/${slug}`,translation_status:brief.translation_status});
 }
 
 const EVIDENCE_LAB_SYNTHESIS_PREFIX = "evidence-lab:v2:synthesis:";
