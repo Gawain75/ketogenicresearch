@@ -758,6 +758,7 @@ async function handleEvidenceAsk(request,env){
 
 
 const PUBLIC_EVIDENCE_PREFIX = "evidence-public:v1:";
+const PUBLIC_EVIDENCE_HERO_PREFIX = "evidence-public:hero:v1:";
 function publicEvidenceEsc(v){return String(v??"").replace(/[&<>\"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
 function publicEvidenceList(items,empty){const a=Array.isArray(items)?items.filter(Boolean):[];return a.length?`<ul>${a.map(x=>`<li>${publicEvidenceEsc(x)}</li>`).join("")}</ul>`:`<p>${publicEvidenceEsc(empty||"Not available.")}</p>`;}
 function publicEvidenceWhatsNew(previousSnapshot,currentSnapshot){
@@ -792,14 +793,15 @@ function publicEvidencePageHtml(b,lang="en"){
   const mixed=isIt?(t.mixed_domains||[]):(b.mixed_domains||[]).map(x=>x.label||x);
   const limitations=isIt?(t.limitations||[]):(b.limitations||[]), gaps=isIt?(t.research_gaps||[]):(b.research_gaps||[]);
   const faq=isIt?(t.faq||[]):(Array.isArray(b.faq)?b.faq:[]);
+  const hero=b?.hero||null, heroAlt=isIt?(hero?.alt_it||hero?.alt_en||areaLabel||""):(hero?.alt_en||hero?.alt_it||areaLabel||"");
   const wn=b.whats_new||null, wnT=isIt?(t?.whats_new||null):null;
   const wnFindings=isIt?(wnT?.main_findings_added||[]):(wn?.main_findings_added||[]).map(x=>x.finding||x);
   const wnConflicts=isIt?(wnT?.conflicts_added||[]):(wn?.conflicts_added||[]).map(x=>x.issue||x);
   const wnProfile=publicEvidenceProfileChangeList(wn?.profile_changes||{});
   const canonical=`https://ketogenicresearch.org${isIt?`/it/evidence/${area.slug}`:`/evidence/${area.slug}`}`;
   return `<!doctype html><html lang="${isIt?'it':'en'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${publicEvidenceEsc(areaLabel||"Evidence Brief")} | Ketogenic Research Hub</title><meta name="description" content="${isIt?'Sintesi approvata delle evidenze del Ketogenic Research Hub.':'Approved evidence brief from the Ketogenic Research Hub.'}"><meta name="robots" content="index,follow"><link rel="canonical" href="${canonical}"><link rel="alternate" hreflang="en" href="https://ketogenicresearch.org/evidence/${area.slug}"><link rel="alternate" hreflang="it" href="https://ketogenicresearch.org/it/evidence/${area.slug}"><link rel="stylesheet" href="/styles.css"><style>
-  body{background:#f6f8fb;color:#18324b}.evidence-public{max-width:980px;margin:0 auto;padding:42px 22px 70px}.evidence-public .top{margin-bottom:24px}.evidence-public .k{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#587089}.evidence-public h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.05;margin:.25rem 0 .7rem}.evidence-public .lead{font-size:1.15rem;line-height:1.65;color:#4e6275}.evidence-public .meta{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.evidence-public .pill{padding:7px 11px;border-radius:999px;background:#eaf2f8;font-size:.9rem}.evidence-public .card{background:white;border:1px solid #dce5ed;border-radius:20px;padding:22px;margin:16px 0}.evidence-public .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.evidence-public h2{font-size:1.25rem;margin:0 0 10px}.evidence-public h3{font-size:1.05rem;margin:18px 0 8px}.evidence-public p,.evidence-public li{line-height:1.62}.evidence-public ul{padding-left:22px;margin:8px 0}.evidence-public .whats-new{border-left:5px solid #2b6f9e;background:#f1f7fb}.evidence-public .bottom{border-left:5px solid #2b7a4b;background:#eef8f1}.evidence-public .faq details{border-top:1px solid #e2e8ee;padding:14px 0}.evidence-public .faq details:first-child{border-top:0}.evidence-public summary{cursor:pointer;font-weight:700}.evidence-public .note{font-size:.9rem;color:#66788a}.evidence-public a{color:#1f5c8f}.evidence-public .language-switch{float:right;font-size:.9rem;font-weight:700;text-decoration:none;padding:7px 11px;border:1px solid #cbd8e3;border-radius:999px;background:#fff}@media(max-width:700px){.evidence-public{padding:28px 16px 52px}.evidence-public .grid{grid-template-columns:1fr}.evidence-public .card{padding:18px}}
-  </style></head><body><main class="evidence-public"><div class="top"><a class="language-switch" href="${L.switchHref}"${!isIt&&!b?.translations?.it?' style="display:none"':''}>${L.switchLabel}</a><div class="k">${L.kicker}</div><h1>${publicEvidenceEsc(areaLabel||"")}</h1><p class="lead">${publicEvidenceEsc(overall||interpretation||"")}</p><div class="meta"><span class="pill">${publicEvidenceEsc(signal||"Evidence signal")}</span><span class="pill">${L.maturity}: ${publicEvidenceEsc(maturity||"—")}</span><span class="pill">${Number(b.direct_human_studies||0)} ${L.direct}</span><span class="pill">${Number(b.clinical_trials||0)} ${L.trials}</span></div></div>
+  body{background:#f6f8fb;color:#18324b}.evidence-public{max-width:980px;margin:0 auto;padding:42px 22px 70px}.evidence-public .top{margin-bottom:24px}.evidence-public .k{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#587089}.evidence-public h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.05;margin:.25rem 0 .7rem}.evidence-public .hero{margin:20px 0 20px;border-radius:20px;overflow:hidden;border:1px solid #dce5ed;background:#eaf0f5;aspect-ratio:21/9}.evidence-public .hero img{display:block;width:100%;height:100%;object-fit:cover}.evidence-public .lead{font-size:1.15rem;line-height:1.65;color:#4e6275}.evidence-public .meta{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.evidence-public .pill{padding:7px 11px;border-radius:999px;background:#eaf2f8;font-size:.9rem}.evidence-public .card{background:white;border:1px solid #dce5ed;border-radius:20px;padding:22px;margin:16px 0}.evidence-public .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.evidence-public h2{font-size:1.25rem;margin:0 0 10px}.evidence-public h3{font-size:1.05rem;margin:18px 0 8px}.evidence-public p,.evidence-public li{line-height:1.62}.evidence-public ul{padding-left:22px;margin:8px 0}.evidence-public .whats-new{border-left:5px solid #2b6f9e;background:#f1f7fb}.evidence-public .bottom{border-left:5px solid #2b7a4b;background:#eef8f1}.evidence-public .faq details{border-top:1px solid #e2e8ee;padding:14px 0}.evidence-public .faq details:first-child{border-top:0}.evidence-public summary{cursor:pointer;font-weight:700}.evidence-public .note{font-size:.9rem;color:#66788a}.evidence-public a{color:#1f5c8f}.evidence-public .language-switch{float:right;font-size:.9rem;font-weight:700;text-decoration:none;padding:7px 11px;border:1px solid #cbd8e3;border-radius:999px;background:#fff}@media(max-width:700px){.evidence-public{padding:28px 16px 52px}.evidence-public .hero{border-radius:14px;aspect-ratio:16/7}.evidence-public .grid{grid-template-columns:1fr}.evidence-public .card{padding:18px}}
+  </style></head><body><main class="evidence-public"><div class="top"><a class="language-switch" href="${L.switchHref}"${!isIt&&!b?.translations?.it?' style="display:none"':''}>${L.switchLabel}</a><div class="k">${L.kicker}</div><h1>${publicEvidenceEsc(areaLabel||"")}</h1>${hero?.url?`<figure class="hero"><img src="${publicEvidenceEsc(hero.url)}" alt="${publicEvidenceEsc(heroAlt)}" loading="eager" decoding="async"></figure>`:""}<p class="lead">${publicEvidenceEsc(overall||interpretation||"")}</p><div class="meta"><span class="pill">${publicEvidenceEsc(signal||"Evidence signal")}</span><span class="pill">${L.maturity}: ${publicEvidenceEsc(maturity||"—")}</span><span class="pill">${Number(b.direct_human_studies||0)} ${L.direct}</span><span class="pill">${Number(b.clinical_trials||0)} ${L.trials}</span></div></div>
   <section class="card"><h2>${L.what}</h2><p>${publicEvidenceEsc(interpretation||"")}</p></section>
   ${wn?.baseline_available&&wn?.has_changes?`<section class="card whats-new"><h2>${L.whatsNew}</h2><p><strong>${Number(wn.new_studies_count||0)} ${L.newStudies}</strong>${Number(wn.removed_studies_count||0)?` · ${Number(wn.removed_studies_count||0)} ${L.removedStudies}`:""}</p>${wnProfile.length?`<h3>${L.profile}</h3><ul>${wnProfile.map(x=>`<li>${publicEvidenceEsc(x.key.replaceAll("_"," "))}: ${x.before} → <strong>${x.after}</strong> (${x.delta>0?"+":""}${x.delta})</li>`).join("")}</ul>`:""}${wnFindings.length?`<h3>${L.newFindings}</h3>${publicEvidenceList(wnFindings,"")}`:""}${wnConflicts.length?`<h3>${L.newConflicts}</h3>${publicEvidenceList(wnConflicts,"")}`:""}${wn.overall_interpretation_changed?`<p><strong>${L.interpretationUpdated}</strong></p>`:""}${wn.bottom_line_changed?`<p><strong>${L.bottomUpdated}</strong></p>`:""}</section>`:""}
   <div class="grid"><section class="card"><h2>${L.fav}</h2>${publicEvidenceList(fav,L.emptyFav)}</section><section class="card"><h2>${L.mixed}</h2>${publicEvidenceList(mixed,L.emptyMixed)}</section></div>
@@ -833,16 +835,38 @@ async function handleEvidencePublication(request,env,session){
   const url=new URL(request.url);let body={};if(request.method!=="GET")body=await request.json().catch(()=>({}));
   const slug=evidenceLabSlug(body.area||url.searchParams.get("area"));if(!slug)return jsonResponse({error:"Clinical area is required."},400);
   const idx=await evidenceLabIndex(request,env), area=idx.areas.find(a=>a.slug===slug);if(!area)return jsonResponse({error:"Clinical area not found."},404);
-  const key=PUBLIC_EVIDENCE_PREFIX+slug, existing=await env.SITE_ADMIN.get(key,"json");
+  const key=PUBLIC_EVIDENCE_PREFIX+slug, heroKey=PUBLIC_EVIDENCE_HERO_PREFIX+slug;
+  const existing=await env.SITE_ADMIN.get(key,"json"), hero=await env.SITE_ADMIN.get(heroKey,"json");
   const review={...evidenceReviewDefault(),...((await env.SITE_ADMIN.get(EVIDENCE_LAB_REVIEW_PREFIX+slug,"json"))||{})};
   const current=await evidenceReviewSnapshot(request,env,slug);
   const changes=current?evidenceReviewDiff(review.approved_snapshot,current):{has_changes:true};
   const can_publish=!!(current&&review.status==="approved"&&review.approved_snapshot&&!changes.has_changes);
-  if(request.method==="GET")return jsonResponse({area:{slug,label:area.label},published:existing||null,can_publish,approval_current:can_publish,public_url:`/evidence/${slug}`,public_url_it:existing?.translations?.it?`/it/evidence/${slug}`:null});
+  const publicationState=(published=existing||null,currentHero=hero||null,extra={})=>({area:{slug,label:area.label},published,hero:currentHero,can_publish,approval_current:can_publish,public_url:`/evidence/${slug}`,public_url_it:published?.translations?.it?`/it/evidence/${slug}`:null,...extra});
+  if(request.method==="GET")return jsonResponse(publicationState());
   if(request.method!=="POST")return jsonResponse({error:"Method not allowed."},405);
   const action=String(body.action||"").toLowerCase();
-  if(action==="unpublish"){await env.SITE_ADMIN.delete(key);return jsonResponse({ok:true,area:{slug,label:area.label},published:null,can_publish,public_url:`/evidence/${slug}`,public_url_it:null});}
-  if(action!=="publish")return jsonResponse({error:"Action must be publish or unpublish."},400);
+  if(action==="save_hero"){
+    const data=String(body.image_data||""), oldHero=hero||null;
+    let nextHero=oldHero?{...oldHero}:null;
+    if(data){
+      const m=data.match(/^data:(image\/(?:png|jpeg|webp));base64,/i);if(!m)return jsonResponse({error:"Hero image must be JPG, PNG or WebP."},400);
+      if(data.length>8000000)return jsonResponse({error:"Hero image is too large. Keep it below about 5.5 MB."},413);
+      const id=Date.now().toString(36)+"-"+crypto.randomUUID().slice(0,8), media={id,name:String(body.image_name||"evidence-hero").slice(0,180),type:m[1].toLowerCase(),data,created_at:new Date().toISOString()};
+      await env.SITE_ADMIN.put(SITE_ADMIN_MEDIA_PREFIX+id,JSON.stringify(media));
+      nextHero={media_id:id,url:`/media/${id}`,name:media.name,type:media.type,alt_en:"",alt_it:"",updated_at:new Date().toISOString(),updated_by:String(session?.email||"administrator")};
+      if(oldHero?.media_id&&oldHero.media_id!==id)await env.SITE_ADMIN.delete(SITE_ADMIN_MEDIA_PREFIX+safeMediaId(oldHero.media_id)).catch(()=>{});
+    }
+    if(!nextHero)return jsonResponse({error:"Choose an image before saving the hero."},400);
+    nextHero.alt_en=String(body.alt_en??nextHero.alt_en??"").trim().slice(0,240);nextHero.alt_it=String(body.alt_it??nextHero.alt_it??"").trim().slice(0,240);nextHero.updated_at=new Date().toISOString();nextHero.updated_by=String(session?.email||"administrator");
+    await env.SITE_ADMIN.put(heroKey,JSON.stringify(nextHero));
+    return jsonResponse(publicationState(existing||null,nextHero,{ok:true}));
+  }
+  if(action==="remove_hero"){
+    if(hero?.media_id)await env.SITE_ADMIN.delete(SITE_ADMIN_MEDIA_PREFIX+safeMediaId(hero.media_id)).catch(()=>{});
+    await env.SITE_ADMIN.delete(heroKey);return jsonResponse(publicationState(existing||null,null,{ok:true}));
+  }
+  if(action==="unpublish"){await env.SITE_ADMIN.delete(key);return jsonResponse(publicationState(null,hero||null,{ok:true,public_url_it:null}));}
+  if(action!=="publish")return jsonResponse({error:"Action must be publish, unpublish, save_hero or remove_hero."},400);
   if(!can_publish)return jsonResponse({error:"Only a current approved synthesis can be published. Review and approve the current evidence state first."},409);
   const cu=new URL(request.url);cu.pathname="/api/review/evidence/conclusion";cu.searchParams.set("area",slug);
   const cr=await handleEvidenceConclusion(new Request(cu.toString(),{method:"GET"}),env), conclusion=await cr.json();if(!cr.ok)return jsonResponse({error:conclusion?.error||"Unable to build the approved evidence conclusion."},cr.status||500);
@@ -854,7 +878,7 @@ async function handleEvidencePublication(request,env,session){
   brief.translations={it:it||null};
   brief.translation_status=it?"ready":"unavailable";
   await env.SITE_ADMIN.put(key,JSON.stringify(brief));
-  return jsonResponse({ok:true,area:{slug,label:area.label},published:brief,can_publish:true,approval_current:true,public_url:`/evidence/${slug}`,public_url_it:it?`/it/evidence/${slug}`:null,translation_status:brief.translation_status});
+  return jsonResponse({...publicationState(brief,hero||null,{ok:true}),can_publish:true,approval_current:true,public_url_it:it?`/it/evidence/${slug}`:null,translation_status:brief.translation_status});
 }
 
 const EVIDENCE_LAB_SYNTHESIS_PREFIX = "evidence-lab:v2:synthesis:";
@@ -1567,6 +1591,7 @@ export default {
       const lang=publicEvidenceMatch[1]?"it":"en", slug=evidenceLabSlug(publicEvidenceMatch[2]);
       const brief=await env.SITE_ADMIN.get(PUBLIC_EVIDENCE_PREFIX+slug,"json");
       if(!brief|| (lang==="it"&&!brief.translations?.it))return new Response("Not found",{status:404,headers:{"X-Robots-Tag":"noindex"}});
+      const hero=await env.SITE_ADMIN.get(PUBLIC_EVIDENCE_HERO_PREFIX+slug,"json").catch(()=>null);if(hero)brief.hero=hero;
       return new Response(publicEvidencePageHtml(brief,lang),{headers:{"Content-Type":"text/html; charset=utf-8","Cache-Control":"public, max-age=60, stale-while-revalidate=300","X-Content-Type-Options":"nosniff"}});
     }
 
