@@ -1,7 +1,7 @@
 // Ketogenic Research — V70 recovery script
 
 const KR_LIBRARY_STATS = {
-  publications: 9064,
+  publications: 9062,
   clinicalAreas: 54
 };
 
@@ -837,7 +837,8 @@ if (document.getElementById('alzheimers-disease')) {
 let KR_EVIDENCE_BRIEFS = new Map();
 function evidenceBriefHref(item){
   if(!item)return '#';
-  return currentLang()==='it' && item.url_it ? item.url_it : item.url;
+  if(currentLang()==='it') return item.url_it || `/it/evidence/${item.slug}`;
+  return item.url;
 }
 function refreshEvidenceBriefLinkLanguage(){
   document.querySelectorAll('[data-evidence-brief-slug]').forEach(a=>{
