@@ -11,6 +11,9 @@
   let project = loadProject() || blankProject();
   let evidenceAutoRunning=false;
   let evidenceAutoStop=false;
+  let publicHeroPendingData=null;
+  let publicHeroPendingName='';
+  let publicHeroPendingType='';
 
   function blankProject(){
     return {
@@ -364,11 +367,31 @@
     catch(e){resetEvidenceConclusion(e.message);setStatus('evidenceConclusionStatus',e.message,'error');}
   }
 
+  function resetPublicHero(message='No hero image uploaded for this area.'){
+    publicHeroPendingData=null;publicHeroPendingName='';publicHeroPendingType='';
+    if($('publicHeroFile'))$('publicHeroFile').value='';
+    if($('publicHeroAltEn'))$('publicHeroAltEn').value='';
+    if($('publicHeroAltIt'))$('publicHeroAltIt').value='';
+    if($('publicHeroPreview'))$('publicHeroPreview').innerHTML=`<div class="empty">${esc(message)}</div>`;
+    if($('publicHeroSave'))$('publicHeroSave').disabled=true;
+    if($('publicHeroRemove'))$('publicHeroRemove').disabled=true;
+    if($('publicHeroStatus'))setStatus('publicHeroStatus','No hero image saved.');
+  }
+  function renderPublicHero(hero,areaSelected=true){
+    const h=hero||null;
+    publicHeroPendingData=null;publicHeroPendingName='';publicHeroPendingType='';
+    $('publicHeroFile').value='';
+    $('publicHeroAltEn').value=h?.alt_en||'';$('publicHeroAltIt').value=h?.alt_it||'';
+    $('publicHeroPreview').innerHTML=h?.url?`<img src="${esc(h.url)}" alt="${esc(h.alt_en||h.alt_it||'Evidence brief hero image')}">`:'<div class="empty">No hero image uploaded for this area.</div>';
+    $('publicHeroSave').disabled=!areaSelected;$('publicHeroRemove').disabled=!h;
+    setStatus('publicHeroStatus',h?.url?'Hero image saved. You can replace it or edit the alt text.':'No hero image saved.',h?.url?'ok':'');
+  }
   function resetPublicEvidence(message='Approve the current synthesis, then publish manually when ready.'){
     const badge=$('publicEvidenceBadge');badge.textContent='Not published';badge.className='protocol-lock';
     $('publicEvidencePublish').disabled=true;$('publicEvidenceUnpublish').disabled=true;$('publicEvidenceOpen').hidden=true;$('publicEvidenceOpen').href='#';
     $('publicEvidencePreview').innerHTML=`<div class="empty">${esc(message)}</div>`;
     setStatus('publicEvidenceStatus','Nothing is published automatically.');
+    resetPublicHero();
   }
   function publicEvidencePreviewHtml(b){
     if(!b)return '<div class="empty">No public snapshot exists for this area.</div>';
@@ -381,6 +404,7 @@
   function renderPublicEvidence(d){
     const b=d?.published||null,badge=$('publicEvidenceBadge'),can=!!d?.can_publish;
     $('publicEvidencePublish').disabled=!can;$('publicEvidenceUnpublish').disabled=!b;
+    renderPublicHero(d?.hero||null,!!d?.area?.slug);
     if(b){badge.textContent='Published';badge.className='protocol-lock review-state-approved';$('publicEvidenceOpen').hidden=false;$('publicEvidenceOpen').href=d.public_url||`/evidence/${encodeURIComponent(d.area?.slug||'')}`;$('publicEvidencePreview').innerHTML=publicEvidencePreviewHtml(b);setStatus('publicEvidenceStatus',d.approval_current?`Public snapshot published ${b.published_at?new Date(b.published_at).toLocaleString():''}. It remains fixed until you publish again or unpublish it.`:`Public snapshot remains live, but the current evidence state is not approved. Re-review and approve before replacing the public snapshot.`,d.approval_current?'ok':'error');}
     else{badge.textContent='Not published';badge.className='protocol-lock';$('publicEvidenceOpen').hidden=true;$('publicEvidenceOpen').href='#';$('publicEvidencePreview').innerHTML='<div class="empty">No public snapshot exists for this area.</div>';setStatus('publicEvidenceStatus',can?'Current synthesis is approved. Publishing requires a separate manual action.':'A current approved synthesis is required before publication.');}
   }
@@ -396,6 +420,28 @@
     const buttons=[$('publicEvidencePublish'),$('publicEvidenceUnpublish')];buttons.forEach(x=>x.disabled=true);
     try{const d=await api('/api/review/evidence/publication',{area,action});renderPublicEvidence(d);}
     catch(e){setStatus('publicEvidenceStatus',e.message,'error');await loadPublicEvidence();}
+  }
+
+  function publicHeroFileChanged(){
+    const f=$('publicHeroFile').files?.[0];if(!f)return;
+    if(!['image/jpeg','image/png','image/webp'].includes(f.type)){setStatus('publicHeroStatus','Use a JPG, PNG or WebP image.','error');$('publicHeroFile').value='';return;}
+    if(f.size>5.5*1024*1024){setStatus('publicHeroStatus','Image too large. Maximum file size is 5.5 MB.','error');$('publicHeroFile').value='';return;}
+    const r=new FileReader();
+    r.onload=()=>{publicHeroPendingData=String(r.result||'');publicHeroPendingName=f.name||'hero-image';publicHeroPendingType=f.type;$('publicHeroPreview').innerHTML=`<img src="${esc(publicHeroPendingData)}" alt="Preview">`;setStatus('publicHeroStatus','New image selected. Save to apply it to the public evidence page.');};
+    r.onerror=()=>setStatus('publicHeroStatus','Unable to read this image.','error');
+    r.readAsDataURL(f);
+  }
+  async function savePublicHero(){
+    const area=$('evidenceArea').value;if(!area){setStatus('publicHeroStatus','Choose a clinical area first.','error');return;}
+    const btn=$('publicHeroSave');btn.disabled=true;setStatus('publicHeroStatus','Saving hero image…');
+    try{const d=await api('/api/review/evidence/publication',{area,action:'save_hero',image_data:publicHeroPendingData||'',image_name:publicHeroPendingName||'',image_type:publicHeroPendingType||'',alt_en:$('publicHeroAltEn').value.trim(),alt_it:$('publicHeroAltIt').value.trim()});renderPublicEvidence(d);setStatus('publicHeroStatus','Hero image saved.','ok');}
+    catch(e){setStatus('publicHeroStatus',e.message,'error');btn.disabled=false;}
+  }
+  async function removePublicHero(){
+    const area=$('evidenceArea').value;if(!area)return;if(!confirm('Remove the hero image from this evidence page?'))return;
+    $('publicHeroRemove').disabled=true;setStatus('publicHeroStatus','Removing hero image…');
+    try{const d=await api('/api/review/evidence/publication',{area,action:'remove_hero'});renderPublicEvidence(d);setStatus('publicHeroStatus','Hero image removed.','ok');}
+    catch(e){setStatus('publicHeroStatus',e.message,'error');$('publicHeroRemove').disabled=false;}
   }
 
   function resetAskEvidence(message='No question asked yet.'){
@@ -554,7 +600,7 @@
   $('importJson').addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;try{const p=JSON.parse(await f.text());if(!p||p.version!==1)throw new Error('Unsupported project file.');project=p;saveProject();bindProjectToForm();renderStudies();showStep('question');setStatus('questionStatus','Project imported.','ok');}catch(err){setStatus('questionStatus',err.message,'error');}e.target.value='';});
 
   $('dailyAutoRefresh').addEventListener('click',loadDailyAutomation); $('dailyAutoRunNow').addEventListener('click',runDailyAutomationNow);
-  $('evidenceArea').addEventListener('change',()=>{evidenceAutoStop=true;saveUiState({evidence_area:$('evidenceArea').value||''});resetEvidenceMap();resetContradictionExplorer();resetEvidenceConclusion();resetPublicEvidence();resetAskEvidence();refreshEvidence();loadEvidenceSynthesis();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();loadPublicEvidence();}); $('evidenceRefresh').addEventListener('click',()=>{refreshEvidence();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();loadPublicEvidence();}); $('evidenceProcess').addEventListener('click',processEvidence); $('evidenceAutoProcess').addEventListener('click',autoProcessEvidence); $('evidenceStopAuto').addEventListener('click',()=>{evidenceAutoStop=true;$('evidenceStopAuto').disabled=true;setStatus('evidenceStatus','Stopping after the current batch…');}); $('evidenceSynthesize').addEventListener('click',generateEvidenceSynthesis); $('evidenceLoadSynthesis').addEventListener('click',()=>{loadEvidenceSynthesis();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();loadPublicEvidence();}); $('evidenceMarkReviewed').addEventListener('click',()=>evidenceReviewAction('review')); $('evidenceApprove').addEventListener('click',()=>evidenceReviewAction('approve')); $('evidenceReopen').addEventListener('click',()=>evidenceReviewAction('reopen')); $('evidenceRefreshReview').addEventListener('click',()=>{loadEvidenceReview();loadEvidenceConclusion();loadPublicEvidence();}); $('publicEvidencePublish').addEventListener('click',()=>publicEvidenceAction('publish')); $('publicEvidenceUnpublish').addEventListener('click',()=>publicEvidenceAction('unpublish')); $('evidenceRefreshMap').addEventListener('click',loadEvidenceMap); $('evidenceRefreshContradictions').addEventListener('click',()=>{loadContradictionExplorer();loadEvidenceConclusion();}); $('evidenceRefreshConclusion').addEventListener('click',loadEvidenceConclusion); $('askEvidenceSubmit').addEventListener('click',askEvidence); $('askEvidenceClear').addEventListener('click',()=>{$('askEvidenceQuestion').value='';resetAskEvidence();}); $('askEvidenceQuestion').addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')askEvidence();}); $('evidenceMapClass').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapRelevance').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapType').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapDirection').addEventListener('change',applyEvidenceMapFilters);
+  $('evidenceArea').addEventListener('change',()=>{evidenceAutoStop=true;saveUiState({evidence_area:$('evidenceArea').value||''});resetEvidenceMap();resetContradictionExplorer();resetEvidenceConclusion();resetPublicEvidence();resetAskEvidence();refreshEvidence();loadEvidenceSynthesis();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();loadPublicEvidence();}); $('evidenceRefresh').addEventListener('click',()=>{refreshEvidence();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();loadPublicEvidence();}); $('evidenceProcess').addEventListener('click',processEvidence); $('evidenceAutoProcess').addEventListener('click',autoProcessEvidence); $('evidenceStopAuto').addEventListener('click',()=>{evidenceAutoStop=true;$('evidenceStopAuto').disabled=true;setStatus('evidenceStatus','Stopping after the current batch…');}); $('evidenceSynthesize').addEventListener('click',generateEvidenceSynthesis); $('evidenceLoadSynthesis').addEventListener('click',()=>{loadEvidenceSynthesis();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();loadPublicEvidence();}); $('evidenceMarkReviewed').addEventListener('click',()=>evidenceReviewAction('review')); $('evidenceApprove').addEventListener('click',()=>evidenceReviewAction('approve')); $('evidenceReopen').addEventListener('click',()=>evidenceReviewAction('reopen')); $('evidenceRefreshReview').addEventListener('click',()=>{loadEvidenceReview();loadEvidenceConclusion();loadPublicEvidence();}); $('publicEvidencePublish').addEventListener('click',()=>publicEvidenceAction('publish')); $('publicEvidenceUnpublish').addEventListener('click',()=>publicEvidenceAction('unpublish')); $('publicHeroFile').addEventListener('change',publicHeroFileChanged); $('publicHeroSave').addEventListener('click',savePublicHero); $('publicHeroRemove').addEventListener('click',removePublicHero); $('evidenceRefreshMap').addEventListener('click',loadEvidenceMap); $('evidenceRefreshContradictions').addEventListener('click',()=>{loadContradictionExplorer();loadEvidenceConclusion();}); $('evidenceRefreshConclusion').addEventListener('click',loadEvidenceConclusion); $('askEvidenceSubmit').addEventListener('click',askEvidence); $('askEvidenceClear').addEventListener('click',()=>{$('askEvidenceQuestion').value='';resetAskEvidence();}); $('askEvidenceQuestion').addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')askEvidence();}); $('evidenceMapClass').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapRelevance').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapType').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapDirection').addEventListener('change',applyEvidenceMapFilters);
 
   bindProjectToForm(); renderStudies(); renderMeta();
   showStep('evidence');

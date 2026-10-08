@@ -62,6 +62,22 @@
     <div class="project-row public-evidence-head"><div><h3 style="margin:0 0 4px">Public Evidence Brief</h3><p class="sub" style="margin:0">Manual public snapshot built only from the approved synthesis and deterministic Evidence Conclusion. No live Groq call is used on the public page.</p></div><span class="protocol-lock" id="publicEvidenceBadge">Not published</span></div>
     <div class="review-actions"><button class="review-btn" id="publicEvidencePublish">Publish approved brief</button><button class="review-btn muted" id="publicEvidenceUnpublish">Unpublish</button><a class="review-btn muted" id="publicEvidenceOpen" href="#" target="_blank" rel="noopener" hidden>Open public page</a></div>
     <div class="review-status" id="publicEvidenceStatus">Nothing is published automatically.</div>
+    <div class="public-hero-editor" id="publicHeroEditor">
+      <div class="project-row public-hero-head"><div><h4 style="margin:0 0 4px">Hero image</h4><p class="sub" style="margin:0">Optional scientific image shown directly below the public page title. Managed manually and independent from synthesis generation.</p></div></div>
+      <div class="public-hero-grid">
+        <div>
+          <div class="public-hero-preview" id="publicHeroPreview"><div class="empty">No hero image uploaded for this area.</div></div>
+          <label class="public-hero-file-label" for="publicHeroFile">Choose image</label><input id="publicHeroFile" type="file" accept="image/jpeg,image/png,image/webp">
+          <p class="small">JPG, PNG or WebP. Recommended horizontal format around 21:9.</p>
+        </div>
+        <div>
+          <div class="review-field"><label for="publicHeroAltEn">Alt text EN</label><input id="publicHeroAltEn" type="text" maxlength="240" placeholder="Scientific illustration related to Parkinson’s disease and ketogenic metabolism"></div>
+          <div class="review-field"><label for="publicHeroAltIt">Alt text IT</label><input id="publicHeroAltIt" type="text" maxlength="240" placeholder="Illustrazione scientifica relativa alla malattia di Parkinson e al metabolismo chetogenico"></div>
+          <div class="review-actions"><button class="review-btn" id="publicHeroSave">Save hero image</button><button class="review-btn muted" id="publicHeroRemove">Remove image</button></div>
+          <div class="review-status" id="publicHeroStatus">No hero image saved.</div>
+        </div>
+      </div>
+    </div>
     <div id="publicEvidencePreview"><div class="empty">Approve the current synthesis, then publish manually when ready.</div></div>
   </div>
   <div class="ask-evidence-box" id="askEvidenceBox">
