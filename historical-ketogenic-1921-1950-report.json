@@ -1,0 +1,709 @@
+{
+  "range": "1921-1950",
+  "curation_policy": "Conservative historical backfill. Empty years are retained when no direct/foundational ketogenic reference was verified; the script does not invent a publication to fill a year.",
+  "records_in_curated_manifest": 42,
+  "added_this_run": 26,
+  "skipped_this_run": 16,
+  "historical_records_in_library_1921_1950": 42,
+  "unresolved_manifest_records": [],
+  "years_with_verified_records": [
+    1921,
+    1922,
+    1923,
+    1924,
+    1925,
+    1926,
+    1927,
+    1928,
+    1929,
+    1930,
+    1931,
+    1932,
+    1933,
+    1934,
+    1935,
+    1936,
+    1937,
+    1938,
+    1939,
+    1942,
+    1946,
+    1947,
+    1948
+  ],
+  "years_without_verified_records": [
+    1940,
+    1941,
+    1943,
+    1944,
+    1945,
+    1949,
+    1950
+  ],
+  "counts_by_year": {
+    "1921": 3,
+    "1922": 2,
+    "1923": 1,
+    "1924": 3,
+    "1925": 1,
+    "1926": 1,
+    "1927": 4,
+    "1928": 4,
+    "1929": 2,
+    "1930": 3,
+    "1931": 3,
+    "1932": 1,
+    "1933": 2,
+    "1934": 1,
+    "1935": 3,
+    "1936": 1,
+    "1937": 1,
+    "1938": 1,
+    "1939": 1,
+    "1940": 0,
+    "1941": 0,
+    "1942": 1,
+    "1943": 0,
+    "1944": 0,
+    "1945": 0,
+    "1946": 1,
+    "1947": 1,
+    "1948": 1,
+    "1949": 0,
+    "1950": 0
+  },
+  "counts_by_area": {
+    "epilepsy": 41,
+    "headache-migraine": 1
+  },
+  "added": [
+    {
+      "year": 1922,
+      "area": "epilepsy",
+      "title": "Some Observations on the Starvation Treatment of Epilepsy",
+      "doi": null,
+      "pmid": "20314170",
+      "scope": "foundational"
+    },
+    {
+      "year": 1922,
+      "area": "epilepsy",
+      "title": "The Threshold of Ketogenesis",
+      "doi": "10.1016/S0021-9258(18)85833-1",
+      "pmid": null,
+      "scope": "mechanistic"
+    },
+    {
+      "year": 1923,
+      "area": "epilepsy",
+      "title": "Observations on Fasting and Diets in the Treatment of Epilepsy",
+      "doi": null,
+      "pmid": null,
+      "scope": "foundational"
+    },
+    {
+      "year": 1924,
+      "area": "epilepsy",
+      "title": "The Effect of Fasting on the Metabolism of Epileptic Children",
+      "doi": "10.1001/archpedi.1924.04120190019002",
+      "pmid": null,
+      "scope": "foundational"
+    },
+    {
+      "year": 1924,
+      "area": "epilepsy",
+      "title": "Hypoglycemia and Acidosis in Fasting Children with Idiopathic Epilepsy",
+      "doi": "10.1001/archpedi.1924.04120230029003",
+      "pmid": null,
+      "scope": "foundational"
+    },
+    {
+      "year": 1927,
+      "area": "epilepsy",
+      "title": "The Treatment of Epilepsy in Childhood: Five Years' Experience with the Ketogenic Diet",
+      "doi": "10.1001/jama.1927.02680520018008",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1928,
+      "area": "epilepsy",
+      "title": "Ketogenic Diet Treatment of Epilepsy in Adults",
+      "doi": "10.1001/jama.1928.02700020007003",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1928,
+      "area": "epilepsy",
+      "title": "Influence of Acid-Forming and Base-Forming Constituents of Ketogenic Diet Used in Treatment of Idiopathic Epilepsy",
+      "doi": "10.3181/00379727-25-3877",
+      "pmid": null,
+      "scope": "mechanistic"
+    },
+    {
+      "year": 1929,
+      "area": "epilepsy",
+      "title": "The Ketogenic Diet in the Treatment of Epilepsy",
+      "doi": "10.7326/0003-4819-2-12-1300",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1930,
+      "area": "epilepsy",
+      "title": "Epilepsy in Adults: Results of Treatment by Ketogenic Diet in One Hundred Cases",
+      "doi": "10.1001/archneurpsyc.1930.02220110066004",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1930,
+      "area": "headache-migraine",
+      "title": "Migraine: Results of Treatment by Ketogenic Diet in Fifty Cases",
+      "doi": "10.1001/jama.1930.02720240035010",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1931,
+      "area": "epilepsy",
+      "title": "The Mechanism of the Ketogenic Diet in Epilepsy: A Preliminary Report of Work in Progress",
+      "doi": "10.1176/ajp.87.4.667",
+      "pmid": null,
+      "scope": "mechanistic"
+    },
+    {
+      "year": 1931,
+      "area": "epilepsy",
+      "title": "The Ketogenic Treatment of Epilepsy",
+      "doi": "10.1007/BF02951585",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1932,
+      "area": "epilepsy",
+      "title": "The Present Status of the Ketogenic Diet",
+      "doi": "10.7326/0003-4819-6-6-795",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1933,
+      "area": "epilepsy",
+      "title": "Ten Years' Experience in the Treatment of Epilepsy with Ketogenic Diet",
+      "doi": "10.1001/archneurpsyc.1933.02240100127010",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1934,
+      "area": "epilepsy",
+      "title": "Epilepsy: Treatment of Institutionalized Adult Patients with a Ketogenic Diet",
+      "doi": "10.1001/archneurpsyc.1934.02250040111007",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1935,
+      "area": "epilepsy",
+      "title": "Epilepsy: Its Treatment by the Use of the Ketogenic Diet Versus Drugs",
+      "doi": null,
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1935,
+      "area": "epilepsy",
+      "title": "Effect of Ketogenic Diet on the Blood Sugar and the Respiratory Quotient of Children",
+      "doi": "10.1001/archpedi.1935.01970100003001",
+      "pmid": null,
+      "scope": "mechanistic"
+    },
+    {
+      "year": 1935,
+      "area": "epilepsy",
+      "title": "Ketosis and the Ketogenic Diet: Their Application to Treatment of Epilepsy and Infections of the Urinary Tract",
+      "doi": null,
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1936,
+      "area": "epilepsy",
+      "title": "Ketosis in the Treatment of Epilepsy",
+      "doi": null,
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1937,
+      "area": "epilepsy",
+      "title": "Epilepsy in Childhood: III. Results with the Ketogenic Diet",
+      "doi": "10.1016/S0022-3476(37)80188-2",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1938,
+      "area": "epilepsy",
+      "title": "Results of 15 Years' Experience with the Ketogenic Diet in the Treatment of Epilepsy in Children",
+      "doi": "10.1176/ajp.94.5.1205",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1939,
+      "area": "epilepsy",
+      "title": "Convulsions in Childhood: A Review of One Thousand Cases",
+      "doi": "10.1001/jama.1939.02800280006002",
+      "pmid": null,
+      "scope": "clinical-context"
+    },
+    {
+      "year": 1942,
+      "area": "epilepsy",
+      "title": "Parallel Clinical and Electro-encephalographic Improvement in Epilepsy: A Study of Children Treated by the Ketogenic Diet",
+      "doi": "10.1016/S0025-6196(25)11352-9",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1946,
+      "area": "epilepsy",
+      "title": "Convulsions in Childhood: Twenty Year Study of 2,500 Cases",
+      "doi": "10.1001/archpedi.1946.02020330031005",
+      "pmid": "20275869",
+      "scope": "clinical-context"
+    },
+    {
+      "year": 1947,
+      "area": "epilepsy",
+      "title": "Results of Treatment of Recurring Convulsive Attacks of Epilepsy",
+      "doi": "10.1001/archpedi.1947.02030010148003",
+      "pmid": "20261971",
+      "scope": "direct"
+    }
+  ],
+  "skipped": [
+    {
+      "year": 1921,
+      "title": "Fasting as a Method for Treating Epilepsy",
+      "reason": "already_present"
+    },
+    {
+      "year": 1921,
+      "title": "The Effect of Ketonemia on the Course of Epilepsy",
+      "reason": "already_present"
+    },
+    {
+      "year": 1921,
+      "title": "High Fat Diets in Epilepsy",
+      "reason": "already_present"
+    },
+    {
+      "year": 1924,
+      "title": "The Ketogenic Diet in the Treatment of Epilepsy: A Preliminary Report",
+      "reason": "already_present"
+    },
+    {
+      "year": 1925,
+      "title": "The Ketogenic Diet in Epilepsy",
+      "reason": "already_present"
+    },
+    {
+      "year": 1926,
+      "title": "The Ketogenic Diet in Epilepsy",
+      "reason": "already_present"
+    },
+    {
+      "year": 1927,
+      "title": "A Clinical Study of Epileptic Children Treated by Ketogenic Diet",
+      "reason": "already_present"
+    },
+    {
+      "year": 1927,
+      "title": "Epilepsy: Chemical Investigations of Rational Treatment by Production of Ketosis",
+      "reason": "already_present"
+    },
+    {
+      "year": 1927,
+      "title": "Epilepsy in Children: Relationship of Variations in the Degree of Ketonuria to Occurrence of Convulsions in Epileptic Children on Ketogenic Diets",
+      "reason": "already_present"
+    },
+    {
+      "year": 1928,
+      "title": "The Ketogenic Diet",
+      "reason": "already_present"
+    },
+    {
+      "year": 1928,
+      "title": "Ketogenic Diet in the Treatment of Epilepsy",
+      "reason": "already_present"
+    },
+    {
+      "year": 1929,
+      "title": "Epilepsy in Children: The Relationship of Water Balance to the Occurrence of Seizures",
+      "reason": "already_present"
+    },
+    {
+      "year": 1930,
+      "title": "Eight Years' Experience with the Ketogenic Diet in the Treatment of Epilepsy",
+      "reason": "already_present"
+    },
+    {
+      "year": 1931,
+      "title": "The Ketogenic Diet in Epilepsy",
+      "reason": "already_present"
+    },
+    {
+      "year": 1933,
+      "title": "The Ketogenic Diet in Epilepsy",
+      "reason": "already_present"
+    },
+    {
+      "year": 1948,
+      "title": "The Treatment of Petit Mal Epilepsy with Tridione (Absentol, Petidion) and with Ketogenic Diet",
+      "reason": "already_present"
+    }
+  ],
+  "records": [
+    {
+      "year": 1921,
+      "area": "epilepsy",
+      "title": "Fasting as a Method for Treating Epilepsy",
+      "doi": null,
+      "pmid": null,
+      "scope": "foundational"
+    },
+    {
+      "year": 1921,
+      "area": "epilepsy",
+      "title": "High Fat Diets in Epilepsy",
+      "doi": null,
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1921,
+      "area": "epilepsy",
+      "title": "The Effect of Ketonemia on the Course of Epilepsy",
+      "doi": null,
+      "pmid": null,
+      "scope": "foundational"
+    },
+    {
+      "year": 1922,
+      "area": "epilepsy",
+      "title": "Some Observations on the Starvation Treatment of Epilepsy",
+      "doi": null,
+      "pmid": "20314170",
+      "scope": "foundational"
+    },
+    {
+      "year": 1922,
+      "area": "epilepsy",
+      "title": "The Threshold of Ketogenesis",
+      "doi": "10.1016/S0021-9258(18)85833-1",
+      "pmid": null,
+      "scope": "mechanistic"
+    },
+    {
+      "year": 1923,
+      "area": "epilepsy",
+      "title": "Observations on Fasting and Diets in the Treatment of Epilepsy",
+      "doi": null,
+      "pmid": null,
+      "scope": "foundational"
+    },
+    {
+      "year": 1924,
+      "area": "epilepsy",
+      "title": "Hypoglycemia and Acidosis in Fasting Children with Idiopathic Epilepsy",
+      "doi": "10.1001/archpedi.1924.04120230029003",
+      "pmid": null,
+      "scope": "foundational"
+    },
+    {
+      "year": 1924,
+      "area": "epilepsy",
+      "title": "The Effect of Fasting on the Metabolism of Epileptic Children",
+      "doi": "10.1001/archpedi.1924.04120190019002",
+      "pmid": null,
+      "scope": "foundational"
+    },
+    {
+      "year": 1924,
+      "area": "epilepsy",
+      "title": "The Ketogenic Diet in the Treatment of Epilepsy: A Preliminary Report",
+      "doi": "10.1001/archpedi.1924.04120190031004",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1925,
+      "area": "epilepsy",
+      "title": "The Ketogenic Diet in Epilepsy",
+      "doi": "10.1001/jama.1925.02660520007003",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1926,
+      "area": "epilepsy",
+      "title": "The Ketogenic Diet in Epilepsy",
+      "doi": null,
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1927,
+      "area": "epilepsy",
+      "title": "A Clinical Study of Epileptic Children Treated by Ketogenic Diet",
+      "doi": "10.1056/NEJM192701201960302",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1927,
+      "area": "epilepsy",
+      "title": "Epilepsy in Children: Relationship of Variations in the Degree of Ketonuria to Occurrence of Convulsions in Epileptic Children on Ketogenic Diets",
+      "doi": "10.1001/archpedi.1927.04130240092013",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1927,
+      "area": "epilepsy",
+      "title": "Epilepsy: Chemical Investigations of Rational Treatment by Production of Ketosis",
+      "doi": "10.1001/archpedi.1927.04130140038005",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1927,
+      "area": "epilepsy",
+      "title": "The Treatment of Epilepsy in Childhood: Five Years' Experience with the Ketogenic Diet",
+      "doi": "10.1001/jama.1927.02680520018008",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1928,
+      "area": "epilepsy",
+      "title": "Influence of Acid-Forming and Base-Forming Constituents of Ketogenic Diet Used in Treatment of Idiopathic Epilepsy",
+      "doi": "10.3181/00379727-25-3877",
+      "pmid": null,
+      "scope": "mechanistic"
+    },
+    {
+      "year": 1928,
+      "area": "epilepsy",
+      "title": "Ketogenic Diet in the Treatment of Epilepsy",
+      "doi": "10.1056/NEJM192807121990206",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1928,
+      "area": "epilepsy",
+      "title": "Ketogenic Diet Treatment of Epilepsy in Adults",
+      "doi": "10.1001/jama.1928.02700020007003",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1928,
+      "area": "epilepsy",
+      "title": "The Ketogenic Diet",
+      "doi": "10.1001/jama.1928.02690450007003",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1929,
+      "area": "epilepsy",
+      "title": "Epilepsy in Children: The Relationship of Water Balance to the Occurrence of Seizures",
+      "doi": "10.1001/archpedi.1929.01930090003001",
+      "pmid": null,
+      "scope": "mechanistic"
+    },
+    {
+      "year": 1929,
+      "area": "epilepsy",
+      "title": "The Ketogenic Diet in the Treatment of Epilepsy",
+      "doi": "10.7326/0003-4819-2-12-1300",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1930,
+      "area": "epilepsy",
+      "title": "Eight Years' Experience with the Ketogenic Diet in the Treatment of Epilepsy",
+      "doi": "10.1001/jama.1930.02720100005002",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1930,
+      "area": "epilepsy",
+      "title": "Epilepsy in Adults: Results of Treatment by Ketogenic Diet in One Hundred Cases",
+      "doi": "10.1001/archneurpsyc.1930.02220110066004",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1930,
+      "area": "headache-migraine",
+      "title": "Migraine: Results of Treatment by Ketogenic Diet in Fifty Cases",
+      "doi": "10.1001/jama.1930.02720240035010",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1931,
+      "area": "epilepsy",
+      "title": "The Ketogenic Diet in Epilepsy",
+      "doi": null,
+      "pmid": "20318124",
+      "scope": "direct"
+    },
+    {
+      "year": 1931,
+      "area": "epilepsy",
+      "title": "The Ketogenic Treatment of Epilepsy",
+      "doi": "10.1007/BF02951585",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1931,
+      "area": "epilepsy",
+      "title": "The Mechanism of the Ketogenic Diet in Epilepsy: A Preliminary Report of Work in Progress",
+      "doi": "10.1176/ajp.87.4.667",
+      "pmid": null,
+      "scope": "mechanistic"
+    },
+    {
+      "year": 1932,
+      "area": "epilepsy",
+      "title": "The Present Status of the Ketogenic Diet",
+      "doi": "10.7326/0003-4819-6-6-795",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1933,
+      "area": "epilepsy",
+      "title": "Ten Years' Experience in the Treatment of Epilepsy with Ketogenic Diet",
+      "doi": "10.1001/archneurpsyc.1933.02240100127010",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1933,
+      "area": "epilepsy",
+      "title": "The Ketogenic Diet in Epilepsy",
+      "doi": "10.1192/bjp.79.327.677",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1934,
+      "area": "epilepsy",
+      "title": "Epilepsy: Treatment of Institutionalized Adult Patients with a Ketogenic Diet",
+      "doi": "10.1001/archneurpsyc.1934.02250040111007",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1935,
+      "area": "epilepsy",
+      "title": "Effect of Ketogenic Diet on the Blood Sugar and the Respiratory Quotient of Children",
+      "doi": "10.1001/archpedi.1935.01970100003001",
+      "pmid": null,
+      "scope": "mechanistic"
+    },
+    {
+      "year": 1935,
+      "area": "epilepsy",
+      "title": "Epilepsy: Its Treatment by the Use of the Ketogenic Diet Versus Drugs",
+      "doi": null,
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1935,
+      "area": "epilepsy",
+      "title": "Ketosis and the Ketogenic Diet: Their Application to Treatment of Epilepsy and Infections of the Urinary Tract",
+      "doi": null,
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1936,
+      "area": "epilepsy",
+      "title": "Ketosis in the Treatment of Epilepsy",
+      "doi": null,
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1937,
+      "area": "epilepsy",
+      "title": "Epilepsy in Childhood: III. Results with the Ketogenic Diet",
+      "doi": "10.1016/S0022-3476(37)80188-2",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1938,
+      "area": "epilepsy",
+      "title": "Results of 15 Years' Experience with the Ketogenic Diet in the Treatment of Epilepsy in Children",
+      "doi": "10.1176/ajp.94.5.1205",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1939,
+      "area": "epilepsy",
+      "title": "Convulsions in Childhood: A Review of One Thousand Cases",
+      "doi": "10.1001/jama.1939.02800280006002",
+      "pmid": null,
+      "scope": "clinical-context"
+    },
+    {
+      "year": 1942,
+      "area": "epilepsy",
+      "title": "Parallel Clinical and Electro-encephalographic Improvement in Epilepsy: A Study of Children Treated by the Ketogenic Diet",
+      "doi": "10.1016/S0025-6196(25)11352-9",
+      "pmid": null,
+      "scope": "direct"
+    },
+    {
+      "year": 1946,
+      "area": "epilepsy",
+      "title": "Convulsions in Childhood: Twenty Year Study of 2,500 Cases",
+      "doi": "10.1001/archpedi.1946.02020330031005",
+      "pmid": "20275869",
+      "scope": "clinical-context"
+    },
+    {
+      "year": 1947,
+      "area": "epilepsy",
+      "title": "Results of Treatment of Recurring Convulsive Attacks of Epilepsy",
+      "doi": "10.1001/archpedi.1947.02030010148003",
+      "pmid": "20261971",
+      "scope": "direct"
+    },
+    {
+      "year": 1948,
+      "area": "epilepsy",
+      "title": "The Treatment of Petit Mal Epilepsy with Tridione (Absentol, Petidion) and with Ketogenic Diet",
+      "doi": null,
+      "pmid": "18862627",
+      "scope": "direct"
+    }
+  ]
+}
