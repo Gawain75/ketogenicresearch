@@ -1,0 +1,99 @@
+name: Backfill ketogenic history 1921-1950
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ketogenicresearch-content-write
+  cancel-in-progress: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out current main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install parser
+        run: python -m pip install beautifulsoup4
+
+      - name: Backfill verified ketogenic history 1921-1950
+        run: python scripts/backfill_ketogenic_history_1921_1950.py
+
+      - name: Rebuild derived Library data
+        shell: bash
+        run: |
+          set -euo pipefail
+          for SCRIPT in \
+            scripts/update_library_counts.py \
+            scripts/rebuild_library_counts.py \
+            scripts/build_evidence_trends.py \
+            scripts/update_evidence_trends.py \
+            scripts/rebuild_evidence_trends.py \
+            scripts/sync_publication_counters.py
+          do
+            if [[ -f "$SCRIPT" ]]; then
+              echo "Running $SCRIPT"
+              python "$SCRIPT"
+            fi
+          done
+
+      - name: Verify historical range and report
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f historical-ketogenic-1921-1950-report.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('historical-ketogenic-1921-1950-report.json').read_text())
+          assert r['historical_records_in_library_1921_1950'] > 0
+          assert 1922 in r['years_with_verified_records']
+          assert 1923 in r['years_with_verified_records']
+          print('Historical records:', r['historical_records_in_library_1921_1950'])
+          print('Years with verified records:', r['years_with_verified_records'])
+          print('Years without verified records:', r['years_without_verified_records'])
+          PY
+
+      - name: Commit historical backfill
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Historical 1921-1950 layer already current."
+            exit 0
+          fi
+          git commit -m "Backfill verified ketogenic literature 1921-1950"
+          git pull --rebase origin main
+          git push origin main
+
+      - name: Summary
+        if: always()
+        shell: bash
+        run: |
+          echo "### Historical ketogenic literature 1921-1950" >> "$GITHUB_STEP_SUMMARY"
+          if [[ -f historical-ketogenic-1921-1950-report.json ]]; then
+            python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          r=json.load(open('historical-ketogenic-1921-1950-report.json'))
+          print(f"- Historical records in Library: **{r['historical_records_in_library_1921_1950']}**")
+          print(f"- Added in this run: **{r['added_this_run']}**")
+          print(f"- Years with verified records: {', '.join(map(str,r['years_with_verified_records']))}")
+          print(f"- Years without a verified direct/foundational record: {', '.join(map(str,r['years_without_verified_records']))}")
+          PY
+          fi
