@@ -43,7 +43,8 @@
     "42815840",
     "42822582",
     "42825834",
-    "42843434"
+    "42843434",
+    "42853368"
   ],
   "failures": [
     {
@@ -751,9 +752,22 @@
       "at": "2026-10-08T03:33:41.218023+00:00",
       "stage": "generation",
       "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "pmid": "42854088",
+      "at": "2026-10-10T03:35:53.430948+00:00",
+      "stage": "verification",
+      "issues": [
+        "The summary English section reports 2 384 participants, which does not match the source (2 433 participants).",
+        "The summary English section states \"43 randomized trials (2 384 participants)\" whereas the source reports 43 studies with 2 433 participants.",
+        "No other major structural or editorial violations were found."
+      ],
+      "unsupported_claims": [
+        "2 384 participants in the meta-analysis (source reports 2 433 participants)."
+      ]
     }
   ],
-  "updated_at": "2026-10-09T03:34:50.726561+00:00",
+  "updated_at": "2026-10-10T03:37:43.140892+00:00",
   "source_unavailable_pmids": [
     "42642354",
     "42717355",
@@ -764,7 +778,7 @@
     "42828422"
   ],
   "last_run": {
-    "attempted_candidates": 1,
+    "attempted_candidates": 2,
     "published_articles": 1,
     "status": "published"
   }
