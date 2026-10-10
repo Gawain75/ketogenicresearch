@@ -1,0 +1,94 @@
+name: Fix GLP-1 PubMed IncompleteRead retry
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ketogenicresearch-content-write
+  cancel-in-progress: false
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Patch GLP-1 maintenance script
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 <<'PY'
+          from pathlib import Path
+
+          p = Path("scripts/maintain_obesity_glp1_keto.py")
+          s = p.read_text(encoding="utf-8")
+
+          if "import http.client" not in s:
+              s = s.replace(
+                  "import os\nimport re\nimport time\n",
+                  "import os\nimport re\nimport time\nimport http.client\n",
+                  1,
+              )
+
+          old = '''        except urllib.error.URLError:
+            if attempt < len(waits):
+                wait = waits[attempt]
+                print(f"PubMed network error; retrying in {wait}s.")
+                time.sleep(wait)
+                continue
+            raise
+'''
+          new = '''        except (
+            urllib.error.URLError,
+            http.client.IncompleteRead,
+            http.client.RemoteDisconnected,
+            ConnectionResetError,
+            TimeoutError,
+        ) as exc:
+            if attempt < len(waits):
+                wait = waits[attempt]
+                print(
+                    f"PubMed transport error ({type(exc).__name__}); "
+                    f"retrying in {wait}s."
+                )
+                time.sleep(wait)
+                continue
+            raise
+'''
+          if old in s:
+              s = s.replace(old, new, 1)
+          elif "http.client.IncompleteRead" not in s:
+              raise SystemExit("Expected network retry block not found; no changes made.")
+
+          p.write_text(s, encoding="utf-8")
+          PY
+
+      - name: Verify patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/maintain_obesity_glp1_keto.py
+          grep -q 'import http.client' scripts/maintain_obesity_glp1_keto.py
+          grep -q 'http.client.IncompleteRead' scripts/maintain_obesity_glp1_keto.py
+
+      - name: Commit and push
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Ketogenic Research Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add scripts/maintain_obesity_glp1_keto.py
+          if git diff --cached --quiet; then
+            echo "Fix already present."
+            exit 0
+          fi
+          git commit -m "Retry GLP1 PubMed incomplete reads"
+          git pull --rebase origin main
+          git push origin main
