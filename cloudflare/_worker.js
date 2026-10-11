@@ -688,11 +688,33 @@ async function handleEvidenceConclusion(request,env){
 function evidenceAskTokens(value){
   return [...new Set(String(value||"").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"").match(/[a-z0-9]{3,}/g)||[])];
 }
-function evidenceAskScore(card,question,rel){
+function evidenceAskIntent(question){
+  const q=String(question||"").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"");
+  if(/(\bwhat is\b|\bwhat's\b|\bdefine\b|\bdefinition\b|\bmodel\b|\bhypothesis\b|\bmechanism\b|\bmechanistic\b|\bche cos[a'e]\b|\bcos'e\b|\bcosa (?:e|significa)\b|\bmodello\b|\bmeccanism)/.test(q))return "conceptual";
+  if(/(\bsafety\b|\btolerab|\badverse\b|\bside effect|\brisk\b|\bsicurezza\b|\btollerab|\beffett[io] avvers|\brisch)/.test(q))return "safety";
+  if(/(\befficacy\b|\beffect\b|\bimprov|\breduc|\boutcome\b|\bsymptom\b|\befficacia\b|\beffett|\bmiglior|\briduc|\besit|\bsintom)/.test(q))return "clinical";
+  return "general";
+}
+function evidenceAskScore(card,question,rel,intent){
   const q=evidenceAskTokens(question); if(!q.length)return 0;
-  const fields=[card.title,card.study_purpose,card.population,card.intervention,card.comparator,Array.isArray(card.primary_outcomes)?card.primary_outcomes.join(" "):card.primary_outcomes,card.main_result,card.effect_direction,card.publication_type].join(" ").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"");
-  let score=rel==="direct"?5:rel==="supporting"?2:0;
-  for(const t of q){if(fields.includes(t))score+=2;if(String(card.title||"").toLowerCase().includes(t))score+=2;}
+  const title=String(card.title||"").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"");
+  const fields=[card.title,card.study_purpose,card.population,card.intervention,card.comparator,Array.isArray(card.primary_outcomes)?card.primary_outcomes.join(" "):card.primary_outcomes,card.main_result,card.effect_direction,card.publication_type,card.study_design,Array.isArray(card.mechanistic_targets)?card.mechanistic_targets.join(" "):card.mechanistic_targets].join(" ").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"");
+  const type=String(card.publication_type||"other");
+  let score=rel==="direct"?5:rel==="supporting"?3:rel==="contextual"?1:0;
+  for(const t of q){if(fields.includes(t))score+=2;if(title.includes(t))score+=3;}
+
+  if(intent==="conceptual"){
+    if(["narrative_review","systematic_review_meta_analysis"].includes(type))score+=7;
+    if(["mechanistic_human","mechanistic_preclinical"].includes(type))score+=4;
+    if(/\b(model|hypothesis|mechanism|mechanistic|framework)\b/.test(title))score+=6;
+  }else if(intent==="clinical"){
+    if(["clinical_trial","observational","case_report_series"].includes(type))score+=7;
+    if(type==="systematic_review_meta_analysis")score+=5;
+  }else if(intent==="safety"){
+    const safetyText=[title,fields].join(" ");
+    if(/(safety|tolerab|adverse|side effect|risk)/.test(safetyText))score+=7;
+    if(["clinical_trial","observational","systematic_review_meta_analysis"].includes(type))score+=4;
+  }
   return score;
 }
 async function handleEvidenceAsk(request,env){
@@ -707,7 +729,7 @@ async function handleEvidenceAsk(request,env){
   const current=await evidenceReviewSnapshot(request,env,slug);if(!current)return jsonResponse({error:"A saved synthesis is required before Ask the Evidence is available."},409);
   const changes=evidenceReviewDiff(review.approved_snapshot,current);
   if(review.status!=="approved" || !review.approved_snapshot || changes.has_changes)return jsonResponse({error:"Ask the Evidence requires a current approved synthesis. Review and approve the current evidence state first.",code:"approval_required"},409);
-  const st=await evidenceLabState(env,slug), candidates=[];
+  const st=await evidenceLabState(env,slug), candidates=[], askIntent=evidenceAskIntent(question);
   const processedIds=(st.processed||[]).map(String);
   let workCards=[];
   if(area.count>EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD || processedIds.length>EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD){const compact=await evidenceCompactLoad(env,slug);workCards=processedIds.map(p=>compact.get(p)).filter(Boolean);}
@@ -716,16 +738,16 @@ async function handleEvidenceAsk(request,env){
     const pmid=String(c.pmid||"");
     if(!c || !(c.source_level==="abstract"||c.source_level==="full_text"))continue;
     const rel=evidenceRelevance(c,area.label);if(rel.level==="exclude")continue;
-    const score=evidenceAskScore(c,question,rel.level);
+    const score=evidenceAskScore(c,question,rel.level,askIntent);
     candidates.push({score,rel:rel.level,card:c});
   }
   candidates.sort((a,b)=>b.score-a.score || (a.rel==="direct"?-1:1));
   let selected=candidates.filter(x=>x.score>0).slice(0,12);
-  if(!selected.length)selected=candidates.filter(x=>x.rel==="direct").slice(0,8);
+  if(!selected.length)selected=(askIntent==="conceptual"?candidates.filter(x=>["direct","supporting","contextual"].includes(x.rel)):candidates.filter(x=>x.rel==="direct")).slice(0,8);
   if(!selected.length)return jsonResponse({answer:"The current approved Evidence Lab corpus does not contain evidence-bearing cards that can answer this question.",claims:[],pmids:[],support_level:"not_supported",cards_considered:0});
   const allowed=new Set(selected.map(x=>String(x.card.pmid||"")));
-  const packet={area:area.label,question,approved_overall_interpretation:current.overall_interpretation,approved_bottom_line:current.bottom_line,evidence:selected.map(x=>({pmid:String(x.card.pmid||""),relevance:x.rel,publication_type:x.card.publication_type,study_design:x.card.study_design,study_purpose:x.card.study_purpose,population:x.card.population,sample_size:x.card.sample_size||x.card.sample_size_details,intervention:x.card.intervention,comparator:x.card.comparator,duration:x.card.duration,primary_outcomes:x.card.primary_outcomes,effect_direction:x.card.effect_direction,statistical_significance:x.card.statistical_significance,main_result:x.card.main_result,limitations:x.card.limitations,source_level:x.card.source_level}))};
-  const system=`You answer questions for a PRIVATE scientific Evidence Lab. Use ONLY the supplied approved synthesis boundaries and Evidence Cards. Do not use outside knowledge. Do not infer unreported facts. Answer in the SAME LANGUAGE as the user's question, including summary, claims and caveat. Distinguish direct human evidence from supporting/contextual evidence. Never turn association, feasibility, safety or mechanistic evidence into efficacy. If the supplied cards do not support the requested point, say so explicitly. The approved bottom line is a hard clinical boundary and must not be strengthened. When support_level is mixed, the summary MUST state that the evidence/findings are mixed, non-uniform, or inconsistent, then briefly describe favorable and null/uncertain findings; NEVER use the words discordant, discordance, discordante, or discordanti for a mixed result, because Discordant is a separate Evidence Lab taxonomy state; do not summarize mixed evidence as an overall benefit. Return ONLY JSON with this exact structure: {"summary":"1-3 concise sentences","claims":[{"text":"one factual evidence statement","pmids":["12345678"]}],"support_level":"direct|mixed|indirect|not_supported","caveat":"concise limitation or empty string"}. Every claim must cite one or more PMID values from the supplied evidence. Do not cite a PMID unless that specific supplied card directly supports the claim. Maximum 5 claims.`;
+  const packet={area:area.label,question,intent:askIntent,approved_overall_interpretation:current.overall_interpretation,approved_bottom_line:current.bottom_line,evidence:selected.map(x=>({pmid:String(x.card.pmid||""),title:String(x.card.title||""),relevance:x.rel,publication_type:x.card.publication_type,study_design:x.card.study_design,study_purpose:x.card.study_purpose,population:x.card.population,sample_size:x.card.sample_size||x.card.sample_size_details,intervention:x.card.intervention,comparator:x.card.comparator,duration:x.card.duration,primary_outcomes:x.card.primary_outcomes,effect_direction:x.card.effect_direction,statistical_significance:x.card.statistical_significance,main_result:x.card.main_result,limitations:x.card.limitations,source_level:x.card.source_level}))};
+  const system=`You answer questions for a PRIVATE scientific Evidence Lab. Use ONLY the supplied approved synthesis boundaries and Evidence Cards. Do not use outside knowledge. Do not infer unreported facts. Answer in the SAME LANGUAGE as the user's question, including summary, claims and caveat. Distinguish direct human evidence from supporting/contextual evidence. For conceptual, definition, model, hypothesis or mechanism questions, narrative/systematic reviews and mechanistic/supporting cards may answer the concept when they directly address it; do not require a clinical trial to define a model. Never turn association, feasibility, safety or mechanistic evidence into efficacy. If the supplied cards do not support the requested point, say so explicitly. The approved bottom line is a hard clinical boundary and must not be strengthened. When support_level is mixed, the summary MUST state that the evidence/findings are mixed, non-uniform, or inconsistent, then briefly describe favorable and null/uncertain findings; NEVER use the words discordant, discordance, discordante, or discordanti for a mixed result, because Discordant is a separate Evidence Lab taxonomy state; do not summarize mixed evidence as an overall benefit. Return ONLY JSON with this exact structure: {"summary":"1-3 concise sentences","claims":[{"text":"one factual evidence statement","pmids":["12345678"]}],"support_level":"direct|mixed|indirect|not_supported","caveat":"concise limitation or empty string"}. Every claim must cite one or more PMID values from the supplied evidence. Do not cite a PMID unless that specific supplied card directly supports the claim. Maximum 5 claims.`;
   let out;
   try{out=await groqJsonLimited(env,[{role:"system",content:system},{role:"user",content:JSON.stringify(packet)}],900);}
   catch(e){return jsonResponse({error:`Ask the Evidence failed: ${e?.message||"AI service error"}. No answer was saved.`},502);}
@@ -1032,7 +1054,7 @@ function evidenceRelevance(c,areaLabel){
   const norm=v=>String(v??"").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"");
   const join=v=>Array.isArray(v)?v.map(x=>typeof x==="string"?x:JSON.stringify(x)).join(" "):String(v??"");
   const title=norm(c.title), intervention=norm(c.intervention), result=norm(c.main_result), population=norm(c.population), model=norm(c.animal_model), targets=norm(join(c.mechanistic_targets));
-  const all=[title,intervention,result,population,model,targets,norm(c.study_design),norm(join(c.primary_outcomes))].join(" ");
+  const all=[title,intervention,result,population,model,targets,norm(c.study_design),norm(join(c.primary_outcomes)),norm(c.study_purpose)].join(" ");
   const keto=/(ketogenic|ketosis|ketone|beta[- ]?hydroxybutyrate|β[- ]?hydroxybutyrate|d[- ]?beta[- ]?hydroxybutyrate|hydroxybutyrate|\bbhb\b|medium[- ]?chain triglycer|\bmct\b|ketoflex|low[- ]?carbohydrate)/;
   const ketoIntervention=keto.test(intervention);
   const areaNorm=norm(areaLabel);
@@ -1042,6 +1064,18 @@ function evidenceRelevance(c,areaLabel){
   const human=["clinical_trial","observational","case_report_series","mechanistic_human"].includes(type);
   const preclinical=["preclinical_animal","mechanistic_preclinical"].includes(type);
   const review=["systematic_review_meta_analysis","narrative_review"].includes(type);
+
+  // Area-specific conceptual evidence. The Lipid Energy Model / LMHR literature is often
+  // framed as carbohydrate-restricted rather than using the literal word "ketogenic".
+  // Do not exclude an exact LEM/LMHR paper merely because the generic keto regex misses it.
+  const lipidEnergyArea=/(lipid energy model|\blmhr\b|lean mass hyper)/.test(areaNorm);
+  const lipidEnergySignal=/(lipid energy model|lean mass hyper[- ]?responder|\blmhr\b|carbohydrate[- ]?restricted|carbohydrate restriction)/.test(all);
+  if(lipidEnergyArea && lipidEnergySignal){
+    if(review) return {level:"direct",reason:"review directly focused on the Lipid Energy Model / LMHR or its carbohydrate-restricted-diet framework"};
+    if(human) return {level:"direct",reason:"human evidence directly evaluating the Lipid Energy Model / LMHR phenotype or its carbohydrate-restricted-diet framework"};
+    if(preclinical) return {level:"supporting",reason:"mechanistic evidence directly relevant to the Lipid Energy Model / LMHR framework"};
+    return {level:"supporting",reason:"evidence directly relevant to the Lipid Energy Model / LMHR conceptual framework"};
+  }
 
   // Disease-model evidence can be directly relevant even when the disease name is absent from
   // the abstract fields (common in toxin/cell models). These markers are deliberately narrow.
