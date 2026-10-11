@@ -457,7 +457,7 @@
     if(!area){setStatus('askEvidenceStatus','Choose a clinical area first.','error');return;}
     if(!question){setStatus('askEvidenceStatus','Enter an evidence question.','error');return;}
     const btn=$('askEvidenceSubmit');btn.disabled=true;setStatus('askEvidenceStatus','Answering from approved Evidence Cards only…');
-    try{const d=await api('/api/review/evidence/ask',{area,question});$('askEvidenceAnswer').innerHTML=askEvidenceHtml(d);setStatus('askEvidenceStatus',`Answer source-locked to ${d.pmids?.length||0} cited PMID${(d.pmids?.length||0)===1?'':'s'}.`,'ok');}
+    try{const d=await api('/api/review/evidence/ask',{area,question});$('askEvidenceAnswer').innerHTML=askEvidenceHtml(d);const n=d.pmids?.length||0;if(n){setStatus('askEvidenceStatus',`Answer source-locked to ${n} cited PMID${n===1?'':'s'}.`,'ok');}else{setStatus('askEvidenceStatus','No source-supported answer is available from the current Evidence Cards.','warn');}}
     catch(e){$('askEvidenceAnswer').innerHTML='<div class="empty">No answer generated.</div>';setStatus('askEvidenceStatus',e.message,'error');}
     finally{btn.disabled=false;}
   }
