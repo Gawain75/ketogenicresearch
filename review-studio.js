@@ -14,6 +14,7 @@
   let publicHeroPendingData=null;
   let publicHeroPendingName='';
   let publicHeroPendingType='';
+  let lastAskEvidence=null;
 
   function blankProject(){
     return {
@@ -244,6 +245,7 @@
         await loadContradictionExplorer();
         await loadEvidenceConclusion();
         await loadPublicEvidence();
+        await loadPublishedQna();
       }
     }catch(e){setStatus('evidenceStatus',e.message,'error');}
   }
@@ -445,7 +447,9 @@
   }
 
   function resetAskEvidence(message='No question asked yet.'){
+    lastAskEvidence=null;
     $('askEvidenceAnswer').innerHTML=`<div class="empty">${esc(message)}</div>`;
+    $('askEvidencePublish').hidden=true;$('askEvidencePublish').disabled=true;
     setStatus('askEvidenceStatus','Ready when the current synthesis is approved.');
   }
   function askEvidenceHtml(d){
@@ -457,9 +461,30 @@
     if(!area){setStatus('askEvidenceStatus','Choose a clinical area first.','error');return;}
     if(!question){setStatus('askEvidenceStatus','Enter an evidence question.','error');return;}
     const btn=$('askEvidenceSubmit');btn.disabled=true;setStatus('askEvidenceStatus','Answering from approved Evidence Cards only…');
-    try{const d=await api('/api/review/evidence/ask',{area,question});$('askEvidenceAnswer').innerHTML=askEvidenceHtml(d);const n=d.pmids?.length||0;if(n){setStatus('askEvidenceStatus',`Answer source-locked to ${n} cited PMID${n===1?'':'s'}.`,'ok');}else{setStatus('askEvidenceStatus','No source-supported answer is available from the current Evidence Cards.','warn');}}
+    try{const d=await api('/api/review/evidence/ask',{area,question});lastAskEvidence=d;$('askEvidenceAnswer').innerHTML=askEvidenceHtml(d);const n=d.pmids?.length||0;$('askEvidencePublish').hidden=!d.can_publish;$('askEvidencePublish').disabled=!d.can_publish;if(n){setStatus('askEvidenceStatus',`Answer source-locked to ${n} cited PMID${n===1?'':'s'}.`,'ok');}else{setStatus('askEvidenceStatus','No source-supported answer is available from the current Evidence Cards.','warn');}}
     catch(e){$('askEvidenceAnswer').innerHTML='<div class="empty">No answer generated.</div>';setStatus('askEvidenceStatus',e.message,'error');}
     finally{btn.disabled=false;}
+  }
+
+  function publishedQnaHtml(items){
+    if(!Array.isArray(items)||!items.length)return '<div class="empty">No Ask the Evidence Q&A published for this area.</div>';
+    return items.map(x=>{const en=x.translations?.en||{};return `<div class="published-qna-item"><div><strong>${esc(en.question||'Published Q&A')}</strong><div class="small">${Number(x.pmids?.length||0)} cited PMID${Number(x.pmids?.length||0)===1?'':'s'} · ${esc(String(x.support_level||'').replaceAll('_',' '))}</div></div><button class="review-btn muted compact" data-qna-unpublish="${esc(x.id||'')}">Unpublish Q&A</button></div>`;}).join('');
+  }
+  async function loadPublishedQna(){
+    const area=$('evidenceArea').value;if(!area){$('publishedQnaList').innerHTML='<div class="empty">Choose a clinical area.</div>';return;}
+    try{const d=await api('/api/review/evidence/qna?area='+encodeURIComponent(area));$('publishedQnaList').innerHTML=publishedQnaHtml(d.items||[]);$('publishedQnaList').querySelectorAll('[data-qna-unpublish]').forEach(b=>b.addEventListener('click',()=>unpublishQna(b.dataset.qnaUnpublish)));}
+    catch(e){$('publishedQnaList').innerHTML=`<div class="empty">${esc(e.message)}</div>`;}
+  }
+  async function publishAskEvidence(){
+    const area=$('evidenceArea').value;if(!area||!lastAskEvidence?.answer_id)return;
+    const btn=$('askEvidencePublish');btn.disabled=true;setStatus('askEvidenceStatus','Publishing validated Q&A in EN/IT…');
+    try{await api('/api/review/evidence/qna',{area,action:'publish',answer_id:lastAskEvidence.answer_id});setStatus('askEvidenceStatus','Q&A published on the public Evidence Brief.','ok');await loadPublishedQna();}
+    catch(e){setStatus('askEvidenceStatus',e.message,'error');btn.disabled=false;}
+  }
+  async function unpublishQna(id){
+    const area=$('evidenceArea').value;if(!area||!id)return;if(!confirm('Remove this Q&A from the public evidence page?'))return;
+    try{await api('/api/review/evidence/qna',{area,action:'unpublish',id});await loadPublishedQna();}
+    catch(e){alert(e.message);}
   }
 
   function pmidLinks(pmids){return (pmids||[]).map(p=>`<a href="https://pubmed.ncbi.nlm.nih.gov/${encodeURIComponent(p)}/" target="_blank" rel="noopener">PMID ${esc(p)}</a>`).join(', ');}
@@ -600,7 +625,7 @@
   $('importJson').addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;try{const p=JSON.parse(await f.text());if(!p||p.version!==1)throw new Error('Unsupported project file.');project=p;saveProject();bindProjectToForm();renderStudies();showStep('question');setStatus('questionStatus','Project imported.','ok');}catch(err){setStatus('questionStatus',err.message,'error');}e.target.value='';});
 
   $('dailyAutoRefresh').addEventListener('click',loadDailyAutomation); $('dailyAutoRunNow').addEventListener('click',runDailyAutomationNow);
-  $('evidenceArea').addEventListener('change',()=>{evidenceAutoStop=true;saveUiState({evidence_area:$('evidenceArea').value||''});resetEvidenceMap();resetContradictionExplorer();resetEvidenceConclusion();resetPublicEvidence();resetAskEvidence();refreshEvidence();loadEvidenceSynthesis();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();loadPublicEvidence();}); $('evidenceRefresh').addEventListener('click',()=>{refreshEvidence();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();loadPublicEvidence();}); $('evidenceProcess').addEventListener('click',processEvidence); $('evidenceAutoProcess').addEventListener('click',autoProcessEvidence); $('evidenceStopAuto').addEventListener('click',()=>{evidenceAutoStop=true;$('evidenceStopAuto').disabled=true;setStatus('evidenceStatus','Stopping after the current batch…');}); $('evidenceSynthesize').addEventListener('click',generateEvidenceSynthesis); $('evidenceLoadSynthesis').addEventListener('click',()=>{loadEvidenceSynthesis();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();loadPublicEvidence();}); $('evidenceMarkReviewed').addEventListener('click',()=>evidenceReviewAction('review')); $('evidenceApprove').addEventListener('click',()=>evidenceReviewAction('approve')); $('evidenceReopen').addEventListener('click',()=>evidenceReviewAction('reopen')); $('evidenceRefreshReview').addEventListener('click',()=>{loadEvidenceReview();loadEvidenceConclusion();loadPublicEvidence();}); $('publicEvidencePublish').addEventListener('click',()=>publicEvidenceAction('publish')); $('publicEvidenceUnpublish').addEventListener('click',()=>publicEvidenceAction('unpublish')); $('publicHeroFile').addEventListener('change',publicHeroFileChanged); $('publicHeroSave').addEventListener('click',savePublicHero); $('publicHeroRemove').addEventListener('click',removePublicHero); $('evidenceRefreshMap').addEventListener('click',loadEvidenceMap); $('evidenceRefreshContradictions').addEventListener('click',()=>{loadContradictionExplorer();loadEvidenceConclusion();}); $('evidenceRefreshConclusion').addEventListener('click',loadEvidenceConclusion); $('askEvidenceSubmit').addEventListener('click',askEvidence); $('askEvidenceClear').addEventListener('click',()=>{$('askEvidenceQuestion').value='';resetAskEvidence();}); $('askEvidenceQuestion').addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')askEvidence();}); $('evidenceMapClass').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapRelevance').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapType').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapDirection').addEventListener('change',applyEvidenceMapFilters);
+  $('evidenceArea').addEventListener('change',()=>{evidenceAutoStop=true;saveUiState({evidence_area:$('evidenceArea').value||''});resetEvidenceMap();resetContradictionExplorer();resetEvidenceConclusion();resetPublicEvidence();resetAskEvidence();refreshEvidence();loadEvidenceSynthesis();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();loadPublicEvidence();loadPublishedQna();}); $('evidenceRefresh').addEventListener('click',()=>{refreshEvidence();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();loadPublicEvidence();}); $('evidenceProcess').addEventListener('click',processEvidence); $('evidenceAutoProcess').addEventListener('click',autoProcessEvidence); $('evidenceStopAuto').addEventListener('click',()=>{evidenceAutoStop=true;$('evidenceStopAuto').disabled=true;setStatus('evidenceStatus','Stopping after the current batch…');}); $('evidenceSynthesize').addEventListener('click',generateEvidenceSynthesis); $('evidenceLoadSynthesis').addEventListener('click',()=>{loadEvidenceSynthesis();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();loadPublicEvidence();}); $('evidenceMarkReviewed').addEventListener('click',()=>evidenceReviewAction('review')); $('evidenceApprove').addEventListener('click',()=>evidenceReviewAction('approve')); $('evidenceReopen').addEventListener('click',()=>evidenceReviewAction('reopen')); $('evidenceRefreshReview').addEventListener('click',()=>{loadEvidenceReview();loadEvidenceConclusion();loadPublicEvidence();}); $('publicEvidencePublish').addEventListener('click',()=>publicEvidenceAction('publish')); $('publicEvidenceUnpublish').addEventListener('click',()=>publicEvidenceAction('unpublish')); $('publicHeroFile').addEventListener('change',publicHeroFileChanged); $('publicHeroSave').addEventListener('click',savePublicHero); $('publicHeroRemove').addEventListener('click',removePublicHero); $('evidenceRefreshMap').addEventListener('click',loadEvidenceMap); $('evidenceRefreshContradictions').addEventListener('click',()=>{loadContradictionExplorer();loadEvidenceConclusion();}); $('evidenceRefreshConclusion').addEventListener('click',loadEvidenceConclusion); $('askEvidenceSubmit').addEventListener('click',askEvidence); $('askEvidencePublish').addEventListener('click',publishAskEvidence); $('askEvidenceClear').addEventListener('click',()=>{$('askEvidenceQuestion').value='';resetAskEvidence();}); $('askEvidenceQuestion').addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')askEvidence();}); $('evidenceMapClass').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapRelevance').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapType').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapDirection').addEventListener('change',applyEvidenceMapFilters);
 
   bindProjectToForm(); renderStudies(); renderMeta();
   showStep('evidence');

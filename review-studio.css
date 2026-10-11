@@ -127,3 +127,9 @@
 
 /* v49 — Public Evidence Brief manual hero image */
 .public-hero-editor{margin-top:16px;padding:16px;border:1px solid #dbe4ee;border-radius:14px;background:#f8fbfd}.public-hero-head{margin-bottom:12px}.public-hero-grid{display:grid;grid-template-columns:minmax(280px,1.15fr) minmax(260px,.85fr);gap:16px;align-items:start}.public-hero-preview{aspect-ratio:21/9;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px dashed #c8d5df;border-radius:13px;background:#fff}.public-hero-preview img{display:block;width:100%;height:100%;object-fit:cover}.public-hero-file-label{display:inline-flex;margin-top:10px;padding:8px 12px;border:1px solid #cbd8e3;border-radius:9px;background:#fff;font-size:13px;font-weight:700;cursor:pointer}.public-hero-editor input[type=file]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}.public-hero-editor input[type=text]{width:100%;box-sizing:border-box}.public-hero-editor .review-field+.review-field{margin-top:10px}@media(max-width:760px){.public-hero-editor{padding:14px}.public-hero-grid{grid-template-columns:1fr}.public-hero-preview{aspect-ratio:16/7}.public-hero-editor .review-actions{align-items:stretch}.public-hero-editor .review-btn{width:100%}}
+
+/* Public Ask the Evidence Q&A */
+.published-qna-box{margin-top:18px;padding-top:16px;border-top:1px solid #dce5ed}
+.published-qna-item{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0;border-top:1px solid #e5ebf0}
+.published-qna-item:first-child{border-top:0}
+@media(max-width:700px){.published-qna-item{align-items:flex-start;flex-direction:column}.published-qna-item .review-btn{width:100%}}
