@@ -1037,18 +1037,143 @@ async function handleEvidenceReview(request,env,session){
 function compactEvidenceCard(c){
   return {pmid:c.pmid,title:c.title,publication_type:c.publication_type,study_design:c.study_design,evidence_domain:c.evidence_domain,study_purpose:c.study_purpose,population:c.population,sample_size:c.sample_size,sample_size_details:c.sample_size_details,intervention:c.intervention,comparator:c.comparator,duration:c.duration,primary_outcomes:c.primary_outcomes,effect_direction:c.effect_direction,statistical_significance:c.statistical_significance,randomized:c.randomized,controlled:c.controlled,review_studies_included:c.review_studies_included,review_participants:c.review_participants,pooled_effect:c.pooled_effect,heterogeneity:c.heterogeneity,risk_of_bias_or_certainty:c.risk_of_bias_or_certainty,animal_species:c.animal_species,animal_model:c.animal_model,mechanistic_targets:c.mechanistic_targets,main_result:c.main_result,limitations:c.limitations,source_level:c.source_level,extraction_confidence:c.extraction_confidence};
 }
-async function handleEvidenceSynthesisGet(request,env,session){
-  const url=new URL(request.url);
-  let body={};
-  if(request.method==="POST")body=await request.json().catch(()=>({}));
-  const slug=evidenceLabSlug(body.area||url.searchParams.get("area"));
+async function handleEvidenceSynthesisGet(request,env){
+  const url=new URL(request.url), slug=evidenceLabSlug(url.searchParams.get("area"));
   if(!slug)return jsonResponse({error:"Clinical area is required."},400);
+  const saved=await env.SITE_ADMIN.get(EVIDENCE_LAB_SYNTHESIS_PREFIX+slug,"json");
+  if(!saved)return jsonResponse({synthesis:null});
+
+  // READ-ONLY source lock. Loading a saved synthesis must never invoke Groq.
+  // Main findings are rendered verbatim from cached Evidence Cards. The human-clinical
+  // summary is rebuilt deterministically from current card metadata so it cannot drift
+  // out of sync with the source-locked findings shown immediately below it.
+  const st=await evidenceLabState(env,slug);
+  const idx=await evidenceLabIndex(request,env);
+  const area=idx.areas.find(a=>a.slug===slug);
+  const directHuman=[], mixedHuman=[];
+  let deterministicHumanSummary="";
+  if(area){
+    const norm=v=>String(v??"").toLowerCase().replace(/\s+/g," ").trim();
+    const join=v=>Array.isArray(v)?v.map(x=>typeof x==="string"?x:JSON.stringify(x)).join(" "):String(v??"");
+    const isNonEfficacyOnly=c=>{
+      const design=norm(c.study_design), purpose=norm(c.study_purpose), outcomes=norm(join(c.primary_outcomes)), result=norm(c.main_result), title=norm(c.title);
+      const text=[design,purpose,outcomes,result,title].join(" ");
+      const pharmacokinetic=/(pharmacokinetic|pharmacokinetics|\bpk\b|plasma concentration|drug absorption|levodopa kinetics)/.test(text);
+      const qualitative=/(qualitative|interview|focus group|thematic analysis|acceptability barrier|adherence barrier|care partner|participant attitudes)/.test(text);
+      return pharmacokinetic || qualitative;
+    };
+    const clinicalPriority=c=>{
+      const type=String(c.publication_type||"");
+      const randomized=norm(c.randomized)==="yes" ? 4 : 0;
+      const controlled=norm(c.controlled)==="yes" ? 3 : 0;
+      const purpose=norm(c.study_purpose);
+      const purposeScore=purpose==="efficacy"?4:purpose==="mixed"?3:purpose==="feasibility"?1:0;
+      const typeScore=type==="clinical_trial"?20:type==="observational"?8:0;
+      return typeScore+randomized+controlled+purposeScore;
+    };
+    const candidates=[];
+    for(const pmid of (st.processed||[]).map(String).slice(-500)){
+      const c=await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");
+      if(!c || !(c.source_level==="abstract" || c.source_level==="full_text"))continue;
+      const rel=evidenceRelevance(c,area.label);
+      const type=String(c.publication_type||"");
+      const humanClinical=type==="clinical_trial" || type==="observational";
+      const result=String(c.main_result||"").replace(/\s+/g," ").trim();
+      if(!humanClinical || rel.level!=="direct" || !result || result==="AI extraction pending" || result==="not reported" || isNonEfficacyOnly(c))continue;
+      candidates.push({card:c,pmid:String(c.pmid||pmid),result,priority:clinicalPriority(c)});
+    }
+    candidates.sort((a,b)=>b.priority-a.priority || Number(b.card.year||0)-Number(a.card.year||0) || a.pmid.localeCompare(b.pmid));
+    for(const x of candidates){
+      const item={finding:x.result,pmids:[x.pmid],source:"evidence_card_verbatim"};
+      directHuman.push(item);
+      const signal=[x.card.effect_direction,x.card.statistical_significance,x.result].map(norm).join(" ");
+      const mixedDirection=["mixed","neutral","unfavorable"].includes(norm(x.card.effect_direction));
+      const nullOrMixedSignificance=["no","mixed"].includes(norm(x.card.statistical_significance));
+      const explicitClinicalNull=/(no significant (?:difference|effect|improvement)|not significant|no between-group difference|no between group difference|did not (?:improve|reduce|change|affect) (?!pharmacokinetic)|failed to (?:improve|reduce|show)|comparable gains|inconsistent)/.test(signal);
+      if(mixedDirection || nullOrMixedSignificance || explicitClinicalNull)
+        mixedHuman.push({issue:x.result,pmids:item.pmids,source:"evidence_card_verbatim"});
+    }
+
+    // Deterministic current-state human evidence summary. No generated efficacy prose is reused.
+    const profile=saved.evidence_profile||{};
+    const randomizedControlled=candidates.filter(x=>String(x.card.publication_type||"")==="clinical_trial" && norm(x.card.randomized)==="yes" && norm(x.card.controlled)==="yes").length;
+    const directions={favorable:0,mixed:0,neutral:0,unfavorable:0,not_reported:0};
+    for(const x of candidates){
+      const d=norm(x.card.effect_direction).replace(/\s+/g,"_");
+      if(Object.prototype.hasOwnProperty.call(directions,d))directions[d]++; else directions.not_reported++;
+    }
+    const directionText=Object.entries(directions).filter(([,n])=>n>0).map(([k,n])=>`${k.replaceAll("_"," ")}: ${n}`).join("; ") || "not reported";
+    deterministicHumanSummary=`Exact evidence profile: ${Number(profile.clinical_trial||0)} clinical trials; ${Number(profile.observational||0)} observational studies; ${Number(profile.mechanistic_human||0)} mechanistic human studies; ${Number(profile.case_report_series||0)} case reports/series. Direct ketogenic/ketone human clinical evidence eligible for source-locked findings: ${candidates.length} studies, including ${randomizedControlled} randomized controlled trials. Evidence-card direction labels: ${directionText}. Main findings below reproduce each Evidence Card main_result verbatim; mixed or null comparative results are shown separately under Conflicting evidence.`;
+  }
+  const out={...saved};
+  out.schema_version=23;
+  out.claim_generation="deterministic_verbatim_clinical_hierarchy_v23";
+  out.human_clinical_generation="deterministic_from_current_evidence_cards";
+  if(deterministicHumanSummary)out.human_clinical=deterministicHumanSummary;
+  out.main_findings=directHuman.slice(0,8);
+  out.conflicting_evidence=mixedHuman.slice(0,6);
+  return jsonResponse({synthesis:out});
+}
+function evidenceRelevance(c,areaLabel){
+  const norm=v=>String(v??"").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"");
+  const join=v=>Array.isArray(v)?v.map(x=>typeof x==="string"?x:JSON.stringify(x)).join(" "):String(v??"");
+  const title=norm(c.title), intervention=norm(c.intervention), result=norm(c.main_result), population=norm(c.population), model=norm(c.animal_model), targets=norm(join(c.mechanistic_targets));
+  const all=[title,intervention,result,population,model,targets,norm(c.study_design),norm(join(c.primary_outcomes)),norm(c.study_purpose)].join(" ");
+  const keto=/(ketogenic|ketosis|ketone|beta[- ]?hydroxybutyrate|β[- ]?hydroxybutyrate|d[- ]?beta[- ]?hydroxybutyrate|hydroxybutyrate|\bbhb\b|medium[- ]?chain triglycer|\bmct\b|ketoflex|low[- ]?carbohydrate)/;
+  const ketoIntervention=keto.test(intervention);
+  const areaNorm=norm(areaLabel);
+  const areaWords=areaNorm.split(/[^a-z0-9]+/).filter(x=>x.length>3 && !["disease","syndrome","disorder"].includes(x));
+  const areaDirect=areaWords.length===0 || areaWords.some(w=>all.includes(w));
+  const type=String(c.publication_type||"other");
+  const human=["clinical_trial","observational","case_report_series","mechanistic_human"].includes(type);
+  const preclinical=["preclinical_animal","mechanistic_preclinical"].includes(type);
+  const review=["systematic_review_meta_analysis","narrative_review"].includes(type);
+
+  // Area-specific conceptual evidence. The Lipid Energy Model / LMHR literature is often
+  // framed as carbohydrate-restricted rather than using the literal word "ketogenic".
+  // Do not exclude an exact LEM/LMHR paper merely because the generic keto regex misses it.
+  const lipidEnergyArea=/(lipid energy model|\blmhr\b|lean mass hyper)/.test(areaNorm);
+  const lipidEnergySignal=/(lipid energy model|lean mass hyper[- ]?responder|\blmhr\b|carbohydrate[- ]?restricted|carbohydrate restriction)/.test(all);
+  if(lipidEnergyArea && lipidEnergySignal){
+    if(review) return {level:"direct",reason:"review directly focused on the Lipid Energy Model / LMHR or its carbohydrate-restricted-diet framework"};
+    if(human) return {level:"direct",reason:"human evidence directly evaluating the Lipid Energy Model / LMHR phenotype or its carbohydrate-restricted-diet framework"};
+    if(preclinical) return {level:"supporting",reason:"mechanistic evidence directly relevant to the Lipid Energy Model / LMHR framework"};
+    return {level:"supporting",reason:"evidence directly relevant to the Lipid Energy Model / LMHR conceptual framework"};
+  }
+
+  // Disease-model evidence can be directly relevant even when the disease name is absent from
+  // the abstract fields (common in toxin/cell models). These markers are deliberately narrow.
+  let diseaseModelDirect=false;
+  if(areaNorm.includes("parkinson")){
+    diseaseModelDirect=/(mptp|6[- ]?ohda|6[- ]?hydroxydopamine|rotenone|dopaminergic|substantia nigra|striatal dopamine|synphilin|alpha[- ]?synuclein|α[- ]?synuclein)/.test(all);
+  }
+  const diseaseSpecific=areaDirect || diseaseModelDirect;
+
+  // MCT-related metabolic substrates are supporting—not direct—evidence when tested in a
+  // disease-specific model. They must never be promoted to human efficacy evidence by this rule.
+  const metabolicSupport=/(octanoic acid|caprylic acid|c8\b|medium[- ]?chain fatty|pantethine)/.test(all);
+
+  if(human && ketoIntervention && areaDirect) return {level:"direct",reason:"human evidence directly evaluating a ketogenic/ketone intervention in the selected clinical area"};
+  if(review && areaDirect && keto.test(title+" "+result)){
+    const focused=keto.test(title) && areaWords.some(w=>title.includes(w));
+    return focused?{level:"direct",reason:"review directly focused on ketogenic/ketone evidence in the selected clinical area"}:{level:"contextual",reason:"review provides broader context in which ketogenic/ketone evidence is only one component"};
+  }
+  if(preclinical && diseaseSpecific && (ketoIntervention || keto.test(result+" "+targets+" "+title))) return {level:"supporting",reason:"ketone/ketogenic mechanism tested in a disease-specific preclinical or mechanistic model"};
+  if(preclinical && diseaseSpecific && metabolicSupport) return {level:"supporting",reason:"ketogenic-metabolism/MCT-related substrate tested in a disease-specific model; supportive mechanistic evidence, not direct ketogenic-diet efficacy evidence"};
+  if(!keto.test(all)) return {level:"exclude",reason:"no ketogenic/ketone-specific evidence in the extracted card and no disease-specific ketogenic-metabolism support signal"};
+  if(diseaseSpecific && keto.test(all)) return {level:"supporting",reason:"ketogenic/ketone evidence supports disease-specific biological plausibility but is not direct clinical efficacy evidence"};
+  return {level:"contextual",reason:"ketogenic/ketone evidence is present but is not directly focused on the selected clinical question"};
+}
+
+async function handleEvidenceSynthesisEdit(request,env,session){
+  if(!env.SITE_ADMIN)return jsonResponse({error:"Evidence Lab storage (SITE_ADMIN) is not configured."},503);
+  const body=await request.json().catch(()=>({}));
+  const slug=evidenceLabSlug(body.area);
+  if(!slug)return jsonResponse({error:"Clinical area is required."},400);
+
   const key=EVIDENCE_LAB_SYNTHESIS_PREFIX+slug;
   const saved=await env.SITE_ADMIN.get(key,"json");
-  if(request.method==="GET")return jsonResponse({synthesis:saved||null});
-  if(request.method!=="POST")return jsonResponse({error:"Method not allowed."},405);
   if(!saved)return jsonResponse({error:"A saved synthesis is required before manual editing."},409);
-  if(String(body.action||"")!=="save_manual_edit")return jsonResponse({error:"Unsupported synthesis action."},400);
 
   const cleanText=(v,max=20000)=>String(v??"").replace(/\u0000/g,"").trim().slice(0,max);
   const cleanList=(v,maxItems=12,maxLen=4000)=>Array.isArray(v)?v.map(x=>cleanText(x,maxLen)).filter(Boolean).slice(0,maxItems):[];
@@ -1065,14 +1190,14 @@ async function handleEvidenceSynthesisGet(request,env,session){
   const now=new Date().toISOString(), who=String(session?.email||"administrator");
   const edited={
     ...saved,
-    overall_interpretation:cleanText(body.overall_interpretation,20000),
-    human_clinical:cleanText(body.human_clinical,20000),
-    reviews_meta_analyses:cleanText(body.reviews_meta_analyses,20000),
-    preclinical_mechanistic:cleanText(body.preclinical_mechanistic,20000),
+    overall_interpretation:cleanText(body.overall_interpretation),
+    human_clinical:cleanText(body.human_clinical),
+    reviews_meta_analyses:cleanText(body.reviews_meta_analyses),
+    preclinical_mechanistic:cleanText(body.preclinical_mechanistic),
     main_findings:rewriteClaims(saved.main_findings,body.main_findings,"finding"),
     conflicting_evidence:rewriteClaims(saved.conflicting_evidence,body.conflicting_evidence,"issue"),
-    limitations:cleanList(body.limitations,12,4000),
-    research_gaps:cleanList(body.research_gaps,12,4000),
+    limitations:cleanList(body.limitations),
+    research_gaps:cleanList(body.research_gaps),
     bottom_line:cleanText(body.bottom_line,12000),
     manual_revision:{
       edited:true,
@@ -1082,23 +1207,30 @@ async function handleEvidenceSynthesisGet(request,env,session){
       revision:Number(saved?.manual_revision?.revision||0)+1
     }
   };
+
   await env.SITE_ADMIN.put(key,JSON.stringify(edited));
 
-  // A manual scientific correction makes the current synthesis a new review candidate.
-  // Keep the previous approved snapshot as historical baseline for "What's new",
-  // but require review + approval again before Ask the Evidence or a new public publish.
+  // Manual changes require a fresh scientific review/approval.
+  // Preserve the last approved snapshot as historical comparison baseline.
   const reviewKey=EVIDENCE_LAB_REVIEW_PREFIX+slug;
-  const priorReview={...evidenceReviewDefault(),...((await env.SITE_ADMIN.get(reviewKey,"json"))||{})};
-  priorReview.status="draft";
-  priorReview.reviewed_at=null;
-  priorReview.reviewed_by=null;
-  priorReview.reviewed_snapshot=null;
-  priorReview.updated_at=now;
-  priorReview.note=`Manual synthesis revision saved ${now}. Previous approved snapshot retained as comparison baseline.`;
-  await env.SITE_ADMIN.put(reviewKey,JSON.stringify(priorReview));
+  const previous=(await env.SITE_ADMIN.get(reviewKey,"json"))||{};
+  const review={...evidenceReviewDefault(),...previous};
+  review.status="draft";
+  review.reviewed_at=null;
+  review.reviewed_by=null;
+  review.reviewed_snapshot=null;
+  review.updated_at=now;
+  review.note=`Manual synthesis revision saved ${now}. Review and approval required again.`;
+  await env.SITE_ADMIN.put(reviewKey,JSON.stringify(review));
 
-  return jsonResponse({ok:true,synthesis:edited,review_required:true,previous_approval_retained:!!priorReview.approved_snapshot});
+  return jsonResponse({
+    ok:true,
+    synthesis:edited,
+    review_required:true,
+    previous_approval_retained:!!review.approved_snapshot
+  });
 }
+
 
 async function handleEvidenceSynthesize(request,env){
   if(!env.SITE_ADMIN)return jsonResponse({error:"Evidence Lab storage (SITE_ADMIN) is not configured."},503);
@@ -1641,7 +1773,7 @@ export default {
 
     if (url.pathname.startsWith("/api/review/")) {
       const auth=await requireReviewAdmin(request,env); if(!auth.ok)return auth.response;
-      try { if(url.pathname==="/api/review/evidence/automation"&&(request.method==="GET"||request.method==="POST"))return handleEvidenceAutomation(request,env); if(url.pathname==="/api/review/evidence/areas")return handleEvidenceAreas(request,env); if(url.pathname==="/api/review/evidence/status")return handleEvidenceStatus(request,env); if(url.pathname==="/api/review/evidence/map"&&request.method==="GET")return handleEvidenceMap(request,env); if(url.pathname==="/api/review/evidence/contradictions"&&request.method==="GET")return handleEvidenceContradictions(request,env); if(url.pathname==="/api/review/evidence/conclusion"&&request.method==="GET")return handleEvidenceConclusion(request,env); if(url.pathname==="/api/review/evidence/publication"&&(request.method==="GET"||request.method==="POST"))return handleEvidencePublication(request,env,auth.session); if(url.pathname==="/api/review/evidence/qna"&&(request.method==="GET"||request.method==="POST"))return handleEvidenceQna(request,env,auth.session); if(url.pathname==="/api/review/evidence/ask"&&request.method==="POST")return handleEvidenceAsk(request,env); if(url.pathname==="/api/review/evidence/process"&&request.method==="POST")return handleEvidenceProcess(request,env); if(url.pathname==="/api/review/evidence/synthesis"&&(request.method==="GET"||request.method==="POST"))return handleEvidenceSynthesisGet(request,env,auth.session); if(url.pathname==="/api/review/evidence/review"&&(request.method==="GET"||request.method==="POST"))return handleEvidenceReview(request,env,auth.session); if(url.pathname==="/api/review/evidence/synthesize"&&request.method==="POST")return handleEvidenceSynthesize(request,env); if(url.pathname==="/api/review/protocol")return handleProtocolApi(request,env); if(url.pathname==="/api/review/pubmed")return handlePubmedApi(request,env); if(url.pathname==="/api/review/draft")return handleDraftApi(request,env); return jsonResponse({error:"Not found"},404); } catch(e){ return jsonResponse({error:e?.message||"Review Studio error"},500); }
+      try { if(url.pathname==="/api/review/evidence/automation"&&(request.method==="GET"||request.method==="POST"))return handleEvidenceAutomation(request,env); if(url.pathname==="/api/review/evidence/areas")return handleEvidenceAreas(request,env); if(url.pathname==="/api/review/evidence/status")return handleEvidenceStatus(request,env); if(url.pathname==="/api/review/evidence/map"&&request.method==="GET")return handleEvidenceMap(request,env); if(url.pathname==="/api/review/evidence/contradictions"&&request.method==="GET")return handleEvidenceContradictions(request,env); if(url.pathname==="/api/review/evidence/conclusion"&&request.method==="GET")return handleEvidenceConclusion(request,env); if(url.pathname==="/api/review/evidence/publication"&&(request.method==="GET"||request.method==="POST"))return handleEvidencePublication(request,env,auth.session); if(url.pathname==="/api/review/evidence/qna"&&(request.method==="GET"||request.method==="POST"))return handleEvidenceQna(request,env,auth.session); if(url.pathname==="/api/review/evidence/ask"&&request.method==="POST")return handleEvidenceAsk(request,env); if(url.pathname==="/api/review/evidence/process"&&request.method==="POST")return handleEvidenceProcess(request,env); if(url.pathname==="/api/review/evidence/synthesis"&&request.method==="GET")return handleEvidenceSynthesisGet(request,env); if(url.pathname==="/api/review/evidence/synthesis-edit"&&request.method==="POST")return handleEvidenceSynthesisEdit(request,env,auth.session); if(url.pathname==="/api/review/evidence/review"&&(request.method==="GET"||request.method==="POST"))return handleEvidenceReview(request,env,auth.session); if(url.pathname==="/api/review/evidence/synthesize"&&request.method==="POST")return handleEvidenceSynthesize(request,env); if(url.pathname==="/api/review/protocol")return handleProtocolApi(request,env); if(url.pathname==="/api/review/pubmed")return handlePubmedApi(request,env); if(url.pathname==="/api/review/draft")return handleDraftApi(request,env); return jsonResponse({error:"Not found"},404); } catch(e){ return jsonResponse({error:e?.message||"Review Studio error"},500); }
     }
 
     // Serve the login document from a non-HTML raw asset. This bypasses
