@@ -534,7 +534,7 @@
     const btn=$('evidenceSaveSynthesisEdit');btn.disabled=true;
     setStatus('synthesisEditStatus','Saving manual scientific corrections…');
     try{
-      const d=await api('/api/review/evidence/synthesis',payload);
+      const d=await api('/api/review/evidence/synthesis-edit',payload);
       currentEvidenceSynthesis=d.synthesis||null;
       $('evidenceSynthesis').innerHTML=synthesisHtml(currentEvidenceSynthesis);
       $('evidenceEditSynthesis').disabled=!currentEvidenceSynthesis;
