@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-11T03:30:58+00:00",
+  "generated_at": "2026-10-12T03:34:21+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
@@ -7,36 +7,35 @@
   "excluded_count": 118,
   "records": [
     {
-      "pmid": "42854762",
-      "title": "Ketogenic diet induces metabolic remodeling and alters myogenic markers in skeletal muscle of obese male mice subjected to medial meniscus destabilization.",
+      "pmid": "42858216",
+      "title": "The Gut Microbiota-Epilepsy Axis: Bibliometric Trends, Mechanistic Insights, and Microbiota-Targeted Next-Generation Therapeutic Opportunities.",
       "authors": [
-        "Górecka K",
-        "Solé T",
-        "Soboska K",
-        "Chikh K",
-        "Maarbani AE",
-        "Pirola L",
-        "Strigini M",
-        "Balcerczyk A"
+        "Khan A",
+        "Ullah Z",
+        "Siraj M",
+        "Younas S",
+        "Wahab S",
+        "Waris A",
+        "Hong ST"
       ],
-      "journal": "The Journal of nutritional biochemistry",
-      "date": "2026-10-09",
+      "journal": "Molecular neurobiology",
+      "date": "2026-10-10",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1016/j.jnutbio.2026.110515",
+      "doi": "10.1007/s12035-026-06227-7",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42854762/",
-      "doi_url": "https://doi.org/10.1016/j.jnutbio.2026.110515",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42858216/",
+      "doi_url": "https://doi.org/10.1007/s12035-026-06227-7",
       "pmc_url": "",
       "areas": [
-        "Obesity",
-        "Sarcopenia & Skeletal Muscle"
+        "Gut Microbiome",
+        "Epilepsy"
       ],
       "category_confidence": 8,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
+      "evidence_type": "Clinical trial / intervention",
+      "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
-      "first_seen": "2026-10-11",
+      "first_seen": "2026-10-12",
       "status": "new",
       "auto_eligible": true,
       "curation_status": "auto-approved"
@@ -101,7 +100,7 @@
     },
     {
       "pmid": "42790707",
-      "title": "Letter to the Editor: Methodological considerations when determining the minimum amount of dietary carbohydrates that prevents nutritional ketosis.",
+      "title": "Letter to the Editor: Methodological Considerations when Determining the Minimum Amount of Dietary Carbohydrates that Prevents Nutritional Ketosis.",
       "authors": [
         "Martins C"
       ],
@@ -4011,7 +4010,5 @@
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
     }
-  ],
-  "updated": "2026-10-11T04:55:43.706985+00:00",
-  "source": "PubMed + Library V5"
+  ]
 }
