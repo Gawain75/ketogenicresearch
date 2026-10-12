@@ -35,8 +35,22 @@
 </div>
 <div style="margin-top:24px;padding-top:20px;border-top:1px solid #dbe4ee">
 <div class="project-row"><div><h3 style="margin:0 0 4px">Provisional Evidence Synthesis</h3><p class="sub" style="margin:0">Private interpretation generated only from cached Evidence Cards. It is never published automatically.</p></div><span class="protocol-lock">Draft</span></div>
-<div class="review-actions"><button class="review-btn secondary" id="evidenceSynthesize">Generate synthesis</button><button class="review-btn muted" id="evidenceLoadSynthesis">Load saved synthesis</button></div>
+<div class="review-actions"><button class="review-btn secondary" id="evidenceSynthesize">Generate synthesis</button><button class="review-btn muted" id="evidenceLoadSynthesis">Load saved synthesis</button><button class="review-btn muted" id="evidenceEditSynthesis" disabled>Edit synthesis</button></div>
 <div class="review-status" id="synthesisStatus">Generate after a meaningful sample of Evidence Cards has been checked.</div>
+<div class="synthesis-editor" id="evidenceSynthesisEditor" hidden>
+  <div class="project-row"><div><h3 style="margin:0 0 4px">Edit synthesis</h3><p class="sub" style="margin:0">Manual scientific correction. Evidence counts and PMID links are locked; editing invalidates the current review/approval and requires a new review.</p></div></div>
+  <div class="review-field"><label for="editOverallInterpretation">Overall interpretation</label><textarea id="editOverallInterpretation"></textarea></div>
+  <div class="review-field"><label for="editHumanClinical">Human clinical evidence</label><textarea id="editHumanClinical"></textarea></div>
+  <div class="review-field"><label for="editReviewsMeta">Reviews / meta-analyses</label><textarea id="editReviewsMeta"></textarea></div>
+  <div class="review-field"><label for="editPreclinical">Preclinical &amp; mechanistic evidence</label><textarea id="editPreclinical"></textarea></div>
+  <div class="review-field"><label>Main findings <span class="small">(PMIDs locked)</span></label><div id="editMainFindings"></div></div>
+  <div class="review-field"><label>Conflicting evidence <span class="small">(PMIDs locked)</span></label><div id="editConflictingEvidence"></div></div>
+  <div class="review-field"><label for="editLimitations">Limitations <span class="small">(one item per line)</span></label><textarea id="editLimitations"></textarea></div>
+  <div class="review-field"><label for="editResearchGaps">Research gaps <span class="small">(one item per line)</span></label><textarea id="editResearchGaps"></textarea></div>
+  <div class="review-field"><label for="editBottomLine">Bottom line</label><textarea id="editBottomLine"></textarea></div>
+  <div class="review-actions"><button class="review-btn" id="evidenceSaveSynthesisEdit">Save reviewed synthesis</button><button class="review-btn muted" id="evidenceCancelSynthesisEdit">Cancel</button></div>
+  <div class="review-status" id="synthesisEditStatus">No manual changes saved.</div>
+</div>
 <div class="evidence-review-box" id="evidenceReviewBox">
   <div class="project-row evidence-review-head"><div><h3 style="margin:0 0 4px">Scientific review</h3><p class="sub" style="margin:0">Manual review state for the current saved synthesis. Approval does not publish anything.</p></div><span class="protocol-lock review-state-draft" id="evidenceReviewBadge">Draft</span></div>
   <div class="review-field" style="margin-top:14px"><label for="evidenceReviewNote">Reviewer note</label><textarea id="evidenceReviewNote" placeholder="Optional note for this review or approval."></textarea></div>

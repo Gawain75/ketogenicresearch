@@ -133,3 +133,24 @@
 .published-qna-item{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0;border-top:1px solid #e5ebf0}
 .published-qna-item:first-child{border-top:0}
 @media(max-width:700px){.published-qna-item{align-items:flex-start;flex-direction:column}.published-qna-item .review-btn{width:100%}}
+
+
+.synthesis-editor{
+  margin-top:16px;
+  padding:18px;
+  border:1px solid rgba(33,67,88,.18);
+  border-radius:16px;
+  background:rgba(247,250,251,.92);
+}
+.synthesis-editor .review-field{margin-top:14px}
+.synthesis-editor textarea{min-height:105px}
+.synthesis-edit-claim{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:6px;
+  padding:10px 0;
+  border-bottom:1px solid rgba(33,67,88,.10);
+}
+.synthesis-edit-claim:last-child{border-bottom:0}
+.synthesis-edit-claim textarea{min-height:80px}
+.synthesis-edit-pmids{font-size:.84rem;color:var(--muted,#6b7880)}

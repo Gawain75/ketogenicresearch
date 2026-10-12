@@ -488,6 +488,65 @@
   }
 
   function pmidLinks(pmids){return (pmids||[]).map(p=>`<a href="https://pubmed.ncbi.nlm.nih.gov/${encodeURIComponent(p)}/" target="_blank" rel="noopener">PMID ${esc(p)}</a>`).join(', ');}
+  let currentEvidenceSynthesis=null;
+  function synthesisLines(v){return String(v||'').split(/\r?\n/).map(x=>x.trim()).filter(Boolean);}
+  function claimEditorHtml(items,field){
+    const arr=Array.isArray(items)?items:[];
+    if(!arr.length)return '<div class="empty">No items in the saved synthesis.</div>';
+    return arr.map((x,i)=>`<div class="synthesis-edit-claim" data-index="${i}"><textarea data-claim-field="${field}" data-index="${i}">${esc(x?.[field]||'')}</textarea><div class="synthesis-edit-pmids">Locked sources: ${x?.pmids?.length?pmidLinks(x.pmids):'none'}</div></div>`).join('');
+  }
+  function openSynthesisEditor(){
+    const s=currentEvidenceSynthesis;
+    if(!s){setStatus('synthesisStatus','Load a saved synthesis before editing.','error');return;}
+    $('editOverallInterpretation').value=s.overall_interpretation||'';
+    $('editHumanClinical').value=s.human_clinical||'';
+    $('editReviewsMeta').value=s.reviews_meta_analyses||'';
+    $('editPreclinical').value=s.preclinical_mechanistic||'';
+    $('editMainFindings').innerHTML=claimEditorHtml(s.main_findings,'finding');
+    $('editConflictingEvidence').innerHTML=claimEditorHtml(s.conflicting_evidence,'issue');
+    $('editLimitations').value=(Array.isArray(s.limitations)?s.limitations:[]).join('\n');
+    $('editResearchGaps').value=(Array.isArray(s.research_gaps)?s.research_gaps:[]).join('\n');
+    $('editBottomLine').value=s.bottom_line||'';
+    $('evidenceSynthesisEditor').hidden=false;
+    setStatus('synthesisEditStatus','Editing the saved synthesis. PMID associations and evidence counts are locked.');
+    $('evidenceSynthesisEditor').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function closeSynthesisEditor(){
+    $('evidenceSynthesisEditor').hidden=true;
+  }
+  async function saveSynthesisEdit(){
+    const area=$('evidenceArea').value;
+    if(!area||!currentEvidenceSynthesis){setStatus('synthesisEditStatus','Load a saved synthesis first.','error');return;}
+    const findingEdits=[...document.querySelectorAll('#editMainFindings textarea[data-claim-field="finding"]')].map(el=>({index:Number(el.dataset.index),text:el.value.trim()}));
+    const conflictEdits=[...document.querySelectorAll('#editConflictingEvidence textarea[data-claim-field="issue"]')].map(el=>({index:Number(el.dataset.index),text:el.value.trim()}));
+    const payload={
+      area,action:'save_manual_edit',
+      overall_interpretation:$('editOverallInterpretation').value.trim(),
+      human_clinical:$('editHumanClinical').value.trim(),
+      reviews_meta_analyses:$('editReviewsMeta').value.trim(),
+      preclinical_mechanistic:$('editPreclinical').value.trim(),
+      main_findings:findingEdits,
+      conflicting_evidence:conflictEdits,
+      limitations:synthesisLines($('editLimitations').value),
+      research_gaps:synthesisLines($('editResearchGaps').value),
+      bottom_line:$('editBottomLine').value.trim()
+    };
+    const btn=$('evidenceSaveSynthesisEdit');btn.disabled=true;
+    setStatus('synthesisEditStatus','Saving manual scientific corrections…');
+    try{
+      const d=await api('/api/review/evidence/synthesis',payload);
+      currentEvidenceSynthesis=d.synthesis||null;
+      $('evidenceSynthesis').innerHTML=synthesisHtml(currentEvidenceSynthesis);
+      $('evidenceEditSynthesis').disabled=!currentEvidenceSynthesis;
+      closeSynthesisEditor();
+      setStatus('synthesisStatus','Manual synthesis revision saved. Review and approval are required again.','ok');
+      await loadEvidenceReview();
+      await loadEvidenceConclusion();
+      await loadPublicEvidence();
+    }catch(e){setStatus('synthesisEditStatus',e.message,'error');}
+    finally{btn.disabled=false;}
+  }
+
   function synthesisHtml(s){
     if(!s)return '<div class="empty">No synthesis generated for this area yet.</div>';
     const items=(arr,field)=>Array.isArray(arr)&&arr.length?'<ul>'+arr.map(x=>typeof x==='string'?`<li>${esc(x)}</li>`:`<li>${esc(x[field]||'')}${x.pmids?.length?` <span class="small">(${pmidLinks(x.pmids)})</span>`:''}</li>`).join('')+'</ul>':'<p class="small">No specific items identified.</p>';
@@ -611,8 +670,8 @@
     catch(e){setStatus('dailyAutoStatus',e.message,'error');}
     finally{b.disabled=false;}
   }
-  async function loadEvidenceSynthesis(){const area=$('evidenceArea').value;if(!area){setStatus('synthesisStatus','Choose a clinical area first.','error');resetEvidenceReview('Choose a clinical area first.');return;}resetEvidenceReview('Loading review status…');setStatus('synthesisStatus','Loading saved synthesis…');try{const d=await api('/api/review/evidence/synthesis?area='+encodeURIComponent(area));$('evidenceSynthesis').innerHTML=synthesisHtml(d.synthesis);setStatus('synthesisStatus',d.synthesis?`Saved synthesis loaded: ${d.synthesis.cards_processed??d.synthesis.cards_analyzed} processed · ${d.synthesis.cards_analyzed} included · ${d.synthesis.cards_excluded??0} excluded.`:'No saved synthesis for this area yet.',d.synthesis?'ok':'');if(d.synthesis)await loadEvidenceReview();else resetEvidenceReview('No saved synthesis for this area yet.');}catch(e){setStatus('synthesisStatus',e.message,'error');resetEvidenceReview('Review state unavailable.');}}
-  async function generateEvidenceSynthesis(){const area=$('evidenceArea').value;if(!area){setStatus('synthesisStatus','Choose a clinical area first.','error');return;}const btn=$('evidenceSynthesize');btn.disabled=true;setStatus('synthesisStatus','Starting provisional synthesis…');try{for(let step=0;step<5000;step++){const d=await api('/api/review/evidence/synthesize',{area});if(d.done&&d.synthesis){$('evidenceSynthesis').innerHTML=synthesisHtml(d.synthesis);setStatus('synthesisStatus',`Provisional synthesis: ${d.synthesis.cards_processed??d.synthesis.cards_analyzed} processed · ${d.synthesis.cards_analyzed} included · ${d.synthesis.cards_excluded??0} excluded. Nothing has been published.`,'ok');await loadEvidenceReview();await loadPublicEvidence();return;}const p=d.progress||{};let msg=p.message||'';if(p.phase==='large_index')msg=msg||`Large Corpus index: ${Number(p.completed||0)}/${Number(p.total||0)} cards prepared.`;else if(p.phase==='chunks')msg=`Hierarchical synthesis: ${Number(p.completed||0)}/${Number(p.total||0)} batches completed. Checkpoint saved.`;else if(!msg)msg=`Synthesis progress: ${Number(p.completed||0)}/${Number(p.total||0)} completed.`;setStatus('synthesisStatus',msg,'ok');const wait=Math.max(900,Math.min(65000,Number(p.wait_seconds||0)*1000));await new Promise(r=>setTimeout(r,wait));}throw new Error('Synthesis reached the safety step limit. Press Generate synthesis to resume from saved checkpoints.');}catch(e){setStatus('synthesisStatus',e.message,'error');}finally{btn.disabled=false;}}
+  async function loadEvidenceSynthesis(){const area=$('evidenceArea').value;if(!area){setStatus('synthesisStatus','Choose a clinical area first.','error');resetEvidenceReview('Choose a clinical area first.');return;}resetEvidenceReview('Loading review status…');setStatus('synthesisStatus','Loading saved synthesis…');try{const d=await api('/api/review/evidence/synthesis?area='+encodeURIComponent(area));currentEvidenceSynthesis=d.synthesis||null;$('evidenceSynthesis').innerHTML=synthesisHtml(d.synthesis);$('evidenceEditSynthesis').disabled=!d.synthesis;closeSynthesisEditor();setStatus('synthesisStatus',d.synthesis?`Saved synthesis loaded: ${d.synthesis.cards_processed??d.synthesis.cards_analyzed} processed · ${d.synthesis.cards_analyzed} included · ${d.synthesis.cards_excluded??0} excluded.`:'No saved synthesis for this area yet.',d.synthesis?'ok':'');if(d.synthesis)await loadEvidenceReview();else resetEvidenceReview('No saved synthesis for this area yet.');}catch(e){setStatus('synthesisStatus',e.message,'error');resetEvidenceReview('Review state unavailable.');}}
+  async function generateEvidenceSynthesis(){const area=$('evidenceArea').value;if(!area){setStatus('synthesisStatus','Choose a clinical area first.','error');return;}const btn=$('evidenceSynthesize');btn.disabled=true;setStatus('synthesisStatus','Starting provisional synthesis…');try{for(let step=0;step<5000;step++){const d=await api('/api/review/evidence/synthesize',{area});if(d.done&&d.synthesis){currentEvidenceSynthesis=d.synthesis;$('evidenceSynthesis').innerHTML=synthesisHtml(d.synthesis);$('evidenceEditSynthesis').disabled=false;closeSynthesisEditor();setStatus('synthesisStatus',`Provisional synthesis: ${d.synthesis.cards_processed??d.synthesis.cards_analyzed} processed · ${d.synthesis.cards_analyzed} included · ${d.synthesis.cards_excluded??0} excluded. Nothing has been published.`,'ok');await loadEvidenceReview();await loadPublicEvidence();return;}const p=d.progress||{};let msg=p.message||'';if(p.phase==='large_index')msg=msg||`Large Corpus index: ${Number(p.completed||0)}/${Number(p.total||0)} cards prepared.`;else if(p.phase==='chunks')msg=`Hierarchical synthesis: ${Number(p.completed||0)}/${Number(p.total||0)} batches completed. Checkpoint saved.`;else if(!msg)msg=`Synthesis progress: ${Number(p.completed||0)}/${Number(p.total||0)} completed.`;setStatus('synthesisStatus',msg,'ok');const wait=Math.max(900,Math.min(65000,Number(p.wait_seconds||0)*1000));await new Promise(r=>setTimeout(r,wait));}throw new Error('Synthesis reached the safety step limit. Press Generate synthesis to resume from saved checkpoints.');}catch(e){setStatus('synthesisStatus',e.message,'error');}finally{btn.disabled=false;}}
 
   document.querySelectorAll('.review-step').forEach(b=>b.addEventListener('click',()=>showStep(b.dataset.step)));
   $('generateProtocol').addEventListener('click',generateProtocol);
@@ -625,7 +684,10 @@
   $('importJson').addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;try{const p=JSON.parse(await f.text());if(!p||p.version!==1)throw new Error('Unsupported project file.');project=p;saveProject();bindProjectToForm();renderStudies();showStep('question');setStatus('questionStatus','Project imported.','ok');}catch(err){setStatus('questionStatus',err.message,'error');}e.target.value='';});
 
   $('dailyAutoRefresh').addEventListener('click',loadDailyAutomation); $('dailyAutoRunNow').addEventListener('click',runDailyAutomationNow);
-  $('evidenceArea').addEventListener('change',()=>{evidenceAutoStop=true;saveUiState({evidence_area:$('evidenceArea').value||''});resetEvidenceMap();resetContradictionExplorer();resetEvidenceConclusion();resetPublicEvidence();resetAskEvidence();refreshEvidence();loadEvidenceSynthesis();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();loadPublicEvidence();loadPublishedQna();}); $('evidenceRefresh').addEventListener('click',()=>{refreshEvidence();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();loadPublicEvidence();}); $('evidenceProcess').addEventListener('click',processEvidence); $('evidenceAutoProcess').addEventListener('click',autoProcessEvidence); $('evidenceStopAuto').addEventListener('click',()=>{evidenceAutoStop=true;$('evidenceStopAuto').disabled=true;setStatus('evidenceStatus','Stopping after the current batch…');}); $('evidenceSynthesize').addEventListener('click',generateEvidenceSynthesis); $('evidenceLoadSynthesis').addEventListener('click',()=>{loadEvidenceSynthesis();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();loadPublicEvidence();}); $('evidenceMarkReviewed').addEventListener('click',()=>evidenceReviewAction('review')); $('evidenceApprove').addEventListener('click',()=>evidenceReviewAction('approve')); $('evidenceReopen').addEventListener('click',()=>evidenceReviewAction('reopen')); $('evidenceRefreshReview').addEventListener('click',()=>{loadEvidenceReview();loadEvidenceConclusion();loadPublicEvidence();}); $('publicEvidencePublish').addEventListener('click',()=>publicEvidenceAction('publish')); $('publicEvidenceUnpublish').addEventListener('click',()=>publicEvidenceAction('unpublish')); $('publicHeroFile').addEventListener('change',publicHeroFileChanged); $('publicHeroSave').addEventListener('click',savePublicHero); $('publicHeroRemove').addEventListener('click',removePublicHero); $('evidenceRefreshMap').addEventListener('click',loadEvidenceMap); $('evidenceRefreshContradictions').addEventListener('click',()=>{loadContradictionExplorer();loadEvidenceConclusion();}); $('evidenceRefreshConclusion').addEventListener('click',loadEvidenceConclusion); $('askEvidenceSubmit').addEventListener('click',askEvidence); $('askEvidencePublish').addEventListener('click',publishAskEvidence); $('askEvidenceClear').addEventListener('click',()=>{$('askEvidenceQuestion').value='';resetAskEvidence();}); $('askEvidenceQuestion').addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')askEvidence();}); $('evidenceMapClass').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapRelevance').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapType').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapDirection').addEventListener('change',applyEvidenceMapFilters);
+  $('evidenceEditSynthesis').addEventListener('click',openSynthesisEditor);
+  $('evidenceSaveSynthesisEdit').addEventListener('click',saveSynthesisEdit);
+  $('evidenceCancelSynthesisEdit').addEventListener('click',closeSynthesisEditor);
+  $('evidenceArea').addEventListener('change',()=>{currentEvidenceSynthesis=null;$('evidenceEditSynthesis').disabled=true;closeSynthesisEditor();evidenceAutoStop=true;saveUiState({evidence_area:$('evidenceArea').value||''});resetEvidenceMap();resetContradictionExplorer();resetEvidenceConclusion();resetPublicEvidence();resetAskEvidence();refreshEvidence();loadEvidenceSynthesis();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();loadPublicEvidence();loadPublishedQna();}); $('evidenceRefresh').addEventListener('click',()=>{refreshEvidence();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();loadPublicEvidence();}); $('evidenceProcess').addEventListener('click',processEvidence); $('evidenceAutoProcess').addEventListener('click',autoProcessEvidence); $('evidenceStopAuto').addEventListener('click',()=>{evidenceAutoStop=true;$('evidenceStopAuto').disabled=true;setStatus('evidenceStatus','Stopping after the current batch…');}); $('evidenceSynthesize').addEventListener('click',generateEvidenceSynthesis); $('evidenceLoadSynthesis').addEventListener('click',()=>{loadEvidenceSynthesis();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();loadPublicEvidence();}); $('evidenceMarkReviewed').addEventListener('click',()=>evidenceReviewAction('review')); $('evidenceApprove').addEventListener('click',()=>evidenceReviewAction('approve')); $('evidenceReopen').addEventListener('click',()=>evidenceReviewAction('reopen')); $('evidenceRefreshReview').addEventListener('click',()=>{loadEvidenceReview();loadEvidenceConclusion();loadPublicEvidence();}); $('publicEvidencePublish').addEventListener('click',()=>publicEvidenceAction('publish')); $('publicEvidenceUnpublish').addEventListener('click',()=>publicEvidenceAction('unpublish')); $('publicHeroFile').addEventListener('change',publicHeroFileChanged); $('publicHeroSave').addEventListener('click',savePublicHero); $('publicHeroRemove').addEventListener('click',removePublicHero); $('evidenceRefreshMap').addEventListener('click',loadEvidenceMap); $('evidenceRefreshContradictions').addEventListener('click',()=>{loadContradictionExplorer();loadEvidenceConclusion();}); $('evidenceRefreshConclusion').addEventListener('click',loadEvidenceConclusion); $('askEvidenceSubmit').addEventListener('click',askEvidence); $('askEvidencePublish').addEventListener('click',publishAskEvidence); $('askEvidenceClear').addEventListener('click',()=>{$('askEvidenceQuestion').value='';resetAskEvidence();}); $('askEvidenceQuestion').addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')askEvidence();}); $('evidenceMapClass').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapRelevance').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapType').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapDirection').addEventListener('change',applyEvidenceMapFilters);
 
   bindProjectToForm(); renderStudies(); renderMeta();
   showStep('evidence');
