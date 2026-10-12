@@ -35,21 +35,21 @@
 </div>
 <div style="margin-top:24px;padding-top:20px;border-top:1px solid #dbe4ee">
 <div class="project-row"><div><h3 style="margin:0 0 4px">Provisional Evidence Synthesis</h3><p class="sub" style="margin:0">Private interpretation generated only from cached Evidence Cards. It is never published automatically.</p></div><span class="protocol-lock">Draft</span></div>
-<div class="review-actions"><button class="review-btn secondary" id="evidenceSynthesize">Generate synthesis</button><button class="review-btn muted" id="evidenceLoadSynthesis">Load saved synthesis</button><button class="review-btn muted" id="evidenceEditSynthesis" disabled>Edit synthesis</button></div>
+<div class="review-actions"><button class="review-btn secondary" id="evidenceSynthesize">Generate synthesis</button><button class="review-btn muted" id="evidenceLoadSynthesis">Load saved synthesis</button><button class="review-btn muted" id="evidenceEditSynthesis" disabled data-en="Edit synthesis" data-it="Modifica sintesi">Edit synthesis</button></div>
 <div class="review-status" id="synthesisStatus">Generate after a meaningful sample of Evidence Cards has been checked.</div>
 <div class="synthesis-editor" id="evidenceSynthesisEditor" hidden>
-  <div class="project-row"><div><h3 style="margin:0 0 4px">Edit synthesis</h3><p class="sub" style="margin:0">Manual scientific correction. Evidence counts and PMID links are locked; editing invalidates the current review/approval and requires a new review.</p></div></div>
-  <div class="review-field"><label for="editOverallInterpretation">Overall interpretation</label><textarea id="editOverallInterpretation"></textarea></div>
-  <div class="review-field"><label for="editHumanClinical">Human clinical evidence</label><textarea id="editHumanClinical"></textarea></div>
-  <div class="review-field"><label for="editReviewsMeta">Reviews / meta-analyses</label><textarea id="editReviewsMeta"></textarea></div>
-  <div class="review-field"><label for="editPreclinical">Preclinical &amp; mechanistic evidence</label><textarea id="editPreclinical"></textarea></div>
-  <div class="review-field"><label>Main findings <span class="small">(PMIDs locked)</span></label><div id="editMainFindings"></div></div>
-  <div class="review-field"><label>Conflicting evidence <span class="small">(PMIDs locked)</span></label><div id="editConflictingEvidence"></div></div>
-  <div class="review-field"><label for="editLimitations">Limitations <span class="small">(one item per line)</span></label><textarea id="editLimitations"></textarea></div>
-  <div class="review-field"><label for="editResearchGaps">Research gaps <span class="small">(one item per line)</span></label><textarea id="editResearchGaps"></textarea></div>
-  <div class="review-field"><label for="editBottomLine">Bottom line</label><textarea id="editBottomLine"></textarea></div>
-  <div class="review-actions"><button class="review-btn" id="evidenceSaveSynthesisEdit">Save reviewed synthesis</button><button class="review-btn muted" id="evidenceCancelSynthesisEdit">Cancel</button></div>
-  <div class="review-status" id="synthesisEditStatus">No manual changes saved.</div>
+  <div class="project-row"><div><h3 style="margin:0 0 4px" data-en="Edit synthesis" data-it="Modifica sintesi">Edit synthesis</h3><p class="sub" style="margin:0" data-en="Manual scientific correction. Evidence counts and PMID links are locked; editing invalidates the current review/approval and requires a new review." data-it="Correzione scientifica manuale. I conteggi delle evidenze e i collegamenti PMID restano bloccati; la modifica invalida la revisione/approvazione corrente e richiede una nuova revisione.">Manual scientific correction. Evidence counts and PMID links are locked; editing invalidates the current review/approval and requires a new review.</p></div></div>
+  <div class="review-field"><label for="editOverallInterpretation" data-en="Overall interpretation" data-it="Interpretazione complessiva">Overall interpretation</label><textarea id="editOverallInterpretation"></textarea></div>
+  <div class="review-field"><label for="editHumanClinical" data-en="Human clinical evidence" data-it="Evidenza clinica nell’uomo">Human clinical evidence</label><textarea id="editHumanClinical"></textarea></div>
+  <div class="review-field"><label for="editReviewsMeta" data-en="Reviews / meta-analyses" data-it="Revisioni / meta-analisi">Reviews / meta-analyses</label><textarea id="editReviewsMeta"></textarea></div>
+  <div class="review-field"><label for="editPreclinical" data-en="Preclinical &amp; mechanistic evidence" data-it="Evidenza preclinica e meccanicistica">Preclinical &amp; mechanistic evidence</label><textarea id="editPreclinical"></textarea></div>
+  <div class="review-field"><label><span data-en="Main findings" data-it="Risultati principali">Main findings</span> <span class="small" data-en="(PMIDs locked)" data-it="(PMID bloccati)">(PMIDs locked)</span></label><div id="editMainFindings"></div></div>
+  <div class="review-field"><label><span data-en="Conflicting evidence" data-it="Evidenze contrastanti">Conflicting evidence</span> <span class="small" data-en="(PMIDs locked)" data-it="(PMID bloccati)">(PMIDs locked)</span></label><div id="editConflictingEvidence"></div></div>
+  <div class="review-field"><label for="editLimitations"><span data-en="Limitations" data-it="Limitazioni">Limitations</span> <span class="small" data-en="(one item per line)" data-it="(una voce per riga)">(one item per line)</span></label><textarea id="editLimitations"></textarea></div>
+  <div class="review-field"><label for="editResearchGaps"><span data-en="Research gaps" data-it="Lacune della ricerca">Research gaps</span> <span class="small" data-en="(one item per line)" data-it="(una voce per riga)">(one item per line)</span></label><textarea id="editResearchGaps"></textarea></div>
+  <div class="review-field"><label for="editBottomLine" data-en="Bottom line" data-it="Conclusione">Bottom line</label><textarea id="editBottomLine"></textarea></div>
+  <div class="review-actions"><button class="review-btn" id="evidenceSaveSynthesisEdit" data-en="Save reviewed synthesis" data-it="Salva sintesi revisionata">Save reviewed synthesis</button><button class="review-btn muted" id="evidenceCancelSynthesisEdit" data-en="Cancel" data-it="Annulla">Cancel</button></div>
+  <div class="review-status" id="synthesisEditStatus" data-en="No manual changes saved." data-it="Nessuna modifica manuale salvata.">No manual changes saved.</div>
 </div>
 <div class="evidence-review-box" id="evidenceReviewBox">
   <div class="project-row evidence-review-head"><div><h3 style="margin:0 0 4px">Scientific review</h3><p class="sub" style="margin:0">Manual review state for the current saved synthesis. Approval does not publish anything.</p></div><span class="protocol-lock review-state-draft" id="evidenceReviewBadge">Draft</span></div>

@@ -489,15 +489,18 @@
 
   function pmidLinks(pmids){return (pmids||[]).map(p=>`<a href="https://pubmed.ncbi.nlm.nih.gov/${encodeURIComponent(p)}/" target="_blank" rel="noopener">PMID ${esc(p)}</a>`).join(', ');}
   let currentEvidenceSynthesis=null;
+  function evidenceUiText(en,it){
+    return (document.documentElement.lang||'en').toLowerCase().startsWith('it') ? it : en;
+  }
   function synthesisLines(v){return String(v||'').split(/\r?\n/).map(x=>x.trim()).filter(Boolean);}
   function claimEditorHtml(items,field){
     const arr=Array.isArray(items)?items:[];
-    if(!arr.length)return '<div class="empty">No items in the saved synthesis.</div>';
-    return arr.map((x,i)=>`<div class="synthesis-edit-claim" data-index="${i}"><textarea data-claim-field="${field}" data-index="${i}">${esc(x?.[field]||'')}</textarea><div class="synthesis-edit-pmids">Locked sources: ${x?.pmids?.length?pmidLinks(x.pmids):'none'}</div></div>`).join('');
+    if(!arr.length)return `<div class="empty">${evidenceUiText('No items in the saved synthesis.','Nessuna voce nella sintesi salvata.')}</div>`;
+    return arr.map((x,i)=>`<div class="synthesis-edit-claim" data-index="${i}"><textarea data-claim-field="${field}" data-index="${i}">${esc(x?.[field]||'')}</textarea><div class="synthesis-edit-pmids">${evidenceUiText('Locked sources','Fonti bloccate')}: ${x?.pmids?.length?pmidLinks(x.pmids):evidenceUiText('none','nessuna')}</div></div>`).join('');
   }
   function openSynthesisEditor(){
     const s=currentEvidenceSynthesis;
-    if(!s){setStatus('synthesisStatus','Load a saved synthesis before editing.','error');return;}
+    if(!s){setStatus('synthesisStatus',evidenceUiText('Load a saved synthesis before editing.','Carica prima una sintesi salvata.'),'error');return;}
     $('editOverallInterpretation').value=s.overall_interpretation||'';
     $('editHumanClinical').value=s.human_clinical||'';
     $('editReviewsMeta').value=s.reviews_meta_analyses||'';
@@ -508,7 +511,7 @@
     $('editResearchGaps').value=(Array.isArray(s.research_gaps)?s.research_gaps:[]).join('\n');
     $('editBottomLine').value=s.bottom_line||'';
     $('evidenceSynthesisEditor').hidden=false;
-    setStatus('synthesisEditStatus','Editing the saved synthesis. PMID associations and evidence counts are locked.');
+    setStatus('synthesisEditStatus',evidenceUiText('Editing the saved synthesis. PMID associations and evidence counts are locked.','Modifica della sintesi salvata. Le associazioni PMID e i conteggi delle evidenze restano bloccati.'));
     $('evidenceSynthesisEditor').scrollIntoView({behavior:'smooth',block:'start'});
   }
   function closeSynthesisEditor(){
@@ -516,7 +519,7 @@
   }
   async function saveSynthesisEdit(){
     const area=$('evidenceArea').value;
-    if(!area||!currentEvidenceSynthesis){setStatus('synthesisEditStatus','Load a saved synthesis first.','error');return;}
+    if(!area||!currentEvidenceSynthesis){setStatus('synthesisEditStatus',evidenceUiText('Load a saved synthesis first.','Carica prima una sintesi salvata.'),'error');return;}
     const findingEdits=[...document.querySelectorAll('#editMainFindings textarea[data-claim-field="finding"]')].map(el=>({index:Number(el.dataset.index),text:el.value.trim()}));
     const conflictEdits=[...document.querySelectorAll('#editConflictingEvidence textarea[data-claim-field="issue"]')].map(el=>({index:Number(el.dataset.index),text:el.value.trim()}));
     const payload={
@@ -532,14 +535,14 @@
       bottom_line:$('editBottomLine').value.trim()
     };
     const btn=$('evidenceSaveSynthesisEdit');btn.disabled=true;
-    setStatus('synthesisEditStatus','Saving manual scientific corrections…');
+    setStatus('synthesisEditStatus',evidenceUiText('Saving manual scientific corrections…','Salvataggio delle correzioni scientifiche manuali…'));
     try{
       const d=await api('/api/review/evidence/synthesis-edit',payload);
       currentEvidenceSynthesis=d.synthesis||null;
       $('evidenceSynthesis').innerHTML=synthesisHtml(currentEvidenceSynthesis);
       $('evidenceEditSynthesis').disabled=!currentEvidenceSynthesis;
       closeSynthesisEditor();
-      setStatus('synthesisStatus','Manual synthesis revision saved. Review and approval are required again.','ok');
+      setStatus('synthesisStatus',evidenceUiText('Manual synthesis revision saved. Review and approval are required again.','Revisione manuale della sintesi salvata. Sono nuovamente richieste revisione e approvazione.'),'ok');
       await loadEvidenceReview();
       await loadEvidenceConclusion();
       await loadPublicEvidence();
