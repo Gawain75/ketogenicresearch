@@ -1771,25 +1771,50 @@ async function handleEvidenceAutomation(request,env){
   if(request.method==="GET"){
     const snap=await evidenceAutoSnapshot(request,env);
     const areas=[];
+    let areasRequiringAttention=0;
     for(const x of snap.rows){
-      let reviewStatus="draft", approvalCurrent=false, hasSynthesis=false;
-      if(x.remaining===0){
-        const synthesis=await env.SITE_ADMIN.get(EVIDENCE_LAB_SYNTHESIS_PREFIX+x.slug,"json").catch(()=>null);
-        hasSynthesis=!!synthesis;
-        const review={...evidenceReviewDefault(),...((await env.SITE_ADMIN.get(EVIDENCE_LAB_REVIEW_PREFIX+x.slug,"json").catch(()=>null))||{})};
-        reviewStatus=String(review.status||"draft");
-        if(hasSynthesis&&reviewStatus==="approved"&&review.approved_snapshot){
-          const st=await evidenceLabState(env,x.slug);
-          const currentPmids=(st.processed||[]).map(String).sort();
-          const approvedPmids=(review.approved_snapshot.processed_pmids||[]).map(String).sort();
-          approvalCurrent=currentPmids.length===approvedPmids.length&&currentPmids.every((v,i)=>v===approvedPmids[i]);
-        }
+      const review={...evidenceReviewDefault(),...((await env.SITE_ADMIN.get(EVIDENCE_LAB_REVIEW_PREFIX+x.slug,"json").catch(()=>null))||{})};
+      const reviewStatus=String(review.status||"draft");
+      const approved=review.approved_snapshot||null;
+      const approvedCount=Number(approved?.cards_processed_current ?? (Array.isArray(approved?.processed_pmids)?approved.processed_pmids.length:0));
+      const newStudies=approved?Math.max(0,Number(x.processed||0)-approvedCount):0;
+
+      // Read a saved synthesis only when it can affect an attention badge/status.
+      let synthesis=null;
+      if(x.remaining===0 || approved || reviewStatus==="reviewed"){
+        synthesis=await env.SITE_ADMIN.get(EVIDENCE_LAB_SYNTHESIS_PREFIX+x.slug,"json").catch(()=>null);
       }
-      const status=x.remaining>0?"in_progress":(hasSynthesis&&reviewStatus==="approved"&&approvalCurrent?"completed":"needs_review");
+      const hasSynthesis=!!synthesis;
+      const approvedAt=review.approved_at?Date.parse(review.approved_at):0;
+      const generatedAt=synthesis?.generated_at?Date.parse(synthesis.generated_at):0;
+      const editedAt=synthesis?.manual_revision?.edited_at?Date.parse(synthesis.manual_revision.edited_at):0;
+      const synthesisUpdated=!!(approved && approvedAt && (generatedAt>approvedAt || editedAt>approvedAt));
+
+      let attention="none";
+      if(approved && newStudies>0) attention="new_studies";
+      else if(approved && synthesisUpdated) attention="updated_synthesis";
+      else if(x.remaining===0 && hasSynthesis && reviewStatus!=="approved") attention="needs_review";
+      else if(approved && reviewStatus==="approved") attention="up_to_date";
+
+      const attentionRequired=["new_studies","updated_synthesis","needs_review"].includes(attention);
+      if(attentionRequired)areasRequiringAttention++;
+
+      // Current approval is valid only when the approved baseline still covers the processed corpus
+      // and no newer synthesis/manual revision exists.
+      const approvalCurrent=!!(approved && reviewStatus==="approved" && newStudies===0 && !synthesisUpdated);
+      const status=x.remaining>0?"in_progress":(hasSynthesis&&approvalCurrent?"completed":"needs_review");
       const percent=x.total>0?Math.round((x.processed/x.total)*1000)/10:100;
-      areas.push({slug:x.slug,label:x.label,total:x.total,processed:x.processed,remaining:x.remaining,percent,status,review_status:reviewStatus,approval_current:approvalCurrent,has_synthesis:hasSynthesis,today_attempted:x.today_attempted,today_processed:x.today_processed,weight:x.weight});
+
+      areas.push({
+        slug:x.slug,label:x.label,total:x.total,processed:x.processed,remaining:x.remaining,percent,status,
+        review_status:reviewStatus,approval_current:approvalCurrent,has_synthesis:hasSynthesis,
+        attention,attention_required:attentionRequired,new_studies_since_approval:newStudies,
+        synthesis_updated_since_approval:synthesisUpdated,
+        approved_at:review.approved_at||null,
+        today_attempted:x.today_attempted,today_processed:x.today_processed,weight:x.weight
+      });
     }
-    return jsonResponse({enabled:!!env.EVIDENCE_AUTOMATION_SECRET,free_only:true,config:snap.cfg,today:snap.ledger,incomplete_areas:snap.incomplete.length,next_area:snap.next?.slug||null,next_area_label:snap.next?.label||null,next_provider:snap.next_provider,providers_configured:{groq:!!env.GROQ_API_KEY,openrouter:!!env.OPENROUTER_API_KEY,cloudflare:!!(snap.cfg.cloudflare_free_enabled&&env.AI&&typeof env.AI.run==="function")},areas});
+    return jsonResponse({enabled:!!env.EVIDENCE_AUTOMATION_SECRET,free_only:true,config:snap.cfg,today:snap.ledger,incomplete_areas:snap.incomplete.length,areas_requiring_attention:areasRequiringAttention,next_area:snap.next?.slug||null,next_area_label:snap.next?.label||null,next_provider:snap.next_provider,providers_configured:{groq:!!env.GROQ_API_KEY,openrouter:!!env.OPENROUTER_API_KEY,cloudflare:!!(snap.cfg.cloudflare_free_enabled&&env.AI&&typeof env.AI.run==="function")},areas});
   }
   const body=await request.json().catch(()=>({})); if(body.action!=="run")return jsonResponse({error:"Unsupported automation action."},400);
   const out=await evidenceAutoRunOne(request,env); return jsonResponse(out,out.ok?200:503);
