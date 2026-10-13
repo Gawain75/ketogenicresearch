@@ -230,6 +230,28 @@
   function saveExtractionIfVisible(){if(!$('panel-extraction').hidden)saveExtraction();}
 
   let evidenceAreas=[];
+  let evidenceAreaLoadTimer=null;
+  let evidenceAreaLoadSeq=0;
+  async function loadSelectedEvidenceArea(){
+    const area=$('evidenceArea').value;
+    const seq=++evidenceAreaLoadSeq;
+    if(!area)return;
+    // Serialize the heavier area-specific endpoints. This prevents rapid area
+    // switching from creating overlapping KV-heavy request bursts.
+    await refreshEvidence();
+    if(seq!==evidenceAreaLoadSeq||$('evidenceArea').value!==area)return;
+    await loadEvidenceSynthesis();
+    if(seq!==evidenceAreaLoadSeq||$('evidenceArea').value!==area)return;
+    await loadEvidenceMap();
+    if(seq!==evidenceAreaLoadSeq||$('evidenceArea').value!==area)return;
+    await loadContradictionExplorer();
+    if(seq!==evidenceAreaLoadSeq||$('evidenceArea').value!==area)return;
+    await loadEvidenceConclusion();
+    if(seq!==evidenceAreaLoadSeq||$('evidenceArea').value!==area)return;
+    await loadPublicEvidence();
+    if(seq!==evidenceAreaLoadSeq||$('evidenceArea').value!==area)return;
+    await loadPublishedQna();
+  }
   async function loadEvidenceAreas(){
     try{
       const d=await api('/api/review/evidence/areas');
@@ -239,13 +261,7 @@
       const savedArea=String(loadUiState().evidence_area||'');
       if(savedArea && evidenceAreas.some(a=>a.slug===savedArea)){
         sel.value=savedArea;
-        await refreshEvidence();
-        await loadEvidenceSynthesis();
-        await loadEvidenceMap();
-        await loadContradictionExplorer();
-        await loadEvidenceConclusion();
-        await loadPublicEvidence();
-        await loadPublishedQna();
+        await loadSelectedEvidenceArea();
       }
     }catch(e){setStatus('evidenceStatus',e.message,'error');}
   }
@@ -718,7 +734,14 @@
   $('evidenceEditSynthesis').addEventListener('click',openSynthesisEditor);
   $('evidenceSaveSynthesisEdit').addEventListener('click',saveSynthesisEdit);
   $('evidenceCancelSynthesisEdit').addEventListener('click',closeSynthesisEditor);
-  $('evidenceArea').addEventListener('change',()=>{currentEvidenceSynthesis=null;$('evidenceEditSynthesis').disabled=true;closeSynthesisEditor();evidenceAutoStop=true;saveUiState({evidence_area:$('evidenceArea').value||''});resetEvidenceMap();resetContradictionExplorer();resetEvidenceConclusion();resetPublicEvidence();resetAskEvidence();refreshEvidence();loadEvidenceSynthesis();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();loadPublicEvidence();loadPublishedQna();}); $('evidenceRefresh').addEventListener('click',()=>{refreshEvidence();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();loadPublicEvidence();}); $('evidenceProcess').addEventListener('click',processEvidence); $('evidenceAutoProcess').addEventListener('click',autoProcessEvidence); $('evidenceStopAuto').addEventListener('click',()=>{evidenceAutoStop=true;$('evidenceStopAuto').disabled=true;setStatus('evidenceStatus','Stopping after the current batch…');}); $('evidenceSynthesize').addEventListener('click',generateEvidenceSynthesis); $('evidenceLoadSynthesis').addEventListener('click',()=>{loadEvidenceSynthesis();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();loadPublicEvidence();}); $('evidenceMarkReviewed').addEventListener('click',()=>evidenceReviewAction('review')); $('evidenceApprove').addEventListener('click',()=>evidenceReviewAction('approve')); $('evidenceReopen').addEventListener('click',()=>evidenceReviewAction('reopen')); $('evidenceRefreshReview').addEventListener('click',()=>{loadEvidenceReview();loadEvidenceConclusion();loadPublicEvidence();}); $('publicEvidencePublish').addEventListener('click',()=>publicEvidenceAction('publish')); $('publicEvidenceUnpublish').addEventListener('click',()=>publicEvidenceAction('unpublish')); $('publicHeroFile').addEventListener('change',publicHeroFileChanged); $('publicHeroSave').addEventListener('click',savePublicHero); $('publicHeroRemove').addEventListener('click',removePublicHero); $('evidenceRefreshMap').addEventListener('click',loadEvidenceMap); $('evidenceRefreshContradictions').addEventListener('click',()=>{loadContradictionExplorer();loadEvidenceConclusion();}); $('evidenceRefreshConclusion').addEventListener('click',loadEvidenceConclusion); $('askEvidenceSubmit').addEventListener('click',askEvidence); $('askEvidencePublish').addEventListener('click',publishAskEvidence); $('askEvidenceClear').addEventListener('click',()=>{$('askEvidenceQuestion').value='';resetAskEvidence();}); $('askEvidenceQuestion').addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')askEvidence();}); $('evidenceMapClass').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapRelevance').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapType').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapDirection').addEventListener('change',applyEvidenceMapFilters);
+  $('evidenceArea').addEventListener('change',()=>{
+    currentEvidenceSynthesis=null;$('evidenceEditSynthesis').disabled=true;closeSynthesisEditor();
+    evidenceAutoStop=true;saveUiState({evidence_area:$('evidenceArea').value||''});
+    resetEvidenceMap();resetContradictionExplorer();resetEvidenceConclusion();resetPublicEvidence();resetAskEvidence();
+    evidenceAreaLoadSeq++;
+    if(evidenceAreaLoadTimer)clearTimeout(evidenceAreaLoadTimer);
+    evidenceAreaLoadTimer=setTimeout(()=>{evidenceAreaLoadTimer=null;loadSelectedEvidenceArea();},250);
+  }); $('evidenceRefresh').addEventListener('click',()=>{loadSelectedEvidenceArea();}); $('evidenceProcess').addEventListener('click',processEvidence); $('evidenceAutoProcess').addEventListener('click',autoProcessEvidence); $('evidenceStopAuto').addEventListener('click',()=>{evidenceAutoStop=true;$('evidenceStopAuto').disabled=true;setStatus('evidenceStatus','Stopping after the current batch…');}); $('evidenceSynthesize').addEventListener('click',generateEvidenceSynthesis); $('evidenceLoadSynthesis').addEventListener('click',()=>{loadEvidenceSynthesis();loadEvidenceMap();loadContradictionExplorer();loadEvidenceConclusion();loadPublicEvidence();}); $('evidenceMarkReviewed').addEventListener('click',()=>evidenceReviewAction('review')); $('evidenceApprove').addEventListener('click',()=>evidenceReviewAction('approve')); $('evidenceReopen').addEventListener('click',()=>evidenceReviewAction('reopen')); $('evidenceRefreshReview').addEventListener('click',()=>{loadEvidenceReview();loadEvidenceConclusion();loadPublicEvidence();}); $('publicEvidencePublish').addEventListener('click',()=>publicEvidenceAction('publish')); $('publicEvidenceUnpublish').addEventListener('click',()=>publicEvidenceAction('unpublish')); $('publicHeroFile').addEventListener('change',publicHeroFileChanged); $('publicHeroSave').addEventListener('click',savePublicHero); $('publicHeroRemove').addEventListener('click',removePublicHero); $('evidenceRefreshMap').addEventListener('click',loadEvidenceMap); $('evidenceRefreshContradictions').addEventListener('click',()=>{loadContradictionExplorer();loadEvidenceConclusion();}); $('evidenceRefreshConclusion').addEventListener('click',loadEvidenceConclusion); $('askEvidenceSubmit').addEventListener('click',askEvidence); $('askEvidencePublish').addEventListener('click',publishAskEvidence); $('askEvidenceClear').addEventListener('click',()=>{$('askEvidenceQuestion').value='';resetAskEvidence();}); $('askEvidenceQuestion').addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')askEvidence();}); $('evidenceMapClass').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapRelevance').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapType').addEventListener('change',applyEvidenceMapFilters); $('evidenceMapDirection').addEventListener('change',applyEvidenceMapFilters);
 
   bindProjectToForm(); renderStudies(); renderMeta();
   showStep('evidence');
