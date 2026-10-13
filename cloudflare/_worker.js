@@ -554,8 +554,9 @@ async function evidenceLabState(env,slug){
 }
 async function handleEvidenceAreas(request,env){
   const idx=await evidenceLabIndex(request,env);
-  const areas=[];
-  for(const a of idx.areas){ const st=await evidenceLabState(env,a.slug); areas.push({slug:a.slug,label:a.label,total:a.count,processed:(st.processed||[]).length,failed:(st.failed||[]).length,updated_at:st.updated_at}); }
+  // The area selector only needs static index metadata. Do not read one KV state
+  // per clinical area here: selected-area status is loaded separately by /status.
+  const areas=idx.areas.map(a=>({slug:a.slug,label:a.label,total:a.count}));
   return jsonResponse({generated_at:idx.generated_at,areas});
 }
 async function handleEvidenceStatus(request,env){
