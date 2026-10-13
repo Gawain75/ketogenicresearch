@@ -1,45 +1,11 @@
 {
-  "generated_at": "2026-10-12T03:34:21+00:00",
+  "generated_at": "2026-10-13T03:32:49+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
-  "auto_approved_count": 1,
+  "auto_approved_count": 0,
   "excluded_count": 118,
   "records": [
-    {
-      "pmid": "42858216",
-      "title": "The Gut Microbiota-Epilepsy Axis: Bibliometric Trends, Mechanistic Insights, and Microbiota-Targeted Next-Generation Therapeutic Opportunities.",
-      "authors": [
-        "Khan A",
-        "Ullah Z",
-        "Siraj M",
-        "Younas S",
-        "Wahab S",
-        "Waris A",
-        "Hong ST"
-      ],
-      "journal": "Molecular neurobiology",
-      "date": "2026-10-10",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1007/s12035-026-06227-7",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42858216/",
-      "doi_url": "https://doi.org/10.1007/s12035-026-06227-7",
-      "pmc_url": "",
-      "areas": [
-        "Gut Microbiome",
-        "Epilepsy"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
-      "source": "PubMed",
-      "first_seen": "2026-10-12",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
     {
       "pmid": "42826040",
       "title": "The Ketogenic Diet Improved Liver Health in Trial, But What Does That Mean in the Real World?",
