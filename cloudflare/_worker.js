@@ -293,6 +293,58 @@ async function groqJsonWithUsage(env, messages) {
   return { value: extractJsonObject(data?.choices?.[0]?.message?.content || ""), usage };
 }
 
+
+function evidenceAiUsage(data){
+  const u=data?.usage||{};
+  const prompt=Math.max(0,Number(u.prompt_tokens??u.input_tokens??0)||0);
+  const completion=Math.max(0,Number(u.completion_tokens??u.output_tokens??0)||0);
+  const total=Math.max(0,Number(u.total_tokens??(prompt+completion))||0);
+  return {prompt_tokens:prompt,completion_tokens:completion,total_tokens:total,calls:1};
+}
+function evidenceAiError(provider,status,detail){
+  const e=new Error(`${provider} AI service error (${status})${detail?`: ${String(detail).slice(0,700)}`:""}.`);
+  e.provider=provider;e.status=Number(status)||0;return e;
+}
+async function openRouterFreeJsonWithUsage(env,messages){
+  if(!env.OPENROUTER_API_KEY)throw new Error("OPENROUTER_API_KEY is not configured in Cloudflare.");
+  const model=String(env.OPENROUTER_FREE_MODEL||"nvidia/nemotron-3-ultra-550b-a55b:free").trim();
+  if(!(model.endsWith(":free")||model==="openrouter/free"))throw new Error("OPENROUTER_FREE_MODEL must be a free-only OpenRouter model (:free) or openrouter/free.");
+  let r;
+  try{
+    r=await fetch("https://openrouter.ai/api/v1/chat/completions",{method:"POST",headers:{"Authorization":`Bearer ${env.OPENROUTER_API_KEY}`,"Content-Type":"application/json","HTTP-Referer":"https://ketogenicresearch.org","X-Title":"Ketogenic Research Hub Evidence Lab"},body:JSON.stringify({model,temperature:0.1,max_tokens:1200,messages})});
+  }catch(e){const x=new Error(`OpenRouter network error: ${e?.message||"request failed"}.`);x.provider="openrouter";throw x;}
+  if(!r.ok){let detail="";try{const j=await r.json();detail=String(j?.error?.message||j?.message||"");}catch{try{detail=await r.text();}catch{}}throw evidenceAiError("OpenRouter",r.status,detail);}
+  const data=await r.json();
+  return {value:extractJsonObject(data?.choices?.[0]?.message?.content||""),usage:evidenceAiUsage(data),provider:"openrouter",model};
+}
+function cloudflareFreeModelRates(model){
+  // Neuron conversion from Cloudflare's published per-model pricing. Only models
+  // intentionally allowed for the free fallback are accepted here.
+  const rates={
+    "@cf/zai-org/glm-4.7-flash":{input:5500,output:36400},
+    "@cf/google/gemma-4-26b-a4b-it":{input:9091,output:27273}
+  };
+  return rates[model]||null;
+}
+async function cloudflareFreeJsonWithUsage(env,messages){
+  if(!env.AI||typeof env.AI.run!=="function")throw new Error("Workers AI binding AI is not configured in Cloudflare Pages.");
+  const model=String(env.EVIDENCE_AUTO_CF_MODEL||"@cf/zai-org/glm-4.7-flash").trim();
+  const rates=cloudflareFreeModelRates(model);
+  if(!rates)throw new Error("EVIDENCE_AUTO_CF_MODEL is not in the Evidence Lab free-only allowlist.");
+  let data;
+  try{data=await env.AI.run(model,{messages,temperature:0.1,max_completion_tokens:1200,stream:false});}
+  catch(e){const x=new Error(`Cloudflare Workers AI error: ${e?.message||"request failed"}.`);x.provider="cloudflare";x.status=Number(e?.status||e?.code||0)||0;throw x;}
+  const content=String(data?.choices?.[0]?.message?.content??data?.response??data?.result?.response??"");
+  const usage=evidenceAiUsage(data);
+  usage.estimated_neurons=Math.ceil((usage.prompt_tokens*rates.input+usage.completion_tokens*rates.output)/1000000);
+  return {value:extractJsonObject(content),usage,provider:"cloudflare",model};
+}
+async function evidenceExtractionJsonWithUsage(env,provider,messages){
+  if(provider==="openrouter")return openRouterFreeJsonWithUsage(env,messages);
+  if(provider==="cloudflare")return cloudflareFreeJsonWithUsage(env,messages);
+  const out=await groqJsonWithUsage(env,messages);return {...out,provider:"groq",model:env.GROQ_MODEL||"openai/gpt-oss-120b"};
+}
+
 async function groqJsonLimited(env, messages, maxCompletionTokens=1100) {
   if (!env.GROQ_API_KEY) throw new Error("GROQ_API_KEY is not configured in Cloudflare.");
   const endpoint="https://api.groq.com/openai/v1/chat/completions";
@@ -1531,13 +1583,36 @@ async function handleEvidenceProcess(request,env){
   const now=new Date().toISOString();
   const fallback=src=>({schema_version:EVIDENCE_LAB_SCHEMA_VERSION,pmid:String(src.pmid),publication_type:"other",study_design:"not extracted",evidence_domain:"other",study_purpose:"other",population:"not reported",sample_size:null,sample_size_details:"not reported",intervention:"not reported",comparator:"not reported",duration:"not reported",primary_outcomes:[],secondary_outcomes:[],effect_direction:"not_reported",statistical_significance:"not_reported",randomized:"not_applicable",controlled:"not_applicable",time_orientation:"not_applicable",population_phenotype:"not reported",review_studies_included:null,review_participants:null,review_study_types:"not reported",pooled_effect:"not reported",heterogeneity:"not reported",risk_of_bias_or_certainty:"not reported",animal_species:"not applicable",animal_model:"not applicable",mechanistic_targets:[],main_result:"AI extraction pending",limitations:["not reported"],source_level:abstracts[src.pmid]?"abstract":"metadata",extraction_confidence:"low"});
   const extracted=new Map();
-  const groqUsage={prompt_tokens:0,completion_tokens:0,total_tokens:0,calls:0};
+  const aiProvider=String(body.automation_ai_provider||"groq").toLowerCase();
+  const aiUsage={provider:aiProvider,model:"",prompt_tokens:0,completion_tokens:0,total_tokens:0,calls:0,estimated_neurons:0};
   const attemptedPmids=new Set();
   const automationTokenBudget=Math.max(0,Number(body.automation_token_budget_remaining||0));
   const automationCallReserve=Math.max(500,Number(body.automation_token_call_reserve||0));
-  let stoppedForTokenBudget=false;
-  const addGroqUsage=u=>{groqUsage.prompt_tokens+=Math.max(0,Number(u?.prompt_tokens||0));groqUsage.completion_tokens+=Math.max(0,Number(u?.completion_tokens||0));groqUsage.total_tokens+=Math.max(0,Number(u?.total_tokens||0));groqUsage.calls+=Math.max(0,Number(u?.calls||0));};
-  const tokenBudgetAllowsCall=()=>!automationTokenBudget || (groqUsage.total_tokens+automationCallReserve)<=automationTokenBudget;
+  const automationProviderCallBudget=Math.max(0,Number(body.automation_provider_call_budget_remaining||0));
+  const automationNeuronBudget=Math.max(0,Number(body.automation_neuron_budget_remaining||0));
+  const automationNeuronCallReserve=Math.max(1,Number(body.automation_neuron_call_reserve||250));
+  let stoppedForTokenBudget=false,providerExhausted=false,providerLastStatus=0;
+  const addAiUsage=u=>{aiUsage.prompt_tokens+=Math.max(0,Number(u?.prompt_tokens||0));aiUsage.completion_tokens+=Math.max(0,Number(u?.completion_tokens||0));aiUsage.total_tokens+=Math.max(0,Number(u?.total_tokens||0));aiUsage.calls+=Math.max(0,Number(u?.calls||0));aiUsage.estimated_neurons+=Math.max(0,Number(u?.estimated_neurons||0));};
+  const providerBudgetAllowsCall=()=>{
+    if(aiProvider==="groq")return !automationTokenBudget || (aiUsage.total_tokens+automationCallReserve)<=automationTokenBudget;
+    if(aiProvider==="openrouter")return !automationProviderCallBudget || aiUsage.calls<automationProviderCallBudget;
+    if(aiProvider==="cloudflare")return (!automationProviderCallBudget||aiUsage.calls<automationProviderCallBudget)&&(!automationNeuronBudget||(aiUsage.estimated_neurons+automationNeuronCallReserve)<=automationNeuronBudget);
+    return false;
+  };
+  const callExtractionAi=async messages=>{
+    if(!providerBudgetAllowsCall()){stoppedForTokenBudget=true;return null;}
+    // Count the request even when the provider rejects it, so a broken/rate-limited
+    // free provider cannot be hammered indefinitely by the scheduler.
+    aiUsage.calls+=1;
+    try{
+      const gr=await evidenceExtractionJsonWithUsage(env,aiProvider,messages);
+      aiUsage.calls-=1;addAiUsage(gr.usage);aiUsage.model=String(gr.model||"");return gr;
+    }catch(e){
+      providerLastStatus=Number(e?.status||0)||0;
+      if(providerLastStatus===402||providerLastStatus===403||providerLastStatus===429)providerExhausted=true;
+      throw e;
+    }
+  };
 
   // Keep each AI request deliberately small. Large multi-abstract calls were fragile on
   // Cloudflare/Groq and could make the whole request fail with a platform 500.
@@ -1551,34 +1626,36 @@ CLINICAL TRIAL / OBSERVATIONAL fields: randomized (yes/no/not_reported/not_appli
 SYSTEMATIC REVIEW / META-ANALYSIS fields: review_studies_included (number or null), review_participants (number or null), review_study_types, pooled_effect, heterogeneity, risk_of_bias_or_certainty. Do not treat a review as if it were a single trial.
 PRECLINICAL fields: animal_species, animal_model, mechanistic_targets (array).
 For fields not applicable to a publication type use "not applicable" or null/[] as appropriate. Never invent sample size, randomization, significance, effect estimates, limitations or certainty. If the abstract does not report something, use "not reported". Preserve whether evidence is human clinical versus animal/preclinical. main_result must be factual, concise, and must not turn association into causation.`
-  if(env.GROQ_API_KEY){
+  const providerConfigured=aiProvider==="groq"?!!env.GROQ_API_KEY:aiProvider==="openrouter"?!!env.OPENROUTER_API_KEY:aiProvider==="cloudflare"?!!(env.AI&&typeof env.AI.run==="function"):false;
+  if(providerConfigured){
     for(let i=0;i<todo.length;i+=2){
-      if(!tokenBudgetAllowsCall()){stoppedForTokenBudget=true;warnings.push("Automation token budget headroom reached; remaining records were left for the next scheduled run.");break;}
+      if(!providerBudgetAllowsCall()){stoppedForTokenBudget=true;warnings.push(`Automation ${aiProvider} free-budget headroom reached; remaining records were left for the next scheduled run.`);break;}
       const group=todo.slice(i,i+2);
       group.forEach(x=>attemptedPmids.add(String(x.pmid)));
       const packet=group.map(x=>({pmid:String(x.pmid),title:x.title,year:x.year,doi:x.doi,evidence_label:x.evidence,source:abstracts[x.pmid]?"PubMed abstract":"metadata only",abstract:String(abstracts[x.pmid]||"").slice(0,6500)}));
       try{
-        const gr=await groqJsonWithUsage(env,[{role:"system",content:aiSystem},{role:"user",content:JSON.stringify(packet)}]);
-        addGroqUsage(gr.usage);
+        const gr=await callExtractionAi([{role:"system",content:aiSystem},{role:"user",content:JSON.stringify(packet)}]);
+        if(!gr)break;
         const out=gr.value;
         for(const c of (Array.isArray(out?.cards)?out.cards:[])) if(c?.pmid) extracted.set(String(c.pmid),c);
       }catch(e){
         warnings.push(`AI batch retry for PMID ${group.map(x=>x.pmid).join(", ")}: ${e?.message||e}`);
+        if(providerExhausted){warnings.push(`${aiProvider} free quota/rate limit reached; fallback will continue with the next free provider on the next scheduler run.`);break;}
         // Retry individually so one malformed/oversized record cannot block its neighbour.
         for(const x of group){
           const one={pmid:String(x.pmid),title:x.title,year:x.year,doi:x.doi,evidence_label:x.evidence,source:abstracts[x.pmid]?"PubMed abstract":"metadata only",abstract:String(abstracts[x.pmid]||"").slice(0,5000)};
           try{
-            if(!tokenBudgetAllowsCall()){stoppedForTokenBudget=true;warnings.push(`Automation token budget headroom reached before retrying PMID ${x.pmid}.`);break;}
-            const gr=await groqJsonWithUsage(env,[{role:"system",content:aiSystem},{role:"user",content:JSON.stringify([one])}]);
-            addGroqUsage(gr.usage);
+            if(!providerBudgetAllowsCall()){stoppedForTokenBudget=true;warnings.push(`Automation ${aiProvider} free-budget headroom reached before retrying PMID ${x.pmid}.`);break;}
+            const gr=await callExtractionAi([{role:"system",content:aiSystem},{role:"user",content:JSON.stringify([one])}]);
+            if(!gr)break;
             const retry=gr.value;
             const card=Array.isArray(retry?.cards)?retry.cards.find(c=>String(c?.pmid)===String(x.pmid)):null;
             if(card) extracted.set(String(x.pmid),card); else warnings.push(`AI returned no card for PMID ${x.pmid}.`);
-          }catch(re){warnings.push(`AI extraction failed for PMID ${x.pmid}: ${re?.message||re}`);}
+          }catch(re){warnings.push(`AI extraction failed for PMID ${x.pmid}: ${re?.message||re}`);if(providerExhausted)break;}
         }
       }
     }
-  }else warnings.push("GROQ_API_KEY is not configured; cards were saved for later AI extraction.");
+  }else warnings.push(`${aiProvider} provider is not configured; cards were saved for later AI extraction.`);
 
   let processedNow=0;
   for(const src of todo){
@@ -1594,18 +1671,48 @@ For fields not applicable to a publication type use "not applicable" or null/[] 
   if(compactNew.length)await evidenceCompactPutMany(env,slug,compactNew);
   const next={processed:[...done],failed,updated_at:now};
   await env.SITE_ADMIN.put(EVIDENCE_LAB_STATE_PREFIX+slug,JSON.stringify(next));
-  return jsonResponse({ok:true,processed_now:processedNow,attempted:env.GROQ_API_KEY?attemptedPmids.size:todo.length,processed:done.size,remaining:Math.max(0,area.count-done.size),large_corpus:area.count>EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD,warnings,groq_usage:groqUsage,token_budget_stopped:stoppedForTokenBudget});
+  const legacyGroqUsage=aiProvider==="groq"?{prompt_tokens:aiUsage.prompt_tokens,completion_tokens:aiUsage.completion_tokens,total_tokens:aiUsage.total_tokens,calls:aiUsage.calls}:{prompt_tokens:0,completion_tokens:0,total_tokens:0,calls:0};
+  return jsonResponse({ok:true,processed_now:processedNow,attempted:providerConfigured?attemptedPmids.size:todo.length,processed:done.size,remaining:Math.max(0,area.count-done.size),large_corpus:area.count>EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD,warnings,ai_provider:aiProvider,ai_usage:aiUsage,groq_usage:legacyGroqUsage,provider_exhausted:providerExhausted,provider_status:providerLastStatus,token_budget_stopped:stoppedForTokenBudget});
 }
 
 
 const EVIDENCE_AUTO_LEDGER_PREFIX="evidence-lab:v2:auto:ledger:";
 const EVIDENCE_AUTO_CURSOR_KEY="evidence-lab:v2:auto:cursor";
 function evidenceAutoInt(v,def,min,max){const n=Number(v);return Number.isFinite(n)?Math.max(min,Math.min(max,Math.floor(n))):def;}
-function evidenceAutoConfig(env){return {per_area_daily_cap:evidenceAutoInt(env.EVIDENCE_AUTO_AREA_DAILY_CAP,24,1,5000),batch_size:evidenceAutoInt(env.EVIDENCE_AUTO_BATCH_SIZE,6,1,10),daily_token_budget:evidenceAutoInt(env.EVIDENCE_AUTO_DAILY_TOKEN_BUDGET,120000,10000,50000000),token_call_reserve:evidenceAutoInt(env.EVIDENCE_AUTO_TOKEN_CALL_RESERVE,6000,500,50000)};}
+function evidenceAutoBool(v,def=false){if(v===undefined||v===null||v==="")return def;return ["1","true","yes","on"].includes(String(v).toLowerCase());}
+function evidenceAutoConfig(env){return {
+  per_area_daily_cap:evidenceAutoInt(env.EVIDENCE_AUTO_AREA_DAILY_CAP,24,1,5000),
+  batch_size:evidenceAutoInt(env.EVIDENCE_AUTO_BATCH_SIZE,6,1,10),
+  daily_token_budget:evidenceAutoInt(env.EVIDENCE_AUTO_DAILY_TOKEN_BUDGET,120000,10000,50000000),
+  token_call_reserve:evidenceAutoInt(env.EVIDENCE_AUTO_TOKEN_CALL_RESERVE,6000,500,50000),
+  openrouter_daily_call_cap:evidenceAutoInt(env.EVIDENCE_AUTO_OPENROUTER_DAILY_CALL_CAP,45,1,50),
+  cloudflare_daily_call_cap:evidenceAutoInt(env.EVIDENCE_AUTO_CF_DAILY_CALL_CAP,40,1,200),
+  cloudflare_daily_neuron_budget:evidenceAutoInt(env.EVIDENCE_AUTO_CF_DAILY_NEURON_BUDGET,6000,100,9000),
+  cloudflare_neuron_call_reserve:evidenceAutoInt(env.EVIDENCE_AUTO_CF_NEURON_CALL_RESERVE,250,10,2000),
+  cloudflare_free_enabled:evidenceAutoBool(env.EVIDENCE_AUTO_CF_FREE_ENABLED,false),
+  free_only:true
+};}
 function evidenceAutoDay(d=new Date()){return d.toISOString().slice(0,10);}
+function evidenceAutoProviderDefaults(){return {
+  groq:{calls:0,prompt_tokens:0,completion_tokens:0,total_tokens:0,blocked:false,last_error:null},
+  openrouter:{calls:0,prompt_tokens:0,completion_tokens:0,total_tokens:0,blocked:false,last_error:null},
+  cloudflare:{calls:0,prompt_tokens:0,completion_tokens:0,total_tokens:0,estimated_neurons:0,blocked:false,last_error:null}
+};}
 async function evidenceAutoLedger(env,day=evidenceAutoDay()){
   const v=await env.SITE_ADMIN.get(EVIDENCE_AUTO_LEDGER_PREFIX+day,"json").catch(()=>null);
-  return v&&typeof v==="object"?v:{date:day,attempted_total:0,processed_total:0,token_total:0,prompt_tokens:0,completion_tokens:0,groq_calls:0,areas:{},last_run_at:null,last_area:null,last_error:null};
+  const base=v&&typeof v==="object"?v:{date:day,attempted_total:0,processed_total:0,token_total:0,prompt_tokens:0,completion_tokens:0,groq_calls:0,areas:{},last_run_at:null,last_area:null,last_error:null};
+  const defs=evidenceAutoProviderDefaults(), existing=base.providers&&typeof base.providers==="object"?base.providers:{};
+  base.providers={groq:{...defs.groq,...(existing.groq||{})},openrouter:{...defs.openrouter,...(existing.openrouter||{})},cloudflare:{...defs.cloudflare,...(existing.cloudflare||{})}};
+  // Migrate today's pre-router Groq counters without double-counting on subsequent reads.
+  if(!base.providers_migrated){base.providers.groq.calls=Math.max(Number(base.providers.groq.calls||0),Number(base.groq_calls||0));base.providers.groq.prompt_tokens=Math.max(Number(base.providers.groq.prompt_tokens||0),Number(base.prompt_tokens||0));base.providers.groq.completion_tokens=Math.max(Number(base.providers.groq.completion_tokens||0),Number(base.completion_tokens||0));base.providers.groq.total_tokens=Math.max(Number(base.providers.groq.total_tokens||0),Number(base.token_total||0));base.providers_migrated=true;}
+  return base;
+}
+function evidenceAutoNextProvider(env,cfg,ledger){
+  const p=ledger.providers||evidenceAutoProviderDefaults();
+  if(env.GROQ_API_KEY&&!p.groq?.blocked&&Number(p.groq?.total_tokens||ledger.token_total||0)+cfg.token_call_reserve<=cfg.daily_token_budget)return "groq";
+  if(env.OPENROUTER_API_KEY&&!p.openrouter?.blocked&&Number(p.openrouter?.calls||0)<cfg.openrouter_daily_call_cap)return "openrouter";
+  if(cfg.cloudflare_free_enabled&&env.AI&&typeof env.AI.run==="function"&&!p.cloudflare?.blocked&&Number(p.cloudflare?.calls||0)<cfg.cloudflare_daily_call_cap&&Number(p.cloudflare?.estimated_neurons||0)+cfg.cloudflare_neuron_call_reserve<=cfg.cloudflare_daily_neuron_budget)return "cloudflare";
+  return null;
 }
 async function evidenceAutoSnapshot(request,env){
   if(!env.SITE_ADMIN)throw new Error("Evidence Lab storage (SITE_ADMIN) is not configured.");
@@ -1619,38 +1726,44 @@ async function evidenceAutoSnapshot(request,env){
   const incomplete=rows.filter(x=>x.remaining>0);
   const eligible=incomplete.filter(x=>x.today_attempted<cfg.per_area_daily_cap);
   const last=String(cursor.last_slug||""); const order=new Map(rows.map((x,i)=>[x.slug,i])); const lastIndex=order.has(last)?order.get(last):-1;
-  eligible.sort((a,b)=>{
-    const sa=a.today_attempted/a.weight, sb=b.today_attempted/b.weight;
-    if(sa!==sb)return sa-sb;
-    const da=(order.get(a.slug)-lastIndex+rows.length)%rows.length, db=(order.get(b.slug)-lastIndex+rows.length)%rows.length;
-    return da-db;
-  });
-  return {cfg,day,ledger,idx,rows,incomplete,eligible,next:eligible[0]||null};
+  eligible.sort((a,b)=>{const sa=a.today_attempted/a.weight,sb=b.today_attempted/b.weight;if(sa!==sb)return sa-sb;const da=(order.get(a.slug)-lastIndex+rows.length)%rows.length,db=(order.get(b.slug)-lastIndex+rows.length)%rows.length;return da-db;});
+  return {cfg,day,ledger,idx,rows,incomplete,eligible,next:eligible[0]||null,next_provider:evidenceAutoNextProvider(env,cfg,ledger)};
 }
 async function evidenceAutoRunOne(request,env){
   const snap=await evidenceAutoSnapshot(request,env), {cfg,ledger,day}=snap;
-  if(Number(ledger.token_total||0)+cfg.token_call_reserve>cfg.daily_token_budget)return {ok:true,reason:"daily_token_budget_reached",message:`Daily Evidence Lab Groq token budget reached (${ledger.token_total}/${cfg.daily_token_budget} tokens used).`,config:cfg,today:ledger};
+  const provider=snap.next_provider;
+  if(!provider)return {ok:true,reason:"all_free_ai_budgets_reached",message:"All configured zero-cost Evidence Lab AI budgets are exhausted or unavailable for today.",config:cfg,today:ledger,next_provider:null};
   const area=snap.next;
-  if(!area)return {ok:true,reason:snap.incomplete.length?"per_area_caps_reached":"all_complete",message:snap.incomplete.length?"All incomplete areas reached their per-area daily cap.":"All Evidence Lab areas are complete.",config:cfg,today:ledger};
+  if(!area)return {ok:true,reason:snap.incomplete.length?"per_area_caps_reached":"all_complete",message:snap.incomplete.length?"All incomplete areas reached their per-area daily cap.":"All Evidence Lab areas are complete.",config:cfg,today:ledger,next_provider:provider};
   const remainingAreaCap=Math.max(0,cfg.per_area_daily_cap-area.today_attempted);
   const batch=Math.max(1,Math.min(cfg.batch_size,remainingAreaCap,area.remaining));
-  const remainingTokenBudget=Math.max(0,cfg.daily_token_budget-Number(ledger.token_total||0));
-  const internal=new Request(new URL("/api/review/evidence/process",request.url).toString(),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({area:area.slug,batch,automation_token_budget_remaining:remainingTokenBudget,automation_token_call_reserve:cfg.token_call_reserve})});
+  const p=ledger.providers?.[provider]||{};
+  const body={area:area.slug,batch,automation_ai_provider:provider};
+  if(provider==="groq"){body.automation_token_budget_remaining=Math.max(0,cfg.daily_token_budget-Number(p.total_tokens||ledger.token_total||0));body.automation_token_call_reserve=cfg.token_call_reserve;}
+  if(provider==="openrouter")body.automation_provider_call_budget_remaining=Math.max(0,cfg.openrouter_daily_call_cap-Number(p.calls||0));
+  if(provider==="cloudflare"){body.automation_provider_call_budget_remaining=Math.max(0,cfg.cloudflare_daily_call_cap-Number(p.calls||0));body.automation_neuron_budget_remaining=Math.max(0,cfg.cloudflare_daily_neuron_budget-Number(p.estimated_neurons||0));body.automation_neuron_call_reserve=cfg.cloudflare_neuron_call_reserve;}
+  const internal=new Request(new URL("/api/review/evidence/process",request.url).toString(),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
   let parsed={}; let status=500;
-  try{const response=await handleEvidenceProcess(internal,env);status=response.status;parsed=await response.json();}
-  catch(e){parsed={error:e?.message||String(e)};}
+  try{const response=await handleEvidenceProcess(internal,env);status=response.status;parsed=await response.json();}catch(e){parsed={error:e?.message||String(e)};}
   const attempted=Math.max(0,Number(parsed.attempted??batch)||0), processedNow=Math.max(0,Number(parsed.processed_now||0));
   const entry=ledger.areas?.[area.slug]||{attempted:0,processed:0,runs:0};
   ledger.areas={...(ledger.areas||{}),[area.slug]:{attempted:Number(entry.attempted||0)+attempted,processed:Number(entry.processed||0)+processedNow,runs:Number(entry.runs||0)+1,last_run_at:new Date().toISOString()}};
-  const gu=parsed.groq_usage||{};
+  const au=parsed.ai_usage||{}; const providerEntry={...(ledger.providers?.[provider]||{})};
+  providerEntry.calls=Number(providerEntry.calls||0)+Math.max(0,Number(au.calls||0));providerEntry.prompt_tokens=Number(providerEntry.prompt_tokens||0)+Math.max(0,Number(au.prompt_tokens||0));providerEntry.completion_tokens=Number(providerEntry.completion_tokens||0)+Math.max(0,Number(au.completion_tokens||0));providerEntry.total_tokens=Number(providerEntry.total_tokens||0)+Math.max(0,Number(au.total_tokens||0));
+  if(provider==="cloudflare")providerEntry.estimated_neurons=Number(providerEntry.estimated_neurons||0)+Math.max(0,Number(au.estimated_neurons||0));
+  if(parsed.provider_exhausted){providerEntry.blocked=true;providerEntry.last_error=`HTTP ${parsed.provider_status||"rate/quota"}`;}
+  ledger.providers={...(ledger.providers||{}),[provider]:providerEntry};
+  if(provider==="groq"){ledger.token_total=Number(providerEntry.total_tokens||0);ledger.prompt_tokens=Number(providerEntry.prompt_tokens||0);ledger.completion_tokens=Number(providerEntry.completion_tokens||0);ledger.groq_calls=Number(providerEntry.calls||0);}
   ledger.attempted_total=Number(ledger.attempted_total||0)+attempted;ledger.processed_total=Number(ledger.processed_total||0)+processedNow;
-  ledger.token_total=Number(ledger.token_total||0)+Math.max(0,Number(gu.total_tokens||0));ledger.prompt_tokens=Number(ledger.prompt_tokens||0)+Math.max(0,Number(gu.prompt_tokens||0));ledger.completion_tokens=Number(ledger.completion_tokens||0)+Math.max(0,Number(gu.completion_tokens||0));ledger.groq_calls=Number(ledger.groq_calls||0)+Math.max(0,Number(gu.calls||0));
-  ledger.last_run_at=new Date().toISOString();ledger.last_area=area.slug;ledger.last_error=status>=400?(parsed.error||`HTTP ${status}`):((parsed.warnings||[]).length&&!processedNow?String(parsed.warnings[0]):null);
+  ledger.last_run_at=new Date().toISOString();ledger.last_area=area.slug;ledger.last_provider=provider;ledger.last_error=status>=400?(parsed.error||`HTTP ${status}`):((parsed.warnings||[]).length&&!processedNow?String(parsed.warnings[0]):null);
   await env.SITE_ADMIN.put(EVIDENCE_AUTO_LEDGER_PREFIX+day,JSON.stringify(ledger));
   await env.SITE_ADMIN.put(EVIDENCE_AUTO_CURSOR_KEY,JSON.stringify({last_slug:area.slug,updated_at:ledger.last_run_at}));
-  if(status>=400)return {ok:false,error:parsed.error||`Evidence batch failed (${status})`,config:cfg,today:ledger,run:{area:area.slug,area_label:area.label,attempted,processed_now:processedNow,remaining:area.remaining,warnings:parsed.warnings||[],groq_usage:parsed.groq_usage||{},token_budget_stopped:!!parsed.token_budget_stopped}};
-  return {ok:true,config:cfg,today:ledger,run:{area:area.slug,area_label:area.label,attempted,processed_now:processedNow,remaining:parsed.remaining,warnings:parsed.warnings||[],groq_usage:parsed.groq_usage||{},token_budget_stopped:!!parsed.token_budget_stopped}};
+  const nextProvider=evidenceAutoNextProvider(env,cfg,ledger);
+  const run={area:area.slug,area_label:area.label,provider,attempted,processed_now:processedNow,remaining:parsed.remaining,warnings:parsed.warnings||[],ai_usage:au,provider_exhausted:!!parsed.provider_exhausted,token_budget_stopped:!!parsed.token_budget_stopped};
+  if(status>=400)return {ok:false,error:parsed.error||`Evidence batch failed (${status})`,config:cfg,today:ledger,next_provider:nextProvider,run};
+  return {ok:true,config:cfg,today:ledger,next_provider:nextProvider,run};
 }
+
 async function handleEvidenceAutomation(request,env){
   if(request.method==="GET"){
     const snap=await evidenceAutoSnapshot(request,env);
@@ -1673,7 +1786,7 @@ async function handleEvidenceAutomation(request,env){
       const percent=x.total>0?Math.round((x.processed/x.total)*1000)/10:100;
       areas.push({slug:x.slug,label:x.label,total:x.total,processed:x.processed,remaining:x.remaining,percent,status,review_status:reviewStatus,approval_current:approvalCurrent,has_synthesis:hasSynthesis,today_attempted:x.today_attempted,today_processed:x.today_processed,weight:x.weight});
     }
-    return jsonResponse({enabled:!!env.EVIDENCE_AUTOMATION_SECRET,config:snap.cfg,today:snap.ledger,incomplete_areas:snap.incomplete.length,next_area:snap.next?.slug||null,next_area_label:snap.next?.label||null,areas});
+    return jsonResponse({enabled:!!env.EVIDENCE_AUTOMATION_SECRET,free_only:true,config:snap.cfg,today:snap.ledger,incomplete_areas:snap.incomplete.length,next_area:snap.next?.slug||null,next_area_label:snap.next?.label||null,next_provider:snap.next_provider,providers_configured:{groq:!!env.GROQ_API_KEY,openrouter:!!env.OPENROUTER_API_KEY,cloudflare:!!(snap.cfg.cloudflare_free_enabled&&env.AI&&typeof env.AI.run==="function")},areas});
   }
   const body=await request.json().catch(()=>({})); if(body.action!=="run")return jsonResponse({error:"Unsupported automation action."},400);
   const out=await evidenceAutoRunOne(request,env); return jsonResponse(out,out.ok?200:503);
