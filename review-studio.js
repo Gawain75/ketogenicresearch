@@ -400,7 +400,9 @@
     const fav=(b.consistent_favorable_domains||[]).map(x=>x.label||x),mixed=(b.mixed_domains||[]).map(x=>x.label||x);
     const list=(a,empty)=>Array.isArray(a)&&a.length?`<ul>${a.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:`<p class="small">${esc(empty)}</p>`;
     const wn=b.whats_new||null;
-    const wnHtml=wn?.has_changes?`<div class="public-whats-new-preview"><h4>What’s new since the previous public brief</h4><p>${Number(wn.new_studies_count||0)} new studies${Number(wn.removed_studies_count||0)?` · ${Number(wn.removed_studies_count||0)} removed`:''}${wn.overall_interpretation_changed?' · interpretation updated':''}${wn.bottom_line_changed?' · bottom line updated':''}</p></div>`:'';
+    const wnCount=Number(wn?.new_studies_count||0);
+    const wnChanged=!!(wn?.main_findings_added?.length||wn?.conflicts_added?.length||wn?.overall_interpretation_changed||wn?.bottom_line_changed);
+    const wnHtml=wn?.has_changes?`<div class="public-whats-new-preview"><h4>What’s new since the previous public brief</h4><p>${wnCount>0?`${wnCount} new studies${Number(wn.removed_studies_count||0)?` · ${Number(wn.removed_studies_count||0)} removed`:''}`:`No new studies were added.${wnChanged?' The interpretation of existing evidence has changed.':''}`}${wn.overall_interpretation_changed&&wnCount>0?' · interpretation updated':''}${wn.bottom_line_changed&&wnCount>0?' · bottom line updated':''}</p></div>`:'';
     return `<div class="public-preview"><h4>${esc(b.area?.label||'Approved evidence brief')}</h4><p><strong>${esc(b.signal||'')}</strong> · maturity: ${esc(b.maturity||'—')} · ${Number(b.direct_human_studies||0)} direct human studies · ${Number(b.clinical_trials||0)} clinical trials</p><p>${esc(b.approved_overall_interpretation||b.interpretation||'')}</p>${wnHtml}<div class="public-preview-grid"><section><h4>Consistent favorable domains</h4>${list(fav,'None identified.')}</section><section><h4>Mixed / uncertain domains</h4>${list(mixed,'None identified.')}</section></div><p><strong>Clinical bottom line:</strong> ${esc(b.approved_bottom_line||'')}</p></div>`;
   }
   function renderPublicEvidence(d){
