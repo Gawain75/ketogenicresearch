@@ -1681,7 +1681,7 @@ const EVIDENCE_AUTO_CURSOR_KEY="evidence-lab:v2:auto:cursor";
 function evidenceAutoInt(v,def,min,max){const n=Number(v);return Number.isFinite(n)?Math.max(min,Math.min(max,Math.floor(n))):def;}
 function evidenceAutoBool(v,def=false){if(v===undefined||v===null||v==="")return def;return ["1","true","yes","on"].includes(String(v).toLowerCase());}
 function evidenceAutoConfig(env){return {
-  per_area_daily_cap:evidenceAutoInt(env.EVIDENCE_AUTO_AREA_DAILY_CAP,24,1,5000),
+  per_area_daily_cap:evidenceAutoInt(env.EVIDENCE_AUTO_AREA_DAILY_CAP,60,1,5000),
   batch_size:evidenceAutoInt(env.EVIDENCE_AUTO_BATCH_SIZE,6,1,10),
   daily_token_budget:evidenceAutoInt(env.EVIDENCE_AUTO_DAILY_TOKEN_BUDGET,120000,10000,50000000),
   token_call_reserve:evidenceAutoInt(env.EVIDENCE_AUTO_TOKEN_CALL_RESERVE,6000,500,50000),
