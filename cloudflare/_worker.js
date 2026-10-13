@@ -595,25 +595,69 @@ async function handleEvidenceContradictions(request,env){
   if(!slug)return jsonResponse({error:"Clinical area is required."},400);
   const idx=await evidenceLabIndex(request,env), area=idx.areas.find(a=>a.slug===slug);
   if(!area)return jsonResponse({error:"Clinical area not found."},404);
-  const st=await evidenceLabState(env,slug), human=[];
-  const processedIds=(st.processed||[]).map(String);
-  let workCards=[];
-  if(area.count>EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD || processedIds.length>EVIDENCE_LAB_LARGE_CORPUS_THRESHOLD){const compact=await evidenceCompactLoad(env,slug);workCards=processedIds.map(p=>compact.get(p)).filter(Boolean);}
-  else{for(const pmid of processedIds){const c=await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");if(c)workCards.push(c);}}
+
+  // Bounded source-locked retrieval.
+  // The previous implementation loaded the whole compact corpus (64 KV buckets) for large
+  // areas. That could intermittently exhaust Worker/KV resources and return HTTP 503.
+  // Contradiction Explorer is anchored to the current saved synthesis, so first use the
+  // PMIDs actually cited by that synthesis. This keeps the explorer aligned with the
+  // reviewed evidence state and makes the request cost proportional to the displayed evidence.
+  const saved=await env.SITE_ADMIN.get(EVIDENCE_LAB_SYNTHESIS_PREFIX+slug,"json");
+  if(!saved)return jsonResponse({error:"A saved synthesis is required before Contradiction Explorer is available."},409);
+
+  const cited=[...new Set([
+    ...(Array.isArray(saved.main_findings)?saved.main_findings.flatMap(x=>Array.isArray(x?.pmids)?x.pmids:[]):[]),
+    ...(Array.isArray(saved.conflicting_evidence)?saved.conflicting_evidence.flatMap(x=>Array.isArray(x?.pmids)?x.pmids:[]):[])
+  ].map(String).filter(Boolean))];
+
+  // Conservative fallback for older snapshots that predate structured claim citations.
+  // Use only direct-relevance PMIDs and keep the request bounded.
+  if(!cited.length && Array.isArray(saved.relevance_cards)){
+    for(const x of saved.relevance_cards){
+      if(String(x?.level||"")==="direct" && x?.pmid)cited.push(String(x.pmid));
+      if(cited.length>=40)break;
+    }
+  }
+
+  const pmids=[...new Set(cited)].slice(0,60);
+  const workCards=(await Promise.all(pmids.map(async pmid=>{
+    try{return await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");}
+    catch(_){return null;}
+  }))).filter(Boolean);
+
+  const human=[];
   for(const c of workCards){
     const pmid=String(c.pmid||"");
     if(!c || !(c.source_level==="abstract"||c.source_level==="full_text"))continue;
     const rel=evidenceRelevance(c,area.label), type=String(c.publication_type||"");
     if(rel.level!=="direct" || !["clinical_trial","observational","mechanistic_human","case_report_series"].includes(type))continue;
     const domains=evidenceOutcomeDomains(c);
-    human.push({pmid:String(c.pmid||pmid),title:String(c.title||""),year:c.year||null,publication_type:type,study_design:String(c.study_design||""),study_purpose:String(c.study_purpose||"other"),randomized:String(c.randomized||"not_reported"),controlled:String(c.controlled||"not_reported"),sample_size:c.sample_size??null,intervention:String(c.intervention||""),comparator:String(c.comparator||""),primary_outcomes:Array.isArray(c.primary_outcomes)?c.primary_outcomes:[],main_result:String(c.main_result||""),effect_direction:String(c.effect_direction||"not_reported"),domains:domains.map(domain=>({domain,direction:evidenceDomainDirection(c,domain)}))});
+    human.push({
+      pmid,title:String(c.title||""),year:c.year||null,publication_type:type,
+      study_design:String(c.study_design||""),study_purpose:String(c.study_purpose||"other"),
+      randomized:String(c.randomized||"not_reported"),controlled:String(c.controlled||"not_reported"),
+      sample_size:c.sample_size??null,intervention:String(c.intervention||""),
+      comparator:String(c.comparator||""),primary_outcomes:Array.isArray(c.primary_outcomes)?c.primary_outcomes:[],
+      main_result:String(c.main_result||""),effect_direction:String(c.effect_direction||"not_reported"),
+      domains:domains.map(domain=>({domain,direction:evidenceDomainDirection(c,domain)}))
+    });
   }
-  const domainLabels={motor:"Motor symptoms",non_motor:"Non-motor symptoms",gait_balance:"Gait / balance",cognition:"Cognition",voice:"Voice / speech",quality_of_life:"Quality of life / ADL",safety:"Safety / tolerability",feasibility_adherence:"Feasibility / adherence",pharmacokinetics:"Pharmacokinetics",biomarkers_microbiome:"Biomarkers / microbiome / ketosis",other_clinical:"Other clinical outcomes"};
+
+  const domainLabels={
+    motor:"Motor symptoms",non_motor:"Non-motor symptoms",gait_balance:"Gait / balance",
+    cognition:"Cognition",voice:"Voice / speech",quality_of_life:"Quality of life / ADL",
+    safety:"Safety / tolerability",feasibility_adherence:"Feasibility / adherence",
+    pharmacokinetics:"Pharmacokinetics",biomarkers_microbiome:"Biomarkers / microbiome / ketosis",
+    other_clinical:"Other clinical outcomes"
+  };
   const groups=[];
   for(const domain of Object.keys(domainLabels)){
-    const studies=human.flatMap(c=>c.domains.filter(d=>d.domain===domain).map(d=>({...c,domain_direction:d.direction}))).map(({domains,...x})=>x);
+    const studies=human
+      .flatMap(c=>c.domains.filter(d=>d.domain===domain).map(d=>({...c,domain_direction:d.direction})))
+      .map(({domains,...x})=>x);
     if(!studies.length)continue;
-    const counts={favorable:0,mixed:0,neutral:0,unfavorable:0,not_reported:0};for(const x of studies)counts[x.domain_direction]=(counts[x.domain_direction]||0)+1;
+    const counts={favorable:0,mixed:0,neutral:0,unfavorable:0,not_reported:0};
+    for(const x of studies)counts[x.domain_direction]=(counts[x.domain_direction]||0)+1;
     const informative=counts.favorable+counts.mixed+counts.neutral+counts.unfavorable;
     let status="insufficient";
     if(counts.favorable>0&&(counts.neutral>0||counts.unfavorable>0))status="discordant";
@@ -625,9 +669,20 @@ async function handleEvidenceContradictions(request,env){
     groups.push({domain,label:domainLabels[domain],status,counts,studies,priority:priority[status]??9});
   }
   groups.sort((a,b)=>a.priority-b.priority||b.studies.length-a.studies.length||a.label.localeCompare(b.label));
-  const discordant=groups.filter(x=>x.status==="discordant").length, mixed=groups.filter(x=>x.status==="mixed").length, consistent_favorable=groups.filter(x=>x.status==="consistent_favorable").length;
+  const discordant=groups.filter(x=>x.status==="discordant").length;
+  const mixed=groups.filter(x=>x.status==="mixed").length;
+  const consistent_favorable=groups.filter(x=>x.status==="consistent_favorable").length;
   const conclusion_signal=discordant?"heterogeneous":mixed?"mixed_with_favorable_signal":consistent_favorable?"favorable_signal_with_limited_evidence":"insufficient";
-  return jsonResponse({schema_version:1,generated_at:new Date().toISOString(),area:{slug,label:area.label},direct_human_studies:human.length,outcome_domains:groups.length,discordant_domains:discordant,mixed_domains:mixed,consistent_favorable_domains:consistent_favorable,conclusion_signal,groups});
+
+  return jsonResponse({
+    schema_version:2,generated_at:new Date().toISOString(),
+    area:{slug,label:area.label},
+    direct_human_studies:human.length,outcome_domains:groups.length,
+    discordant_domains:discordant,mixed_domains:mixed,
+    consistent_favorable_domains:consistent_favorable,
+    conclusion_signal,groups,
+    source_lock:{basis:"saved_synthesis_cited_pmids",pmids_requested:pmids.length,cards_loaded:workCards.length,bounded:true}
+  });
 }
 async function handleEvidenceConclusion(request,env){
   if(!env.SITE_ADMIN)return jsonResponse({error:"Evidence Lab storage (SITE_ADMIN) is not configured."},503);
@@ -1038,63 +1093,90 @@ function compactEvidenceCard(c){
   return {pmid:c.pmid,title:c.title,publication_type:c.publication_type,study_design:c.study_design,evidence_domain:c.evidence_domain,study_purpose:c.study_purpose,population:c.population,sample_size:c.sample_size,sample_size_details:c.sample_size_details,intervention:c.intervention,comparator:c.comparator,duration:c.duration,primary_outcomes:c.primary_outcomes,effect_direction:c.effect_direction,statistical_significance:c.statistical_significance,randomized:c.randomized,controlled:c.controlled,review_studies_included:c.review_studies_included,review_participants:c.review_participants,pooled_effect:c.pooled_effect,heterogeneity:c.heterogeneity,risk_of_bias_or_certainty:c.risk_of_bias_or_certainty,animal_species:c.animal_species,animal_model:c.animal_model,mechanistic_targets:c.mechanistic_targets,main_result:c.main_result,limitations:c.limitations,source_level:c.source_level,extraction_confidence:c.extraction_confidence};
 }
 async function handleEvidenceSynthesisGet(request,env){
+  if(!env.SITE_ADMIN)return jsonResponse({error:"Evidence Lab storage (SITE_ADMIN) is not configured."},503);
   const url=new URL(request.url), slug=evidenceLabSlug(url.searchParams.get("area"));
   if(!slug)return jsonResponse({error:"Clinical area is required."},400);
+
   const saved=await env.SITE_ADMIN.get(EVIDENCE_LAB_SYNTHESIS_PREFIX+slug,"json");
   if(!saved)return jsonResponse({synthesis:null});
 
   // READ-ONLY source lock. Loading a saved synthesis must never invoke Groq.
-  // Main findings are rendered verbatim from cached Evidence Cards. The human-clinical
-  // summary is rebuilt deterministically from current card metadata so it cannot drift
-  // out of sync with the source-locked findings shown immediately below it.
-  const st=await evidenceLabState(env,slug);
-  const idx=await evidenceLabIndex(request,env);
-  const area=idx.areas.find(a=>a.slug===slug);
-  const directHuman=[], mixedHuman=[];
-  let deterministicHumanSummary="";
-  if(area){
-    const norm=v=>String(v??"").toLowerCase().replace(/\s+/g," ").trim();
-    const join=v=>Array.isArray(v)?v.map(x=>typeof x==="string"?x:JSON.stringify(x)).join(" "):String(v??"");
-    const isNonEfficacyOnly=c=>{
-      const design=norm(c.study_design), purpose=norm(c.study_purpose), outcomes=norm(join(c.primary_outcomes)), result=norm(c.main_result), title=norm(c.title);
-      const text=[design,purpose,outcomes,result,title].join(" ");
-      const pharmacokinetic=/(pharmacokinetic|pharmacokinetics|\bpk\b|plasma concentration|drug absorption|levodopa kinetics)/.test(text);
-      const qualitative=/(qualitative|interview|focus group|thematic analysis|acceptability barrier|adherence barrier|care partner|participant attitudes)/.test(text);
-      return pharmacokinetic || qualitative;
-    };
-    const clinicalPriority=c=>{
-      const type=String(c.publication_type||"");
-      const randomized=norm(c.randomized)==="yes" ? 4 : 0;
-      const controlled=norm(c.controlled)==="yes" ? 3 : 0;
-      const purpose=norm(c.study_purpose);
-      const purposeScore=purpose==="efficacy"?4:purpose==="mixed"?3:purpose==="feasibility"?1:0;
-      const typeScore=type==="clinical_trial"?20:type==="observational"?8:0;
-      return typeScore+randomized+controlled+purposeScore;
-    };
-    const candidates=[];
-    for(const pmid of (st.processed||[]).map(String).slice(-500)){
-      const c=await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");
-      if(!c || !(c.source_level==="abstract" || c.source_level==="full_text"))continue;
-      const rel=evidenceRelevance(c,area.label);
-      const type=String(c.publication_type||"");
-      const humanClinical=type==="clinical_trial" || type==="observational";
-      const result=String(c.main_result||"").replace(/\s+/g," ").trim();
-      if(!humanClinical || rel.level!=="direct" || !result || result==="AI extraction pending" || result==="not reported" || isNonEfficacyOnly(c))continue;
-      candidates.push({card:c,pmid:String(c.pmid||pmid),result,priority:clinicalPriority(c)});
-    }
-    candidates.sort((a,b)=>b.priority-a.priority || Number(b.card.year||0)-Number(a.card.year||0) || a.pmid.localeCompare(b.pmid));
-    for(const x of candidates){
-      const item={finding:x.result,pmids:[x.pmid],source:"evidence_card_verbatim"};
-      directHuman.push(item);
-      const signal=[x.card.effect_direction,x.card.statistical_significance,x.result].map(norm).join(" ");
-      const mixedDirection=["mixed","neutral","unfavorable"].includes(norm(x.card.effect_direction));
-      const nullOrMixedSignificance=["no","mixed"].includes(norm(x.card.statistical_significance));
-      const explicitClinicalNull=/(no significant (?:difference|effect|improvement)|not significant|no between-group difference|no between group difference|did not (?:improve|reduce|change|affect) (?!pharmacokinetic)|failed to (?:improve|reduce|show)|comparable gains|inconsistent)/.test(signal);
-      if(mixedDirection || nullOrMixedSignificance || explicitClinicalNull)
-        mixedHuman.push({issue:x.result,pmids:item.pmids,source:"evidence_card_verbatim"});
-    }
+  //
+  // IMPORTANT: previous versions re-read up to 500 Evidence Cards on every load.
+  // On large clinical areas that can exhaust Worker/KV execution resources and
+  // surface as HTTP 503. Revalidate only the PMIDs actually cited by the saved
+  // synthesis; this preserves source-lock while keeping the load bounded.
+  const citedPmids=[...new Set([
+    ...(Array.isArray(saved.main_findings)?saved.main_findings.flatMap(x=>Array.isArray(x?.pmids)?x.pmids:[]):[]),
+    ...(Array.isArray(saved.conflicting_evidence)?saved.conflicting_evidence.flatMap(x=>Array.isArray(x?.pmids)?x.pmids:[]):[])
+  ].map(String).filter(Boolean))].slice(0,40);
 
-    // Deterministic current-state human evidence summary. No generated efficacy prose is reused.
+  // Older synthesis snapshots may have no structured cited claims. In that case
+  // use a small bounded fallback from direct relevance audit rather than scanning
+  // the full Evidence Lab corpus.
+  if(!citedPmids.length && Array.isArray(saved.relevance_cards)){
+    for(const x of saved.relevance_cards){
+      if(String(x?.level||"")==="direct" && x?.pmid)citedPmids.push(String(x.pmid));
+      if(citedPmids.length>=24)break;
+    }
+  }
+
+  const cards=(await Promise.all(citedPmids.map(async pmid=>{
+    try{return await env.SITE_ADMIN.get(EVIDENCE_LAB_CARD_PREFIX+slug+":"+pmid,"json");}
+    catch(_){return null;}
+  }))).filter(Boolean);
+
+  const norm=v=>String(v??"").toLowerCase().replace(/\s+/g," ").trim();
+  const join=v=>Array.isArray(v)?v.map(x=>typeof x==="string"?x:JSON.stringify(x)).join(" "):String(v??"");
+  const isNonEfficacyOnly=c=>{
+    const design=norm(c.study_design), purpose=norm(c.study_purpose), outcomes=norm(join(c.primary_outcomes)), result=norm(c.main_result), title=norm(c.title);
+    const text=[design,purpose,outcomes,result,title].join(" ");
+    const pharmacokinetic=/(pharmacokinetic|pharmacokinetics|\bpk\b|plasma concentration|drug absorption|levodopa kinetics)/.test(text);
+    const qualitative=/(qualitative|interview|focus group|thematic analysis|acceptability barrier|adherence barrier|care partner|participant attitudes)/.test(text);
+    return pharmacokinetic || qualitative;
+  };
+  const clinicalPriority=c=>{
+    const type=String(c.publication_type||"");
+    const randomized=norm(c.randomized)==="yes" ? 4 : 0;
+    const controlled=norm(c.controlled)==="yes" ? 3 : 0;
+    const purpose=norm(c.study_purpose);
+    const purposeScore=purpose==="efficacy"?4:purpose==="mixed"?3:purpose==="feasibility"?1:0;
+    const typeScore=type==="clinical_trial"?20:type==="observational"?8:0;
+    return typeScore+randomized+controlled+purposeScore;
+  };
+
+  const directHuman=[], mixedHuman=[], candidates=[];
+  for(const c of cards){
+    if(!(c.source_level==="abstract" || c.source_level==="full_text"))continue;
+    const type=String(c.publication_type||"");
+    const humanClinical=type==="clinical_trial" || type==="observational";
+    const result=String(c.main_result||"").replace(/\s+/g," ").trim();
+    if(!humanClinical || !result || result==="AI extraction pending" || result==="not reported" || isNonEfficacyOnly(c))continue;
+    candidates.push({card:c,pmid:String(c.pmid||""),result,priority:clinicalPriority(c)});
+  }
+
+  candidates.sort((a,b)=>b.priority-a.priority || Number(b.card.year||0)-Number(a.card.year||0) || a.pmid.localeCompare(b.pmid));
+  for(const x of candidates){
+    const item={finding:x.result,pmids:[x.pmid],source:"evidence_card_verbatim"};
+    directHuman.push(item);
+    const signal=[x.card.effect_direction,x.card.statistical_significance,x.result].map(norm).join(" ");
+    const mixedDirection=["mixed","neutral","unfavorable"].includes(norm(x.card.effect_direction));
+    const nullOrMixedSignificance=["no","mixed"].includes(norm(x.card.statistical_significance));
+    const explicitClinicalNull=/(no significant (?:difference|effect|improvement)|not significant|no between-group difference|no between group difference|did not (?:improve|reduce|change|affect) (?!pharmacokinetic)|failed to (?:improve|reduce|show)|comparable gains|inconsistent)/.test(signal);
+    if(mixedDirection || nullOrMixedSignificance || explicitClinicalNull)
+      mixedHuman.push({issue:x.result,pmids:item.pmids,source:"evidence_card_verbatim"});
+  }
+
+  const out={...saved};
+  out.schema_version=Math.max(Number(saved.schema_version||0),23);
+  out.claim_generation="bounded_deterministic_verbatim_source_lock_v58";
+
+  // Replace generated claim prose only when the cited cards were successfully reloaded.
+  // If a card is temporarily unavailable, keep the already-saved source-validated synthesis
+  // instead of returning 503 or silently deleting its claims.
+  if(directHuman.length){
+    out.main_findings=directHuman.slice(0,8);
+    out.conflicting_evidence=mixedHuman.slice(0,6);
     const profile=saved.evidence_profile||{};
     const randomizedControlled=candidates.filter(x=>String(x.card.publication_type||"")==="clinical_trial" && norm(x.card.randomized)==="yes" && norm(x.card.controlled)==="yes").length;
     const directions={favorable:0,mixed:0,neutral:0,unfavorable:0,not_reported:0};
@@ -1103,16 +1185,11 @@ async function handleEvidenceSynthesisGet(request,env){
       if(Object.prototype.hasOwnProperty.call(directions,d))directions[d]++; else directions.not_reported++;
     }
     const directionText=Object.entries(directions).filter(([,n])=>n>0).map(([k,n])=>`${k.replaceAll("_"," ")}: ${n}`).join("; ") || "not reported";
-    deterministicHumanSummary=`Exact evidence profile: ${Number(profile.clinical_trial||0)} clinical trials; ${Number(profile.observational||0)} observational studies; ${Number(profile.mechanistic_human||0)} mechanistic human studies; ${Number(profile.case_report_series||0)} case reports/series. Direct ketogenic/ketone human clinical evidence eligible for source-locked findings: ${candidates.length} studies, including ${randomizedControlled} randomized controlled trials. Evidence-card direction labels: ${directionText}. Main findings below reproduce each Evidence Card main_result verbatim; mixed or null comparative results are shown separately under Conflicting evidence.`;
+    out.human_clinical_generation="bounded_deterministic_from_cited_evidence_cards";
+    out.human_clinical=`Exact evidence profile: ${Number(profile.clinical_trial||0)} clinical trials; ${Number(profile.observational||0)} observational studies; ${Number(profile.mechanistic_human||0)} mechanistic human studies; ${Number(profile.case_report_series||0)} case reports/series. Source-locked human clinical findings currently displayed: ${candidates.length} cited studies, including ${randomizedControlled} randomized controlled trials. Evidence-card direction labels among displayed cited studies: ${directionText}. Main findings below reproduce Evidence Card main_result text verbatim.`;
   }
-  const out={...saved};
-  out.schema_version=23;
-  out.claim_generation="deterministic_verbatim_clinical_hierarchy_v23";
-  out.human_clinical_generation="deterministic_from_current_evidence_cards";
-  if(deterministicHumanSummary)out.human_clinical=deterministicHumanSummary;
-  out.main_findings=directHuman.slice(0,8);
-  out.conflicting_evidence=mixedHuman.slice(0,6);
-  return jsonResponse({synthesis:out});
+
+  return jsonResponse({synthesis:out,source_lock:{cited_pmids_checked:citedPmids.length,cards_loaded:cards.length,bounded:true}});
 }
 function evidenceRelevance(c,areaLabel){
   const norm=v=>String(v??"").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"");
