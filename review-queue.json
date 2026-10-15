@@ -1,116 +1,11 @@
 {
-  "generated_at": "2026-10-14T03:42:54+00:00",
+  "generated_at": "2026-10-15T03:42:57+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
-  "auto_approved_count": 7,
-  "excluded_count": 114,
+  "auto_approved_count": 0,
+  "excluded_count": 115,
   "records": [
-    {
-      "pmid": "42869131",
-      "title": "β-Hydroxybutyrate alleviates intestinal aGVHD via remodeling gut microbiota-bile acid axis and inhibiting TLR4-NF-κB-driven Th1/Th17 differentiation.",
-      "authors": [
-        "Tian R",
-        "Deng C",
-        "Liu K",
-        "Lai H",
-        "Liao C",
-        "Tu H",
-        "Li J"
-      ],
-      "journal": "Life sciences",
-      "date": "2026-10-13",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.lfs.2026.124737",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42869131/",
-      "doi_url": "https://doi.org/10.1016/j.lfs.2026.124737",
-      "pmc_url": "",
-      "areas": [
-        "Gut Microbiome"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-10-14",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "42868613",
-      "title": "Time-Restricted Ketogenic Diet Combined with Exercise Improves Cardiorespiratory Fitness but Compromises Sleep Quality in Overweight and Obese Young Adults: A Randomized Controlled Trial.",
-      "authors": [
-        "Wu Z",
-        "Kong Z",
-        "Hu M",
-        "Shi Q",
-        "Nie J"
-      ],
-      "journal": "Applied physiology, nutrition, and metabolism = Physiologie appliquee, nutrition et metabolisme",
-      "date": "2026-10-13",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1139/apnm-2026-0138",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42868613/",
-      "doi_url": "https://doi.org/10.1139/apnm-2026-0138",
-      "pmc_url": "",
-      "areas": [
-        "Obesity",
-        "Exercise & Performance",
-        "Circadian Rhythms"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Randomized clinical trial",
-      "evidence_type_it": "Trial clinico randomizzato",
-      "source": "PubMed",
-      "first_seen": "2026-10-14",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "42867412",
-      "title": "International Society of Sports Nutrition position stand: diets for body weight reduction.",
-      "authors": [
-        "Aragon AA",
-        "Campbell BI",
-        "Schoenfeld BJ",
-        "Stout JR",
-        "Kalman D",
-        "Arciero PJ",
-        "Arent SM",
-        "Kreider RB",
-        "Taylor LW",
-        "Bannock L",
-        "Wildman REC",
-        "Kerksick CM",
-        "Antonio J"
-      ],
-      "journal": "Journal of the International Society of Sports Nutrition",
-      "date": "2026-10-13",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1080/15502783.2026.2740266",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42867412/",
-      "doi_url": "https://doi.org/10.1080/15502783.2026.2740266",
-      "pmc_url": "",
-      "areas": [
-        "Obesity"
-      ],
-      "category_confidence": 11,
-      "evidence_type": "Guideline / consensus",
-      "evidence_type_it": "Linea guida / consensus",
-      "source": "PubMed",
-      "first_seen": "2026-10-14",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
     {
       "pmid": "42826040",
       "title": "The Ketogenic Diet Improved Liver Health in Trial, But What Does That Mean in the Real World?",
@@ -170,72 +65,36 @@
       "curation_status": "excluded-low-confidence"
     },
     {
-      "pmid": "42865375",
-      "title": "Efficacy of an Eastern Healthy Dietary Pattern-modified ketogenic diet in patients with obesity and polyendocrine metabolic ovarian syndrome.",
+      "pmid": "42874133",
+      "title": "The Ketogenic Diet Wean as a Trigger for Valproate Toxicity: Lessons From Two Cases.",
       "authors": [
-        "Chen Q",
-        "Zhang P",
-        "Dai M",
-        "Feng Y",
-        "Yu X",
-        "Zhao P",
-        "He X"
+        "Owusu K",
+        "Dickson J",
+        "Lowe H",
+        "Wang L",
+        "Kobayashi J",
+        "Sharma S"
       ],
-      "journal": "Frontiers in endocrinology",
-      "date": "2026-09-28",
+      "journal": "Pediatric neurology",
+      "date": "2026-09-25",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.3389/fendo.2026.1948375",
-      "pmc": "PMC13654692",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42865375/",
-      "doi_url": "https://doi.org/10.3389/fendo.2026.1948375",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13654692/",
+      "doi": "10.1016/j.pediatrneurol.2026.09.020",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42874133/",
+      "doi_url": "https://doi.org/10.1016/j.pediatrneurol.2026.09.020",
+      "pmc_url": "",
       "areas": [
-        "Obesity",
-        "Polyendocrine Metabolic Ovarian Syndrome (PMOS, formerly PCOS)",
-        "Aesthetic Medicine & Body Composition"
+        "Other / General"
       ],
-      "category_confidence": 7,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-10-14",
+      "first_seen": "2026-10-15",
       "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "42865373",
-      "title": "Association of first-month beta-hydroxybutyrate levels with subsequent ketogenic diet response in children with drug-resistant epilepsy: a prospective cohort study.",
-      "authors": [
-        "Tan Q",
-        "Zhang S",
-        "Li Y",
-        "Zhang J",
-        "Chang X",
-        "Wu Y",
-        "Zhang J"
-      ],
-      "journal": "Frontiers in nutrition",
-      "date": "2026-09-28",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3389/fnut.2026.1923059",
-      "pmc": "PMC13654700",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42865373/",
-      "doi_url": "https://doi.org/10.3389/fnut.2026.1923059",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13654700/",
-      "areas": [
-        "Epilepsy"
-      ],
-      "category_confidence": 13,
-      "evidence_type": "Observational human study",
-      "evidence_type_it": "Studio osservazionale umano",
-      "source": "PubMed",
-      "first_seen": "2026-10-14",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
     },
     {
       "pmid": "42790707",
@@ -605,39 +464,6 @@
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "42866210",
-      "title": "Clinical characteristics and treatment analysis of children with glucose transporter type 1 deficiency syndrome: a report of two cases.",
-      "authors": [
-        "Cao M",
-        "Zhang B",
-        "Xiao X",
-        "Cheng F",
-        "Tian J"
-      ],
-      "journal": "Translational pediatrics",
-      "date": "2026-08-11",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.21037/tp-2026-1-0159",
-      "pmc": "PMC13655861",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42866210/",
-      "doi_url": "https://doi.org/10.21037/tp-2026-1-0159",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13655861/",
-      "areas": [
-        "GLUT1 Deficiency Syndrome",
-        "Diabetes & Glucose Metabolism",
-        "Epilepsy"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Case report / case series",
-      "evidence_type_it": "Case report / case series",
-      "source": "PubMed",
-      "first_seen": "2026-10-14",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
     },
     {
       "pmid": "42581421",
@@ -1770,34 +1596,6 @@
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "42036791",
-      "title": "Mild ketosis, metabolic syndrome and genetic-lifestyle interactions in the UK Biobank.",
-      "authors": [
-        "Park S",
-        "Choi J"
-      ],
-      "journal": "The British journal of nutrition",
-      "date": "2026-04-27",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1017/S0007114526107260",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42036791/",
-      "doi_url": "https://doi.org/10.1017/S0007114526107260",
-      "pmc_url": "",
-      "areas": [
-        "Exercise & Performance"
-      ],
-      "category_confidence": 2,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
-      "source": "PubMed",
-      "first_seen": "2026-09-30",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
     },
     {
       "pmid": "42039767",
