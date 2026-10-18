@@ -1,146 +1,38 @@
 {
-  "generated_at": "2026-10-17T03:41:14+00:00",
+  "generated_at": "2026-10-18T08:01:15+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
-  "auto_approved_count": 6,
-  "excluded_count": 113,
+  "auto_approved_count": 0,
+  "excluded_count": 114,
   "records": [
     {
-      "pmid": "42885740",
-      "title": "Case Report WIN-MTB-2024001 - WIN International Molecular Tumor Board: A 55-year-old male with glioblastoma exhibiting amplifications in MDM2 and EGFR.",
+      "pmid": "42890883",
+      "title": "Ketogenic diet in treating NADH accumulation caused by complex I dysfunction: the metabolic wisdom of \"dredging, not repairing\".",
       "authors": [
-        "El-Deiry WS",
-        "Ikeda S",
-        "Magidi S",
-        "Bresson C",
-        "Abdel-Razeq H",
-        "Joshua A",
-        "Hernando-Calvo A",
-        "Oberoi A",
-        "Hu Z",
-        "Meissner T",
-        "Elsey R",
-        "Al-Omari A",
-        "Wunder F",
-        "Kurzrock R"
+        "Qiao X",
+        "Liao J"
       ],
-      "journal": "Oncotarget",
-      "date": "2026-10-16",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.18632/oncotarget.28920",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42885740/",
-      "doi_url": "https://doi.org/10.18632/oncotarget.28920",
-      "pmc_url": "",
-      "areas": [
-        "Oncology & Cancer Metabolism"
-      ],
-      "category_confidence": 16,
-      "evidence_type": "Case report / case series",
-      "evidence_type_it": "Case report / case series",
-      "source": "PubMed",
-      "first_seen": "2026-10-17",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "42887228",
-      "title": "Early myelin-associated histological and cellular findings following ketogenic diet or ketone ester treatment in a cuprizone/rapamycin mouse model.",
-      "authors": [
-        "Alaeiilkhchi N",
-        "Zhou W",
-        "Jangjoo Ghalat N",
-        "Kolehmainen K",
-        "Thomson T",
-        "Rajendran A",
-        "Liu J",
-        "Seira O",
-        "Tetzlaff W"
-      ],
-      "journal": "Multiple sclerosis and related disorders",
-      "date": "2026-10-10",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.msard.2026.107978",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42887228/",
-      "doi_url": "https://doi.org/10.1016/j.msard.2026.107978",
-      "pmc_url": "",
-      "areas": [
-        "Exogenous Ketones",
-        "Supplementation & Nutraceuticals"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-10-17",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "42887446",
-      "title": "Circulating biomarkers of oxidative stress and antioxidant status in women with overweight and obesity following an 8-week energy-restricted ketogenic diet: Results from the randomized KETO-MINOX study.",
-      "authors": [
-        "Drabińska-Fois N",
-        "Bauer W",
-        "Bączek N",
-        "Borowicz-Skoneczny S",
-        "Romaszko J"
-      ],
-      "journal": "Clinical nutrition (Edinburgh, Scotland)",
-      "date": "2026-10-09",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.clnu.2026.106816",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42887446/",
-      "doi_url": "https://doi.org/10.1016/j.clnu.2026.106816",
-      "pmc_url": "",
-      "areas": [
-        "Obesity"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Randomized clinical trial",
-      "evidence_type_it": "Trial clinico randomizzato",
-      "source": "PubMed",
-      "first_seen": "2026-10-17",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "42884707",
-      "title": "Ketogenic Dietary Therapies and β-Hydroxybutyrate as Modulators of Mitochondrial Function: From Molecular Mechanisms to Clinical Translation.",
-      "authors": [
-        "Na JH",
-        "Lee YM"
-      ],
-      "journal": "Nutrients",
+      "journal": "Frontiers in pediatrics",
       "date": "2026-10-02",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.3390/nu18193256",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42884707/",
-      "doi_url": "https://doi.org/10.3390/nu18193256",
-      "pmc_url": "",
+      "doi": "10.3389/fped.2026.1939961",
+      "pmc": "PMC13672544",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42890883/",
+      "doi_url": "https://doi.org/10.3389/fped.2026.1939961",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13672544/",
       "areas": [
-        "Epilepsy",
-        "Diabetes & Glucose Metabolism"
+        "Other / General"
       ],
-      "category_confidence": 3,
-      "evidence_type": "Randomized clinical trial",
-      "evidence_type_it": "Trial clinico randomizzato",
+      "category_confidence": 0,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-10-17",
+      "first_seen": "2026-10-18",
       "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
     },
     {
       "pmid": "42826040",
@@ -199,68 +91,6 @@
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "42882058",
-      "title": "Ketoacidosis at Hypoglycemic and Low Glucose Levels Associated with SGLT2 Inhibitor Use: A Descriptive Systematic Review of Published Cases.",
-      "authors": [
-        "Itagaki H",
-        "Endo T"
-      ],
-      "journal": "Journal of clinical medicine",
-      "date": "2026-09-30",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/jcm15197595",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42882058/",
-      "doi_url": "https://doi.org/10.3390/jcm15197595",
-      "pmc_url": "",
-      "areas": [
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 13,
-      "evidence_type": "Systematic review / meta-analysis",
-      "evidence_type_it": "Revisione sistematica / meta-analisi",
-      "source": "PubMed",
-      "first_seen": "2026-10-17",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "42883857",
-      "title": "Association of Hoof Disorders with Inflammatory, Oxidative, Metabolic, and Milk Quality Biomarkers in Holstein-Friesian Dairy Cows.",
-      "authors": [
-        "Slósarz J",
-        "Balcerak M",
-        "Kunowska-Slósarz M",
-        "Grodkowski G",
-        "Solarczyk P",
-        "Kostusiak P",
-        "Młynek K",
-        "Puppel K"
-      ],
-      "journal": "International journal of molecular sciences",
-      "date": "2026-09-26",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/ijms27198610",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42883857/",
-      "doi_url": "https://doi.org/10.3390/ijms27198610",
-      "pmc_url": "",
-      "areas": [
-        "Inflammation & Immunometabolism"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-10-17",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
     },
     {
       "pmid": "42874133",
@@ -4005,7 +3835,5 @@
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
     }
-  ],
-  "updated": "2026-10-18T05:07:25.934274+00:00",
-  "source": "PubMed + Library V5"
+  ]
 }
