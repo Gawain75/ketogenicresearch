@@ -44,6 +44,7 @@
     "42822582",
     "42825834",
     "42843434",
+    "42850154",
     "42853368",
     "42854088",
     "42854762",
@@ -784,9 +785,37 @@
       "at": "2026-10-16T03:46:00.022503+00:00",
       "stage": "generation",
       "error": "Groq HTTP 413: {\"error\":{\"message\":\"Request too large for model `openai/gpt-oss-120b` in organization `org_01m2v9fhzme29te5cqydhvxz4y` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 9057, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "pmid": "42867412",
+      "at": "2026-10-18T08:04:47.369736+00:00",
+      "stage": "generation",
+      "error": "Groq HTTP 413: {\"error\":{\"message\":\"Request too large for model `openai/gpt-oss-120b` in organization `org_01m2v9fhzme29te5cqydhvxz4y` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 8917, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "pmid": "42887228",
+      "at": "2026-10-18T08:04:47.409094+00:00",
+      "stage": "generation",
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "pmid": "42877272",
+      "at": "2026-10-18T08:04:47.446744+00:00",
+      "stage": "generation",
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "pmid": "42887446",
+      "at": "2026-10-18T08:06:07.891563+00:00",
+      "stage": "verification",
+      "issues": [
+        "The 'Limitations and open questions' section introduces limitations that are not reported in the source abstract (e.g., lack of tissue-specific oxidative measures, uncertainty of clinical relevance of OSI reductions, need to link redox changes to functional outcomes). Inventing limitations is prohibited.",
+        "The draft includes interpretive statements that go beyond the source's reported findings, attributing improvements primarily to energy restriction and weight loss without explicit support from the source."
+      ],
+      "unsupported_claims": []
     }
   ],
-  "updated_at": "2026-10-17T03:45:32.699727+00:00",
+  "updated_at": "2026-10-18T08:07:27.248512+00:00",
   "source_unavailable_pmids": [
     "42642354",
     "42717355",
@@ -798,7 +827,7 @@
     "42875781"
   ],
   "last_run": {
-    "attempted_candidates": 1,
+    "attempted_candidates": 6,
     "published_articles": 1,
     "status": "published"
   }
