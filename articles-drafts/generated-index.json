@@ -56,7 +56,8 @@
     "42877272",
     "42885740",
     "42887228",
-    "42887446"
+    "42887446",
+    "42905653"
   ],
   "failures": [
     {
@@ -819,7 +820,7 @@
       "unsupported_claims": []
     }
   ],
-  "updated_at": "2026-10-22T08:58:10.091178+00:00",
+  "updated_at": "2026-10-23T08:36:46.006693+00:00",
   "source_unavailable_pmids": [
     "42642354",
     "42717355",
@@ -832,7 +833,7 @@
   ],
   "last_run": {
     "attempted_candidates": 1,
-    "published_articles": 0,
-    "status": "no_article_published"
+    "published_articles": 1,
+    "status": "published"
   }
 }
