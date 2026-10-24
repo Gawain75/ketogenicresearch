@@ -1,44 +1,11 @@
 {
-  "generated_at": "2026-10-23T08:32:26+00:00",
+  "generated_at": "2026-10-24T08:07:21+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
-  "auto_approved_count": 2,
+  "auto_approved_count": 1,
   "excluded_count": 114,
   "records": [
-    {
-      "pmid": "42905653",
-      "title": "Effects of a maternal ketogenic diet on maternal and offspring metabolic health in mice.",
-      "authors": [
-        "Ruano AH",
-        "Kracaw RA",
-        "Cervantes IA",
-        "Ruano SH",
-        "Tacam MJ",
-        "Pennington KA"
-      ],
-      "journal": "PloS one",
-      "date": "2026-10-21",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1371/journal.pone.0356015",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42905653/",
-      "doi_url": "https://doi.org/10.1371/journal.pone.0356015",
-      "pmc_url": "",
-      "areas": [
-        "Obesity",
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 3,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-10-23",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
     {
       "pmid": "42902976",
       "title": "Astrocytic Ketogenesis Protects Central Nervous System Injury via CPT1A Stabilization and Epigenetic Regulation.",
@@ -79,34 +46,6 @@
       "status": "new",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "42905034",
-      "title": "Managing Ketogenic Diet-Induced Hypercholesterolemia.",
-      "authors": [
-        "Avivi I",
-        "Ben-Yehuda O"
-      ],
-      "journal": "Journal of the American College of Cardiology",
-      "date": "2026-10-08",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.jacc.2026.09.031",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42905034/",
-      "doi_url": "https://doi.org/10.1016/j.jacc.2026.09.031",
-      "pmc_url": "",
-      "areas": [
-        "Dyslipidemia & Lipid Metabolism"
-      ],
-      "category_confidence": 12,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-10-23",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
     },
     {
       "pmid": "42890883",
@@ -193,6 +132,47 @@
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "42915855",
+      "title": "β-Hydroxybutyrate Exacerbates Klebsiella pneumoniae-Induced Inflammatory Injury and Milk Synthesis Impairment via the GPR109A/NF-κB Signaling Axis.",
+      "authors": [
+        "Wang J",
+        "Yuan C",
+        "Cai S",
+        "Ni L",
+        "Liu K",
+        "Guo L",
+        "Cui L",
+        "Dong J",
+        "Li J",
+        "Zhu G",
+        "Wang R",
+        "Zhang L",
+        "He T",
+        "Meng X",
+        "Wang H"
+      ],
+      "journal": "Journal of agricultural and food chemistry",
+      "date": "2026-09-30",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1021/acs.jafc.6c02243",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42915855/",
+      "doi_url": "https://doi.org/10.1021/acs.jafc.6c02243",
+      "pmc_url": "",
+      "areas": [
+        "Inflammation & Immunometabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-10-24",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
     },
     {
       "pmid": "42874133",
@@ -524,8 +504,8 @@
         "Other / General"
       ],
       "category_confidence": 0,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
       "first_seen": "2026-09-30",
       "status": "indexed",
@@ -864,6 +844,38 @@
       "evidence_type_it": "Altro",
       "source": "PubMed",
       "first_seen": "2026-09-30",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "42919082",
+      "title": "Evaluating the reach of restrictive dietary practices: prevalence and awareness among young females (18-30 years).",
+      "authors": [
+        "Mogre D",
+        "Tailor P",
+        "Mulla A",
+        "Panchal P",
+        "Gokhale AA",
+        "Menon K"
+      ],
+      "journal": "Eating and weight disorders : EWD",
+      "date": "2026-07-23",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1007/s40519-026-01893-x",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42919082/",
+      "doi_url": "https://doi.org/10.1007/s40519-026-01893-x",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Observational human study",
+      "evidence_type_it": "Studio osservazionale umano",
+      "source": "PubMed",
+      "first_seen": "2026-10-24",
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
@@ -3864,33 +3876,6 @@
       "category_confidence": 0,
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-30",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "41216625",
-      "title": "NHANES data are irrelevant for ketogenic diet research - Comment on \"Ketogenic diets are associated with an elevated risk of hypertension: Insights from a cross-sectional analysis of the NHANES 2007-2018″.",
-      "authors": [
-        "Klement RJ"
-      ],
-      "journal": "International journal of cardiology. Cardiovascular risk and prevention",
-      "date": "2025-10-23",
-      "date_precision": "day",
-      "year": 2025,
-      "doi": "10.1016/j.ijcrp.2025.200534",
-      "pmc": "PMC12596632",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41216625/",
-      "doi_url": "https://doi.org/10.1016/j.ijcrp.2025.200534",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12596632/",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Observational human study",
-      "evidence_type_it": "Studio osservazionale umano",
       "source": "PubMed",
       "first_seen": "2026-09-30",
       "status": "indexed",
