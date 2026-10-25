@@ -1,11 +1,98 @@
 {
-  "generated_at": "2026-10-24T08:07:21+00:00",
+  "generated_at": "2026-10-25T08:24:44+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
-  "auto_approved_count": 1,
-  "excluded_count": 114,
+  "auto_approved_count": 3,
+  "excluded_count": 115,
   "records": [
+    {
+      "pmid": "42926076",
+      "title": "\"Metabolic Diets and Fasting in Oncology: Integrating Guideline-Based Nutrition, Nutrition Assessments and Biomarker-Driven Clinical Pathology\".",
+      "authors": [
+        "Abbasi N"
+      ],
+      "journal": "Critical reviews in oncology/hematology",
+      "date": "2026-10-24",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.critrevonc.2026.105669",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42926076/",
+      "doi_url": "https://doi.org/10.1016/j.critrevonc.2026.105669",
+      "pmc_url": "",
+      "areas": [
+        "Oncology & Cancer Metabolism"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Systematic review / meta-analysis",
+      "evidence_type_it": "Revisione sistematica / meta-analisi",
+      "source": "PubMed",
+      "first_seen": "2026-10-25",
+      "status": "new",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "42925432",
+      "title": "SLC16A13 Promotes Malignant Progression in Glioma via Metabolic Reprogramming and Disruption of Monocarboxylate Homeostasis.",
+      "authors": [
+        "Yang S",
+        "Liu Y",
+        "Hui X",
+        "Yang A"
+      ],
+      "journal": "Neurochemical research",
+      "date": "2026-10-24",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1007/s11064-026-04905-5",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42925432/",
+      "doi_url": "https://doi.org/10.1007/s11064-026-04905-5",
+      "pmc_url": "",
+      "areas": [
+        "Oncology & Cancer Metabolism"
+      ],
+      "category_confidence": 11,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-10-25",
+      "status": "new",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "42921968",
+      "title": "Comparing clinical laboratory beta-hydroxybutyrate testing of vitreous humor against toxicological blood analyses in ketoacidosis deaths.",
+      "authors": [
+        "Basso Q",
+        "Parai J",
+        "Chow BLC",
+        "Milroy C"
+      ],
+      "journal": "Journal of forensic sciences",
+      "date": "2026-10-22",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1111/1556-4029.70498",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42921968/",
+      "doi_url": "https://doi.org/10.1111/1556-4029.70498",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Observational human study",
+      "evidence_type_it": "Studio osservazionale umano",
+      "source": "PubMed",
+      "first_seen": "2026-10-25",
+      "status": "new",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
     {
       "pmid": "42902976",
       "title": "Astrocytic Ketogenesis Protects Central Nervous System Injury via CPT1A Stabilization and Epigenetic Regulation.",
@@ -132,47 +219,6 @@
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "42915855",
-      "title": "β-Hydroxybutyrate Exacerbates Klebsiella pneumoniae-Induced Inflammatory Injury and Milk Synthesis Impairment via the GPR109A/NF-κB Signaling Axis.",
-      "authors": [
-        "Wang J",
-        "Yuan C",
-        "Cai S",
-        "Ni L",
-        "Liu K",
-        "Guo L",
-        "Cui L",
-        "Dong J",
-        "Li J",
-        "Zhu G",
-        "Wang R",
-        "Zhang L",
-        "He T",
-        "Meng X",
-        "Wang H"
-      ],
-      "journal": "Journal of agricultural and food chemistry",
-      "date": "2026-09-30",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1021/acs.jafc.6c02243",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42915855/",
-      "doi_url": "https://doi.org/10.1021/acs.jafc.6c02243",
-      "pmc_url": "",
-      "areas": [
-        "Inflammation & Immunometabolism"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-10-24",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
     },
     {
       "pmid": "42874133",
@@ -408,6 +454,42 @@
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "42922891",
+      "title": "Ketone ester supplementation reduces age-associated B cell activation in aged mice without impairing antibody responses.",
+      "authors": [
+        "Adkisson-Floro A",
+        "Tiwari R",
+        "Nomura M",
+        "Riley RR",
+        "Kwok R",
+        "Sellegounder D",
+        "Khalid MM",
+        "Kasler HG",
+        "Newman JC",
+        "Verdin E"
+      ],
+      "journal": "Research square",
+      "date": "2026-09-03",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.21203/rs.3.rs-10756850/v1",
+      "pmc": "PMC13684763",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42922891/",
+      "doi_url": "https://doi.org/10.21203/rs.3.rs-10756850/v1",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13684763/",
+      "areas": [
+        "Supplementation & Nutraceuticals"
+      ],
+      "category_confidence": 13,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-10-25",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
     },
     {
       "pmid": "42724302",
@@ -864,10 +946,10 @@
       "date_precision": "day",
       "year": 2026,
       "doi": "10.1007/s40519-026-01893-x",
-      "pmc": "",
+      "pmc": "PMC13690856",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42919082/",
       "doi_url": "https://doi.org/10.1007/s40519-026-01893-x",
-      "pmc_url": "",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13690856/",
       "areas": [
         "Other / General"
       ],
