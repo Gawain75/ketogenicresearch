@@ -3789,7 +3789,7 @@
     "oa_status": "gold",
     "landing_page_url": "https://doi.org/10.1016/j.celrep.2026.117185",
     "pdf_url": null,
-    "license": "cc-by-nc-nd",
+    "license": "cc-by",
     "source": "openalex"
   },
   "10.1016/j.eprac.2026.01.009": {
@@ -5595,8 +5595,8 @@
     "checked": true,
     "is_oa": true,
     "oa_status": "gold",
-    "landing_page_url": "https://doi.org/10.1016/j.celrep.2023.113570",
-    "pdf_url": null,
+    "landing_page_url": "http://dx.doi.org/10.1016/j.celrep.2023.113570",
+    "pdf_url": "http://www.cell.com/article/S2211124723015826/pdf",
     "license": "cc-by-nc-nd",
     "source": "openalex"
   },
@@ -13166,11 +13166,11 @@
   },
   "10.1111/j.1468-2982.2009.02016.x": {
     "checked": true,
-    "is_oa": true,
-    "oa_status": "hybrid",
-    "landing_page_url": "https://doi.org/10.1111/j.1468-2982.2009.02016.x",
+    "is_oa": false,
+    "oa_status": "closed",
+    "landing_page_url": null,
     "pdf_url": null,
-    "license": "cc-by",
+    "license": "closed",
     "source": "openalex"
   },
   "10.1016/j.sleep.2023.10.016": {
@@ -38894,6 +38894,105 @@
     "landing_page_url": null,
     "pdf_url": null,
     "license": "closed",
+    "source": "openalex"
+  },
+  "10.1186/1743-7075-2-35": {
+    "checked": true,
+    "is_oa": true,
+    "oa_status": "gold",
+    "landing_page_url": "https://doi.org/10.1186/1743-7075-2-35",
+    "pdf_url": "https://nutritionandmetabolism.biomedcentral.com/track/pdf/10.1186/1743-7075-2-35",
+    "license": "cc-by",
+    "source": "openalex"
+  },
+  "10.1016/j.appet.2006.06.007": {
+    "checked": true,
+    "is_oa": true,
+    "oa_status": "green",
+    "landing_page_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/2714161",
+    "pdf_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2714161/pdf/nihms18744.pdf",
+    "license": "green",
+    "source": "publisher-metadata"
+  },
+  "10.1186/1743-7075-2-34": {
+    "checked": true,
+    "is_oa": true,
+    "oa_status": "gold",
+    "landing_page_url": "https://doi.org/10.1186/1743-7075-2-34",
+    "pdf_url": "https://nutritionandmetabolism.biomedcentral.com/counter/pdf/10.1186/1743-7075-2-34",
+    "license": "cc-by",
+    "source": "openalex"
+  },
+  "10.1042/bj0301637": {
+    "checked": true,
+    "is_oa": true,
+    "oa_status": "bronze",
+    "landing_page_url": "https://doi.org/10.1042/bj0301637",
+    "pdf_url": "https://portlandpress.com/biochemj/article-pdf/30/9/1637/724647/bj0301637.pdf",
+    "license": "bronze",
+    "source": "openalex"
+  },
+  "10.1042/bj2850647": {
+    "checked": true,
+    "is_oa": true,
+    "oa_status": "bronze",
+    "landing_page_url": "https://doi.org/10.1042/bj2850647",
+    "pdf_url": "https://portlandpress.com/biochemj/article-pdf/285/2/647/607879/bj2850647.pdf",
+    "license": "bronze",
+    "source": "openalex"
+  },
+  "10.1128/aem.59.5.1602-1606.1993": {
+    "checked": true,
+    "is_oa": true,
+    "oa_status": "bronze",
+    "landing_page_url": "https://doi.org/10.1128/aem.59.5.1602-1606.1993",
+    "pdf_url": "https://aem.asm.org/content/aem/59/5/1602.full.pdf",
+    "license": "bronze",
+    "source": "openalex"
+  },
+  "10.1016/j.yebeh.2005.05.025": {
+    "checked": true,
+    "is_oa": true,
+    "oa_status": "green",
+    "landing_page_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/3637968",
+    "pdf_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3637968/pdf/nihms452862.pdf",
+    "license": "green",
+    "source": "publisher-metadata"
+  },
+  "10.1111/j.1535-7597.2004.46001.x": {
+    "checked": true,
+    "is_oa": true,
+    "oa_status": "green",
+    "landing_page_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/1176378",
+    "pdf_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1176378/pdf/epc_46001.pdf",
+    "license": "green",
+    "source": "publisher-metadata"
+  },
+  "10.1097/00008877-200609000-00009": {
+    "checked": true,
+    "is_oa": true,
+    "oa_status": "green",
+    "landing_page_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/2367001",
+    "pdf_url": null,
+    "license": "green",
+    "source": "openalex"
+  },
+  "10.1186/1743-7075-2-28": {
+    "checked": true,
+    "is_oa": true,
+    "oa_status": "gold",
+    "landing_page_url": "https://doi.org/10.1186/1743-7075-2-28",
+    "pdf_url": "https://nutritionandmetabolism.biomedcentral.com/track/pdf/10.1186/1743-7075-2-28",
+    "license": "cc-by",
+    "source": "openalex"
+  },
+  "10.1186/1471-2202-7-29": {
+    "checked": true,
+    "is_oa": true,
+    "oa_status": "gold",
+    "landing_page_url": "https://doi.org/10.1186/1471-2202-7-29",
+    "pdf_url": "https://bmcneurosci.biomedcentral.com/counter/pdf/10.1186/1471-2202-7-29",
+    "license": "cc-by",
     "source": "openalex"
   }
 }
