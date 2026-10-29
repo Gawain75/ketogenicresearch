@@ -5510,7 +5510,7 @@
     "checked": true,
     "is_oa": true,
     "oa_status": "gold",
-    "landing_page_url": "http://dx.doi.org/10.20960/nh.05171",
+    "landing_page_url": "https://doi.org/10.20960/nh.05171",
     "pdf_url": null,
     "license": "cc-by-nc-sa",
     "source": "openalex"
@@ -11828,7 +11828,7 @@
     "is_oa": true,
     "oa_status": "hybrid",
     "landing_page_url": "https://doi.org/10.1016/j.clnesp.2025.02.020",
-    "pdf_url": null,
+    "pdf_url": "https://www.clinicalnutritionespen.com/article/S2405-4577(25)00083-X/pdf",
     "license": "cc-by",
     "source": "openalex"
   },
@@ -38998,5 +38998,18 @@
   "10.1097/yco.0000000000001130": {
     "error": "HTTP Error 404: Not Found",
     "checked": true
+  },
+  "10.1017/neu.2026.10101": {
+    "error": "HTTP Error 404: Not Found",
+    "checked": true
+  },
+  "10.1177/0148607198022005286": {
+    "checked": true,
+    "is_oa": false,
+    "oa_status": "closed",
+    "landing_page_url": null,
+    "pdf_url": null,
+    "license": "closed",
+    "source": "openalex"
   }
 }
