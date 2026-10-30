@@ -1790,7 +1790,7 @@
     "is_oa": true,
     "oa_status": "hybrid",
     "landing_page_url": "https://doi.org/10.1016/j.clnu.2025.02.006",
-    "pdf_url": null,
+    "pdf_url": "https://www.clinicalnutritionjournal.com/article/S0261-5614(25)00040-8/pdf",
     "license": "cc-by-nc-nd",
     "source": "openalex"
   },
@@ -4616,7 +4616,7 @@
     "is_oa": true,
     "oa_status": "hybrid",
     "landing_page_url": "https://doi.org/10.1016/j.jacl.2025.03.009",
-    "pdf_url": null,
+    "pdf_url": "https://www.lipidjournal.com/article/S1933-2874(25)00060-1/pdf",
     "license": "cc-by",
     "source": "openalex"
   },
@@ -39010,6 +39010,23 @@
     "landing_page_url": null,
     "pdf_url": null,
     "license": "closed",
+    "source": "openalex"
+  },
+  "10.1080/07853890.2026.2751276": {
+    "error": "HTTP Error 404: Not Found",
+    "checked": true
+  },
+  "10.1007/s13668-026-00813-w": {
+    "error": "HTTP Error 404: Not Found",
+    "checked": true
+  },
+  "10.1093/jn/128.8.1262": {
+    "checked": true,
+    "is_oa": true,
+    "oa_status": "bronze",
+    "landing_page_url": "https://doi.org/10.1093/jn/128.8.1262",
+    "pdf_url": null,
+    "license": "bronze",
     "source": "openalex"
   }
 }
