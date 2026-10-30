@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T09:57:39+00:00",
+  "generated_at": "2026-10-30T10:00:06+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
@@ -7,60 +7,65 @@
   "excluded_count": 116,
   "records": [
     {
-      "pmid": "42952324",
-      "title": "Energetic metabolism in bipolar disorder: from markers to precision therapeutics.",
+      "pmid": "42954816",
+      "title": "Clinical, metabolic, dermoscopic, and reflectance confocal microscopy features of prurigo pigmentosa: a retrospective case series.",
       "authors": [
-        "Malewska-Kasprzak M",
-        "Dmitrzak-Weglarz M",
-        "Rybakowski F"
+        "Tan MJ",
+        "Chang XL",
+        "Wang SN",
+        "Wang F",
+        "Zhang WY",
+        "Xiao-Hong L",
+        "Qiang D",
+        "Tao Y",
+        "He CF"
       ],
-      "journal": "Acta neuropsychiatrica",
+      "journal": "Annals of medicine",
       "date": "2026-10-29",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1017/neu.2026.10101",
+      "doi": "10.1080/07853890.2026.2751276",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42952324/",
-      "doi_url": "https://doi.org/10.1017/neu.2026.10101",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42954816/",
+      "doi_url": "https://doi.org/10.1080/07853890.2026.2751276",
       "pmc_url": "",
       "areas": [
-        "Psychiatry & Mental Health"
+        "Keto Rash / Prurigo Pigmentosa",
+        "Diabetes & Glucose Metabolism"
       ],
       "category_confidence": 6,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
+      "evidence_type": "Case report / case series",
+      "evidence_type_it": "Case report / case series",
       "source": "PubMed",
-      "first_seen": "2026-10-29",
+      "first_seen": "2026-10-30",
       "status": "new",
       "auto_eligible": true,
       "curation_status": "auto-approved"
     },
     {
-      "pmid": "42951014",
-      "title": "A cancer-inspired metaheuristic for optimal control of breast cancer treatment.",
+      "pmid": "42955473",
+      "title": "The Role of Mediterranean, MIND, and Ketogenic Diets in the Management of Parkinson's Disease.",
       "authors": [
-        "Ebrahimzadeh A",
-        "Khanduzi R",
-        "Khandoozi SR",
-        "Jajarmi A"
+        "Şahin Anılgan İN",
+        "Yıldıran H"
       ],
-      "journal": "Mathematical biosciences",
+      "journal": "Current nutrition reports",
       "date": "2026-10-28",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1016/j.mbs.2026.109835",
+      "doi": "10.1007/s13668-026-00813-w",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42951014/",
-      "doi_url": "https://doi.org/10.1016/j.mbs.2026.109835",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42955473/",
+      "doi_url": "https://doi.org/10.1007/s13668-026-00813-w",
       "pmc_url": "",
       "areas": [
-        "Oncology & Cancer Metabolism"
+        "Parkinson’s Disease"
       ],
-      "category_confidence": 7,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
+      "category_confidence": 6,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
       "source": "PubMed",
-      "first_seen": "2026-10-29",
+      "first_seen": "2026-10-30",
       "status": "new",
       "auto_eligible": true,
       "curation_status": "auto-approved"
