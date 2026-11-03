@@ -1,11 +1,40 @@
 {
-  "generated_at": "2026-11-02T11:04:37+00:00",
+  "generated_at": "2026-11-03T10:51:49+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
   "auto_approved_count": 0,
-  "excluded_count": 119,
+  "excluded_count": 120,
   "records": [
+    {
+      "pmid": "42971345",
+      "title": "Regulation of ketone body metabolism: biochemical mechanisms controlling ketogenesis and ketolysis.",
+      "authors": [
+        "Nasser S",
+        "Balcerczyk A",
+        "Pirola L"
+      ],
+      "journal": "Biochimie",
+      "date": "2026-11-02",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.biochi.2026.10.034",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42971345/",
+      "doi_url": "https://doi.org/10.1016/j.biochi.2026.10.034",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
+      "source": "PubMed",
+      "first_seen": "2026-11-03",
+      "status": "new",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
     {
       "pmid": "41418322",
       "title": "Metabolism Meets Epigenetics: β-Hydroxybutyrate-Driven Lysine β-Hydroxybutyrylation Bridging Energy Metabolism With Transcription and Protein Functional Remodeling.",
