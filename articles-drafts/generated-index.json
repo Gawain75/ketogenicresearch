@@ -68,6 +68,7 @@
     "42932932",
     "42937055",
     "42951014",
+    "42952324",
     "42954816",
     "42955473",
     "42956143",
@@ -927,9 +928,15 @@
       "at": "2026-10-30T10:30:43.597647+00:00",
       "stage": "generation",
       "error": "Groq HTTP 413: {\"error\":{\"message\":\"Request too large for model `openai/gpt-oss-120b` in organization `org_01m2v9fhzme29te5cqydhvxz4y` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 8123, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "pmid": "42975834",
+      "at": "2026-11-04T11:37:39.240783+00:00",
+      "stage": "source",
+      "error": "PubMed abstract unavailable"
     }
   ],
-  "updated_at": "2026-11-04T11:00:54.346140+00:00",
+  "updated_at": "2026-11-04T11:39:01.987867+00:00",
   "source_unavailable_pmids": [
     "42642354",
     "42717355",
@@ -938,10 +945,11 @@
     "42826040",
     "42827191",
     "42828422",
-    "42875781"
+    "42875781",
+    "42975834"
   ],
   "last_run": {
-    "attempted_candidates": 1,
+    "attempted_candidates": 2,
     "published_articles": 1,
     "status": "published"
   }
