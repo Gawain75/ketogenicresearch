@@ -1,11 +1,76 @@
 {
-  "generated_at": "2026-11-03T10:51:49+00:00",
+  "generated_at": "2026-11-04T10:54:45+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
-  "auto_approved_count": 0,
+  "auto_approved_count": 2,
   "excluded_count": 120,
   "records": [
+    {
+      "pmid": "42977736",
+      "title": "Epilepsy: epidemiology, risk factors, classification, pathophysiology, clinical features, diagnosis and management.",
+      "authors": [
+        "Sha L",
+        "Fu Y",
+        "Basang S",
+        "Jin L",
+        "Huang S",
+        "Chen T",
+        "Zhang J",
+        "He M",
+        "Zhang J",
+        "Chen L"
+      ],
+      "journal": "Signal transduction and targeted therapy",
+      "date": "2026-11-04",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1038/s41392-026-03104-6",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42977736/",
+      "doi_url": "https://doi.org/10.1038/s41392-026-03104-6",
+      "pmc_url": "",
+      "areas": [
+        "Epilepsy"
+      ],
+      "category_confidence": 7,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
+      "source": "PubMed",
+      "first_seen": "2026-11-04",
+      "status": "new",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "42975834",
+      "title": "Retraction Note: A ketogenic diet for the management of binge-eating disorder: a pilot study.",
+      "authors": [
+        "Liang Y",
+        "Taylor A",
+        "Qiu C"
+      ],
+      "journal": "Eating and weight disorders : EWD",
+      "date": "2026-11-03",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1007/s40519-026-01916-7",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42975834/",
+      "doi_url": "https://doi.org/10.1007/s40519-026-01916-7",
+      "pmc_url": "",
+      "areas": [
+        "Eating Disorders"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-11-04",
+      "status": "new",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
     {
       "pmid": "42971345",
       "title": "Regulation of ketone body metabolism: biochemical mechanisms controlling ketogenesis and ketolysis.",
@@ -250,7 +315,7 @@
       "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
       "first_seen": "2026-10-27",
-      "status": "new",
+      "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
     },
@@ -291,7 +356,7 @@
       "evidence_type_it": "Altro",
       "source": "PubMed",
       "first_seen": "2026-10-23",
-      "status": "new",
+      "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
     },
