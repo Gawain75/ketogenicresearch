@@ -20766,7 +20766,7 @@
     "is_oa": true,
     "oa_status": "green",
     "landing_page_url": "http://hdl.handle.net/10637/776",
-    "pdf_url": null,
+    "pdf_url": "http://hdl.handle.net/10637/776",
     "license": "cc-by-nc-nd",
     "source": "openalex"
   },
@@ -21126,7 +21126,7 @@
     "is_oa": true,
     "oa_status": "green",
     "landing_page_url": "http://hdl.handle.net/10637/752",
-    "pdf_url": null,
+    "pdf_url": "http://hdl.handle.net/10637/752",
     "license": "cc-by-nc-nd",
     "source": "openalex"
   },
@@ -21162,8 +21162,8 @@
     "is_oa": true,
     "oa_status": "green",
     "landing_page_url": "http://hdl.handle.net/10637/800",
-    "pdf_url": null,
-    "license": "cc-by-nc-nd",
+    "pdf_url": "http://hdl.handle.net/10637/800",
+    "license": "other-oa",
     "source": "openalex"
   },
   "10.1016/0022-4804(88)90044-3": {
@@ -26401,7 +26401,7 @@
     "oa_status": "green",
     "landing_page_url": "http://hdl.handle.net/10637/728",
     "pdf_url": null,
-    "license": "cc-by-nc-nd",
+    "license": "other-oa",
     "source": "openalex"
   },
   "10.1016/0305-0491(85)90238-x": {
@@ -39297,6 +39297,60 @@
     "landing_page_url": null,
     "pdf_url": null,
     "license": "closed",
+    "source": "openalex"
+  },
+  "10.1016/j.mehy.2018.11.012": {
+    "checked": true,
+    "is_oa": false,
+    "oa_status": "closed",
+    "landing_page_url": null,
+    "pdf_url": null,
+    "license": "closed",
+    "source": "openalex"
+  },
+  "10.1016/j.mehy.2018.06.014": {
+    "checked": true,
+    "is_oa": false,
+    "oa_status": "closed",
+    "landing_page_url": null,
+    "pdf_url": null,
+    "license": "closed",
+    "source": "openalex"
+  },
+  "10.1016/j.nut.2017.12.015": {
+    "checked": true,
+    "is_oa": true,
+    "oa_status": "bronze",
+    "landing_page_url": "https://doi.org/10.1016/j.nut.2017.12.015",
+    "pdf_url": "https://www.sciencedirect.com/science/article/pii/S089990071830042X",
+    "license": "bronze",
+    "source": "openalex"
+  },
+  "10.1016/j.jphs.2019.10.007": {
+    "checked": true,
+    "is_oa": true,
+    "oa_status": "gold",
+    "landing_page_url": "https://doi.org/10.1016/j.jphs.2019.10.007",
+    "pdf_url": "https://www.sciencedirect.com/science/article/pii/S1347861319357251/pdf",
+    "license": "cc-by-nc-nd",
+    "source": "openalex"
+  },
+  "10.1016/j.abb.2019.01.020": {
+    "checked": true,
+    "is_oa": true,
+    "oa_status": "green",
+    "landing_page_url": "https://hdl.handle.net/20.500.14094/D1007479",
+    "pdf_url": "https://da.lib.kobe-u.ac.jp/da/kernel/D1007479/D1007479y.pdf",
+    "license": "green",
+    "source": "openalex"
+  },
+  "10.32394/rpzh.2020.0120": {
+    "checked": true,
+    "is_oa": true,
+    "oa_status": "gold",
+    "landing_page_url": "https://doi.org/10.32394/rpzh.2020.0120",
+    "pdf_url": "https://doi.org/10.32394/rpzh.2020.0120",
+    "license": "cc-by-nc",
     "source": "openalex"
   }
 }
