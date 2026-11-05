@@ -757,8 +757,31 @@ def main():
             "mindate": start_date.strftime("%Y/%m/%d"),
             "maxdate": end_date.strftime("%Y/%m/%d"),
         }
-        result = json.loads(api("esearch.fcgi", params).decode("utf-8"))
-        return result.get("esearchresult", {}).get("idlist", [])
+        def read_ids(request_params):
+            try:
+                payload = json.loads(api("esearch.fcgi", request_params).decode("utf-8"))
+            except (ValueError, UnicodeError):
+                raise PubMedTemporaryError(f"PubMed {datetype}: invalid JSON response") from None
+            result = payload.get("esearchresult") if isinstance(payload, dict) else None
+            if (
+                not isinstance(result, dict)
+                or payload.get("error")
+                or result.get("ERROR")
+                or result.get("errorlist")
+                or not isinstance(result.get("idlist"), list)
+            ):
+                raise PubMedTemporaryError(f"PubMed {datetype}: response missing a valid ID list")
+            print(f"PubMed {datetype}: {len(result['idlist'])} PMID(s) returned", flush=True)
+            return result["idlist"]
+
+        try:
+            return read_ids(params)
+        except PubMedTemporaryError as error:
+            print(f"WARNING: PubMed {datetype}: {error}. Trying date field in query.", flush=True)
+            for key in ("datetype", "mindate", "maxdate"):
+                del params[key]
+            params["term"] = f"({QUERY}) AND {start_date:%Y/%m/%d}:{end_date:%Y/%m/%d}[{datetype}]"
+            return read_ids(params)
 
     def discover_ids():
         pdat_ids = search_ids("pdat", search_start, search_end)
