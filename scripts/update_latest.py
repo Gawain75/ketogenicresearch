@@ -220,6 +220,10 @@ MONTHS = {
 }
 
 
+class PubMedTemporaryError(RuntimeError):
+    pass
+
+
 def api(name, params):
     params = {**params, "tool": "ketogenicresearch-literature-monitor", "email": EMAIL}
     if API_KEY:
@@ -253,17 +257,17 @@ def api(name, params):
         except urllib.error.HTTPError as error:
             status = error.code
             error.close()
-            if status not in {429, 500, 502, 503, 504} or attempt == max_attempts:
+            if status not in {429, 500, 502, 503, 504}:
                 raise RuntimeError(f"PubMed {name}: HTTP {status} (attempt {attempt}/{max_attempts})") from None
             reason = f"HTTP {status}"
         except (urllib.error.URLError, TimeoutError) as error:
             reason = type(error).__name__
-            if attempt == max_attempts:
-                raise RuntimeError(f"PubMed {name}: {reason} after {max_attempts} attempts") from None
         else:
             time.sleep(0.12 if API_KEY else 0.36)
             return data
 
+        if attempt == max_attempts:
+            raise PubMedTemporaryError(f"PubMed {name}: {reason} after {max_attempts} attempts")
         delay = retry_delays[attempt - 1]
         print(f"PubMed {name}: {reason} (attempt {attempt}/{max_attempts}); retrying in {delay}s.", flush=True)
         time.sleep(delay)
@@ -756,16 +760,23 @@ def main():
         result = json.loads(api("esearch.fcgi", params).decode("utf-8"))
         return result.get("esearchresult", {}).get("idlist", [])
 
-    # Main discovery by publication date.
-    pdat_ids = search_ids("pdat", search_start, search_end)
+    def discover_ids():
+        pdat_ids = search_ids("pdat", search_start, search_end)
+        if BACKFILL_MODE:
+            return pdat_ids, []
 
-    # On normal scheduled runs, also capture records newly entered into PubMed.
-    # A paper can be indexed today while carrying an earlier publication date;
-    # pdat alone can therefore miss genuinely new PubMed additions.
-    edat_ids = []
-    if not BACKFILL_MODE:
+        # Indexing can occur after publication, so search both dates when available.
         index_start = today - dt.timedelta(days=INDEX_WINDOW_DAYS)
-        edat_ids = search_ids("edat", index_start, today)
+        try:
+            edat_ids = search_ids("edat", index_start, today)
+        except PubMedTemporaryError as error:
+            if not pdat_ids:
+                raise
+            print(f"WARNING: PubMed edat search unavailable ({error}). Continuing with pdat results only.", flush=True)
+            edat_ids = []
+        return pdat_ids, edat_ids
+
+    pdat_ids, edat_ids = discover_ids()
 
     # Preserve PubMed ordering while removing duplicates.
     ids = list(dict.fromkeys(pdat_ids + edat_ids))
@@ -779,11 +790,7 @@ def main():
             wait_seconds = attempt * 5
             print(f"PubMed returned no records; retry {attempt}/3 after {wait_seconds}s...")
             time.sleep(wait_seconds)
-            pdat_ids = search_ids("pdat", search_start, search_end)
-            edat_ids = []
-            if not BACKFILL_MODE:
-                index_start = today - dt.timedelta(days=INDEX_WINDOW_DAYS)
-                edat_ids = search_ids("edat", index_start, today)
+            pdat_ids, edat_ids = discover_ids()
             ids = list(dict.fromkeys(pdat_ids + edat_ids))
             if ids:
                 print(f"PubMed recovered on retry {attempt}: {len(ids)} unique record(s) returned.")
