@@ -6,6 +6,7 @@ import json
 import os
 import re
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -243,11 +244,29 @@ def api(name, params):
             headers={"User-Agent": f"ketogenicresearch/2.1 ({EMAIL})"},
         )
 
-    with urllib.request.urlopen(req, timeout=60) as response:
-        data = response.read()
+    retry_delays = (5, 15, 30)
+    max_attempts = len(retry_delays) + 1
+    for attempt in range(1, max_attempts + 1):
+        try:
+            with urllib.request.urlopen(req, timeout=60) as response:
+                data = response.read()
+        except urllib.error.HTTPError as error:
+            status = error.code
+            error.close()
+            if status not in {429, 500, 502, 503, 504} or attempt == max_attempts:
+                raise RuntimeError(f"PubMed {name}: HTTP {status} (attempt {attempt}/{max_attempts})") from None
+            reason = f"HTTP {status}"
+        except (urllib.error.URLError, TimeoutError) as error:
+            reason = type(error).__name__
+            if attempt == max_attempts:
+                raise RuntimeError(f"PubMed {name}: {reason} after {max_attempts} attempts") from None
+        else:
+            time.sleep(0.12 if API_KEY else 0.36)
+            return data
 
-    time.sleep(0.12 if API_KEY else 0.36)
-    return data
+        delay = retry_delays[attempt - 1]
+        print(f"PubMed {name}: {reason} (attempt {attempt}/{max_attempts}); retrying in {delay}s.", flush=True)
+        time.sleep(delay)
 
 
 def text(node):
