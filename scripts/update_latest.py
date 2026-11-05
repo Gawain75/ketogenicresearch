@@ -777,11 +777,46 @@ def main():
         try:
             return read_ids(params)
         except PubMedTemporaryError as error:
-            print(f"WARNING: PubMed {datetype}: {error}. Trying date field in query.", flush=True)
-            for key in ("datetype", "mindate", "maxdate"):
-                del params[key]
-            params["term"] = f"({QUERY}) AND {start_date:%Y/%m/%d}:{end_date:%Y/%m/%d}[{datetype}]"
-            return read_ids(params)
+            print(f"WARNING: PubMed {datetype}: {error}. Searching Europe PMC for PubMed IDs.", flush=True)
+            return europe_pmc_ids(datetype, start_date, end_date)
+
+    def europe_pmc_ids(datetype, start_date, end_date):
+        date_field = {"pdat": "FIRST_PDATE", "edat": "FIRST_IDATE"}[datetype]
+        terms = re.sub(r'("[^"]+"|\w+)\[Title/Abstract\]', r"TITLE_ABS:\1", QUERY)
+        terms = re.sub(r'("[^"]+")\[Mesh\]', r"KW:\1", terms)
+        query = f"SRC:MED AND {terms} AND {date_field}:[{start_date} TO {end_date}]"
+        ids = []
+        cursor = "*"
+        while len(ids) < CURATION_MAX_RECORDS:
+            params = urllib.parse.urlencode({
+                "query": query,
+                "format": "json",
+                "resultType": "idlist",
+                "pageSize": min(500, CURATION_MAX_RECORDS - len(ids)),
+                "sort": "P_PDATE_D desc",
+                "cursorMark": cursor,
+            })
+            url = f"https://www.ebi.ac.uk/europepmc/webservices/rest/search?{params}"
+            try:
+                with urllib.request.urlopen(url, timeout=60) as response:
+                    payload = json.load(response)
+                records = payload["resultList"]["result"]
+                if not isinstance(records, list) or any(
+                    row.get("source") != "MED" or not str(row.get("id", "")).isdigit()
+                    for row in records
+                ):
+                    raise ValueError("Invalid PMID list")
+                ids.extend(str(row["id"]) for row in records)
+                if len(ids) >= min(int(payload["hitCount"]), CURATION_MAX_RECORDS):
+                    break
+                next_cursor = payload.get("nextCursorMark")
+                if not records or not next_cursor or next_cursor == cursor:
+                    raise ValueError("Incomplete result pages")
+                cursor = next_cursor
+            except (urllib.error.URLError, TimeoutError, KeyError, ValueError, TypeError, AttributeError) as error:
+                raise PubMedTemporaryError(f"Europe PMC {datetype}: {error}") from None
+        print(f"WARNING: Europe PMC {datetype}: {len(ids)} PMID(s) returned using Europe PMC date fields.", flush=True)
+        return ids
 
     def discover_ids():
         pdat_ids = search_ids("pdat", search_start, search_end)
