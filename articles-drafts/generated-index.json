@@ -934,9 +934,21 @@
       "at": "2026-11-04T11:37:39.240783+00:00",
       "stage": "source",
       "error": "PubMed abstract unavailable"
+    },
+    {
+      "pmid": "42979683",
+      "at": "2026-11-05T12:19:13.524293+00:00",
+      "stage": "source",
+      "error": "PubMed abstract unavailable"
+    },
+    {
+      "pmid": "42935744",
+      "at": "2026-11-05T12:19:14.369341+00:00",
+      "stage": "generation",
+      "error": "HTTP Error 429: Too Many Requests"
     }
   ],
-  "updated_at": "2026-11-04T11:39:01.987867+00:00",
+  "updated_at": "2026-11-05T12:19:14.369590+00:00",
   "source_unavailable_pmids": [
     "42642354",
     "42717355",
@@ -946,11 +958,12 @@
     "42827191",
     "42828422",
     "42875781",
-    "42975834"
+    "42975834",
+    "42979683"
   ],
   "last_run": {
-    "attempted_candidates": 2,
-    "published_articles": 1,
-    "status": "published"
+    "attempted_candidates": 4,
+    "published_articles": 0,
+    "status": "no_article_published"
   }
 }
