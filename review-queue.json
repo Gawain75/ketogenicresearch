@@ -1,11 +1,100 @@
 {
-  "generated_at": "2026-11-05T12:16:17+00:00",
+  "generated_at": "2026-11-06T10:51:37+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
-  "auto_approved_count": 0,
-  "excluded_count": 117,
+  "auto_approved_count": 4,
+  "excluded_count": 119,
   "records": [
+    {
+      "pmid": "42988340",
+      "title": "Fatty acid oxidation of dietary lipids from ketogenic diets promotes intestinal tumorigenesis independently from ketone bodies.",
+      "authors": [
+        "Ivy DM",
+        "Ianiro G"
+      ],
+      "journal": "Gastroenterology",
+      "date": "2026-11-05",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1053/j.gastro.2026.11.001",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42988340/",
+      "doi_url": "https://doi.org/10.1053/j.gastro.2026.11.001",
+      "pmc_url": "",
+      "areas": [
+        "Dyslipidemia & Lipid Metabolism",
+        "Oncology & Cancer Metabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-11-06",
+      "status": "new",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "42988152",
+      "title": "Ketone bodies and heart failure: A dual paradox from metabolic adaptation to therapeutic target.",
+      "authors": [
+        "Hao L",
+        "Zhang Q",
+        "Gao RK",
+        "Du ZX",
+        "Wang HQ"
+      ],
+      "journal": "Metabolism: clinical and experimental",
+      "date": "2026-11-05",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.metabol.2026.156822",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42988152/",
+      "doi_url": "https://doi.org/10.1016/j.metabol.2026.156822",
+      "pmc_url": "",
+      "areas": [
+        "Cardiovascular Health"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Review",
+      "evidence_type_it": "Revisione",
+      "source": "PubMed",
+      "first_seen": "2026-11-06",
+      "status": "new",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "42983895",
+      "title": "Prurigo Pigmentosa With Prominent Pustular Lesions Associated With a Ketogenic Diet.",
+      "authors": [
+        "Lee PD",
+        "Bertlich I",
+        "Schmitt L"
+      ],
+      "journal": "International journal of dermatology",
+      "date": "2026-11-04",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1111/ijd.70779",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42983895/",
+      "doi_url": "https://doi.org/10.1111/ijd.70779",
+      "pmc_url": "",
+      "areas": [
+        "Keto Rash / Prurigo Pigmentosa"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-11-06",
+      "status": "new",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
     {
       "pmid": "42979683",
       "title": "Ketone bodies: a double-edged sword for HFpEF.",
@@ -162,6 +251,39 @@
       "curation_status": "excluded-low-confidence"
     },
     {
+      "pmid": "42985469",
+      "title": "Epigenetic Silencing of ZNF471 Contributes to Osimertinib Resistance in Lung Adenocarcinoma: β-Hydroxybutyrate Associates with ZNF471 Re-Expression and Reduced Resistance-Associated Phenotypes.",
+      "authors": [
+        "Feng D",
+        "Yan H",
+        "Ni Q",
+        "Peng Z",
+        "Xu X",
+        "Liang Y",
+        "Liu C"
+      ],
+      "journal": "Oncology research",
+      "date": "2026-10-28",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.32604/or.2026.087712",
+      "pmc": "PMC13732338",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42985469/",
+      "doi_url": "https://doi.org/10.32604/or.2026.087712",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13732338/",
+      "areas": [
+        "Oncology & Cancer Metabolism"
+      ],
+      "category_confidence": 10,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-11-06",
+      "status": "new",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
       "pmid": "42826040",
       "title": "The Ketogenic Diet Improved Liver Health in Trial, But What Does That Mean in the Real World?",
       "authors": [
@@ -246,7 +368,7 @@
       "evidence_type_it": "Studio osservazionale umano",
       "source": "PubMed",
       "first_seen": "2026-10-25",
-      "status": "new",
+      "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
     },
@@ -927,6 +1049,41 @@
       "curation_status": "excluded-low-confidence"
     },
     {
+      "pmid": "42620129",
+      "title": "Mice Undergo Organ-Specific Transcriptional and Metabolic Remodeling During Late Adolescence.",
+      "authors": [
+        "Huang QX",
+        "Ajami AA",
+        "Kohnert E",
+        "Kilic T",
+        "Engel C",
+        "Boerries M",
+        "Kreutz C",
+        "Moos K",
+        "Walz G"
+      ],
+      "journal": "Research square",
+      "date": "2026-08-05",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.21203/rs.3.rs-10171816/v1",
+      "pmc": "PMC13484811",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42620129/",
+      "doi_url": "https://doi.org/10.21203/rs.3.rs-10171816/v1",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13484811/",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-11-06",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
       "pmid": "42543122",
       "title": "Highly expressed ACSF2 contributes to butyrate utilization in the rumen epithelium.",
       "authors": [
@@ -1120,6 +1277,46 @@
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
       "first_seen": "2026-09-30",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "42465365",
+      "title": "Challenges and Solutions in Quantifying Brain β-Hydroxybutyrate (BHB) with 1 H-MRS Following Oral Keto-Ester Consumption.",
+      "authors": [
+        "Virk M",
+        "Connors KT",
+        "Kitaneh R",
+        "Mignosa MM",
+        "McIntyre S",
+        "Nixon TW",
+        "DeMartini K",
+        "O'Malley S",
+        "Krystal JH",
+        "De Feyter HM",
+        "Angarita GA",
+        "Mason GF",
+        "de Graaf RA",
+        "Kumaragamage C"
+      ],
+      "journal": "bioRxiv : the preprint server for biology",
+      "date": "2026-07-09",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.64898/2026.07.04.736442",
+      "pmc": "PMC13370465",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42465365/",
+      "doi_url": "https://doi.org/10.64898/2026.07.04.736442",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13370465/",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-11-06",
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
@@ -2240,6 +2437,41 @@
       "curation_status": "excluded-low-confidence"
     },
     {
+      "pmid": "41929183",
+      "title": "β-hydroxybutyrate modulates enteric pathogen susceptibility through regulation of commensal bacteria and intestinal Th17 responses.",
+      "authors": [
+        "Dong W",
+        "Yan C",
+        "Korwin-Mihavics B",
+        "Stack K",
+        "Hughes G",
+        "Schmidt A",
+        "Schwartz K",
+        "Caballero-Flores G",
+        "Alexander M"
+      ],
+      "journal": "bioRxiv : the preprint server for biology",
+      "date": "2026-03-25",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.64898/2026.03.20.713262",
+      "pmc": "PMC13041886",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41929183/",
+      "doi_url": "https://doi.org/10.64898/2026.03.20.713262",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13041886/",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-11-06",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
       "pmid": "41882026",
       "title": "GPR109a-AMPK axis mediates the Attenuation of uric acid-induced M1 macrophage polarization by β-hydroxybutyrate from Lacticaseibacillus rhamnosus M2b.",
       "authors": [
@@ -2725,6 +2957,48 @@
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
       "first_seen": "2026-09-30",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "41676474",
+      "title": "Ketone body β-hydroxybutyrate restores neuronal Tau proteostasis via ketolysis-independent mechanism.",
+      "authors": [
+        "Rossitto LM",
+        "Foo J",
+        "Di Silvestri JM",
+        "Lehmann L",
+        "Brunelli M",
+        "Nie Y",
+        "Muñoz-Mayorga D",
+        "Xiao Q",
+        "Dai-Liu AY",
+        "Jati S",
+        "Rossi M",
+        "Daneman R",
+        "Kelly JW",
+        "Newman JC",
+        "Myers SA",
+        "Chen X"
+      ],
+      "journal": "bioRxiv : the preprint server for biology",
+      "date": "2026-02-02",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.64898/2026.01.30.702936",
+      "pmc": "PMC12889508",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41676474/",
+      "doi_url": "https://doi.org/10.64898/2026.01.30.702936",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12889508/",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-11-06",
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
@@ -3292,6 +3566,41 @@
       "curation_status": "excluded-low-confidence"
     },
     {
+      "pmid": "41497602",
+      "title": "BDH1-Dependent Ketone Body Metabolism Maintains Müller Cell Homeostasis and Retinal Function.",
+      "authors": [
+        "Garg R",
+        "Karmakar E",
+        "DeBruin D",
+        "Prasad S",
+        "Naquin E",
+        "Brennan M",
+        "Piri N",
+        "Kisselev O",
+        "Gnana-Prakasam JP"
+      ],
+      "journal": "bioRxiv : the preprint server for biology",
+      "date": "2025-12-27",
+      "date_precision": "day",
+      "year": 2025,
+      "doi": "10.64898/2025.12.27.696636",
+      "pmc": "PMC12767654",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41497602/",
+      "doi_url": "https://doi.org/10.64898/2025.12.27.696636",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12767654/",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-11-06",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
       "pmid": "41467109",
       "title": "Green Nanotechnology and Phytochemical Mediated Production of Ketone Encapsulated Protein Nanoparticles-in vitro and in vivo Bioavailability Investigations.",
       "authors": [
@@ -3573,39 +3882,6 @@
       "curation_status": "excluded-low-confidence"
     },
     {
-      "pmid": "41573350",
-      "title": "Dietary duration and composition differentially influence mitochondrial activity and gene expression in a tissue-specific manner in aged rats.",
-      "authors": [
-        "Ford BJ",
-        "Banerjee A",
-        "Ding S",
-        "Caton AA",
-        "Grothaus A",
-        "Burke SN",
-        "Hernandez AR"
-      ],
-      "journal": "Translational medicine of aging",
-      "date": "2025-11-28",
-      "date_precision": "day",
-      "year": 2025,
-      "doi": "10.1016/j.tma.2025.11.001",
-      "pmc": "PMC12823141",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41573350/",
-      "doi_url": "https://doi.org/10.1016/j.tma.2025.11.001",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12823141/",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-11-05",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
       "pmid": "41522662",
       "title": "Denosumab as a treatment for pediatric hypercalcemia-a multicenter experience.",
       "authors": [
@@ -3814,37 +4090,6 @@
       "curation_status": "excluded-low-confidence"
     },
     {
-      "pmid": "41306674",
-      "title": "Food environment with high plant-based fat supply is associated with Attention-Deficit/Hyperactivity Disorder (ADHD) protection: a global study with more than 150 countries.",
-      "authors": [
-        "Ni D",
-        "Senior A",
-        "Raubenheimer D",
-        "Simpson SJ",
-        "Nanan R"
-      ],
-      "journal": "Frontiers in nutrition",
-      "date": "2025-11-11",
-      "date_precision": "day",
-      "year": 2025,
-      "doi": "10.3389/fnut.2025.1658228",
-      "pmc": "PMC12644920",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41306674/",
-      "doi_url": "https://doi.org/10.3389/fnut.2025.1658228",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12644920/",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
-      "source": "PubMed",
-      "first_seen": "2026-09-30",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
       "pmid": "41207600",
       "title": "Evaluation of an enzymatic one-step assay for Beta-Hydroxybutyrate blood testing on clinical chemistry platforms using HILIC-MS/MS as a non-enzymatic reference method.",
       "authors": [
@@ -3873,34 +4118,6 @@
       "category_confidence": 1,
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-09-30",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "41205580",
-      "title": "Topical β-hydroxybutyrate suppresses allergic dermatitis via HCAR2-CaMKK-AMPK-mediated barrier protection.",
-      "authors": [
-        "Yoshimura Y",
-        "Fujii A"
-      ],
-      "journal": "Biochemical and biophysical research communications",
-      "date": "2025-11-05",
-      "date_precision": "day",
-      "year": 2025,
-      "doi": "10.1016/j.bbrc.2025.152931",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41205580/",
-      "doi_url": "https://doi.org/10.1016/j.bbrc.2025.152931",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
       "first_seen": "2026-09-30",
       "status": "indexed",
