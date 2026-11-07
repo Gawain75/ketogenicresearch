@@ -983,9 +983,48 @@
       "at": "2026-11-06T11:35:14.564845+00:00",
       "stage": "generation",
       "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "pmid": "42989060",
+      "at": "2026-11-07T10:12:42.943021+00:00",
+      "stage": "verification",
+      "issues": [
+        "The source note incorrectly cites the authors as \"Leh et al.\" whereas the source lists the authors as Leong EL, Tan M, Chong AT, Tan SS."
+      ],
+      "unsupported_claims": []
+    },
+    {
+      "pmid": "42975834",
+      "at": "2026-11-07T10:12:43.987279+00:00",
+      "stage": "generation",
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "pmid": "42992162",
+      "at": "2026-11-07T10:12:44.097545+00:00",
+      "stage": "generation",
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "pmid": "42985469",
+      "at": "2026-11-07T10:12:44.861864+00:00",
+      "stage": "generation",
+      "error": "Groq HTTP 413: {\"error\":{\"message\":\"Request too large for model `openai/gpt-oss-120b` in organization `org_01m2v9fhzme29te5cqydhvxz4y` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 9457, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "pmid": "42990966",
+      "at": "2026-11-07T10:12:45.213166+00:00",
+      "stage": "generation",
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "pmid": "42935744",
+      "at": "2026-11-07T10:12:45.973452+00:00",
+      "stage": "generation",
+      "error": "Groq HTTP 413: {\"error\":{\"message\":\"Request too large for model `openai/gpt-oss-120b` in organization `org_01m2v9fhzme29te5cqydhvxz4y` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 8104, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
     }
   ],
-  "updated_at": "2026-11-06T11:35:14.565013+00:00",
+  "updated_at": "2026-11-07T10:12:45.973515+00:00",
   "source_unavailable_pmids": [
     "42642354",
     "42717355",
@@ -1001,7 +1040,7 @@
     "42988340"
   ],
   "last_run": {
-    "attempted_candidates": 7,
+    "attempted_candidates": 10,
     "published_articles": 0,
     "status": "no_article_published"
   }
