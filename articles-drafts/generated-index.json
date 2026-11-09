@@ -1025,9 +1025,39 @@
       "at": "2026-11-07T10:12:45.973452+00:00",
       "stage": "generation",
       "error": "Groq HTTP 413: {\"error\":{\"message\":\"Request too large for model `openai/gpt-oss-120b` in organization `org_01m2v9fhzme29te5cqydhvxz4y` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 8104, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "pmid": "42975834",
+      "at": "2026-11-09T11:34:21.231338+00:00",
+      "stage": "generation",
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "pmid": "42992162",
+      "at": "2026-11-09T11:34:21.256924+00:00",
+      "stage": "generation",
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "pmid": "42985469",
+      "at": "2026-11-09T11:34:21.281264+00:00",
+      "stage": "generation",
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "pmid": "42826040",
+      "at": "2026-11-09T11:34:21.315966+00:00",
+      "stage": "generation",
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "pmid": "42990966",
+      "at": "2026-11-09T11:34:21.347308+00:00",
+      "stage": "generation",
+      "error": "HTTP Error 429: Too Many Requests"
     }
   ],
-  "updated_at": "2026-11-08T10:49:16.072107+00:00",
+  "updated_at": "2026-11-09T11:34:21.347476+00:00",
   "source_unavailable_pmids": [
     "42642354",
     "42717355",
@@ -1043,8 +1073,8 @@
     "42988340"
   ],
   "last_run": {
-    "attempted_candidates": 1,
-    "published_articles": 1,
-    "status": "published"
+    "attempted_candidates": 8,
+    "published_articles": 0,
+    "status": "no_article_published"
   }
 }
