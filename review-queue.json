@@ -1,11 +1,43 @@
 {
-  "generated_at": "2026-11-09T11:30:08+00:00",
+  "generated_at": "2026-11-10T11:10:49+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
-  "auto_approved_count": 0,
-  "excluded_count": 120,
+  "auto_approved_count": 2,
+  "excluded_count": 121,
   "records": [
+    {
+      "pmid": "43003420",
+      "title": "Genetically Predicted β-Hydroxybutyrate and Coronary Atherosclerosis: Mendelian Randomization and APOE-Associated Transcriptomic Signatures in Human Atherosclerotic Plaques.",
+      "authors": [
+        "Yang H",
+        "Qi W",
+        "Liu C",
+        "Li Y",
+        "Li L",
+        "Wu X"
+      ],
+      "journal": "Diabetes, obesity & metabolism",
+      "date": "2026-11-09",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1111/dom.71530",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43003420/",
+      "doi_url": "https://doi.org/10.1111/dom.71530",
+      "pmc_url": "",
+      "areas": [
+        "Cardiovascular Health"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-11-10",
+      "status": "new",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
     {
       "pmid": "42989060",
       "title": "Stability of beta-hydroxybutyrate in venous whole blood.",
@@ -187,6 +219,37 @@
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
       "first_seen": "2026-10-31",
+      "status": "new",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "43001310",
+      "title": "Continuous ketone monitoring in inborn errors of metabolism.",
+      "authors": [
+        "Sikonja J",
+        "Janez A",
+        "Gregoric N",
+        "Battelino T",
+        "Groselj U"
+      ],
+      "journal": "Metabolism open",
+      "date": "2026-10-28",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.metop.2026.100517",
+      "pmc": "PMC13744896",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43001310/",
+      "doi_url": "https://doi.org/10.1016/j.metop.2026.100517",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13744896/",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Clinical trial / intervention",
+      "evidence_type_it": "Trial clinico / intervento",
+      "source": "PubMed",
+      "first_seen": "2026-11-10",
       "status": "new",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
@@ -849,6 +912,42 @@
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "43000435",
+      "title": "Comparative associations of six dietary pattern indices with mortality among U.S. adults with sarcopenia: a nationally representative cohort study.",
+      "authors": [
+        "Jiang Y",
+        "Wang J",
+        "Luo K",
+        "Wu J",
+        "Li Z",
+        "Zhu H",
+        "Du L",
+        "Min M",
+        "Zhong Z",
+        "Chen S"
+      ],
+      "journal": "Nutrition & metabolism",
+      "date": "2026-08-11",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1186/s12986-026-01180-7",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43000435/",
+      "doi_url": "https://doi.org/10.1186/s12986-026-01180-7",
+      "pmc_url": "",
+      "areas": [
+        "Sarcopenia & Skeletal Muscle"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Observational human study",
+      "evidence_type_it": "Studio osservazionale umano",
+      "source": "PubMed",
+      "first_seen": "2026-11-10",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
     },
     {
       "pmid": "42581421",
