@@ -82,6 +82,7 @@
     "42998075",
     "42998110",
     "43003420",
+    "43003961",
     "43008909"
   ],
   "failures": [
@@ -1101,7 +1102,7 @@
       "error": "Groq HTTP 413: {\"error\":{\"message\":\"Request too large for model `openai/gpt-oss-120b` in organization `org_01m2v9fhzme29te5cqydhvxz4y` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 8419, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
     }
   ],
-  "updated_at": "2026-11-11T09:00:00.378017+00:00",
+  "updated_at": "2026-11-11T11:00:37.832323+00:00",
   "source_unavailable_pmids": [
     "42642354",
     "42717355",
