@@ -1,81 +1,11 @@
 {
-  "generated_at": "2026-11-11T08:54:10+00:00",
+  "generated_at": "2026-11-11T10:56:13+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
-  "auto_approved_count": 2,
+  "auto_approved_count": 0,
   "excluded_count": 121,
   "records": [
-    {
-      "pmid": "43008909",
-      "title": "Linking ferroptosis to chronic sleep deprivation: emerging insights into mechanisms and interventions.",
-      "authors": [
-        "Li R",
-        "Zhang W",
-        "Han W",
-        "Wang M",
-        "Gao Y",
-        "Wei H",
-        "Zhu Y",
-        "Xu Y",
-        "Yu M"
-      ],
-      "journal": "Brain research",
-      "date": "2026-11-10",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.brainres.2026.150632",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43008909/",
-      "doi_url": "https://doi.org/10.1016/j.brainres.2026.150632",
-      "pmc_url": "",
-      "areas": [
-        "Circadian Rhythms"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-11-11",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "43003961",
-      "title": "Ketogenic diet ameliorates diabetic kidney disease but promotes renal lipid and calcium deposition.",
-      "authors": [
-        "Abdualkader AM",
-        "Li X",
-        "Mechchate H",
-        "Bai C",
-        "Pourfarziani P",
-        "Papillon J",
-        "Alexander RT",
-        "Al Batran R"
-      ],
-      "journal": "EMBO molecular medicine",
-      "date": "2026-11-09",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1038/s44321-026-00552-z",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43003961/",
-      "doi_url": "https://doi.org/10.1038/s44321-026-00552-z",
-      "pmc_url": "",
-      "areas": [
-        "Dyslipidemia & Lipid Metabolism",
-        "Chronic Kidney Disease"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-11-11",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
     {
       "pmid": "42989060",
       "title": "Stability of beta-hydroxybutyrate in venous whole blood.",
