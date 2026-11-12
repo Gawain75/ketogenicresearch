@@ -1,11 +1,42 @@
 {
-  "generated_at": "2026-11-11T10:56:13+00:00",
+  "generated_at": "2026-11-12T09:44:35+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
-  "auto_approved_count": 0,
+  "auto_approved_count": 2,
   "excluded_count": 121,
   "records": [
+    {
+      "pmid": "43012353",
+      "title": "Analytical Validation of β-Hydroxybutyrate Quantification in Feline Serum with the BT3500 Analyzer.",
+      "authors": [
+        "Tirolo A",
+        "Sabetti MC",
+        "Carrillo Heredero AM",
+        "Fidanzio F",
+        "Corsini A"
+      ],
+      "journal": "Veterinary clinical pathology",
+      "date": "2026-11-11",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1111/vcp.70163",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43012353/",
+      "doi_url": "https://doi.org/10.1111/vcp.70163",
+      "pmc_url": "",
+      "areas": [
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 2,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-11-12",
+      "status": "new",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
     {
       "pmid": "42989060",
       "title": "Stability of beta-hydroxybutyrate in venous whole blood.",
@@ -192,6 +223,33 @@
       "curation_status": "excluded-low-confidence"
     },
     {
+      "pmid": "43013929",
+      "title": "Reply to \"inconsistency between the definition of 'Real-World Exposure' and the predefined inclusion criteria in a systematic review on the ketogenic diet for polycystic ovary syndrome\".",
+      "authors": [
+        "Kechagias KS"
+      ],
+      "journal": "Clinical nutrition (Edinburgh, Scotland)",
+      "date": "2026-10-29",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.clnu.2026.106833",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43013929/",
+      "doi_url": "https://doi.org/10.1016/j.clnu.2026.106833",
+      "pmc_url": "",
+      "areas": [
+        "Polyendocrine Metabolic Ovarian Syndrome (PMOS, formerly PCOS)"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Systematic review / meta-analysis",
+      "evidence_type_it": "Revisione sistematica / meta-analisi",
+      "source": "PubMed",
+      "first_seen": "2026-11-12",
+      "status": "new",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
       "pmid": "43001310",
       "title": "Continuous ketone monitoring in inborn errors of metabolism.",
       "authors": [
@@ -218,7 +276,7 @@
       "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
       "first_seen": "2026-11-10",
-      "status": "new",
+      "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
     },
