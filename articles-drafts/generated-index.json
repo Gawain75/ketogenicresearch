@@ -1137,9 +1137,21 @@
       "at": "2026-11-12T11:11:46.703393+00:00",
       "stage": "generation",
       "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "pmid": "42975834",
+      "at": "2026-11-12T11:54:19.129860+00:00",
+      "stage": "generation",
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "pmid": "43013929",
+      "at": "2026-11-12T11:54:19.233408+00:00",
+      "stage": "generation",
+      "error": "HTTP Error 429: Too Many Requests"
     }
   ],
-  "updated_at": "2026-11-12T11:11:46.703548+00:00",
+  "updated_at": "2026-11-12T11:54:19.233545+00:00",
   "source_unavailable_pmids": [
     "42642354",
     "42717355",
