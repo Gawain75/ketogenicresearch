@@ -85,6 +85,7 @@
     "43003961",
     "43008909",
     "43012353",
+    "43018099",
     "43018440"
   ],
   "failures": [
@@ -1150,9 +1151,21 @@
       "at": "2026-11-12T11:54:19.233408+00:00",
       "stage": "generation",
       "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "pmid": "43021443",
+      "at": "2026-11-13T11:03:39.086717+00:00",
+      "stage": "verification",
+      "issues": [
+        "The draft includes an unsupported causal speculation that the ketogenic diet may unmask or exacerbate dysphagia due to its high fat content and altered gastric motility; the source does not provide evidence for this mechanism.",
+        "The statement presents a mechanistic explanation that goes beyond the observational data reported in the source."
+      ],
+      "unsupported_claims": [
+        "The ketogenic diet may unmask or exacerbate underlying dysphagia, perhaps because the diet’s high fat content and altered gastric motility affect swallowing safety."
+      ]
     }
   ],
-  "updated_at": "2026-11-13T07:37:32.650187+00:00",
+  "updated_at": "2026-11-13T11:04:58.679537+00:00",
   "source_unavailable_pmids": [
     "42642354",
     "42717355",
@@ -1168,7 +1181,7 @@
     "42988340"
   ],
   "last_run": {
-    "attempted_candidates": 1,
+    "attempted_candidates": 2,
     "published_articles": 1,
     "status": "published"
   }
