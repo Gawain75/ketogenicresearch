@@ -1,13 +1,49 @@
 {
-  "generated_at": "2026-11-13T07:30:47+00:00",
+  "generated_at": "2026-11-13T10:57:39+00:00",
   "window_days": 90,
   "max_records": 100,
   "pubmed_records_fetched": 2000,
-  "relevant_records_after_filter": 1051,
+  "relevant_records_after_filter": 1052,
   "truncated": true,
   "source": "PubMed / NCBI E-utilities",
   "count": 100,
   "publications": [
+    {
+      "pmid": "43021443",
+      "title": "Feeding challenges at initiation and maintenance of the ketogenic diet in children with infantile epileptic spasms syndrome: 20 years single center experience.",
+      "authors": [
+        "Lowe H",
+        "Kaur P",
+        "Dickson J",
+        "Fraser E",
+        "Owusu K",
+        "McRae L",
+        "Zak M",
+        "Chau V",
+        "Jain P",
+        "Donner E",
+        "Kobayashi J",
+        "Sharma S"
+      ],
+      "journal": "Developmental neurorehabilitation",
+      "date": "2026-11-12",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1080/17518423.2026.2761585",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43021443/",
+      "doi_url": "https://doi.org/10.1080/17518423.2026.2761585",
+      "pmc_url": "",
+      "areas": [
+        "Epilepsy"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Observational human study",
+      "evidence_type_it": "Studio osservazionale umano",
+      "source": "PubMed",
+      "first_seen": "2026-11-13",
+      "status": "new"
+    },
     {
       "pmid": "43018440",
       "title": "Ketogenic Fasting Suppresses Tumor Growth and Enhances PD-1 Blockade Efficacy Through Glutamine Partitioning and Microbial Metabolite Remodeling.",
@@ -3045,42 +3081,8 @@
       "source": "PubMed",
       "first_seen": "2026-11-13",
       "status": "indexed"
-    },
-    {
-      "pmid": "42840303",
-      "title": "Pilot evaluation of an educational and lived experience training program on ketogenic metabolic therapy in mental health care for health care professionals.",
-      "authors": [
-        "Murray SL",
-        "Potter D",
-        "Zisman-Ilani Y",
-        "Lee H",
-        "Chen S",
-        "Roche DJO",
-        "Rowland LM",
-        "Palmer CM",
-        "Kelly DL"
-      ],
-      "journal": "Frontiers in psychiatry",
-      "date": "2026-09-22",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3389/fpsyt.2026.1913325",
-      "pmc": "PMC13638670",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42840303/",
-      "doi_url": "https://doi.org/10.3389/fpsyt.2026.1913325",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13638670/",
-      "areas": [
-        "Psychiatry & Mental Health",
-        "Exercise & Performance"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
-      "source": "PubMed",
-      "first_seen": "2026-11-13",
-      "status": "indexed"
     }
   ],
-  "verified_at": "2026-11-13T07:30:47+00:00",
-  "content_updated_at": "2026-11-13T07:30:47+00:00"
+  "verified_at": "2026-11-13T10:57:39+00:00",
+  "content_updated_at": "2026-11-13T10:57:39+00:00"
 }
