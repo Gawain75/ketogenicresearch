@@ -1,50 +1,37 @@
 {
-  "generated_at": "2026-11-14T10:25:02+00:00",
+  "generated_at": "2026-11-15T10:52:07+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
-  "auto_approved_count": 2,
+  "auto_approved_count": 4,
   "excluded_count": 123,
   "records": [
     {
-      "pmid": "43024707",
-      "title": "Ketogenic diets induce proinflammatory macrophage accumulation through long-chain saturated fatty acids driving cGAS-STING signaling.",
+      "pmid": "43032929",
+      "title": "Ketogenic diet therapy in adolescents and adults with epilepsy: A scoping review of cognitive outcomes.",
       "authors": [
-        "Wei SJ",
-        "Schell J",
-        "Sezaki M",
-        "Baseviciene A",
-        "Qian W",
-        "Chen WH",
-        "Trevino R",
-        "Sreenivas P",
-        "Chocron ES",
-        "Jiang H",
-        "Dong FF",
-        "Chang J",
-        "Nazarullah A",
-        "Huang G",
-        "Munkácsy E",
-        "Horikoshi N",
-        "Gius D"
+        "Ibrahim T",
+        "Åkerstedt AM",
+        "Rudberg AS"
       ],
-      "journal": "Science advances",
-      "date": "2026-11-13",
+      "journal": "Epilepsia open",
+      "date": "2026-11-14",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1126/sciadv.aeg5542",
+      "doi": "10.1002/epi4.70379",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43024707/",
-      "doi_url": "https://doi.org/10.1126/sciadv.aeg5542",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43032929/",
+      "doi_url": "https://doi.org/10.1002/epi4.70379",
       "pmc_url": "",
       "areas": [
-        "Inflammation & Immunometabolism"
+        "Epilepsy",
+        "Cognitive Function"
       ],
-      "category_confidence": 9,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
+      "category_confidence": 8,
+      "evidence_type": "Randomized clinical trial",
+      "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
-      "first_seen": "2026-11-14",
+      "first_seen": "2026-11-15",
       "status": "new",
       "auto_eligible": true,
       "curation_status": "auto-approved"
@@ -75,6 +62,35 @@
       "status": "new",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "43028201",
+      "title": "Dietary Responses in the Diabetic Brain: Transcriptomic Convergence and Comparison with an Alzheimer's Disease Model.",
+      "authors": [
+        "Kordas B",
+        "Juranek JK"
+      ],
+      "journal": "International journal of molecular sciences",
+      "date": "2026-11-06",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3390/ijms27219957",
+      "pmc": "PMC13763819",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43028201/",
+      "doi_url": "https://doi.org/10.3390/ijms27219957",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13763819/",
+      "areas": [
+        "Alzheimer’s Disease",
+        "Diabetes & Glucose Metabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Clinical trial / intervention",
+      "evidence_type_it": "Trial clinico / intervento",
+      "source": "PubMed",
+      "first_seen": "2026-11-15",
+      "status": "new",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
     },
     {
       "pmid": "42989060",
@@ -134,6 +150,38 @@
       "status": "new",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "43029283",
+      "title": "Metabolically Controlled Oncological Treatment: An Evidence-Graded Framework Integrating Metabolic Reprogramming, Targeted Drug Delivery, and Standard Oncological Care.",
+      "authors": [
+        "Iyikesici MS",
+        "Oncul O",
+        "Sen S",
+        "Budak S",
+        "Seyfried TN",
+        "Duraj T"
+      ],
+      "journal": "Molecules (Basel, Switzerland)",
+      "date": "2026-11-03",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3390/molecules31213970",
+      "pmc": "PMC13764848",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43029283/",
+      "doi_url": "https://doi.org/10.3390/molecules31213970",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13764848/",
+      "areas": [
+        "Oncology & Cancer Metabolism"
+      ],
+      "category_confidence": 5,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-11-15",
+      "status": "new",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
     },
     {
       "pmid": "42971345",
@@ -224,9 +272,41 @@
       "evidence_type_it": "Revisione",
       "source": "PubMed",
       "first_seen": "2026-11-01",
-      "status": "new",
+      "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "43030238",
+      "title": "Ketogenic Diet and Black Seed Oil (Nigella sativa) Combination Overcomes Doxorubicin Resistance in Breast Cancer: An In Vitro and In Vivo Study.",
+      "authors": [
+        "Hadi RW",
+        "Wraikat MA",
+        "Alasmari MM",
+        "Anbarserry D",
+        "Talib WH",
+        "Raposa B"
+      ],
+      "journal": "Nutrients",
+      "date": "2026-10-30",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3390/nu18213610",
+      "pmc": "PMC13765494",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43030238/",
+      "doi_url": "https://doi.org/10.3390/nu18213610",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13765494/",
+      "areas": [
+        "Oncology & Cancer Metabolism"
+      ],
+      "category_confidence": 10,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-11-15",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
     },
     {
       "pmid": "42963879",
@@ -293,36 +373,6 @@
       "curation_status": "excluded-low-confidence"
     },
     {
-      "pmid": "43025029",
-      "title": "Ketogenic Diet for Infantile Epileptic Spasms Syndrome After Cardiac Surgery in an Infant With an Xp22.33 Deletion.",
-      "authors": [
-        "Molinaro ME",
-        "Kossoff EH",
-        "Sharp AN"
-      ],
-      "journal": "Pediatric neurology",
-      "date": "2026-10-27",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.pediatrneurol.2026.10.016",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43025029/",
-      "doi_url": "https://doi.org/10.1016/j.pediatrneurol.2026.10.016",
-      "pmc_url": "",
-      "areas": [
-        "Cardiovascular Health",
-        "Epilepsy"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-11-14",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
       "pmid": "42826040",
       "title": "The Ketogenic Diet Improved Liver Health in Trial, But What Does That Mean in the Real World?",
       "authors": [
@@ -345,6 +395,39 @@
       "evidence_type_it": "Altro",
       "source": "PubMed",
       "first_seen": "2026-10-03",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "43027821",
+      "title": "Duration-Dependent Ketone Body Responses to Fasting: A Systematic Review, Meta-Analysis, and Meta-Regression.",
+      "authors": [
+        "Ulupınar S",
+        "Terzi M",
+        "Malkoç N",
+        "Çamli A",
+        "İnce İ",
+        "Gençoğlu C",
+        "Özbay S"
+      ],
+      "journal": "International journal of molecular sciences",
+      "date": "2026-10-26",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3390/ijms27219570",
+      "pmc": "PMC13762781",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43027821/",
+      "doi_url": "https://doi.org/10.3390/ijms27219570",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13762781/",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Systematic review / meta-analysis",
+      "evidence_type_it": "Revisione sistematica / meta-analisi",
+      "source": "PubMed",
+      "first_seen": "2026-11-15",
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
@@ -4095,48 +4178,6 @@
       "category_confidence": 1,
       "evidence_type": "Case report / case series",
       "evidence_type_it": "Case report / case series",
-      "source": "PubMed",
-      "first_seen": "2026-09-30",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "41368239",
-      "title": "Association between high fat diet and kidney stones based on the National Health and Nutrition Examination Survey (NHANES) 2007-2020: a cross-sectional study.",
-      "authors": [
-        "Cheng C",
-        "Tang X",
-        "Li P",
-        "Yuan Y",
-        "Jiang Y",
-        "Ma Y",
-        "Wen J",
-        "Ma Y",
-        "Li X",
-        "Yin Z",
-        "Liu L",
-        "Wei J",
-        "Li T",
-        "Qi S",
-        "Jin X",
-        "Wang K"
-      ],
-      "journal": "Translational andrology and urology",
-      "date": "2025-11-27",
-      "date_precision": "day",
-      "year": 2025,
-      "doi": "10.21037/tau-2025-333",
-      "pmc": "PMC12683406",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41368239/",
-      "doi_url": "https://doi.org/10.21037/tau-2025-333",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12683406/",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 0,
-      "evidence_type": "Observational human study",
-      "evidence_type_it": "Studio osservazionale umano",
       "source": "PubMed",
       "first_seen": "2026-09-30",
       "status": "indexed",
