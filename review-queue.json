@@ -1,41 +1,11 @@
 {
-  "generated_at": "2026-11-15T10:52:07+00:00",
+  "generated_at": "2026-11-16T07:38:17+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
-  "auto_approved_count": 4,
+  "auto_approved_count": 0,
   "excluded_count": 123,
   "records": [
-    {
-      "pmid": "43032929",
-      "title": "Ketogenic diet therapy in adolescents and adults with epilepsy: A scoping review of cognitive outcomes.",
-      "authors": [
-        "Ibrahim T",
-        "Åkerstedt AM",
-        "Rudberg AS"
-      ],
-      "journal": "Epilepsia open",
-      "date": "2026-11-14",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1002/epi4.70379",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43032929/",
-      "doi_url": "https://doi.org/10.1002/epi4.70379",
-      "pmc_url": "",
-      "areas": [
-        "Epilepsy",
-        "Cognitive Function"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Randomized clinical trial",
-      "evidence_type_it": "Trial clinico randomizzato",
-      "source": "PubMed",
-      "first_seen": "2026-11-15",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
     {
       "pmid": "43018099",
       "title": "GLP-1 dose escalation and disputed ignition interlock alcohol results: Case report.",
@@ -62,35 +32,6 @@
       "status": "new",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "43028201",
-      "title": "Dietary Responses in the Diabetic Brain: Transcriptomic Convergence and Comparison with an Alzheimer's Disease Model.",
-      "authors": [
-        "Kordas B",
-        "Juranek JK"
-      ],
-      "journal": "International journal of molecular sciences",
-      "date": "2026-11-06",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/ijms27219957",
-      "pmc": "PMC13763819",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43028201/",
-      "doi_url": "https://doi.org/10.3390/ijms27219957",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13763819/",
-      "areas": [
-        "Alzheimer’s Disease",
-        "Diabetes & Glucose Metabolism"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
-      "source": "PubMed",
-      "first_seen": "2026-11-15",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
     },
     {
       "pmid": "42989060",
@@ -152,38 +93,6 @@
       "curation_status": "excluded-low-confidence"
     },
     {
-      "pmid": "43029283",
-      "title": "Metabolically Controlled Oncological Treatment: An Evidence-Graded Framework Integrating Metabolic Reprogramming, Targeted Drug Delivery, and Standard Oncological Care.",
-      "authors": [
-        "Iyikesici MS",
-        "Oncul O",
-        "Sen S",
-        "Budak S",
-        "Seyfried TN",
-        "Duraj T"
-      ],
-      "journal": "Molecules (Basel, Switzerland)",
-      "date": "2026-11-03",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/molecules31213970",
-      "pmc": "PMC13764848",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43029283/",
-      "doi_url": "https://doi.org/10.3390/molecules31213970",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13764848/",
-      "areas": [
-        "Oncology & Cancer Metabolism"
-      ],
-      "category_confidence": 5,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-11-15",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
       "pmid": "42971345",
       "title": "Regulation of ketone body metabolism: biochemical mechanisms controlling ketogenesis and ketolysis.",
       "authors": [
@@ -242,7 +151,7 @@
       "evidence_type_it": "Revisione",
       "source": "PubMed",
       "first_seen": "2026-11-01",
-      "status": "new",
+      "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
     },
@@ -275,38 +184,6 @@
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "43030238",
-      "title": "Ketogenic Diet and Black Seed Oil (Nigella sativa) Combination Overcomes Doxorubicin Resistance in Breast Cancer: An In Vitro and In Vivo Study.",
-      "authors": [
-        "Hadi RW",
-        "Wraikat MA",
-        "Alasmari MM",
-        "Anbarserry D",
-        "Talib WH",
-        "Raposa B"
-      ],
-      "journal": "Nutrients",
-      "date": "2026-10-30",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/nu18213610",
-      "pmc": "PMC13765494",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43030238/",
-      "doi_url": "https://doi.org/10.3390/nu18213610",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13765494/",
-      "areas": [
-        "Oncology & Cancer Metabolism"
-      ],
-      "category_confidence": 10,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-11-15",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
     },
     {
       "pmid": "42963879",
@@ -4248,7 +4125,5 @@
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
     }
-  ],
-  "updated": "2026-11-15T12:16:59.122380+00:00",
-  "source": "PubMed + Library V5"
+  ]
 }
