@@ -1,11 +1,42 @@
 {
-  "generated_at": "2026-11-16T07:38:17+00:00",
+  "generated_at": "2026-11-16T11:16:03+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
-  "auto_approved_count": 0,
+  "auto_approved_count": 2,
   "excluded_count": 123,
   "records": [
+    {
+      "pmid": "43035524",
+      "title": "Status epilepticus in mTORopathies: a systematic review of clinical features, management, and outcomes.",
+      "authors": [
+        "Kim M",
+        "Kaminski M",
+        "Goldberg M",
+        "Young W",
+        "Ma Y"
+      ],
+      "journal": "Neurological sciences : official journal of the Italian Neurological Society and of the Italian Society of Clinical Neurophysiology",
+      "date": "2026-11-16",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1007/s10072-026-09534-y",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43035524/",
+      "doi_url": "https://doi.org/10.1007/s10072-026-09534-y",
+      "pmc_url": "",
+      "areas": [
+        "Epilepsy"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Systematic review / meta-analysis",
+      "evidence_type_it": "Revisione sistematica / meta-analisi",
+      "source": "PubMed",
+      "first_seen": "2026-11-16",
+      "status": "new",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
     {
       "pmid": "43018099",
       "title": "GLP-1 dose escalation and disputed ignition interlock alcohol results: Case report.",
@@ -909,6 +940,35 @@
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "43035686",
+      "title": "Asymptomatic fasting-associated ketosis with high-anion-gap metabolic acidosis during phentermine-assisted weight loss: a case report.",
+      "authors": [
+        "Snoddy K",
+        "Pugh C",
+        "Maddux A"
+      ],
+      "journal": "BMC endocrine disorders",
+      "date": "2026-08-19",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1186/s12902-026-02468-8",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43035686/",
+      "doi_url": "https://doi.org/10.1186/s12902-026-02468-8",
+      "pmc_url": "",
+      "areas": [
+        "Obesity"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Case report / case series",
+      "evidence_type_it": "Case report / case series",
+      "source": "PubMed",
+      "first_seen": "2026-11-16",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
     },
     {
       "pmid": "42650855",

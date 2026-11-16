@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T07:38:17+00:00",
+  "generated_at": "2026-11-16T11:16:03+00:00",
   "window_days": 90,
   "max_records": 100,
   "pubmed_records_fetched": 2001,
@@ -8,6 +8,35 @@
   "source": "PubMed / NCBI E-utilities",
   "count": 100,
   "publications": [
+    {
+      "pmid": "43035524",
+      "title": "Status epilepticus in mTORopathies: a systematic review of clinical features, management, and outcomes.",
+      "authors": [
+        "Kim M",
+        "Kaminski M",
+        "Goldberg M",
+        "Young W",
+        "Ma Y"
+      ],
+      "journal": "Neurological sciences : official journal of the Italian Neurological Society and of the Italian Society of Clinical Neurophysiology",
+      "date": "2026-11-16",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1007/s10072-026-09534-y",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43035524/",
+      "doi_url": "https://doi.org/10.1007/s10072-026-09534-y",
+      "pmc_url": "",
+      "areas": [
+        "Epilepsy"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Systematic review / meta-analysis",
+      "evidence_type_it": "Revisione sistematica / meta-analisi",
+      "source": "PubMed",
+      "first_seen": "2026-11-16",
+      "status": "new"
+    },
     {
       "pmid": "43032929",
       "title": "Ketogenic diet therapy in adolescents and adults with epilepsy: A scoping review of cognitive outcomes.",
@@ -33,7 +62,7 @@
       "evidence_type": "Randomized clinical trial",
       "evidence_type_it": "Trial clinico randomizzato",
       "source": "PubMed",
-      "first_seen": "2026-11-15",
+      "first_seen": "2026-11-16",
       "status": "new"
     },
     {
@@ -445,7 +474,7 @@
       "evidence_type": "Clinical trial / intervention",
       "evidence_type_it": "Trial clinico / intervento",
       "source": "PubMed",
-      "first_seen": "2026-11-15",
+      "first_seen": "2026-11-16",
       "status": "new"
     },
     {
@@ -647,7 +676,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-11-15",
+      "first_seen": "2026-11-16",
       "status": "new"
     },
     {
@@ -889,7 +918,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-11-15",
+      "first_seen": "2026-11-16",
       "status": "indexed"
     },
     {
@@ -3059,37 +3088,8 @@
       "source": "PubMed",
       "first_seen": "2026-11-16",
       "status": "indexed"
-    },
-    {
-      "pmid": "42938300",
-      "title": "Ubiquitin Proteasome System BTB-Adaptor Protein Insomniac Modifies Seizure Severity and Response to the Ketogenic Diet in a Drosophila Model of Mitochondrial Encephalomyopathy.",
-      "authors": [
-        "Fogle KJ",
-        "Urban B",
-        "Mumford DM",
-        "Palladino MJ"
-      ],
-      "journal": "Genes",
-      "date": "2026-09-24",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3390/genes17101185",
-      "pmc": "PMC13704187",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42938300/",
-      "doi_url": "https://doi.org/10.3390/genes17101185",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13704187/",
-      "areas": [
-        "Epilepsy",
-        "Circadian Rhythms"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-11-16",
-      "status": "indexed"
     }
   ],
-  "verified_at": "2026-11-16T07:38:17+00:00",
-  "content_updated_at": "2026-11-16T07:38:17+00:00"
+  "verified_at": "2026-11-16T11:16:03+00:00",
+  "content_updated_at": "2026-11-16T11:16:03+00:00"
 }
