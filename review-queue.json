@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T11:16:03+00:00",
+  "generated_at": "2026-11-17T11:51:03+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
@@ -7,32 +7,64 @@
   "excluded_count": 123,
   "records": [
     {
-      "pmid": "43035524",
-      "title": "Status epilepticus in mTORopathies: a systematic review of clinical features, management, and outcomes.",
+      "pmid": "43039060",
+      "title": "Seven-day treatment with combined acetoacetate and D-β-hydroxybutyrate, at concentrations representative of nutritional ketosis, increases basal glucose uptake in L6 skeletal muscle myotubes.",
       "authors": [
-        "Kim M",
-        "Kaminski M",
-        "Goldberg M",
-        "Young W",
-        "Ma Y"
+        "Khouri H",
+        "Ussher JR",
+        "Aguer C"
       ],
-      "journal": "Neurological sciences : official journal of the Italian Neurological Society and of the Italian Society of Clinical Neurophysiology",
+      "journal": "Biochimica et biophysica acta. General subjects",
       "date": "2026-11-16",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1007/s10072-026-09534-y",
+      "doi": "10.1016/j.bbagen.2026.131020",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43035524/",
-      "doi_url": "https://doi.org/10.1007/s10072-026-09534-y",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43039060/",
+      "doi_url": "https://doi.org/10.1016/j.bbagen.2026.131020",
       "pmc_url": "",
       "areas": [
-        "Epilepsy"
+        "Diabetes & Glucose Metabolism",
+        "Sarcopenia & Skeletal Muscle"
       ],
-      "category_confidence": 8,
-      "evidence_type": "Systematic review / meta-analysis",
-      "evidence_type_it": "Revisione sistematica / meta-analisi",
+      "category_confidence": 7,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-11-16",
+      "first_seen": "2026-11-17",
+      "status": "new",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "43038230",
+      "title": "Tumor cells incapable of using ketone bodies can still grow in vivo if highly glycolytic.",
+      "authors": [
+        "Elisia I",
+        "Yeung M",
+        "Chang V",
+        "Schweitzer M",
+        "Janz N",
+        "Mao X",
+        "Krystal G"
+      ],
+      "journal": "PloS one",
+      "date": "2026-11-16",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1371/journal.pone.0362670",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43038230/",
+      "doi_url": "https://doi.org/10.1371/journal.pone.0362670",
+      "pmc_url": "",
+      "areas": [
+        "Oncology & Cancer Metabolism"
+      ],
+      "category_confidence": 9,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-11-17",
       "status": "new",
       "auto_eligible": true,
       "curation_status": "auto-approved"
@@ -148,7 +180,7 @@
       "evidence_type_it": "Revisione",
       "source": "PubMed",
       "first_seen": "2026-11-03",
-      "status": "new",
+      "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
     },
@@ -940,35 +972,6 @@
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "43035686",
-      "title": "Asymptomatic fasting-associated ketosis with high-anion-gap metabolic acidosis during phentermine-assisted weight loss: a case report.",
-      "authors": [
-        "Snoddy K",
-        "Pugh C",
-        "Maddux A"
-      ],
-      "journal": "BMC endocrine disorders",
-      "date": "2026-08-19",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1186/s12902-026-02468-8",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43035686/",
-      "doi_url": "https://doi.org/10.1186/s12902-026-02468-8",
-      "pmc_url": "",
-      "areas": [
-        "Obesity"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Case report / case series",
-      "evidence_type_it": "Case report / case series",
-      "source": "PubMed",
-      "first_seen": "2026-11-16",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
     },
     {
       "pmid": "42650855",
