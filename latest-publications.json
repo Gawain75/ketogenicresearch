@@ -1,13 +1,43 @@
 {
-  "generated_at": "2026-11-18T07:50:32+00:00",
+  "generated_at": "2026-11-18T11:40:47+00:00",
   "window_days": 90,
   "max_records": 100,
   "pubmed_records_fetched": 2001,
-  "relevant_records_after_filter": 1053,
+  "relevant_records_after_filter": 1052,
   "truncated": true,
   "source": "PubMed / NCBI E-utilities",
   "count": 100,
   "publications": [
+    {
+      "pmid": "43045679",
+      "title": "Dietary interventions and stroke clinical outcomes: a systematic review.",
+      "authors": [
+        "Rita Cardoso BR",
+        "Amanat S",
+        "Dordevic A",
+        "Carvalho LB",
+        "Thayabaranathan T",
+        "Cadilhac D"
+      ],
+      "journal": "International journal of stroke : official journal of the International Stroke Society",
+      "date": "2026-11-17",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1177/17474930261511416",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43045679/",
+      "doi_url": "https://doi.org/10.1177/17474930261511416",
+      "pmc_url": "",
+      "areas": [
+        "Exercise & Performance"
+      ],
+      "category_confidence": 2,
+      "evidence_type": "Systematic review / meta-analysis",
+      "evidence_type_it": "Revisione sistematica / meta-analisi",
+      "source": "PubMed",
+      "first_seen": "2026-11-18",
+      "status": "new"
+    },
     {
       "pmid": "43044761",
       "title": "Acute fasting-induced maternal ketogenesis determines fetal ketone body availability during late gestation.",
@@ -61,7 +91,7 @@
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-11-17",
+      "first_seen": "2026-11-18",
       "status": "new"
     },
     {
@@ -92,7 +122,7 @@
       "evidence_type": "Preclinical / mechanistic",
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
-      "first_seen": "2026-11-17",
+      "first_seen": "2026-11-18",
       "status": "new"
     },
     {
@@ -911,10 +941,10 @@
       "date_precision": "month",
       "year": 2026,
       "doi": "10.1002/jimd.70272",
-      "pmc": "",
+      "pmc": "PMC13776788",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43043091/",
       "doi_url": "https://doi.org/10.1002/jimd.70272",
-      "pmc_url": "",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13776788/",
       "areas": [
         "Other / General"
       ],
@@ -3061,38 +3091,8 @@
       "source": "PubMed",
       "first_seen": "2026-11-18",
       "status": "indexed"
-    },
-    {
-      "pmid": "42800643",
-      "title": "Neuroenergetic flexibility in the aging brain: Cellular mechanisms and diet-induced metabolic switching.",
-      "authors": [
-        "Balaji P",
-        "Elias JM",
-        "Kumudhaveni B",
-        "Senthilraj R",
-        "Gobinathan G",
-        "Thirumal M"
-      ],
-      "journal": "Ageing research reviews",
-      "date": "2026-09-26",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.arr.2026.103385",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/42800643/",
-      "doi_url": "https://doi.org/10.1016/j.arr.2026.103385",
-      "pmc_url": "",
-      "areas": [
-        "Longevity & Healthy Aging"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Review",
-      "evidence_type_it": "Revisione",
-      "source": "PubMed",
-      "first_seen": "2026-11-18",
-      "status": "indexed"
     }
   ],
-  "verified_at": "2026-11-18T07:50:32+00:00",
-  "content_updated_at": "2026-11-18T07:50:32+00:00"
+  "verified_at": "2026-11-18T11:40:47+00:00",
+  "content_updated_at": "2026-11-18T11:40:47+00:00"
 }
