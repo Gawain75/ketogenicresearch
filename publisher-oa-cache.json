@@ -130,9 +130,9 @@
     "is_oa": true,
     "oa_status": "gold",
     "landing_page_url": "https://doi.org/10.1007/s40519-026-01843-7",
-    "pdf_url": null,
+    "pdf_url": "https://link.springer.com/content/pdf/10.1007/s40519-026-01843-7.pdf",
     "license": "cc-by",
-    "source": "openalex"
+    "source": "publisher-metadata"
   },
   "10.1016/j.nut.2026.113222": {
     "checked": true,
@@ -734,11 +734,11 @@
   },
   "10.1038/s41591-020-01209-1": {
     "checked": true,
-    "is_oa": true,
-    "oa_status": "green",
-    "landing_page_url": "https://research.wur.nl/en/publications/effect-of-a-plant-based-low-fat-diet-versus-an-animal-based-ketog",
+    "is_oa": false,
+    "oa_status": "closed",
+    "landing_page_url": null,
     "pdf_url": null,
-    "license": "green",
+    "license": "closed",
     "source": "openalex"
   },
   "10.3923/pjbs.2021.801.806": {
@@ -17762,9 +17762,9 @@
     "checked": true,
     "is_oa": true,
     "oa_status": "green",
-    "landing_page_url": "https://ro.ecu.edu.au/ecuworks2022-2026/7453",
+    "landing_page_url": "https://purehost.bath.ac.uk/en/publications/c17809ce-5309-45a4-8c3d-5bad8948d39a",
     "pdf_url": null,
-    "license": "cc-by-nd",
+    "license": "cc-by",
     "source": "openalex"
   },
   "10.1530/erc-25-0221": {
@@ -18929,10 +18929,10 @@
     "checked": true,
     "is_oa": true,
     "oa_status": "green",
-    "landing_page_url": "https://eprints.gla.ac.uk/147484/",
-    "pdf_url": null,
-    "license": "cc-by-sa",
-    "source": "openalex"
+    "landing_page_url": "https://hal.science/hal-02362351",
+    "pdf_url": "https://hal.science/hal-02362351/document",
+    "license": "other-oa",
+    "source": "publisher-metadata"
   },
   "10.2527/jas.2016.1247": {
     "checked": true,
@@ -37910,9 +37910,9 @@
     "is_oa": true,
     "oa_status": "gold",
     "landing_page_url": "https://doi.org/10.1038/s41467-026-73519-w",
-    "pdf_url": null,
+    "pdf_url": "https://www.nature.com/articles/s41467-026-73519-w.pdf",
     "license": "cc-by-nc-nd",
-    "source": "openalex"
+    "source": "publisher-metadata"
   },
   "10.1016/j.adcanc.2023.100093": {
     "checked": true,
@@ -42633,5 +42633,23 @@
   "10.1371/journal.pone.0362670": {
     "error": "HTTP Error 404: Not Found",
     "checked": true
+  },
+  "10.1016/s0002-9149(97)00454-2": {
+    "checked": true,
+    "is_oa": false,
+    "oa_status": "closed",
+    "landing_page_url": null,
+    "pdf_url": null,
+    "license": "closed",
+    "source": "openalex"
+  },
+  "10.1152/ajpheart.1998.274.6.h1962": {
+    "checked": true,
+    "is_oa": false,
+    "oa_status": "closed",
+    "landing_page_url": null,
+    "pdf_url": null,
+    "license": "closed",
+    "source": "openalex"
   }
 }
