@@ -1,73 +1,40 @@
 {
-  "generated_at": "2026-11-17T11:51:03+00:00",
+  "generated_at": "2026-11-18T07:50:32+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
-  "auto_approved_count": 2,
-  "excluded_count": 123,
+  "auto_approved_count": 0,
+  "excluded_count": 124,
   "records": [
     {
-      "pmid": "43039060",
-      "title": "Seven-day treatment with combined acetoacetate and D-β-hydroxybutyrate, at concentrations representative of nutritional ketosis, increases basal glucose uptake in L6 skeletal muscle myotubes.",
+      "pmid": "43044761",
+      "title": "Acute fasting-induced maternal ketogenesis determines fetal ketone body availability during late gestation.",
       "authors": [
-        "Khouri H",
-        "Ussher JR",
-        "Aguer C"
+        "Xu Y",
+        "Fujiyama A",
+        "Tsujita K",
+        "Arima Y"
       ],
-      "journal": "Biochimica et biophysica acta. General subjects",
-      "date": "2026-11-16",
+      "journal": "Molecular metabolism",
+      "date": "2026-11-17",
       "date_precision": "day",
       "year": 2026,
-      "doi": "10.1016/j.bbagen.2026.131020",
+      "doi": "10.1016/j.molmet.2026.102473",
       "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43039060/",
-      "doi_url": "https://doi.org/10.1016/j.bbagen.2026.131020",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43044761/",
+      "doi_url": "https://doi.org/10.1016/j.molmet.2026.102473",
       "pmc_url": "",
       "areas": [
-        "Diabetes & Glucose Metabolism",
-        "Sarcopenia & Skeletal Muscle"
+        "Other / General"
       ],
-      "category_confidence": 7,
+      "category_confidence": 1,
       "evidence_type": "Other",
       "evidence_type_it": "Altro",
       "source": "PubMed",
-      "first_seen": "2026-11-17",
+      "first_seen": "2026-11-18",
       "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "43038230",
-      "title": "Tumor cells incapable of using ketone bodies can still grow in vivo if highly glycolytic.",
-      "authors": [
-        "Elisia I",
-        "Yeung M",
-        "Chang V",
-        "Schweitzer M",
-        "Janz N",
-        "Mao X",
-        "Krystal G"
-      ],
-      "journal": "PloS one",
-      "date": "2026-11-16",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1371/journal.pone.0362670",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43038230/",
-      "doi_url": "https://doi.org/10.1371/journal.pone.0362670",
-      "pmc_url": "",
-      "areas": [
-        "Oncology & Cancer Metabolism"
-      ],
-      "category_confidence": 9,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-11-17",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
     },
     {
       "pmid": "43018099",
@@ -214,6 +181,40 @@
       "evidence_type_it": "Revisione",
       "source": "PubMed",
       "first_seen": "2026-11-01",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "43043091",
+      "title": "Untargeted Metabolomics of Dried Blood Spots for Inherited Metabolic Disorder Classification.",
+      "authors": [
+        "Cremer JC",
+        "Waltl L",
+        "Juric V",
+        "Koch J",
+        "Scholl-Bürgi S",
+        "Karall D",
+        "Zschocke J",
+        "Keller MA"
+      ],
+      "journal": "Journal of inherited metabolic disease",
+      "date": "2026-11",
+      "date_precision": "month",
+      "year": 2026,
+      "doi": "10.1002/jimd.70272",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43043091/",
+      "doi_url": "https://doi.org/10.1002/jimd.70272",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-11-18",
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
@@ -4143,38 +4144,6 @@
       "pmc": "",
       "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41314456/",
       "doi_url": "https://doi.org/10.1016/j.ejphar.2025.178409",
-      "pmc_url": "",
-      "areas": [
-        "Other / General"
-      ],
-      "category_confidence": 1,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-09-30",
-      "status": "indexed",
-      "auto_eligible": false,
-      "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "41260481",
-      "title": "Prediction and genetic analysis of blood β-hydroxybutyrate based on milk mid-infrared spectra in Fleckvieh dairy cows.",
-      "authors": [
-        "Gruber S",
-        "Köck A",
-        "Egger-Danner C",
-        "Iwersen M",
-        "Fuerst-Waltl B",
-        "Sölkner J"
-      ],
-      "journal": "Journal of dairy science",
-      "date": "2025-11-17",
-      "date_precision": "day",
-      "year": 2025,
-      "doi": "10.3168/jds.2025-27308",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41260481/",
-      "doi_url": "https://doi.org/10.3168/jds.2025-27308",
       "pmc_url": "",
       "areas": [
         "Other / General"
