@@ -1184,9 +1184,41 @@
       "at": "2026-11-17T12:33:07.231624+00:00",
       "stage": "generation",
       "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "pmid": "43044761",
+      "at": "2026-11-18T07:55:15.812872+00:00",
+      "stage": "verification",
+      "issues": [
+        "Quantitative claim of a ~3‑fold increase in maternal β‑hydroxybutyrate is not stated in the source abstract.",
+        "Statement that maternal glucose levels fell during fasting is not supported by the provided source text.",
+        "The draft repeats detailed quantitative description without direct source support."
+      ],
+      "unsupported_claims": [
+        "Maternal fasting raised circulating βHB in dams (≈3‑fold).",
+        "Glucose fell in fasted dams."
+      ]
+    },
+    {
+      "pmid": "43038230",
+      "at": "2026-11-18T07:55:16.327481+00:00",
+      "stage": "generation",
+      "error": "Groq HTTP 413: {\"error\":{\"message\":\"Request too large for model `openai/gpt-oss-120b` in organization `org_01m2v9fhzme29te5cqydhvxz4y` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 8218, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "pmid": "42983895",
+      "at": "2026-11-18T07:55:16.503338+00:00",
+      "stage": "generation",
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "pmid": "42979683",
+      "at": "2026-11-18T07:55:16.533924+00:00",
+      "stage": "generation",
+      "error": "HTTP Error 429: Too Many Requests"
     }
   ],
-  "updated_at": "2026-11-17T12:33:07.231754+00:00",
+  "updated_at": "2026-11-18T07:55:16.534070+00:00",
   "source_unavailable_pmids": [
     "42642354",
     "42717355",
