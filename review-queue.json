@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-11-20T11:25:32+00:00",
+  "generated_at": "2026-11-20T11:38:13+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
-  "auto_approved_count": 3,
+  "auto_approved_count": 0,
   "excluded_count": 126,
   "records": [
     {
@@ -35,38 +35,6 @@
       "status": "new",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "43057191",
-      "title": "Ketogenic metabolic therapy decreases the allostatic load in severe mental illness.",
-      "authors": [
-        "Finlay S",
-        "Adegboye O",
-        "Rudd D",
-        "McDermott B",
-        "Sethi S",
-        "Sarnyai Z"
-      ],
-      "journal": "Journal of psychiatric research",
-      "date": "2026-11-13",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.jpsychires.2026.11.036",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43057191/",
-      "doi_url": "https://doi.org/10.1016/j.jpsychires.2026.11.036",
-      "pmc_url": "",
-      "areas": [
-        "Psychiatry & Mental Health"
-      ],
-      "category_confidence": 3,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
-      "source": "PubMed",
-      "first_seen": "2026-11-20",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
     },
     {
       "pmid": "43018099",
@@ -126,44 +94,6 @@
       "curation_status": "excluded-low-confidence"
     },
     {
-      "pmid": "43054992",
-      "title": "Ketogenic metabolic therapy in schizophrenia spectrum and bipolar disorders: population descriptors and feasibility outcomes from a randomized, controlled clinical trial.",
-      "authors": [
-        "Longhitano C",
-        "Swift JL",
-        "Finlay S",
-        "Suvarna B",
-        "Gordon S",
-        "Shareef O",
-        "Peachey I",
-        "Rudd D",
-        "Campbell I",
-        "Sethi S",
-        "Palmer C",
-        "Sarnyai Z"
-      ],
-      "journal": "Frontiers in nutrition",
-      "date": "2026-11-04",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3389/fnut.2026.1962072",
-      "pmc": "PMC13781240",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43054992/",
-      "doi_url": "https://doi.org/10.3389/fnut.2026.1962072",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13781240/",
-      "areas": [
-        "Psychiatry & Mental Health"
-      ],
-      "category_confidence": 12,
-      "evidence_type": "Randomized clinical trial",
-      "evidence_type_it": "Trial clinico randomizzato",
-      "source": "PubMed",
-      "first_seen": "2026-11-20",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
       "pmid": "43054903",
       "title": "Ketogenic diet induces systemic and tissue-specific metabolic remodeling in mice: an untargeted GC-MS metabolomics study.",
       "authors": [
@@ -195,42 +125,6 @@
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "43054893",
-      "title": "Classical and mediterranean-modified ketogenic diets distinctly shape the gut microbiota composition and function in scopolamine-induced cognitive impairment model.",
-      "authors": [
-        "Ayten Ş",
-        "Koc F",
-        "Patangia D",
-        "Stanton C",
-        "Ross RP",
-        "Kayabaşı B",
-        "Dincer S",
-        "Saglam ASY",
-        "Bilici S"
-      ],
-      "journal": "Frontiers in microbiology",
-      "date": "2026-11-04",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.3389/fmicb.2026.1968751",
-      "pmc": "PMC13780372",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43054893/",
-      "doi_url": "https://doi.org/10.3389/fmicb.2026.1968751",
-      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13780372/",
-      "areas": [
-        "Cognitive Function",
-        "Gut Microbiome"
-      ],
-      "category_confidence": 8,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-11-20",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
     },
     {
       "pmid": "42979683",
