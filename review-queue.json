@@ -1,11 +1,79 @@
 {
-  "generated_at": "2026-11-20T11:38:13+00:00",
+  "generated_at": "2026-11-21T10:59:49+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
-  "auto_approved_count": 0,
-  "excluded_count": 126,
+  "auto_approved_count": 3,
+  "excluded_count": 127,
   "records": [
+    {
+      "pmid": "43064057",
+      "title": "Ketogenic Diet enhances the efficacy of immunotherapy for Colorectal Cancer through modulating intestinal Branched-Chain Amino Acids metabolism.",
+      "authors": [
+        "Li S",
+        "Yao Y",
+        "Yang P",
+        "Wang X",
+        "Zhao Y",
+        "Xu Q",
+        "Chen Y",
+        "Cao L",
+        "Jiang L",
+        "Zhu X",
+        "Sun S",
+        "Shao X",
+        "Wang B"
+      ],
+      "journal": "Cancer letters",
+      "date": "2026-11-20",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.canlet.2026.218961",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43064057/",
+      "doi_url": "https://doi.org/10.1016/j.canlet.2026.218961",
+      "pmc_url": "",
+      "areas": [
+        "Oncology & Cancer Metabolism"
+      ],
+      "category_confidence": 7,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-11-21",
+      "status": "new",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "43063882",
+      "title": "Alcohol-associated attenuation of postmortem β-hydroxybutyrate and complementary biochemical findings in fatal hypothermia.",
+      "authors": [
+        "Jung JE",
+        "Shim YT",
+        "Nam GM"
+      ],
+      "journal": "Forensic science international",
+      "date": "2026-11-17",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1016/j.forsciint.2026.113194",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43063882/",
+      "doi_url": "https://doi.org/10.1016/j.forsciint.2026.113194",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 1,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-11-21",
+      "status": "new",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
     {
       "pmid": "43044761",
       "title": "Acute fasting-induced maternal ketogenesis determines fetal ketone body availability during late gestation.",
@@ -62,6 +130,34 @@
       "status": "new",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "43060814",
+      "title": "Hyperbaric oxygen in cancer patients: a review of clinical safety, tissue selectivity, and therapeutic synergy.",
+      "authors": [
+        "Abrahami A",
+        "Efrati S"
+      ],
+      "journal": "Frontiers in aging",
+      "date": "2026-11-05",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.3389/fragi.2026.1961490",
+      "pmc": "PMC13782957",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43060814/",
+      "doi_url": "https://doi.org/10.3389/fragi.2026.1961490",
+      "pmc_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13782957/",
+      "areas": [
+        "Oncology & Cancer Metabolism"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Systematic review / meta-analysis",
+      "evidence_type_it": "Revisione sistematica / meta-analisi",
+      "source": "PubMed",
+      "first_seen": "2026-11-21",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
     },
     {
       "pmid": "42989060",
@@ -905,6 +1001,48 @@
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "43064724",
+      "title": "The efficacy of ketogenic interventions on neuropsychological & metabolic outcomes in serious mental illness & neurocognitive disorders: a systematic review & meta-analysis.",
+      "authors": [
+        "Maksyutynska K",
+        "Arnold C",
+        "De R",
+        "Smith EC",
+        "Panganiban KJ",
+        "Humber BE",
+        "Mak TH",
+        "Stogios N",
+        "Besa R",
+        "Andreazza AC",
+        "Ebdrup BH",
+        "Zemmour K",
+        "Cunnane SC",
+        "Agarwal SM",
+        "Hahn MK"
+      ],
+      "journal": "Translational psychiatry",
+      "date": "2026-08-27",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1038/s41398-026-04370-2",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43064724/",
+      "doi_url": "https://doi.org/10.1038/s41398-026-04370-2",
+      "pmc_url": "",
+      "areas": [
+        "Cognitive Function",
+        "Psychiatry & Mental Health"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Systematic review / meta-analysis",
+      "evidence_type_it": "Revisione sistematica / meta-analisi",
+      "source": "PubMed",
+      "first_seen": "2026-11-21",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
     },
     {
       "pmid": "42724302",
