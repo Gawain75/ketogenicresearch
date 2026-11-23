@@ -1,45 +1,11 @@
 {
-  "generated_at": "2026-11-23T09:59:23+00:00",
+  "generated_at": "2026-11-23T12:37:27+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
-  "auto_approved_count": 2,
-  "excluded_count": 127,
+  "auto_approved_count": 1,
+  "excluded_count": 128,
   "records": [
-    {
-      "pmid": "43068731",
-      "title": "β-hydroxybutyrate and cancer: an update on conflicting roles and therapeutic targeting.",
-      "authors": [
-        "Wu S",
-        "Xie A",
-        "Zhang M",
-        "Wang J",
-        "Zeng W",
-        "Zhang Y",
-        "Ye J",
-        "Zhou L"
-      ],
-      "journal": "Biochemical pharmacology",
-      "date": "2026-11-22",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.bcp.2026.118685",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43068731/",
-      "doi_url": "https://doi.org/10.1016/j.bcp.2026.118685",
-      "pmc_url": "",
-      "areas": [
-        "Oncology & Cancer Metabolism"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Review",
-      "evidence_type_it": "Revisione",
-      "source": "PubMed",
-      "first_seen": "2026-11-23",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
     {
       "pmid": "43063882",
       "title": "Alcohol-associated attenuation of postmortem β-hydroxybutyrate and complementary biochemical findings in fatal hypothermia.",
@@ -280,33 +246,6 @@
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "43068373",
-      "title": "[Can nutrition slow down the aging process?].",
-      "authors": [
-        "Niv E"
-      ],
-      "journal": "Harefuah",
-      "date": "2026-11",
-      "date_precision": "month",
-      "year": 2026,
-      "doi": "",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43068373/",
-      "doi_url": "",
-      "pmc_url": "",
-      "areas": [
-        "Longevity & Healthy Aging"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Clinical trial / intervention",
-      "evidence_type_it": "Trial clinico / intervento",
-      "source": "PubMed",
-      "first_seen": "2026-11-23",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
     },
     {
       "pmid": "43043091",
@@ -992,6 +931,75 @@
       "evidence_type_it": "Preclinico / meccanicistico",
       "source": "PubMed",
       "first_seen": "2026-09-30",
+      "status": "indexed",
+      "auto_eligible": false,
+      "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "43069156",
+      "title": "Effects of ketogenic diet on obesity indices, lipid profile, and glycemic control parameters in athletes: a GRADE-assessed systematic review and meta-analysis of randomized controlled trials.",
+      "authors": [
+        "Wang Y",
+        "Ye X",
+        "Lin W",
+        "Li R",
+        "Pan Y"
+      ],
+      "journal": "BMC sports science, medicine & rehabilitation",
+      "date": "2026-08-29",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1186/s13102-026-01988-z",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43069156/",
+      "doi_url": "https://doi.org/10.1186/s13102-026-01988-z",
+      "pmc_url": "",
+      "areas": [
+        "Dyslipidemia & Lipid Metabolism",
+        "Diabetes & Glucose Metabolism",
+        "Exercise & Performance"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Systematic review / meta-analysis",
+      "evidence_type_it": "Revisione sistematica / meta-analisi",
+      "source": "PubMed",
+      "first_seen": "2026-11-23",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
+    },
+    {
+      "pmid": "43069041",
+      "title": "β-hydroxybutyrate exerts protective effects against sepsis-associated acute kidney injury by promoting HMGB1 β-hydroxybutyrylation.",
+      "authors": [
+        "Zhang Q",
+        "Qiao J",
+        "Tan Y",
+        "Yang S",
+        "Tao J",
+        "Yang B",
+        "Xu Z",
+        "Liu D",
+        "Pei J",
+        "Cui L"
+      ],
+      "journal": "Molecular medicine (Cambridge, Mass.)",
+      "date": "2026-08-28",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1186/s10020-026-01621-2",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43069041/",
+      "doi_url": "https://doi.org/10.1186/s10020-026-01621-2",
+      "pmc_url": "",
+      "areas": [
+        "Other / General"
+      ],
+      "category_confidence": 0,
+      "evidence_type": "Preclinical / mechanistic",
+      "evidence_type_it": "Preclinico / meccanicistico",
+      "source": "PubMed",
+      "first_seen": "2026-11-23",
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
