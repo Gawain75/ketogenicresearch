@@ -1254,9 +1254,15 @@
       "at": "2026-11-22T12:01:11.932897+00:00",
       "stage": "generation",
       "error": "Groq HTTP 413: {\"error\":{\"message\":\"Request too large for model `openai/gpt-oss-120b` in organization `org_01m2v9fhzme29te5cqydhvxz4y` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 8021, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "pmid": "43038230",
+      "at": "2026-11-23T12:42:39.240573+00:00",
+      "stage": "generation",
+      "error": "Groq HTTP 413: {\"error\":{\"message\":\"Request too large for model `openai/gpt-oss-120b` in organization `org_01m2v9fhzme29te5cqydhvxz4y` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 8109, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
     }
   ],
-  "updated_at": "2026-11-23T10:04:49.135173+00:00",
+  "updated_at": "2026-11-23T12:42:39.240632+00:00",
   "source_unavailable_pmids": [
     "42642354",
     "42717355",
@@ -1273,7 +1279,7 @@
   ],
   "last_run": {
     "attempted_candidates": 1,
-    "published_articles": 1,
-    "status": "published"
+    "published_articles": 0,
+    "status": "no_article_published"
   }
 }
