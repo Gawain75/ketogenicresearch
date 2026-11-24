@@ -1,7 +1,7 @@
 // Ketogenic Research — V70 recovery script
 
 const KR_LIBRARY_STATS = {
-  publications: 9188,
+  publications: 9193,
   clinicalAreas: 54
 };
 
