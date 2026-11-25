@@ -1,105 +1,11 @@
 {
-  "generated_at": "2026-11-24T13:42:02+00:00",
+  "generated_at": "2026-11-25T11:02:21+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
-  "auto_approved_count": 4,
+  "auto_approved_count": 0,
   "excluded_count": 128,
   "records": [
-    {
-      "pmid": "43074431",
-      "title": "Ketogenic and low-carbohydrate diets in cardiovascular prevention: can safety and efficacy coexist?",
-      "authors": [
-        "Parameswaran V",
-        "Maron DJ",
-        "Gardner C"
-      ],
-      "journal": "Current opinion in cardiology",
-      "date": "2026-11-24",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1097/HCO.0000000000001360",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43074431/",
-      "doi_url": "https://doi.org/10.1097/HCO.0000000000001360",
-      "pmc_url": "",
-      "areas": [
-        "Cardiovascular Health"
-      ],
-      "category_confidence": 12,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-11-24",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "43071941",
-      "title": "Effects of succinate supplements on metabolic health and muscle mass after mechanical overloading and denervation of skeletal muscles in mice fed high-fat or ketogenic diet.",
-      "authors": [
-        "Dirmontas M",
-        "Minderis P",
-        "Ratkevicius A"
-      ],
-      "journal": "Applied physiology, nutrition, and metabolism = Physiologie appliquee, nutrition et metabolisme",
-      "date": "2026-11-23",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1139/apnm-2026-0282",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43071941/",
-      "doi_url": "https://doi.org/10.1139/apnm-2026-0282",
-      "pmc_url": "",
-      "areas": [
-        "Sarcopenia & Skeletal Muscle"
-      ],
-      "category_confidence": 12,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-11-24",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
-    {
-      "pmid": "43072349",
-      "title": "Urinary ketone bodies score and its association with cardiovascular mortality and incidence: from Korean cohorts.",
-      "authors": [
-        "Jung KJ",
-        "Shin JW",
-        "Kim S",
-        "Kim SY",
-        "Yang YS",
-        "Kimm H",
-        "Lee S",
-        "Lee BW",
-        "Jee SH",
-        "Shin C"
-      ],
-      "journal": "Diabetes & metabolic syndrome",
-      "date": "2026-11-19",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.dsx.2026.103510",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43072349/",
-      "doi_url": "https://doi.org/10.1016/j.dsx.2026.103510",
-      "pmc_url": "",
-      "areas": [
-        "Cardiovascular Health"
-      ],
-      "category_confidence": 13,
-      "evidence_type": "Other",
-      "evidence_type_it": "Altro",
-      "source": "PubMed",
-      "first_seen": "2026-11-24",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
     {
       "pmid": "43063882",
       "title": "Alcohol-associated attenuation of postmortem β-hydroxybutyrate and complementary biochemical findings in fatal hypothermia.",
@@ -1369,41 +1275,6 @@
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
-    },
-    {
-      "pmid": "43073327",
-      "title": "Ketogenic diet induces cardiac changes via the OHB-Ffar3-Hopx/ACTC1 regulatory pathway in growing mice.",
-      "authors": [
-        "Wang J",
-        "Dai L",
-        "Yu T",
-        "Cao Z",
-        "Li Y",
-        "Zhang Y",
-        "Liu T",
-        "Wang H",
-        "Xiao J"
-      ],
-      "journal": "NPJ science of food",
-      "date": "2026-08-08",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1038/s41538-026-01055-4",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43073327/",
-      "doi_url": "https://doi.org/10.1038/s41538-026-01055-4",
-      "pmc_url": "",
-      "areas": [
-        "Cardiovascular Health"
-      ],
-      "category_confidence": 7,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-11-24",
-      "status": "indexed",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
     },
     {
       "pmid": "42568321",
