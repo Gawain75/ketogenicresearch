@@ -1,54 +1,11 @@
 {
-  "generated_at": "2026-11-27T07:43:09+00:00",
+  "generated_at": "2026-11-27T12:17:18+00:00",
   "curation_window_days": 365,
   "index_window_days": 14,
   "backfill_year": null,
-  "auto_approved_count": 1,
+  "auto_approved_count": 2,
   "excluded_count": 127,
   "records": [
-    {
-      "pmid": "43097893",
-      "title": "Pemafibrate attenuates hepatic lipid droplet accumulation through peroxisome proliferator-activated receptor α (PPARα)-mediated activation of ketogenesis.",
-      "authors": [
-        "Fujiyama A",
-        "Morikawa K",
-        "Nagakura T",
-        "Xu Y",
-        "Ogata F",
-        "Kimura K",
-        "Kataoka M",
-        "Esumi C",
-        "Ishii M",
-        "Hanatani S",
-        "Yamamoto E",
-        "Fujiwara Y",
-        "Matsuzawa Y",
-        "Izumiya Y",
-        "Tsujita K",
-        "Arima Y"
-      ],
-      "journal": "Biochimica et biophysica acta. Molecular basis of disease",
-      "date": "2026-11-26",
-      "date_precision": "day",
-      "year": 2026,
-      "doi": "10.1016/j.bbadis.2026.168494",
-      "pmc": "",
-      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43097893/",
-      "doi_url": "https://doi.org/10.1016/j.bbadis.2026.168494",
-      "pmc_url": "",
-      "areas": [
-        "Dyslipidemia & Lipid Metabolism",
-        "MASLD / Metabolic Liver Disease"
-      ],
-      "category_confidence": 6,
-      "evidence_type": "Preclinical / mechanistic",
-      "evidence_type_it": "Preclinico / meccanicistico",
-      "source": "PubMed",
-      "first_seen": "2026-11-27",
-      "status": "new",
-      "auto_eligible": true,
-      "curation_status": "auto-approved"
-    },
     {
       "pmid": "43063882",
       "title": "Alcohol-associated attenuation of postmortem β-hydroxybutyrate and complementary biochemical findings in fatal hypothermia.",
@@ -977,6 +934,46 @@
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "43099000",
+      "title": "HMGCS2-mediated ketogenesis maintains intestinal barrier in inflammatory bowel disease by inhibiting ferroptosis.",
+      "authors": [
+        "Han J",
+        "Li X",
+        "Wang Y",
+        "Yang G",
+        "Zheng S",
+        "Lin L",
+        "Xie Z",
+        "Zhou G",
+        "Zhang M",
+        "Chao K",
+        "Zhang L",
+        "Gao X",
+        "Huang S",
+        "Zhang S"
+      ],
+      "journal": "Cell death & disease",
+      "date": "2026-09-04",
+      "date_precision": "day",
+      "year": 2026,
+      "doi": "10.1038/s41419-026-09219-6",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43099000/",
+      "doi_url": "https://doi.org/10.1038/s41419-026-09219-6",
+      "pmc_url": "",
+      "areas": [
+        "Inflammation & Immunometabolism"
+      ],
+      "category_confidence": 6,
+      "evidence_type": "Other",
+      "evidence_type_it": "Altro",
+      "source": "PubMed",
+      "first_seen": "2026-11-27",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
     },
     {
       "pmid": "43069041",
@@ -3919,6 +3916,36 @@
       "status": "indexed",
       "auto_eligible": false,
       "curation_status": "excluded-low-confidence"
+    },
+    {
+      "pmid": "43100091",
+      "title": "Integrating diagnosis, classification, and multimodal management in epilepsy care.",
+      "authors": [
+        "Cong Y",
+        "Liu Y",
+        "Miao J",
+        "Li N"
+      ],
+      "journal": "Folia neuropathologica",
+      "date": "2026-01",
+      "date_precision": "year",
+      "year": 2026,
+      "doi": "10.5114/fn.2026.165742",
+      "pmc": "",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/43100091/",
+      "doi_url": "https://doi.org/10.5114/fn.2026.165742",
+      "pmc_url": "",
+      "areas": [
+        "Epilepsy"
+      ],
+      "category_confidence": 8,
+      "evidence_type": "Clinical trial / intervention",
+      "evidence_type_it": "Trial clinico / intervento",
+      "source": "PubMed",
+      "first_seen": "2026-11-27",
+      "status": "indexed",
+      "auto_eligible": true,
+      "curation_status": "auto-approved"
     },
     {
       "pmid": "41588916",
