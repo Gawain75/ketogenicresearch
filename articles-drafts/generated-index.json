@@ -1344,9 +1344,33 @@
       "at": "2026-11-27T13:10:39.693523+00:00",
       "stage": "generation",
       "error": "Groq HTTP 413: {\"error\":{\"message\":\"Request too large for model `openai/gpt-oss-120b` in organization `org_01m2v9fhzme29te5cqydhvxz4y` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 8813, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "pmid": "43103553",
+      "at": "2026-11-28T11:47:33.830565+00:00",
+      "stage": "source",
+      "error": "PubMed abstract unavailable"
+    },
+    {
+      "pmid": "43086580",
+      "at": "2026-11-28T11:47:36.058648+00:00",
+      "stage": "generation",
+      "error": "Groq HTTP 413: {\"error\":{\"message\":\"Request too large for model `openai/gpt-oss-120b` in organization `org_01m2v9fhzme29te5cqydhvxz4y` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 10392, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "pmid": "43084196",
+      "at": "2026-11-28T11:47:36.532032+00:00",
+      "stage": "generation",
+      "error": "Groq HTTP 413: {\"error\":{\"message\":\"Request too large for model `openai/gpt-oss-120b` in organization `org_01m2v9fhzme29te5cqydhvxz4y` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 8233, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "pmid": "43074431",
+      "at": "2026-11-28T11:47:37.722160+00:00",
+      "stage": "generation",
+      "error": "Groq HTTP 413: {\"error\":{\"message\":\"Request too large for model `openai/gpt-oss-120b` in organization `org_01m2v9fhzme29te5cqydhvxz4y` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 9576, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
     }
   ],
-  "updated_at": "2026-11-27T13:10:39.693582+00:00",
+  "updated_at": "2026-11-28T11:47:37.722223+00:00",
   "source_unavailable_pmids": [
     "42642354",
     "42717355",
@@ -1359,10 +1383,11 @@
     "42975834",
     "42979683",
     "42983895",
-    "42988340"
+    "42988340",
+    "43103553"
   ],
   "last_run": {
-    "attempted_candidates": 3,
+    "attempted_candidates": 4,
     "published_articles": 0,
     "status": "no_article_published"
   }
